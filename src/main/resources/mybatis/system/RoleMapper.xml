@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SystemRoleMapper">
+
+	<resultMap type="Role" id="RoleResult">
+		<result property="roleId" column="roleId" />
+		<result property="status" column="status" />
+		<result property="roleName" column="roleName" />
+		<result property="roleKey" column="roleKey" />
+		<result property="description" column="description" />
+		<result property="createTime" column="createTime" />
+	</resultMap>
+
+	<select id="findRoleByUserId" parameterType="Integer" resultType="Role">
+		SELECT * FROM sys_role WHERE roleId = (SELECT roleId FROM sys_user_role WHERE userId =#{userId})
+	</select>
+	
+	<select id="findRoleByRole" parameterType="Role" resultType="Role">
+		SELECT * FROM sys_role where 1 = 1
+		<if test="roleId != null and roleId != ''">
+			AND roleId = #{roleId}
+		</if>
+	</select>
+	
+	<!-- 查询角色菜单权限 -->
+	<select id="queryRolePermission" parameterType="String" resultType="Permission">
+		SELECT (SELECT CASE WHEN r.permsId > '0' THEN 'true' END
+		FROM sys_role_permission r WHERE r.roleId = #{roleId} AND r.permsId = p.permsId) AS checked,p.* FROM sys_permission p
+		WHERE available = '0'
+	</select>
+	
+	<!-- 修改用户和角色表信息 -->
+	<update id="updateUserRole" parameterType="UserRole">
+ 		update sys_user_role
+ 		<set>
+ 			<if test="roleId != null and roleId != ''">roleId = #{roleId},</if>
+ 		</set>
+ 		where 1=1
+ 		<if test="userId != null and userId  != ''">and userId = #{userId}</if>
+ 	</update>
+ 	
+ 	<!-- 插入用户角色关联信息 -->
+ 	<insert id="addUserRole" parameterType="UserRole">
+ 		insert into sys_user_role (userId,roleId)
+ 		values(#{userId},#{roleId})
+ 	</insert>
+ 	
+ 	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultType="Role" useCache="false">
+		SELECT * FROM sys_role WHERE 1=1
+		<if test="relationMap.roleName != null and relationMap.roleName != ''"><!-- 关键词检索 -->
+			AND
+				(
+					 roleName LIKE CONCAT(CONCAT('%', #{relationMap.roleName}),'%')
+				)
+		</if>
+		<if test="relationMap.beginTime != null and relationMap.beginTime != ''"><!-- 开始时间检索 -->
+			AND DATE_FORMAT(createTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
+		</if>
+		<if test="relationMap.endTime != null and relationMap.endTime != ''"><!-- 结束时间检索 -->
+			AND DATE_FORMAT(createTime,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
+		</if>
+	</select>
+	
+	<!-- 修改角色信息 -->
+	<update id="updateRoleInfo" parameterType="Role">
+ 		update sys_role
+ 		<set>
+ 			<if test="status != null and status != ''">status = #{status},</if>
+ 			<if test="roleName != null and roleName != ''">roleName = #{roleName},</if>
+ 			<if test="roleKey != null and roleKey != ''">roleKey = #{roleKey},</if>
+ 			description = #{description}
+ 		</set>
+ 		where 1=1
+ 		<if test="roleId != null and roleId  != ''">and roleId = #{roleId}</if>
+ 	</update>
+ 	
+ 	<!-- 插入角色信息 -->
+ 	<insert id="addRoleInfo" parameterType="Role">
+ 		insert into sys_role(
+ 			<if test="status != null and status != ''">status,</if>
+ 			<if test="roleName != null and roleName != ''">roleName,</if>
+ 			<if test="roleKey != null and roleKey != ''">roleKey,</if>
+ 			<if test="description != null and description != ''">description,</if>
+ 			createTime
+ 		)values(
+ 			<if test="status != null and status != ''">#{status},</if>
+ 			<if test="roleName != null and roleName != ''">#{roleName},</if>
+ 			<if test="roleKey != null and roleKey != ''">#{roleKey},</if>
+ 			<if test="description != null and description != ''">#{description},</if>
+ 			sysdate()
+ 		)
+ 	</insert>
+	
+	<!-- 删除角色信息 -->
+ 	<delete id="deleteRoleById" parameterType="Role">
+ 		delete from sys_role where roleId = #{roleId}
+ 	</delete>
+ 	
+ 	<!-- 删除角色信息 -->
+ 	<delete id="deletePremsRoleById" parameterType="Integer">
+ 		delete from sys_role_permission where roleId = #{roleId}
+ 	</delete>
+ 	
+ 	<!-- 插入角色菜单关系信息 -->
+ 	<insert id="batchSavePremsRole" parameterType="java.util.List">
+ 		insert into sys_role_permission(roleId,permsId)
+ 		values
+		<foreach collection="list" item="item" index="index" separator=",">
+		    (#{item.roleId},#{item.permsId}) 
+		</foreach>
+ 	</insert>
+
+</mapper> 

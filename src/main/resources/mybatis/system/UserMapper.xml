@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SystemUserMapper">
+
+	<resultMap type="User" id="UserResult">
+		<result property="userId" column="userId" />
+		<result property="userName" column="userName" />
+		<result property="roleName" column="roleName" />
+		<result property="email" column="email" />
+		<result property="mobilePhone" column="mobilePhone" />
+		<result property="accountName" column="accountName" />
+		<result property="password" column="password" />
+		<result property="salt" column="salt" />
+		<result property="description" column="description" />
+		<result property="locked" column="locked" />
+		<result property="createTime" column="createTime" />
+		<collection property="roles" javaType="java.util.List" resultMap="RoleResult" />
+	</resultMap>
+
+	<resultMap type="Role" id="RoleResult">
+		<result property="roleId" column="roleId" />
+		<result property="status" column="status" />
+		<result property="roleName" column="roleName" />
+		<result property="description" column="description" />
+		<result property="createTime" column="createTime" />
+		<collection property="permissions" javaType="java.util.List" resultMap="PermissionResult" />
+	</resultMap>
+
+	<resultMap type="Permission" id="PermissionResult">
+		<result property="permsId" column="permsId" />
+		<result property="permsName" column="permsName" />
+		<result property="parentId" column="parentId" />
+		<result property="permsKey" column="permsKey" />
+		<result property="permsType" column="permsType" />
+		<result property="permsUrl" column="permsUrl" />
+		<result property="permsLevel" column="permsLevel" />
+		<result property="permsIcon" column="permsIcon" />
+		<result property="available" column="available" />
+		<result property="description" column="description" />
+	</resultMap>
+
+	<select id="findByUserName" parameterType="String" resultType="User">
+		select * from sys_user where userName=#{userName}
+	</select>
+	
+	<select id="findByUserId" parameterType="Integer" resultType="User">
+		select * from sys_user where userId=#{userId}
+	</select>
+	
+	<!-- 根据用户ID查询角色信息 -->
+	<select id="findRoleByUserId" parameterType="Integer" resultType="Role">
+		SELECT * FROM sys_role WHERE roleId = (SELECT roleId FROM sys_user_role WHERE userId = #{userId})
+	</select>
+	
+	<select id="findByUserPermission" parameterType="String"
+		resultMap="UserResult">
+		SELECT u.userId,u.userName,u.accountName,r.roleId,r.roleName,m.permsId,m.permsName,m.parentId,m.permsKey,m.permsType,m.permsUrl
+		FROM sys_user u 
+		LEFT JOIN sys_user_role ur ON ur.userId=u.userId
+		JOIN sys_role r ON r.roleId=ur.roleId
+		JOIN sys_role_permission rm ON rm.roleId=r.roleId
+		JOIN sys_permission m ON m.permsId=rm.permsId
+		WHERE u.username=#{userName}
+	</select>
+
+	<select id="findRoleListByUserId" parameterType="String"
+		resultType="Role">
+		SELECT * FROM sys_role
+		WHERE roleId
+		IN (SELECT roleId FROM
+		sys_user_role WHERE userId =(SELECT userId FROM
+		sys_user WHERE
+		userName=#{userName}))
+	</select>
+
+	<select id="findPermsListByUserId" parameterType="String"
+		resultType="Permission">
+		SELECT * FROM sys_permission
+		WHERE permsId IN( SELECT permsId FROM
+		sys_role_permission
+		WHERE roleId IN (SELECT roleId FROM sys_user_role WHERE
+		userId = (SELECT
+		userId FROM sys_user WHERE userName=#{userName}))) and available = '0'
+	</select>
+
+	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultType="User" useCache="false">
+		SELECT userId,userName,accountName,
+		(SELECT GROUP_CONCAT(roleName) FROM sys_role WHERE sys_role.roleId IN (SELECT roleId FROM sys_user_role WHERE userId=sys_user.userId) ) roleName,
+		email,mobilePhone,locked,createTime FROM sys_user WHERE 1=1
+		<if test="relationMap.userName != null and relationMap.userName != ''"><!-- 关键词检索 -->
+			AND
+				(
+					 accountName LIKE CONCAT(CONCAT('%', #{relationMap.userName}),'%')
+					 OR 
+					 userName LIKE CONCAT(CONCAT('%', #{relationMap.userName}),'%') 
+					 OR
+					 email LIKE CONCAT(CONCAT('%', #{relationMap.userName}),'%')
+					 OR
+					 mobilePhone LIKE CONCAT(CONCAT('%', #{relationMap.userName}),'%')
+				)
+		</if>
+		<if test="relationMap.beginTime != null and relationMap.beginTime != ''"><!-- 开始时间检索 -->
+			AND DATE_FORMAT(createTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
+		</if>
+		<if test="relationMap.endTime != null and relationMap.endTime != ''"><!-- 结束时间检索 -->
+			AND DATE_FORMAT(createTime,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
+		</if>
+	</select>
+	
+	<!-- 修改用户信息 -->
+	<update id="updateUserInfo" parameterType="User">
+ 		update sys_user
+ 		<set>
+ 			<if test="userName != null and userName != ''">userName = #{userName},</if>
+ 			<if test="password != null and password != ''">password = #{password},</if>
+ 			<if test="accountName != null and accountName != ''">accountName = #{accountName},</if>
+ 			<if test="email != null and email != ''">email = #{email},</if>
+ 			<if test="mobilePhone != null and mobilePhone != ''">mobilePhone = #{mobilePhone},</if>
+ 			<if test="locked !=null and locked != ''">locked = #{locked},</if>
+ 			<if test="description != null and description != ''">description = #{description},</if>
+ 		</set>
+ 		where 1=1
+ 		<if test="userId != null and userId  != ''">and userId = #{userId}</if>
+ 	</update>
+ 	
+ 	<!-- 插入用户信息 -->
+ 	<insert id="addUserInfo" parameterType="User" useGeneratedKeys="true" keyProperty="userId">
+ 		insert into sys_user(
+ 			<if test="userName != null and userName != ''">userName,</if>
+ 			<if test="password != null and password != ''">password,</if>
+ 			<if test="accountName != null and accountName != ''">accountName,</if>
+ 			<if test="email != null and email != ''">email,</if>
+ 			<if test="mobilePhone != null and mobilePhone != ''">mobilePhone,</if>
+ 			<if test="locked !=null and locked != ''">locked,</if>
+ 			<if test="description != null and description != ''">description,</if>
+ 			createTime
+ 		)values(
+ 			<if test="userName != null and userName != ''">#{userName},</if>
+ 			<if test="password != null and password != ''">#{password},</if>
+ 			<if test="accountName != null and accountName != ''">#{accountName},</if>
+ 			<if test="email != null and email != ''">#{email},</if>
+ 			<if test="mobilePhone != null and mobilePhone != ''">#{mobilePhone},</if>
+ 			<if test="locked !=null and locked != ''">locked,</if>
+ 			<if test="description != null and description != ''">#{description},</if>
+ 			sysdate()
+ 		)
+ 	</insert>
+ 	
+ 	<!-- 删除用户信息 -->
+ 	<delete id="deleteUserInfo" parameterType="User">
+ 		delete from sys_user where userId = #{userId}
+ 	</delete>
+ 	
+ 	<!-- 删除用户信息 -->
+ 	<delete id="deleteUserRoleInfo" parameterType="Integer">
+ 		delete from sys_user_role where userId = #{userId}
+ 	</delete>
+
+</mapper> 

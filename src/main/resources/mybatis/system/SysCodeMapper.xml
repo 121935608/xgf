@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SystemCodeMapper">
+
+	<resultMap type="SysCode" id="SysCodeResult">
+		<result column="codekey" property="codekey" />
+		<result column="codeid" property="codeid" />
+		<result column="codevalue" property="codevalue" />
+		<result column="codedesc" property="codedesc" />
+		<result column="servicekey" property="servicekey" />
+	</resultMap>
+
+	<select id="querySysCodeListByCond" parameterType="String" resultType="SysCode">
+		select codekey,codeid,codevalue,codedesc,servicekey from sys_code where codekey = #{codeGroup}
+	</select>
+
+</mapper> 

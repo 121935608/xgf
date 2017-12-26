@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="xgf_admin" default="all" basedir=".">
+
+	<property file="build.properties" />
+
+	<property name="target" value="src/main/webapp/WEB-INF/classes" />
+
+	<property name="src" value="src/main/java" />
+	
+	<property name="war" value="target" />
+
+	<property name="resources" value="src/main/resources" />
+
+	<property name="lib" value="src/main/webapp/WEB-INF/lib" />
+
+	<property name="project" value="${project}" />
+
+	<property name="version" value="${version}" />
+	
+	<property name="webinfo" value="src/main/webapp/WEB-INF" />
+	
+	<property name="webapp" value="src/main/webapp/" />
+
+	<path id="classpath">
+		<fileset dir="${lib}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<target name="clean">
+		<delete dir="${target}" />
+		<delete dir="${war}" />
+	</target>
+
+	<target name="init" depends="clean">
+		<tstamp />
+		<echo>${java.class.path}</echo>
+		<echo>${java.home}</echo>
+		<mkdir dir="${target}" />
+	</target>
+
+
+	<target name="compile" depends="init">
+		<javac destdir="${target}" classpathref="classpath" debug="${javac.debug}" srcdir="${src}" source="${javac.source}" 
+			target="${javac.target}" encoding="${javac.encoding}" includes="**"/>
+		
+		<copy todir="${target}">
+			<fileset dir="${resources}">
+				<include name="*.properties"/>
+				<include name="*.xml"/>
+				<include name="*/*"/>
+				<include name="*/*/*"/>
+			</fileset>
+		</copy>
+	</target>
+	
+	<target name="all" depends="compile">
+		<war warfile="${war}/xgf_admin.war" webxml="${webinfo}/web.xml">
+			<!--
+			<lib dir="${webinfo}/lib">  
+				<include name="**" />  
+			</lib>
+			<classes dir="${webinfo}/classes"/>
+			-->
+			<fileset dir="${webapp}/" excludes="${webinfo}/"/>
+        </war>  
+	</target>
+
+
+</project>
+
+

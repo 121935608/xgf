@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SystemPermissionMapper">
+
+	<resultMap type="Permission" id="PermissionResult">
+		<result property="permsId" column="permsId"/>
+		<result property="permsName" column="permsName" />
+		<result property="parentId" column="parentId" />
+		<result property="permsKey" column="permsKey" />
+		<result property="permsType" column="permsType" />
+		<result property="permsUrl" column="permsUrl" />
+		<result property="permsLevel" column="permsLevel" />
+		<result property="permsIcon" column="permsIcon" />
+		<result property="available" column="available" />
+		<result property="description" column="description" />
+		<result property="checked" column="checked" />
+	</resultMap>
+
+	<select id="queryPermissions" resultMap="PermissionResult">
+		SELECT * FROM sys_permission order by permsLevel
+	</select>
+	
+	<select id="findPermissionById" parameterType="Integer" resultType="Permission">
+		SELECT * FROM sys_permission
+		where permsId = #{permsId}
+	</select>
+	
+	<select id="findPermissionByPid" parameterType="String" resultType="Permission">
+		SELECT * FROM sys_permission WHERE parentId = #{parentId}  ORDER BY permsLevel ASC
+	</select>
+	
+	<!-- 删除用户信息 -->
+ 	<delete id="deletePermission" parameterType="Permission">
+ 		delete from sys_permission where 1=1
+ 		<if test="permsId != null and permsId  != ''">and permsId = #{permsId}</if>
+ 		<if test="parentId != null and parentId  != ''">and parentId = #{parentId}</if>
+ 	</delete>
+ 	
+ 	<!-- 修改菜单信息 -->
+	<update id="updatePermission" parameterType="Permission">
+		update sys_permission
+		<set>
+			<if test="permsName != null and permsName != ''">permsName = #{permsName}</if>
+			<if test="parentId != null and parentId != ''">,parentId = #{parentId}</if>
+			<if test="permsKey != null and permsKey != ''">,permsKey = #{permsKey}</if>
+			<if test="permsUrl != null and permsUrl != ''">,permsUrl = #{permsUrl}</if>
+			<if test="permsLevel != null and permsLevel != ''">,permsLevel = #{permsLevel}</if>
+			<if test="permsIcon != null and permsIcon != ''">,permsIcon = #{permsIcon}</if>
+			<if test="available !=null">,available = #{available}</if>
+			<if test="description != null and description != ''">,description = #{description}</if>
+		</set>
+		where 1=1
+		<if test="permsId != null and permsId  != ''">and permsId = #{permsId}</if>
+ 	</update>
+ 	
+ 	<!-- 插入菜单信息 -->
+ 	<insert id="insertPermission" parameterType="Permission">
+ 		insert into sys_permission(
+ 			<if test="permsName != null and permsName != ''">permsName,</if>
+ 			<if test="parentId != null and parentId != ''">parentId,</if>
+ 			<if test="permsKey != null and permsKey != ''">permsKey,</if>
+ 			<if test="permsType != null and permsType != ''">permsType,</if>
+ 			<if test="permsUrl != null and permsUrl != ''">permsUrl,</if>
+ 			<if test="permsLevel != null and permsLevel != ''">permsLevel,</if>
+ 			<if test="permsIcon != null and permsIcon != ''">permsIcon,</if>
+ 			<if test="available !=null and available != ''">available,</if>
+ 			<if test="description != null and description != ''">description,</if>
+ 			createTime
+ 		)values(
+ 		    <if test="permsName != null and permsName != ''">#{permsName},</if>
+ 			<if test="parentId != null and parentId != ''">#{parentId},</if>
+ 			<if test="permsKey != null and permsKey != ''">#{permsKey},</if>
+ 			<if test="permsType != null and permsType != ''">#{permsType},</if>
+ 			<if test="permsUrl != null and permsUrl != ''">#{permsUrl},</if>
+ 			<if test="permsLevel != null and permsLevel != ''">#{permsLevel},</if>
+ 			<if test="permsIcon != null and permsIcon != ''">#{permsIcon},</if>
+ 			<if test="available !=null and available != ''">#{available},</if>
+ 			<if test="description != null and description != ''">#{description},</if>
+ 			sysdate()
+ 		)
+ 	</insert>
+ 	
+</mapper> 

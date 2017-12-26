@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="xgf_admin:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="xgf_admin-0.0.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="xgf_admin:war exploded" />
+    </root>
+  </artifact>
+</component>

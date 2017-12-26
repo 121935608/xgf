@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="UserLogMapper">
+
+	<resultMap type="UserLog" id="UserLogResult">
+		<result column="signId" property="signId" />
+		<result column="userName" property="userName" />
+		<result column="status" property="status" />
+		<result column="loginIP" property="loginIP" />
+		<result column="browser" property="browser" />
+		<result column="os" property="os" />
+		<result column="msg" property="msg" />
+		<result column="loginTime" property="loginTime" />
+	</resultMap>
+	
+	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultType="UserLog" useCache="false">
+		select * from sys_userlog where 1=1
+		<if test="relationMap.userName != null and relationMap.userName != ''"><!-- 关键词检索 -->
+			AND userName LIKE CONCAT(CONCAT('%', #{relationMap.userName}),'%') 
+		</if>
+		${orderCond}
+	</select>
+
+	<insert id="addUserlog" parameterType="UserLog">
+		insert into sys_userlog (
+			userName,
+			status,
+			loginIP,
+			browser,
+			os,
+			msg
+		) values (
+			#{userName},
+			#{status},
+			#{loginIP},
+			#{browser},
+			#{os},
+			#{msg}
+		)
+	</insert>
+
+</mapper> 

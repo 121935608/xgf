@@ -1,0 +1,12 @@
+<!--[if lt IE 9]>
+<script type="text/javascript" src="${context_url}/uiloader/lib/html5.js"></script>
+<script type="text/javascript" src="${context_url}/uiloader/lib/respond.min.js"></script>
+<script type="text/javascript" src="${context_url}/uiloader/lib/PIE_IE678.js"></script>
+<![endif]-->
+
+<link rel="stylesheet" type="text/css" href="${context_url}/uiloader/static/h-ui/css/H-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="${context_url}/uiloader/static/h-ui.admin/css/H-ui.admin.css" />
+<link rel="stylesheet" type="text/css" href="${context_url}/uiloader/lib/Hui-iconfont/1.0.7/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="${context_url}/uiloader/lib/icheck/icheck.css" />
+<link rel="stylesheet" type="text/css" href="${context_url}/uiloader/static/h-ui.admin/skin/green/skin.css"/>
+<link rel="stylesheet" type="text/css" href="${context_url}/uiloader/static/h-ui.admin/css/style.css" />
