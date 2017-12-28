@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="OperLogMapper">
+
+	<resultMap type="OperLog" id="OperLogResult">
+		<result column="logId" property="logId" />
+		<result column="action" property="action" />
+		<result column="title" property="title" />
+		<result column="channel" property="channel" />
+		<result column="requestParam" property="requestParam" />
+		<result column="userIp" property="userIp" />
+		<result column="createTIme" property="createTIme" />
+		<result column="url" property="url" />
+		<result column="userId" property="userId" />
+		<result column="status" property="status" />
+		<result column="userName" property="userName" />
+		<result column="errorMessage" property="errorMessage" />
+	</resultMap>
+	
+	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultType="OperLog" useCache="false">
+		select * from sys_operlog where 1=1
+		<if test="relationMap.userName != null and relationMap.userName != ''"><!-- 关键词检索 -->
+			AND userName LIKE CONCAT(CONCAT('%', #{relationMap.userName}),'%') 
+		</if>
+		<if test="relationMap.beginTime != null and relationMap.beginTime != ''"><!-- 开始时间检索 -->
+			AND DATE_FORMAT(createTIme,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
+		</if>
+		<if test="relationMap.endTime != null and relationMap.endTime != ''"><!-- 结束时间检索 -->
+			AND DATE_FORMAT(createTIme,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
+		</if>
+	</select>
+
+	<insert id="addOperlog" parameterType="OperLog">
+		insert into sys_operlog (
+			action,
+			title,
+			channel,
+			requestParam,
+			userIp,
+			createTIme,
+			url,
+			userId,
+			status,
+			userName,
+			errorMessage
+		) values (
+			#{action},
+			#{title},
+			#{channel},
+			#{requestParam},
+			#{userIp},
+			#{createTIme},
+			#{url},
+			#{userId},
+			#{status},
+			#{userName},
+			#{errorMessage}
+		)
+	</insert>
+
+</mapper> 

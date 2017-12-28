@@ -21,7 +21,7 @@ public interface IRoleService
      * @param roleId 角色ID
      * @return 角色对象信息
      */
-    public Role findByUserId(Integer userId);
+    public Role findByUserId(String userId);
 
     /**
      * 通过角色ID查询角色

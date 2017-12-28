@@ -8,7 +8,7 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>账号：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				${user.userName }
+				<input type="text" class="input-text" placeholder="" id="userName" name="userName" value="${user.userName }">
 			</div>
 		</div>
 		<div class="row cl">
@@ -17,7 +17,7 @@
 				<input type="text" class="input-text" placeholder="" id="accountName" name="accountName" value="${user.accountName }">
 			</div>
 		</div>
-		<div class="row cl">
+		<%--<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>邮箱：</label>
 			<div class="formControls col-xs-8 col-sm-4">
 				<input type="text" class="input-text" placeholder="@" id="email" name="email" value="${user.email }">
@@ -28,9 +28,9 @@
 			<div class="formControls col-xs-8 col-sm-4">
 				<input type="text" class="input-text" placeholder="" id="mobilePhone" name="mobilePhone" value="${user.mobilePhone }">
 			</div>
-		</div>
+		</div>--%>
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>所属角色：</label>
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>角色：</label>
 			<div class="formControls col-xs-8 col-sm-4">
 				 <y:select id="roleId" name="roleId" codeGroup="${roles }" selectedValue="${role.roleId }"
 					cssClass="select" headerKey="" headerValue="--请选择--">
@@ -45,13 +45,13 @@
 		</div>
 		
 		
-		<div class="row cl">
+		<%--<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3">描述：</label>
 			<div class="formControls col-xs-8 col-sm-6">
 				<textarea name="description" cols="" rows="" class="textarea" placeholder="说点什么...最少输入10个字符" datatype="*10-100" dragonfly="true" onKeyUp="textarealength(this,200)">${user.description }</textarea>
 				<p class="textarea-numberbar"><em class="textarea-length">${fn:length(user.description)}</em>/200</p>
 			</div>
-		</div>
+		</div>--%>
 		<div class="row cl">
 			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
 				<input class="btn btn-primary radius" type="submit" id="save" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
@@ -67,14 +67,14 @@ $("#form-user-modify").validate({
 			required:true,
 			isSpace:true,
 		},
-		email:{
+		/*email:{
 			required:true,
 			email:true
 		},
 		mobilePhone:{
 			required:true,
 			isPhone:true
-		},
+		},*/
 		roleId:{
 			required:true,
 		},

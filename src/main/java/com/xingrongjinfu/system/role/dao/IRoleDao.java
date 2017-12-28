@@ -21,7 +21,7 @@ public interface IRoleDao
      * @param roleId 角色ID
      * @return 角色对象信息
      */
-    public Role findRoleByUserId(Integer userId);
+    public Role findRoleByUserId(String userId);
 
     /**
      * 通过角色ID查询角色

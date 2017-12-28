@@ -115,4 +115,19 @@ public class UserConstant
      */
     public final static String CHANGE_PWD_PAGE = "system/user-changePwd";
 
+    /**
+     * 请求地址:修改密码地址
+     */
+    public final static String MODIFY_PASSWORD="toModifyPassword";
+
+    /**
+     * 逻辑视图名：修改密码界面
+     */
+    public final static String MODIFY_PWD_PAGE = "modifyPwd";
+
+
+    /**
+     * 请求地址:重置密码地址
+     */
+    public final static String RESET_PASSWORD="resetPWD";
 }

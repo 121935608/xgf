@@ -13,7 +13,7 @@ public class User implements Serializable
 {
     private static final long serialVersionUID = 1L;
 
-    private Integer userId;
+    private String userId;
     private String userName;
     private String email;
     private String mobilePhone;
@@ -23,6 +23,8 @@ public class User implements Serializable
     private String description;
     private String locked;
     private String createTime;
+    private String status;
+
 
     private String roleName; // 角色临时字段
 
@@ -32,7 +34,7 @@ public class User implements Serializable
     {
     }
 
-    public User(Integer userId, String userName, String password)
+    public User(String userId, String userName, String password)
     {
         super();
         this.userId = userId;
@@ -40,12 +42,12 @@ public class User implements Serializable
         this.password = password;
     }
 
-    public Integer getUserId()
+    public String getUserId()
     {
         return userId;
     }
 
-    public void setUserId(Integer userId)
+    public void setUserId(String userId)
     {
         this.userId = userId;
     }
@@ -140,6 +142,14 @@ public class User implements Serializable
         this.createTime = createTime;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public List<Role> getRoles()
     {
         return roles;
@@ -160,6 +170,7 @@ public class User implements Serializable
         this.roleName = roleName;
     }
 
+    @Override
     public String toString()
     {
         return "User [userId=" + userId + ", userName=" + userName + ", email=" + email + ", mobilePhone=" + mobilePhone

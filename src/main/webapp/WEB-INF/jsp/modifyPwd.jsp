@@ -15,25 +15,25 @@
 <link href="uiloader/lib/Hui-iconfont/1.0.7/iconfont.css" rel="stylesheet" type="text/css" />
 <link href="uiloader/lib/jQuery-Validation-Engine/css/validationEngine.jquery.css?1" rel="stylesheet">
 <link href="uiloader/lib/jQuery-Validation-Engine/css/template.css?1" rel="stylesheet">
-<title>服务商平台登录页</title>
-<meta name="keywords" content="服务商平台登录页">
-<meta name="description" content="服务商平台登录页。">
+<title>服务商平台修改密码页</title>
+<meta name="keywords" content="服务商平台修改密码页">
+<meta name="description" content="服务商平台修改密码页。">
 </head>
 <body>
 <input type="hidden" id="TenantId" name="TenantId" value="" />
 <div class="loginWraper">
   <div class="loginBox">
-    <form id="loginForm" class="form form-horizontal" action="${pageContext.request.contextPath}/login.action" method="post">
+    <form id="modifyPwdForm" class="form form-horizontal" action="${pageContext.request.contextPath}/login.action" method="post">
       <div class="row cl">
         <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
         <div class="formControls col-xs-8">
-         <input id="username" name="username" type="text" placeholder="请输入登录账号" value="" class="input-text size-L validate[required,custom[onlyLetterSp]]">
+         <input id="username" name="username" type="text" placeholder="注册时手机号" value="admin" class="input-text size-L validate[required,custom[onlyLetterSp]]">
         </div>
       </div>
       <div class="row cl">
         <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60e;</i></label>
         <div class="formControls col-xs-8">
-          <input id="password" name="password" type="password" placeholder="请输入登录密码" value="" class="input-text size-L validate[required]">
+          <input id="password" name="password" type="password" placeholder="请输入登录密码" value="admin123" class="input-text size-L validate[required]">
         </div>
       </div>
       <%-- jcaptchaEbabled 在JCaptchaValidateFilter设置 --%>
@@ -45,19 +45,8 @@
 	      </div>
       </c:if>
       <div class="row cl">
-        <%--<div class="formControls col-xs-8 col-xs-offset-3">
-          <label for="online">
-            <input type="checkbox" name="rememberMe">
-            	使我保持登录状态</label>
-        </div>--%>
-          <div class="formControls col-xs-8 col-xs-offset-3" style="padding-left: 300px;">
-            <a href="javascript:;"onclick="${context_root}/system/toModifyPassword.action">忘记密码?</a>
-          </div>
-      </div>
-      <div class="row cl">
         <div class="formControls col-xs-8 col-xs-offset-3">
-          <input id="loginsubmit" type="submit" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;">
-          <input type="reset" class="btn btn-default radius size-L" value="&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;">
+          <input id="loginsubmit" type="submit" class="btn btn-success radius size-L" value="&nbsp;下&nbsp;&nbsp;一&nbsp;&nbsp;步&nbsp;">
         </div>
       </div>
       <font color="red">
@@ -93,7 +82,7 @@ $(function() {
         "url": "${pageContext.request.contextPath}/jcaptcha-validate.action",
         "alertTextLoad": "* 正在验证，请稍等。。。"
     };
-    $("#loginForm").validationEngine({scroll:false});
+    $("#modifyPwdForm").validationEngine({scroll:false});
 });
 </script>
 </body>

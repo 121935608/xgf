@@ -20,6 +20,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.xingrongjinfu.system.operlog.model.OperLog" alias="OperLog"/>
 		<typeAlias type="com.xingrongjinfu.system.userlog.model.UserLog" alias="UserLog"/>
 		<typeAlias type="com.xingrongjinfu.system.role.model.RolePermission" alias="RolePermission"/>
+		<typeAlias type="com.xingrongjinfu.system.merchant.model.Merchant" alias="Merchant"/>
+		<typeAlias type="com.xingrongjinfu.system.merchant.model.AccountInfo" alias="AccountInfo"/>
+		<typeAlias type="com.xingrongjinfu.system.merchant.model.Balance" alias="Balance"/>
 
 		<!-- 分页 -->
 		<typeAlias type="org.framework.base.util.TableDataInfo" alias="TableDataInfo"/>

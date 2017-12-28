@@ -35,7 +35,7 @@ public class UserDao extends DynamicObjectBaseDao implements IUserDao
      * @param userId 用户ID
      * @return 用户对象信息
      */
-    public User findByUserId(Integer userId)
+    public User findByUserId(String userId)
     {
         return (User) this.findForObject("SystemUserMapper.findByUserId", userId);
     }
@@ -46,7 +46,7 @@ public class UserDao extends DynamicObjectBaseDao implements IUserDao
      * @param userId
      * @return 角色对象
      */
-    public Role findRoleByUserId(Integer userId)
+    public Role findRoleByUserId(String userId)
     {
         return (Role) this.findForObject("SystemUserMapper.findRoleByUserId", userId);
     }
@@ -166,7 +166,7 @@ public class UserDao extends DynamicObjectBaseDao implements IUserDao
      * @param userId 用户ID
      * @return 结果
      */
-    public int deleteUserRoleInfo(Integer userId)
+    public int deleteUserRoleInfo(String userId)
     {
         return this.update("SystemUserMapper.deleteUserRoleInfo", userId);
     }

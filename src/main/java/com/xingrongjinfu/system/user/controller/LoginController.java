@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.xingrongjinfu.system.user.common.UserConstant;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * 登录 业务处理
@@ -40,4 +41,7 @@ public class LoginController extends BaseController
 
         return UserConstant.LOGIN_PAGE;
     }
+
+
+
 }

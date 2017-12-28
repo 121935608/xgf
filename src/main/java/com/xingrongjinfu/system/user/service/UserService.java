@@ -31,6 +31,7 @@ public class UserService implements IUserService
      * @param userName 用户名
      * @return 用户对象信息
      */
+    @Override
     public User findByUserName(String userName)
     {
         return userDao.findByUserName(userName);
@@ -42,18 +43,19 @@ public class UserService implements IUserService
      * @param userName 用户名
      * @return
      */
+    @Override
     public String checkNameUnique(User user)
     {
         if (user.getUserId() == null)
         {
-            user.setUserId(-1);
+            user.setUserId("-1");
         }
         String username = user.getUserName();
-        int userId = user.getUserId();
+        String userId = user.getUserId();
         user = new User();
         user.setUserName(username);
         User newUser = userDao.findByUserName(username);
-        if (ObjectUtil.isNotNull(newUser) && newUser.getUserId().intValue() != userId)
+        if (ObjectUtil.isNotNull(newUser) && newUser.getUserId() != userId)
         {
             return UserConstants.NAME_NOT_UNIQUE;
         }
@@ -66,7 +68,8 @@ public class UserService implements IUserService
      * @param userId 用户ID
      * @return 用户对象信息
      */
-    public User findByUserId(Integer userId)
+    @Override
+    public User findByUserId(String userId)
     {
         return userDao.findByUserId(userId);
     }
@@ -77,7 +80,8 @@ public class UserService implements IUserService
      * @param userId
      * @return 角色对象
      */
-    public Role findRoleByUserId(Integer userId)
+    @Override
+    public Role findRoleByUserId(String userId)
     {
         return userDao.findRoleByUserId(userId);
     }
@@ -89,6 +93,7 @@ public class UserService implements IUserService
      * @param page 分页对象
      * @return 用户信息集合信息
      */
+    @Override
     public List<TableDataInfo> pageInfoQuery(PageUtilEntity pageUtilEntity)
     {
         return userDao.pageInfoQuery(pageUtilEntity);
@@ -100,6 +105,7 @@ public class UserService implements IUserService
      * @param userName
      * @return 用户对象信息
      */
+    @Override
     public User findByUserPermission(String username)
     {
         return userDao.findByUserPermission(username);
@@ -111,6 +117,7 @@ public class UserService implements IUserService
      * @param username 用户名
      * @return 用户对象信息
      */
+    @Override
     public List<Permission> findPermsListByUserId(String username)
     {
         return userDao.findPermsListByUserId(username);
@@ -122,6 +129,7 @@ public class UserService implements IUserService
      * @param username 用户名
      * @return 用户对象信息
      */
+    @Override
     public List<Role> findRoleListByUserId(String username)
     {
         return userDao.findRoleListByUserId(username);
@@ -133,6 +141,7 @@ public class UserService implements IUserService
      * @param user 用户信息
      * @return 结果
      */
+    @Override
     public int changeUserStatus(User user)
     {
         return updateUserInfo(user);
@@ -144,6 +153,7 @@ public class UserService implements IUserService
      * @param user 用户信息
      * @return 结果
      */
+    @Override
     public int changePassword(User user)
     {
         String password = new PasswordService().encryptPassword(user.getUserName(), user.getPassword(), "");
@@ -157,6 +167,7 @@ public class UserService implements IUserService
      * @param user 用户信息
      * @return 结果
      */
+    @Override
     public int updateUserInfo(User user)
     {
         return userDao.updateUserInfo(user);
@@ -168,6 +179,7 @@ public class UserService implements IUserService
      * @param user 用户信息
      * @return 结果
      */
+    @Override
     public int deleteUserByInfo(User user)
     {
         userDao.deleteUserRoleInfo(user.getUserId());
@@ -180,6 +192,7 @@ public class UserService implements IUserService
      * @param user 用户信息
      * @return 结果
      */
+    @Override
     public int addUser(User user)
     {
         String password = new PasswordService().encryptPassword(user.getUserName(), user.getPassword(), "");
@@ -193,6 +206,7 @@ public class UserService implements IUserService
      * @param user 用户信息
      * @return 结果
      */
+    @Override
     public int updateUser(User user)
     {
         return userDao.updateUserInfo(user);

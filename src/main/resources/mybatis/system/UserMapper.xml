@@ -45,12 +45,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from sys_user where userName=#{userName}
 	</select>
 	
-	<select id="findByUserId" parameterType="Integer" resultType="User">
+	<select id="findByUserId" parameterType="String" resultType="User">
 		select * from sys_user where userId=#{userId}
 	</select>
 	
 	<!-- 根据用户ID查询角色信息 -->
-	<select id="findRoleByUserId" parameterType="Integer" resultType="Role">
+	<select id="findRoleByUserId" parameterType="String" resultType="Role">
 		SELECT * FROM sys_role WHERE roleId = (SELECT roleId FROM sys_user_role WHERE userId = #{userId})
 	</select>
 	
@@ -88,24 +88,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultType="User" useCache="false">
 		SELECT userId,userName,accountName,
 		(SELECT GROUP_CONCAT(roleName) FROM sys_role WHERE sys_role.roleId IN (SELECT roleId FROM sys_user_role WHERE userId=sys_user.userId) ) roleName,
-		email,mobilePhone,locked,createTime FROM sys_user WHERE 1=1
+		email,mobilePhone,locked,createTime FROM sys_user
+		WHERE 1=1 AND type='S'
 		<if test="relationMap.userName != null and relationMap.userName != ''"><!-- 关键词检索 -->
 			AND
 				(
 					 accountName LIKE CONCAT(CONCAT('%', #{relationMap.userName}),'%')
 					 OR 
-					 userName LIKE CONCAT(CONCAT('%', #{relationMap.userName}),'%') 
-					 OR
-					 email LIKE CONCAT(CONCAT('%', #{relationMap.userName}),'%')
-					 OR
-					 mobilePhone LIKE CONCAT(CONCAT('%', #{relationMap.userName}),'%')
+					 userName LIKE CONCAT(CONCAT('%', #{relationMap.userName}),'%')
 				)
 		</if>
-		<if test="relationMap.beginTime != null and relationMap.beginTime != ''"><!-- 开始时间检索 -->
-			AND DATE_FORMAT(createTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
+		<if test="relationMap.status != null and relationMap.status != ''">
+			AND locked=#{relationMap.status}
 		</if>
-		<if test="relationMap.endTime != null and relationMap.endTime != ''"><!-- 结束时间检索 -->
-			AND DATE_FORMAT(createTime,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
+		<if test="relationMap.roleName != null and relationMap.roleName != ''">
+			AND roleName=#{relationMap.roleName}
 		</if>
 	</select>
 	
@@ -116,12 +113,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="userName != null and userName != ''">userName = #{userName},</if>
  			<if test="password != null and password != ''">password = #{password},</if>
  			<if test="accountName != null and accountName != ''">accountName = #{accountName},</if>
- 			<if test="email != null and email != ''">email = #{email},</if>
- 			<if test="mobilePhone != null and mobilePhone != ''">mobilePhone = #{mobilePhone},</if>
+ 			<!--<if test="email != null and email != ''">email = #{email},</if>
+ 			<if test="mobilePhone != null and mobilePhone != ''">mobilePhone = #{mobilePhone},</if>-->
  			<if test="locked !=null and locked != ''">locked = #{locked},</if>
- 			<if test="description != null and description != ''">description = #{description},</if>
+ 			<!--<if test="description != null and description != ''">description = #{description},</if>-->
  		</set>
- 		where 1=1
+ 		where 1=1 AND type='S'
  		<if test="userId != null and userId  != ''">and userId = #{userId}</if>
  	</update>
  	
@@ -131,19 +128,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="userName != null and userName != ''">userName,</if>
  			<if test="password != null and password != ''">password,</if>
  			<if test="accountName != null and accountName != ''">accountName,</if>
- 			<if test="email != null and email != ''">email,</if>
- 			<if test="mobilePhone != null and mobilePhone != ''">mobilePhone,</if>
+ 			<!--<if test="email != null and email != ''">email,</if>
+ 			<if test="mobilePhone != null and mobilePhone != ''">mobilePhone,</if>-->
  			<if test="locked !=null and locked != ''">locked,</if>
- 			<if test="description != null and description != ''">description,</if>
+ 			<!--<if test="description != null and description != ''">description,</if>-->
+			type,
  			createTime
  		)values(
  			<if test="userName != null and userName != ''">#{userName},</if>
  			<if test="password != null and password != ''">#{password},</if>
  			<if test="accountName != null and accountName != ''">#{accountName},</if>
- 			<if test="email != null and email != ''">#{email},</if>
- 			<if test="mobilePhone != null and mobilePhone != ''">#{mobilePhone},</if>
+ 			<!--<if test="email != null and email != ''">#{email},</if>
+ 			<if test="mobilePhone != null and mobilePhone != ''">#{mobilePhone},</if>-->
  			<if test="locked !=null and locked != ''">locked,</if>
- 			<if test="description != null and description != ''">#{description},</if>
+ 			<!--<if test="description != null and description != ''">#{description},</if>-->
+			'S',
  			sysdate()
  		)
  	</insert>
@@ -154,7 +153,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	</delete>
  	
  	<!-- 删除用户信息 -->
- 	<delete id="deleteUserRoleInfo" parameterType="Integer">
+ 	<delete id="deleteUserRoleInfo" parameterType="String">
  		delete from sys_user_role where userId = #{userId}
  	</delete>
 

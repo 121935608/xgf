@@ -18,7 +18,7 @@ public class OperLog
     private Date createTIme;
     private String url;
     private String status;
-    private Integer userId;
+    private String userId;
     private String userName;
     private String errorMessage;
 
@@ -112,12 +112,12 @@ public class OperLog
         this.status = status;
     }
 
-    public Integer getUserId()
+    public String getUserId()
     {
         return userId;
     }
 
-    public void setUserId(Integer userId)
+    public void setUserId(String userId)
     {
         this.userId = userId;
     }

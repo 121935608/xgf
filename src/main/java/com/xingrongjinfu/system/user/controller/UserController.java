@@ -3,6 +3,8 @@ package com.xingrongjinfu.system.user.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import com.xingrongjinfu.utils.IdUtil;
 import org.apache.shiro.service.MailSenderService;
 import org.aspectj.lang.annotation.ActionControllerLog;
 import org.framework.base.util.PageUtilEntity;
@@ -23,6 +25,8 @@ import com.xingrongjinfu.system.user.common.UserConstant;
 import com.xingrongjinfu.system.user.model.User;
 import com.xingrongjinfu.system.user.model.UserRole;
 import com.xingrongjinfu.system.user.service.IUserService;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 用户 业务处理
@@ -48,8 +52,11 @@ public class UserController extends BaseController
      */
     @RequestMapping(UserConstant.USER_URL)
     public ModelAndView loadSystemUser()
+
     {
-        return this.getModelAndView(UserConstant.USER_PAGE);
+        ModelAndView modelAndView= this.getModelAndView(UserConstant.USER_PAGE);
+        modelAndView.addObject("roles",getRoleList());
+        return modelAndView;
     }
 
     /**
@@ -76,7 +83,7 @@ public class UserController extends BaseController
      * 跳转用户修改界面
      */
     @RequestMapping(UserConstant.TO_MODIFY_URL)
-    public ModelAndView toUserModify(@RequestParam(required = true) Integer userId)
+    public ModelAndView toUserModify(@RequestParam(required = true) String userId)
     {
         ModelAndView modelAndView = this.getModelAndView(UserConstant.MODIFY_PAGE);
         if (userId != null)
@@ -92,7 +99,7 @@ public class UserController extends BaseController
      * 跳转用户修改密码界面
      */
     @RequestMapping(UserConstant.TO_CHANGEPWD_URL)
-    public ModelAndView toChangePwd(@RequestParam(required = true) Integer userId)
+    public ModelAndView toChangePwd(@RequestParam(required = true) String userId)
     {
         ModelAndView modelAndView = this.getModelAndView(UserConstant.CHANGE_PWD_PAGE);
         if (userId != null)
@@ -148,7 +155,7 @@ public class UserController extends BaseController
     public @ResponseBody Message saveUser(User user, Integer roleId)
     {
         int result = 0;
-        Integer userId = user.getUserId();
+        String userId = user.getUserId();
 
         UserRole userRole = new UserRole();
         userRole.setRoleId(roleId);
@@ -161,6 +168,7 @@ public class UserController extends BaseController
         }
         else
         {
+            user.setUserId(IdUtil.get32UUID());
             result = userService.addUser(user);
             userRole.setUserId(user.getUserId());
             roleService.addUserRole(userRole);
@@ -176,7 +184,7 @@ public class UserController extends BaseController
     public @ResponseBody Message changeUserStatus(User user)
     {
         int result = 0;
-        Integer id = user.getUserId();
+        String id = user.getUserId();
         if (id != null)
         {
             result = userService.changeUserStatus(user);
@@ -192,7 +200,7 @@ public class UserController extends BaseController
     public @ResponseBody Message deleteUserById(User user)
     {
         int result = 0;
-        Integer userId = user.getUserId();
+        String userId = user.getUserId();
         if (userId != null)
         {
             result = userService.deleteUserByInfo(user);
@@ -208,7 +216,7 @@ public class UserController extends BaseController
     public @ResponseBody Message changeUserPwd(User user)
     {
         int result = 0;
-        Integer id = user.getUserId();
+        String id = user.getUserId();
         if (id != null)
         {
             result = userService.changePassword(user);
@@ -247,4 +255,27 @@ public class UserController extends BaseController
         return sysCodeList;
     }
 
+
+    /**
+     * 重置密码
+     * @param userName
+     * @return
+     */
+    @RequestMapping(UserConstant.RESET_PASSWORD)
+    public @ResponseBody Message resetPwd(String userName)
+    {
+       int result = 0;
+       System.out.println(userName);
+       String[] userNames=userName.split(",");
+       System.out.println("userNames:"+userNames);
+       if (userNames!=null) {
+           for (String name : userNames) {
+               System.out.println("name:" + name);
+               User user= userService.findByUserName(name);
+               user.setPassword("123456");
+               result = userService.changePassword(user);
+           }
+       }
+        return new Message(result);
+    }
 }

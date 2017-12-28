@@ -30,7 +30,7 @@ public class RoleService implements IRoleService
      * @param roleId 角色ID
      * @return 角色对象信息
      */
-    public Role findByUserId(Integer userId)
+    public Role findByUserId(String userId)
     {
         return roleDao.findRoleByUserId(userId);
     }

@@ -29,7 +29,7 @@ public interface IUserDao
      * @param userId 用户ID
      * @return 用户对象信息
      */
-    public User findByUserId(Integer userId);
+    public User findByUserId(String userId);
 
     /**
      * 根据用户ID查询角色信息
@@ -37,7 +37,7 @@ public interface IUserDao
      * @param userId
      * @return 角色对象
      */
-    public Role findRoleByUserId(Integer userId);
+    public Role findRoleByUserId(String userId);
 
     /**
      * 根据条件分页查询用户对象
@@ -101,6 +101,6 @@ public interface IUserDao
      * @param userId 用户ID
      * @return 结果
      */
-    public int deleteUserRoleInfo(Integer userId);
+    public int deleteUserRoleInfo(String userId);
 
 }

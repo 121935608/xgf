@@ -25,7 +25,7 @@ public class RoleDao extends DynamicObjectBaseDao implements IRoleDao
      * @param roleId 角色ID
      * @return 角色对象信息
      */
-    public Role findRoleByUserId(Integer userId)
+    public Role findRoleByUserId(String userId)
     {
         return (Role) this.findForObject("SystemRoleMapper.findRoleByUserId", userId);
     }

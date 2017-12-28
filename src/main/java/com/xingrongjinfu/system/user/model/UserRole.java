@@ -7,15 +7,15 @@ package com.xingrongjinfu.system.user.model;
  */
 public class UserRole
 {
-    private Integer userId;
+    private String userId;
     private Integer roleId;
 
-    public Integer getUserId()
+    public String getUserId()
     {
         return userId;
     }
 
-    public void setUserId(Integer userId)
+    public void setUserId(String userId)
     {
         this.userId = userId;
     }
