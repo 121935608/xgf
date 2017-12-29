@@ -23,7 +23,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.xingrongjinfu.system.merchant.model.Merchant" alias="Merchant"/>
 		<typeAlias type="com.xingrongjinfu.system.merchant.model.AccountInfo" alias="AccountInfo"/>
 		<typeAlias type="com.xingrongjinfu.system.merchant.model.Balance" alias="Balance"/>
-		
+		<typeAlias type="com.xingrongjinfu.commodity.classification.model.Category" alias="Category"/>
+		<typeAlias type="com.xingrongjinfu.commodity.label.model.Label" alias="Label"/>
 		<typeAlias type="com.xingrongjinfu.system.storeaffairs.model.Certification" alias="Certification"/>
 		<typeAlias type="com.xingrongjinfu.system.storeaffairs.model.Store" alias="Store"/>
 		<typeAlias type="com.xingrongjinfu.system.storeaffairs.model.BankAccount" alias="BankAccount"/>

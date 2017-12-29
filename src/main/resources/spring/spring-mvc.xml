@@ -18,8 +18,8 @@
 	<mvc:default-servlet-handler/>
 
 	<!-- 使用注解的包，包括子集 -->
-	<context:component-scan base-package="com.xingrongjinfu.system.*.controller" />
-
+	<context:component-scan base-package="com.xingrongjinfu.*.*.controller" />
+	
 	<context:component-scan base-package="org.aspectj.system" />
 	
 	<context:component-scan base-package="org.apache.shiro" />
@@ -61,5 +61,12 @@
 			</list>
 		</property>
 	</bean>
+	
+	<!-- 启用文件上传支持 -->
+    <bean id="multipartResolver"
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="100000" />
+        <property name="maxInMemorySize" value="10240" />
+    </bean>
 	
 </beans>  
