@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="StoreAffairMapper">
+
+	<!-- <resultMap type="Certification" id="CertificationResult">
+		<result property="storeId" column="storeId" />
+		<result property="storeNo" column="storeNo" />
+		<result property="addTime" column="addTime" />
+		<result property="accountName" column="accountName" />
+		<result property="supervisorId" column="supervisorId" /> 
+		<result property="process" column="process" /> 
+		<result property="remark" column="remark" />
+	</resultMap>
+	
+	<resultMap type="supervisor" id="supervisor">
+		<result property="supervisorId" column="supervisorId" />
+		<result property="name" column="name" /> 
+	</resultMap> -->
+
+	<select id="CertificationpageInfoQuery"  parameterType="PageUtilEntity"  resultType="Certification">
+		select a.storeId,a.storeNo,a.addTime,b.accountName,a.supervisorId,a.process,a.remark 
+			from t_store a LEFT join  sys_user b on a.userId=b.userId 
+			where 1=1 
+			<if test="relationMap.accountName != null and relationMap.accountName != ''">
+				AND (
+					b.accountName LIKE CONCAT(CONCAT('%', #{relationMap.accountName}),'%')
+				) 
+			</if> 
+			<if test="relationMap.supervisor != null and relationMap.supervisor != ''">
+				AND a.supervisorId = #{relationMap.supervisor}
+			</if> 
+			<if test="relationMap.repaymentStatus != null and relationMap.repaymentStatus != ''">
+				AND a.process = #{relationMap.repaymentStatus}
+			</if> 
+			<if test="relationMap.beginTime != null and relationMap.beginTime != ''"> 
+				AND DATE_FORMAT(a.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
+			</if>
+			<if test="relationMap.endTime != null and relationMap.endTime != ''"> 
+				AND DATE_FORMAT(a.addTime,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
+			</if> 
+	</select>
+	
+	<!-- 查询所有监督员对象 -->
+	<select id="getSupervisorList"    resultType="supervisor">
+		select  supervisorId,name from sys_supervisor
+	</select>
+	
+	
+	<!-- 查询店铺详细信息 -->
+	<select id="getStoreInfo"  parameterType="java.lang.String"   resultType="Store">
+		select storeId,storeName,userName,idCard,phone,area,address from t_store where storeId = #{storeId}
+	</select>
+	
+	<!-- 查询银行账户详细信息 -->
+	<select id="getBankAccountInfo"  parameterType="java.lang.String"   resultType="BankAccount">
+		select bankType,accountType,userName,oprateType,cardNumber,idType,idCard,remark
+		 from t_bankCard 
+		where userId=(select userId from t_store where storeId = #{storeId}) 
+	</select>
+	
+	<!-- 查询银行账户详细信息 -->
+	<select id="updateCheckToStore"  parameterType="Store"   resultType="java.lang.Integer">
+		update  t_store  
+		<set>
+ 			<if test="supervisorId != null and supervisorId != ''">supervisorId = #{supervisorId},</if>
+ 			<if test="process != null and process != ''">process = #{process},</if>
+ 			<if test="remark != null and remark != ''">remark = #{remark},</if> 
+ 		</set>
+ 		where  storeId= #{storeId} 
+		
+	</select>
+	 
+	 
+	 
+	
+	<select id="repaymentpageInfoQuery"  parameterType="PageUtilEntity"  resultType="Order">
+		select a.paymentNumber,a.orderTime,a.orderNumber,b.storeName,a.paymentTime,a.payment,a.orderStatus
+			from t_order a LEFT join  t_store b on a.userId=b.userId 
+			where 1=1 
+			<if test="relationMap.dateType=='orderTime'">
+				<if test="relationMap.beginTime != null and relationMap.beginTime != ''"> 
+					AND DATE_FORMAT(a.orderTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
+				</if>
+				<if test="relationMap.endTime != null and relationMap.endTime != ''"> 
+					AND DATE_FORMAT(a.orderTime,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
+				</if>  
+			</if> 
+			<if test="relationMap.dateType=='payTime'">
+				<if test="relationMap.beginTime != null and relationMap.beginTime != ''"> 
+					AND DATE_FORMAT(a.paymentTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
+				</if>
+				<if test="relationMap.endTime != null and relationMap.endTime != ''"> 
+					AND DATE_FORMAT(a.paymentTime,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
+				</if>  
+			</if> 
+			<if test="relationMap.repaymentStatus != null and relationMap.repaymentStatus != ''">
+				AND a.orderStatus = #{relationMap.repaymentStatus}
+			</if> 
+			<if test="relationMap.fuzzyCondition != null and relationMap.fuzzyCondition != ''">
+				AND (
+						a.orderNumber LIKE CONCAT(CONCAT('%', #{relationMap.fuzzyCondition}),'%') or 
+						a.paymentNumber LIKE CONCAT(CONCAT('%', #{relationMap.fuzzyCondition}),'%') or 
+						b.storeName LIKE CONCAT(CONCAT('%', #{relationMap.fuzzyCondition}),'%') 
+						)
+			</if>
+	</select>
+	 
+	 
+	 
+</mapper> 

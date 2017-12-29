@@ -27,13 +27,13 @@
       <div class="row cl">
         <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
         <div class="formControls col-xs-8">
-         <input id="username" name="username" type="text" placeholder="请输入登录账号" value="" class="input-text size-L validate[required,custom[onlyLetterSp]]">
+         <input id="username" name="username" type="text" placeholder="请输入登录账号" value="admin" class="input-text size-L validate[required,custom[onlyLetterSp]]">
         </div>
       </div>
       <div class="row cl">
         <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60e;</i></label>
         <div class="formControls col-xs-8">
-          <input id="password" name="password" type="password" placeholder="请输入登录密码" value="" class="input-text size-L validate[required]">
+          <input id="password" name="password" type="password" placeholder="请输入登录密码" value="admin123" class="input-text size-L validate[required]">
         </div>
       </div>
       <%-- jcaptchaEbabled 在JCaptchaValidateFilter设置 --%>
