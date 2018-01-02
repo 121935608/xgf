@@ -10,7 +10,10 @@
  */
 package com.xingrongjinfu.system.merchant.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -22,16 +25,17 @@ import java.io.Serializable;
  */
 public class Balance implements Serializable
 {
-
-    private String payTime;
+    private static final long serialVersionUID = 1L;
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH-mm-ss")
+    private Date payTime;
     private Long totalPrice;
     private Long remain;
 
-    public String getPayTime() {
+    public Date getPayTime() {
         return payTime;
     }
 
-    public void setPayTime(String payTime) {
+    public void setPayTime(Date payTime) {
         this.payTime = payTime;
     }
 

@@ -28,9 +28,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.xingrongjinfu.system.storeaffairs.model.Certification" alias="Certification"/>
 		<typeAlias type="com.xingrongjinfu.system.storeaffairs.model.Store" alias="Store"/>
 		<typeAlias type="com.xingrongjinfu.system.storeaffairs.model.BankAccount" alias="BankAccount"/>
-		<typeAlias type="com.xingrongjinfu.system.storeaffairs.model.Supervisor" alias="Supervisor"/>
+		<typeAlias type="com.xingrongjinfu.system.supervisor.model.Supervisor" alias="Supervisor"/>
 		<typeAlias type="com.xingrongjinfu.system.storeaffairs.model.Order" alias="Order"/>
-
+		<typeAlias type="com.xingrongjinfu.system.help.model.Help" alias="Help"/>
 		<!-- 分页 -->
 		<typeAlias type="org.framework.base.util.TableDataInfo" alias="TableDataInfo"/>
 		<typeAlias type="org.framework.base.util.PageUtilEntity" alias="PageUtilEntity"/>

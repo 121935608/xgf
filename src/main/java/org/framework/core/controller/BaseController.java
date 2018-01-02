@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.ShiroConstants;
 import org.apache.shiro.session.Session;
@@ -63,6 +64,15 @@ public class BaseController
      * 返回数据到表格
      */
     public ModelAndView buildDataTable(int totalResult, List<TableDataInfo> tableDataInfo)
+    {
+        ModelAndView modelAndJsonView = this.getModelAndJsonView();
+        modelAndJsonView.addObject("recordsTotal", totalResult);
+        modelAndJsonView.addObject("recordsFiltered", totalResult);
+        modelAndJsonView.addObject("data", tableDataInfo);
+        return modelAndJsonView;
+    }
+
+    public ModelAndView buildDatasTable(int totalResult, List tableDataInfo)
     {
         ModelAndView modelAndJsonView = this.getModelAndJsonView();
         modelAndJsonView.addObject("recordsTotal", totalResult);

@@ -74,17 +74,14 @@
             {
                 "sDefaultContent": "状态",
                 "bSortable": false,
-                "sClass": "text-c",
+                "sClass": "td-status text-c",
                 "bSearchable": false,
                 "mRender": function (data, type, row) {
-                    if (row.locked == 0){
-                        return "启用";
-                    }else if (row.locked == 1){
-                        return "禁用";
-                    }else{
-                        return "";
+                    if (row.locked == '0') {
+                        return "<span class=\"label label-success radius\">已启用</span>";
+                    } else {
+                        return "<span class=\"label label-defaunt radius\">已停用</span>";
                     }
-
                 }
             },
             {

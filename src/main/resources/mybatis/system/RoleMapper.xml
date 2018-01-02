@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="createTime" column="createTime" />
 	</resultMap>
 
-	<select id="findRoleByUserId" parameterType="Integer" resultType="Role">
+	<select id="findRoleByUserId" parameterType="String" resultType="Role">
 		SELECT * FROM sys_role WHERE roleId = (SELECT roleId FROM sys_user_role WHERE userId =#{userId})
 	</select>
 	

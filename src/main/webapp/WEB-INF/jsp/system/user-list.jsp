@@ -47,7 +47,7 @@ $(document).ready(function(){
 	{
 		"sDefaultContent": "复选",
 		"bSortable" : false,
-		"sClass": "td-status text-c",
+		"sClass": "text-c",
 		"bSearchable": false,
 		"mRender": function(data, type, row) {
 			return "<input class= \"userName\" type=\"checkbox\"name=\"checkName\" value="+row.userName+"></input>";
@@ -112,6 +112,7 @@ function statusTools(row) {
 function query() {
     var status = $("#statusSelect option:selected").val();
     var roleName = $("#roleName option:selected").val();
+    alert(roleName);
     var userName=$("#userName").val();
 
     pageTable.fnSettings().sAjaxSource = "${context_root}/system/userList.action?status=" + status+"&roleName="+roleName+"&userName="+userName;
@@ -140,23 +141,26 @@ function change_password(title,url,w,h){
 function user_resetPWD(obj,id){
     parent.layer.confirm('确认执行改操作？',{icon: 3, title:'提示'},function(index){
         var userName=[];
-        $(":checkbox[name='']:checked").each(function(){ userName.push($(this).val());});
+        $(":checkbox:checked").each(function(){ userName.push($(this).val());});
         alert(userName);
-        $.ajax({
+        if (userName ==null || userName ==''){
+           // alert("userName:"+userName);
+            parent.layer.msg('请选中一个进行操作',{icon: 2,title:"系统提示"});
+		}else {
+            $.ajax({
             url:"${context_root}/system/resetPWD.action?userName="+userName,
             type:'post',
-            /*async:true ,*/
+            async:true ,
             cache:false ,
             dataType:"json",
             success:function(data){
                 if(data.s == true){
                     parent.layer.msg('已重置!',{icon: 5,time:1000});
                 }else{
-                    parent.layer.alert(data.m , {icon: 2,title:"系统提示"});
+                    parent.layer.msg("重置失败" , {icon: 2,title:"系统提示"});
                 }
             },
-        }) ;
-
+        }); }
     });
 }
 
