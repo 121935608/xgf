@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SettingMapper">
+
+	<resultMap id="SettingResult" type="Setting">
+		<result column="systemId" property="systemId" />
+		<result column="xzfMethod" property="xzfMethod" />
+		<result column="xzfRate" property="xzfRate" />
+		<result column="orderRate" property="orderRate" />
+		<result column="settingTime" property="settingTime" />
+		<result column="status" property="status" />
+		<result column="creator" property="creator" />
+	</resultMap>
+
+	<select id="findSetting" resultType="Setting">
+		SELECT * FROM sys_setting
+	</select>
+
+	<update id="updateSetting" parameterType="Setting">
+		UPDATE sys_setting
+		<set>
+			<if test="xzfMethod !=null and xzfMethod !=''">xzfMethod=#{xzfMethod},</if>
+			<if test="xzfRate !=null and xzfRate !=''">xzfRate=#{xzfRate},</if>
+			<if test="orderRate !=null and orderRate !=''">orderRate=#{orderRate},</if>
+			<if test="creator !=null and creator !=''">creator=#{creator},</if>
+			<if test="status !=null ">status=#{status},</if>
+			settingTime=sysdate()
+		</set>
+	</update>
+</mapper> 

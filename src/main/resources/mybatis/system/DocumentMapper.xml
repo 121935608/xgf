@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DocumentMapper">
+
+	<resultMap id="DocumentResult" type="Document">
+		<result column="documentId" property="documentId" />
+		<result column="title" property="title" />
+		<result column="url" property="url" />
+		<result column="status" property="status" />
+		<result column="creatTime" property="creatTime" />
+		<result column="creator" property="creator" />
+	</resultMap>
+	
+	<select id="DocumentpageInfoQuery" parameterType="PageUtilEntity" resultMap="DocumentResult">
+		SELECT * FROM sys_document
+		WHERE 1=1
+		<if test="relationMap.status!=null and relationMap.status !=''">
+			AND status =#{relationMap.status}
+		</if>
+		<if test="relationMap.title!=null and relationMap.title!=''">
+			AND title LIKE CONCAT(CONCAT('%', #{relationMap.title}),'%')
+		</if>
+	</select>
+
+	<insert id="saveDocument" parameterType="Document">
+		INSERT INTO sys_document(
+			<if test="title!=null and title!=''">title,</if>
+			<if test="url!=null and url!=''">url,</if>
+			<if test="status!=null and status!=''">status,</if>
+			<if test="creator!=null and creator!=''">creator,</if>
+			creatTime
+		)VALUES (
+		<if test="title!=null and title!=''">#{title},</if>
+		<if test="url!=null and url!=''">#{url},</if>
+		<if test="status!=null and status!=''">#{status},</if>
+		<if test="creator!=null and creator!=''">#{creator},</if>
+			sysdate()
+		)
+	</insert>
+
+	<select id="findDocument" parameterType="Integer" resultType="Document">
+		SELECT * FROM sys_document WHERE documentId=#{documentId}
+	</select>
+
+	<update id="updateDocument" parameterType="Document">
+		UPDATE sys_document
+		<set>
+			<if test="title!=null and title!=''">title=#{title},</if>
+			<if test="url!=null and url!=''">url=#{url},</if>
+			<if test="status!=null">status=#{status},</if>
+			<if test="creator!=null and creator!=''">creator=#{creator},</if>
+			creatTime=sysdate()
+		</set>
+		WHERE 1=1
+		<if test="documentId !=null and documentId !=''">
+			AND documentId=#{documentId}
+		</if>
+	</update>
+</mapper> 

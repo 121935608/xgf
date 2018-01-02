@@ -7,42 +7,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b71cfb14-e94e-445c-bc94-753a825d87d1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/help/common/HelpConstant.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/help/controller/HelpController.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/help/dao/HelpDao.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/help/dao/IHelpDao.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/help/model/Help.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/help/service/HelpService.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/help/service/IHelpService.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/supervisor/common/SupervisorConstant.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/supervisor/controller/SupervisorController.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/supervisor/dao/ISupervisorDao.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/supervisor/dao/SupervisorDao.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/supervisor/model/Supervisor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/supervisor/service/ISupervisorService.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/supervisor/service/SupervisorService.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/system/HelpMapper.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/system/SupervisorMapper.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/help-list.jsp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/help-reply.jsp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/supervisor-add.jsp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/supervisor-list.jsp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/supervisor-modify.jsp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/uiloader/static/dist/distpicker.data.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/uiloader/static/dist/distpicker.data.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/uiloader/static/dist/distpicker.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/uiloader/static/dist/distpicker.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/merchant/model/Balance.java" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/merchant/model/Balance.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/merchant/model/Merchant.java" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/merchant/model/Merchant.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/user/controller/UserController.java" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/user/controller/UserController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/framework/core/controller/BaseController.java" afterPath="$PROJECT_DIR$/src/main/java/org/framework/core/controller/BaseController.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/document/common/DocumentConstant.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/document/controller/DocumentController.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/document/dao/DocumentDao.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/document/dao/IDocumentDao.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/document/model/Document.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/document/service/DocumentService.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/document/service/IDocumentService.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/setting/common/SettingConstant.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/setting/controller/SettingController.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/setting/dao/ISettingDao.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/setting/dao/SettingDao.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/setting/model/Setting.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/setting/service/ISettingService.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/setting/service/SettingService.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/system/DocumentMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/system/SettingMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/document-add.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/document-list.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/document-modify.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/setting-list.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/utils/AliyunOSSClientUtil.java" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/utils/AliyunOSSClientUtil.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mybatis-config.xml" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mybatis-config.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mybatis/system/RoleMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/system/RoleMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/common/import-js.jspf" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/common/import-js.jspf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/common/taglibs.jspf" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/common/taglibs.jspf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/dataCount-list.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/dataCount-list.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/merchant-list.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/merchant-list.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/user-list.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/user-list.jsp" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -52,55 +39,146 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_TABLE_DETAILS" value="true" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <expand />
+    <select />
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="help-list.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/help-list.jsp">
+      <file leaf-file-name="SettingConstant.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/setting/common/SettingConstant.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+            <state relative-caret-position="383">
+              <caret line="35" column="1" lean-forward="true" selection-start-line="35" selection-start-column="1" selection-end-line="35" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="setting-list.jsp" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/setting-list.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="456">
+              <caret line="22" column="131" lean-forward="false" selection-start-line="22" selection-start-column="131" selection-end-line="22" selection-end-column="131" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="document-modify.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/document-modify.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="288">
+              <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SettingController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/setting/controller/SettingController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="335">
+              <caret line="53" column="44" lean-forward="false" selection-start-line="53" selection-start-column="44" selection-end-line="53" selection-end-column="44" />
               <folding>
-                <marker date="1514856309876" expanded="true" signature="5119:5139" ph="..." />
-                <marker date="1514856309876" expanded="true" signature="5155:5170" ph="..." />
-                <marker date="1514856309876" expanded="true" signature="5497:5517" ph="..." />
-                <marker date="1514856309876" expanded="true" signature="5632:5640" ph="&amp;##xe631;" />
-                <marker date="1514856309876" expanded="true" signature="5699:5719" ph="..." />
-                <marker date="1514856309876" expanded="true" signature="5835:5843" ph="&amp;##xe615;" />
-                <marker date="1514856309876" expanded="true" signature="7599:7619" ph="..." />
-                <marker date="1514856309876" expanded="true" signature="7714:7722" ph="&amp;##xe6e1;" />
-                <marker date="1514856309876" expanded="true" signature="8768:8788" ph="..." />
-                <marker date="1514856309876" expanded="true" signature="8814:8822" ph="&amp;##xe631;" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="supervisor-add.jsp" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/supervisor-add.jsp">
+      <file leaf-file-name="Setting.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/setting/model/Setting.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="56" column="33" lean-forward="false" selection-start-line="56" selection-start-column="33" selection-end-line="56" selection-end-column="33" />
+            <state relative-caret-position="407">
+              <caret line="74" column="32" lean-forward="false" selection-start-line="74" selection-start-column="32" selection-end-line="74" selection-end-column="32" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1546#1547#0" expanded="true" />
+                <element signature="e#1591#1592#0" expanded="true" />
+                <element signature="e#1627#1628#0" expanded="true" />
+                <element signature="e#1661#1662#0" expanded="true" />
+                <element signature="e#1691#1692#0" expanded="true" />
+                <element signature="e#1737#1738#0" expanded="true" />
+                <element signature="e#1775#1776#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SettingService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/setting/service/SettingService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="383">
+              <caret line="29" column="16" lean-forward="false" selection-start-line="29" selection-start-column="16" selection-end-line="29" selection-end-column="16" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#907#908#0" expanded="true" />
+                <element signature="e#963#964#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SettingMapper.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/system/SettingMapper.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="377">
+              <caret line="29" column="14" lean-forward="true" selection-start-line="29" selection-start-column="14" selection-end-line="29" selection-end-column="14" />
+              <folding>
+                <marker date="1514890760778" expanded="true" signature="655:680" ph="SELECT * FRO... sys_setting" />
+                <marker date="1514890760778" expanded="true" signature="748:766" ph="UPDATE sys_s... " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DocumentMapper.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/system/DocumentMapper.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="260">
+              <caret line="53" column="31" lean-forward="true" selection-start-line="53" selection-start-column="22" selection-end-line="53" selection-end-column="31" />
+              <folding>
+                <marker date="1514886247306" expanded="true" signature="637:675" ph="SELECT * FRO... sys_document" />
+                <marker date="1514886247306" expanded="true" signature="991:1488" ph="INSERT INTO sys_document... " />
+                <marker date="1514886247306" expanded="true" signature="1577:1610" ph="SELECT * FRO... sys_document" />
+                <marker date="1514886247306" expanded="true" signature="1577:1634" ph="SELECT * FRO... sys_document" />
+                <marker date="1514886247306" expanded="true" signature="1704:1723" ph="UPDATE sys_d... " />
+                <marker date="1514886247306" expanded="true" signature="1704:2008" ph="UPDATE sys_d... " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ISettingDao.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/setting/dao/ISettingDao.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="383">
+              <caret line="29" column="37" lean-forward="false" selection-start-line="29" selection-start-column="37" selection-end-line="29" selection-end-column="37" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="distpicker.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/uiloader/static/dist/distpicker.js">
+      <file leaf-file-name="SettingDao.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/setting/dao/SettingDao.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1080">
-              <caret line="98" column="26" lean-forward="false" selection-start-line="98" selection-start-column="22" selection-end-line="98" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HelpController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/help/controller/HelpController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="404">
-              <caret line="61" column="56" lean-forward="false" selection-start-line="61" selection-start-column="56" selection-end-line="61" selection-end-column="56" />
-              <folding />
+            <state relative-caret-position="407">
+              <caret line="34" column="55" lean-forward="false" selection-start-line="34" selection-start-column="55" selection-end-line="34" selection-end-column="55" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#693#694#0" expanded="true" />
+                <element signature="e#778#779#0" expanded="true" />
+                <element signature="e#841#842#0" expanded="true" />
+                <element signature="e#914#915#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -138,6 +216,8 @@
       <find>distr</find>
       <find>ChineseDistricts</find>
       <find>description</find>
+      <find>java.lang.ClassNotFoundException: org.apache.commons.fileupload.FileItemFactory</find>
+      <find>net.sf.json-lib</find>
     </findStrings>
     <dirStrings>
       <dir>C:\Users\zxuser\Desktop\星果坊\星果坊后台运营\xgf_admin\src\main\java\com\xingrongjinfu\common</dir>
@@ -149,29 +229,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/user/model/UserRole.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/merchant/service/IMerchantService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/merchant/controller/MerchantController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/merchant/service/MerchantService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/merchant/dao/IMerchantDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/user/service/UserService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/user/dao/IUserDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/user/service/IUserService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/role/service/IRoleService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/merchant/dao/MerchantDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/user/dao/UserDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/role/service/RoleService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/role/dao/IRoleDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/role/dao/RoleDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/utils/IdUtil.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/mybatis/system/MerchantMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/resources/mybatis/system/UserMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/frontOrAPP-add.jsp" />
-        <option value="$PROJECT_DIR$/src/main/resources/mybatis/system/RoleMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/user/controller/UserController.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/merchant-list.jsp" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/common/taglibs.jspf" />
-        <option value="$PROJECT_DIR$/src/main/webapp/uiloader/static/city/js/distpicker.data.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/common/import-js.jspf" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/supervisor-list.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/supervisor/common/SupervisorConstant.java" />
@@ -182,7 +239,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/supervisor/controller/SupervisorController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/mybatis/system/SupervisorMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/java/org/framework/core/controller/BaseController.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/mybatis/mybatis-config.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/merchant/model/Merchant.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/merchant/model/Balance.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/supervisor/model/Supervisor.java" />
@@ -200,6 +256,30 @@
         <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/help/controller/HelpController.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/help-list.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/supervisor-add.jsp" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/document/model/Document.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/utils/AliyunOSSClientUtil.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mybatis/system/UserMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/document-add.jsp" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/document/service/IDocumentService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/document/service/DocumentService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/document/dao/IDocumentDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/document/dao/DocumentDao.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/document-list.jsp" />
+        <option value="$PROJECT_DIR$/src/main/resources/mybatis/system/DocumentMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/document/common/DocumentConstant.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/document-modify.jsp" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/document/controller/DocumentController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mybatis/mybatis-config.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/setting/common/SettingConstant.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/setting/service/ISettingService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/setting/service/SettingService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/setting/dao/ISettingDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/setting/dao/SettingDao.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mybatis/system/SettingMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/setting/model/Setting.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/setting/controller/SettingController.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/setting-list.jsp" />
       </list>
     </option>
   </component>
@@ -223,12 +303,31 @@
         <option name="userSettingsFile" value="E:\develop\maven\apache-maven-3.3.9\conf\settings.xml" />
       </MavenGeneralSettings>
     </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="xgf_admin Maven Webapp" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+      </expand>
+      <select />
+    </treeState>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1936" />
     <option name="height" value="1056" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -245,8 +344,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -285,6 +385,89 @@
               <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="xingrongjinfu" type="462c0819:PsiDirectoryNode" />
+              <item name="system" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="xingrongjinfu" type="462c0819:PsiDirectoryNode" />
+              <item name="system" type="462c0819:PsiDirectoryNode" />
+              <item name="setting" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="xingrongjinfu" type="462c0819:PsiDirectoryNode" />
+              <item name="system" type="462c0819:PsiDirectoryNode" />
+              <item name="setting" type="462c0819:PsiDirectoryNode" />
+              <item name="common" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="xingrongjinfu" type="462c0819:PsiDirectoryNode" />
+              <item name="system" type="462c0819:PsiDirectoryNode" />
+              <item name="setting" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="xingrongjinfu" type="462c0819:PsiDirectoryNode" />
+              <item name="system" type="462c0819:PsiDirectoryNode" />
+              <item name="setting" type="462c0819:PsiDirectoryNode" />
+              <item name="dao" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="xingrongjinfu" type="462c0819:PsiDirectoryNode" />
+              <item name="system" type="462c0819:PsiDirectoryNode" />
+              <item name="setting" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="xingrongjinfu" type="462c0819:PsiDirectoryNode" />
+              <item name="system" type="462c0819:PsiDirectoryNode" />
+              <item name="setting" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="xingrongjinfu" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -311,26 +494,66 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
+              <item name="jsp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
+              <item name="jsp" type="462c0819:PsiDirectoryNode" />
+              <item name="commodity" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
+              <item name="jsp" type="462c0819:PsiDirectoryNode" />
+              <item name="system" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="File.Encoding" />
-    <property name="project.structure.last.edited" value="Artifacts" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.importing" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\zxuser\Desktop\星果坊\星果坊后台运营\xgf_admin\src\main\java\com\xingrongjinfu\system" />
-      <recent name="C:\Users\zxuser\Desktop\星果坊\星果坊后台运营\xgf_admin\src\main\webapp\uiloader\static" />
       <recent name="C:\Users\zxuser\Desktop\星果坊\星果坊后台运营\xgf_admin\src\main\webapp\WEB-INF\jsp\system" />
       <recent name="C:\Users\zxuser\Desktop\星果坊\星果坊后台运营\xgf_admin\src\main\resources\mybatis\system" />
+      <recent name="C:\Users\zxuser\Desktop\星果坊\星果坊后台运营\xgf_admin\src\main\java\com\xingrongjinfu\system" />
+      <recent name="C:\Users\zxuser\Desktop\星果坊\星果坊后台运营\xgf_admin\src\main\webapp\uiloader\static" />
       <recent name="C:\Users\zxuser\Desktop\星果坊\星果坊后台运营\xgf_admin\src\main\webapp\uiloader\static\city" />
     </key>
   </component>
@@ -467,21 +690,22 @@
     <option name="remove_strategy" value="false" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932165" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15544872" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20787746" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36433262" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21634616" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21901709" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32959402" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39934355" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -515,8 +739,14 @@
           <properties />
           <option name="timeStamp" value="13" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/document/dao/DocumentDao.java</url>
+          <line>53</line>
+          <properties />
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="14" />
+      <option name="time" value="23" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory">
@@ -525,311 +755,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/utils/AccessCodeUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="23" column="13" lean-forward="false" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/supervisor/dao/ISupervisorDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="473">
-          <caret line="48" column="43" lean-forward="false" selection-start-line="48" selection-start-column="43" selection-end-line="48" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/supervisor/dao/SupervisorDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="33" column="56" lean-forward="false" selection-start-line="33" selection-start-column="43" selection-end-line="33" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/supervisor/controller/SupervisorController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="428">
-          <caret line="92" column="46" lean-forward="true" selection-start-line="92" selection-start-column="46" selection-end-line="92" selection-end-column="46" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/member-add.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="45" column="84" lean-forward="true" selection-start-line="45" selection-start-column="84" selection-end-line="45" selection-end-column="84" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/sourceCode-add.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1728">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/supervisor/service/ISupervisorService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="353">
-          <caret line="48" column="8" lean-forward="false" selection-start-line="48" selection-start-column="8" selection-end-line="48" selection-end-column="8" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/supervisor/common/SupervisorConstant.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="401">
-          <caret line="64" column="60" lean-forward="false" selection-start-line="64" selection-start-column="47" selection-end-line="64" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/supervisor/service/SupervisorService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="38" column="15" lean-forward="false" selection-start-line="38" selection-start-column="15" selection-end-line="38" selection-end-column="15" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#973#974#0" expanded="true" />
-            <element signature="e#1035#1036#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/help/common/Help.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/member-list.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1514266794703" expanded="true" signature="5977:5997" ph="..." />
-            <marker date="1514266794703" expanded="true" signature="6112:6120" ph="&amp;##xe631;" />
-            <marker date="1514266794703" expanded="true" signature="6179:6199" ph="..." />
-            <marker date="1514266794703" expanded="true" signature="6315:6323" ph="&amp;##xe615;" />
-            <marker date="1514266794703" expanded="true" signature="8107:8127" ph="..." />
-            <marker date="1514266794703" expanded="true" signature="8222:8230" ph="&amp;##xe6e1;" />
-            <marker date="1514266794703" expanded="true" signature="9276:9296" ph="..." />
-            <marker date="1514266794703" expanded="true" signature="9322:9330" ph="&amp;##xe631;" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/framework/base/util/PageUtilEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/framework/core/controller/BaseController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="393">
-          <caret line="74" column="34" lean-forward="false" selection-start-line="74" selection-start-column="34" selection-end-line="74" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/merchant/controller/MerchantController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="62" column="71" lean-forward="false" selection-start-line="62" selection-start-column="58" selection-end-line="62" selection-end-column="71" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/merchant/dao/MerchantDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="451">
-          <caret line="42" column="99" lean-forward="false" selection-start-line="42" selection-start-column="86" selection-end-line="42" selection-end-column="99" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/mybatis-config.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="26" column="78" lean-forward="false" selection-start-line="26" selection-start-column="74" selection-end-line="26" selection-end-column="78" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/merchant/model/Merchant.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="24" column="52" lean-forward="false" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/merchant/model/Balance.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="403">
-          <caret line="37" column="31" lean-forward="false" selection-start-line="37" selection-start-column="31" selection-end-line="37" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/merchant/model/AccountInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-53">
-          <caret line="22" column="13" lean-forward="false" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/supervisor/model/Supervisor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="33" column="68" lean-forward="false" selection-start-line="33" selection-start-column="68" selection-end-line="33" selection-end-column="68" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1412#1413#0" expanded="false" />
-            <element signature="e#1444#1445#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/user/model/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/user/model/UserRole.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/dataCount-list.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="552">
-          <caret line="164" column="74" lean-forward="false" selection-start-line="164" selection-start-column="74" selection-end-line="164" selection-end-column="74" />
-          <folding>
-            <marker date="1514543233024" expanded="true" signature="9092:9112" ph="..." />
-            <marker date="1514543233024" expanded="true" signature="9227:9235" ph="&amp;##xe631;" />
-            <marker date="1514543233024" expanded="true" signature="9294:9314" ph="..." />
-            <marker date="1514543233024" expanded="true" signature="9430:9438" ph="&amp;##xe615;" />
-            <marker date="1514543233024" expanded="true" signature="12007:12027" ph="..." />
-            <marker date="1514543233024" expanded="true" signature="12122:12130" ph="&amp;##xe6e1;" />
-            <marker date="1514543233024" expanded="true" signature="13176:13196" ph="..." />
-            <marker date="1514543233024" expanded="true" signature="13222:13230" ph="&amp;##xe631;" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/system/SysCodeMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1514266794578" expanded="true" signature="588:682" ph="select codek... sys_code" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/system/UserLogMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-216">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1514266794578" expanded="true" signature="723:940" ph="select * fro... sys_userlog" />
-            <marker date="1514266794578" expanded="true" signature="1005:1189" ph="insert into sys_userlog... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/system/MerchantMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="37" column="25" lean-forward="true" selection-start-line="37" selection-start-column="25" selection-end-line="37" selection-end-column="25" />
-          <folding>
-            <marker date="1514460802348" expanded="true" signature="1750:1927" ph="SELECT s.use... sys_user" />
-            <marker date="1514460802348" expanded="true" signature="2010:2526" ph="SELECT s.sto... t_store" />
-            <marker date="1514460802348" expanded="true" signature="2608:2818" ph="UPDATE sys_u... " />
-            <marker date="1514460802348" expanded="true" signature="2943:3178" ph="SELECT o.pay... t_order" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/system/OperLogMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="31" column="13" lean-forward="true" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
-          <folding>
-            <marker date="1480324893172" expanded="true" signature="1584:1929" ph="insert into sys_operlog... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/menu-list.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-473">
-          <caret line="146" column="50" lean-forward="false" selection-start-line="146" selection-start-column="39" selection-end-line="146" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/supervisor-list.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-96">
-          <caret line="8" column="55" lean-forward="true" selection-start-line="8" selection-start-column="55" selection-end-line="8" selection-end-column="55" />
-          <folding>
-            <marker date="1514536712412" expanded="true" signature="4338:4358" ph="..." />
-            <marker date="1514536712412" expanded="true" signature="4387:4395" ph="&amp;##xe6e2;" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/supervisor-modify.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="18" column="14" lean-forward="true" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/merchant-list.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1320">
-          <caret line="91" column="54" lean-forward="false" selection-start-line="91" selection-start-column="54" selection-end-line="91" selection-end-column="54" />
-          <folding>
-            <marker date="1514511946505" expanded="true" signature="4489:4509" ph="..." />
-            <marker date="1514511946505" expanded="true" signature="4655:4675" ph="..." />
-            <marker date="1514511946505" expanded="true" signature="6900:6920" ph="..." />
-            <marker date="1514511946505" expanded="true" signature="8039:8059" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/merchant-balance.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="17" column="10" lean-forward="false" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="10" />
-          <folding>
-            <marker date="1514377528036" expanded="true" signature="2130:2150" ph="..." />
-            <marker date="1514377528036" expanded="true" signature="2296:2316" ph="..." />
-            <marker date="1514377528036" expanded="true" signature="4979:4999" ph="..." />
-            <marker date="1514377528036" expanded="true" signature="6118:6138" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/common/taglibs.jspf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="18" lean-forward="false" selection-start-line="0" selection-start-column="18" selection-end-line="0" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/help/common/HelpConstant.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="482">
@@ -838,89 +763,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/user/controller/UserController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="449">
-          <caret line="170" column="47" lean-forward="true" selection-start-line="170" selection-start-column="47" selection-end-line="170" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/help/service/IHelpService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="656">
-          <caret line="48" column="32" lean-forward="false" selection-start-line="48" selection-start-column="32" selection-end-line="48" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/help/dao/IHelpDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="45" column="11" lean-forward="false" selection-start-line="45" selection-start-column="11" selection-end-line="45" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/help/service/HelpService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="32" column="17" lean-forward="false" selection-start-line="32" selection-start-column="17" selection-end-line="32" selection-end-column="17" />
-          <folding>
-            <element signature="e#1004#1005#0" expanded="true" />
-            <element signature="e#1057#1058#0" expanded="true" />
-            <element signature="e#1120#1121#0" expanded="true" />
-            <element signature="e#1167#1168#0" expanded="true" />
-            <element signature="e#1225#1226#0" expanded="true" />
-            <element signature="e#1276#1277#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/help/dao/HelpDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="530">
-          <caret line="57" column="53" lean-forward="false" selection-start-line="57" selection-start-column="39" selection-end-line="57" selection-end-column="53" />
+        <state relative-caret-position="290">
+          <caret line="36" column="30" lean-forward="true" selection-start-line="36" selection-start-column="30" selection-end-line="36" selection-end-column="30" />
           <folding>
-            <element signature="e#1112#1113#0" expanded="false" />
-            <element signature="e#1195#1196#0" expanded="false" />
             <element signature="e#1536#1537#0" expanded="false" />
             <element signature="e#1604#1605#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/help-reply.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="58" column="70" lean-forward="false" selection-start-line="58" selection-start-column="60" selection-end-line="58" selection-end-column="70" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/system/UserMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="508">
-          <caret line="145" column="21" lean-forward="true" selection-start-line="145" selection-start-column="12" selection-end-line="145" selection-end-column="21" />
-          <folding>
-            <marker date="1514461926439" expanded="true" signature="1962:2011" ph="select * fro... sys_user" />
-            <marker date="1514461926439" expanded="true" signature="2096:2141" ph="select * fro... sys_user" />
-            <marker date="1514461926439" expanded="true" signature="2253:2350" ph="SELECT * FRO... sys_role" />
-            <marker date="1514461926439" expanded="true" signature="2292:2349" ph="SELECT roleI... sys_user_role" />
-            <marker date="1514461926439" expanded="true" signature="2450:2818" ph="SELECT u.use... sys_user" />
-            <marker date="1514461926439" expanded="true" signature="2912:3066" ph="SELECT * FRO... sys_role" />
-            <marker date="1514461926439" expanded="true" signature="2956:3065" ph="SELECT roleI... sys_user_role" />
-            <marker date="1514461926439" expanded="true" signature="3006:3064" ph="SELECT userI... sys_user" />
-            <marker date="1514461926439" expanded="true" signature="3167:3407" ph="SELECT * FRO... sys_permission" />
-            <marker date="1514461926439" expanded="true" signature="3216:3386" ph="SELECT perms... sys_role_permission" />
-            <marker date="1514461926439" expanded="true" signature="3277:3385" ph="SELECT roleI... sys_user_role" />
-            <marker date="1514461926439" expanded="true" signature="3328:3384" ph="SELECT userI... sys_user" />
-            <marker date="1514461926439" expanded="true" signature="3556:3688" ph="SELECT GROUP... sys_role" />
-            <marker date="1514461926439" expanded="true" signature="3626:3687" ph="SELECT roleI... sys_user_role" />
-            <marker date="1514461926439" expanded="true" signature="4364:5083" ph="update sys_u... " />
-            <marker date="1514461926439" expanded="true" signature="5219:6295" ph="insert into sys_user... " />
-            <marker date="1514461926439" expanded="true" signature="6384:6429" ph="delete from " />
-            <marker date="1514461926439" expanded="true" signature="6524:6574" ph="delete from " />
           </folding>
         </state>
       </provider>
@@ -939,37 +788,138 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/user-list.jsp">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/system/SupervisorMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="114" column="20" lean-forward="false" selection-start-line="114" selection-start-column="20" selection-end-line="114" selection-end-column="20" />
+        <state relative-caret-position="436">
+          <caret line="33" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
           <folding>
-            <marker date="1514795208868" expanded="true" signature="4538:4558" ph="..." />
-            <marker date="1514795208868" expanded="true" signature="4696:4716" ph="..." />
-            <marker date="1514795208868" expanded="true" signature="6831:6851" ph="..." />
-            <marker date="1514795208868" expanded="true" signature="7660:7680" ph="..." />
+            <marker date="1514538517644" expanded="true" signature="771:847" ph="SELECT super... sys_supervisor" />
+            <marker date="1514538517644" expanded="true" signature="771:865" ph="SELECT super... sys_supervisor" />
+            <marker date="1514538517644" expanded="true" signature="1471:1492" ph="UPDATE sys_s... " />
+            <marker date="1514538517644" expanded="true" signature="1471:2015" ph="UPDATE sys_s... " />
+            <marker date="1514538517644" expanded="true" signature="2217:2280" ph="SELECT * FRO... sys_supervisor" />
+            <marker date="1514538517644" expanded="true" signature="2363:3103" ph="INSERT INTO sys_supervisor... " />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/help/model/Help.java">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/commodity/classification-list.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="46" column="33" lean-forward="false" selection-start-line="46" selection-start-column="33" selection-end-line="46" selection-end-column="33" />
+        <state relative-caret-position="-936">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1514857219067" expanded="true" signature="2147:2167" ph="..." />
+            <marker date="1514857219067" expanded="true" signature="2296:2304" ph="&amp;##xe631;" />
+            <marker date="1514857219067" expanded="true" signature="2355:2375" ph="..." />
+            <marker date="1514857219067" expanded="true" signature="2505:2513" ph="&amp;##xe615;" />
+            <marker date="1514857219067" expanded="true" signature="3111:3131" ph="..." />
+            <marker date="1514857219067" expanded="true" signature="3240:3248" ph="&amp;##xe6e1;" />
+            <marker date="1514857219067" expanded="true" signature="4033:4053" ph="..." />
+            <marker date="1514857219067" expanded="true" signature="4079:4087" ph="&amp;##xe631;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/commodity/classification-add.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/HTML5.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="95" column="34" lean-forward="false" selection-start-line="95" selection-start-column="34" selection-end-line="95" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/commodity/label/controller/LabelController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="77" column="72" lean-forward="false" selection-start-line="77" selection-start-column="72" selection-end-line="77" selection-end-column="72" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/commodity/label-list.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-360">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1514857219067" expanded="true" signature="2223:2243" ph="..." />
+            <marker date="1514857219067" expanded="true" signature="2363:2371" ph="&amp;##xe631;" />
+            <marker date="1514857219067" expanded="true" signature="2422:2442" ph="..." />
+            <marker date="1514857219067" expanded="true" signature="2563:2571" ph="&amp;##xe615;" />
+            <marker date="1514857219067" expanded="true" signature="3133:3153" ph="..." />
+            <marker date="1514857219067" expanded="true" signature="3253:3261" ph="&amp;##xe6e1;" />
+            <marker date="1514857219067" expanded="true" signature="4019:4039" ph="..." />
+            <marker date="1514857219067" expanded="true" signature="4065:4073" ph="&amp;##xe631;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/commodity/label-add.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-624">
+          <caret line="4" column="32" lean-forward="false" selection-start-line="4" selection-start-column="32" selection-end-line="4" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/commodity/label/model/Label.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MAVEN_REPOSITORY$/commons-io/commons-io/2.4/commons-io-2.4.pom">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider editor-type-id="MavenHelperPluginDependencyAnalyzer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="252" column="28" lean-forward="false" selection-start-line="252" selection-start-column="28" selection-end-line="252" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/4.1.7.RELEASE/spring-web-4.1.7.RELEASE.jar!/org/springframework/web/method/support/InvocableHandlerMethod.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="132" column="0" lean-forward="false" selection-start-line="132" selection-start-column="0" selection-end-line="132" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/utils/AliyunOSSClientUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="107">
+          <caret line="27" column="36" lean-forward="false" selection-start-line="27" selection-start-column="36" selection-end-line="27" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1061#1062#0" expanded="true" />
-            <element signature="e#1090#1091#0" expanded="true" />
-            <element signature="e#1135#1136#0" expanded="true" />
-            <element signature="e#1171#1172#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/help-list.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+        <state relative-caret-position="-840">
+          <caret line="83" column="55" lean-forward="true" selection-start-line="83" selection-start-column="55" selection-end-line="83" selection-end-column="55" />
           <folding>
             <marker date="1514856309876" expanded="true" signature="5119:5139" ph="..." />
             <marker date="1514856309876" expanded="true" signature="5155:5170" ph="..." />
@@ -985,57 +935,389 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/common/import-js.jspf">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/merchant-list.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="11" column="90" lean-forward="true" selection-start-line="11" selection-start-column="90" selection-end-line="11" selection-end-column="90" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/system/SupervisorMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="436">
-          <caret line="48" column="13" lean-forward="true" selection-start-line="48" selection-start-column="13" selection-end-line="48" selection-end-column="13" />
+        <state relative-caret-position="175">
+          <caret line="186" column="29" lean-forward="false" selection-start-line="186" selection-start-column="29" selection-end-line="186" selection-end-column="29" />
           <folding>
-            <marker date="1514538517644" expanded="true" signature="771:847" ph="SELECT super... sys_supervisor" />
-            <marker date="1514538517644" expanded="true" signature="771:865" ph="SELECT super... sys_supervisor" />
-            <marker date="1514538517644" expanded="true" signature="1471:1492" ph="UPDATE sys_s... " />
-            <marker date="1514538517644" expanded="true" signature="1471:2015" ph="UPDATE sys_s... " />
-            <marker date="1514538517644" expanded="true" signature="2217:2280" ph="SELECT * FRO... sys_supervisor" />
-            <marker date="1514538517644" expanded="true" signature="2363:3103" ph="INSERT INTO sys_supervisor... " />
+            <marker date="1514511946505" expanded="true" signature="4489:4509" ph="..." />
+            <marker date="1514511946505" expanded="true" signature="4655:4675" ph="..." />
+            <marker date="1514511946505" expanded="true" signature="6900:6920" ph="..." />
+            <marker date="1514511946505" expanded="true" signature="8039:8059" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/uiloader/static/dist/distpicker.data.js">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/merchant/controller/MerchantController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="624">
-          <caret line="253" column="20" lean-forward="true" selection-start-line="253" selection-start-column="20" selection-end-line="253" selection-end-column="20" />
+        <state relative-caret-position="-824">
+          <caret line="43" column="13" lean-forward="false" selection-start-line="43" selection-start-column="13" selection-end-line="43" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/uiloader/static/dist/distpicker.js">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/system/UserMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1080">
-          <caret line="98" column="26" lean-forward="false" selection-start-line="98" selection-start-column="22" selection-end-line="98" selection-end-column="26" />
+        <state relative-caret-position="1049">
+          <caret line="145" column="21" lean-forward="true" selection-start-line="145" selection-start-column="21" selection-end-line="145" selection-end-column="21" />
+          <folding>
+            <marker date="1514857219005" expanded="true" signature="1962:2011" ph="select * fro... sys_user" />
+            <marker date="1514857219005" expanded="true" signature="2096:2141" ph="select * fro... sys_user" />
+            <marker date="1514857219005" expanded="true" signature="2253:2350" ph="SELECT * FRO... sys_role" />
+            <marker date="1514857219005" expanded="true" signature="2292:2349" ph="SELECT roleI... sys_user_role" />
+            <marker date="1514857219005" expanded="true" signature="2450:2818" ph="SELECT u.use... sys_user" />
+            <marker date="1514857219005" expanded="true" signature="2912:3066" ph="SELECT * FRO... sys_role" />
+            <marker date="1514857219005" expanded="true" signature="2956:3065" ph="SELECT roleI... sys_user_role" />
+            <marker date="1514857219005" expanded="true" signature="3006:3064" ph="SELECT userI... sys_user" />
+            <marker date="1514857219005" expanded="true" signature="3167:3407" ph="SELECT * FRO... sys_permission" />
+            <marker date="1514857219005" expanded="true" signature="3216:3386" ph="SELECT perms... sys_role_permission" />
+            <marker date="1514857219005" expanded="true" signature="3277:3385" ph="SELECT roleI... sys_user_role" />
+            <marker date="1514857219005" expanded="true" signature="3328:3384" ph="SELECT userI... sys_user" />
+            <marker date="1514857219005" expanded="true" signature="3556:3688" ph="SELECT GROUP... sys_role" />
+            <marker date="1514857219005" expanded="true" signature="3626:3687" ph="SELECT roleI... sys_user_role" />
+            <marker date="1514857219005" expanded="true" signature="4364:5083" ph="update sys_u... " />
+            <marker date="1514857219005" expanded="true" signature="5219:6295" ph="insert into sys_user... " />
+            <marker date="1514857219005" expanded="true" signature="6384:6429" ph="delete from " />
+            <marker date="1514857219005" expanded="true" signature="6524:6574" ph="delete from " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/document/model/Document.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="28" column="30" lean-forward="false" selection-start-line="28" selection-start-column="20" selection-end-line="28" selection-end-column="30" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/4.1.7.RELEASE/spring-web-4.1.7.RELEASE-sources.jar!/org/springframework/web/method/support/InvocableHandlerMethod.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="136" column="0" lean-forward="false" selection-start-line="136" selection-start-column="0" selection-end-line="136" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/help/controller/HelpController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/document/service/IDocumentService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="404">
-          <caret line="61" column="56" lean-forward="false" selection-start-line="61" selection-start-column="56" selection-end-line="61" selection-end-column="56" />
+        <state relative-caret-position="353">
+          <caret line="48" column="8" lean-forward="false" selection-start-line="48" selection-start-column="8" selection-end-line="48" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/document/service/DocumentService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="33" column="19" lean-forward="true" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1364#1365#0" expanded="true" />
+            <element signature="e#1423#1424#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/document/dao/IDocumentDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-43">
+          <caret line="26" column="17" lean-forward="false" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/document/dao/DocumentDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+          <folding>
+            <element signature="e#1660#1661#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/document/common/DocumentConstant.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="455">
+          <caret line="74" column="47" lean-forward="false" selection-start-line="74" selection-start-column="47" selection-end-line="74" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/document/controller/DocumentController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="108" column="0" lean-forward="false" selection-start-line="108" selection-start-column="0" selection-end-line="108" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/framework/core/dao/DynamicObjectBaseDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2760">
+          <caret line="140" column="18" lean-forward="false" selection-start-line="140" selection-start-column="18" selection-end-line="140" selection-end-column="18" />
+          <folding>
+            <element signature="e#2815#2816#0" expanded="false" />
+            <element signature="e#2876#2877#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/mybatis-config.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="34" column="87" lean-forward="false" selection-start-line="34" selection-start-column="80" selection-end-line="34" selection-end-column="87" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/role-list.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1514857219116" expanded="true" signature="3531:3551" ph="..." />
+            <marker date="1514857219116" expanded="true" signature="3580:3588" ph="&amp;##xe6e2;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/user-list.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4415">
+          <caret line="192" column="62" lean-forward="true" selection-start-line="192" selection-start-column="62" selection-end-line="192" selection-end-column="62" />
+          <folding>
+            <marker date="1514795208868" expanded="true" signature="4538:4558" ph="..." />
+            <marker date="1514795208868" expanded="true" signature="4696:4716" ph="..." />
+            <marker date="1514795208868" expanded="true" signature="6831:6851" ph="..." />
+            <marker date="1514795208868" expanded="true" signature="7660:7680" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/document-list.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4393">
+          <caret line="186" column="167" lean-forward="false" selection-start-line="186" selection-start-column="167" selection-end-line="186" selection-end-column="167" />
+          <folding>
+            <marker date="1514885634316" expanded="true" signature="4455:4475" ph="..." />
+            <marker date="1514885634316" expanded="true" signature="4617:4637" ph="..." />
+            <marker date="1514885634316" expanded="true" signature="5760:5780" ph="..." />
+            <marker date="1514885634316" expanded="true" signature="6782:6802" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/dataCount-list.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-72">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1514857219083" expanded="true" signature="9090:9110" ph="..." />
+            <marker date="1514857219083" expanded="true" signature="9225:9233" ph="&amp;##xe631;" />
+            <marker date="1514857219083" expanded="true" signature="9292:9312" ph="..." />
+            <marker date="1514857219083" expanded="true" signature="9428:9436" ph="&amp;##xe615;" />
+            <marker date="1514857219083" expanded="true" signature="12005:12025" ph="..." />
+            <marker date="1514857219083" expanded="true" signature="12120:12128" ph="&amp;##xe6e1;" />
+            <marker date="1514857219083" expanded="true" signature="13174:13194" ph="..." />
+            <marker date="1514857219083" expanded="true" signature="13220:13228" ph="&amp;##xe631;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/dataCount-userAccess-list.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-360">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1514857219083" expanded="true" signature="4278:4298" ph="..." />
+            <marker date="1514857219083" expanded="true" signature="4413:4421" ph="&amp;##xe631;" />
+            <marker date="1514857219083" expanded="true" signature="4480:4500" ph="..." />
+            <marker date="1514857219083" expanded="true" signature="4616:4624" ph="&amp;##xe615;" />
+            <marker date="1514857219083" expanded="true" signature="6582:6602" ph="..." />
+            <marker date="1514857219083" expanded="true" signature="6697:6705" ph="&amp;##xe6e1;" />
+            <marker date="1514857219083" expanded="true" signature="7751:7771" ph="..." />
+            <marker date="1514857219083" expanded="true" signature="7797:7805" ph="&amp;##xe631;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/supervisor-list.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="8" column="55" lean-forward="true" selection-start-line="8" selection-start-column="55" selection-end-line="8" selection-end-column="55" />
+          <folding>
+            <marker date="1514536712412" expanded="true" signature="4338:4358" ph="..." />
+            <marker date="1514536712412" expanded="true" signature="4387:4395" ph="&amp;##xe6e2;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/sourceCode-list.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1514857219132" expanded="true" signature="3516:3536" ph="..." />
+            <marker date="1514857219132" expanded="true" signature="3565:3573" ph="&amp;##xe6e2;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/document-add.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="407">
+          <caret line="72" column="3" lean-forward="true" selection-start-line="72" selection-start-column="3" selection-end-line="72" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/member-add.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2088">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/sourceCode-add.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1728">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/supervisor-add.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="56" column="33" lean-forward="false" selection-start-line="56" selection-start-column="33" selection-end-line="56" selection-end-column="33" />
+        <state relative-caret-position="359">
+          <caret line="78" column="3" lean-forward="true" selection-start-line="78" selection-start-column="3" selection-end-line="78" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/setting/service/ISettingService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="433">
+          <caret line="32" column="37" lean-forward="false" selection-start-line="32" selection-start-column="37" selection-end-line="32" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/setting/dao/ISettingDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="383">
+          <caret line="29" column="37" lean-forward="false" selection-start-line="29" selection-start-column="37" selection-end-line="29" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/setting/dao/SettingDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="407">
+          <caret line="34" column="55" lean-forward="false" selection-start-line="34" selection-start-column="55" selection-end-line="34" selection-end-column="55" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#693#694#0" expanded="true" />
+            <element signature="e#778#779#0" expanded="true" />
+            <element signature="e#841#842#0" expanded="true" />
+            <element signature="e#914#915#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/setting/service/SettingService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="383">
+          <caret line="29" column="16" lean-forward="false" selection-start-line="29" selection-start-column="16" selection-end-line="29" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#907#908#0" expanded="true" />
+            <element signature="e#963#964#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/system/DocumentMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="53" column="31" lean-forward="true" selection-start-line="53" selection-start-column="22" selection-end-line="53" selection-end-column="31" />
+          <folding>
+            <marker date="1514886247306" expanded="true" signature="637:675" ph="SELECT * FRO... sys_document" />
+            <marker date="1514886247306" expanded="true" signature="991:1488" ph="INSERT INTO sys_document... " />
+            <marker date="1514886247306" expanded="true" signature="1577:1610" ph="SELECT * FRO... sys_document" />
+            <marker date="1514886247306" expanded="true" signature="1577:1634" ph="SELECT * FRO... sys_document" />
+            <marker date="1514886247306" expanded="true" signature="1704:1723" ph="UPDATE sys_d... " />
+            <marker date="1514886247306" expanded="true" signature="1704:2008" ph="UPDATE sys_d... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/system/SettingMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="377">
+          <caret line="29" column="14" lean-forward="true" selection-start-line="29" selection-start-column="14" selection-end-line="29" selection-end-column="14" />
+          <folding>
+            <marker date="1514890760778" expanded="true" signature="655:680" ph="SELECT * FRO... sys_setting" />
+            <marker date="1514890760778" expanded="true" signature="748:766" ph="UPDATE sys_s... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/setting/model/Setting.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="407">
+          <caret line="74" column="32" lean-forward="false" selection-start-line="74" selection-start-column="32" selection-end-line="74" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1546#1547#0" expanded="true" />
+            <element signature="e#1591#1592#0" expanded="true" />
+            <element signature="e#1627#1628#0" expanded="true" />
+            <element signature="e#1661#1662#0" expanded="true" />
+            <element signature="e#1691#1692#0" expanded="true" />
+            <element signature="e#1737#1738#0" expanded="true" />
+            <element signature="e#1775#1776#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/setting/controller/SettingController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="335">
+          <caret line="53" column="44" lean-forward="false" selection-start-line="53" selection-start-column="44" selection-end-line="53" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/setting/common/SettingConstant.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="383">
+          <caret line="35" column="1" lean-forward="true" selection-start-line="35" selection-start-column="1" selection-end-line="35" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/document-modify.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/setting-list.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="22" column="131" lean-forward="false" selection-start-line="22" selection-start-column="131" selection-end-line="22" selection-end-column="131" />
           <folding />
         </state>
       </provider>
@@ -1046,7 +1328,7 @@
       <state key="ArtifactsStructureConfigurable.UI">
         <settings>
           <artifact-editor />
-          <last-edited>xgf_admin:war</last-edited>
+          <last-edited>xgf_admin:war exploded</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

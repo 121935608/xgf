@@ -25,7 +25,7 @@ public class AliyunOSSClientUtil{
    //阿里云API的bucket名称  
    public static String BACKET_NAME="xrjf";
    //阿里云API的文件夹名称 
-   public static String FOLDER="uploadImg/";
+   public static String FOLDER="xgf/platform/";
    
    /**
     * 获取阿里云OSS客户端对象
@@ -135,6 +135,9 @@ public class AliyunOSSClientUtil{
 	   }
 	   if(".jpeg".equalsIgnoreCase(fileExtension)||".jpg".equalsIgnoreCase(fileExtension)||".png".equalsIgnoreCase(fileExtension)){
 		   return "image/jpeg";
+	   }
+	   if (".txt".equalsIgnoreCase(fileExtension)){
+		   return "txt";
 	   }
 	return fileName;
    }
