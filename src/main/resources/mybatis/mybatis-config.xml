@@ -33,6 +33,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.xingrongjinfu.system.help.model.Help" alias="Help"/>
 		<typeAlias type="com.xingrongjinfu.system.document.model.Document" alias="Document"/>
 		<typeAlias type="com.xingrongjinfu.system.setting.model.Setting" alias="Setting"/>
+		<typeAlias type="com.xingrongjinfu.system.pays.model.Pays" alias="Pays"/>
+		<typeAlias type="com.xingrongjinfu.system.commodity.model.Commodity" alias="Commodity"/>
+		<typeAlias type="com.xingrongjinfu.system.sale.model.Sale" alias="Sale"/>
 
 		<!-- 分页 -->
 		<typeAlias type="org.framework.base.util.TableDataInfo" alias="TableDataInfo"/>

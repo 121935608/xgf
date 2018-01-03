@@ -31,7 +31,7 @@ public interface IDocumentService {
      * @param pageUtilEntity
      * @return
      */
-    List<TableDataInfo> documentPageInfoQuery(PageUtilEntity pageUtilEntity);
+    List<Document> documentPageInfoQuery(PageUtilEntity pageUtilEntity);
 
     /**
      * 保存文件

@@ -34,7 +34,7 @@ public class DocumentService implements IDocumentService
     private IDocumentDao documentDao;
 
     @Override
-    public List<TableDataInfo> documentPageInfoQuery(PageUtilEntity pageUtilEntity) {
+    public List<Document> documentPageInfoQuery(PageUtilEntity pageUtilEntity) {
         return documentDao.documentPageInfoQuery(pageUtilEntity);
     }
 

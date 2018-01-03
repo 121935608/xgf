@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SaleMapper">
+
+	<resultMap id="SaleResult" type="Sale">
+		<result column="commodityName" property="commodityName" />
+		<result column="commodityNo" property="commodityNo" />
+		<result column="orderNumber" property="orderNumber" />
+		<result column="addTime" property="addTime" />
+		<result column="commodityNum" property="commodityNum" />
+		<result column="salePrice" property="salePrice" />
+	</resultMap>
+		<select id="pageInfoQuery" parameterType="PageUtilEntity" resultMap="SaleResult">
+			SELECT t.commodityName,c.commodityNo,t.orderNumber,t.addTime,t.commodityNum,t.salePrice
+			FROM t_order_detail t LEFT JOIN t_commodity c ON t.commodityName=c.commodityName
+		</select>
+
+</mapper> 

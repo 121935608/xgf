@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PaysMapper">
+
+	<resultMap id="PaysResult" type="Pays">
+		<result column="cashId" property="cashId" />
+		<result column="userId" property="userId" />
+		<result column="tradeCode" property="tradeCode" />
+		<result column="money" property="money" />
+		<result column="payType" property="payType" />
+		<result column="status" property="status" />
+		<result column="remark" property="remark" />
+		<result column="addTime" property="addTime" />
+		<result column="addIP" property="addIP" />
+		<result column="storeName" property="storeName" />
+	</resultMap>
+
+	<select id="PaypageInfoQuery" parameterType="PageUtilEntity" resultMap="PaysResult">
+		SELECT c.tradeCode,c.addTime,s.storeName,c.money,c.payType
+		FROM m_cashier c LEFT JOIN t_store s ON c.userId=s.userId
+		WHERE 1=1
+		<if test="relationMap.beginTime != null and relationMap.beginTime != ''"><!-- 开始时间检索 -->
+			AND DATE_FORMAT(c.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
+		</if>
+		<if test="relationMap.endTime != null and relationMap.endTime != ''"><!-- 结束时间检索 -->
+			AND DATE_FORMAT(c.addTime,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
+		</if>
+		<if test="relationMap.payType !=null">
+			AND c.payType=#{relationMap.payType}
+		</if>
+		<if test="relationMap.storeName !=null and relationMap.storeName !=''">
+			AND (
+			c.tradeCode LIKE CONCAT(CONCAT('%', #{relationMap.storeName}),'%')
+			OR
+			s.storeName LIKE CONCAT(CONCAT('%', #{relationMap.storeName}),'%')
+			)
+		</if><!--关键词查询-->
+</select>
+
+</mapper> 

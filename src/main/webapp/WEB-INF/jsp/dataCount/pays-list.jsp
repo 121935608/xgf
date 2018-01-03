@@ -6,27 +6,31 @@
 <div class="page-container">
 	
 	<div class="text-c">
+		<input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')||\'%y-%M-%d\'}'})" id="beginTime"
+			   class="input-text Wdate" style="width:120px;" placeholder="开始时间">
+		<input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'beginTime\')}',maxDate:'%y-%M-%d'})" id="endTime"
+			   class="input-text Wdate" style="width:120px;" placeholder="结束时间">
 		<span class="select-box" style="width: 120px;">
-		   <select name="statusSelect" id="statusSelect" class="select" autocomplete="off">
-			   <option value="">启用状态</option>
-			   <option value="0">启用</option>
-			   <option value="1">禁用</option>
-		   </select>
-		</span>
-		<input type="text" class="input-text" style="width:250px" placeholder="请输入公告标题" id="title" name="title">
+           <select name="statusSelect" id="statusSelect" class="select" autocomplete="off">
+               <option value="">支付方式</option>
+               <option value="1">支付宝支付</option>
+               <option value="2" >微信支付</option>
+               <option value="3" >银联支付</option>
+               <option value="4" >京东白条</option>
+           </select>
+       </span>
+		<input type="text" class="input-text" style="width:250px" placeholder="交易号|商铺名称" id="storeName" name="storeName">
 		<button type="button" class="btn btn-success radius" onclick="query()"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
 	</div>
-	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="role_add('添加公文','${context_root}/system/toDocumentAdd.action','','410')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加公文</a></span></div>
 	<div class="mt-20">
 	<table class="table table-border table-bordered table-hover table-bg table-sort">
 		<thead>
 			<tr class="text-c">
-				<th width="5%"></th>
-				<th width="15%">公文标题</th>
-				<th width="15%">创建者</th>
-				<th width="15%">创建时间 </th>
-				<th width="10%">启用状态</th>
-				<th width="10%">操作</th>
+				<th width="10%">交易号</th>
+				<th width="15%">创建时间</th>
+				<th width="15%">商铺名称</th>
+				<th width="15%">收款金额(元) </th>
+				<th width="10%">支付方式</th>
 			</tr>
 		</thead>
 	</table>
@@ -37,39 +41,13 @@ var pageTable;
 $(document).ready(function(){ 
     var aoColumns = [
         {
-            "sDefaultContent": "",
+            "sDefaultContent": "交易号",
             "bSortable" : false,
             "sClass": "text-c",
             "bSearchable": false,
             "mRender": function(data, type, row) {
-                if (row.documentNum != null) {
-                    return row.name;
-                } else {
-                    return "";
-                }
-            }
-        },
-        {
-            "sDefaultContent": "公文标题",
-            "bSortable" : false,
-            "sClass": "text-c",
-            "bSearchable": false,
-            "mRender": function(data, type, row) {
-                if (row.title != null) {
-                    return row.title;
-                } else {
-                    return "";
-                }
-            }
-        },
-        {
-            "sDefaultContent": "创建者",
-            "bSortable" : false,
-            "sClass": "text-c",
-            "bSearchable": false,
-            "mRender": function(data, type, row) {
-                if (row.creator != null) {
-                    return row.creator;
+                if (row.tradeCode != null) {
+                    return row.tradeCode;
                 } else {
                     return "";
                 }
@@ -81,39 +59,60 @@ $(document).ready(function(){
             "sClass": "text-c",
             "bSearchable": false,
             "mRender": function(data, type, row) {
-                if (row.creatTime != null) {
-                    return formatDate(row.creatTime, "yyyy-MM-dd hh:mm:ss");
+                if (row.addTime != null) {
+                    return formatDate(row.addTime, "yyyy-MM-dd hh:mm:ss");
+                } else {
+                    return "";
+                }
+            }
+        },
+        {
+            "sDefaultContent": "商铺名称",
+            "bSortable" : false,
+            "sClass": "text-c",
+            "bSearchable": false,
+            "mRender": function(data, type, row) {
+                if (row.storeName != null) {
+                    return row.storeName;
+                } else {
+                    return "";
+                }
+            }
+        },
+        {
+            "sDefaultContent": "收款金额",
+            "bSortable" : false,
+            "sClass": "text-c",
+            "bSearchable": false,
+            "mRender": function(data, type, row) {
+                if (row.money != null) {
+                    return row.money/1000;
                 } else {
                     return "";
                 }
             }
         },
     {
-        "sDefaultContent": "启用状态",
+        "sDefaultContent": "支付方式",
         "bSortable" : false,
         "sClass": "td-status text-c",
         "bSearchable": false,
         "mRender": function(data, type, row) {
-            if (row.status == '0') {
-                return "<span class=\"label label-success radius\">可用</span>";
-            } else {
-                return "<span class=\"label label-defaunt radius\">不可用</span>";
+            if (row.payType == 1) {
+                return "支付宝支付";
+            } else if(row.payType == 2) {
+                return "微信支付";
+			}else if(row.payType == 3){
+                return "银联支付";
+			}else if(row.payType == 4){
+                return "京东白条";
+            }else {
+                return "";
             }
         }
     },
-    {
-        "sDefaultContent": "操作",
-        "bSortable" : false,
-        "sClass": "td-manage text-c",
-        "bSearchable": false,
-        "mRender": function(data, type, row) {
-        	//编辑
-            var toEdit = "<a title=\"修改\" href=\"javascript:;\" onclick=\"role_edit('修改公文','${context_root}/system/toDocumentModify.action?documentId=" + row.documentId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\">修改</a>";
-        	return statusTools(row) + "&nbsp;&nbsp;"+toEdit;
-        }
-    },
     ];
-    var url = "${context_root}/system/documentList.action";
+    var url = "${context_root}/dataCount/findALLPays.action";
     pageTable = _Datatable_Init(pageTable, aoColumns, url);
 });
 
@@ -126,9 +125,11 @@ function statusTools(row) {
 }
 
 function query() {
-    var status = $("#statusSelect option:selected").val();
-	var title =$("#title").val();
-    pageTable.fnSettings().sAjaxSource = encodeURI("${context_root}/system/documentList.action?status="+status+"&title="+title);
+    var beginTime = $("#beginTime").val();
+    var endTime = $("#endTime").val();
+    var payType = $("#statusSelect option:selected").val();
+	var storeName =$("#storeName").val();
+    pageTable.fnSettings().sAjaxSource = encodeURI("${context_root}/dataCount/findALLPays.action?beginTime="+beginTime+"&endTime="+endTime+"&payType="+payType+"&storeName="+storeName);
     pageTable.fnClearTable(0);
     pageTable.fnDraw();
 }

@@ -30,10 +30,10 @@ import java.util.List;
 @Repository("documentDao")
 public class DocumentDao extends DynamicObjectBaseDao implements IDocumentDao {
     @Override
-    public List<TableDataInfo> documentPageInfoQuery(PageUtilEntity pageUtilEntity) {
-        List<TableDataInfo> documentPageInfoQuery=null;
+    public List<Document> documentPageInfoQuery(PageUtilEntity pageUtilEntity) {
+        List<Document> documentPageInfoQuery=null;
         try {
-            documentPageInfoQuery=(List<TableDataInfo>)this.findForList("DocumentMapper.DocumentpageInfoQuery",pageUtilEntity);
+            documentPageInfoQuery=(List<Document>)this.findForList("DocumentMapper.DocumentpageInfoQuery",pageUtilEntity);
         }catch (Exception e)
         {e.printStackTrace();}
         return documentPageInfoQuery;

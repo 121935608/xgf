@@ -82,11 +82,11 @@ $(document).ready(function(){
         "bSearchable": false,
         "mRender": function(data, type, row) {
         	//编辑
-            var toEdit = "<a title=\"编辑\" href=\"javascript:;\" onclick=\"role_edit('编辑角色','${context_root}/system/toRoleModify.action?roleId=" + row.roleId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><i class=\"Hui-iconfont\">&#xe6df;</i></a>";
+            var toEdit = "<a title=\"编辑\" href=\"javascript:;\" onclick=\"role_edit('编辑角色','${context_root}/system/toRoleModify.action?roleId=" + row.roleId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\">编辑</a>";
         	//删除
-        	var toDelete = "<a title=\"删除\" href=\"javascript:;\" onclick=\"role_del(this,\'" + row.roleId + "\')\" class=\"ml-5\" style=\"text-decoration:none\"><i class=\"Hui-iconfont\">&#xe6e2;</i></a>";
+        	var toDelete = "<a title=\"删除\" href=\"javascript:;\" onclick=\"role_del(this,\'" + row.roleId + "\')\" class=\"ml-5\" style=\"text-decoration:none\">删除</a>";
         	//授权
-        	var toAuthorize = "<a title=\"授权\" href=\"javascript:;\" onclick=\"role_Authorize('授权菜单','${context_root}/system/toRoleAuthorize.action?roleId=" + row.roleId + "','230','406')\" class=\"ml-5\" style=\"text-decoration:none\"><i class=\"Hui-iconfont\">&#xe6e1;</i></a>";
+        	var toAuthorize = "<a title=\"授权\" href=\"javascript:;\" onclick=\"role_Authorize('授权菜单','${context_root}/system/toRoleAuthorize.action?roleId=" + row.roleId + "','230','406')\" class=\"ml-5\" style=\"text-decoration:none\">授权</a>";
         	return toAuthorize  + "&nbsp;&nbsp;" + toEdit + "&nbsp;&nbsp;" + toDelete;
         }
     },

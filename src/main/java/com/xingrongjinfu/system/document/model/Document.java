@@ -25,7 +25,7 @@ import java.util.Date;
  */
 public class Document implements Serializable
 {
-
+    private Integer documentNum;
     private Integer documentId;
     private String title;
     private String url;
@@ -33,6 +33,15 @@ public class Document implements Serializable
     private Integer status;
     private Date creatTime;
     private String creator;
+    private String fileName;
+
+    public Integer getDocumentNum() {
+        return documentNum;
+    }
+
+    public void setDocumentNum(Integer documentNum) {
+        this.documentNum = documentNum;
+    }
 
     public MultipartFile getFile() {
         return file;
@@ -88,5 +97,13 @@ public class Document implements Serializable
 
     public void setCreator(String creator) {
         this.creator = creator;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 }

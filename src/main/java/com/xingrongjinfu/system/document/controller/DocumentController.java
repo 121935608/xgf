@@ -60,7 +60,11 @@ public class DocumentController extends BaseController {
     @RequestMapping(DocumentConstant.DOCUMENT_LIST_URL)
     public ModelAndView getDocumentList(){
         PageUtilEntity pageUtilEntity=this.getPageUtilEntity();
-        List<TableDataInfo> tableDataInfo=documentService.documentPageInfoQuery(pageUtilEntity);
+        List<Document> tableDataInfo=documentService.documentPageInfoQuery(pageUtilEntity);
+        Integer i=1;
+        for (Document document :tableDataInfo){
+            document.setDocumentNum(pageUtilEntity.getPage()+(i++));
+        }
         return buildDatasTable(pageUtilEntity.getTotalResult(),tableDataInfo);
     }
 
@@ -106,6 +110,7 @@ public class DocumentController extends BaseController {
     {
         ModelAndView modelAndView=this.getModelAndView(DocumentConstant.DOCUMENT_MODIFY_PAGE);
         Document document=documentService.findDocument(documentId);
+        document.setFileName(document.getUrl().substring(13));
         modelAndView.addObject("document",document);
         return modelAndView;
     }
