@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="StoreAffairMapper">
- 
-	<select id="CertificationpageInfoQuery"  parameterType="PageUtilEntity"  resultType="Certification">
+<mapper namespace="StoreAffairMapper"> 
+
+	<select id="CertificationpageInfoQuery"  parameterType="PageUtilEntity"  resultType="Store">
 		select a.storeId,a.storeNo,a.addTime,b.accountName,a.supervisorId,a.process,a.remark 
 			from t_store a LEFT join  sys_user b on a.userId=b.userId 
 			where 1=1 
@@ -60,7 +60,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 
 	 
 	
-	<select id="repaymentpageInfoQuery"  parameterType="PageUtilEntity"  resultType="Order">
+	<select id="repaymentpageInfoQuery"  parameterType="PageUtilEntity"  resultType="Repay">
 		select a.repayNo,a.addTime,c.orderNumber,b.storeName,a.repayDate,a.planTotal,a.status
 			from t_repay a 
 			LEFT join  t_store b on a.userId=b.userId 

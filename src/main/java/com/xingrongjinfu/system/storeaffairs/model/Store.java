@@ -12,11 +12,13 @@ import com.xingrongjinfu.system.permission.model.Permission;
 	 * 
 	 * @author cj
 	 */
-public class Store {
+public class Store { 
+	
 	    private static final long serialVersionUID = 1L;
 	    private String storeId;
 	    private String userId;// '用户Id',
 	    private String supervisorId;//'督导员ID',
+	    private String storeNo;//'商铺编号',
 	    private String storeName;//'商铺名字',
 	    private String userName;//'商铺店主姓名',
 	    private String phone;//'联系方式',
@@ -38,7 +40,7 @@ public class Store {
 	    private Date addTime;//'添加时间',
 	    private Date updateTime;//'最近修改时间',
 	    
-	    private List<Order> orders; // 菜表单
+	    private String accountName; // '用户账号',
  
 
 		public String getStoreId() {
@@ -225,14 +227,23 @@ public class Store {
 			this.updateTime = updateTime;
 		}
 
-		public List<Order> getOrders() {
-			return orders;
+		 
+		public String getStoreNo() {
+			return storeNo;
 		}
 
-		public void setOrders(List<Order> orders) {
-			this.orders = orders;
+		public void setStoreNo(String storeNo) {
+			this.storeNo = storeNo;
 		}
-	    
+
+		public String getAccountName() {
+			return accountName;
+		}
+
+		public void setAccountName(String accountName) {
+			this.accountName = accountName;
+		}
+
 		public String toString()
 	    {
 	        return "store [storeId=" + storeId +

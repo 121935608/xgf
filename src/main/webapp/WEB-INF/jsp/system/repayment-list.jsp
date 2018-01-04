@@ -57,40 +57,76 @@ $(document).ready(function(){
     {
         "mData": "repayNo",
         "bSortable" : false,
-        "sClass": "text-c"
+        "sClass": "text-c",
+        "mRender": function(data, type, row) {
+            if (row.repayNo != null) {
+                return row.repayNo;
+            } else {
+                return "";
+            }
+        }
     },
     {
         "sDefaultContent": "创建时间",
         "bSortable" : false,
         "sClass": "text-c",
-        "bSearchable": false,
-        "mRender": function(data, type, row) { 
-            return formatDate(row.addTime,"yyyy-MM-dd hh:mm:ss");
-        }
+        "bSearchable": false, 
+	    "mRender": function(data, type, row) {
+	        if (row.addTime != null) {
+	        	return formatDate(row.addTime,"yyyy-MM-dd hh:mm:ss");
+	        } else {
+	            return "";
+	        }
+	    }
     },
     {
         "mData": "orderNumber",
         "bSortable" : false,
-        "sClass": "text-c"
+        "sClass": "text-c",
+        "mRender": function(data, type, row) {
+            if (row.orderNumber != null) {
+                return row.orderNumber;
+            } else {
+                return "";
+            }
+        }
     },
     {
         "mData": "storeName",   
         "bSortable" : false,
-        "sClass": "text-c", 
+        "sClass": "text-c",
+        "mRender": function(data, type, row) {
+            if (row.storeName != null) {
+                return row.storeName;
+            } else {
+                return "";
+            }
+        }
     },
     {
         "sDefaultContent": "还款时间",
         "bSortable" : false,
         "sClass": "text-c",
         "bSearchable": false,
-        "mRender": function(data, type, row) { 
-            return formatDate(row.repayDate,"yyyy-MM-dd hh:mm:ss");
-        }
+        "mRender": function(data, type, row) {
+            if (row.repayDate != null) {
+            	return formatDate(row.repayDate,"yyyy-MM-dd hh:mm:ss");
+            } else {
+                return "";
+            }
+        } 
     }, 
     {
         "mData": "planTotal",
         "bSortable" : false,
-        "sClass": "text-c"
+        "sClass": "text-c",
+        "mRender": function(data, type, row) {
+            if (row.planTotal != null) {
+                return row.planTotal;
+            } else {
+                return "";
+            }
+        }
     },
     {
         "sDefaultContent": "还款状态",

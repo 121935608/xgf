@@ -57,26 +57,51 @@ $(document).ready(function(){
     {
         "mData": "storeNo",
         "bSortable" : false,
-        "sClass": "text-c"
+        "sClass": "text-c",
+        "mRender": function(data, type, row) {
+            if (row.storeNo != null) {
+                return row.storeNo;
+            } else {
+                return "";
+            }
+        }
     },
     {
         "sDefaultContent": "申请时间",
         "bSortable" : false,
         "sClass": "text-c",
         "bSearchable": false,
-        "mRender": function(data, type, row) { 
-            return formatDate(row.addTime,"yyyy-MM-dd hh:mm:ss");
-        }
+	    "mRender": function(data, type, row) {
+	        if (row.addTime != null) {
+	        	return formatDate(row.addTime,"yyyy-MM-dd hh:mm:ss");
+	        } else {
+	            return "";
+	        }
+	    }
     },
     {
         "mData": "accountName",
         "bSortable" : false,
-        "sClass": "text-c"
+        "sClass": "text-c",
+       	"mRender": function(data, type, row) {
+               if (row.accountName != null) {
+                   return row.accountName;
+               } else {
+                   return "";
+               }
+           }
     },
     {
         "mData": "supervisorId",  //督导员
         "bSortable" : false,
-        "sClass": "text-c", 
+        "sClass": "text-c",
+        "mRender": function(data, type, row) {
+            if (row.supervisorId != null) {
+                return row.supervisorId;
+            } else {
+                return "";
+            }
+        }
     },
     {
         "sDefaultContent": "状态",
@@ -102,7 +127,14 @@ $(document).ready(function(){
     {
         "mData": "remark",
         "bSortable" : false,
-        "sClass": "text-c"
+        "sClass": "text-c",
+       	"mRender": function(data, type, row) {
+               if (row.remark != null) {
+                   return row.remark;
+               } else {
+                   return "";
+               }
+           }
     },
     {
         "sDefaultContent": "审核",
