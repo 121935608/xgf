@@ -4,14 +4,10 @@ import java.util.List;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.framework.core.dao.DynamicObjectBaseDao;
-import org.springframework.stereotype.Repository;
-import com.xingrongjinfu.system.permission.model.Permission;
-import com.xingrongjinfu.system.role.model.Role;
-import com.xingrongjinfu.system.role.model.RolePermission;
+import org.springframework.stereotype.Repository; 
 import com.xingrongjinfu.system.storeaffairs.model.BankAccount;
 import com.xingrongjinfu.system.storeaffairs.model.Store;
-import com.xingrongjinfu.system.storeaffairs.model.Supervisor;
-import com.xingrongjinfu.system.user.model.UserRole;
+import com.xingrongjinfu.system.supervisor.model.Supervisor; 
 
 /**
  * 申请审核 数据层处理

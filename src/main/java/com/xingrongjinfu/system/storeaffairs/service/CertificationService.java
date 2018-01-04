@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.xingrongjinfu.system.storeaffairs.dao.ICertificationDao;
 import com.xingrongjinfu.system.storeaffairs.model.BankAccount;
 import com.xingrongjinfu.system.storeaffairs.model.Store;
-import com.xingrongjinfu.system.storeaffairs.model.Supervisor; 
+import com.xingrongjinfu.system.supervisor.model.Supervisor; 
 
 /**
  * 角色管理 业务层处理

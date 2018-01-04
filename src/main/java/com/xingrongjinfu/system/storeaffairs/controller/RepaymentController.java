@@ -47,12 +47,12 @@ class RepaymentController extends BaseController {
       //（1:待支付；2:待发货；3:待收货；4:待还款；5:已还款）
         List<SysCode> sysCodeList1 = new ArrayList<SysCode>(); 
             SysCode sysCode1 = new SysCode();
-            sysCode1.setCodeid("4"); 
+            sysCode1.setCodeid("0"); 
             sysCode1.setCodevalue("待还款");
             sysCodeList1.add(sysCode1);
              
             SysCode sysCode2 = new SysCode();
-            sysCode2.setCodeid("5");
+            sysCode2.setCodeid("1");
             sysCode2.setCodevalue("已还款");
             sysCodeList1.add(sysCode2); 
              
@@ -60,12 +60,12 @@ class RepaymentController extends BaseController {
         
         List<SysCode> dateTypeList = new ArrayList<SysCode>(); 
             SysCode sysCode3 = new SysCode();
-            sysCode3.setCodeid("orderTime"); 
+            sysCode3.setCodeid("addTime"); 
             sysCode3.setCodevalue("创建时间");
             dateTypeList.add(sysCode3);
              
             SysCode sysCode4 = new SysCode();
-            sysCode4.setCodeid("payTime");
+            sysCode4.setCodeid("repayDate");
             sysCode4.setCodevalue("还款日期");
             dateTypeList.add(sysCode4); 
              

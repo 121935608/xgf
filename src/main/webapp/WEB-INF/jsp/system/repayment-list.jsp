@@ -52,10 +52,10 @@
 </div>
 <script type="text/javascript"  charset="UTF-8">
 var pageTable;
-$(document).ready(function(){ 
+$(document).ready(function(){  
     var aoColumns = [
     {
-        "mData": "paymentNumber",
+        "mData": "repayNo",
         "bSortable" : false,
         "sClass": "text-c"
     },
@@ -65,7 +65,7 @@ $(document).ready(function(){
         "sClass": "text-c",
         "bSearchable": false,
         "mRender": function(data, type, row) { 
-            return formatDate(row.orderTime,"yyyy-MM-dd hh:mm:ss");
+            return formatDate(row.addTime,"yyyy-MM-dd hh:mm:ss");
         }
     },
     {
@@ -84,11 +84,11 @@ $(document).ready(function(){
         "sClass": "text-c",
         "bSearchable": false,
         "mRender": function(data, type, row) { 
-            return formatDate(row.payTime,"yyyy-MM-dd hh:mm:ss");
+            return formatDate(row.repayDate,"yyyy-MM-dd hh:mm:ss");
         }
     }, 
     {
-        "mData": "payment",
+        "mData": "planTotal",
         "bSortable" : false,
         "sClass": "text-c"
     },
@@ -99,9 +99,9 @@ $(document).ready(function(){
         "bSearchable": false,
         "mRender": function(data, type, row) { 
         	 //（1:待支付；2:待发货；3:待收货；4:待还款；5:已还款）
-        	if(row.orderStatus=='4'){
+        	if(row.status=='0'){
         		return "待还款";
-        	}else if(row.orderStatus=='5'){
+        	}else if(row.status=='1'){
         		return "已还款";
         	}else{
         		return "";

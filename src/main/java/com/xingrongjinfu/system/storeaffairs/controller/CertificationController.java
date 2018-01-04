@@ -24,9 +24,9 @@ import com.xingrongjinfu.system.role.common.RoleConstant;
 import com.xingrongjinfu.system.role.model.Role;
 import com.xingrongjinfu.system.storeaffairs.commom.StoreaffairConstant;
 import com.xingrongjinfu.system.storeaffairs.model.BankAccount;
-import com.xingrongjinfu.system.storeaffairs.model.Store;
-import com.xingrongjinfu.system.storeaffairs.model.Supervisor;
+import com.xingrongjinfu.system.storeaffairs.model.Store; 
 import com.xingrongjinfu.system.storeaffairs.service.ICertificationService;
+import com.xingrongjinfu.system.supervisor.model.Supervisor;
 import com.xingrongjinfu.system.syscode.model.SysCode; 
 
 
@@ -54,7 +54,7 @@ class CertificationController extends BaseController {
         for (Supervisor supervisor : getSupervisorSelection())
         {
             SysCode sysCode = new SysCode();
-            sysCode.setCodeid(supervisor.getSupervisorId());
+            sysCode.setCodeid(supervisor.getSupervisorId()+"");
             sysCode.setCodevalue(supervisor.getName());
             sysCodeList.add(sysCode);
         } 
@@ -127,7 +127,7 @@ class CertificationController extends BaseController {
         for (Supervisor supervisor : getSupervisorSelection())
         {
             SysCode sysCode = new SysCode();
-            sysCode.setCodeid(supervisor.getSupervisorId());
+            sysCode.setCodeid(supervisor.getSupervisorId()+"");
             sysCode.setCodevalue(supervisor.getName());
             sysCodeList.add(sysCode);
         } 

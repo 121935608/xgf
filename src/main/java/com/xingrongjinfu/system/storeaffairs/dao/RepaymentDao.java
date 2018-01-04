@@ -9,8 +9,7 @@ import com.xingrongjinfu.system.permission.model.Permission;
 import com.xingrongjinfu.system.role.model.Role;
 import com.xingrongjinfu.system.role.model.RolePermission;
 import com.xingrongjinfu.system.storeaffairs.model.BankAccount;
-import com.xingrongjinfu.system.storeaffairs.model.Store;
-import com.xingrongjinfu.system.storeaffairs.model.Supervisor;
+import com.xingrongjinfu.system.storeaffairs.model.Store; 
 import com.xingrongjinfu.system.user.model.UserRole;
 
 /**

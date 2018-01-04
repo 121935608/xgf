@@ -4,12 +4,8 @@ import java.util.List;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service; 
-import com.xingrongjinfu.system.storeaffairs.dao.ICertificationDao;
-import com.xingrongjinfu.system.storeaffairs.dao.IRepaymentDao;
-import com.xingrongjinfu.system.storeaffairs.model.BankAccount;
-import com.xingrongjinfu.system.storeaffairs.model.Store;
-import com.xingrongjinfu.system.storeaffairs.model.Supervisor; 
+import org.springframework.stereotype.Service;  
+import com.xingrongjinfu.system.storeaffairs.dao.IRepaymentDao; 
 
 /**
  * 角色管理 业务层处理
