@@ -95,9 +95,9 @@ $(document).ready(function(){
         "bSearchable": false,
         "mRender": function(data, type, row) {
             if (row.status == '0') {
-                return "<span class=\"label label-success radius\">可用</span>";
+                return "<span class=\"label label-success radius\">已启用</span>";
             } else {
-                return "<span class=\"label label-defaunt radius\">不可用</span>";
+                return "<span class=\"label label-defaunt radius\">已停用</span>";
             }
         }
     },
@@ -108,7 +108,7 @@ $(document).ready(function(){
         "bSearchable": false,
         "mRender": function(data, type, row) {
         	//编辑
-            var toEdit = "<a title=\"修改\" href=\"javascript:;\" onclick=\"role_edit('修改公文','${context_root}/system/toDocumentModify.action?documentId=" + row.documentId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\">修改</a>";
+            var toEdit = "<a title=\"修改\" href=\"javascript:;\" onclick=\"role_edit('修改公文','${context_root}/system/toDocumentModify.action?documentId=" + row.documentId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>修改</span></a>";
         	return statusTools(row) + "&nbsp;&nbsp;"+toEdit;
         }
     },
@@ -119,9 +119,9 @@ $(document).ready(function(){
 
 function statusTools(row) {
     if (row.status == '0') {
-        return "<a style=\"text-decoration:none\" onClick=\"user_stop(this,\'" + row.documentId + "\')\" href=\"javascript:;\" title=\"停用\">停用</a>";
+        return "<a style=\"text-decoration:none\" onClick=\"user_stop(this,\'" + row.documentId + "\')\" href=\"javascript:;\" title=\"停用\"><span style='color: #0e90d2 '>停用</span></a>";
     } else {
-        return "<a style=\"text-decoration:none\" onClick=\"user_start(this,\'" + row.documentId + "\')\" href=\"javascript:;\" title=\"启用\">启用</a>";
+        return "<a style=\"text-decoration:none\" onClick=\"user_start(this,\'" + row.documentId + "\')\" href=\"javascript:;\" title=\"启用\"><span style='color: #0e90d2 '>启用</span></a>";
     }
 }
 
@@ -160,7 +160,7 @@ function user_stop(obj,id){
             dataType:"json",
             success:function(data){
                 if(data.s == true){
-                    $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="user_start(this,'+id+')" href="javascript:;" title="启用">启用</a>');
+                    $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="user_start(this,'+id+')" href="javascript:;" title="启用"><span style=\'color: #0e90d2 \'>启用</span></a>');
                     $(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已停用</span>');
                     $(obj).remove();
                     parent.layer.msg('已停用!',{icon: 5,time:1000});
@@ -184,7 +184,7 @@ function user_start(obj,id){
             dataType:"json",
             success:function(data){
                 if(data.s == true){
-                    $(obj).parents("tr").find(".td-manage").prepend('<a onClick="user_stop(this,'+id+')" href="javascript:;" title="停用" style="text-decoration:none">停用</a>');
+                    $(obj).parents("tr").find(".td-manage").prepend('<a onClick="user_stop(this,'+id+')" href="javascript:;" title="停用" style="text-decoration:none"><span style=\'color: #0e90d2 \'>停用</span></a>');
                     $(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
                     $(obj).remove();
                     parent.layer.msg('已启用!', {icon: 6,time:1000});

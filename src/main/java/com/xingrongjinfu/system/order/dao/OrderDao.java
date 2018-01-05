@@ -56,4 +56,20 @@ public class OrderDao extends DynamicObjectBaseDao implements IOrderDao {
         }
         return findOrderDetailInfo;
     }
+
+    @Override
+    public int updateOrderInfo(Order order) {
+        return this.update("OrderMapper.updateOrderInfo",order);
+    }
+
+    @Override
+    public List<TableDataInfo> expressPageInfoQuery(PageUtilEntity pageUtilEntity) {
+        List<TableDataInfo> expressPageInfoQuery=null;
+        try {
+            expressPageInfoQuery=(List<TableDataInfo>)this.findForList("OrderMapper.ExpresspageInfoQuery",pageUtilEntity);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return expressPageInfoQuery;
+    }
 }

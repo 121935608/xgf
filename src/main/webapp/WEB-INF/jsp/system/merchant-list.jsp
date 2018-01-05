@@ -91,9 +91,9 @@
                 "bSearchable": false,
                 "mRender": function(data, type, row) {
                     //查看
-                    var toQuery = "<a title=\"查看\" href=\"javascript:;\" onclick=\"user_query('查看','${context_root}/system/toMerchantQuery.action?userId=" + row.userId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\">查看</a>";
+                    var toQuery = "<a title=\"查看\" href=\"javascript:;\" onclick=\"user_query('查看','${context_root}/system/toMerchantQuery.action?userId=" + row.userId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>查看</span></a>";
                     //账户余额
-                    var toBalance = "<a title=\"账户余额\" href=\"javascript:;\" onclick=\"user_balance('账户余额','${context_root}/system/accountBalance.action?userId=" + row.userId + "','850','850')\" class=\"ml-5\" style=\"text-decoration:none\">账户余额</a>";
+                    var toBalance = "<a title=\"账户余额\" href=\"javascript:;\" onclick=\"user_balance('账户余额','${context_root}/system/accountBalance.action?userId=" + row.userId + "','850','850')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>账户余额</span></a>";
                     return statusTools(row) + "&nbsp;&nbsp;" + toQuery + "&nbsp;&nbsp;" + toBalance;
                 }
             },
@@ -107,9 +107,9 @@
 
     function statusTools(row) {
         if (row.locked == '0') {
-            return "<a style=\"text-decoration:none\" onClick=\"user_stop(this,\'" + row.userId + "\')\" href=\"javascript:;\" title=\"禁用\">禁用</a>";
+            return "<a style=\"text-decoration:none\" onClick=\"user_stop(this,\'" + row.userId + "\')\" href=\"javascript:;\" title=\"禁用\"><span style='color: #0e90d2 '>禁用</span></a>";
         } else {
-            return "<a style=\"text-decoration:none\" onClick=\"user_start(this,\'" + row.userId + "\')\" href=\"javascript:;\" title=\"启用\">启用</a>";
+            return "<a style=\"text-decoration:none\" onClick=\"user_start(this,\'" + row.userId + "\')\" href=\"javascript:;\" title=\"启用\"><span style='color: #0e90d2 '>启用</span></a>";
         }
     }
 
@@ -170,7 +170,7 @@
                 dataType: "json",
                 success: function (data) {
                     if (data.s == true) {
-                        $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="user_start(this,' + id + ')" href="javascript:;" title="启用">启用</a>');
+                        $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="user_start(this,' + id + ')" href="javascript:;" title="启用"><span style=\'color: #0e90d2 \'>启用</span></a>');
                         $(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已停用</span>');
                         $(obj).remove();
                         parent.layer.msg('已停用!', {icon: 5, time: 1000});
@@ -194,7 +194,7 @@
                 dataType: "json",
                 success: function (data) {
                     if (data.s == true) {
-                        $(obj).parents("tr").find(".td-manage").prepend('<a onClick="user_stop(this,' + id + ')" href="javascript:;" title="停用" style="text-decoration:none">禁用</a>');
+                        $(obj).parents("tr").find(".td-manage").prepend('<a onClick="user_stop(this,' + id + ')" href="javascript:;" title="停用" style="text-decoration:none"><span style=\'color: #0e90d2 \'>禁用</span></a>');
                         $(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
                         $(obj).remove();
                         parent.layer.msg('已启用!', {icon: 6, time: 1000});

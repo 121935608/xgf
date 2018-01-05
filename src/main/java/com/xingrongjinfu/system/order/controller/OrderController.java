@@ -15,12 +15,15 @@ import com.xingrongjinfu.system.order.common.OrderConstant;
 import com.xingrongjinfu.system.order.model.Order;
 import com.xingrongjinfu.system.order.model.OrderDetail;
 import com.xingrongjinfu.system.order.service.IOrderService;
+import com.xingrongjinfu.system.order.service.OrderService;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.framework.core.controller.BaseController;
+import org.framework.core.model.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.text.SimpleDateFormat;
@@ -52,6 +55,11 @@ public class OrderController extends BaseController {
         return buildDatasTable(pageUtilEntity.getTotalResult(),tableDataInfo);
     }
 
+    /**
+     * 查看订单信息
+     * @param orderNumber
+     * @return
+     */
     @RequestMapping(OrderConstant.ORDER_LOOK_URL)
     public ModelAndView lookOrderInfo(String orderNumber)
     {
@@ -77,10 +85,59 @@ public class OrderController extends BaseController {
         return modelAndView;
     }
 
+    /**
+     * 发货界面
+     * @param orderNumber
+     * @return
+     */
     @RequestMapping(OrderConstant.ORDER_SEND_URL)
     public ModelAndView loadSendPage(String orderNumber)
     {
         ModelAndView modelAndView=this.getModelAndView(OrderConstant.ORDER_SEND_PAGE);
         return modelAndView;
+    }
+
+    /**
+     * 收货后更新订单信息
+     * @param order
+     * @return
+     */
+    @RequestMapping(OrderConstant.ORDER_CONFIRM_URL)
+    public @ResponseBody
+    Message orderConfirm(Order order)
+    {
+     int result=0;
+     String orderNumber=order.getOrderNumber();
+     if (orderNumber !=null && orderNumber !="") {
+         result = orderService.updateOrderInfo(order);
+     }
+     return new Message(result);
+    }
+
+    /**
+     * 跳转到打印配送单界面
+     */
+    @RequestMapping(OrderConstant.ORDER_PRINT_URL)
+    public ModelAndView loadPrintPage(String orderNumber){
+        ModelAndView modelAndView=this.getModelAndView(OrderConstant.ORDER_PRINT_PAGE);
+        List<OrderDetail> orderDetails=orderService.findOrderDetailInfo(orderNumber);
+        modelAndView.addObject("orderDetails",orderDetails);
+        return modelAndView;
+    }
+
+    /**
+     * 跳转到订单快递查询界面
+     */
+    @RequestMapping(OrderConstant.ORDER_EXPRESS_URL)
+    public ModelAndView loadExpressPage(){return this.getModelAndView(OrderConstant.ORDER_EXPRESS_PAGE);}
+
+    /**
+     * 查询订单快递信息
+     */
+    @RequestMapping(OrderConstant.ORDER_EXPRESS_LIST_URL)
+    public ModelAndView orderExpressList(){
+        PageUtilEntity pageUtilEntity=this.getPageUtilEntity();
+        List<TableDataInfo> tableDataInfo=orderService.expressPageInfoQuery(pageUtilEntity);
+        return buildDatasTable(pageUtilEntity.getTotalResult(),tableDataInfo);
     }
 }

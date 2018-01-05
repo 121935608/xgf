@@ -58,4 +58,5 @@ public class SupervisorDao extends DynamicObjectBaseDao implements ISupervisorDa
         }
         return supervisorPageInfo;
     }
+
 }

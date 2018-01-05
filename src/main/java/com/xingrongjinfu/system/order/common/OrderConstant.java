@@ -54,4 +54,34 @@ public class OrderConstant {
      * 逻辑视图名:发送订单界面
      */
     public final static String ORDER_SEND_PAGE="order/order-send";
+
+    /**
+     * 请求地址:确认收货
+     */
+    public final static String ORDER_CONFIRM_URL="toOrderConfirm";
+
+    /**
+     * 请求地址:跳转到打印配送单
+     */
+    public final static String ORDER_PRINT_URL="toPrintOrder";
+
+    /**
+     * 逻辑视图名:打印配送单界面
+     */
+    public final static String ORDER_PRINT_PAGE="order/order-print";
+
+    /**
+     * 请求地址:订单快递查询
+     */
+    public final static String ORDER_EXPRESS_URL="orderDeliveryView";
+
+    /**
+     * 逻辑视图名:订单快递查询界面
+     */
+    public final static String ORDER_EXPRESS_PAGE="order/order-express";
+
+    /**
+     * 请求地址:查询订单快递信息
+     */
+    public final static String ORDER_EXPRESS_LIST_URL="findOrderExpressList";
 }

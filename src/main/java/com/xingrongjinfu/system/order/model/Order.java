@@ -36,7 +36,7 @@ public class Order {
     private Integer number;
     private Integer totalPrice;
     private Integer freight;
-        private Integer payment;
+    private Integer payment;
     private Integer orderPrice;
     private String orderStatus;
     private Integer status;

@@ -39,7 +39,7 @@ $(document).ready(function(){
         {
             "sDefaultContent": "姓名",
             "bSortable" : false,
-            "sClass": "td-status text-c",
+            "sClass": "text-c",
             "bSearchable": false,
             "mRender": function(data, type, row) {
                 if (row.name != null) {
@@ -52,7 +52,7 @@ $(document).ready(function(){
         {
             "sDefaultContent": "所在区域",
             "bSortable" : false,
-            "sClass": "td-status text-c",
+            "sClass": "text-c",
             "bSearchable": false,
             "mRender": function(data, type, row) {
                 if (row.area != null) {
@@ -65,7 +65,7 @@ $(document).ready(function(){
         {
             "sDefaultContent": "督导编号",
             "bSortable" : false,
-            "sClass": "td-status text-c",
+            "sClass": "text-c",
             "bSearchable": false,
             "mRender": function(data, type, row) {
                 if (row.supervisorNum != null) {
@@ -78,7 +78,7 @@ $(document).ready(function(){
         {
             "sDefaultContent": "电话",
             "bSortable" : false,
-            "sClass": "td-status text-c",
+            "sClass": "text-c",
             "bSearchable": false,
             "mRender": function(data, type, row) {
                 if (row.phone != null) {
@@ -95,9 +95,9 @@ $(document).ready(function(){
         "bSearchable": false,
         "mRender": function(data, type, row) {
             if (row.status == '0') {
-                return "<span class=\"label label-success radius\">可用</span>";
+                return "<span class=\"label label-success radius\">已启用</span>";
             } else {
-                return "<span class=\"label label-defaunt radius\">不可用</span>";
+                return "<span class=\"label label-defaunt radius\">已停用</span>";
             }
         }
     },
@@ -108,12 +108,8 @@ $(document).ready(function(){
         "bSearchable": false,
         "mRender": function(data, type, row) {
         	//编辑
-            var toEdit = "<a title=\"编辑\" href=\"javascript:;\" onclick=\"role_edit('编辑角色','${context_root}/system/toSupervisorModify.action?supervisorId=" + row.supervisorId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\">编辑</a>";
-        	//删除
-        	var toDelete = "<a title=\"删除\" href=\"javascript:;\" onclick=\"role_del(this,\'" + row.roleId + "\')\" class=\"ml-5\" style=\"text-decoration:none\"><i class=\"Hui-iconfont\">&#xe6e2;</i></a>";
-        	//授权
-        	var toAuthorize = "<a title=\"授权\" href=\"javascript:;\" onclick=\"role_Authorize('授权菜单','${context_root}/system/toRoleAuthorize.action?roleId=" + row.roleId + "','230','406')\" class=\"ml-5\" style=\"text-decoration:none\"><i class=\"Hui-iconfont\">&#xe6e1;</i></a>";
-        	return toEdit;
+            var toEdit = "<a title=\"编辑\" href=\"javascript:;\" onclick=\"role_edit('编辑角色','${context_root}/system/toSupervisorModify.action?supervisorId=" + row.supervisorId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>编辑</span></a>";
+        	return statusTools(row) +"&nbsp;&nbsp;" + toEdit;
         }
     },
     ];
@@ -129,6 +125,13 @@ function query() {
     pageTable.fnDraw();
 }
 
+function statusTools(row) {
+    if (row.status == '0') {
+        return "<a style=\"text-decoration:none\" onClick=\"supervisor_stop(this,\'" + row.supervisorId + "\')\" href=\"javascript:;\" title=\"停用\"><span style='color: #0e90d2 '>停用</span></a>";
+    } else {
+        return "<a style=\"text-decoration:none\" onClick=\"supervisor_start(this,\'" + row.supervisorId + "\')\" href=\"javascript:;\" title=\"启用\"><span style='color: #0e90d2 '>启用</span></a>";
+    }
+}
 
 /*角色-添加*/
 function role_add(title,url,w,h){
@@ -145,20 +148,21 @@ function role_Authorize(title,url,w,h){
 	layer_show(title,url,w,h);
 }
 
-/*角色-删除*/
-function role_del(obj,id){
+/*督导员-停用*/
+function supervisor_stop(obj,id){
 	parent.layer.confirm('确认要删除吗？',{icon: 3, title:'提示'},function(index){
 		$.ajax({
-			    url:"${context_root}/system/deleteRoleById.action?roleId=" + id, 
+			    url:"${context_root}/system/changeSupervisorStatus.action?supervisorId=" + id+"&status=1",
 				type:'post',
 				async:true ,
 				cache:false ,
 				dataType:"json",
 				success:function(data){
 					if(data.s == true){
-						$(obj).parents("tr").remove();
-						parent.layer.msg('已删除!',{icon:1,time:1000});
-						loadData() ;
+                        $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="supervisor_start(this,' + id + ')" href="javascript:;" title="启用"><span style=\'color: #0e90d2 \'>启用</span></a>');
+                        $(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已停用</span>');
+                        $(obj).remove();
+                        parent.layer.msg('已停用!', {icon: 5, time: 1000});
 					}else{
 						parent.layer.alert(data.m , {icon: 2,title:"系统提示"});
 					}
@@ -166,6 +170,30 @@ function role_del(obj,id){
 				
 			}) ;
 	});
+}
+
+/*督导员-启用*/
+function supervisor_start(obj, id) {
+    parent.layer.confirm('确认要启用吗？', {icon: 3, title: '提示'}, function (index) {
+        $.ajax({
+            url: "${context_root}/system/changeSupervisorStatus.action?supervisorId=" + id + "&status=0",
+            type: 'post',
+            async: true,
+            cache: false,
+            dataType: "json",
+            success: function (data) {
+                if (data.s == true) {
+                    $(obj).parents("tr").find(".td-manage").prepend('<a onClick="supervisor_stop(this,' + id + ')" href="javascript:;" title="停用" style="text-decoration:none"><span style=\'color: #0e90d2 \'>禁用</span></a>');
+                    $(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
+                    $(obj).remove();
+                    parent.layer.msg('已启用!', {icon: 6, time: 1000});
+                } else {
+                    parent.layer.alert(data.m, {icon: 2, title: "系统提示"});
+                }
+            },
+        });
+
+    });
 }
 </script> 
 </body>

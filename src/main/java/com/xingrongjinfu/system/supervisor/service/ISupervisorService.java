@@ -47,4 +47,5 @@ public interface ISupervisorService {
      * 添加督导员
      */
     int addSupervisor(Supervisor supervisor);
+
 }

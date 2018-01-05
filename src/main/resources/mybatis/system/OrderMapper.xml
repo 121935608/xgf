@@ -44,6 +44,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="totalPrice" property="totalPrice" />
 		<result column="commodityNo" property="commodityNo" />
 	</resultMap>
+
+	<resultMap id="OrderExpressResult" type="OrderExpress">
+		<result column="expressId" property="expressId" />
+		<result column="expressNo" property="expressNo" />
+		<result column="orderNumber" property="orderNumber" />
+		<result column="expressFirm" property="expressFirm" />
+		<result column="address" property="address" />
+		<result column="status" property="status" />
+		<result column="addTime" property="addTime" />
+		<result column="freight" property="freight" />
+	</resultMap>
 	
 	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultMap="OrderResult">
 		SELECT o.orderNumber,o.orderTime,o.payTime,s.userName,o.orderPrice,t.platform,o.orderStatus
@@ -92,5 +103,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT d.commodityName,c.commodityNo,d.unit,d.commodityNum,d.inPrice
 		FROM t_order_detail d LEFT JOIN t_commodity c ON d.commodityId=c.commodityId
 		WHERE d.orderNumber=#{orderNumber}
+	</select>
+
+	<update id="updateOrderInfo" parameterType="Orders">
+		UPDATE t_order
+		<set>
+			<if test="orderStatus !=null and orderStatus!=''">orderStatus=#{orderStatus},</if>
+			arriveTime=sysdate()
+		</set>
+		WHERE 1=1
+		<if test="orderNumber!=null and orderNumber!=''"> AND orderNumber=#{orderNumber}</if>
+	</update>
+
+	<select id="ExpresspageInfoQuery" parameterType="PageUtilEntity" resultMap="OrderExpressResult">
+		SELECT * FROM t_express
+		WHERE 1=1
+		<if test="relationMap.expressFirm !=null and relationMap.expressFirm !=''">
+			AND expressFirm=#{relationMap.expressFirm}
+		</if>
+		<if test="relationMap.orderNumber!=null and relationMap.orderNumber!=''">
+			AND
+			(
+			orderNumber LIKE CONCAT(CONCAT('%', #{relationMap.orderNumber}),'%')
+			OR
+			expressNo LIKE CONCAT(CONCAT('%', #{relationMap.orderNumber}),'%')
+			)
+		</if>
 	</select>
 </mapper> 

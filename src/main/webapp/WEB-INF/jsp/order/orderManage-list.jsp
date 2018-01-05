@@ -31,7 +31,7 @@
                <option value="2" >待发货</option>
                <option value="3" >待收货</option>
                <option value="4" >待还款</option>
-               <option value="5" >已还款</option>
+               <option value="5" >完成</option>
            </select>
        </span>
 		<input type="text" class="input-text" style="width:250px" placeholder="订单号|会员" id="orderNumber" name="orderNumber">
@@ -115,7 +115,7 @@ $(document).ready(function(){
 					   }else if (row.orderStatus==4){
                            return "待还款";
 					   }else if(row.orderStatus==5){
-                           return "已还款";
+                           return "完成";
 					   }
                 } else {
                     return "";
@@ -193,11 +193,9 @@ $(document).ready(function(){
             "mRender": function(data, type, row) {
                 //查看
                 var tolook = "<a title=\"查看\" href=\"javascript:;\" onclick=\"order_look('查看','${context_root}/order/toLookOrderInfo.action?orderNumber=" + row.orderNumber + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>查看</span></a>";
-                //确认收货
-                var toConfirm = "<a title=\"确认收货\" href=\"javascript:;\" onclick=\"role_edit('确认收货','${context_root}/system/toRoleModify.action?roleId=" + row.roleId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\">确认收货</a>";
                 //打印配送单
-                var toPrint = "<a title=\"打印配送单\" href=\"javascript:;\" onclick=\"role_Authorize('打印配送单','${context_root}/system/toRoleAuthorize.action?roleId=" + row.roleId + "','230','406')\" class=\"ml-5\" style=\"text-decoration:none\">打印配送单</a>";
-                return tolook  + "&nbsp;&nbsp;" + statusTools(row) + "&nbsp;&nbsp;" + toConfirm+ "&nbsp;&nbsp;" + toPrint;
+                var toPrint = "<a title=\"打印配送单\" href=\"javascript:;\" onclick=\"order_print('打印配送单','${context_root}/order/toPrintOrder.action?orderNumber=" + row.orderNumber + "','230','406')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>打印配送单</span></a>";
+                return tolook;
             }
         },
     ];
@@ -205,14 +203,31 @@ $(document).ready(function(){
     pageTable = _Datatable_Init(pageTable, aoColumns, url);
 });
 
-function statusTools(row) {
+//发货
+function sendTools(row) {
     if (row.orderStatus == '2') {
         return "<a style=\"text-decoration:none\" onclick=\"order_send('发送','${context_root}/order/toSendOrder.action?orderNumber=" + row.orderNumber + "','','510')\" href=\"javascript:;\" title=\"发送\"><span style='color: #0e90d2 '>发送</span></a>";
     } else {
-        return "<a style=\"cursor: default;\" onClick=\"return false;\" href=\"javascript:return false;;\" title=\"发送\">发送</a>";
+        return "<a style=\"cursor: default;\" title=\"发送\">发送</a>";
+    }
+}
+//确认收货
+function statusTools(row) {
+    if (row.orderStatus == '3') {
+        return "<a style=\"text-decoration:none\" onClick=\"order_confirm(this,\'" + row.orderNumber + "\')\" href=\"javascript:;\" title=\"确认收货\"><span style='color: #0e90d2 '>确认收货</span></a>";
+    } else {
+        return "<a style=\"cursor: default;\" title=\"确认收货\">确认收货</a>";
     }
 }
 
+//打印配送单
+function printTools(row) {
+	if(row.orderStatus !=1){
+	    return "<a style=\"text-decoration:none\" onclick=\"order_print('打印配送单','${context_root}/order/toPrintOrder.action?orderNumber=" + row.orderNumber + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>打印配送单</span></a>";
+	}else {
+	    return "<a style=\"cursor: default;\" title=\"打印配送单\">打印配送单</a>";
+	}
+}
 function query() {
     var beginTime = $("#beginTime").val();
     var endTime = $("#endTime").val();
@@ -231,31 +246,29 @@ function order_look(title,url,w,h){
 	layer_show(title,url,w,h);
 }
 
-/*角色-编辑*/
+/*订单-发货*/
 function order_send(title,url,w,h){
 	layer_show(title,url,w,h);
 }
 
-/*角色-授权*/
-function role_Authorize(title,url,w,h){
+/*订单-打印*/
+function order_print(title,url,w,h){
 	layer_show(title,url,w,h);
 }
 
 /*停用*/
-function user_stop(obj,id){
-    parent.layer.confirm('确认要停用吗？',{icon: 3, title:'提示'},function(index){
+function order_confirm(obj,orderNumber){
+    parent.layer.confirm('确认要停用吗？',{icon: 3, title:'确认收货后开始计算贷款日期'},function(index){
         $.ajax({
-            url:"${context_root}/system/changeDocumentStatus.action?documentId=" + id +"&status=1",
+            url:"${context_root}/order/toOrderConfirm.action?orderNumber=" +orderNumber+"&orderStatus=4",
             type:'post',
             async:true ,
             cache:false ,
             dataType:"json",
             success:function(data){
                 if(data.s == true){
-                    $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="user_start(this,'+id+')" href="javascript:;" title="启用">启用</a>');
-                    $(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已停用</span>');
-                    $(obj).remove();
-                    parent.layer.msg('已停用!',{icon: 5,time:1000});
+                    $(obj).html('<a style="cursor: default;" title="确认收货">确认收货</a>');
+                    parent.layer.msg('已收货!', {icon: 6,time:1000});
                 }else{
                     parent.layer.alert(data.m , {icon: 2,title:"系统提示"});
                 }

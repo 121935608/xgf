@@ -39,12 +39,12 @@
             <if test="name !=null and name!=''">name =#{name},</if>
             <if test="phone !=null and phone!=''">phone =#{phone},</if>
             <if test="area !=null and area!=''">area =#{area},</if>
-            <if test="status !=null and status!=''">status =#{status},</if>
-            <if test="creatTime !=null and creatTime!=''">creatTime =#{creatTime},</if>
-            <if test="supervisorNum !=null and supervisorNum!=''">supervisorNum =#{supervisorNum},</if>
+            <if test="status !=null">status =#{status},</if>
+            <if test="supervisorNum !=null and supervisorNum!=''">supervisorNum =#{supervisorNum}</if>
+            creatTime=sysdate()
         </set>
         WHERE 1=1
-        <if test="supervisorId !=null and supervisorId !=''">
+        <if test="supervisorId !=null">
             AND supervisorId=#{supervisorId}
         </if>
     </update>

@@ -88,7 +88,7 @@ $(document).ready(function(){
         "bSearchable": false,
         "mRender": function(data, type, row) {
             //编辑
-            var toEdit = "<a title=\"编辑\" href=\"javascript:;\" onclick=\"user_edit('编辑','${context_root}/system/toUserModify.action?userId=" + row.userId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\">编辑</a>";
+            var toEdit = "<a title=\"编辑\" href=\"javascript:;\" onclick=\"user_edit('编辑','${context_root}/system/toUserModify.action?userId=" + row.userId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>编辑</span></a>";
         	/*//修改密码
         	var toPassword = "<a style=\"text-decoration:none\" class=\"ml-5\" onClick=\"change_password('修改密码','${context_root}/system/toChangePwd.action?userId=" + row.userId + "','600','270')\" href=\"javascript:;\" title=\"修改密码\"><i class=\"Hui-iconfont\">&#xe63f;</i></a>";
         	//删除
@@ -103,18 +103,16 @@ $(document).ready(function(){
 
 function statusTools(row) {
     if (row.locked == '0') {
-        return "<a style=\"text-decoration:none\" onClick=\"user_stop(this,\'" + row.userId + "\')\" href=\"javascript:;\" title=\"停用\">禁用</a>";
+        return "<a style=\"text-decoration:none\" onClick=\"user_stop(this,\'" + row.userId + "\')\" href=\"javascript:;\" title=\"停用\"><span style='color: #0e90d2 '>停用</span></a>";
     } else {
-        return "<a style=\"text-decoration:none\" onClick=\"user_start(this,\'" + row.userId + "\')\" href=\"javascript:;\" title=\"启用\">启用</a>";
+        return "<a style=\"text-decoration:none\" onClick=\"user_start(this,\'" + row.userId + "\')\" href=\"javascript:;\" title=\"启用\"><span style='color: #0e90d2 '>启用</span></a>";
     }
 }
 
 function query() {
     var status = $("#statusSelect option:selected").val();
     var roleName = $("#roleName option:selected").val();
-    alert(roleName);
     var userName=$("#userName").val();
-
     pageTable.fnSettings().sAjaxSource = "${context_root}/system/userList.action?status=" + status+"&roleName="+roleName+"&userName="+userName;
     pageTable.fnClearTable(0);
     pageTable.fnDraw();
@@ -142,7 +140,6 @@ function user_resetPWD(obj,id){
     parent.layer.confirm('确认执行改操作？',{icon: 3, title:'提示'},function(index){
         var userName=[];
         $(":checkbox:checked").each(function(){ userName.push($(this).val());});
-        alert(userName);
         if (userName ==null || userName ==''){
            // alert("userName:"+userName);
             parent.layer.msg('请选中一个进行操作',{icon: 2,title:"系统提示"});
@@ -175,7 +172,7 @@ function user_stop(obj,id){
 			dataType:"json",
 			success:function(data){
 				if(data.s == true){
-					$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="user_start(this,'+id+')" href="javascript:;" title="启用">启用</a>');
+					$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="user_start(this,'+id+')" href="javascript:;" title="启用"><span style=\'color: #0e90d2 \'>启用</span></a>');
 					$(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已停用</span>');
 					$(obj).remove();
 					parent.layer.msg('已停用!',{icon: 5,time:1000});
@@ -199,7 +196,7 @@ function user_start(obj,id){
 			dataType:"json",
 			success:function(data){
 				if(data.s == true){
-					$(obj).parents("tr").find(".td-manage").prepend('<a onClick="user_stop(this,'+id+')" href="javascript:;" title="停用" style="text-decoration:none">禁用</a>');
+					$(obj).parents("tr").find(".td-manage").prepend('<a onClick="user_stop(this,'+id+')" href="javascript:;" title="停用" style="text-decoration:none"><span style=\'color: #0e90d2 \'>禁用</span></a>');
 					$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
 					$(obj).remove();
 					parent.layer.msg('已启用!', {icon: 6,time:1000});

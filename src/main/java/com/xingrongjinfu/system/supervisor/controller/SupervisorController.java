@@ -59,7 +59,7 @@ public class SupervisorController extends BaseController {
     }
 
     /**
-     * 修改督导员
+     * 跳转到修改督导员界面
      */
     @RequestMapping(SupervisorConstant.SUPERVISOR_MODIFY_URL)
     public ModelAndView loadModifyPage(Integer supervisorId)
@@ -70,6 +70,11 @@ public class SupervisorController extends BaseController {
        return modelAndView;
     }
 
+    /**
+     * 编辑督导员
+     * @param supervisor
+     * @return
+     */
     @RequestMapping(SupervisorConstant.SUPERVISOR_MODIFY)
     public @ResponseBody
     Message toModifySupervisor(Supervisor supervisor)
@@ -82,9 +87,18 @@ public class SupervisorController extends BaseController {
        return new Message(result);
     }
 
+    /**
+     * 跳转到督导员添加界面
+     * @return
+     */
     @RequestMapping(SupervisorConstant.SUPERVISOR_ADD_URL)
     public ModelAndView loadAddPage(){return this.getModelAndView(SupervisorConstant.SUPERVISOR_ADD_PAGE);}
 
+    /**
+     * 添加督导员
+     * @param supervisor
+     * @return
+     */
     @RequestMapping(SupervisorConstant.SUPERVISOR_ADD)
     public @ResponseBody Message addSupervisor(Supervisor supervisor)
         {
@@ -92,5 +106,19 @@ public class SupervisorController extends BaseController {
             supervisor.setSupervisorNum(AccessCodeUtil.accessCode());
             result = supervisorService.addSupervisor(supervisor);
             return new Message(result);
+    }
+
+    /**
+     * 督导员的启用停用
+     */
+    @RequestMapping(SupervisorConstant.SUPERVISOR_STATUS_CHANGE)
+    public @ResponseBody Message changeStatus(Supervisor supervisor)
+    {
+        int result=0;
+        Integer supervisorId=supervisor.getSupervisorId();
+        if (supervisorId!=null) {
+            result = supervisorService.updateSupervisorById(supervisor);
+        }
+        return new Message(result);
     }
 }

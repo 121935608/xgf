@@ -86,23 +86,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultType="User" useCache="false">
-		SELECT userId,userName,accountName,
-		(SELECT GROUP_CONCAT(roleName) FROM sys_role WHERE sys_role.roleId IN (SELECT roleId FROM sys_user_role WHERE userId=sys_user.userId) ) roleName,
-		email,mobilePhone,locked,createTime FROM sys_user
-		WHERE 1=1 AND type='S'
+		SELECT u.userId,u.userName,u.accountName,roleName,u.email,u.mobilePhone,u.locked,u.createTime FROM
+		sys_user u LEFT JOIN sys_user_role ur ON ur.userId=u.userId
+		LEFT JOIN sys_role r ON r.roleId=ur.roleId
+		WHERE type='S'
 		<if test="relationMap.userName != null and relationMap.userName != ''"><!-- 关键词检索 -->
 			AND
 				(
-					 accountName LIKE CONCAT(CONCAT('%', #{relationMap.userName}),'%')
+					 u.accountName LIKE CONCAT(CONCAT('%', #{relationMap.userName}),'%')
 					 OR 
-					 userName LIKE CONCAT(CONCAT('%', #{relationMap.userName}),'%')
+					 u.userName LIKE CONCAT(CONCAT('%', #{relationMap.userName}),'%')
 				)
 		</if>
 		<if test="relationMap.status != null and relationMap.status != ''">
-			AND locked=#{relationMap.status}
+			AND u.locked=#{relationMap.status}
 		</if>
 		<if test="relationMap.roleName != null and relationMap.roleName != ''">
-			AND roleName=#{relationMap.roleName}
+			AND r.roleId=#{relationMap.roleName}
 		</if>
 	</select>
 	

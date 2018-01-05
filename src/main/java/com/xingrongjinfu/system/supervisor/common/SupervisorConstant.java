@@ -63,4 +63,9 @@ public class SupervisorConstant {
      * 请求地址:添加督导员
      */
     public final static String SUPERVISOR_ADD="supervisorAdd";
+
+    /**
+     * 请求地址:督导员的启用,停用
+     */
+    public final static String SUPERVISOR_STATUS_CHANGE="changeSupervisorStatus";
 }

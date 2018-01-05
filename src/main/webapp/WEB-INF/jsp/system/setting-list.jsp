@@ -14,13 +14,13 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>星支付代付费率：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="text" class="input-text" placeholder="" id="xzfRate" name="xzfRate" value="${setting.xzfRate}">%
+				<input type="text" style="width: 525px;" class="input-text" placeholder="" autocomplete="off" id="xzfRate" name="xzfRate" value="${setting.xzfRate}">%
 			</div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>订单账期费率：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="text" class="input-text" placeholder="" id="orderRate" name="orderRate" value="${setting.orderRate}">%
+				<input type="text" style="width: 525px;" class="input-text" placeholder="" id="orderRate" name="orderRate" value="${setting.orderRate}">%
 			</div>
 		</div>
 

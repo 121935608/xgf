@@ -19,9 +19,9 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>所在区域:</label>
 			<div data-toggle="distpicker">
-				<select data-province="---- 选择省 ----"></select>
-				<select data-city="---- 选择市 ----"></select>
-				<select data-district="---- 选择区 ----"></select>
+				<select data-province="---- 选择省 ----" id="province"></select>
+				<select data-city="---- 选择市 ----" id="city"></select>
+				<select data-district="---- 选择区 ----" id="district"></select>
 			</div>
 		</div>
 		<div class="row cl">
@@ -55,9 +55,13 @@ $("#form-role-modify").validate({
 	focusCleanup:true,
 	success:"valid",
 	submitHandler:function(form){
+        var province=$("#province option:selected").val();
+        var city=$("#city option:selected").val()
+        var district=$("#district option:selected").val();
+        var area=province+city+district;
 		var index = parent.layer.load();
 		$.ajax({
-			url:"${context_url}/system/supervisorAdd.action",
+			url:"${context_url}/system/supervisorAdd.action?area="+area,
 			type:'post',
 			async:true ,
 			cache:false ,

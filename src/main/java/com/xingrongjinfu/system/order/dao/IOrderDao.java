@@ -41,4 +41,14 @@ public interface IOrderDao {
      * 根据订单号查询订单详情
      */
     List<OrderDetail> findOrderDetailInfo(String orderNumber);
+
+    /**
+     * 收货后更新订单信息
+     */
+    int updateOrderInfo(Order order);
+
+    /**
+     * 查询订单快递信息
+     */
+    List<TableDataInfo>expressPageInfoQuery(PageUtilEntity pageUtilEntity);
 }

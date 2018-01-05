@@ -27,8 +27,9 @@ public class User implements Serializable
 
 
     private String roleName; // 角色临时字段
-
+    private Integer roleId;
     private List<Role> roles; // 角色表
+
 
     public User()
     {
@@ -148,6 +149,14 @@ public class User implements Serializable
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Integer getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 
     public List<Role> getRoles()
