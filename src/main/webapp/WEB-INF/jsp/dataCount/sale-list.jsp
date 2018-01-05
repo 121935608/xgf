@@ -127,7 +127,7 @@ function query() {
     var beginTime = $("#beginTime").val();
     var endTime = $("#endTime").val();
 	var commodityName =$("#commodityName").val();
-    pageTable.fnSettings().sAjaxSource = encodeURI("${context_root}/dataCount/findCommodityInfo.action?beginTime="+beginTime+"&endTime="+endTime+"&commodityName="+commodityName);
+    pageTable.fnSettings().sAjaxSource = encodeURI("${context_root}/dataCount/findSaleInfo.action?beginTime="+beginTime+"&endTime="+endTime+"&commodityName="+commodityName);
     pageTable.fnClearTable(0);
     pageTable.fnDraw();
 }

@@ -10,7 +10,13 @@
  */
 package com.xingrongjinfu.system.financial.service;
 
+import com.xingrongjinfu.system.financial.dao.IFinancialDao;
+import org.framework.base.util.PageUtilEntity;
+import org.framework.base.util.TableDataInfo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -23,4 +29,10 @@ import org.springframework.stereotype.Service;
 @Service("financialService")
 public class FinancialService implements IFinancialService {
 
+    @Autowired
+    private IFinancialDao financialDao;
+    @Override
+    public List<TableDataInfo> pageInfoQuery(PageUtilEntity pageUtilEntity) {
+        return financialDao.pageInfoQuery(pageUtilEntity);
+    }
 }

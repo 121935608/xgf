@@ -11,7 +11,7 @@
 		<input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'beginTime\')}',maxDate:'%y-%M-%d'})" id="endTime"
 			   class="input-text Wdate" style="width:120px;" placeholder="结束时间">
 		<span class="select-box" style="width: 120px;">
-           <select name="statusSelect" id="statusSelect" class="select" autocomplete="off">
+           <select name="payType" id="payType" class="select" autocomplete="off">
                <option value="">支付方式</option>
                <option value="1">支付宝支付</option>
                <option value="2" >微信支付</option>
@@ -19,7 +19,14 @@
                <option value="4" >京东白条</option>
            </select>
        </span>
-		<input type="text" class="input-text" style="width:250px" placeholder="交易号|商铺名称" id="storeName" name="storeName">
+		<span class="select-box" style="width: 120px;">
+           <select name="statusSelect" id="statusSelect" class="select" autocomplete="off">
+               <option value="">转账状态</option>
+               <option value="1">转账成功</option>
+               <option value="2" >转账失败</option>
+           </select>
+       </span>
+		<input type="text" class="input-text" style="width:250px" placeholder="结算单号|商铺名称" id="storeName" name="storeName">
 		<button type="button" class="btn btn-success radius" onclick="query()"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
 	</div>
 	<div class="mt-20">
@@ -49,8 +56,8 @@ $(document).ready(function(){
             "sClass": "text-c",
             "bSearchable": false,
             "mRender": function(data, type, row) {
-                if (row.tradeCode != null) {
-                    return row.tradeCode;
+                if (row.amountNum != null) {
+                    return row.amountNum;
                 } else {
                     return "";
                 }
@@ -88,8 +95,8 @@ $(document).ready(function(){
             "sClass": "text-c",
             "bSearchable": false,
             "mRender": function(data, type, row) {
-                if (row.money != null) {
-                    return row.money/1000;
+                if (row.totalMoney != null) {
+                    return row.totalMoney/100;
                 } else {
                     return "";
                 }
@@ -101,14 +108,8 @@ $(document).ready(function(){
         "sClass": "td-status text-c",
         "bSearchable": false,
         "mRender": function(data, type, row) {
-            if (row.payType == 1) {
-                return "支付宝支付";
-            } else if(row.payType == 2) {
-                return "微信支付";
-			}else if(row.payType == 3){
-                return "银联支付";
-			}else if(row.payType == 4){
-                return "京东白条";
+            if (row.xzfRate !=null) {
+                return row.xzfRate;
             }else {
                 return "";
             }
@@ -120,14 +121,8 @@ $(document).ready(function(){
             "sClass": "td-status text-c",
             "bSearchable": false,
             "mRender": function(data, type, row) {
-                if (row.payType == 1) {
-                    return "支付宝支付";
-                } else if(row.payType == 2) {
-                    return "微信支付";
-                }else if(row.payType == 3){
-                    return "银联支付";
-                }else if(row.payType == 4){
-                    return "京东白条";
+                if (row.amountMoney !=null) {
+                    return row.amountMoney;
                 }else {
                     return "";
                 }
@@ -139,21 +134,17 @@ $(document).ready(function(){
             "sClass": "td-status text-c",
             "bSearchable": false,
             "mRender": function(data, type, row) {
-                if (row.payType == 1) {
-                    return "支付宝支付";
-                } else if(row.payType == 2) {
-                    return "微信支付";
-                }else if(row.payType == 3){
-                    return "银联支付";
-                }else if(row.payType == 4){
-                    return "京东白条";
+                if (row.status == 1) {
+                    return "转账成功";
+                } else if(row.status == 2) {
+                    return "转账失败";
                 }else {
                     return "";
                 }
             }
         },
     ];
-    <%--var url = "${context_root}/dataCount/findALLPays.action";--%>
+    var url = "${context_root}/dataCount/findFinancialList.action";
     pageTable = _Datatable_Init(pageTable, aoColumns, url);
 });
 

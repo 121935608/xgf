@@ -14,7 +14,12 @@ public interface SystemConstant
     public final static String MERCHANT_URL = "/merchant";
 
     /**
-     * 没款请求地址:数据统计
+     * 模块请求地址:数据统计
      */
     public final static String DATACOUNT_URL="/dataCount";
+
+    /**
+     * 模块请求地址:订单管理
+     */
+    public final static String ORDER_URL="/order";
 }

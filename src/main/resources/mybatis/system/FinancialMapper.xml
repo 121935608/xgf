@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FinancialMapper">
+
+	<resultMap id="FinancialResult" type="Financial">
+		<result column="amountId" property="amountId" />
+		<result column="userId" property="userId" />
+		<result column="addTime" property="addTime" />
+		<result column="totalMoney" property="totalMoney" />
+		<result column="xzfRate" property="xzfRate" />
+		<result column="amountMoney" property="amountMoney" />
+		<result column="status" property="status" />
+		<result column="storeName" property="storeName" />
+		<result column="amountNum" property="amountNum" />
+	</resultMap>
+
+	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultMap="FinancialResult">
+		SELECT a.amountId,a.amountNum,s.storeName,a.addTime,a.totalMoney,a.xzfRate,a.amountMoney,a.status
+		 FROM m_amount a LEFT JOIN t_store s ON a.userId=s.userId
+	</select>
+</mapper> 

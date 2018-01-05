@@ -29,4 +29,9 @@ public class FinancialConstant {
      * 逻辑视图名:财务结算界面
      */
     public final static String FINANCIAL_PAGE="dataCount/financial-list";
+
+    /**
+     * 请求地址:查询财务信息
+     */
+    public final static String FINANCIAL_LIST_URL="findFinancialList";
 }

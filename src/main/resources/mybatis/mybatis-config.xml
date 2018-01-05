@@ -25,6 +25,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.xingrongjinfu.system.merchant.model.Balance" alias="Balance"/>
 		<typeAlias type="com.xingrongjinfu.commodity.classification.model.Category" alias="Category"/>
 		<typeAlias type="com.xingrongjinfu.commodity.label.model.Label" alias="Label"/>
+		<typeAlias type="com.xingrongjinfu.system.storeaffairs.model.Certification" alias="Certification"/>
 		<typeAlias type="com.xingrongjinfu.system.storeaffairs.model.Store" alias="Store"/>
 		<typeAlias type="com.xingrongjinfu.system.storeaffairs.model.BankAccount" alias="BankAccount"/>
 		<typeAlias type="com.xingrongjinfu.system.storeaffairs.model.Repay" alias="Repay"/>
@@ -36,6 +37,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.xingrongjinfu.system.pays.model.Pays" alias="Pays"/>
 		<typeAlias type="com.xingrongjinfu.system.commodity.model.Commodity" alias="Commodity"/>
 		<typeAlias type="com.xingrongjinfu.system.sale.model.Sale" alias="Sale"/>
+		<typeAlias type="com.xingrongjinfu.system.financial.model.Financial" alias="Financial"/>
+		<typeAlias type="com.xingrongjinfu.system.order.model.Order" alias="Orders"/>
+		<typeAlias type="com.xingrongjinfu.system.order.model.OrderDetail" alias="OrderDetail"/>
 
 		<!-- 分页 -->
 		<typeAlias type="org.framework.base.util.TableDataInfo" alias="TableDataInfo"/>

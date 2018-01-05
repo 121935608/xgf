@@ -10,6 +10,11 @@
  */
 package com.xingrongjinfu.system.financial.dao;
 
+import org.framework.base.util.PageUtilEntity;
+import org.framework.base.util.TableDataInfo;
+
+import java.util.List;
+
 /**
  * 〈一句话功能简述〉<br> 
  * 〈〉
@@ -20,4 +25,5 @@ package com.xingrongjinfu.system.financial.dao;
  */
 public interface IFinancialDao {
 
+    List<TableDataInfo>pageInfoQuery(PageUtilEntity pageUtilEntity);
 }

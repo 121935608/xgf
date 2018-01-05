@@ -15,6 +15,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<select id="pageInfoQuery" parameterType="PageUtilEntity" resultMap="SaleResult">
 			SELECT t.commodityName,c.commodityNo,t.orderNumber,t.addTime,t.commodityNum,t.salePrice
 			FROM t_order_detail t LEFT JOIN t_commodity c ON t.commodityName=c.commodityName
+			WHERE 1=1
+			<if test="relationMap.beginTime != null and relationMap.beginTime != ''"><!-- 开始时间检索 -->
+				AND DATE_FORMAT(t.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
+			</if>
+			<if test="relationMap.endTime != null and relationMap.endTime != ''"><!-- 结束时间检索 -->
+				AND DATE_FORMAT(t.addTime,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
+			</if>
+			<if test="relationMap.commodityName !=null and relationMap.commodityName !=''">
+				AND (
+				c.commodityName LIKE CONCAT(CONCAT('%', #{relationMap.commodityName}),'%')
+				OR
+				c.commodityNo LIKE CONCAT(CONCAT('%', #{relationMap.commodityName}),'%')
+				OR
+				t.orderNumber LIKE CONCAT(CONCAT('%', #{relationMap.commodityName}),'%')
+				)
+			</if><!--关键词查询-->
 		</select>
 
 </mapper> 

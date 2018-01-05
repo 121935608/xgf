@@ -10,8 +10,12 @@
  */
 package com.xingrongjinfu.system.financial.dao;
 
+import org.framework.base.util.PageUtilEntity;
+import org.framework.base.util.TableDataInfo;
 import org.framework.core.dao.DynamicObjectBaseDao;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -24,4 +28,14 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class FinancialDao extends DynamicObjectBaseDao implements IFinancialDao {
 
+    @Override
+    public List<TableDataInfo> pageInfoQuery(PageUtilEntity pageUtilEntity) {
+        List<TableDataInfo> tableDataInfo=null;
+        try {
+            tableDataInfo=(List<TableDataInfo>)this.findForList("FinancialMapper.pageInfoQuery",pageUtilEntity);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tableDataInfo;
+    }
 }
