@@ -22,4 +22,9 @@ public interface SystemConstant
      * 模块请求地址:订单管理
      */
     public final static String ORDER_URL="/order";
+
+    /**
+     * 模块请求地址:商品列表
+     */
+    public final static String COMMODITY_URL="/commodity";
 }

@@ -40,6 +40,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.xingrongjinfu.system.order.model.Order" alias="Orders"/>
 		<typeAlias type="com.xingrongjinfu.system.order.model.OrderDetail" alias="OrderDetail"/>
 		<typeAlias type="com.xingrongjinfu.system.order.model.OrderExpress" alias="OrderExpress"/>
+		<typeAlias type="com.xingrongjinfu.system.product.model.Product" alias="Product"/>
+		<typeAlias type="com.xingrongjinfu.system.product.model.Classes" alias="Classes"/>
 
 		<!-- 分页 -->
 		<typeAlias type="org.framework.base.util.TableDataInfo" alias="TableDataInfo"/>

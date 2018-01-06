@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ProductMapper">
+
+	<resultMap id="ProductResult" type="Product">
+		<result column="commodityId" property="commodityId" />
+		<result column="commodityName" property="commodityName" />
+		<result column="commodityNo" property="commodityNo" />
+		<result column="imgMain" property="imgMain" />
+		<result column="imgOther" property="imgOther" />
+		<result column="specification" property="specification" />
+		<result column="inPrice" property="inPrice" />
+		<result column="salePrice" property="salePrice" />
+		<result column="tag" property="tag" />
+		<result column="categoryId" property="categoryId" />
+		<result column="info" property="info" />
+		<result column="weight" property="weight" />
+		<result column="commodityStatus" property="commodityStatus" />
+		<result column="unit" property="unit" />
+		<result column="stockNum" property="stockNum" />
+		<result column="taxRate" property="taxRate" />
+		<result column="status" property="status" />
+		<result column="addTime" property="addTime" />
+		<result column="updateTime" property="updateTime" />
+		<result column="origin" property="origin" />
+		<result column="supply" property="supply" />
+		<result column="hint" property="hint" />
+		<result column="country" property="country" />
+		<result column="type" property="type" />
+		<result column="categoryName" property="categoryName" />
+		<result column="grade" property="grade" />
+	</resultMap>
+
+	<resultMap id="ClassesResult" type="Classes">
+		<result column="classId" property="classId" />
+		<result column="className" property="className" />
+		<result column="status" property="status" />
+		<result column="addTime" property="addTime" />
+		<result column="type" property="type" />
+		<result column="sort" property="sort" />
+	</resultMap>
+
+	<resultMap id="CategoryResult" type="Category">
+		<result column="categoryId" property="categoryId" />
+		<result column="categoryName" property="categoryName" />
+		<result column="type" property="type" />
+		<result column="img" property="img" />
+		<result column="sort" property="sort" />
+		<result column="status" property="status" />
+		<result column="addTime" property="addTime" />
+	</resultMap>
+
+	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultMap="ProductResult">
+		SELECT c.*,t.categoryName FROM t_commodity c LEFT JOIN t_category t ON c.categoryId=t.categoryId
+		WHERE 1=1
+		<if test="relationMap.classId!=null and relationMap.classId !=''">
+			AND t.categoryId=#{relationMap.classId}
+		</if>
+		<if test="relationMap.origin!=null and relationMap.origin !=''">
+			AND c.origin=#{relationMap.origin}
+		</if>
+		<if test="relationMap.category!=null and relationMap.category !=''">
+			AND t.categoryId=#{relationMap.category}
+		</if>
+		<if test="relationMap.supply!=null and relationMap.supply !=''">
+			AND	c.supply=#{relationMap.supply}
+		</if>
+		<if test="relationMap.commodityStatus!=null and relationMap.commodityStatus !=''">
+			AND c.commodityStatus=#{relationMap.commodityStatus}
+		</if>
+		<if test="relationMap.commodityName!=null and relationMap.commodityName !=''">
+			AND (
+			c.commodityId LIKE CONCAT(CONCAT('%', #{relationMap.commodityName}),'%')
+			OR
+			c.commodityName LIKE CONCAT(CONCAT('%', #{relationMap.commodityName}),'%')
+			OR
+			c.commodityNo LIKE CONCAT(CONCAT('%', #{relationMap.commodityName}),'%')
+			)
+		</if>
+	</select>
+
+	<select id="findAllClass" resultMap="CategoryResult">
+		SELECT categoryId,categoryName FROM t_category WHERE type='FL' AND parentId !='0'
+	</select>
+
+	<select id="findAllCategory" resultMap="CategoryResult">
+		SELECT categoryId,categoryName FROM t_category WHERE type='BQ'
+	</select>
+
+	<select id="findAllSupply" resultMap="ProductResult">
+		SELECT DISTINCT (supply) FROM t_commodity
+	</select>
+
+	<select id="findAllOrigin" resultMap="ProductResult">
+		SELECT DISTINCT (origin) FROM t_commodity
+	</select>
+
+	<update id="changeStatus" parameterType="Product">
+		UPDATE t_commodity
+		<set>
+			<if test="status !=null and status !=''">
+				status=#{status},
+			</if>
+			updateTime=sysdate()
+		</set>
+		WHERE 1=1
+		<if test="commodityId !=null and commodityId!=''">
+			AND commodityId=#{commodityId}
+		</if>
+		<if test="type!=null and type !=''">
+			AND type=#{type}
+		</if>
+	</update>
+
+	<select id="findProductById" parameterType="Product" resultType="Product">
+		SELECT c.*,t.categoryName FROM t_commodity c LEFT JOIN t_category t ON c.categoryId=t.categoryId
+		WHERE 1=1
+		<if test="commodityId !=null and commodityId !=''">
+			AND commodityId =#{commodityId}
+		</if>
+	</select>
+</mapper> 
