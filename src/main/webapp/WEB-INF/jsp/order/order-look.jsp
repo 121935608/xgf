@@ -21,7 +21,7 @@
 				<div class="formControls col-xs-8 col-sm-4">
 					<span>
 						<c:if  test="${orders.orderStatus eq 1}">未支付</c:if>
-						<c:if  test="${orders.orderStatus eq 2}">待发货</c:if>
+						<c:if  test="${orders.orderStatus ne 1}">已支付</c:if>
 					</span>
 				</div>
 			</div>
@@ -34,7 +34,7 @@
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-3">付款金额:</label>
 				<div class="formControls col-xs-8 col-sm-4">
-					<span>${orders.orderPrice}</span>
+					<span>¥${orders.orderPrice}</span>
 				</div>
 			</div>
 			<div class="row cl">
@@ -111,8 +111,8 @@
 					<td>${order.commodityNo}</td>
 					<td>${order.unit}</td>
 					<td>${order.commodityNum}</td>
-					<td>${order.inPrice}</td>
-					<td>${order.totalMoney}</td>
+					<td>¥${order.inPrice}</td>
+					<td>¥${order.totalMoney}</td>
 				</tr>
 				</c:forEach>
 			</table>
@@ -121,25 +121,25 @@
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-3">商品金额:</label>
 				<div class="formControls col-xs-8 col-sm-4">
-					<span>${orders.totalPrice}</span>
+					<span>¥${orders.totalPrice}</span>
 				</div>
 			</div>
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-3">运费:</label>
 				<div class="formControls col-xs-8 col-sm-4">
-					<span>${orders.freight}</span>
+					<span>¥${orders.freight}</span>
 				</div>
 			</div>
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-3">账期金额:</label>
 				<div class="formControls col-xs-8 col-sm-4">
-					<span>${orders.payment}</span>
+					<span>¥${orders.payment}</span>
 				</div>
 			</div>
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-3">付款金额:</label>
 				<div class="formControls col-xs-8 col-sm-4">
-					<span>${orders.orderPrice}</span>
+					<span>¥${orders.orderPrice}</span>
 				</div>
 			</div>
 		</div>

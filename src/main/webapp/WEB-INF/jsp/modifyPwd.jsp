@@ -13,8 +13,10 @@
 <link href="uiloader/static/h-ui.admin/css/H-ui.login.css" rel="stylesheet" type="text/css" />
 <link href="uiloader/static/h-ui.admin/css/style.css" rel="stylesheet" type="text/css" />
 <link href="uiloader/lib/Hui-iconfont/1.0.7/iconfont.css" rel="stylesheet" type="text/css" />
+<link href="uiloader/static/jqueryStep/css/jquery.step.css" type="text/css" rel="stylesheet">
 <link href="uiloader/lib/jQuery-Validation-Engine/css/validationEngine.jquery.css?1" rel="stylesheet">
 <link href="uiloader/lib/jQuery-Validation-Engine/css/template.css?1" rel="stylesheet">
+
 <title>服务商平台修改密码页</title>
 <meta name="keywords" content="服务商平台修改密码页">
 <meta name="description" content="服务商平台修改密码页。">
@@ -23,6 +25,9 @@
 <input type="hidden" id="TenantId" name="TenantId" value="" />
 <div class="loginWraper">
   <div class="loginBox">
+      <ul>
+
+      </ul>
     <form id="modifyPwdForm" class="form form-horizontal"  method="post">
       <div class="row cl">
         <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
@@ -59,10 +64,19 @@
 <div class="footer">Copyright 星融金服</div>
 <script type="text/javascript" src="uiloader/lib/jquery/1.9.1/jquery.min.js"></script> 
 <script type="text/javascript" src="uiloader/static/h-ui/js/H-ui.js"></script>
+<script type="text/javascript" src="uiloader/static/jqueryStep/js/jquery.step.min.js"></script>
 <script src="uiloader/lib/jQuery-Validation-Engine/js/jquery.validationEngine.js?1" charset="utf-8" type="text/javascript"></script>
 <script src="uiloader/lib/jQuery-Validation-Engine/js/languages/jquery.validationEngine-zh_CN.js?1" charset="utf-8" type="text/javascript"></script>
 <script type="text/javascript">
-if(window != top)
+    var $step = $("#step");
+    var $index = $("#index");
+    $step.step({ index: 0, time: 500, title: ["填写申请表", "上传资料", "待确认", "已确认", "预约完成"] });
+    $index.text($step.getIndex());
+    $("#prevBtn").on("click", function() { $step.prevStep(); $index.text($step.getIndex()); });
+    $("#nextBtn").on("click", function() { $step.nextStep(); $index.text($step.getIndex()); });
+    $("#btn1").on("click", function() { $step.toStep(1); $index.text($step.getIndex()); });
+    $("#btn2").on("click", function() { $step.toStep(2); $index.text($step.getIndex()); });
+    if(window != top)
 {
     top.location.href=location.href;
 }
