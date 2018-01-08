@@ -26,7 +26,7 @@ public class UserConstant
     /**
      * 请求地址：登录验证
      */
-    public final static String LOGIN_URL = "/{login:login;?.*}";
+    public final static String LOGIN_URL = "/login";
     
     /**
      * 逻辑视图名：登录页
