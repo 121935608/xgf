@@ -1,6 +1,6 @@
 /**
  * Copyright (C), 2018
- * FileName: IFinancialService
+ * FileName: IFinancialsService
  * Author:   zxuser
  * Date:     2018/1/3 14:15
  * Description:
@@ -10,6 +10,7 @@
  */
 package com.xingrongjinfu.system.financial.service;
 
+import com.xingrongjinfu.system.financial.model.Financial;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 
@@ -31,4 +32,9 @@ public interface IFinancialService {
      * @return
      */
     List<TableDataInfo> pageInfoQuery(PageUtilEntity pageUtilEntity);
+
+    /**
+     * 更新财务信息
+     */
+    int updateAmountInfo(Financial financial);
 }

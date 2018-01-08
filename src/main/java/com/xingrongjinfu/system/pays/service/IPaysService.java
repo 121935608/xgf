@@ -1,6 +1,6 @@
 /**
  * Copyright (C), 2018
- * FileName: IPaysService
+ * FileName: IPayService
  * Author:   zxuser
  * Date:     2018/1/3 10:03
  * Description:

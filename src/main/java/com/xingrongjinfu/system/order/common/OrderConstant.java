@@ -84,4 +84,29 @@ public class OrderConstant {
      * 请求地址:查询订单快递信息
      */
     public final static String ORDER_EXPRESS_LIST_URL="findOrderExpressList";
+
+    /**
+     * 请求地址:跳转到财务结算单financial
+     */
+    public final static String ORDER_FINANCIAL_URL="financialView";
+
+    /**
+     * 逻辑视图名:财务结算单界面
+     */
+    public final static String ORDER_FINANCIAL_PAGE="order/order-financial";
+
+    /**
+     * 请求地址:跳转到输入密码
+     */
+    public final static String ORDER_CHECK_URL="toCheck";
+
+    /**
+     * 逻辑视图名:输入密码界面
+     */
+    public final static String ORDER_CHECK_PAGE="order/order-check";
+
+    /**
+     * 请求地址:确认结账
+     */
+    public final static String ORDER_TOCHECK_URL="checkOrder";
 }

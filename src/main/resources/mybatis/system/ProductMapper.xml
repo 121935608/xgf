@@ -55,6 +55,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultMap="ProductResult">
 		SELECT c.*,t.categoryName FROM t_commodity c LEFT JOIN t_category t ON c.categoryId=t.categoryId
 		WHERE 1=1
+		<if test="relationMap.type !=null and relationMap.type!=''">
+			AND c.type=#{relationMap.type}
+		</if>
 		<if test="relationMap.classId!=null and relationMap.classId !=''">
 			AND t.categoryId=#{relationMap.classId}
 		</if>
@@ -90,11 +93,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="findAllSupply" resultMap="ProductResult">
-		SELECT DISTINCT (supply) FROM t_commodity
+		SELECT DISTINCT (supply) FROM t_commodity WHERE 1=1
+		<if test="type!=null and type!=''">
+			AND type=#{type}
+		</if>
 	</select>
 
 	<select id="findAllOrigin" resultMap="ProductResult">
-		SELECT DISTINCT (origin) FROM t_commodity
+		SELECT DISTINCT (origin) FROM t_commodity WHERE 1=1
+		<if test="type!=null and type!=''">
+			AND type=#{type}
+		</if>
 	</select>
 
 	<update id="changeStatus" parameterType="Product">
@@ -121,4 +130,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			AND commodityId =#{commodityId}
 		</if>
 	</select>
+
+	<update id="updateProduct" parameterType="Product" >
+		UPDATE t_commodity
+		<set>
+			<if test="commodityName!=null and commodityName !=''">commodityName=#{commodityName},</if>
+			<if test="commodityNo!=null and commodityNo !=''">commodityNo=#{commodityNo},</if>
+			<if test="imgMain!=null and imgMain !=''">imgMain=#{imgMain},</if>
+			<if test="imgOther!=null and imgOther !=''">imgOther=#{imgOther},</if>
+			<if test="specification!=null and specification !=''">specification=#{specification},</if>
+			<if test="inPrice!=null">inPrice=#{inPrice},</if>
+			<if test="salePrice!=null">salePrice=#{salePrice},</if>
+			<if test="tag!=null and tag !=''">tag=#{tag},</if>
+			<if test="categoryId!=null and categoryId !=''">categoryId=#{categoryId},</if>
+			<if test="info!=null and info !=''">info=#{info},</if>
+			<if test="weight!=null ">weight=#{weight},</if>
+			<if test="commodityStatus!=null and commodityStatus !=''">commodityStatus=#{commodityStatus},</if>
+			<if test="unit!=null and unit !=''">unit=#{unit},</if>
+			<if test="stockNum!=null ">stockNum=#{stockNum},</if>
+			<if test="taxRate!=null">taxRate=#{taxRate},</if>
+			<if test="status!=null ">status=#{status},</if>
+			<if test="origin!=null and origin !=''">origin=#{origin},</if>
+			<if test="supply!=null and supply !=''">supply=#{supply},</if>
+			<if test="hint!=null and hint !=''">hint=#{hint},</if>
+			<if test="grade!=null and grade !=''">grade=#{grade},</if>
+			<if test="country!=null and country !=''">country=#{country},</if>
+			<if test="type!=null and type !=''">type=#{type},</if>
+			updateTime=sysdate()
+		</set>
+		WHERE 1=1
+		<if test="commodityId !=null and commodityId!=''">
+			AND commodityId=#{commodityId}
+		</if>
+	</update>
 </mapper> 

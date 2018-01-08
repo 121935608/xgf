@@ -44,8 +44,8 @@ public class MerchantService implements IMerchantService {
     }
 
     @Override
-    public AccountInfo getUserAccount(String userId) {
-        return merchantDao.getUserAccount(userId);
+    public AccountInfo getUserAccount(Merchant merchant) {
+        return merchantDao.getUserAccount(merchant);
     }
 
     @Override
@@ -59,5 +59,5 @@ public class MerchantService implements IMerchantService {
     }
 
     @Override
-    public Merchant getMerchantInfo(String userId) { return merchantDao.getMerchantInfo(userId);}
+    public Merchant getMerchantInfo(Merchant merchant) { return merchantDao.getMerchantInfo(merchant);}
 }

@@ -64,4 +64,9 @@ public interface IProductService {
      * 查询商品信息
      */
     Product findProductById(Product product);
+
+    /**
+     * 更新商品信息
+     */
+    int updateProduct(Product product);
 }

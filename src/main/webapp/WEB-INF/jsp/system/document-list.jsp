@@ -43,7 +43,7 @@ $(document).ready(function(){
             "bSearchable": false,
             "mRender": function(data, type, row) {
                 if (row.documentNum != null) {
-                    return row.name;
+                    return row.documentNum;
                 } else {
                     return "";
                 }

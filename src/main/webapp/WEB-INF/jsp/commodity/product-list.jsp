@@ -293,7 +293,7 @@ $(document).ready(function(){
             }
         },
     ];
-    var url = "${context_root}/commodity/findProductList.action";
+    var url = "${context_root}/commodity/findProductList.action?type=${product.type}";
     pageTable = _Datatable_Init(pageTable, aoColumns, url);
 });
 
@@ -337,7 +337,7 @@ function role_Authorize(title,url,w,h){
 function user_stop(obj,id){
     parent.layer.confirm('确认要停用吗？',{icon: 3, title:'提示'},function(index){
         $.ajax({
-            url:"${context_root}/commodity/changeProductStatus.action?commodityId=" + id +"&status=-1&type=c",
+            url:"${context_root}/commodity/changeProductStatus.action?commodityId=" + id +"&status=-1&type=${product.type}",
             type:'post',
             async:true ,
             cache:false ,
@@ -361,7 +361,7 @@ function user_stop(obj,id){
 function user_start(obj,id){
     parent.layer.confirm('确认要启用吗？',{icon: 3, title:'提示'},function(index){
         $.ajax({
-            url:"${context_root}/commodity/changeProductStatus.action?commodityId=" + id +"&status=1&type=c",
+            url:"${context_root}/commodity/changeProductStatus.action?commodityId=" + id +"&status=1&type=${product.type}",
             type:'post',
             async:true ,
             cache:false ,

@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -57,8 +58,10 @@ public class HelpController extends BaseController{
     {
         PageUtilEntity pageUtilEntity=this.getPageUtilEntity();
         List<Help>tableDataInfo=helpService.HelpPageInfoQuery(pageUtilEntity);
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         Integer i=1;
         for (Help help :tableDataInfo){
+            help.setReplyTimes(help.getReplyTime()==null ? "":sdf.format(help.getReplyTime()));
             help.setNumber(pageUtilEntity.getPage()+(i++));
         }
         return buildDatasTable(pageUtilEntity.getTotalResult(),tableDataInfo);
@@ -73,6 +76,11 @@ public class HelpController extends BaseController{
         ModelAndView modelAndView=this.getModelAndView(HelpConstant.HELP_REPLY_PAGE);
         Help unHelpInfo=helpService.getUnreply(feedBackId);
         List<Help> helpInfo=helpService.getReply(userId);
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        for (Help help:helpInfo){
+            help.setAddTimes(help.getAddTime()==null?"":sdf.format(help.getAddTime()));
+            help.setReplyTimes(help.getReplyTime()==null ? "":sdf.format(help.getReplyTime()));
+        }
         modelAndView.addObject("unHelpInfo",unHelpInfo);
         modelAndView.addObject("helpInfo",helpInfo);
         return modelAndView;

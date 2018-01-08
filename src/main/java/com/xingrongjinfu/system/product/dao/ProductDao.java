@@ -103,4 +103,9 @@ public class ProductDao extends DynamicObjectBaseDao implements IProductDao {
     public Product findProductById(Product product) {
         return (Product) this.findForObject("ProductMapper.findProductById",product);
     }
+
+    @Override
+    public int updateProduct(Product product) {
+        return this.update("ProductMapper.updateProduct",product);
+    }
 }

@@ -1,6 +1,6 @@
 /**
  * Copyright (C), 2018
- * FileName: FinancialDao
+ * FileName: FinancialsDao
  * Author:   zxuser
  * Date:     2018/1/3 14:14
  * Description: 业务层
@@ -10,6 +10,7 @@
  */
 package com.xingrongjinfu.system.financial.dao;
 
+import com.xingrongjinfu.system.financial.model.Financial;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.framework.core.dao.DynamicObjectBaseDao;
@@ -37,5 +38,10 @@ public class FinancialDao extends DynamicObjectBaseDao implements IFinancialDao 
             e.printStackTrace();
         }
         return tableDataInfo;
+    }
+
+    @Override
+    public int updateAmountInfo(Financial financial) {
+        return this.update("FinancialMapper.updateAmountInfo",financial);
     }
 }

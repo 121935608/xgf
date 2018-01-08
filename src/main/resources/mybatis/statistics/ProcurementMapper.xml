@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="StatisticsProcurementMapper">
+
+	<resultMap type="Procurement" id="ProcurementResult">
+		<result property="orderDetailId" column="orderDetailId"/>
+		<result property="orderNumber" column="orderNumber" />
+		<result property="commodityId" column="commodityId" />
+		<result property="commodityNum" column="commodityNum" />
+		<result property="commodityName" column="commodityName" />
+		<result property="addTime" column="addTime" />
+		<result property="inPrice" column="inPrice" />
+		<result property="salePrice" column="salePrice" />
+		<result property="taxRate" column="taxRate" />
+		<result property="unit" column="unit" />
+		<result property="imgMain" column="imgMain" />
+		<result property="totalPrice" column="totalPrice" />
+		
+	</resultMap>
+
+	<!-- <select id="pageInfoQuery" parameterType="PageUtilEntity" resultType="Procurement" useCache="false">
+		SELECT commodityName,commodityId,orderNumber,addTime,commodityNum,totalPrice FROM t_order_detail 
+		
+	</select> -->
+	
+	<select id="pageInfoQuery"  parameterType="PageUtilEntity"  resultType="Procurement">
+		select commodityName,commodityId,orderNumber,addTime,commodityNum,totalPrice
+			from t_order_detail 
+			where 1=1 
+			<if test="relationMap.dateType=='addTime'">
+				<if test="relationMap.beginTime != null and relationMap.beginTime != ''"> 
+					AND DATE_FORMAT(a.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
+				</if>
+				<if test="relationMap.endTime != null and relationMap.endTime != ''"> 
+					AND DATE_FORMAT(a.addTime,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
+				</if>  
+			</if> 
+			 
+			<if test="relationMap.fuzzyCondition != null and relationMap.fuzzyCondition != ''">
+				AND (
+						commodityName LIKE CONCAT(CONCAT('%', #{relationMap.fuzzyCondition}),'%') or 
+						commodityId LIKE CONCAT(CONCAT('%', #{relationMap.fuzzyCondition}),'%') 
+						)
+			</if>
+	</select>
+	
+	
+</mapper> 

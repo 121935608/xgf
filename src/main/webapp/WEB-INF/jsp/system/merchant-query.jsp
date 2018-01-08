@@ -47,7 +47,7 @@
 			</tr>
 			<tr>
 				<td>经营类型</td>
-				<td>${accountInfo.oprateType}</td>
+				<td></td>
 			</tr>
 			<tr>
 				<td>银行卡号</td>

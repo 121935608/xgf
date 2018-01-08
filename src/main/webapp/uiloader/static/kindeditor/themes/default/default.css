@@ -788,7 +788,7 @@
 	opacity:0.5;
 }
 .ke-button-common {
-	background: url(background.png) no-repeat;
+	background: url(background.png) no-repeat scroll 0 -25px transparent;
 	cursor: pointer;
 	height: 23px;
 	line-height: 23px;
@@ -800,6 +800,7 @@
 .ke-button-outer {
 	background-position: 0 -25px;
 	padding: 0;
+	position: relative;
 	display: -moz-inline-stack;
 	display: inline-block;
 	vertical-align: middle;
@@ -808,12 +809,13 @@
 }
 .ke-button {
 	background-position: right -25px;
-	padding: 0 14px 0 12px;
-	margin: 0 0 0 2px;
+	padding: 0 12px;
+	margin: 0;
 	font-family: "sans serif",tahoma,verdana,helvetica;
 	border: 0 none;
 	color: #333;
 	font-size: 12px;
+	left: 2px;
 	text-decoration: none;
 }
 /* inputbox */

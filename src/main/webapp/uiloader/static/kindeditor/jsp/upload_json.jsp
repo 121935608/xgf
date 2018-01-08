@@ -39,15 +39,15 @@ if(!ServletFileUpload.isMultipartContent(request)){
 }
 //检查目录
 File uploadDir = new File(savePath);
-/* if(!uploadDir.isDirectory()){
+if(!uploadDir.isDirectory()){
 	out.println(getError("上传目录不存在。"));
 	return;
-} */
+}
 //检查目录写权限
-/* if(!uploadDir.canWrite()){
+if(!uploadDir.canWrite()){
 	out.println(getError("上传目录没有写权限。"));
 	return;
-} */
+}
 
 String dirName = request.getParameter("dir");
 if (dirName == null) {

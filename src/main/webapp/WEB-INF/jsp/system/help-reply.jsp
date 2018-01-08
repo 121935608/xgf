@@ -9,13 +9,13 @@
                 <tr>
                     <td>问:</td>
                     <td>${a.question}</td>
-                    <td>${a.addTime}</td>
+                    <td>${a.addTimes}</td>
                     <td>${a.userName}</td>
                 </tr>
                 <tr>
                     <td>答:</td>
                     <td>${a.reply}</td>
-                    <td>${a.replyTime}</td>
+                    <td>${a.replyTimes}</td>
                     <td>${a.answer}</td>
                 </tr>
             </c:forEach>

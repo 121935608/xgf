@@ -51,7 +51,7 @@
             	使我保持登录状态</label>
         </div>--%>
           <div class="formControls col-xs-8 col-xs-offset-3" style="padding-left: 300px;">
-            <a href="javascript:;"onclick="${context_root}/system/toModifyPassword.action">忘记密码?</a>
+            <a href="javascript:;" onclick="${context_root}/system/toModifyPassword.action">忘记密码?</a>
           </div>
       </div>
       <div class="row cl">

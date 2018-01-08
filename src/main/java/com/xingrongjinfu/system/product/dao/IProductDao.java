@@ -61,5 +61,15 @@ public interface IProductDao {
      */
     int changeStatus(Product product);
 
+    /**
+     * 查询商品信息
+     * @param product
+     * @return
+     */
     Product findProductById(Product product);
+
+    /**
+     * 更新商品信息
+     */
+    int updateProduct(Product product);
 }

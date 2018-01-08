@@ -10,6 +10,7 @@
         <result column="userName" property="userName" jdbcType="VARCHAR" />
         <result column="phone" property="phone" jdbcType="VARCHAR" />
         <result column="locked" property="locked" jdbcType="INTEGER" />
+        <result column="storeId" property="storeId" jdbcType="VARCHAR" />
 
     </resultMap>
 
@@ -21,7 +22,7 @@
 
 
     <select id="pageInfoQuery" parameterType="PageUtilEntity" resultMap="MerchantResult">
-        SELECT s.userId,s.mobilePhone,t.storeName,t.userName,t.phone,s.locked
+        SELECT s.userId,t.storeId,s.mobilePhone,t.storeName,t.userName,t.phone,s.locked
         FROM sys_user s
         LEFT JOIN t_store t ON s.userId=t.userId
         WHERE 1=1 AND s.type='B'
@@ -38,19 +39,19 @@
         </if><!--关键词查询-->
     </select>
 
-    <select id="getMerchantInfo" resultType="Merchant">
+    <select id="getMerchantInfo" parameterType="Merchant" resultType="Merchant">
         SELECT s.userId,s.mobilePhone,t.storeName,t.userName,t.phone,s.locked
         FROM sys_user s
         LEFT JOIN t_store t ON s.userId=t.userId
-        WHERE s.userId = #{userId}
+        WHERE t.storeId=#{storeId}
     </select>
 
    <select id="userAccountQuery" resultType="AccountInfo">
-        SELECT s.storeName storeName,s.userName userName,s.idCard idCard,s.phone phone,s.area area,s.address address,
-        s.frontPic frontPic,s.backPic backPic,s.licensePic licensePic,s.frontStorePic frontStorePic,s.innerStorePic innerStorePic,
-        b.bankType bankType,b.accountType accountType,b.userName bankUserName,b.oprateType oprateType,b.cardNumber cardNumber,
-        b.idType idType,b.idCard cIdCard,b.remark remark
-        FROM t_store s LEFT JOIN t_bankCard b ON s.userId=b.userId WHERE s.userId=#{userId}
+        SELECT s.storeName,s.userName,s.idCard,s.phone,s.area,s.address,
+        s.frontPic,s.backPic,s.licensePic,s.frontStorePic,s.innerStorePic,
+        b.bankType,b.accountType,b.userName bankUserName,b.cardNumber,
+        b.idType,b.idCard cIdCard,b.remark
+        FROM t_store s LEFT JOIN t_bankCard b ON s.userId=b.userId WHERE s.storeId=#{storeId}
     </select>
 
     <update id="updateMerchantInfo" parameterType="User">
@@ -66,6 +67,6 @@
         SELECT o.payTime payTime,o.totalPrice,s.remain
         FROM t_order o JOIN t_store s ON o.userId=s.userId
         WHERE 1=1
-        <if test="relationMap.userId!=null and relationMap.userId!=''">AND o.userId=#{relationMap.userId}</if>>
+        <if test="relationMap.userId!=null and relationMap.userId!=''">AND o.userId=#{relationMap.userId}</if>
     </select>
 </mapper>

@@ -29,6 +29,7 @@ public class Merchant implements Serializable
     private String userName;
     private String phone;
     private String locked;
+    private String storeId;
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
@@ -80,5 +81,13 @@ public class Merchant implements Serializable
 
     public void setLocked(String locked) {
         this.locked = locked;
+    }
+
+    public String getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(String storeId) {
+        this.storeId = storeId;
     }
 }

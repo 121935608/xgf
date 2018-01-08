@@ -7,6 +7,9 @@ import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.xingrongjinfu.statistics.procurement.dao.IProcurementDao;
+import com.xingrongjinfu.statistics.purchase.dao.IPurchaseDao;
 import com.xingrongjinfu.system.permission.model.Permission;
 import com.xingrongjinfu.system.role.model.Role;
 import com.xingrongjinfu.system.user.dao.IUserDao;
@@ -21,6 +24,16 @@ import com.xingrongjinfu.utils.ObjectUtil;
 @Service("purchaseService")
 public class PurchaseService implements IPurchaseService
 {
+	@Autowired
+    private IPurchaseDao purchaseDao;
+  
+    /**
+     * 根据条件分页查询
+     */
+    public List<TableDataInfo> pageInfoQuery(PageUtilEntity pageUtilEntity)
+    {
+        return purchaseDao.pageInfoQuery(pageUtilEntity);
+    }
 
 
 }

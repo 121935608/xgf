@@ -45,10 +45,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		</selectKey>
  		insert into t_category
  		(	categoryId,type,
- 			<if test="categoryName != null and categoryName != ''">categoryName</if>
+ 			<if test="categoryName != null and categoryName != ''">categoryName,</if>
+ 			<if test="img != null and img != ''">img</if>
  			
  		)values(#{categoryId},"BQ",
- 			<if test="categoryName != null and categoryName != ''">#{categoryName}</if>
+ 			<if test="categoryName != null and categoryName != ''">#{categoryName},</if>
+ 			<if test="img != null and img != ''">#{img}</if>
  		)
  	</insert>	
 </mapper> 

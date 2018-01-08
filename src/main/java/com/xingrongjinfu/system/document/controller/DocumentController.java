@@ -85,17 +85,19 @@ public class DocumentController extends BaseController {
         AliyunOSSClientUtil aliyunOSSClientUtil=new AliyunOSSClientUtil();
         try {
             String key = aliyunOSSClientUtil.uploadImg(file);
-            String originalFilename = file.getOriginalFilename();
-            String filePath = aliyunOSSClientUtil.FOLDER + originalFilename;
-            document.setUrl(filePath);
-            User user=this.getCurrentUser();
-            document.setCreator(user.getUserName());
-            result = documentService.saveDocument(document);
+            if (key!=null) {
+                String originalFilename = file.getOriginalFilename();
+                String filePath = aliyunOSSClientUtil.FOLDER + originalFilename;
+                document.setUrl(filePath);
+                User user = this.getCurrentUser();
+                document.setCreator(user.getUserName());
+                result = documentService.saveDocument(document);
+            }
         }
         catch (OSSException e)
         {
             e.printStackTrace();
-            return new Message(false,"文件上传至阿里云服务器失败");
+            return new Message(result);
         }
         return new Message(result);
     }
@@ -146,7 +148,7 @@ public class DocumentController extends BaseController {
 
             } catch (OSSException e) {
                 e.printStackTrace();
-                return new Message(false, "文件上传至阿里云服务器失败");
+                return new Message(result);
             }
         }
         return new Message(result);

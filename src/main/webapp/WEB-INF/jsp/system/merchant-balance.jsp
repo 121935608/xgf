@@ -34,23 +34,44 @@
     $(document).ready(function () {
         var aoColumns = [
             {
-                "mData": "payTime",
+                "sDefaultContent": "结算单号",
                 "bSortable" : false,
                 "sClass": "text-c",
-                "defaultContent": ""
+                "bSearchable": false,
+                "mRender": function(data, type, row) {
+                    if (row.payTime != null) {
+                        return formatDate(row.payTime,"yyyy-MM-dd hh:mm:ss");
+                    } else {
+                        return "";
+                    }
+                }
             },
             {
-                "mData": "totalPrice",
+                "sDefaultContent": "结算单号",
                 "bSortable" : false,
                 "sClass": "text-c",
-                "defaultContent": ""
+                "bSearchable": false,
+                "mRender": function(data, type, row) {
+                    if (row.totalPrice != null) {
+                        return row.totalPrice/100;
+                    } else {
+                        return "";
+                    }
+                }
             },
 
             {
-                "mData": "remain",
+                "sDefaultContent": "结算单号",
                 "bSortable" : false,
                 "sClass": "text-c",
-                "defaultContent": ""
+                "bSearchable": false,
+                "mRender": function(data, type, row) {
+                    if (row.remain != null) {
+                        return row.remain/100;
+                    } else {
+                        return "";
+                    }
+                }
             },
             {
                 "sDefaultContent": "原因",
@@ -64,9 +85,7 @@
             },
         ];
         var url = "${context_root}/system/accountInfoList.action?userId="+${merchant.userId};
-        pageTable.fnSettings().sAjaxSource =encodeURI(url);
-        pageTable.fnClearTable(0);
-        pageTable.fnDraw();
+        pageTable = _Datatable_Init(pageTable, aoColumns, url);
     });
 
 

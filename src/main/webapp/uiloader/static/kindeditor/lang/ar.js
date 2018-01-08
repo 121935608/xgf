@@ -74,8 +74,6 @@ KindEditor.lang({
 	deleteMedia : 'حذف الوسائط',
 	editLink : 'خصائص الرابط',
 	deleteLink : 'إزالة الرابط',
-	editAnchor : 'Anchor properties',
-	deleteAnchor : 'Delete Anchor',
 	tableprop : 'خصائص الجدول',
 	tablecellprop : 'خصائص الخلية',
 	tableinsert : 'إدراج جدول',
@@ -233,10 +231,3 @@ KindEditor.lang({
 		'3.html' : 'قائمة'
 	}
 }, 'ar');
-
-KindEditor.each(KindEditor.options.items, function(i, name) {
-	if (name == 'baidumap') {
-		KindEditor.options.items[i] = 'map';
-	}
-});
-KindEditor.options.langType = 'ar';

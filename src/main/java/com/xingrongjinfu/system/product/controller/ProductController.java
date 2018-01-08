@@ -48,6 +48,9 @@ public class ProductController extends BaseController{
     @RequestMapping(ProductConstant.PRODUCT_URL)
     public ModelAndView loadProductPage(){
         ModelAndView modelAndView=this.getModelAndView(ProductConstant.PRODUCT_PAGE);
+        Product product=new Product();
+        product.setType("c");
+        modelAndView.addObject("product",product);
         //分类
         modelAndView.addObject("classes",getClassList());
         //标签
@@ -97,11 +100,55 @@ public class ProductController extends BaseController{
         if (commodityId !=null && commodityId !=""){
             Product products=productService.findProductById(product);
             modelAndView.addObject("product",products);
+            //分类
+            modelAndView.addObject("classes",getClassList());
+            //标签
+            modelAndView.addObject("category",getCategoryList());
         }
         return modelAndView;
     }
 
 
+    /**
+     * 跳转到新增商品列表
+     *
+     */
+
+    @RequestMapping(ProductConstant.NEW_PRODUCT_URL)
+    public ModelAndView loadNewProduct(){
+        ModelAndView modelAndView=this.getModelAndView(ProductConstant.PRODUCT_PAGE);
+        Product product=new Product();
+        product.setType("s");
+        modelAndView.addObject("product",product);
+        //分类
+        modelAndView.addObject("classes",getClassList());
+        //标签
+        modelAndView.addObject("category",getCategoryList());
+        //供货地
+        modelAndView.addObject("supply",getSupplyList());
+        //产地
+        modelAndView.addObject("origin",getOriginList());
+        return modelAndView;
+    }
+    /**
+     * 提交商品
+     */
+    @RequestMapping(ProductConstant.PRODUCT_ADD_URL)
+    public @ResponseBody Message saveProduct(Product product){
+        int result=0;
+        String commodityId=product.getCommodityId();
+        if (commodityId !=null && commodityId!=""){
+            //商品为c就是商品表中的信息
+            if (product.getType().equalsIgnoreCase("c")) {
+                result = productService.updateProduct(product);
+            }else {
+                //商品为s这里的提交还需将type改为c
+                product.setType("s");
+                result =productService.updateProduct(product);
+            }
+        }
+        return new Message(result);
+    }
     /**
      * 获取所有的分类
      * @return

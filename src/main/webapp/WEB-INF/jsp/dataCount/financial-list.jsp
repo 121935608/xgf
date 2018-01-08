@@ -22,8 +22,8 @@
 		<span class="select-box" style="width: 120px;">
            <select name="statusSelect" id="statusSelect" class="select" autocomplete="off">
                <option value="">转账状态</option>
-               <option value="1">转账成功</option>
-               <option value="2" >转账失败</option>
+               <option value="0">已结清</option>
+               <option value="1" >未结清</option>
            </select>
        </span>
 		<input type="text" class="input-text" style="width:250px" placeholder="结算单号|商铺名称" id="storeName" name="storeName">
@@ -134,10 +134,10 @@ $(document).ready(function(){
             "sClass": "td-status text-c",
             "bSearchable": false,
             "mRender": function(data, type, row) {
-                if (row.status == 1) {
-                    return "转账成功";
-                } else if(row.status == 2) {
-                    return "转账失败";
+                if (row.amountStatus == 0) {
+                    return "已结清";
+                } else if(row.amountStatus == 1) {
+                    return "未结清";
                 }else {
                     return "";
                 }
@@ -159,9 +159,9 @@ function statusTools(row) {
 function query() {
     var beginTime = $("#beginTime").val();
     var endTime = $("#endTime").val();
-    var payType = $("#statusSelect option:selected").val();
+    var status = $("#statusSelect option:selected").val();
 	var storeName =$("#storeName").val();
-    pageTable.fnSettings().sAjaxSource = encodeURI("${context_root}/dataCount/findALLPays.action?beginTime="+beginTime+"&endTime="+endTime+"&payType="+payType+"&storeName="+storeName);
+    pageTable.fnSettings().sAjaxSource = encodeURI("${context_root}/dataCount/findFinancialList.action?beginTime="+beginTime+"&endTime="+endTime+"&status="+status+"&storeName="+storeName);
     pageTable.fnClearTable(0);
     pageTable.fnDraw();
 }

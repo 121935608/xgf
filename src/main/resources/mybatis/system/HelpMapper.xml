@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="HelppageInfoQuery" parameterType="PageUtilEntity" resultMap="HelpResult">
 		SELECT f.feedBackId,u.userName,f.userId,f.question,f.addTime,f.reply,f.answer,f.replyTime
 		FROM t_feedBack f LEFT JOIN sys_user u ON f.userId=u.userId
-		WHERE 1=1
+		WHERE f.parentId='0'
 		<if test="relationMap.beginTime != null and relationMap.beginTime != ''"><!-- 开始时间检索 -->
 			AND DATE_FORMAT(f.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
 		</if>
@@ -37,13 +37,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="getUnreply" parameterType="String" resultType="Help">
 		SELECT f.feedBackId,u.userName,f.userId,f.question,f.addTime,f.reply,f.answer,f.replyTime
-		FROM t_feedBack f LEFT JOIN sys_user u ON f.userId=u.userId WHERE f.feedBackId=#{feedBackId}
+		FROM t_feedBack f LEFT JOIN sys_user u ON f.userId=u.userId WHERE f.parentId=#{feedBackId}
 	</select>
 
 	<select id="getReply" parameterType="String" resultMap="HelpResult">
 		SELECT f.feedBackId,u.userName,f.userId,f.question,f.addTime,f.reply,f.answer,f.replyTime
 		FROM t_feedBack f LEFT JOIN sys_user u ON f.userId=u.userId
-		WHERE f.userId=#{userId} AND f.reply is NOT null
+		WHERE f.parentId='0' AND f.userId=#{userId} AND f.reply is NOT null
 	</select>
 
 	<update id="updateHelpInfo" parameterType="Help">

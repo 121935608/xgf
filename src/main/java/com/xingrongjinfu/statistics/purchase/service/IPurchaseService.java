@@ -15,6 +15,10 @@ import com.xingrongjinfu.system.user.model.User;
 public interface IPurchaseService
 {
 
-    
+	/**
+     * 根据条件分页查询对象
+     * 
+     */
+    public List<TableDataInfo> pageInfoQuery(PageUtilEntity pageUtilEntity);
 
 }

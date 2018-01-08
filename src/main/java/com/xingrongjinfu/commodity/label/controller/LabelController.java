@@ -76,7 +76,6 @@ public class LabelController extends BaseController {
 		String key = aliyunOSSClientUtil.uploadImg(picture);
 		String originalFilename = picture.getOriginalFilename();
 		String filePath = aliyunOSSClientUtil.FOLDER + originalFilename;
-		
 		category.setImg(filePath);
 		if (categoryId != null) {
 			result = labelService.updateCategoryInfo(category);
@@ -85,6 +84,7 @@ public class LabelController extends BaseController {
 		}
 
 		return new Message(result);
+		
 
 	}
 

@@ -1,6 +1,6 @@
 /**
  * Copyright (C), 2018
- * FileName: FinancialService
+ * FileName: FinancialsService
  * Author:   zxuser
  * Date:     2018/1/3 14:15
  * Description:
@@ -11,6 +11,7 @@
 package com.xingrongjinfu.system.financial.service;
 
 import com.xingrongjinfu.system.financial.dao.IFinancialDao;
+import com.xingrongjinfu.system.financial.model.Financial;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +35,10 @@ public class FinancialService implements IFinancialService {
     @Override
     public List<TableDataInfo> pageInfoQuery(PageUtilEntity pageUtilEntity) {
         return financialDao.pageInfoQuery(pageUtilEntity);
+    }
+
+    @Override
+    public int updateAmountInfo(Financial financial) {
+        return financialDao.updateAmountInfo(financial);
     }
 }

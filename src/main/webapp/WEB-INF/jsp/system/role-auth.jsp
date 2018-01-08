@@ -53,7 +53,7 @@ $(document).ready(function(){
 			dataType:"json",
 			success:function(data){
 				if(data.s == true){
-					parent.layer.msg("删除成功,正在刷新数据请稍后……",{icon:1,time: 1000,shade: [0.1,'#fff']},function(){
+					parent.layer.msg("授权成功,正在刷新数据请稍后……",{icon:1,time: 1000,shade: [0.1,'#fff']},function(){
 						window.parent.location.reload();
 					});
 				}else{

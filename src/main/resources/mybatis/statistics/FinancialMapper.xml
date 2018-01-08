@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="StatisticsFinancialMapper">
+
+	<resultMap type="Financial" id="FinancialResult">
+		<result property="amountId" column="amountId" />
+		<result property="userId" column="userId" />
+		<result property="addTime" column="addTime" />
+		<result property="totalMoney" column="totalMoney" />
+		<result property="xzfRate" column="xzfRate" />
+		<result property="amountMoney" column="amountMoney" />
+		<result property="status" column="status" />
+		<result property="amountNum" column="amountNum" />
+
+	</resultMap>
+
+
+	<select id="pageInfoQuery" parameterType="PageUtilEntity"
+		resultType="Financial">
+		select amountNum,addTime,totalMoney,xzfRate,amountMoney,status
+		from
+		m_amount m
+		inner join sys_user s on m.userId = s.userId
+		where 1=1
+		<if test="relationMap.userId != null and relationMap.userId != ''">
+			AND m.userId=#{relationMap.userId}
+		</if>
+
+		<if test="relationMap.beginTime != null and relationMap.beginTime != ''">
+			AND DATE_FORMAT(m.addTime,'%Y%m%d') &gt;=
+			DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
+		</if>
+		<if test="relationMap.endTime != null and relationMap.endTime != ''">
+			AND DATE_FORMAT(m.addTime,'%Y%m%d') &lt;=
+			DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
+		</if>
+
+
+		<if test="relationMap.status != null and relationMap.status != ''">
+			AND status = #{relationMap.status}
+		</if>
+
+		<if
+			test="relationMap.fuzzyCondition != null and relationMap.fuzzyCondition != ''">
+			AND (
+			amountNum LIKE CONCAT(CONCAT('%',
+			#{relationMap.fuzzyCondition}),'%')
+			)
+		</if>
+	</select>
+</mapper> 

@@ -50,12 +50,12 @@ public class MerchantDao extends DynamicObjectBaseDao implements IMerchantDao {
     }
 
     @Override
-    public AccountInfo getUserAccount(String userId)
+    public AccountInfo getUserAccount(Merchant merchant)
     {
         AccountInfo userAccountInfo = null;
         try
         {
-            userAccountInfo=(AccountInfo)this.findForObject("MerchantMapper.userAccountQuery",userId);
+            userAccountInfo=(AccountInfo)this.findForObject("MerchantMapper.userAccountQuery",merchant);
         }
         catch (Exception e)
         {e.printStackTrace();}
@@ -79,15 +79,15 @@ public class MerchantDao extends DynamicObjectBaseDao implements IMerchantDao {
     }
 
     @Override
-    public Merchant getMerchantInfo(String userId) {
-        Merchant merchant = null;
+    public Merchant getMerchantInfo(Merchant merchant) {
+        Merchant merchants = null;
         try
         {
-            merchant=(Merchant) this.findForObject("MerchantMapper.getMerchantInfo",userId);
+            merchants=(Merchant) this.findForObject("MerchantMapper.getMerchantInfo",merchant);
         }
         catch (Exception e)
         {e.printStackTrace();}
-        return merchant;
+        return merchants;
     }
 
     @Override

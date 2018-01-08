@@ -66,14 +66,14 @@ public class MerchantController extends BaseController {
 
     /**
      * 跳转到产看商户界面
-     * @param userId
+     * @param
      * @return
      */
     @RequestMapping(MerchantConstant.MERCHANT_QUERY_URL)
-    public ModelAndView merchantQuery(String userId)
+    public ModelAndView merchantQuery(Merchant merchant)
     {
         ModelAndView modelAndView=this.getModelAndView(MerchantConstant.MERCHANT_QUERY_PAGE);
-        AccountInfo accountInfo= merchantService.getUserAccount(userId);
+        AccountInfo accountInfo= merchantService.getUserAccount(merchant);
         modelAndView.addObject("accountInfo",accountInfo);
         return modelAndView;
     }
@@ -94,12 +94,17 @@ public class MerchantController extends BaseController {
         return new Message(result);
     }
 
+    /**
+     * 查看账户余额
+     * @param merchant
+     * @return
+     */
     @RequestMapping(MerchantConstant.MERCHANT_BALANCE_URL)
-    public ModelAndView toAccountBalance(String userId)
+    public ModelAndView toAccountBalance(Merchant merchant)
     {
         ModelAndView modelAndView=this.getModelAndView(MerchantConstant.MERCHANT_BALANCE_PAGE);
-        Merchant merchant = merchantService.getMerchantInfo(userId);
-        modelAndView.addObject("merchant",merchant);
+        Merchant merchants = merchantService.getMerchantInfo(merchant);
+        modelAndView.addObject("merchant",merchants);
         return modelAndView;
 
     }

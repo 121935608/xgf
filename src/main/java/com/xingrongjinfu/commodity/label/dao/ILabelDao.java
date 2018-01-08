@@ -35,7 +35,7 @@ public interface ILabelDao
     public int addCategoryInfo(Label category);
 
     /**
-     * 修改城市
+     * 修改
      * 
      */
     public int updateCategoryInfo(Label category);

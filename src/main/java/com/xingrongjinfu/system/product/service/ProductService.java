@@ -69,4 +69,11 @@ public class ProductService implements IProductService {
     public Product findProductById(Product product) {
         return productDao.findProductById(product);
     }
+
+    @Override
+    public int updateProduct(Product product) {
+        return productDao.updateProduct(product);
+    }
+
+
 }

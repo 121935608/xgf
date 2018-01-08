@@ -27,12 +27,15 @@ public class Financial implements Serializable
     private String amountId;
     private String userId;
     private Date addTime;
+    private Date updateTime;
     private Integer totalMoney;
     private Integer xzfRate;
     private Integer amountMoney;
+    private Integer amountStatus;
     private Integer status;
     private String storeName;
     private String amountNum;
+
 
     public String getAmountId() {
         return amountId;
@@ -56,6 +59,14 @@ public class Financial implements Serializable
 
     public void setAddTime(Date addTime) {
         this.addTime = addTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 
     public Integer getTotalMoney() {
@@ -104,5 +115,13 @@ public class Financial implements Serializable
 
     public void setAmountNum(String amountNum) {
         this.amountNum = amountNum;
+    }
+
+    public Integer getAmountStatus() {
+        return amountStatus;
+    }
+
+    public void setAmountStatus(Integer amountStatus) {
+        this.amountStatus = amountStatus;
     }
 }

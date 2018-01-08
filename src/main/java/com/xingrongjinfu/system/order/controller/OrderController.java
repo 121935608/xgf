@@ -11,11 +11,14 @@
 package com.xingrongjinfu.system.order.controller;
 
 import com.xingrongjinfu.system.SystemConstant;
+import com.xingrongjinfu.system.financial.model.Financial;
+import com.xingrongjinfu.system.financial.service.IFinancialService;
 import com.xingrongjinfu.system.order.common.OrderConstant;
 import com.xingrongjinfu.system.order.model.Order;
 import com.xingrongjinfu.system.order.model.OrderDetail;
 import com.xingrongjinfu.system.order.service.IOrderService;
 import com.xingrongjinfu.system.order.service.OrderService;
+import com.xingrongjinfu.system.user.model.User;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.framework.core.controller.BaseController;
@@ -43,6 +46,9 @@ public class OrderController extends BaseController {
 
     @Autowired
     private IOrderService orderService;
+
+    @Autowired
+    private IFinancialService financialService;
 
     @RequestMapping(OrderConstant.ORDER_MANAGE_URL)
     public ModelAndView loadOrderManage(){return this.getModelAndView(OrderConstant.ORDER_MANAGE_PAGE);}
@@ -139,5 +145,46 @@ public class OrderController extends BaseController {
         PageUtilEntity pageUtilEntity=this.getPageUtilEntity();
         List<TableDataInfo> tableDataInfo=orderService.expressPageInfoQuery(pageUtilEntity);
         return buildDatasTable(pageUtilEntity.getTotalResult(),tableDataInfo);
+    }
+
+    /**
+     * 财务结算单界面
+     */
+    @RequestMapping(OrderConstant.ORDER_FINANCIAL_URL)
+    public ModelAndView loadFinancialPage(){return this.getModelAndView(OrderConstant.ORDER_FINANCIAL_PAGE);}
+
+    /**
+     * 跳转到输入密码界面
+     */
+    @RequestMapping(OrderConstant.ORDER_CHECK_URL)
+    public ModelAndView loadCheckPage(Financial financial)
+    {
+        ModelAndView modelAndView=this.getModelAndView(OrderConstant.ORDER_CHECK_PAGE);
+        modelAndView.addObject("financial",financial);
+        return modelAndView;
+    }
+
+    /**
+     * 确认结账
+     */
+    @RequestMapping(OrderConstant.ORDER_TOCHECK_URL)
+    public @ResponseBody Message toCheck(Financial financial, User user)
+    {
+        int result=0;
+        User nowUser=this.getCurrentUser();
+        String amountId=financial.getAmountId();
+        if (amountId !=null && amountId !=""){
+            //校验密码
+            if (nowUser.getPassword().equals(user.getPassword())) {
+                result = 1;
+            }
+            //校验密码通过之后更新结算单
+            if (result==1) {
+                financial.setAmountStatus(0);
+
+                result=financialService.updateAmountInfo(financial);
+            }
+        }
+        return new Message(result);
     }
 }

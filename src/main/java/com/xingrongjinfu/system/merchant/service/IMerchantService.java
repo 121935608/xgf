@@ -32,11 +32,11 @@ public interface IMerchantService {
 
     List<TableDataInfo> pageInfoQuery(PageUtilEntity pageUtilEntity);
 
-    AccountInfo getUserAccount(String userId);
+    AccountInfo getUserAccount(Merchant merchant);
 
     int changeMerchantStatus(User user);
 
-    Merchant getMerchantInfo(String userId);
+    Merchant getMerchantInfo(Merchant merchant);
 
     List<TableDataInfo> AccountPageInfoQuery(PageUtilEntity pageUtilEntity);
 }

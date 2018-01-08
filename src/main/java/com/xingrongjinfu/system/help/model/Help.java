@@ -33,11 +33,13 @@ public class Help implements Serializable
     private String question;
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH-mm-ss")
     private Date addTime;
+    private String  addTimes;//格式时间
     private String reply;
     private String answer;
     private String parentId;
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH-mm-ss")
     private Date replyTime;
+    private String replyTimes;//格式时间
     private Integer status;
 
     public Integer getNumber() {
@@ -100,6 +102,14 @@ public class Help implements Serializable
         return answer;
     }
 
+    public String getReplyTimes() {
+        return replyTimes;
+    }
+
+    public void setReplyTimes(String replyTimes) {
+        this.replyTimes = replyTimes;
+    }
+
     public void setAnswer(String answer) {
         this.answer = answer;
     }
@@ -126,5 +136,13 @@ public class Help implements Serializable
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public String getAddTimes() {
+        return addTimes;
+    }
+
+    public void setAddTimes(String addTimes) {
+        this.addTimes = addTimes;
     }
 }
