@@ -59,7 +59,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="info-div">
+		<div class="info-div"  style="display:none">
 			<div class="row cl"> 
 				<div class="col-xs-3 col-sm-2">
 					<h4>银行资料</h4>
