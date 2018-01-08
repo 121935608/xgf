@@ -10,6 +10,8 @@
  */
 package com.xingrongjinfu.system.product.controller;
 
+import com.alibaba.fastjson.JSONObject;
+import com.aliyun.oss.OSSException;
 import com.xingrongjinfu.commodity.classification.model.Category;
 import com.xingrongjinfu.system.SystemConstant;
 import com.xingrongjinfu.system.product.common.ProductConstant;
@@ -17,6 +19,9 @@ import com.xingrongjinfu.system.product.model.Classes;
 import com.xingrongjinfu.system.product.model.Product;
 import com.xingrongjinfu.system.product.service.IProductService;
 import com.xingrongjinfu.system.syscode.model.SysCode;
+import com.xingrongjinfu.system.user.model.User;
+import com.xingrongjinfu.utils.AliyunOSSClientUtil;
+import com.xingrongjinfu.utils.PriceUtil;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.framework.core.controller.BaseController;
@@ -25,6 +30,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -104,6 +110,8 @@ public class ProductController extends BaseController{
             modelAndView.addObject("classes",getClassList());
             //标签
             modelAndView.addObject("category",getCategoryList());
+            //规格
+            modelAndView.addObject("specification",getSpecificationList());
         }
         return modelAndView;
     }
@@ -134,12 +142,32 @@ public class ProductController extends BaseController{
      * 提交商品
      */
     @RequestMapping(ProductConstant.PRODUCT_ADD_URL)
-    public @ResponseBody Message saveProduct(Product product){
+    public @ResponseBody Message saveProduct(Product product,MultipartFile file){
         int result=0;
         String commodityId=product.getCommodityId();
         if (commodityId !=null && commodityId!=""){
+            AliyunOSSClientUtil aliyunOSSClientUtil=new AliyunOSSClientUtil();
+            try {
+                if (file !=null) {
+                    String key = aliyunOSSClientUtil.uploadImgs(file);
+                    if (key!=null) {
+                        String originalFilename = file.getOriginalFilename();
+                        String filePath = aliyunOSSClientUtil.FOLDER2 + originalFilename;
+                        product.setImgMain(filePath);
+                    }
+                }
+            }
+            catch (OSSException e)
+            {
+                e.printStackTrace();
+                return new Message(result);
+            }
+            product.setCountry(product.getCountry().equals("国内")?"1":"2");
+            product.setInPrice(product.getInPrice()*100);
+            product.setSalePrice(product.getSalePrice()*100);
             //商品为c就是商品表中的信息
             if (product.getType().equalsIgnoreCase("c")) {
+
                 result = productService.updateProduct(product);
             }else {
                 //商品为s这里的提交还需将type改为c
@@ -148,6 +176,33 @@ public class ProductController extends BaseController{
             }
         }
         return new Message(result);
+    }
+
+    /**
+     * 富文本上传图片
+     */
+    @RequestMapping(ProductConstant.PRODUCT_IMFFILE_URL)
+    public Object imgFile(MultipartFile file){
+        AliyunOSSClientUtil aliyunOSSClientUtil=new AliyunOSSClientUtil();
+        JSONObject jsonObject = new JSONObject();
+        try {
+            String key = aliyunOSSClientUtil.uploadImgs(file);
+            String originalFilename = file.getOriginalFilename();
+            String filePath = aliyunOSSClientUtil.FOLDER2 + originalFilename;
+            // 返回地址
+            jsonObject.put("error", 0);
+            jsonObject.put("url", filePath);
+            return jsonObject;
+        }
+        catch (OSSException e)
+        {
+            e.printStackTrace();
+            jsonObject.put("error", 1);
+            jsonObject.put("message", "对不起图片上传失败");
+            return jsonObject;
+
+        }
+
     }
     /**
      * 获取所有的分类
@@ -206,10 +261,27 @@ public class ProductController extends BaseController{
         List<SysCode> sysCodeList = new ArrayList<SysCode>();
         for (Product product:products){
             SysCode sysCode = new SysCode();
-            sysCode.setCodeid(product.getOrigin());
-            sysCode.setCodevalue(product.getOrigin());
+            sysCode.setCodeid(product.getSpecification());
+            sysCode.setCodevalue(product.getSpecification());
             sysCodeList.add(sysCode);
         }
+        return sysCodeList;
+    }
+
+    /**
+     * 获取商品中所有规格
+     * @return
+     */
+    public List<SysCode> getSpecificationList(){
+        List<SysCode> sysCodeList = new ArrayList<SysCode>();
+        SysCode sysCode = new SysCode();
+        sysCode.setCodeid("70");
+        sysCode.setCodevalue("70");
+        sysCodeList.add(sysCode);
+        SysCode sysCode1 = new SysCode();
+        sysCode1.setCodeid("80");
+        sysCode1.setCodevalue("80");
+        sysCodeList.add(sysCode1);
         return sysCodeList;
     }
 }

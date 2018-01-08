@@ -123,7 +123,7 @@ public class UserConstant
     /**
      * 逻辑视图名：修改密码界面
      */
-    public final static String MODIFY_PWD_PAGE = "modifyPwd";
+    public final static String MODIFY_PWD_PAGE = "system/modifyPwd";
 
 
     /**

@@ -5,17 +5,20 @@
 
 <div class="page-container">
    <div class="text-c">
-       <table>
-           <tr>
-               <td>店铺名称</td>
-               <td>${merchant.storeName}</td>
-           </tr>
-           <tr>
-               <td>账户</td>
-               <td>${merchant.mobilePhone}</td>
-           </tr>
-       </table>
-    </div>
+       <div class="info-div">
+           <div class="row cl">
+               <label class="form-label col-xs-4 col-sm-3">店铺名称</label>
+               <div class="formControls col-xs-8 col-sm-4">
+                   <span>${merchant.storeName}</span>
+               </div>
+           </div>
+           <div class="row cl">
+               <label class="form-label col-xs-4 col-sm-3">账户</label>
+               <div class="formControls col-xs-8 col-sm-4">
+                   <span>${merchant.mobilePhone}</span>
+               </div>
+           </div>
+       </div>
     <div class="mt-20">
         <table class="table table-border table-bordered table-hover table-bg table-sort">
             <thead>

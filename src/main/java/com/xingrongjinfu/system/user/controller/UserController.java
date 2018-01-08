@@ -278,4 +278,10 @@ public class UserController extends BaseController
        }
         return new Message(result);
     }
+
+    @RequestMapping(value = { UserConstant.MODIFY_PASSWORD })
+    public String  loadPage(){
+        return UserConstant.MODIFY_PWD_PAGE;
+    }
+
 }

@@ -23,19 +23,19 @@
 <input type="hidden" id="TenantId" name="TenantId" value="" />
 <div class="loginWraper">
   <div class="loginBox">
-    <form id="modifyPwdForm" class="form form-horizontal" action="${pageContext.request.contextPath}/login.action" method="post">
+    <form id="modifyPwdForm" class="form form-horizontal"  method="post">
       <div class="row cl">
         <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
         <div class="formControls col-xs-8">
-         <input id="username" name="username" type="text" placeholder="注册时手机号" value="admin" class="input-text size-L validate[required,custom[onlyLetterSp]]">
+         <input id="username" name="username" type="text" placeholder="注册时手机号"  class="input-text size-L validate[required]">
         </div>
       </div>
-      <div class="row cl">
+     <%-- <div class="row cl">
         <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60e;</i></label>
         <div class="formControls col-xs-8">
-          <input id="password" name="password" type="password" placeholder="请输入登录密码" value="admin123" class="input-text size-L validate[required]">
+          <input id="password" name="password" type="password" placeholder="请输入验证码"  class="input-text size-L validate[required]">
         </div>
-      </div>
+      </div>--%>
       <%-- jcaptchaEbabled 在JCaptchaValidateFilter设置 --%>
       <c:if test="${jcaptchaEbabled}">
 	      <div class="row cl">

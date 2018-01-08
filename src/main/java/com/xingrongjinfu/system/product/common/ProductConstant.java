@@ -54,10 +54,15 @@ public class ProductConstant {
     /**
      * 请求地址:商品详情
      */
-    public final static String PRODUCT_ADD_URL="productDtail";
+    public final static String PRODUCT_ADD_URL="saveProduct";
 
     /**
      * 请求地址:新增商品列表
      */
     public final static String NEW_PRODUCT_URL="newProductListView";
+
+    /**
+     * 请求地址:富文本上传图片
+     */
+    public final static String PRODUCT_IMFFILE_URL="imgFile";
 }

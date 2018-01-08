@@ -4,81 +4,146 @@
 <body>
 <div class="page-container">
 	<div class="mt-20">
-		<span>订单信息</span>
-		<table>
-			<tr>
-				<td>订单号:</td>
-				<td>${orders.orderNumber}</td>
-				<td>支付状态:</td>
-				<td>${orders.orderStatus}</td>
-			</tr>
-			<tr>
-				<td>会员</td>
-				<td>${orders.userName}</td>
-				<td>付款金额</td>
-				<td>${orders.orderPrice}</td>
-			</tr>
-			<tr>
-				<td>下单时间</td>
-				<td>${orders.orderTimes}</td>
-				<td>订单状态</td>
-				<td>${orders.orderStatus}</td>
-			</tr>
-		</table>
-		<span>配送信息</span>
-		<table>
-			<tr>
-				<td>下单店铺:</td>
-				<td>${orders.storeName}</td>
-			</tr>
-			<tr>
-				<td>收货人:</td>
-				<td>${orders.userNames}</td>
-			</tr>
-			<tr>
-				<td>联系方式:</td>
-				<td>${orders.phone}</td>
-			</tr>
-			<tr>
-				<td>配送:</td>
-				<td>${orders.area}${orders.address}</td>
-			</tr>
-		</table>
-		<span>产品信息</span>
-		<table>
-			<tr>
-				<td>商品名称</td>
-				<td>商品条码</td>
-				<td>规格</td>
-				<td>数量</td>
-				<td>单价</td>
-				<td>总金额</td>
-			</tr>
-			<c:forEach items="${orderDetails}" var="order" varStatus="n">
-			<tr>
-				<td>${order.commodityName}</td>
-				<td>${order.commodityNo}</td>
-				<td>${order.unit}</td>
-				<td>${order.commodityNum}</td>
-				<td>${order.inPrice}</td>
-				<td>${order.totalMoney}</td>
-			</tr>
-			</c:forEach>
-		</table>
-		<table>
-			<tr>
-				<td>商品金额:¥${orders.totalPrice}</td>
-			</tr>
-			<tr>
-				<td>运费:¥${orders.freight}</td>
-			</tr>
-			<tr>
-				<td>账期金额:¥${orders.payment}</td>
-			</tr>
-			<tr>
-				<td>付款金额:¥${orders.orderPrice}</td>
-			</tr>
-		</table>
+		<div class="info-div">
+			<div class="row cl">
+				<div class="col-xs-3 col-sm-2">
+					<h4>订单信息</h4>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">订单号:</label>
+				<div class="formControls col-xs-8 col-sm-4">
+					<span>${orders.orderNumber}</span>
+				</div>
+			</div>
+				<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">支付状态:</label>
+				<div class="formControls col-xs-8 col-sm-4">
+					<span>
+						<c:if  test="${orders.orderStatus eq 1}">未支付</c:if>
+						<c:if  test="${orders.orderStatus eq 2}">待发货</c:if>
+					</span>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">会员:</label>
+				<div class="formControls col-xs-8 col-sm-4">
+					<span>${orders.userName}</span>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">付款金额:</label>
+				<div class="formControls col-xs-8 col-sm-4">
+					<span>${orders.orderPrice}</span>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">下单时间:</label>
+				<div class="formControls col-xs-8 col-sm-4">
+					<span>${orders.orderTimes}</span>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">订单状态:</label>
+				<div class="formControls col-xs-8 col-sm-4">
+					<span>
+						<c:if  test="${orders.orderStatus eq 1}">待支付</c:if>
+						<c:if  test="${orders.orderStatus eq 2}">待发货</c:if>
+						<c:if  test="${orders.orderStatus eq 3}">待收货</c:if>
+						<c:if  test="${orders.orderStatus eq 4}">待还款</c:if>
+						<c:if  test="${orders.orderStatus eq 5}">已还款</c:if>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="info-div">
+			<div class="row cl">
+				<div class="col-xs-3 col-sm-2">
+					<h4>配送信息</h4>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">下单店铺:</label>
+				<div class="formControls col-xs-8 col-sm-4">
+					<span>${orders.storeName}</span>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">收货人:</label>
+				<div class="formControls col-xs-8 col-sm-4">
+					<span>${orders.userNames}</span>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">联系方式:</label>
+				<div class="formControls col-xs-8 col-sm-4">
+					<span>${orders.phone}</span>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">配送:</label>
+				<div class="formControls col-xs-8 col-sm-4">
+					<span>${orders.area}${orders.address}</span>
+				</div>
+			</div>
+
+		</div>
+
+
+		<div class="info-div">
+			<div class="row cl">
+				<div class="col-xs-3 col-sm-2">
+					<h4>配送信息</h4>
+				</div>
+			</div>
+			<table>
+				<tr>
+					<td>商品名称</td>
+					<td>商品条码</td>
+					<td>规格</td>
+					<td>数量</td>
+					<td>单价</td>
+					<td>总金额</td>
+				</tr>
+				<c:forEach items="${orderDetails}" var="order" varStatus="n">
+				<tr>
+					<td>${order.commodityName}</td>
+					<td>${order.commodityNo}</td>
+					<td>${order.unit}</td>
+					<td>${order.commodityNum}</td>
+					<td>${order.inPrice}</td>
+					<td>${order.totalMoney}</td>
+				</tr>
+				</c:forEach>
+			</table>
+		</div>
+		<div class="info-div">
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">商品金额:</label>
+				<div class="formControls col-xs-8 col-sm-4">
+					<span>${orders.totalPrice}</span>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">运费:</label>
+				<div class="formControls col-xs-8 col-sm-4">
+					<span>${orders.freight}</span>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">账期金额:</label>
+				<div class="formControls col-xs-8 col-sm-4">
+					<span>${orders.payment}</span>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">付款金额:</label>
+				<div class="formControls col-xs-8 col-sm-4">
+					<span>${orders.orderPrice}</span>
+				</div>
+			</div>
+		</div>
+
 	</div>
 </div>
 <script type="text/javascript">

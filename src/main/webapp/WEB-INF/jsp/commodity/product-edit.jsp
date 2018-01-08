@@ -2,23 +2,16 @@
 <%@include file="/WEB-INF/jsp/common/taglibs.jspf"%>
 <ys:contentHeader/>
 <body>
-
+<script type="text/javascript" src="${context_url}/uiloader/static/kindeditor/kindeditor-all-min.js"></script>
+<script type="text/javascript" src="${context_url}/uiloader/static/kindeditor/kindeditor-all.js"></script>
+<script type="text/javascript" src="${context_url}/uiloader/static/kindeditor/lang/zh-CN.js"></script>
 <script>
-/*$(document).ready(function(){
-	 $.get("${context_root}/commodity/findProductById.action",function(data){
-    	for(var i=0;i<data.length;i++){
-    		$("#tags").append("<input type='checkbox' name='taginfo' value="+data[i]+"  />"+data[i]+"<br/>");
-   	 	}
-	});
-    
-});*/
 </script>
 	<div id="ul">
 		<ul>
 			<li class="page"  index="0"><div style="font-weight:bold;width:80px;height:30px;color:white;border-radius:5px;padding:5px;cursor:pointer;background:#1dc21d;border:2.5px solid #2da32d;">基本信息</div></li>
 			<li class="page"  index="1"><div style="color:white;cursor:pointer;padding:5px;border-radius:5px;width:80px;height:30px;background:#1dc21d;border:2.5px solid #2da32d;">商品详情</div></li>
 			<li class="page"  index="2"><div style="color:white;cursor:pointer;padding:5px;border-radius:5px;width:80px;height:30px;border:2.5px solid #2da32d;background:#1dc21d;">上传图片</div></li>
-			<%--<li class="page"  index="3"><div style="color:white;cursor:pointer;padding:5px;border-radius:5px;width:80px;height:30px;border:2.5px solid #2da32d;background:#1dc21d;">申请资料</div></li>--%>
 		</ul>
 	</div>
 	<style> 
@@ -50,7 +43,7 @@
 	</script>
 	<div style="clear:both"></div>
 	<article class="page-container">
-	<form action="" method="post" class="form form-horizontal" id="form-loan-add">
+	<form action="" method="post" class="form form-horizontal" id="form-product-update">
 	<div class="showOrHide" style="display:block;margin-left:100px">
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>商品名称：</label>
@@ -87,7 +80,7 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>国内/国外：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="text" class="input-text" autocomplete="off" maxlength="20"  placeholder="" id="country" name="country" value="${product.country}">
+				<input type="text" class="input-text" autocomplete="off" maxlength="20"  placeholder="" id="country" name="country" value="${product.country eq 1 ?"国内":"国外"}">
 			</div>
 		</div>
 		<div class="row cl">
@@ -135,12 +128,11 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>规格：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<span class="select-box" style="width: 120px;">
-				   <select name="specification" id="specification" class="select" autocomplete="off">
-					    <option value="70" >70#</option>
-						<option value="80" >80#</option>
-				   </select>
-       			</span>
+			<span class="select-box" style="width: 100px;border: hidden;">
+             <y:select id="specification" name="specification" codeGroup="${specification}" selectedValue="${product.specification}"
+					   cssClass="select" headerKey="" headerValue="规格">
+			 </y:select>
+       		</span>
 			</div>
 		</div>
 		<div class="row cl">
@@ -149,6 +141,10 @@
 				<input type="text" class="input-text" autocomplete="off" maxlength="20"  placeholder="" id="stockNum" name="stockNum" value="${product.stockNum}">
 			</div>
 		</div>
+
+		<input type="hidden" class="input-text" autocomplete="off" maxlength="20"  placeholder="" id="type" name="type" value="${product.type}">
+		<input type="hidden" class="input-text" autocomplete="off" maxlength="20"  placeholder="" id="commodityId" name="commodityId" value="${product.commodityId}">
+
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>上下架：</label>
 			<div class="formControls col-xs-8 col-sm-4">
@@ -168,7 +164,7 @@
 		<div class="showOrHide" style="display:none">
 				<div style="text-align:center;margin-bottom:10px;">
 					<div style="margin-left:50px;">
-						<textarea name="loanIntro" id="loanIntro" style="width:650px;height:350px;" placeholder="" >${product.info}</textarea>
+						<textarea name="info" id="info" style="width:650px;height:350px;" placeholder="" >${product.info}</textarea>
 					</div>
 				</div>
 		</div>
@@ -177,7 +173,8 @@
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>商品名称：</label>
 				<div class="formControls col-xs-8 col-sm-4">
-					<input type="file" id="file" name="file">
+					<input type="file" onchange="pic(event)" id="picture" name="picture" accept="image/*">
+					<img alt="" id="myImg" src="" height="100px",width="100px">
 				</div>
 			</div>
 			<div class="col-xs-2 col-sm-2">
@@ -206,12 +203,12 @@
 		//富文本
 		var editor;
 		KindEditor.ready(function(K) {
-             editor = K.create( '#loanIntro',{
+             editor = K.create( '#info',{
             	 resizeType : 1,
                  allowPreviewEmoticons : false,
                  allowImageUpload : true,
                  allowFileManager : true,
-                 uploadJson : "${context_root}/consult/imgFile.action",
+                 uploadJson : "${context_root}/commodity/imgFile.action",
                  afterUpload : function () {
                      this.sync();
                  },
@@ -234,52 +231,56 @@
 		var index = parent.layer.getFrameIndex(window.name);
 		parent.layer.close(index);
 	}
-	
-$("#form-loan-add").validate({
+
+        //校验上传文件是否为图片格式
+        function pic(e) {
+            for (var i = 0; i < e.target.files.length; i++) {
+                var file = e.target.files.item(i);
+                if (!(/^image\/.*$/i.test(file.type))) {
+                    continue; //不是图片 就跳出这一次循环
+                }
+                //实例化FileReader API
+                var freader = new FileReader();
+                freader.readAsDataURL(file);
+                freader.onload = function(e) {
+                    $("#myImg").attr("src",e.target.result);
+                }
+            }
+        }
+
+        $("#form-product-update").validate({
  	rules:{
-		loanName:{
+        commodityName:{
 			required:true,
 		},
-		type:{
+        commodityNo:{
 			required:true,
 		},
-		moneyMin:{
+        country:{
 			required:true,
 		},
-		moneyMax:{
+        grade:{
 			required:true,
 		},
-		limitMin:{
+        origin:{
 			required:true,
 		},
-		limitMax:{
+        unit:{
 			required:true,
 		},
-		tag:{
+        weight:{
 			required:true,
 		},
-		fee:{
+        inPrice:{
 			required:true,
 		},
-		rate:{
+        taxRate:{
 			required:true,
 		},
-		sort:{
+        salePrice:{
 			required:true,
 		},
-		bankUrl:{
-			required:true,
-		},
-		repayUrl:{
-			required:true,
-		},
-		orderUrl:{
-			required:true,
-		},
-		/* signUrl:{
-			required:true,
-		}, */
-		orderCall:{
+        stockNum:{
 			required:true,
 		},
 	 }, 
@@ -287,76 +288,21 @@ $("#form-loan-add").validate({
 	focusCleanup:true,
 	success:"valid",
 	submitHandler:function(form){
-		/* var option1 =$('#name').find('option:selected').val();
-		if(option1 == null){
-			alert("请选择资方！");
-			return;
-		}
-		var option2 =$('#type').find('option:selected').val();
-		if(null == option2){
-			alert("请选择分类！");
-			return;
-		} */
-		//贷款金额
-		var moneymin = $("#moneyMin").val();
-		var moneymax = $("#moneyMax").val();
-		var reg=/^[1-9]\d*$|^0$/; 
-		if(parseInt(moneymin) > parseInt(moneymax) || moneymin<=0 || moneymax<=0){
-			alert("请输入正确的贷款金额！");
-			return;
-		}
-		if(reg.test(moneymin)==false || reg.test(moneymax)==false){
-		    alert("请输入整数的贷款金额");
-		    return;
-		}
-		var moneyType = $('#moneyType').find('option:selected').val();
-		if(moneyType == "WY"){
-			moneymin = parseInt(moneymin)*10000;
-			moneymax = parseInt(moneymax)*10000;
-			$("#moneyMin").val(moneymin);
-			$("#moneyMax").val(moneymax);
-		}
-		//贷款年限
-		var limitMin = $("#limitMin").val();
-		var limitMax = $("#limitMax").val();
-		if(parseInt(limitMin) > parseInt(limitMax) || limitMin<=0 || limitMax<=0){
-			alert("请输入正确的贷款年限！");
-			return;
-		}
-		//手续费
-		var fee = $("#fee").val();
-		if(fee < 0){
-			alert("请输入正确的手续费！");
-			return;
-		}
-		//费率
-		var rate = $("#rate").val();
-		if((rate < 0) || (rate > 100)){
-			alert("请输入正确的费率！");
-			return;
-		}
-		//逾期费率
-		var dueRate = $("#dueRate").val();
-		if((dueRate < 0) || (dueRate > 100)){
-			alert("请输入正确的逾期！");
-			return;
-		}
-		//排序
-		var sort = $("#sort").val();
-		if((sort < 0)){
-			alert("请输入正确的排序！");
-			return;
-		}
-		var index = parent.layer.load();
+        var index = parent.layer.load();
+        var formData = new FormData($('#form-product-update')[0]);
 		$.ajax({
-			url:"${context_root}/product/saveProduct.action",
-			type:'post',
-			async:true ,
-			cache:false ,
-			data:$(form).serialize(),
-			dataType:"json",
+			url:"${context_root}/commodity/saveProduct.action",
+            type:'post',
+            data:formData,
+            mimeType: "multipart/form-data",
+            contentType: false,
+            cache:false,
+            processData: false,
 			success:function(data){
-				parent.layer.close(index);
+                //这种类型需要转成对象
+                var data = JSON.parse(data);
+                //成功提交
+                parent.layer.close(index);
 				if(data.s == true){
 					index = parent.layer.getFrameIndex(window.name);
 					parent.layer.msg("保存成功,正在刷新数据请稍后……",{icon:1,time: 1000,shade: [0.1,'#fff']},function(){
@@ -370,9 +316,6 @@ $("#form-loan-add").validate({
 	}
 });
 </script>
-<link rel="stylesheet" href="${context_url}/uiloader/static/kindeditor/themes/default/default.css" />
 
-<script type="text/javascript" src="${context_url}/uiloader/static/kindeditor/kindeditor.js"></script>
-<script type="text/javascript" src="${context_url}/uiloader/static/kindeditor/lang/zh_CN.js"></script>
 </body>
 </html>

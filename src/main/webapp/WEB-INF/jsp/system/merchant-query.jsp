@@ -4,85 +4,134 @@
 <body>
 <div class="page-container">
 	<div class="mt-20">
-		<span>店铺信息</span>
-		<table>
-			<tr>
-				<td>店铺名称</td>
-				<td>${accountInfo.storeName}</td>
-			</tr>
-			<tr>
-				<td>店长</td>
-				<td>${accountInfo.userName}</td>
-			</tr>
-			<tr>
-				<td>身份证号码</td>
-				<td>${accountInfo.idCard}</td>
-			</tr>
-			<tr>
-				<td>联系方式</td>
-				<td>${accountInfo.phone}</td>
-			</tr>
-			<tr>
-				<td>所在区域</td>
-				<td>${accountInfo.area}</td>
-			</tr>
-			<tr>
-				<td>详细地址</td>
-				<td>${accountInfo.address}</td>
-			</tr>
-		</table>
-		<span>银行资料</span>
-		<table>
-			<tr>
-				<td>银行类型</td>
-				<td>${accountInfo.bankType}</td>
-			</tr>
-			<tr>
-				<td>开户类型</td>
-				<td>${accountInfo.accountType}</td>
-			</tr>
-			<tr>
-				<td>开户人</td>
-				<td>${accountInfo.bankUserName}</td>
-			</tr>
-			<tr>
-				<td>经营类型</td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>银行卡号</td>
-				<td>${accountInfo.cardNumber}</td>
-			</tr>
-			<tr>
-				<td>证件类型</td>
-				<td>${accountInfo.idType}</td>
-			</tr>
-			<tr>
-				<td>证件号码</td>
-				<td>${accountInfo.cIdCard}</td>
-			</tr>
-			<tr>
-				<td>备注</td>
-				<td>${accountInfo.remark}</td>
-			</tr>
-		</table>
-		<span>证件信息</span>
-		<table>
-			<tr>
-				<td>${accountInfo.frontPic}</td>
-				<td>${accountInfo.backPic}</td>
-				<td>${accountInfo.licensePic}</td>
-				<td>${accountInfo.frontStorePic}</td>
-				<td>${accountInfo.innerStorePic}</td>
-			</tr>
-			<tr>
-				<td>身份证正面</td>
-				<td>身份证反面</td>
-				<td>营业执照</td>
-				<td>店铺门脸照</td>
-				<td>店铺内照片</td>
-			</tr>
-		</table>
+		<div class="info-div">
+			<div class="row cl">
+				<div class="col-xs-3 col-sm-2">
+					<h4>店铺信息</h4>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">店铺名称</label>
+				<div class="formControls col-xs-8 col-sm-4">
+					<span>${accountInfo.storeName}</span>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">店长</label>
+				<div class="formControls col-xs-8 col-sm-4">
+					<span>${accountInfo.userName}</span>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">身份证号码</label>
+				<div class="formControls col-xs-8 col-sm-4">
+					<span>${accountInfo.idCard}</span>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">联系方式</label>
+				<div class="formControls col-xs-8 col-sm-4">
+					<span>${accountInfo.phone}</span>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">所在区域</label>
+				<div class="formControls col-xs-8 col-sm-4">
+					<span>${accountInfo.area}</span>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">详细地址</label>
+				<div class="formControls col-xs-8 col-sm-4">
+					<span>${accountInfo.address}</span>
+				</div>
+			</div>
+		</div>
+		<div class="info-div">
+			<div class="row cl">
+				<div class="col-xs-3 col-sm-2">
+					<h4>银行资料</h4>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">银行类型</label>
+				<div class="formControls col-xs-8 col-sm-4">
+					<span>${accountInfo.bankType}</span>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">开户行类型</label>
+				<div class="formControls col-xs-8 col-sm-4">
+					<span>${accountInfo.accountType}</span>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">开户人</label>
+				<div class="formControls col-xs-8 col-sm-4">
+					<span>${accountInfo.bankUserName}</span>
+				</div>
+			</div>
+			<%--<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">经营类型</label>
+				<div class="formControls col-xs-8 col-sm-4">
+					<span>${bankaccount["oprateType"]}</span>
+				</div>
+			</div>--%>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">银行卡号</label>
+				<div class="formControls col-xs-8 col-sm-4">
+					<span>${accountInfo.cardNumber}</span>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">证件类型</label>
+				<div class="formControls col-xs-8 col-sm-4">
+					<span>${accountInfo.idType}</span>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">证件号码</label>
+				<div class="formControls col-xs-8 col-sm-4">
+					<span>${accountInfo.cIdCard}</span>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">备注</label>
+				<div class="formControls col-xs-8 col-sm-4">
+					<span>${accountInfo.remark}</span>
+				</div>
+			</div>
+		</div>
+		<div class="info-div">
+			<div class="row cl">
+				<div class="col-xs-3 col-sm-2">
+					<h4>证件信息</h4>
+				</div>
+			</div>
+			<div class="row cl">
+				<div class="col-xs-2 col-sm-2">
+				</div>
+				<div class="col-xs-2 col-sm-2">
+					<img src="${accountInfo.frontPic}">
+					<p>身份证正面</p>
+				</div>
+				<div class="col-xs-2 col-sm-2">
+					<img  src="${accountInfo.backPic}">
+					<p>身份证反面</p>
+				</div>
+				<div class="col-xs-2 col-sm-2">
+					<img src="${accountInfo.licensePic}">
+					<p>营业执照</p>
+				</div>
+				<div class="col-xs-2 col-sm-2">
+					<img src="${accountInfo.frontStorePic}">
+					<p>店铺门脸照</p>
+				</div>
+				<div class="col-xs-2 col-sm-2">
+					<img src="${accountInfo.innerStorePic}">
+					<p>店铺内照片</p>
+				</div>
+			</div>
 	</div>
 </div>
 <script type="text/javascript">

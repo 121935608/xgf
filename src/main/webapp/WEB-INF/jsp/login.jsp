@@ -27,13 +27,13 @@
       <div class="row cl">
         <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
         <div class="formControls col-xs-8">
-         <input id="username" name="username" type="text" placeholder="请输入登录账号" value="admin" class="input-text size-L validate[required,custom[onlyLetterSp]]">
+         <input id="username" name="username" type="text" placeholder="请输入登录账号" class="input-text size-L validate[required]">
         </div>
       </div>
       <div class="row cl">
         <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60e;</i></label>
         <div class="formControls col-xs-8">
-          <input id="password" name="password" type="password" placeholder="请输入登录密码" value="admin123" class="input-text size-L validate[required]">
+          <input id="password" name="password" type="password" placeholder="请输入登录密码"  class="input-text size-L validate[required]">
         </div>
       </div>
       <%-- jcaptchaEbabled 在JCaptchaValidateFilter设置 --%>
@@ -50,9 +50,7 @@
             <input type="checkbox" name="rememberMe">
             	使我保持登录状态</label>
         </div>--%>
-          <div class="formControls col-xs-8 col-xs-offset-3" style="padding-left: 300px;">
-            <a href="javascript:;" onclick="${context_root}/system/toModifyPassword.action">忘记密码?</a>
-          </div>
+
       </div>
       <div class="row cl">
         <div class="formControls col-xs-8 col-xs-offset-3">
@@ -65,14 +63,22 @@
           <c:if test="${not empty param.forceLogout}">您已经被管理员强制退出。请重新登录</c:if>
           ${errorMsg }</font>
     </form>
+    <div class="formControls col-xs-8 col-xs-offset-3" style="padding-left: 300px;">
+      <input type="button" class="btn btn-success radius size-L" value="忘记密码?" onclick="aa()" />
+
+    </div>
   </div>
 </div>
 <div class="footer">Copyright 星融金服</div>
-<script type="text/javascript" src="uiloader/lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="uiloader/lib/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="uiloader/static/h-ui/js/H-ui.js"></script>
 <script src="uiloader/lib/jQuery-Validation-Engine/js/jquery.validationEngine.js?1" charset="utf-8" type="text/javascript"></script>
 <script src="uiloader/lib/jQuery-Validation-Engine/js/languages/jquery.validationEngine-zh_CN.js?1" charset="utf-8" type="text/javascript"></script>
 <script type="text/javascript">
+  function aa() {
+      window.location.href = '${context_root}/system/toChangePwd.action';
+  }
+
 if(window != top)
 {
     top.location.href=location.href;
