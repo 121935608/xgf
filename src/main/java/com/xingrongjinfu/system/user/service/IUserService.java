@@ -127,4 +127,9 @@ public interface IUserService
      */
     public int updateUser(User user);
 
+
+    /**
+     * 确认用户是否存在
+     */
+    int confirmUser(User user);
 }

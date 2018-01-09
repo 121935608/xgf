@@ -26,32 +26,40 @@ import java.util.Date;
 public class Balance implements Serializable
 {
     private static final long serialVersionUID = 1L;
-    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH-mm-ss")
-    private Date payTime;
-    private Long totalPrice;
-    private Long remain;
+    private Date addTime;
+    private Integer money;
+    private String item;
+    private String userId;
 
-    public Date getPayTime() {
-        return payTime;
+    public Date getAddTime() {
+        return addTime;
     }
 
-    public void setPayTime(Date payTime) {
-        this.payTime = payTime;
+    public void setAddTime(Date addTime) {
+        this.addTime = addTime;
     }
 
-    public Long getTotalPrice() {
-        return totalPrice;
+    public Integer getMoney() {
+        return money;
     }
 
-    public void setTotalPrice(Long totalPrice) {
-        this.totalPrice = totalPrice;
+    public void setMoney(Integer money) {
+        this.money = money;
     }
 
-    public Long getRemain() {
-        return remain;
+    public String getItem() {
+        return item;
     }
 
-    public void setRemain(Long remain) {
-        this.remain = remain;
+    public void setItem(String item) {
+        this.item = item;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

@@ -157,4 +157,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		delete from sys_user_role where userId = #{userId}
  	</delete>
 
+	<select id="confirmUser" parameterType="User" >
+		SELECT count(0) FROM sys_user WHERE userName=#{userName}
+	</select>
 </mapper> 

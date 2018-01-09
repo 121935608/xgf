@@ -103,4 +103,8 @@ public interface IUserDao
      */
     public int deleteUserRoleInfo(String userId);
 
+    /**
+     * 确认用户
+     */
+    int confirmUser(User user);
 }

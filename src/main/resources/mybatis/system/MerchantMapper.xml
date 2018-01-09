@@ -15,9 +15,9 @@
     </resultMap>
 
     <resultMap id="BalanceResult" type="Balance">
-        <result column="payTime" property="payTime"/>
-        <result column="totalPrice" property="totalPrice"/>
-        <result column="remain" property="remain"/>
+        <result column="addTime" property="addTime"/>
+        <result column="item" property="item"/>
+        <result column="money" property="money"/>
     </resultMap>
 
 
@@ -64,9 +64,8 @@
     </update>
 
     <select id="AccountpageInfoQuery" parameterType="PageUtilEntity" resultMap="BalanceResult">
-        SELECT o.payTime payTime,o.totalPrice,s.remain
-        FROM t_order o JOIN t_store s ON o.userId=s.userId
+        SELECT * FROM t_balance
         WHERE 1=1
-        <if test="relationMap.userId!=null and relationMap.userId!=''">AND o.userId=#{relationMap.userId}</if>
+        <if test="relationMap.userId!=null and relationMap.userId!=''">AND userId=#{relationMap.userId}</if>
     </select>
 </mapper>

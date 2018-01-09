@@ -60,7 +60,6 @@ $("#form-role-modify").validate({
 	    var city=$("#city option:selected").val()
 	    var district=$("#district option:selected").val();
 	    var area=province+city+district;
-	    alert(area);
 		var index = parent.layer.load();
 		$.ajax({
 			url:"${context_url}/system/supervisorModify.action?area="+area,

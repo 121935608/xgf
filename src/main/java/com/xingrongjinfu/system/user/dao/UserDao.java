@@ -171,4 +171,8 @@ public class UserDao extends DynamicObjectBaseDao implements IUserDao
         return this.update("SystemUserMapper.deleteUserRoleInfo", userId);
     }
 
+    @Override
+    public int confirmUser(User user) {
+        return (int)this.findForObject("SystemUserMapper.confirmUser",user);
+    }
 }

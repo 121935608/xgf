@@ -4,12 +4,14 @@ import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.HashMap;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 
+import net.sf.json.JSONObject;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
@@ -146,6 +148,23 @@ public class DesUtils {
 		}
 		return "";
 	}
+
+
+	/**
+	 * String 转MAP
+	 * @param args
+	 * @throws Exception
+	 */
+	public static HashMap stringToMap(String data) throws DecryptExcption {
+		try {
+			JSONObject j = JSONObject.fromObject(data);
+			HashMap<String, Object> map = (HashMap<String, Object>) JSONObject.toBean(j, HashMap.class);
+			return map;
+		} catch (Exception e) {
+			throw new DecryptExcption("解析出错");
+		}
+	}
+
 
 	public static void main(String[] args) throws Exception {
 		String data = "{\n" + "\"APP_VERSION\": \"v1.0\",\n"

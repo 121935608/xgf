@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.xingrongjinfu.utils.DesUtils;
+import com.xingrongjinfu.utils.HttpClientUtil;
 import com.xingrongjinfu.utils.IdUtil;
+import com.xingrongjinfu.utils.StringUtil;
 import org.apache.shiro.service.MailSenderService;
 import org.aspectj.lang.annotation.ActionControllerLog;
 import org.framework.base.util.PageUtilEntity;
@@ -12,6 +15,8 @@ import org.framework.base.util.TableDataInfo;
 import org.framework.core.controller.BaseController;
 import org.framework.core.model.Message;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,6 +32,7 @@ import com.xingrongjinfu.system.user.model.UserRole;
 import com.xingrongjinfu.system.user.service.IUserService;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * 用户 业务处理
@@ -260,10 +266,95 @@ public class UserController extends BaseController {
         return new Message(result);
     }
 
-    /*@RequestMapping(value = {UserConstant.MODIFY_PASSWORD})
+    /**
+     * 忘记密码修改密码
+     * @return
+     */
+    @RequestMapping(value = {UserConstant.MODIFY_PASSWORD})
     public ModelAndView loadPage() {
         System.out.println("111");
         return this.getModelAndView(UserConstant.MODIFY_PWD_PAGE);
-    }*/
+    }
 
+    /**
+     * 身份验证
+     */
+    @RequestMapping(UserConstant.CONFIRM_USER)
+    public @ResponseBody Message confirmUser(User user){
+        int result=0;
+        String userName=user.getUserName();
+        if (userName!=null && userName!=""){
+            result=userService.confirmUser(user);
+        }
+        return new Message(result);
+    }
+
+    /**
+     * 发送验证码
+     */
+    @RequestMapping(UserConstant.USER_VERLIFY)
+    public @ResponseBody
+    Message verifyCode(User user,HttpSession session) throws Exception{
+        int result=0;
+        //判断手机号格式是否正确
+        String phone=user.getUserName();
+        if(StringUtil.checkPhone(phone)==false){
+            return new Message(result);
+        }
+        //生成验证码
+        int verify = StringUtil.getVerify();
+        System.out.println("verify:  "+verify);
+        //发送验证码（调用发送短信接口）
+        //String content="\"您的验证码是："+verify+" 有效时间10分钟，请勿外泄。感谢使用星融金服产品服务!\"";
+        String url=UserConstant.USER_SERVICE_URL+"/uaa/index/sms?q={\"phone\":"+phone+",\"content\":\"您的验证码是："+verify+"有效时间10分钟，请勿外泄。感谢使用星融金服产品服务!\"}";
+        String returnMsg= HttpClientUtil.httpGetRequest(url);
+        HashMap returnMap= DesUtils.stringToMap(returnMsg);
+        String code=String.valueOf(returnMap.get("code"));
+        //将验证码存入session
+        session.setAttribute("verify",code);
+        if(code.equals("-1")){
+            return new Message(result);
+        }else {
+           result=1;
+           return new Message(result);
+        }
+
+
+
+
+    }
+
+
+    /**
+     * 校验验证码
+     * @param
+     * @param
+     * @return
+     * @throws
+     */
+    @RequestMapping(UserConstant.CHECK_VERRIFY)
+    public @ResponseBody
+    Message checkCode(User user,HttpSession httpSession) throws Exception{
+        int result=0;
+        String phone=user.getUserName();
+        String verifyCode=user.getVerifyCode();
+        String code=(String)httpSession.getAttribute("code");
+        if (verifyCode.equals(code)){
+            result=1;
+        }
+        return new Message(result);
+    }
+
+    /**
+     * 修改密码
+     */
+    @RequestMapping(UserConstant.CHANGE_PASSEORD)
+    public @ResponseBody Message changePssword(User user){
+        int result=0;
+        String userId=user.getUserId();
+        if (userId != null && userId !="") {
+            result = userService.changePassword(user);
+        }
+        return new Message(result);
+    }
 }

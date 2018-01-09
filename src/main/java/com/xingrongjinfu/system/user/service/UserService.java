@@ -212,4 +212,8 @@ public class UserService implements IUserService
         return userDao.updateUserInfo(user);
     }
 
+    @Override
+    public int confirmUser(User user) {
+        return userDao.confirmUser(user);
+    }
 }

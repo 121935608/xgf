@@ -62,4 +62,9 @@ public class MerchantConstant {
      * 请求地址:商品管理商户余额信息查询
      */
     public final static String MERCHANT_BALANCE_LIST= "accountInfoList";
+
+    /**
+     * 阿里云地址
+     */
+    public final static String ALIYUN_URL="http://xrjf.oss-cn-shanghai.aliyuncs.com/";
 }

@@ -93,7 +93,7 @@
                     //查看
                     var toQuery = "<a title=\"查看\" href=\"javascript:;\" onclick=\"user_query('查看','${context_root}/system/toMerchantQuery.action?storeId=" + row.storeId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>查看</span></a>";
                     //账户余额
-                    var toBalance = "<a title=\"账户余额\" href=\"javascript:;\" onclick=\"user_balance('账户余额','${context_root}/system/accountBalance.action?storeId=" + row.storeId + "','850','850')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>账户余额</span></a>";
+                    var toBalance = "<a title=\"账户余额\" href=\"javascript:;\" onclick=\"user_balance('账户余额','${context_root}/system/accountBalance.action?storeId=" + row.storeId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>账户余额</span></a>";
                     return statusTools(row) + "&nbsp;&nbsp;" + toQuery + "&nbsp;&nbsp;" + toBalance;
                 }
             },

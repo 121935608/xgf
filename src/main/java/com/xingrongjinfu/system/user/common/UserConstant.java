@@ -123,11 +123,35 @@ public class UserConstant
     /**
      * 逻辑视图名：修改密码界面
      */
-    public final static String MODIFY_PWD_PAGE = "modifyPwd";
+    public final static String MODIFY_PWD_PAGE = "system/modifyPwd";
 
 
     /**
      * 请求地址:重置密码地址
      */
     public final static String RESET_PASSWORD="resetPWD";
+
+    /**
+     * 请求地址:修改密码时的身份验证
+     */
+    public final static String CONFIRM_USER="confirmUser";
+
+    /**
+     * 请求地址,发送验证码
+     */
+    public final static String USER_VERLIFY="sendVerify";
+
+    /**
+     * 请求地址:用户中心地址
+     */
+    public final static String USER_SERVICE_URL="http://101.132.32.72:8101";
+    /**
+     * 请求地址:校验验证码
+     */
+    public final static String CHECK_VERRIFY="checkVerify";
+
+    /**
+     * 请求地址:修改密码
+     */
+    public final static String CHANGE_PASSEORD="changePassword";
 }

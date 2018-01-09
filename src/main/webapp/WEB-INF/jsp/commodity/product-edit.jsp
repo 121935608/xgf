@@ -48,13 +48,13 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>商品名称：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="text" class="input-text" autocomplete="off" maxlength="20"  placeholder="" id="commodityName" name="commodityName" value="${product.commodityName}">
+				<input type="text" class="input-text" autocomplete="off" disabled="disabled" maxlength="20"  placeholder="" id="commodityName" name="commodityName" value="${product.commodityName}">
 			</div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>商品条码：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="text" class="input-text" autocomplete="off" maxlength="20"  placeholder="" id="commodityNo" name="commodityNo" value="${product.commodityNo}">
+				<input type="text" class="input-text" autocomplete="off" disabled="disabled" maxlength="20"  placeholder="" id="commodityNo" name="commodityNo" value="${product.commodityNo}">
 			</div>
 		</div>
 		<div class="row cl">
@@ -80,49 +80,49 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>国内/国外：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="text" class="input-text" autocomplete="off" maxlength="20"  placeholder="" id="country" name="country" value="${product.country eq 1 ?"国内":"国外"}">
+				<input type="text" class="input-text" autocomplete="off" disabled="disabled" maxlength="20"  placeholder="" id="country" name="country" value="${product.country eq 1 ?"国内":"国外"}">
 			</div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>等级：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="text" class="input-text" autocomplete="off" maxlength="20"  placeholder="" id="grade" name="grade" value="${product.grade}">
+				<input type="text" class="input-text" autocomplete="off" disabled="disabled" maxlength="20"  placeholder="" id="grade" name="grade" value="${product.grade}">
 			</div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>产地：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="text" class="input-text" autocomplete="off" maxlength="20"  placeholder="" id="origin" name="origin" value="${product.origin}">
+				<input type="text" class="input-text" autocomplete="off" disabled="disabled" maxlength="20"  placeholder="" id="origin" name="origin" value="${product.origin}">
 			</div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>单位：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="text" class="input-text" autocomplete="off" maxlength="20"  placeholder="" id="unit" name="unit" value="${product.unit}">
+				<input type="text" class="input-text" autocomplete="off" disabled="disabled" maxlength="20"  placeholder="" id="unit" name="unit" value="${product.unit}">
 			</div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>重量：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input style="width: 100px;" type="text" class="input-text" autocomplete="off" maxlength="20"  placeholder="" id="weight" name="weight" value="${product.weight}">kg
+				<input style="width: 100px;" type="text" class="input-text" autocomplete="off" disabled="disabled" maxlength="20"  placeholder="" id="weight" name="weight" value="${product.weight}">kg
 			</div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>进价：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input style="width: 100px;" type="text" class="input-text" autocomplete="off" maxlength="20"  placeholder="" id="inPrice" name="inPrice" value="${product.inPrice}">元
+				<input style="width: 100px;" type="text" class="input-text" autocomplete="off" disabled="disabled" maxlength="20"  placeholder="" id="inPrice" name="inPrice" value="${product.inPrice}">元
 			</div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>费率：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input style="width: 100px;" type="text" class="input-text" autocomplete="off" maxlength="20"  placeholder="" id="taxRate" name="taxRate" value="${product.taxRate}">%
+				<input style="width: 100px;" type="text" class="input-text" autocomplete="off" disabled="disabled" maxlength="20"  placeholder="" id="taxRate" name="taxRate" value="${product.taxRate}">%
 			</div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>售价：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input style="width: 100px;" type="number" class="input-text" autocomplete="off" maxlength="20"  placeholder="" id="salePrice" name="salePrice" value="${product.salePrice}">元
+				<input style="width: 100px;" type="number" class="input-text" autocomplete="off" disabled="disabled" maxlength="20"  placeholder="" id="salePrice" name="salePrice" value="${product.salePrice}">元
 			</div>
 		</div>
 		<div class="row cl">
@@ -138,7 +138,7 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>库存：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="text" class="input-text" autocomplete="off" maxlength="20"  placeholder="" id="stockNum" name="stockNum" value="${product.stockNum}">
+				<input type="text" class="input-text" autocomplete="off" disabled="disabled" maxlength="20"  placeholder="" id="stockNum" name="stockNum" value="${product.stockNum}">
 			</div>
 		</div>
 

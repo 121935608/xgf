@@ -74,7 +74,14 @@ public class MerchantController extends BaseController {
     {
         ModelAndView modelAndView=this.getModelAndView(MerchantConstant.MERCHANT_QUERY_PAGE);
         AccountInfo accountInfo= merchantService.getUserAccount(merchant);
-        modelAndView.addObject("accountInfo",accountInfo);
+        if (accountInfo !=null) {
+            accountInfo.setFrontPic(accountInfo.getFrontPic() == null ? "" : (MerchantConstant.ALIYUN_URL + accountInfo.getFrontPic()));
+            accountInfo.setBackPic(accountInfo.getBackPic() == null ? "" : (MerchantConstant.ALIYUN_URL + accountInfo.getBackPic()));
+            accountInfo.setLicensePic(accountInfo.getLicensePic() == null ? "" : (MerchantConstant.ALIYUN_URL + accountInfo.getLicensePic()));
+            accountInfo.setFrontStorePic(accountInfo.getFrontStorePic() == null ? "" : (MerchantConstant.ALIYUN_URL + accountInfo.getFrontStorePic()));
+            accountInfo.setInnerStorePic(accountInfo.getInnerStorePic() == null ? "" : (MerchantConstant.ALIYUN_URL + accountInfo.getInnerStorePic()));
+            modelAndView.addObject("accountInfo", accountInfo);
+        }
         return modelAndView;
     }
 
@@ -104,6 +111,7 @@ public class MerchantController extends BaseController {
     {
         ModelAndView modelAndView=this.getModelAndView(MerchantConstant.MERCHANT_BALANCE_PAGE);
         Merchant merchants = merchantService.getMerchantInfo(merchant);
+
         modelAndView.addObject("merchant",merchants);
         return modelAndView;
 

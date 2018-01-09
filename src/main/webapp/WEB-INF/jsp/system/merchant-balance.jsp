@@ -37,12 +37,12 @@
     $(document).ready(function () {
         var aoColumns = [
             {
-                "sDefaultContent": "结算单号",
+                "sDefaultContent": "时间",
                 "bSortable" : false,
                 "sClass": "text-c",
                 "bSearchable": false,
                 "mRender": function(data, type, row) {
-                    if (row.payTime != null) {
+                    if (row.addTime != null) {
                         return formatDate(row.payTime,"yyyy-MM-dd hh:mm:ss");
                     } else {
                         return "";
@@ -50,13 +50,13 @@
                 }
             },
             {
-                "sDefaultContent": "结算单号",
+                "sDefaultContent": "金额(元)",
                 "bSortable" : false,
                 "sClass": "text-c",
                 "bSearchable": false,
                 "mRender": function(data, type, row) {
-                    if (row.totalPrice != null) {
-                        return row.totalPrice/100;
+                    if (row.money != null) {
+                        return row.money/100;
                     } else {
                         return "";
                     }
@@ -64,16 +64,12 @@
             },
 
             {
-                "sDefaultContent": "结算单号",
+                "sDefaultContent": "入账后金额(元)",
                 "bSortable" : false,
                 "sClass": "text-c",
                 "bSearchable": false,
                 "mRender": function(data, type, row) {
-                    if (row.remain != null) {
-                        return row.remain/100;
-                    } else {
                         return "";
-                    }
                 }
             },
             {
@@ -82,7 +78,12 @@
                 "sClass": "text-c",
                 "bSearchable": false,
                 "mRender": function (data, type, row) {
-                   return "购物消费";
+                    if (row.item !=null){
+                        return row.item;
+                    }else {
+                        return "";
+                    }
+
 
                 }
             },

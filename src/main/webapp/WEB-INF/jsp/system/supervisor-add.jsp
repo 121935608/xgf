@@ -13,7 +13,7 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>联系电话：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="text" class="input-text" placeholder="联系电话" id="phone" name="phone">
+				<input type="text" class="input-text " placeholder="联系电话" id="phone" name="phone" >
 			</div>
 		</div>
 		<div class="row cl">
@@ -55,6 +55,11 @@ $("#form-role-modify").validate({
 	focusCleanup:true,
 	success:"valid",
 	submitHandler:function(form){
+		reg=" \"^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$\";"
+		var phone=$("#phone").val();
+		if (!reg.test(phone)){
+		    alert("不是正确的手机号");
+		}
         var province=$("#province option:selected").val();
         var city=$("#city option:selected").val()
         var district=$("#district option:selected").val();

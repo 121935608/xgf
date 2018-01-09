@@ -27,12 +27,12 @@
         <form id="loginForm" class="form form-horizontal" action="${pageContext.request.contextPath}/login.action"
               method="post">
             <div class="row cl">
-                <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
-                <div class="formControls col-xs-8">
-                    <input id="username" name="username" type="text" placeholder="请输入登录账号"
-                           class="input-text size-L validate[required]">
-                </div>
+            <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
+            <div class="formControls col-xs-8">
+                <input id="username" name="username" type="text" placeholder="请输入登录账号"
+                       class="input-text size-L validate[required]">
             </div>
+        </div>
             <div class="row cl">
                 <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60e;</i></label>
                 <div class="formControls col-xs-8">
@@ -70,7 +70,11 @@
                 <c:if test="${not empty param.forceLogout}">您已经被管理员强制退出。请重新登录</c:if>
                 ${errorMsg }</font>
         </form>
-            <a href="${context_root}/toModifyPassword.action" class="btn btn-success radius size-L">忘记密码</a>
+        <div class="row cl">
+            <div class="formControls col-xs-8 col-xs-offset-8">
+            <a href="${context_root}/system/toModifyPassword.action" class="btn btn-success radius size-L">忘记密码?</a>
+            </div>
+        </div>
     </div>
 </div>
 <div class="footer">Copyright 星融金服</div>
