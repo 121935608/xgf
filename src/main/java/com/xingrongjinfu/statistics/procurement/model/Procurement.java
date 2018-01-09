@@ -24,6 +24,13 @@ public class Procurement implements Serializable
 	private Date unit;
 	private String imgMain;
 	private String totalPrice;
+	private String commodityNo;
+	public String getCommodityNo() {
+		return commodityNo;
+	}
+	public void setCommodityNo(String commodityNo) {
+		this.commodityNo = commodityNo;
+	}
 	public String getOrderDetailId() {
 		return orderDetailId;
 	}
@@ -101,6 +108,7 @@ public class Procurement implements Serializable
 		return "Procurement [orderDetailId=" + orderDetailId + ", orderNumber=" + orderNumber + ", commodityId="
 				+ commodityId + ", commodityNum=" + commodityNum + ", commodityName=" + commodityName + ", addTime="
 				+ addTime + ", inPrice=" + inPrice + ", salePrice=" + salePrice + ", taxRate=" + taxRate + ", unit="
-				+ unit + ", imgMain=" + imgMain + ", totalPrice=" + totalPrice + "]";
-	}	
+				+ unit + ", imgMain=" + imgMain + ", totalPrice=" + totalPrice + ", commodityNo=" + commodityNo + "]";
+	}
+		
 }

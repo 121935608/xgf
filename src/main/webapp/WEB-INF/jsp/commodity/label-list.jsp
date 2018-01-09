@@ -25,20 +25,46 @@ var pageTable;
 $(document).ready(function(){ 
     var aoColumns = [
     {
-        "mData": "categoryId",
-        "bSortable" : false,
-        "sClass": "text-c"
-    },
-    {
-        "mData": "categoryName",
-        "bSortable" : false,
-        "sClass": "text-c"
-    },
-    {
-        "mData": "img",
-        "bSortable" : false,
-        "sClass": "text-c"
-    },
+    "sDefaultContent": "序号",
+    "bSortable" : false,
+    "sClass": "text-c",
+    "bSearchable": false,
+    "mRender": function(data, type, row) {
+        if (row.categoryId != null) {
+            return row.categoryId;
+        } else {
+            return "";
+        }
+    }
+},
+{
+    "sDefaultContent": "分类名称",
+    "bSortable" : false,
+    "sClass": "text-c",
+    "bSearchable": false,
+    "mRender": function(data, type, row) {
+        if (row.categoryName != null) {
+            return row.categoryName;
+        } else {
+            return "";
+        }
+    }
+},
+
+{
+    "sDefaultContent": "图片",
+    "bSortable" : false,
+    "sClass": "text-c",
+    "bSearchable": false,
+    "mRender": function(data, type, row) {
+        if (row.img != null) {
+            return row.img;
+        } else {
+            return "";
+        }
+    }
+},
+   
     {
         "sDefaultContent": "编辑",
         "bSortable" : false,

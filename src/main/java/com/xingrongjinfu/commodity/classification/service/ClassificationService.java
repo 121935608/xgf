@@ -11,61 +11,67 @@ import com.xingrongjinfu.commodity.classification.dao.IClassificationDao;
 import com.xingrongjinfu.commodity.classification.model.Category;
 import com.xingrongjinfu.system.user.model.User;
 
-
 /**
  * 业务层处理
  * 
- * @author y
+ * @author
  */
 @Service("classificationService")
-public class ClassificationService implements IClassificationService
-{
+public class ClassificationService implements IClassificationService {
+	@Autowired
+	private IClassificationDao classificationDao;
 
-    @Autowired
-    private IClassificationDao classificationDao;
-
-    /**
-     * 通过ID查询
-     */
-    public Category findByCategoryId(String categoryId)
-    {
-        return classificationDao.findByCategoryId(categoryId);
-    }
-
-    
-    /**
-     * 根据条件分页查询
-     */
-    public List<TableDataInfo> pageInfoQuery(PageUtilEntity pageUtilEntity)
-    {
-        return classificationDao.pageInfoQuery(pageUtilEntity);
-    }
-    
-    /**
-     * 修改信息
+	/**
+     * 查询所有信息
      * 
+     * @return 集合
      */
-    public int updateCategoryInfo(Category category)
-    {
-        return classificationDao.updateCategoryInfo(category);
-    }
+	public List<Category> queryCategorys() {
 
-    /**
-     * 新增信息
-     * 
-     */
-    public int addCategoryInfo(Category category)
-    {        
-        return classificationDao.addCategoryInfo(category);
-    }
-    
-    /**
-     * 修改状态
-     * 
-     */
-    public int changeCategoryStatus(Category category)
-    {
-        return classificationDao.updateCategoryInfo(category);
-    }
+		return classificationDao.queryCategorys();
+	}
+
+	/**
+	 * 通过ID查询
+	 */
+	public Category findByCategoryId(String categoryId) {
+		return classificationDao.findByCategoryId(categoryId);
+	}
+	
+	/**
+	 * 新增信息
+	 * 
+	 */
+	public int addCategoryInfo(Category category) {
+		return classificationDao.addCategoryInfo(category);
+	}
+
+	/**
+	 * 修改信息
+	 * 
+	 */
+	public int updateCategoryInfo(Category category) {
+		return classificationDao.updateCategoryInfo(category);
+	}
+
+	
+
+	/**
+	 * 修改状态
+	 * 
+	 */
+	public int changeCategoryStatus(Category category) {
+		return classificationDao.updateCategoryInfo(category);
+	}
+
+	@Override
+	public List<Category> findCategoryByPid(String parentId) {
+		return classificationDao.findCategoryByPid(parentId);
+	}
+
+	@Override
+	public int deleteCategory(Category category) {
+		return classificationDao.deleteCategory(category);
+	}
 
 }

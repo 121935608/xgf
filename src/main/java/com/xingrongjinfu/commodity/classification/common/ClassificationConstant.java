@@ -64,5 +64,15 @@ public class ClassificationConstant
      * 逻辑视图名：修改界面
      */
     public final static String MODIFY_PAGE = "commodity/classification-modify";
+    
+    /**
+     * 请求地址：查询单个菜单详细信息
+     */
+    public final static String VIEW_URL = "getMenu";
+    
+    /**
+     * 请求地址：删除单个菜单信息
+     */
+    public final static String DEL_URL = "delMenu";
 
 }

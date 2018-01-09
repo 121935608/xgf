@@ -21,7 +21,7 @@ public class Category implements Serializable
     private int sort;
     private int status;
     private Date addTime;
-	private String country;
+	private String parentId;
 	public String getCategoryId() {
 		return categoryId;
 	}
@@ -64,16 +64,17 @@ public class Category implements Serializable
 	public void setAddTime(Date addTime) {
 		this.addTime = addTime;
 	}
-	public String getCountry() {
-		return country;
+	public String getParentId() {
+		return parentId;
 	}
-	public void setCountry(String country) {
-		this.country = country;
+	public void setParentId(String parentId) {
+		this.parentId = parentId;
 	}
 	@Override
 	public String toString() {
 		return "Category [categoryId=" + categoryId + ", categoryName=" + categoryName + ", type=" + type + ", img="
-				+ img + ", sort=" + sort + ", status=" + status + ", addTime=" + addTime + ", country=" + country + "]";
+				+ img + ", sort=" + sort + ", status=" + status + ", addTime=" + addTime + ", parentId=" + parentId
+				+ "]";
 	}
 
 }

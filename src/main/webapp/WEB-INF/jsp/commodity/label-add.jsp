@@ -3,7 +3,7 @@
 <ys:contentHeader/>
 <body>
 <article class="page-container">
-	<form action="" method="post" enctype="multipart/form-data" class="form form-horizontal" id="form-label-add">
+	<form action="" method="post"  class="form form-horizontal" id="form-label-add">
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>标签名称：</label>
 			<div class="formControls col-xs-8 col-sm-4">
@@ -14,7 +14,7 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>图片：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="file" id="img" name="img">
+				<input type="file" id="picture" name="picture">
 			</div>
 		</div>
 		
@@ -34,7 +34,7 @@ $("#form-label-add").validate({
 			required:true,
 			isSpace:true,
 		},
-		img:{
+		picture:{
 			required:true,
 			isSpace:true,
 		},
@@ -45,14 +45,17 @@ $("#form-label-add").validate({
 	success:"valid",
 	submitHandler:function(form){
 		var index = parent.layer.load();
+		var formData = new FormData($('#form-label-add')[0]);
 		$.ajax({
 			url:"${context_root}/commodity/saveLabel.action", 
 			type:'post',
-			async:true ,
-			cache:false ,
-			data:$(form).serialize(),
-			dataType:"json",
+			data:formData,
+			mimeType: "multipart/form-data",
+			contentType: false,
+			cache:false,
+			processData: false,			
 			success:function(data){
+				var data = JSON.parse(data);
 				parent.layer.close(index);
 				if(data.s == true){
 					index = parent.layer.getFrameIndex(window.name);

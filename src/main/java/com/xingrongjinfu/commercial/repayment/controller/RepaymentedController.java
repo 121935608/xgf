@@ -78,7 +78,7 @@ public class RepaymentedController extends BaseController {
 	public ModelAndView RepaymentList() {
 
 		PageUtilEntity pageUtilEntity = this.getPageUtilEntity();
-		
+		User user=this.getCurrentUser();
 		String fuzzyCondition=pageUtilEntity.getRelationMap().get("fuzzyCondition");
         if(fuzzyCondition!=null&&!fuzzyCondition.equals("")){
         	try {
@@ -87,7 +87,7 @@ public class RepaymentedController extends BaseController {
 				e.printStackTrace();
 			}
         }
-
+        pageUtilEntity.getRelationMap().put("userId", user.getUserId());
 		List<TableDataInfo> tableDataInfo = repaymentedService.pageInfoQuery(pageUtilEntity);
 
 		return buildDataTable(pageUtilEntity.getTotalResult(), tableDataInfo);

@@ -16,6 +16,7 @@ import com.xingrongjinfu.statistics.procurement.common.ProcurementConstant;
 import com.xingrongjinfu.statistics.procurement.service.IProcurementService;
 import com.xingrongjinfu.statistics.purchase.common.PurchaseConstant;
 import com.xingrongjinfu.statistics.purchase.service.IPurchaseService;
+import com.xingrongjinfu.system.user.model.User;
 
 /**
  *  业务处理
@@ -44,7 +45,7 @@ public class PurchaseController extends BaseController
 	 */
 	@RequestMapping(PurchaseConstant.PURCHASE_LIST_URL)
 	public ModelAndView PurchaseList() {
-		
+		User user=this.getCurrentUser();
 		PageUtilEntity pageUtilEntity = this.getPageUtilEntity();
 		String fuzzyCondition=pageUtilEntity.getRelationMap().get("fuzzyCondition");
 		if(fuzzyCondition!=null&&!fuzzyCondition.equals("")){
@@ -54,7 +55,7 @@ public class PurchaseController extends BaseController
 				e.printStackTrace();
 			}
         }
-
+		pageUtilEntity.getRelationMap().put("userId", user.getUserId());
 		List<TableDataInfo> tableDataInfo = purchaseService.pageInfoQuery(pageUtilEntity);
 
 		return buildDataTable(pageUtilEntity.getTotalResult(), tableDataInfo);

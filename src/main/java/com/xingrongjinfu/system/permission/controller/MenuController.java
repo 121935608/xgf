@@ -85,8 +85,6 @@ public class MenuController extends BaseController
     /**
      * 获取菜单详细信息
      * 
-     * @param permsId 菜单id
-     * @return 菜单对象
      */
     @RequestMapping(PermissionConstant.VIEW_URL)
     public @ResponseBody Permission getMenu(Integer permsId)

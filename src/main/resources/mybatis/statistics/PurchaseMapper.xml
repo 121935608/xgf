@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="StatisticsPurchaseMapper">
 
 	<resultMap type="Purchase" id="PurchaseResult">
-		<result property="orderDetailId" column="orderDetailId"/>
+		<result property="orderDetailId" column="orderDetailId" />
 		<result property="orderNumber" column="orderNumber" />
 		<result property="commodityId" column="commodityId" />
 		<result property="commodityNum" column="commodityNum" />
@@ -17,34 +17,48 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="unit" column="unit" />
 		<result property="imgMain" column="imgMain" />
 		<result property="totalPrice" column="totalPrice" />
-		
+		<result property="commodityNo" column="commodityNo" />
 	</resultMap>
-	
-	<select id="pageInfoQuery"  parameterType="PageUtilEntity"  resultType="Purchase">
-		select a.commodityName,a.commodityId,a.commodityNum,a.totalPrice,a.addTime,c.userId
-			from (t_order_detail a ,t_order c)
-			inner join sys_user s on c.userId = s.userId
-			where 1=1 
-			<if test="relationMap.userId != null and relationMap.userId != ''">
-			AND c.userId=#{relationMap.userId}
+
+	<!-- <select id="pageInfoQuery" parameterType="PageUtilEntity" resultType="Purchase" 
+		useCache="false"> SELECT commodityName,commodityId,commodityNum,totalPrice 
+		FROM t_order_detail </select> -->
+
+	<select id="pageInfoQuery" parameterType="PageUtilEntity"
+		resultType="Purchase">
+		select
+		c.commodityName,d.commodityNo,sum(c.commodityNum) commodityNum,sum(c.totalPrice) totalPrice
+		FROM sys_user a
+		LEFT JOIN t_order b on a.userId = b.userId
+		LEFT JOIN t_order_detail c on c.orderNumber = b.orderNumber
+		LEFT JOIN t_commodity d ON c.commodityId = d.commodityId
+		where 1=1 
+		 <if test="relationMap.userId != null and relationMap.userId != ''">
+			AND a.userId=#{relationMap.userId}
+		</if> 
+		<if test="relationMap.dateType=='addTime'">
+			<if test="relationMap.beginTime != null and relationMap.beginTime != ''">
+				AND DATE_FORMAT(c.addTime,'%Y%m%d') &gt;=
+				DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
 			</if>
-			<if test="relationMap.dateType=='addTime'">
-				<if test="relationMap.beginTime != null and relationMap.beginTime != ''"> 
-					AND DATE_FORMAT(a.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
-				</if>
-				<if test="relationMap.endTime != null and relationMap.endTime != ''"> 
-					AND DATE_FORMAT(a.addTime,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
-				</if>  
-			</if> 
-			 
-			<if test="relationMap.fuzzyCondition != null and relationMap.fuzzyCondition != ''">
-				AND (
-						commodityName LIKE CONCAT(CONCAT('%', #{relationMap.fuzzyCondition}),'%') or 
-						commodityId LIKE CONCAT(CONCAT('%', #{relationMap.fuzzyCondition}),'%') 
-						)
+			<if test="relationMap.endTime != null and relationMap.endTime != ''">
+				AND DATE_FORMAT(c.addTime,'%Y%m%d') &lt;=
+				DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
 			</if>
-			
+		</if>
+
+		<if
+			test="relationMap.fuzzyCondition != null and relationMap.fuzzyCondition != ''">
+			AND (
+			c.commodityName LIKE CONCAT(CONCAT('%',
+			#{relationMap.fuzzyCondition}),'%') or
+			c.commodityId LIKE
+			CONCAT(CONCAT('%',
+			#{relationMap.fuzzyCondition}),'%')
+			)
+		</if>
+		GROUP BY c.commodityName,d.commodityNo
 	</select>
-	
-	
+
+
 </mapper> 

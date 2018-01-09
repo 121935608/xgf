@@ -15,12 +15,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.aliyun.oss.OSSException;
 import com.xingrongjinfu.commodity.CommodityConstant;
 import com.xingrongjinfu.commodity.classification.common.ClassificationConstant;
 import com.xingrongjinfu.commodity.classification.model.Category;
 import com.xingrongjinfu.commodity.label.common.LabelConstant;
 import com.xingrongjinfu.commodity.label.model.Label;
 import com.xingrongjinfu.commodity.label.service.ILabelService;
+import com.xingrongjinfu.system.user.model.User;
 import com.xingrongjinfu.utils.AliyunOSSClientUtil;
 
 /**
@@ -70,21 +72,29 @@ public class LabelController extends BaseController {
 	@ActionControllerLog(title = "商品管理", action = "商品管理-保存标签", isSaveRequestData = true)
 	@RequestMapping(LabelConstant.SAVE_URL)
 	public @ResponseBody Message saveCategory(Label category, String categoryId,MultipartFile picture) {
-		int result = 0;
-		
+		int result = 0;		
 		AliyunOSSClientUtil aliyunOSSClientUtil = new AliyunOSSClientUtil();
-		String key = aliyunOSSClientUtil.uploadImg(picture);
-		String originalFilename = picture.getOriginalFilename();
-		String filePath = aliyunOSSClientUtil.FOLDER + originalFilename;
-		category.setImg(filePath);
+		
+		try {
+			String key = aliyunOSSClientUtil.uploadImg(picture);
+			if(key!=null){
+				
+				String originalFilename = picture.getOriginalFilename();
+				String filePath = aliyunOSSClientUtil.FOLDER + originalFilename;
+				category.setImg(filePath);
+				
+			}
+		} catch (OSSException e) {
+			e.printStackTrace();
+            return new Message(result);
+		}
 		if (categoryId != null) {
 			result = labelService.updateCategoryInfo(category);
 		} else {
 			result = labelService.addCategoryInfo(category);
 		}
-
-		return new Message(result);
 		
+		return new Message(result);
 
 	}
 
@@ -96,6 +106,7 @@ public class LabelController extends BaseController {
 		ModelAndView modelAndView = this.getModelAndView(LabelConstant.MODIFY_PAGE);
 		if (categoryId != null) {
 			modelAndView.addObject("category", this.labelService.findByCategoryId(categoryId));
+			modelAndView.addObject("categoryId",categoryId);
 		}
 
 		return modelAndView;

@@ -1,67 +1,78 @@
 package com.xingrongjinfu.commodity.classification.dao;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.framework.core.dao.DynamicObjectBaseDao;
 import org.springframework.stereotype.Repository;
 
 import com.xingrongjinfu.commodity.classification.model.Category;
+import com.xingrongjinfu.system.permission.model.Permission;
 
 /**
  * 数据层处理
  * 
- * @author 
+ * @author
  */
 @Repository("classificationDao")
-public class ClassificationDao extends DynamicObjectBaseDao implements IClassificationDao
-{
+public class ClassificationDao extends DynamicObjectBaseDao implements IClassificationDao {
 
-    /**
-     * 通过ID查询
-     * 
-     */
-    public Category findByCategoryId(String categoryId)
-    {
-        return (Category) this.findForObject("CommodityClassificationMapper.findByCategoryId", categoryId);
-    }
+	public List<Category> queryCategorys() {
+		List<Category> categoryList = null;
+		try {
+			categoryList = (List<Category>) this.findForList("CommodityClassificationMapper.queryCategorys", null);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return categoryList;
+	}
 
-    /**
-     * 根据条件分页查询
-     * 
-     */
-    @SuppressWarnings("unchecked")
-    public List<TableDataInfo> pageInfoQuery(PageUtilEntity pageUtilEntity)
-    {
-
-        List<TableDataInfo> cityPageInfo = null;
+	/**
+	 * 通过ID查询
+	 * 
+	 */
+	public Category findByCategoryId(@Param(value = "categoryId") String categoryId) {
+		return (Category) this.findForObject("CommodityClassificationMapper.findByCategoryId", categoryId);
+	}
+	
+	@Override
+	public List<Category> findCategoryByPid(@Param(value = "parentId")String parentId) {
+		List<Category> parentList = null;
         try
         {
-        	cityPageInfo = (List<TableDataInfo>) this.findForList("CommodityClassificationMapper.pageInfoQuery", pageUtilEntity);
+            parentList = (List<Category>) this.findForList("CommodityClassificationMapper.findCategoryByPid", parentId);
         }
         catch (Exception e)
         {
             e.printStackTrace();
         }
-        return cityPageInfo;
+        return parentList;
+	}
+	
+	
+	/**
+	 * 新增信息
+	 * 
+	 */
+	public int addCategoryInfo(Category category) {
+		return (int) this.save("CommodityClassificationMapper.addCategoryInfo", category);
+	}
 
-    }
+	/**
+	 * 修改信息
+	 * 
+	 */
+	public int updateCategoryInfo(Category category) {
+		return this.update("CommodityClassificationMapper.updateCategoryInfo", category);
+	}
 
-    /**
-     * 新增信息
-     * 
-     */
-    public int addCategoryInfo(Category category)
-    {
-        return (int) this.save("CommodityClassificationMapper.addCategoryInfo", category);
-    }
+	@Override
+	public int deleteCategory(Category category) {
+		return (int) this.delete("CommodityClassificationMapper.deleteCategoryInfo", category);
+	}
 
-    /**
-     * 修改信息
-     * 
-     */
-    public int updateCategoryInfo(Category category)
-    {
-        return this.update("CommodityClassificationMapper.updateCategoryInfo", category);
-    }
+	
+
 }

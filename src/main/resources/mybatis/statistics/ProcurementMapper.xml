@@ -17,6 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="unit" column="unit" />
 		<result property="imgMain" column="imgMain" />
 		<result property="totalPrice" column="totalPrice" />
+		<result property="commodityNo" column="commodityNo" />
 		
 	</resultMap>
 
@@ -26,9 +27,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select> -->
 	
 	<select id="pageInfoQuery"  parameterType="PageUtilEntity"  resultType="Procurement">
-		select commodityName,commodityId,orderNumber,addTime,commodityNum,totalPrice
-			from t_order_detail 
-			where 1=1 
+		select c.commodityName,d.commodityNo,c.orderNumber,c.addTime,c.commodityNum,c.totalPrice
+		from sys_user a
+		LEFT JOIN t_order b on a.userId = b.userId
+		LEFT JOIN t_order_detail c on c.orderNumber = b.orderNumber
+		LEFT JOIN t_commodity d ON c.commodityId = d.commodityId
+		where 1=1
+	
+		<if test="relationMap.userId != null and relationMap.userId != ''">
+			AND a.userId=#{relationMap.userId}
+		</if>
 			<if test="relationMap.dateType=='addTime'">
 				<if test="relationMap.beginTime != null and relationMap.beginTime != ''"> 
 					AND DATE_FORMAT(a.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')

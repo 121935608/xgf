@@ -20,6 +20,7 @@ public class Label implements Serializable
     private int status;
     private Date addTime;
 	private String country;
+	
 	public String getCategoryId() {
 		return categoryId;
 	}

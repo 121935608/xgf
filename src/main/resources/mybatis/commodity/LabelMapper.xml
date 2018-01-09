@@ -26,16 +26,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateCategoryInfo" parameterType="Label">
  		update t_category
  		<set>
- 			<if test="categoryName != null and categoryName != ''">categoryName = #{categoryName},</if>
- 			<if test="type != null and type != ''">type = #{type},</if>
- 			<if test="img != null and img != ''">img = #{img},</if>
- 			<if test="sort != null and sort != ''">sort = #{sort},</if>
- 			<if test="status.toString() != null and status.toString() != ''">status = #{status},</if>
- 			<if test="addTime != null and addTime != ''">addTime = #{addTime},</if>
- 			<if test="country != null and country != ''">country = #{country}</if>
+ 			<if test="categoryName != null and categoryName != ''">
+ 			categoryName = #{categoryName},
+ 			</if>
+ 			<if test="type != null and type != ''">
+ 			type = #{type},</if>
+ 			<if test="img != null and img != ''">
+ 			img = #{img},
+ 			</if>
+ 			<if test="sort != null and sort != ''">
+ 			sort = #{sort},
+ 			</if>
+ 			<if test="status.toString() != null and status.toString() != ''">
+ 			status = #{status},
+ 			</if>
+ 			<if test="addTime != null and addTime != ''">
+ 			addTime = #{addTime},
+ 			</if>
+ 			
  		</set>
  		where 1=1
- 		<if test="categoryId != null and categoryId  != ''">and categoryId = #{categoryId}</if>
+ 		<if test="categoryId != null and categoryId  != ''">
+ 		and categoryId = #{categoryId}
+ 		</if>
  	</update>
 	
 	<!-- 插入信息 -->

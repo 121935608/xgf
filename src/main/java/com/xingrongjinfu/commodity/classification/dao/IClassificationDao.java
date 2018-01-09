@@ -5,6 +5,7 @@ import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 
 import com.xingrongjinfu.commodity.classification.model.Category;
+import com.xingrongjinfu.system.permission.model.Permission;
 import com.xingrongjinfu.system.user.model.User;
 
 /**
@@ -14,21 +15,11 @@ import com.xingrongjinfu.system.user.model.User;
  */
 public interface IClassificationDao
 {
-
-    /**
-     * 通过ID查询
-     * 
-     */
-    public Category findByCategoryId(String categoryId);
+	
+	public List<Category> queryCategorys();
 
     
-    /**
-     * 根据条件分页查询
-     * 
-     */
-    public List<TableDataInfo> pageInfoQuery(PageUtilEntity pageUtilEntity);
 
-   
     /**
      * 新增信息
      * 
@@ -40,5 +31,25 @@ public interface IClassificationDao
      * 
      */
     public int updateCategoryInfo(Category category);
+    
+    /**
+     * 通过ID查询
+     * 
+     */
+    public Category findByCategoryId(String categoryId);
+
+    /**
+     * 根据父菜单ID查询
+     * 
+     */
+	public List<Category> findCategoryByPid(String parentId);
+
+
+	/**
+     * 删除菜单
+     * 
+     */
+    public int deleteCategory(Category category);
+	
 
 }
