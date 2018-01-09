@@ -42,5 +42,11 @@ public class LoginController extends BaseController
         return UserConstant.LOGIN_PAGE;
     }
 
+    @RequestMapping(value = "/toModifyPassword")
+    public ModelAndView loadPage() {
+        System.out.println("111");
+        return this.getModelAndView(UserConstant.MODIFY_PWD_PAGE);
+    }
+
 
 }

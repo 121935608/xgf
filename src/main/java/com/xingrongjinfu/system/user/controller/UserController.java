@@ -260,10 +260,10 @@ public class UserController extends BaseController {
         return new Message(result);
     }
 
-    @RequestMapping(value = {UserConstant.MODIFY_PASSWORD})
+    /*@RequestMapping(value = {UserConstant.MODIFY_PASSWORD})
     public ModelAndView loadPage() {
         System.out.println("111");
         return this.getModelAndView(UserConstant.MODIFY_PWD_PAGE);
-    }
+    }*/
 
 }

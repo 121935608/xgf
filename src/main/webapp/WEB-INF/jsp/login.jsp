@@ -70,7 +70,7 @@
                 <c:if test="${not empty param.forceLogout}">您已经被管理员强制退出。请重新登录</c:if>
                 ${errorMsg }</font>
         </form>
-            <a href="${context_root}/system/toModifyPassword.action" class="btn btn-success radius size-L">忘记密码</a>
+            <a href="${context_root}/toModifyPassword.action" class="btn btn-success radius size-L">忘记密码</a>
     </div>
 </div>
 <div class="footer">Copyright 星融金服</div>

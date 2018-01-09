@@ -122,7 +122,7 @@
 				<!-- 登录功能  校验验证码 用户信息-->
 				/login.action* = jCaptchaValidate,authc
 				<!-- 修改密码，可匿名访问 -->
-				/system/toModifyPassword.action = anon
+				/toModifyPassword.action = anon
 			</value>
 		</property>
 	</bean>
