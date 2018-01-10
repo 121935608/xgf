@@ -36,7 +36,7 @@ public class LabelService implements ILabelService
     /**
      * 根据条件分页查询
      */
-    public List<TableDataInfo> pageInfoQuery(PageUtilEntity pageUtilEntity)
+    public List<Label> pageInfoQuery(PageUtilEntity pageUtilEntity)
     {
         return labelDao.pageInfoQuery(pageUtilEntity);
     }

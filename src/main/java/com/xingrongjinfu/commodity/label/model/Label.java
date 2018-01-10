@@ -12,6 +12,7 @@ public class Label implements Serializable
 {
     private static final long serialVersionUID = 1L;
 
+    private Integer laberNum;
     private String categoryId;
     private String categoryName;
     private String type;
@@ -21,6 +22,13 @@ public class Label implements Serializable
     private Date addTime;
 	private String country;
 	
+	
+	public Integer getLaberNum() {
+		return laberNum;
+	}
+	public void setLaberNum(Integer laberNum) {
+		this.laberNum = laberNum;
+	}
 	public String getCategoryId() {
 		return categoryId;
 	}

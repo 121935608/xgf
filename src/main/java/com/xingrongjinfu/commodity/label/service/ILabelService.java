@@ -27,7 +27,7 @@ public interface ILabelService
      * 根据条件分页查询对象
      * 
      */
-    public List<TableDataInfo> pageInfoQuery(PageUtilEntity pageUtilEntity);
+    public List<Label> pageInfoQuery(PageUtilEntity pageUtilEntity);
    
 
      /**

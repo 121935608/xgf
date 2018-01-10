@@ -30,8 +30,8 @@ $(document).ready(function(){
     "sClass": "text-c",
     "bSearchable": false,
     "mRender": function(data, type, row) {
-        if (row.categoryId != null) {
-            return row.categoryId;
+        if (row.laberNum != null) {
+            return row.laberNum;
         } else {
             return "";
         }

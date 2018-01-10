@@ -52,9 +52,14 @@ public class LabelController extends BaseController {
 	public ModelAndView LabelList() {
 		PageUtilEntity pageUtilEntity = this.getPageUtilEntity();
 
-		List<TableDataInfo> tableDataInfo = labelService.pageInfoQuery(pageUtilEntity);
+		
+		List<Label> tableDataInfo = labelService.pageInfoQuery(pageUtilEntity);
+		Integer i=1;
+		for (Label label : tableDataInfo) {
+		label.setLaberNum(pageUtilEntity.getPage()+(i++));
+		}
 
-		return buildDataTable(pageUtilEntity.getTotalResult(), tableDataInfo);
+		return buildDatasTable(pageUtilEntity.getTotalResult(), tableDataInfo);
 	}
 
 	/**

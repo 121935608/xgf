@@ -31,13 +31,13 @@ public class LabelDao extends DynamicObjectBaseDao implements ILabelDao
      * 
      */
     @SuppressWarnings("unchecked")
-    public List<TableDataInfo> pageInfoQuery(PageUtilEntity pageUtilEntity)
+    public List<Label> pageInfoQuery(PageUtilEntity pageUtilEntity)
     {
 
-        List<TableDataInfo> cityPageInfo = null;
+        List<Label> cityPageInfo = null;
         try
         {
-        	cityPageInfo = (List<TableDataInfo>) this.findForList("CommodityLabelMapper.pageInfoQuery", pageUtilEntity);
+        	cityPageInfo = (List<Label>) this.findForList("CommodityLabelMapper.pageInfoQuery", pageUtilEntity);
         }
         catch (Exception e)
         {
