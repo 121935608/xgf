@@ -20,6 +20,7 @@ import com.xingrongjinfu.commercial.repayment.service.IRepaymentedService;
 import com.xingrongjinfu.statistics.StatisticsConstant;
 import com.xingrongjinfu.statistics.procurement.common.ProcurementConstant;
 import com.xingrongjinfu.statistics.procurement.service.IProcurementService;
+import com.xingrongjinfu.system.user.model.User;
 
 /**
  *  业务处理
@@ -39,7 +40,9 @@ public class ProcurementController extends BaseController
     @RequestMapping(ProcurementConstant.PROCUREMENT_URL)
     public ModelAndView loadStatisticsProcurement()
     {
-        return this.getModelAndView(ProcurementConstant.PROCUREMENT_PAGE);
+    	
+    	ModelAndView modelAndView=this.getModelAndView(ProcurementConstant.PROCUREMENT_PAGE);
+        return modelAndView;
     }
     
     /**
@@ -48,6 +51,15 @@ public class ProcurementController extends BaseController
 	@RequestMapping(ProcurementConstant.PROCUREMENT_LIST_URL)
 	public ModelAndView ProcurementList() {
 		
+		User user=this.getCurrentUser();
+		System.out.println(user.getUserId()+"----------------------------------");
+		System.out.println(user.getUserId()+"----------------------------------");
+		System.out.println(user.getUserId()+"----------------------------------");
+		System.out.println(user.getUserId()+"----------------------------------");
+		System.out.println(user.getUserId()+"----------------------------------");
+		System.out.println(user.getUserId()+"----------------------------------");
+		System.out.println(user.getUserId()+"----------------------------------");
+		System.out.println(user.getUserId()+"----------------------------------");
 		PageUtilEntity pageUtilEntity = this.getPageUtilEntity();
 
 		String fuzzyCondition=pageUtilEntity.getRelationMap().get("fuzzyCondition");
@@ -58,6 +70,8 @@ public class ProcurementController extends BaseController
 				e.printStackTrace();
 			}
         }
+		
+		pageUtilEntity.getRelationMap().put("userId", user.getUserId());
 		List<TableDataInfo> tableDataInfo = procurementService.pageInfoQuery(pageUtilEntity);
 
 		return buildDataTable(pageUtilEntity.getTotalResult(), tableDataInfo);

@@ -205,7 +205,7 @@
 	function checkOption2(status)
 	{
 		var selectHeader = "<option value='0'>启用</option>";
-		if(status == '0')
+		if(status == '1')
 		{
 			$("#status").find("option").remove();
 			$("#status").append(selectHeader);

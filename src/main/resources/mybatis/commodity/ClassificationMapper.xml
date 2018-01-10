@@ -24,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="findCategoryByPid" parameterType="String" resultType="Category">
-		SELECT * FROM t_category WHERE parentId = '0' 
+		SELECT * FROM t_category WHERE parentId = "0"
 	</select>
 	
 	<delete id="deleteCategoryInfo" parameterType="Category">
@@ -61,7 +61,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="img != null and img != ''">img,</if>
  			<if test="sort != null and sort != ''">sort,</if>
  			<if test="status != null and status != ''">status,</if>
- 			<if test="addTime != null and addTime != ''">addTime,</if>
+ 			addTime,
  			<if test="parentId != null and parentId != ''">parentId</if>
  			
  		)values(#{categoryId},
@@ -70,7 +70,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="img != null and img != ''">#{img},</if>
  			<if test="sort != null and sort != ''">#{sort},</if>
  			<if test="status != null and status != ''">#{status},</if>
- 			<if test="addTime != null and addTime != ''">#{addTime},</if>
+ 			sysdate(),
  			<if test="parentId != null and parentId != ''">#{parentId}</if>
  		)
  	</insert>	

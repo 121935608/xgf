@@ -53,7 +53,7 @@ public class ClassificationController extends BaseController {
 		ModelAndView modelAndView = this.getModelAndView(ClassificationConstant.CLASSIFICATION_PAGE);
 
 		// 1 启用 -1禁用
-		List<SysCode> sysCodeList1 = new ArrayList<SysCode>();
+		/*List<SysCode> sysCodeList1 = new ArrayList<SysCode>();
 		SysCode sysCode1 = new SysCode();
 		sysCode1.setCodeid("1");
 		sysCode1.setCodevalue("启用");
@@ -64,7 +64,7 @@ public class ClassificationController extends BaseController {
 		sysCode2.setCodevalue("禁用");
 		sysCodeList1.add(sysCode2);
 
-		modelAndView.addObject("statusList", sysCodeList1);
+		modelAndView.addObject("statusList", sysCodeList1);*/
 		modelAndView.addObject("parents", getParentList());
 		return modelAndView;
 	}
@@ -149,9 +149,13 @@ public class ClassificationController extends BaseController {
 		}
 
 		String categoryId = category.getCategoryId();
+		String parentId = category.getParentId();
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!"+categoryId);
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!"+parentId);
 		if (categoryId != null) {
 			result = classificationService.updateCategoryInfo(category);
-		} else {
+		} 
+		if(parentId.equals("0")){
 			result = classificationService.addCategoryInfo(category);
 		}
 

@@ -37,7 +37,11 @@ public class PurchaseController extends BaseController
     @RequestMapping(PurchaseConstant.PURCHASE_URL)
     public ModelAndView loadStatisticsPurchase()
     {
-        return this.getModelAndView(PurchaseConstant.PURCHASE_PAGE);
+    	ModelAndView modelAndView=this.getModelAndView(PurchaseConstant.PURCHASE_PAGE);
+    	User user=this.getCurrentUser();
+    	System.out.println("userId:"+user.getUserId());
+    	modelAndView.addObject("user", user);
+        return modelAndView;
     }
     
     /**
@@ -45,7 +49,7 @@ public class PurchaseController extends BaseController
 	 */
 	@RequestMapping(PurchaseConstant.PURCHASE_LIST_URL)
 	public ModelAndView PurchaseList() {
-		User user=this.getCurrentUser();
+		//User user=this.getCurrentUser();
 		PageUtilEntity pageUtilEntity = this.getPageUtilEntity();
 		String fuzzyCondition=pageUtilEntity.getRelationMap().get("fuzzyCondition");
 		if(fuzzyCondition!=null&&!fuzzyCondition.equals("")){
@@ -55,7 +59,8 @@ public class PurchaseController extends BaseController
 				e.printStackTrace();
 			}
         }
-		pageUtilEntity.getRelationMap().put("userId", user.getUserId());
+		//System.out.println(user+"!!!!!!!!!!!!");
+		//pageUtilEntity.getRelationMap().put("userId", user.getUserId());
 		List<TableDataInfo> tableDataInfo = purchaseService.pageInfoQuery(pageUtilEntity);
 
 		return buildDataTable(pageUtilEntity.getTotalResult(), tableDataInfo);

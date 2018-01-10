@@ -20,10 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="commodityNo" column="commodityNo" />
 	</resultMap>
 
-	<!-- <select id="pageInfoQuery" parameterType="PageUtilEntity" resultType="Purchase" 
-		useCache="false"> SELECT commodityName,commodityId,commodityNum,totalPrice 
-		FROM t_order_detail </select> -->
-
+	
 	<select id="pageInfoQuery" parameterType="PageUtilEntity"
 		resultType="Purchase">
 		select
@@ -52,7 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			AND (
 			c.commodityName LIKE CONCAT(CONCAT('%',
 			#{relationMap.fuzzyCondition}),'%') or
-			c.commodityId LIKE
+			d.commodityNo LIKE
 			CONCAT(CONCAT('%',
 			#{relationMap.fuzzyCondition}),'%')
 			)
