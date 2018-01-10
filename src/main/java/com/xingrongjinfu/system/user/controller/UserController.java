@@ -310,22 +310,16 @@ public class UserController extends BaseController {
         String returnMsg= HttpClientUtil.sendGet(url);
         HashMap returnMap= DesUtils.stringToMap(returnMsg);
         String code=String.valueOf(returnMap.get("code"));
-        System.out.println("code:"+code);
-        request.getSession(true).setAttribute("verify",code);
-        String aaa=(String) request.getSession().getAttribute("verify");
-        System.out.println("aaa:"+aaa);
         if(code.equals("-1")){
             return new Message(result);
         }else {
         //将验证码存入session
-            request.getSession().setAttribute("verify",code);
+            request.getSession(true).setAttribute("verify",verify);
+            Integer aaa=(Integer) request.getSession().getAttribute("verify");
+            System.out.println("aaa:"+aaa);
            result=1;
            return new Message(result);
         }
-
-
-
-
     }
 
 
@@ -341,9 +335,9 @@ public class UserController extends BaseController {
     Message checkCode(User user,HttpServletRequest request) throws Exception{
         int result=0;
         String phone=user.getUserName();
-        String verifyCode=user.getVerifyCode();
+        Integer verifyCode=user.getVerifyCode();
         System.out.println("verifyCode:"+verifyCode);
-        String code=(String)request.getSession().getAttribute("verify");
+        Integer code=(Integer)request.getSession().getAttribute("verify");
         System.out.println("code:"+code);
         if (verifyCode.equals(code)){
             result=1;
@@ -359,8 +353,9 @@ public class UserController extends BaseController {
         int result=0;
         String userId=user.getUserId();
         if (userId != null && userId !="") {
-            result = userService.changePassword(user);
+            result = userService.modifyPassword(user);
         }
         return new Message(result);
     }
+
 }

@@ -24,7 +24,7 @@ public class User implements Serializable
     private String locked;
     private String createTime;
     private String status;
-    private String verifyCode;
+    private Integer verifyCode;
 
     private String roleName; // 角色临时字段
     private Integer roleId;
@@ -179,11 +179,11 @@ public class User implements Serializable
         this.roleName = roleName;
     }
 
-    public String getVerifyCode() {
+    public Integer getVerifyCode() {
         return verifyCode;
     }
 
-    public void setVerifyCode(String verifyCode) {
+    public void setVerifyCode(Integer verifyCode) {
         this.verifyCode = verifyCode;
     }
 

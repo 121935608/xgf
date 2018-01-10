@@ -132,4 +132,9 @@ public interface IUserService
      * 确认用户是否存在
      */
     int confirmUser(User user);
+
+    /**
+     * 修改B端用户密码
+     */
+    int modifyPassword(User user);
 }
