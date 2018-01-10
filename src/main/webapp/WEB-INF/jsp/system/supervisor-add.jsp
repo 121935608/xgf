@@ -55,10 +55,11 @@ $("#form-role-modify").validate({
 	focusCleanup:true,
 	success:"valid",
 	submitHandler:function(form){
-		reg=" \"^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$\";"
+		var reg=" \"^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$\";"
 		var phone=$("#phone").val();
 		if (!reg.test(phone)){
 		    alert("不是正确的手机号");
+		    return;
 		}
         var province=$("#province option:selected").val();
         var city=$("#city option:selected").val()

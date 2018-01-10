@@ -47,7 +47,7 @@
 </style>
 <div class="main">
     <div id="step"></div>
-    <form action="" method="post" class="form form-horizontal" id="form-userName">
+    <form >
         <div class="row cl">
         <div id="con1" class="formControls col-xs-8 col-xs-offset-3">
             <input type="text" name="username" id="username" placeholder="注册时手机号"
@@ -58,16 +58,17 @@
         </div>
         </div>
     </form>
-    <form id="form-phone">
+    <form >
         <div class="row cl">
             <div id="con2" style="display:none;" class="formControls col-xs-8 col-xs-offset-3">
-                <input type="text" name="phone" id="phone">
+                <input type="text" name="phone" id="phone" class="input-text size-L">
+                <input type="button" id="btn" value="免费获取验证码" />
                 <input type="text" name="verify" id="verify" placeholder="填写手机验证码"
-                       class="input-text size-L validate[required]">
+                       class="input-text size-L validate[required,ajax[ajaxJcaptchaCall]]">
             </div>
         </div>
     </form>
-    <form id="form-password">
+    <form >
         <div class="row cl">
             <div style="display:none;" class="formControls col-xs-8 col-xs-offset-3" id="con3">
                 <input type="password" name="password" placeholder="请输入新密码"
@@ -86,7 +87,7 @@
 
             </div>
     </div>
-    <div class="info">index：<span id="index"></span></div>
+   <%-- <div class="info">index：<span id="index"></span></div>--%>
     <!--  style="display:none;"-->
 </div>
 
@@ -107,56 +108,83 @@
         $index.text($step.getIndex());
     });
 
+
+
     $("#nextBtn").on("click", function() {
+        var userName=$("#username").val();
         if($step.getIndex()=="0"){
-            alert(111);
-            $("#form-userName").validate({
-                rules:{
-                    userName:{
-                        required:true,
-                        isSpace:true,
-                    },
-                },
-                onkeyup:false,
-                focusCleanup:true,
-                success:"valid",
-                submitHandler:function(form){
-                    var userName=$("#username").val();
-                    alert(userName);
-                    $.ajax({
-                        url:"${context_root}/system/confirmUser.action?userName=" + userName,
-                        type:'post',
-                        async:true ,
-                        cache:false ,
-                        dataType:"json",
-                        success:function(data){
-                            if(data.s == true){
-                                var phone=document.getElementById("phone");
-                                phone.value=username;
-                                $step.nextStep();
-                                $index.text($step.getIndex());
-                            }else{
-                                parent.layer.alert("你还不是我们的商户", {icon: 2,title:"系统提示"});
-                            }
-                        },
-                    });
+            /*var reg="^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$";
+            if (!reg.test(userName)){
+                alert("不是正确的手机号");
+                return;
+            }*/
+            $.ajax({
+                type: "post",
+                url: "${context_root}/system/confirmUser.action?userName=" +userName,
+                dataType: "json",
+                success: function(data){
+                    if(data.s == true){
+                        $step.nextStep();
+                        $index.text($step.getIndex());
+                        $("#con1").css("display","none");
+                        $("#con2").css("display","block");
+                        $("#con3").css("display","none");
+                        var phone=document.getElementById("phone");
+                        phone.value=userName;
+
+                    }else{
+                        parent.layer.alert("你还不是我们的商户", {icon: 2,title:"系统提示"});
+                    }
+
                 }
-            });
-        alert(222);
+            }) ;
         }
+
         if($step.getIndex()=="1"){
-            $("#con1").css("display","none");
-            $("#con2").css("display","block");
-            $("#con3").css("display","none");
-            $step.nextStep();
-            $index.text($step.getIndex());
+            var verify=$("#verify").val();
+            $.ajax({
+                type: "post",
+                url: "${context_root}/system/checkVerify.action?verifyCode=" +verify,
+                dataType: "json",
+                success: function(data){
+                    if(data.s == true){
+                        $step.nextStep();
+                        $index.text($step.getIndex());
+                        $("#con1").css("display","none");
+                        $("#con2").css("display","none");
+                        $("#con3").css("display","block");
+                    }else{
+                        parent.layer.alert("您输入的验证码不对", {icon: 2,title:"系统提示"});
+                    }
+
+                }
+            }) ;
+
+
+
         }
         if($step.getIndex()=="2"){
-            $("#con1").css("display","none");
-            $("#con2").css("display","none");
-            $("#con3").css("display","block");
-            $step.nextStep();
-            $index.text($step.getIndex());
+            var password=$("#password").val();
+            var rPassword=$("#rPassword").val();
+            if (!password.equals (rPassword)){
+                alert("两次输入的密码不一致");
+                return;
+            }
+            $.ajax({
+                type: "post",
+                url: "${context_root}/system/changePassword.action?userName="+userName+"&password="+password,
+                dataType: "json",
+                success: function(data){
+                    if(data.s == true){
+                        $step.nextStep();
+                        $index.text($step.getIndex());
+                    }else{
+                        parent.layer.alert("修改密码失败", {icon: 2,title:"系统提示"});
+                    }
+
+                }
+            }) ;
+
         }
         if($step.getIndex()=="3"){
             $("#nextBtn").css("display","none");
@@ -188,6 +216,48 @@
         };
 
     });
+
+//60s倒计时
+    var wait=60;
+    function time(o) {
+        if (wait == 0) {
+            o.removeAttribute("disabled");
+            o.value="免费获取验证码";
+            wait = 60;
+        } else {
+            o.setAttribute("disabled", true);
+            o.value="重新发送(" + wait + ")";
+            wait--;
+            setTimeout(function() {
+                    time(o)
+                },
+                1000)
+        }
+    }
+
+        $("#btn").on("click",function () {
+            console.log(this)
+            time(this);
+
+            sendVery();
+        });
+        
+
+    /*document.getElementById("btn").onclick=function(){time(this);}*/
+    function sendVery() {
+    $.ajax({
+        type: "post",
+        url: "${context_root}/system/sendVerify.action?userName="+$("#username").val(),
+        dataType: "json",
+        success: function(data){
+            if(data.s == true){
+                parent.layer.alert("验证码发送成功", {icon: 2,title:"系统提示"});
+            }else{
+                parent.layer.alert("修改密码失败", {icon: 2,title:"系统提示"});
+            }
+        }
+    });
+}
 </script>
 </body>
 </html>

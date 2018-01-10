@@ -294,7 +294,7 @@ public class UserController extends BaseController {
      */
     @RequestMapping(UserConstant.USER_VERLIFY)
     public @ResponseBody
-    Message verifyCode(User user,HttpSession session) throws Exception{
+    Message verifyCode(User user,HttpServletRequest request) throws Exception{
         int result=0;
         //判断手机号格式是否正确
         String phone=user.getUserName();
@@ -307,14 +307,18 @@ public class UserController extends BaseController {
         //发送验证码（调用发送短信接口）
         //String content="\"您的验证码是："+verify+" 有效时间10分钟，请勿外泄。感谢使用星融金服产品服务!\"";
         String url=UserConstant.USER_SERVICE_URL+"/uaa/index/sms?q={\"phone\":"+phone+",\"content\":\"您的验证码是："+verify+"有效时间10分钟，请勿外泄。感谢使用星融金服产品服务!\"}";
-        String returnMsg= HttpClientUtil.httpGetRequest(url);
+        String returnMsg= HttpClientUtil.sendGet(url);
         HashMap returnMap= DesUtils.stringToMap(returnMsg);
         String code=String.valueOf(returnMap.get("code"));
-        //将验证码存入session
-        session.setAttribute("verify",code);
+        System.out.println("code:"+code);
+        request.getSession(true).setAttribute("verify",code);
+        String aaa=(String) request.getSession().getAttribute("verify");
+        System.out.println("aaa:"+aaa);
         if(code.equals("-1")){
             return new Message(result);
         }else {
+        //将验证码存入session
+            request.getSession().setAttribute("verify",code);
            result=1;
            return new Message(result);
         }
@@ -334,11 +338,13 @@ public class UserController extends BaseController {
      */
     @RequestMapping(UserConstant.CHECK_VERRIFY)
     public @ResponseBody
-    Message checkCode(User user,HttpSession httpSession) throws Exception{
+    Message checkCode(User user,HttpServletRequest request) throws Exception{
         int result=0;
         String phone=user.getUserName();
         String verifyCode=user.getVerifyCode();
-        String code=(String)httpSession.getAttribute("code");
+        System.out.println("verifyCode:"+verifyCode);
+        String code=(String)request.getSession().getAttribute("verify");
+        System.out.println("code:"+code);
         if (verifyCode.equals(code)){
             result=1;
         }
