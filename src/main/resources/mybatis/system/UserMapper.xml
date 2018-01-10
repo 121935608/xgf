@@ -123,7 +123,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	</update>
 
 	<!-- 修改B端用户密码 -->
-	<update id="updateUserInfo" parameterType="User">
+	<update id="updateInfo" parameterType="User">
 		update sys_user
 		<set>
 			<if test="password != null and password != ''">password = #{password},</if>
