@@ -1,6 +1,22 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@include file="/WEB-INF/jsp/common/taglibs.jspf"%>
-<ys:contentHeader/>
+<%@include file="/WEB-INF/jsp/common/common.jsp"%>
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta http-equiv="Cache-Control" content="no-store" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+    <title>密码修改页</title>
+    <link rel="Bookmark" href="/favicon.ico" >
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <%@include file="/WEB-INF/jsp/common/import-css.jspf"%>
+    <%@include file="/WEB-INF/jsp/common/import-js.jspf"%>
+</head>
 <body>
 <link rel="stylesheet" type="text/css" href="${context_url}/uiloader/static/jqueryStep/css/jquery.step.css" />
 <script type="text/javascript" src="${context_url}/uiloader/static/jqueryStep/js/jquery.step.min.js"></script>
@@ -52,10 +68,9 @@
         <div id="con1" class="formControls col-xs-8 col-xs-offset-3">
             <input type="text" name="username" id="username" placeholder="注册时手机号"
                    class="input-text size-L ">
-            <input class="input-text size-L " type="text"
+            <input class="input-text size-L validate[required,ajax[ajaxJcaptchaCall]]" type="text"
                    placeholder="验证码" id="jcaptchaCode" name="jcaptchaCode" style="width:150px;">
-            <img id="jcaptchaImage" src="jcaptcha.jpg"> <a class="jcaptcha-btn">看不清，换一张</a>
-        </div>
+            <img id="jcaptchaImage" src="jcaptcha.jpg"> <a class="jcaptcha-btn">看不清，换一张</a></div>
         </div>
     </form>
     <form >
@@ -110,17 +125,22 @@
 
 
 
-    $("#nextBtn").on("click", function() {
+    $("#nextBtn").on("click",function() {
         var userName=$("#username").val();
+
         if($step.getIndex()=="0"){
-            /*var reg="^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$";
+            if (userName ==null){
+                alert("输入的手机号不能为空!")
+            }
+            var reg=/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
             if (!reg.test(userName)){
                 alert("不是正确的手机号");
                 return;
-            }*/
+            }
+
             $.ajax({
                 type: "post",
-                url: "${context_root}/system/confirmUser.action?userName=" +userName,
+                url: "${pageContext.request.contextPath}/system/confirmUser.action?userName=" +userName,
                 dataType: "json",
                 success: function(data){
                     if(data.s == true){
@@ -144,7 +164,7 @@
             var verify=$("#verify").val();
             $.ajax({
                 type: "post",
-                url: "${context_root}/system/checkVerify.action?verifyCode=" +verify,
+                url: "${pageContext.request.contextPath}/system/checkVerify.action?verifyCode=" +verify,
                 dataType: "json",
                 success: function(data){
                     if(data.s == true){
@@ -165,16 +185,14 @@
         }
         if($step.getIndex()=="2"){
             var password=$("#password").val();
-            alert(password);
             var rPassword=$("#rPassword").val();
-            alert(rPassword);
             if (password!=rPassword){
                 alert("两次输入的密码不一致");
                 return;
             }
             $.ajax({
                 type: "post",
-                url: "${context_root}/system/changePassword.action?userName="+userName+"&password="+password,
+                url: "${pageContext.request.contextPath}/system/changePassword.action?userName="+userName+"&password="+password,
                 dataType: "json",
                 success: function(data){
                     if(data.s == true){
@@ -215,7 +233,17 @@
             "url": "${pageContext.request.contextPath}/jcaptcha-validate.action",
             "alertTextLoad": "* 正在验证，请稍等。。。"
         };
+    });
 
+    //点击验证码
+    $(".jcaptcha-btn").click(function () {
+        var img = $("#jcaptchaImage")
+        var imageSrc = img.attr("src");
+        if (imageSrc.indexOf("?") > 0) {
+            imageSrc = imageSrc.substr(0, imageSrc.indexOf("?"));
+        }
+        imageSrc = imageSrc + "?" + new Date().getTime();
+        img.attr("src", imageSrc);
     });
 
 //60s倒计时
@@ -239,7 +267,6 @@
         $("#btn").on("click",function () {
             console.log(this)
             time(this);
-
             sendVery();
         });
         
@@ -248,11 +275,11 @@
     function sendVery() {
     $.ajax({
         type: "post",
-        url: "${context_root}/system/sendVerify.action?userName="+$("#username").val(),
+        url: "${pageContext.request.contextPath}/system/sendVerify.action?userName="+$("#username").val(),
         dataType: "json",
         success: function(data){
             if(data.s == true){
-                parent.layer.alert("验证码发送成功", {icon: 2,title:"系统提示"});
+                parent.layer.alert("手机验证码发送成功", {icon: 5,title:"系统提示"});
             }else{
                 parent.layer.alert("修改密码失败", {icon: 2,title:"系统提示"});
             }

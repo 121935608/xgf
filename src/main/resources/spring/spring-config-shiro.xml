@@ -127,6 +127,7 @@
 				/system/checkVerify.action= anon
 				/system/sendVerify.action= anon
 				/system/changePassword.action =anon
+				/jcaptcha-validate.action=anon
 			</value>
 		</property>
 	</bean>
