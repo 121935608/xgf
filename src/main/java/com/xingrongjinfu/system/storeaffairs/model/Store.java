@@ -32,7 +32,7 @@ public class Store {
 	    private String innerStorePic;//'店铺店内照',
 	    private String contractPic;//'租赁合同',
 	    private String transactionPic;//'经营流水',
-	    private Integer utilitiesPic;//'水电费',
+	    private String utilitiesPic;//'水电费',
 	    private String contract;//'合同信息',
 	    private String process;//'未认证:WRZ 审核中:APRING 审核不通过:APRNO 审核通过:APRYES',
 	    private Integer status;//'状态：1 正常 -1 已删除',
@@ -171,11 +171,12 @@ public class Store {
 			this.transactionPic = transactionPic;
 		}
 
-		public Integer getUtilitiesPic() {
+		 
+		public String getUtilitiesPic() {
 			return utilitiesPic;
 		}
 
-		public void setUtilitiesPic(Integer utilitiesPic) {
+		public void setUtilitiesPic(String utilitiesPic) {
 			this.utilitiesPic = utilitiesPic;
 		}
 

@@ -35,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 查询店铺详细信息 -->
 	<select id="getStoreInfo"  parameterType="java.lang.String"   resultType="Store">
-		select storeId,storeName,userName,idCard,phone,area,address from t_store where storeId = #{storeId}
+		select storeId,storeName,userName,idCard,phone,area,address,process,supervisorId,licensePic,frontStorePic,innerStorePic,contractPic,transactionPic,utilitiesPic from t_store where storeId = #{storeId}
 	</select>
 	
 	<!-- 查询银行账户详细信息 -->
@@ -45,7 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where userId=(select userId from t_store where storeId = #{storeId}) 
 	</select>
 	
-	<!-- 查询银行账户详细信息 -->
+	 
 	<select id="updateCheckToStore"  parameterType="Store"   resultType="java.lang.Integer">
 		update  t_store  
 		<set>

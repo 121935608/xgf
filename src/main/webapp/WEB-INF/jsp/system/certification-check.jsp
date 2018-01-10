@@ -3,7 +3,7 @@
 <ys:contentHeader/>
 <style>
 	.info-div{
-		margin: 0px 20px;
+		margin: 0  20px 20px 20px;
 	}
 	.info-div>div{
 		margin-top: 5px  !important;
@@ -120,45 +120,30 @@
 					<h4>证件信息</h4>
 				</div>
 			</div> 
-			<div class="row cl">
-				<div class="col-xs-2 col-sm-2"> 
+			<!-- licensePic,frontStorePic,innerStorePic,contractPic,transactionPic,utilitiesPic -->
+			<div class="row cl"> 
+				<div class="col-xs-1 col-sm-1"> 
 				</div>
 				<div class="col-xs-2 col-sm-2">
-					<img alt="ssss" src="">
-					<p>身份证正面</p>
+					<img alt="ssss" src="${store['licensePic']}">
+					<p class="form-label">营业执照</p>
 				</div>
 				<div class="col-xs-2 col-sm-2">
-					<img alt="ssss" src="">
-					<p>身份证正面</p>
+					<img alt="ssss" src="${store['frontStorePic']}">
+					<p class="form-label">店铺门脸照</p>
 				</div>
 				<div class="col-xs-2 col-sm-2">
-					<img alt="ssss" src="">
-					<p>身份证正面</p>
-				</div>
+					<img alt="ssss" src="${store['innerStorePic']}">
+					<p class="form-label">店铺店内照</p>
+				</div>  
 				<div class="col-xs-2 col-sm-2">
-					<img alt="ssss" src="">
-					<p>身份证正面</p>
-				</div>
-			</div> 
-			<div class="row cl">
-				<div class="col-xs-2 col-sm-2"> 
-				</div>
+					<img alt="ssss" src="${store['contractPic']}">
+					<p class="form-label">租赁合同</p>
+				</div> 
 				<div class="col-xs-2 col-sm-2">
-					<img alt="ssss" src="">
-					<p>身份证正面</p>
-				</div>
-				<div class="col-xs-2 col-sm-2">
-					<img alt="ssss" src="">
-					<p>身份证正面</p>
-				</div>
-				<div class="col-xs-2 col-sm-2">
-					<img alt="ssss" src="">
-					<p>身份证正面</p>
-				</div>
-				<div class="col-xs-2 col-sm-2">
-					<img alt="ssss" src="">
-					<p>身份证正面</p>
-				</div>
+					<img alt="ssss" src="${store['utilitiesPic']}">
+					<p class="form-label">租赁水电费</p>
+				</div> 
 			</div>
 		</div>
 		  
@@ -167,7 +152,7 @@
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-3">审核结果</label>
 				<div class="formControls col-xs-8 col-sm-4">
-					<y:select id="process" name="process" codeGroup="${ispass}" selectedValue=""
+					<y:select id="process" name="process" codeGroup="${ispass}" selectedValue="${store['process']}"
 								cssClass="select" headerKey="" headerValue="请选择"> 
 					</y:select>
 				</div>
@@ -176,8 +161,8 @@
 				<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>督导员</label>
 				
 				<div class="formControls col-xs-8 col-sm-4">
-						<y:select id="supervisorId" name="supervisorId" codeGroup="${supervisorList}" selectedValue=""
-								cssClass="select" headerKey="" headerValue="请选择督导员">
+						<y:select id="supervisorId" name="supervisorId" codeGroup="${supervisorList}" selectedValue="${store['supervisorId']}"
+								cssClass="select" headerKey="" headerValue="请选择">
 						</y:select>
 				</div> 
 			</div> 

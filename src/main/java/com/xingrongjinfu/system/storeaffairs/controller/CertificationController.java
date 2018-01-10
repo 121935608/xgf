@@ -118,7 +118,15 @@ class CertificationController extends BaseController {
         ModelAndView modelAndView = this.getModelAndView(StoreaffairConstant.CERTIFICATION_CHECK_PAGE);
         //获取商户信息
         //List<Store> storeList=getStoreInfo(this.getRequest().getParameter("storeId"));
-        modelAndView.addObject("store", getStoreInfo(storeId));
+        Store s=getStoreInfo(storeId); 
+        //licensePic,frontStorePic,innerStorePic,contractPic,transactionPic,utilitiesPic
+        s.setLicensePic("http://xrjf.oss-cn-shanghai.aliyuncs.com/"+s.getLicensePic());
+        s.setFrontStorePic("http://xrjf.oss-cn-shanghai.aliyuncs.com/"+s.getFrontStorePic());
+        s.setInnerStorePic("http://xrjf.oss-cn-shanghai.aliyuncs.com/"+s.getInnerStorePic());
+        s.setContractPic("http://xrjf.oss-cn-shanghai.aliyuncs.com/"+s.getContractPic());
+        s.setTransactionPic("http://xrjf.oss-cn-shanghai.aliyuncs.com/"+s.getTransactionPic());
+        s.setUtilitiesPic("http://xrjf.oss-cn-shanghai.aliyuncs.com/"+s.getUtilitiesPic());
+        modelAndView.addObject("store",s);
         modelAndView.addObject("bankaccount", getBankAccountInfo(storeId));
        
         
