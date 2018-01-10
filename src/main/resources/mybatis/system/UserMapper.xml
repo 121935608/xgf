@@ -123,23 +123,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	</update>
 
 	<!-- 修改B端用户密码 -->
-	<update id="updateInfo" parameterType="User">
-		update sys_user
+	<update id="updatePassword" parameterType="User" >
+		UPDATE sys_user
 		<set>
-			<if test="password != null and password != ''">password = #{password},</if>
-			<!--<if test="accountName != null and accountName != ''">accountName = #{accountName},</if>-->
-			<!--<if test="email != null and email != ''">email = #{email},</if>
-            <if test="mobilePhone != null and mobilePhone != ''">mobilePhone = #{mobilePhone},</if>-->
-			<!--<if test="locked !=null and locked != ''">locked = #{locked},</if>-->
-			<!--<if test="description != null and description != ''">description = #{description},</if>-->
+			<if test="password !=null and password !=''"> password =#{password}</if>
 		</set>
-		where 1=1 AND type='B'
-		<if test="userName != null and userName  != ''">and userName = #{userName}</if>
+		WHERE type='B' <if test="userName != null and userName  != ''">AND userName = #{userName}</if>
 	</update>
  	
  	<!-- 插入用户信息 -->
  	<insert id="addUserInfo" parameterType="User" useGeneratedKeys="true" keyProperty="userId">
  		insert into sys_user(
+			<if test="userId != null and userId !=''">userId,</if>
  			<if test="userName != null and userName != ''">userName,</if>
  			<if test="password != null and password != ''">password,</if>
  			<if test="accountName != null and accountName != ''">accountName,</if>
@@ -150,6 +145,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			type,
  			createTime
  		)values(
+			<if test="userId != null and userId !=''">#{userId},</if>
  			<if test="userName != null and userName != ''">#{userName},</if>
  			<if test="password != null and password != ''">#{password},</if>
  			<if test="accountName != null and accountName != ''">#{accountName},</if>

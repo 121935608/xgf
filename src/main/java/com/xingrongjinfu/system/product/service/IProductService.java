@@ -32,7 +32,7 @@ public interface IProductService {
      * 查询商品信息
      * @return
      */
-    List<TableDataInfo>pageInfoQuery(PageUtilEntity pageUtilEntity);
+    List<Product>pageInfoQuery(PageUtilEntity pageUtilEntity);
 
     /**
      * 查询所有分类

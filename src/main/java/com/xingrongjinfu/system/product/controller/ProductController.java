@@ -76,8 +76,12 @@ public class ProductController extends BaseController{
     public ModelAndView findProductList()
     {
         PageUtilEntity pageUtilEntity=this.getPageUtilEntity();
-        List<TableDataInfo> tableDataInfo=productService.pageInfoQuery(pageUtilEntity);
-        return buildDataTable(pageUtilEntity.getTotalResult(),tableDataInfo);
+        List<Product> tableDataInfo=productService.pageInfoQuery(pageUtilEntity);
+        Integer i=1;
+        for(Product product:tableDataInfo){
+            product.setCommodityNum(pageUtilEntity.getPage()+(i++));
+        }
+        return buildDatasTable(pageUtilEntity.getTotalResult(),tableDataInfo);
     }
 
     /**

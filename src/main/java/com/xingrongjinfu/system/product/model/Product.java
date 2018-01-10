@@ -21,7 +21,7 @@ import java.util.Date;
  * @since 1.0.0
  */
 public class Product {
-
+    private Integer commodityNum;//序号
     private String commodityId;
     private String commodityName;
     private String commodityNo;
@@ -48,6 +48,14 @@ public class Product {
     private String country;
     private String type;
     private String categoryName;
+
+    public Integer getCommodityNum() {
+        return commodityNum;
+    }
+
+    public void setCommodityNum(Integer commodityNum) {
+        this.commodityNum = commodityNum;
+    }
 
     public String getCommodityId() {
         return commodityId;

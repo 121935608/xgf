@@ -136,5 +136,5 @@ public interface IUserService
     /**
      * 修改B端用户密码
      */
-    int modifyPassword(User user);
+    int updatePassword(User user);
 }

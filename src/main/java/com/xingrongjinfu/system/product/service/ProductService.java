@@ -36,7 +36,7 @@ public class ProductService implements IProductService {
     private IProductDao productDao;
 
     @Override
-    public List<TableDataInfo> pageInfoQuery(PageUtilEntity pageUtilEntity) {
+    public List<Product> pageInfoQuery(PageUtilEntity pageUtilEntity) {
         return productDao.pageInfoQuery(pageUtilEntity);
     }
 

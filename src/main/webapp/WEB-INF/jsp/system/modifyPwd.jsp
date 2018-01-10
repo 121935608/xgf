@@ -71,7 +71,7 @@
     <form >
         <div class="row cl">
             <div style="display:none;" class="formControls col-xs-8 col-xs-offset-3" id="con3">
-                <input type="password" name="password" placeholder="请输入新密码"
+                <input type="password" name="password" id="password" placeholder="请输入新密码"
                        class="input-text size-L validate[required]">
                 <input type="password" name="rPassword" id="rPassword" placeholder="请确认新密码"
                        class="input-text size-L validate[required]">
@@ -165,8 +165,10 @@
         }
         if($step.getIndex()=="2"){
             var password=$("#password").val();
+            alert(password);
             var rPassword=$("#rPassword").val();
-            if (!password.equals (rPassword)){
+            alert(rPassword);
+            if (password!=rPassword){
                 alert("两次输入的密码不一致");
                 return;
             }
@@ -176,8 +178,7 @@
                 dataType: "json",
                 success: function(data){
                     if(data.s == true){
-                        $step.nextStep();
-                        $index.text($step.getIndex());
+                        window.location.href="${context_root}/login.jsp";
                     }else{
                         parent.layer.alert("修改密码失败", {icon: 2,title:"系统提示"});
                     }

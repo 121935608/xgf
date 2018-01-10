@@ -33,7 +33,7 @@ public interface IProductDao {
      * @param pageUtilEntity
      * @return
      */
-    List<TableDataInfo>pageInfoQuery(PageUtilEntity pageUtilEntity);
+    List<Product>pageInfoQuery(PageUtilEntity pageUtilEntity);
 
     /**
      * 查询所有分类

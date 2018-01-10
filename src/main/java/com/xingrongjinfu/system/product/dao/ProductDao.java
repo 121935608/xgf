@@ -33,10 +33,10 @@ public class ProductDao extends DynamicObjectBaseDao implements IProductDao {
 
 
     @Override
-    public List<TableDataInfo> pageInfoQuery(PageUtilEntity pageUtilEntity) {
-        List<TableDataInfo> pageInfoQuery=null;
+    public List<Product> pageInfoQuery(PageUtilEntity pageUtilEntity) {
+        List<Product> pageInfoQuery=null;
         try {
-            pageInfoQuery=(List<TableDataInfo>)this.findForList("ProductMapper.pageInfoQuery",pageUtilEntity);
+            pageInfoQuery=(List<Product>)this.findForList("ProductMapper.pageInfoQuery",pageUtilEntity);
         }catch (Exception e)
         {
          e.printStackTrace();

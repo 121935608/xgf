@@ -218,10 +218,10 @@ public class UserService implements IUserService
     }
 
     @Override
-    public int modifyPassword(User user) {
+    public int updatePassword(User user) {
         String password = new PasswordService().encryptPassword(user.getUserName(), user.getPassword(), "");
         user.setPassword(password);
-        return userDao.updateInfo(user);
+        return userDao.updatePassword(user);
 
     }
 }

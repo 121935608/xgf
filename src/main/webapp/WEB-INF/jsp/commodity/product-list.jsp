@@ -74,8 +74,8 @@ $(document).ready(function(){
             "sClass": "text-c",
             "bSearchable": false,
             "mRender": function(data, type, row) {
-                if (row.commodityId != null) {
-                    return row.commodityId;
+                if (row.commodityNum != null) {
+                    return row.commodityNum;
                 } else {
                     return "";
                 }

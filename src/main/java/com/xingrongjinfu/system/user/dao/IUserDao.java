@@ -111,5 +111,5 @@ public interface IUserDao
     /**
      * 修改B端用户信息
      */
-    int updateInfo(User user);
+    int updatePassword(User user);
 }

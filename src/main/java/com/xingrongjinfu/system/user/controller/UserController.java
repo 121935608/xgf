@@ -351,10 +351,7 @@ public class UserController extends BaseController {
     @RequestMapping(UserConstant.CHANGE_PASSEORD)
     public @ResponseBody Message changePssword(User user){
         int result=0;
-        String userId=user.getUserId();
-        if (userId != null && userId !="") {
-            result = userService.modifyPassword(user);
-        }
+        result = userService.updatePassword(user);
         return new Message(result);
     }
 

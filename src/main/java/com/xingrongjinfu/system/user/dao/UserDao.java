@@ -177,7 +177,7 @@ public class UserDao extends DynamicObjectBaseDao implements IUserDao
     }
 
     @Override
-    public int updateInfo(User user) {
-        return this.update("SystemUserMapper.updateInfo",user);
+    public int updatePassword(User user) {
+        return this.update("SystemUserMapper.updatePassword",user);
     }
 }

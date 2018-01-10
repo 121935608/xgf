@@ -125,8 +125,8 @@
 				/toModifyPassword.action = anon
 				/system/confirmUser.action =anon
 				/system/checkVerify.action= anon
-				/system/changePassword.action= anon
 				/system/sendVerify.action= anon
+				/system/changePassword.action =anon
 			</value>
 		</property>
 	</bean>
