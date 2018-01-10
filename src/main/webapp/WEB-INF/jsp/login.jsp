@@ -72,7 +72,7 @@
         </form>
         <div class="row cl">
             <div class="formControls col-xs-8 col-xs-offset-8">
-            <a href="${context_root}/toModifyPassword.action" class="btn btn-success radius size-L">忘记密码?</a>
+            <a href="${pageContext.request.contextPath}/toModifyPassword.action" class="btn btn-success radius size-L">忘记密码?</a>
             </div>
         </div>
     </div>
