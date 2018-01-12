@@ -112,4 +112,17 @@ public interface IUserDao
      * 修改B端用户信息
      */
     int updatePassword(User user);
+
+    /**
+     * 查询商户的数量
+     */
+    int findAllMerchant();
+    /**
+     * 查询认证人数
+     */
+    int findAllCount();
+    /**
+     * 查询贷款申请人数
+     */
+    int findAllOrders();
 }

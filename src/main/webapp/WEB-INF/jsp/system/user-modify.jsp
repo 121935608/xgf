@@ -61,12 +61,33 @@
 </article>
 
 <script type="text/javascript">
+    // 只能输入英文
+    jQuery.validator.addMethod("english", function (value, element) {
+        var chrnum = /^([a-zA-Z]+)$/;
+        return this.optional(element) || (chrnum.test(value));
+    }, "账号不符合规范");
 $("#form-user-modify").validate({
 	rules:{
-		accountName:{
-			required:true,
-			isSpace:true,
-		},
+        userName: {
+            required: true,
+            minlength: 5,
+            isSpace: true,
+            english: true,
+            remote: {
+                url: "${context_root}/system/checkNameUnique.action",
+                type: "post",
+                dataType: "text",
+                data: {
+                    name: function () {
+                        return $.trim($("#userName").val());
+                    }
+                },
+                dataFilter: function (data, type) {
+                    if (data == "0") return true;
+                    else return false;
+                }
+            }
+        },
 		/*email:{
 			required:true,
 			email:true

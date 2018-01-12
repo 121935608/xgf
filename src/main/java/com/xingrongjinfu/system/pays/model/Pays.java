@@ -25,6 +25,7 @@ public class Pays implements Serializable
 {
 
     private static final long serialVersionUID = 1L;
+    private Integer cashNum;
     private String cashId;
     private String userId;
     private String tradeCode;
@@ -35,6 +36,14 @@ public class Pays implements Serializable
     private Date addTime;
     private String addIP;
     private String storeName;
+
+    public Integer getCashNum() {
+        return cashNum;
+    }
+
+    public void setCashNum(Integer cashNum) {
+        this.cashNum = cashNum;
+    }
 
     public String getCashId() {
         return cashId;

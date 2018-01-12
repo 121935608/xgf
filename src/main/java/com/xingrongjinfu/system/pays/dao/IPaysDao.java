@@ -10,6 +10,7 @@
  */
 package com.xingrongjinfu.system.pays.dao;
 
+import com.xingrongjinfu.system.pays.model.Pays;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 
@@ -29,4 +30,7 @@ public interface IPaysDao {
      * 查询收银支付流水
      */
     List<TableDataInfo>pageInfoQuery(PageUtilEntity pageUtilEntity);
+
+
+    List<Pays> firstPageInfoQuery();
 }

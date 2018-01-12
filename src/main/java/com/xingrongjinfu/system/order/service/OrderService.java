@@ -58,4 +58,9 @@ public class OrderService implements IOrderService {
     public List<TableDataInfo> expressPageInfoQuery(PageUtilEntity pageUtilEntity) {
         return orderDao.expressPageInfoQuery(pageUtilEntity);
     }
+
+    @Override
+    public int findAllOrders() {
+        return orderDao.findAllOrders();
+    }
 }

@@ -77,10 +77,10 @@
 
 <script type="text/javascript">
    // 只能输入英文
-    jQuery.validator.addMethod("english", function (value, element) {
-        var chrnum = /^([a-zA-Z]+)$/;
-        return this.optional(element) || (chrnum.test(value));
-    }, "只能输入字母");
+   jQuery.validator.addMethod("english", function (value, element) {
+       var chrnum = /^([a-zA-Z]+)$/;
+       return this.optional(element) || (chrnum.test(value));
+   }, "账号不符合规范");
     $("#form-user-add").validate({
         rules: {
             userName: {

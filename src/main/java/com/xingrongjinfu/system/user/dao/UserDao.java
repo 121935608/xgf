@@ -180,4 +180,16 @@ public class UserDao extends DynamicObjectBaseDao implements IUserDao
     public int updatePassword(User user) {
         return this.update("SystemUserMapper.updatePassword",user);
     }
+
+    @Override
+    public int findAllMerchant() {
+        return (int)this.findForObject("SystemUserMapper.findAllMerchant",null);
+    }
+
+    public int findAllCount() {
+        return (int)this.findForObject("SystemUserMapper.findAllCount",null);
+    }
+    public int findAllOrders() {
+        return (int)this.findForObject("SystemUserMapper.findAllOrders",null);
+    }
 }

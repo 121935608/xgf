@@ -130,4 +130,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			)
 		</if>
 	</select>
+
+	<select id="findAllOrders" resultType="Integer">
+		SELECT count(orderNumber) FROM t_order WHERE status=1 AND orderStatus !='1'
+	</select>
 </mapper> 

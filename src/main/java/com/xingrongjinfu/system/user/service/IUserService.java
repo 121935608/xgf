@@ -137,4 +137,17 @@ public interface IUserService
      * 修改B端用户密码
      */
     int updatePassword(User user);
+
+    /**
+     * 查询所有的商户
+     */
+    int findAllMerchant();
+    /**
+     * 查询所有的认证人数
+     */
+    int findAllCount();
+    /**
+     * 查询所有的贷款人数
+     */
+    int findAllOrders();
 }

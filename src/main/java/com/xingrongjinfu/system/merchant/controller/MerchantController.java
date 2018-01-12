@@ -111,7 +111,6 @@ public class MerchantController extends BaseController {
     {
         ModelAndView modelAndView=this.getModelAndView(MerchantConstant.MERCHANT_BALANCE_PAGE);
         Merchant merchants = merchantService.getMerchantInfo(merchant);
-
         modelAndView.addObject("merchant",merchants);
         return modelAndView;
 

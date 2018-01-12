@@ -10,6 +10,7 @@
  */
 package com.xingrongjinfu.system.pays.service;
 
+import com.xingrongjinfu.system.pays.model.Pays;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 
@@ -31,4 +32,9 @@ public interface IPaysService {
      * @return
      */
     List<TableDataInfo>pageInfoQuery(PageUtilEntity pageUtilEntity);
+
+    /**
+     * 首页查询
+     */
+    List<Pays>firstPageInfoQuery();
 }

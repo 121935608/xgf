@@ -53,4 +53,9 @@ public interface IOrderService {
      * 查询订单快递信息
      */
     List<TableDataInfo>expressPageInfoQuery(PageUtilEntity pageUtilEntity);
+
+    /**
+     * 查询所有订单的数量
+     */
+    int findAllOrders();
 }

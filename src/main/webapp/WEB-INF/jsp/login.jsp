@@ -90,7 +90,7 @@
         top.location.href = location.href;
     }
 
-    $(function () {
+   $(function () {
         $("#username").focus();
         $(".jcaptcha-btn").click(function () {
             var img = $("#jcaptchaImage")

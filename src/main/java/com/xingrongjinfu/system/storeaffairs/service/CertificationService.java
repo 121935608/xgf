@@ -64,4 +64,9 @@ public class CertificationService implements ICertificationService
     {
     	return certificationDao.saveCertificationCheck(store);   
     }
+
+    @Override
+    public int findAllCount() {
+        return certificationDao.findAllCount();
+    }
 }

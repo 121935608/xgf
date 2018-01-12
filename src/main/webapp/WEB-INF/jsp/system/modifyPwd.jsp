@@ -18,7 +18,19 @@
     <%@include file="/WEB-INF/jsp/common/import-js.jspf"%>
 </head>
 <body>
+<link href="${context_url}/uiloader/static/h-ui/css/H-ui.min.css" rel="stylesheet" type="text/css"/>
+<link href="${context_url}/uiloader/static/h-ui.admin/css/H-ui.login.css" rel="stylesheet" type="text/css"/>
+<link href="${context_url}/uiloader/static/h-ui.admin/css/style.css" rel="stylesheet" type="text/css"/>
+<link href="${context_url}/uiloader/lib/Hui-iconfont/1.0.7/iconfont.css" rel="stylesheet" type="text/css"/>
+<link href="${context_url}/uiloader/lib/jQuery-Validation-Engine/css/validationEngine.jquery.css?1" rel="stylesheet">
+<link href="${context_url}/uiloader/lib/jQuery-Validation-Engine/css/template.css?1" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="${context_url}/uiloader/static/jqueryStep/css/jquery.step.css" />
+<script type="text/javascript" src="${context_url}/uiloader/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="${context_url}/uiloader/static/h-ui/js/H-ui.js"></script>
+<script src="${context_url}/uiloader/lib/jQuery-Validation-Engine/js/jquery.validationEngine.js?1" charset="utf-8"
+        type="text/javascript"></script>
+<script src="${context_url}/uiloader/lib/jQuery-Validation-Engine/js/languages/jquery.validationEngine-zh_CN.js?1" charset="utf-8"
+        type="text/javascript"></script>
 <script type="text/javascript" src="${context_url}/uiloader/static/jqueryStep/js/jquery.step.min.js"></script>
 <style>
     button {
@@ -63,14 +75,15 @@
 </style>
 <div class="main">
     <div id="step"></div>
-    <form >
+    <form id="check-form">
         <div class="row cl">
         <div id="con1" class="formControls col-xs-8 col-xs-offset-3">
             <input type="text" name="username" id="username" placeholder="注册时手机号"
                    class="input-text size-L ">
             <input class="input-text size-L validate[required,ajax[ajaxJcaptchaCall]]" type="text"
                    placeholder="验证码" id="jcaptchaCode" name="jcaptchaCode" style="width:150px;">
-            <img id="jcaptchaImage" src="jcaptcha.jpg"> <a class="jcaptcha-btn">看不清，换一张</a></div>
+            <img id="jcaptchaImage" src="jcaptcha.jpg"> <a class="jcaptcha-btn">看不清，换一张</a>
+        </div>
         </div>
     </form>
     <form >
@@ -134,7 +147,7 @@
             }
             var reg=/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
             if (!reg.test(userName)){
-                alert("不是正确的手机号");
+                alert("请输入正确的手机号");
                 return;
             }
 
@@ -229,13 +242,15 @@
             imageSrc = imageSrc + "?" + new Date().getTime();
             img.attr("src", imageSrc);
         });
-        $.validationEngineLanguage.allRules.ajaxJcaptchaCall = {
-            "url": "${pageContext.request.contextPath}/jcaptcha-validate.action",
-            "alertTextLoad": "* 正在验证，请稍等。。。"
-        };
+         $.validationEngineLanguage.allRules.ajaxJcaptchaCall = {
+                "url": "${pageContext.request.contextPath}/jcaptcha-validate.action",
+                "alertTextLoad": "* 正在验证，请稍等。。。"
+            };
+            $("#check-form").validationEngine({scroll: false});
+
     });
 
-    //点击验证码
+    /*//点击验证码
     $(".jcaptcha-btn").click(function () {
         var img = $("#jcaptchaImage")
         var imageSrc = img.attr("src");
@@ -244,7 +259,7 @@
         }
         imageSrc = imageSrc + "?" + new Date().getTime();
         img.attr("src", imageSrc);
-    });
+    });*/
 
 //60s倒计时
     var wait=60;

@@ -46,6 +46,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			)
 		</if>
 	</select>
+	<select id="PayPageInfoQuery"
+		resultType="Pays">
+		select tradeCode,DATE_FORMAT(`addTime`,'%Y-%m-%d %H:%i:%S') `addTime`,money/100 money,payType
+		from m_cashier m
+		inner join sys_user s on m.userId = s.userId
+		/*limit 10*/
+	</select>
 
 
 </mapper> 

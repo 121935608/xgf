@@ -224,4 +224,17 @@ public class UserService implements IUserService
         return userDao.updatePassword(user);
 
     }
+
+    @Override
+    public int findAllMerchant() {
+        return userDao.findAllMerchant();
+    }
+    @Override
+    public int findAllCount() {
+        return userDao.findAllCount();
+    }
+    @Override
+    public int findAllOrders() {
+        return userDao.findAllOrders();
+    }
 }

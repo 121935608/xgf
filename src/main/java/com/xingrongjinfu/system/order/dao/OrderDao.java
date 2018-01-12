@@ -72,4 +72,9 @@ public class OrderDao extends DynamicObjectBaseDao implements IOrderDao {
         }
         return expressPageInfoQuery;
     }
+
+    @Override
+    public int findAllOrders() {
+        return (int) this.findForObject("OrderMapper.findAllOrders",null);
+    }
 }

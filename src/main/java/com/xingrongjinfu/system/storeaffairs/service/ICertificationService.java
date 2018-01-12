@@ -51,5 +51,9 @@ public interface ICertificationService
      * 更新审核信息到Store表
      */
     public  int saveCertificationCheck(Store store);
-      
+
+    /**
+     * 查询所有认证申请的数量
+     */
+    int findAllCount();
 }

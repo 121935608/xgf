@@ -27,6 +27,7 @@ public class CertificationDao extends DynamicObjectBaseDao implements ICertifica
      * @return 角色信息集合信息
      */
     @SuppressWarnings("unchecked")
+    @Override
     public List<TableDataInfo> pageInfoQuery(PageUtilEntity pageUtilEntity)
     {
         List<TableDataInfo> userPageInfo = null;
@@ -47,6 +48,7 @@ public class CertificationDao extends DynamicObjectBaseDao implements ICertifica
      * @return 监督员信息集合 
      */
 	@SuppressWarnings("unchecked")
+    @Override
 	public List<Supervisor> getSupervisorList() {
 		List<Supervisor> supervisorList = null;
 		try
@@ -65,6 +67,7 @@ public class CertificationDao extends DynamicObjectBaseDao implements ICertifica
 	/**
      * 获取商户信息
      */
+	@Override
     public  Store getStoreInfo(String storeid) 
     {  
     	Store storeInfo = null;
@@ -82,6 +85,7 @@ public class CertificationDao extends DynamicObjectBaseDao implements ICertifica
     /**
      * 获取银行账户信息
      */
+    @Override
     public  BankAccount getBankAccountInfo(String storeid)
     { 
     	BankAccount bankAccountInfo = null;
@@ -99,6 +103,7 @@ public class CertificationDao extends DynamicObjectBaseDao implements ICertifica
     /**
      * 更新审核信息到Store表
      */
+    @Override
     public  int saveCertificationCheck(Store store)
     {
     	int result = 0;
@@ -111,5 +116,10 @@ public class CertificationDao extends DynamicObjectBaseDao implements ICertifica
             e.printStackTrace();
         }
 		return result; 
+    }
+
+    @Override
+    public int findAllCount() {
+        return (int) this.findForObject("StoreAffairMapper.findAllCount",null);
     }
 }

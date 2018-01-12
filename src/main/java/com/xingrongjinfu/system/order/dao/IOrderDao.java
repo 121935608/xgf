@@ -51,4 +51,10 @@ public interface IOrderDao {
      * 查询订单快递信息
      */
     List<TableDataInfo>expressPageInfoQuery(PageUtilEntity pageUtilEntity);
+
+    /**
+     * 查询订单总数
+     *
+     */
+    int findAllOrders();
 }

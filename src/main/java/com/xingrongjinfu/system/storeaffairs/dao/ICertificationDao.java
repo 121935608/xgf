@@ -44,4 +44,9 @@ public interface ICertificationDao
      * 更新审核信息到Store表
      */
     public  int saveCertificationCheck(Store store);
+
+    /**
+     * 查询所有的认证申请数量
+     */
+    int findAllCount();
 }

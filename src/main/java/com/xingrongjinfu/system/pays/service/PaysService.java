@@ -11,6 +11,7 @@
 package com.xingrongjinfu.system.pays.service;
 
 import com.xingrongjinfu.system.pays.dao.IPaysDao;
+import com.xingrongjinfu.system.pays.model.Pays;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +35,10 @@ public class PaysService implements IPaysService {
     @Override
     public List<TableDataInfo> pageInfoQuery(PageUtilEntity pageUtilEntity) {
         return paysDao.pageInfoQuery(pageUtilEntity);
+    }
+
+    @Override
+    public List<Pays> firstPageInfoQuery() {
+        return paysDao.firstPageInfoQuery();
     }
 }

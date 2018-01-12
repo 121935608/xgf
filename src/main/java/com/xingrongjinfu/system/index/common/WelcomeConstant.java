@@ -18,4 +18,8 @@ public interface WelcomeConstant
      */
     public final static String WELCOME_PAGE = "welcome";
 
+    /**
+     * 请求地址:首页数据
+     */
+    public final static String WELCOME_INFO_LIST="getInfo";
 }
