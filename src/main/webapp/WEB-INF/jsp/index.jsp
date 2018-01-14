@@ -17,10 +17,10 @@ function logout() {
 	<input runat="server" id="divScrollValue" type="hidden" value="" />
 	<div class="menu_dropdown bk_2">
 		<c:if test="${permissions!=null }">
-			<dl id="menu-system">
+			<dl>
 				<c:forEach items="${permissions }" var="permission">
-					<dt><i class="${permission.permsIcon }"></i> ${permission.permsName }<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-					<dd>
+					<dt style="text-decoration:none;"><i class="${permission.permsIcon }"></i> ${permission.permsName }</dt>
+					<dd style="background-color: #3E3E6A;padding-left: 30px;">
 						<ul>
 							<c:forEach items="${permission.children }" var="children">
 								<li><a _href="${context_root}${children.permsUrl }" data-title="${children.permsName }" href="javascript:void(0)">${children.permsName }</a></li>
@@ -34,11 +34,11 @@ function logout() {
 	</div>
 </aside>
 <div class="dislpayArrow hidden-xs"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a></div>
-<section class="Hui-article-box">
+<section class="Hui-article-box" style="border-right: 1px white solid;">
 	<div id="Hui-tabNav" class="Hui-tabNav hidden-xs">
 		<div class="Hui-tabNav-wp">
 			<ul id="min_title_list" class="acrossTab cl">
-				<li class="active"><span title="首页">首页</span><em></em></li>
+				<li style="height:30px;"><span title="首页" style="line-height: 30px;">首页</span><em></em></li>
 			</ul>
 			<nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
 				<ul class="cl">
@@ -51,17 +51,17 @@ function logout() {
 					</li>
 				</ul>
 			</nav>
-			<nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
-				<ul class="cl">
-					<li>${currentUser.accountName }</li>
-					<li class="dropDown dropDown_hover"> <a href="#" class="dropDown_A">${currentUser.userName } <i class="Hui-iconfont">&#xe6d5;</i></a>
-						<ul class="dropDown-menu menu radius box-shadow">
-							<li><a _href="${context_root}/system/userInfoDeail.action" data-title="个人信息" onClick="Hui_admin_tab(this)">个人信息</a></li>
-							<li><a id="loginOut" href=javascript:logout()>退出</a></li>
-						</ul>
-					</li>
-				</ul>
-			</nav>
+			<%--<nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">--%>
+				<%--<ul class="cl">--%>
+					<%--<li>${currentUser.accountName }</li>--%>
+					<%--<li class="dropDown dropDown_hover"> <a href="#" class="dropDown_A">${currentUser.userName } <i class="Hui-iconfont">&#xe6d5;</i></a>--%>
+						<%--<ul class="dropDown-menu menu radius box-shadow">--%>
+							<%--<li><a _href="${context_root}/system/userInfoDeail.action" data-title="个人信息" onClick="Hui_admin_tab(this)">个人信息</a></li>--%>
+							<%--<li><a id="loginOut" href=javascript:logout()>退出</a></li>--%>
+						<%--</ul>--%>
+					<%--</li>--%>
+				<%--</ul>--%>
+			<%--</nav>--%>
 		</div>
 		<div class="Hui-tabNav-more btn-group"><a id="js-tabNav-prev" class="btn radius btn-default size-S" href="javascript:;"><i class="Hui-iconfont">&#xe6d4;</i></a><a id="js-tabNav-next" class="btn radius btn-default size-S" href="javascript:;"><i class="Hui-iconfont">&#xe6d7;</i></a></div>
 	</div>
