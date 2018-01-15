@@ -176,7 +176,7 @@ public class AdvertisementController extends BaseController {
 	
 	/**
      * 根据ID删除
-     */
+     *//*
     @ActionControllerLog(title = "内容管理", action = "内容管理-删除广告", isSaveRequestData = true)
     @RequestMapping(AdvertisementConstant.DEL_URL)
     public @ResponseBody Message deleteAdvertisementById(Advertisement advertisement)
@@ -188,7 +188,7 @@ public class AdvertisementController extends BaseController {
                 result = advertisementService.deleteById(advertisement);           
         }
         return new Message(result);
-    }
+    }*/
 
 	/**
 	 * 启动/停用 操作
