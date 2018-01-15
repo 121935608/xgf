@@ -36,15 +36,6 @@
 				<input type="file"  id="picture" name="picture">
 			</div>
 		</div> 
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>状态：</label>
-			<div class="formControls col-xs-8 col-sm-4">
-			<y:select id="status" name="status"
-					codeGroup="${statusList}" selectedValue=""
-					cssClass="select" headerKey="0" headerValue="启用">
-			</y:select>
-			</div>
-		</div>  
 		
 		<div class="row cl">
 			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
