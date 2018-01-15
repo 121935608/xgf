@@ -91,8 +91,8 @@ $(document).ready(function(){
         "sClass": "text-c",
         "bSearchable": false,
         "mRender": function(data, type, row) {
-            if (row.salePrice != null) {
-                return row.salePrice;
+            if (row.totalPrice != null) {
+                return row.totalPrice;
             } else {
                 return "";
             }

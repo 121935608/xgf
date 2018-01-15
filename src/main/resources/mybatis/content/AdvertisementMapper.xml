@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ContentAdvertisementMapper">
+
+	<resultMap type="Advertisement" id="AdvertisementResult">
+		<result property="advertisementId" column="advertisementId" />
+		<result property="advertisementImg" column="advertisementImg" />
+		<result property="advertisementName" column="advertisementName" />
+		<result property="advertisementUrl" column="advertisementUrl" />
+		<result property="createTime" column="createTime" />
+		<result property="updateTime" column="updateTime" />
+		<result property="status" column="status" />
+	</resultMap>
+
+	<select id="findByAdvertisementId" parameterType="String"
+		resultType="Advertisement">
+		select * from t_advertisement where
+		advertisementId=#{advertisementId}
+	</select>
+
+	<select id="pageInfoQuery" parameterType="PageUtilEntity"
+		resultType="Advertisement" useCache="false">
+		SELECT
+		advertisementName,advertisementUrl,createTime,status
+		from
+		t_advertisement
+		WHERE 1=1
+
+		<if test="relationMap.beginTime != null and relationMap.beginTime != ''">
+			AND DATE_FORMAT(createTime,'%Y%m%d') &gt;=
+			DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
+		</if>
+		<if test="relationMap.endTime != null and relationMap.endTime != ''">
+			AND DATE_FORMAT(createTime,'%Y%m%d') &lt;=
+			DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
+		</if>
+		<if test="relationMap.status != null and relationMap.status != ''">
+			AND status = #{relationMap.status}
+		</if>
+		<if
+			test="relationMap.fuzzyCondition != null and relationMap.fuzzyCondition != ''">
+			AND (
+			advertisementName LIKE CONCAT(CONCAT('%', #{relationMap.fuzzyCondition}),'%')
+			)
+		</if>
+	</select>
+
+	<!-- 修改信息 -->
+	<update id="updateAdvertisementInfo" parameterType="Advertisement">
+		update t_advertisement
+		<set>
+			<if test="advertisementName != null and advertisementName != ''">
+				advertisementName = #{advertisementName},
+			</if>
+			<if test="advertisementUrl != null and advertisementUrl != ''">
+				advertisementUrl = #{advertisementUrl},
+			</if>
+			<if test="status.toString() != null and status.toString() != ''">
+				status = #{status},
+			</if>
+		</set>
+		where 1=1
+		<if test="advertisementId != null and advertisementId  != ''">
+			and advertisementId = #{advertisementId}
+		</if>
+	</update>
+
+	<!-- 插入信息 -->
+	<insert id="addAdvertisementInfo" parameterType="Advertisement"
+		keyProperty="advertisementId">
+		<selectKey keyProperty="advertisementId" resultType="java.lang.String"
+			order="BEFORE">
+			select uuid()
+		</selectKey>
+		insert into t_advertisement
+		( advertisementId,
+		<if test="advertisementImg != null and advertisementImg != ''">advertisementImg,</if>
+		<if test="advertisementName != null and advertisementName != ''">advertisementName,</if>
+		<if test="advertisementUrl != null and advertisementUrl != ''">advertisementUrl,</if>
+		createTime,updateTime,
+		<if test="status != null and status != ''">status</if>
+		)values(#{advertisementId},
+		<if test="advertisementImg != null and advertisementImg != ''">#{advertisementImg},</if>
+		<if test="advertisementName != null and advertisementName != ''">#{advertisementName},</if>
+		<if test="advertisementUrl != null and advertisementUrl != ''">#{advertisementUrl},</if>
+		sysdate(),sysdate(),
+		<if test="status != null and status != ''">#{status}</if>
+		)
+	</insert>
+
+</mapper> 

@@ -52,14 +52,7 @@ public class ProcurementController extends BaseController
 	public ModelAndView ProcurementList() {
 		
 		User user=this.getCurrentUser();
-		System.out.println(user.getUserId()+"----------------------------------");
-		System.out.println(user.getUserId()+"----------------------------------");
-		System.out.println(user.getUserId()+"----------------------------------");
-		System.out.println(user.getUserId()+"----------------------------------");
-		System.out.println(user.getUserId()+"----------------------------------");
-		System.out.println(user.getUserId()+"----------------------------------");
-		System.out.println(user.getUserId()+"----------------------------------");
-		System.out.println(user.getUserId()+"----------------------------------");
+		
 		PageUtilEntity pageUtilEntity = this.getPageUtilEntity();
 
 		String fuzzyCondition=pageUtilEntity.getRelationMap().get("fuzzyCondition");

@@ -41,7 +41,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			status = #{status},
  			</if>
  			<if test="addTime != null and addTime != ''">
- 			addTime = #{addTime},
+ 			addTime = #{addTime}
  			</if>
  			
  		</set>

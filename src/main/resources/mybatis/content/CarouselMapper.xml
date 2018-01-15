@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ContentCarouselMapper">
+
+	<resultMap type="Carousel" id="CarouselResult">
+		<result property="carouselId" column="carouselId"/>
+		<result property="carouselName" column="carouselName" />
+		<result property="sort" column="sort" />
+		<result property="carouselImg" column="carouselImg" />
+		<result property="visitNum" column="visitNum" />
+		<result property="createTime" column="createTime" />
+		<result property="updateTime" column="updateTime" />
+		<result property="status" column="status" />
+		<result property="url" column="url" />
+		<result property="carouselNum" column="carouselNum" />
+	</resultMap>
+	
+	<select id="findByCarouselId" parameterType="String" resultType="Carousel">
+		select * from t_carousel where carouselId=#{carouselId}
+	</select>
+	
+	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultType="Carousel" useCache="false">
+		SELECT carouselId,carouselNum,carouselName,sort,carouselImg,visitNum,createTime,status
+		from t_carousel
+		WHERE 1=1
+		
+		
+				<if test="relationMap.beginTime != null and relationMap.beginTime != ''"> 
+					AND DATE_FORMAT(createTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
+				</if>
+				<if test="relationMap.endTime != null and relationMap.endTime != ''"> 
+					AND DATE_FORMAT(createTime,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
+				</if>  
+
+			
+			<if test="relationMap.status != null and relationMap.status != ''">
+				AND status = #{relationMap.status}
+			</if> 
+			<if test="relationMap.fuzzyCondition != null and relationMap.fuzzyCondition != ''">
+				AND (
+						carouselName LIKE CONCAT(CONCAT('%', #{relationMap.fuzzyCondition}),'%')
+						)
+			</if>
+	</select>
+	
+	<!-- 修改信息 -->
+	<update id="updateCarouselInfo" parameterType="Carousel">
+ 		update t_carousel
+ 		<set>
+ 			<if test="carouselName != null and carouselName != ''">
+ 			carouselName = #{carouselName},
+ 			</if>
+ 			<if test="sort != null and sort != ''">
+ 			sort = #{sort},</if>
+ 			<if test="carouselImg != null and carouselImg != ''">
+ 			carouselImg = #{carouselImg},
+ 			</if>
+ 			<if test="visitNum != null and visitNum != ''">
+ 			visitNum = #{visitNum},
+ 			</if>
+ 			<if test="createTime != null and createTime != ''">
+ 			createTime = #{createTime},
+ 			</if>
+ 			<if test="updateTime != null and updateTime != ''">
+ 			updateTime = #{updateTime},
+ 			</if>
+ 			<if test="status.toString() != null and status.toString() != ''">
+ 			status = #{status},
+ 			</if>
+ 			<if test="url != null and url != ''">
+ 			url = #{url},
+ 			</if>
+ 			<if test="carouselNum != null and carouselNum != ''">
+ 			carouselNum = #{carouselNum}
+ 			</if>
+ 			
+ 		</set>
+ 		where 1=1
+ 		<if test="carouselId != null and carouselId  != ''">
+ 		and carouselId = #{carouselId}
+ 		</if>
+ 	</update>
+	
+	<!-- 插入信息 -->
+ 	<insert id="addCarouselInfo" parameterType="Carousel"  keyProperty="carouselId">
+ 		<selectKey keyProperty="carouselId" resultType="java.lang.String" order="BEFORE">
+ 			select uuid()
+ 		</selectKey>
+ 		insert into t_carousel
+ 		(	carouselId,
+ 			<if test="carouselName != null and carouselName != ''">carouselName,</if>
+ 			<if test="sort != null and sort != ''">sort,</if>
+ 			<if test="carouselImg != null and carouselImg != ''">carouselImg,</if>
+ 			<if test="visitNum != null and visitNum != ''">visitNum,</if>
+ 			createTime,updateTime,
+ 			<if test="status != null and status != ''">status,</if>
+ 			<if test="url != null and url != ''">url</if>
+ 			<!-- <if test="carouselNum != null and carouselNum != ''">carouselNum</if>	 -->		
+ 		)values(#{carouselId},
+ 			<if test="carouselName != null and carouselName != ''">#{carouselName},</if>
+ 			<if test="sort != null and sort != ''">#{sort},</if>
+ 			<if test="carouselImg != null and carouselImg != ''">#{carouselImg},</if>
+ 			<if test="visitNum != null and visitNum != ''">#{visitNum},</if>
+ 			sysdate(),sysdate(),
+ 			<if test="status != null and status != ''">#{status},</if>
+ 			<if test="url != null and url != ''">#{url}</if>
+ 			<!-- <if test="carouselNum != null and carouselNum != ''">#{carouselNum}</if> -->
+ 			
+ 		)
+ 	</insert>
+	
+</mapper> 

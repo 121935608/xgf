@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CommercialCashierManageMapper">
+
+	<resultMap type="CashierManage" id="CashierManageResult">
+		<result property="cashierId" column="cashierId" />
+		<result property="cashierName" column="cashierName" />
+		<result property="password" column="password" />
+		<result property="userId" column="userId" />
+		<result property="status" column="status" />
+		<result property="addTime" column="addTime" />
+		<result property="updateTime" column="updateTime" />
+	</resultMap>
+
+	<select id="pageInfoQuery" parameterType="PageUtilEntity"
+		resultType="CashierManage" useCache="false">
+		select b.cashierId,b.cashierName,b.status
+		from sys_user a
+		LEFT JOIN t_cashier b ON
+		a.userId = b.userId
+		
+		WHERE 1=1 
+		<if test="relationMap.userId != null and relationMap.userId != ''">
+			AND a.userId=#{relationMap.userId}
+		</if>
+		<if
+			test="relationMap.fuzzyCondition != null and relationMap.fuzzyCondition != ''">
+			AND (
+			b.cashierName LIKE CONCAT(CONCAT('%',#{relationMap.fuzzyCondition}),'%')
+			)
+		</if>
+	</select>
+	
+	<!-- 修改信息 -->
+	<update id="updateCashierManageInfo" parameterType="CashierManage">
+ 		update t_cashier
+ 		<set>
+ 			<if test="cashierName != null and cashierName != ''">
+ 			cashierName = #{cashierName},
+ 			</if>
+ 			<if test="password != null and password != ''">
+ 			password = #{password},</if>
+ 			
+ 			<if test="status.toString() != null and status.toString() != ''">
+ 			status = #{status},
+ 			</if>
+ 			<if test="addTime != null and addTime != ''">
+ 			addTime = #{addTime},
+ 			</if>
+ 			<if test="updateTime != null and updateTime != ''">
+ 			updateTime = #{updateTime}
+ 			</if>
+ 			
+ 		</set>
+ 		where 1=1
+ 		<if test="cashierId != null and cashierId  != ''">
+ 		and cashierId = #{cashierId}
+ 		</if>
+ 	</update>
+ 	
+ 	<!-- 插入信息 -->
+ 	<insert id="addCashierManageInfo" parameterType="CashierManage" keyProperty="cashierId">
+ 		<selectKey keyProperty="cashierId" resultType="java.lang.String" order="BEFORE">
+ 			select uuid()
+ 		</selectKey>
+ 		insert into t_cashier(cashierId,
+ 			<if test="cashierName != null and cashierName != ''">cashierName,</if>
+ 			<if test="password != null and password != ''">password,</if>
+ 			<if test="userId != null and userId != ''">userId,</if>
+ 			<if test="status != null and status != ''">status,</if>
+ 			addTime,updateTime
+ 		)values(#{cashierId},
+ 			<if test="cashierName != null and cashierName != ''">#{cashierName},</if>
+ 			<if test="password != null and password != ''">#{password},</if>
+ 			<if test="userId != null and userId != ''">#{userId},</if>
+ 			<if test="status != null and status != ''">#{status},</if>
+ 			sysdate(),sysdate()
+ 		)
+ 	</insert>
+
+
+
+</mapper> 

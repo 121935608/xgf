@@ -34,16 +34,16 @@ public class LabelDao extends DynamicObjectBaseDao implements ILabelDao
     public List<Label> pageInfoQuery(PageUtilEntity pageUtilEntity)
     {
 
-        List<Label> cityPageInfo = null;
+        List<Label> labelPageInfo = null;
         try
         {
-        	cityPageInfo = (List<Label>) this.findForList("CommodityLabelMapper.pageInfoQuery", pageUtilEntity);
+        	labelPageInfo = (List<Label>) this.findForList("CommodityLabelMapper.pageInfoQuery", pageUtilEntity);
         }
         catch (Exception e)
         {
             e.printStackTrace();
         }
-        return cityPageInfo;
+        return labelPageInfo;
 
     }
 
