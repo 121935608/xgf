@@ -112,23 +112,23 @@
 				<div class="col-xs-2 col-sm-2">
 				</div>
 				<div class="col-xs-2 col-sm-2">
-					<img src="${accountInfo.frontPic}">
+					<img style="width: 100px;height: 100px;" src="${accountInfo.frontPic}">
 					<p>身份证正面</p>
 				</div>
 				<div class="col-xs-2 col-sm-2">
-					<img  src="${accountInfo.backPic}">
+					<img style="width: 100px;height: 100px;" src="${accountInfo.backPic}">
 					<p>身份证反面</p>
 				</div>
 				<div class="col-xs-2 col-sm-2">
-					<img src="${accountInfo.licensePic}">
+					<img style="width: 100px;height: 100px;" src="${accountInfo.licensePic}">
 					<p>营业执照</p>
 				</div>
 				<div class="col-xs-2 col-sm-2">
-					<img src="${accountInfo.frontStorePic}">
+					<img style="width: 100px;height: 100px;" src="${accountInfo.frontStorePic}">
 					<p>店铺门脸照</p>
 				</div>
 				<div class="col-xs-2 col-sm-2">
-					<img src="${accountInfo.innerStorePic}">
+					<img style="width: 100px;height: 100px;" src="${accountInfo.innerStorePic}">
 					<p>店铺内照片</p>
 				</div>
 			</div>
