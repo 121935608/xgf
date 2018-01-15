@@ -48,4 +48,8 @@ public interface ISupervisorDao {
      */
     int addSupervisor(Supervisor supervisor);
 
+    /**
+     * 校验手机号
+     */
+    Supervisor findPhone(Supervisor supervisor);
 }

@@ -58,6 +58,7 @@ public class SupervisorController extends BaseController {
         return buildDataTable(pageUtilEntity.getTotalResult(),tableDataInfo);
     }
 
+
     /**
      * 跳转到修改督导员界面
      */
@@ -120,5 +121,18 @@ public class SupervisorController extends BaseController {
             result = supervisorService.updateSupervisorById(supervisor);
         }
         return new Message(result);
+    }
+
+    /**
+     * 校验手机号
+     */
+    @RequestMapping(SupervisorConstant.CHECK_PHONE_URL)
+    public @ResponseBody String checkPhone(Supervisor supervisor){
+        String uniqueFlag="0";
+        if (supervisor !=null)
+        {
+            uniqueFlag=supervisorService.checkPhone(supervisor);
+        }
+        return uniqueFlag;
     }
 }

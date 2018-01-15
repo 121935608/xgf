@@ -119,4 +119,8 @@ public interface IRoleDao
      */
     public int batchSavePremsRole(List<RolePermission> rolePermissions);
 
+    /**
+     * 查询角色是否唯一
+     */
+    Role findRole(Role role);
 }

@@ -48,8 +48,11 @@ public class RoleConstant
      */
     public final static String SAVE_AUTH_URL = "savePermissions";
 
-    
-    
+    /**
+     * 请求地址:查询角色是否唯一
+     */
+    public final static String CHECK_ROLE_UNIQUE="checkRoleUnique";
+
 
     /**
      * 逻辑视图名：跳转至角色列表界面

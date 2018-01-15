@@ -2,7 +2,7 @@
 <%@include file="/WEB-INF/jsp/common/taglibs.jspf"%>
 <ys:contentHeader title="督导员管理"/>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 系统管理 <span class="c-gray en">&gt;</span> 角色管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 系统管理 <span class="c-gray en">&gt;</span> 督导员管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
 	
 	<div class="text-c">
@@ -108,7 +108,7 @@ $(document).ready(function(){
         "bSearchable": false,
         "mRender": function(data, type, row) {
         	//编辑
-            var toEdit = "<a title=\"编辑\" href=\"javascript:;\" onclick=\"role_edit('编辑角色','${context_root}/system/toSupervisorModify.action?supervisorId=" + row.supervisorId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>编辑</span></a>";
+            var toEdit = "<a title=\"编辑\" href=\"javascript:;\" onclick=\"role_edit('编辑督导员','${context_root}/system/toSupervisorModify.action?supervisorId=" + row.supervisorId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>编辑</span></a>";
         	return statusTools(row) +"&nbsp;&nbsp;" + toEdit;
         }
     },

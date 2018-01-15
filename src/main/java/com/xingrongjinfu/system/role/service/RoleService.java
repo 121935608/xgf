@@ -2,6 +2,10 @@ package com.xingrongjinfu.system.role.service;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.xingrongjinfu.system.user.model.User;
+import com.xingrongjinfu.utils.ObjectUtil;
+import org.apache.shiro.common.UserConstants;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -166,4 +170,22 @@ public class RoleService implements IRoleService
         return roleDao.batchSavePremsRole(rolePermissions);
     }
 
+    @Override
+    public String checkRole(Role role) {
+        if (role.getRoleId()== null)
+        {
+            role.setRoleId(null);
+        }
+        String roleName = role.getRoleName();
+        Integer roleId =role.getRoleId();
+        role = new Role();
+        role.setRoleName(roleName);
+        role.setRoleId(roleId);
+        Role newRole=roleDao.findRole(role);
+        if (ObjectUtil.isNotNull(newRole))
+        {
+            return UserConstants.NAME_NOT_UNIQUE;
+        }
+        return UserConstants.NAME_UNIQUE;
+    }
 }

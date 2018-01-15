@@ -49,6 +49,20 @@ $("#form-role-modify").validate({
         phone:{
 			required:true,
 			isSpace:true,
+            remote: {
+                url: "${context_root}/system/checkPhoneUnique.action",
+                type: "post",
+                dataType: "text",
+                data: {
+                    name: function () {
+                        return $.trim($("#phone").val());
+                    }
+                },
+                dataFilter: function (data, type) {
+                    if (data == "0") return true;
+                    else return "系统中已存在该电话号信息督导员";
+                }
+            }
 		},
 	},
 	onkeyup:false,

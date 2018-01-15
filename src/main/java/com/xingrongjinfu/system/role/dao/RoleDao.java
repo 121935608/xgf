@@ -190,4 +190,9 @@ public class RoleDao extends DynamicObjectBaseDao implements IRoleDao
         return this.batchSave("SystemRoleMapper.batchSavePremsRole", rolePermissions);
     }
 
+
+    @Override
+    public Role findRole(Role role) {
+        return (Role)this.findForObject("SystemRoleMapper.findRole",role);
+    }
 }

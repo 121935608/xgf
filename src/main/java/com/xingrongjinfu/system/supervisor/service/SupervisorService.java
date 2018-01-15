@@ -12,6 +12,8 @@ package com.xingrongjinfu.system.supervisor.service;
 
 import com.xingrongjinfu.system.supervisor.dao.ISupervisorDao;
 import com.xingrongjinfu.system.supervisor.model.Supervisor;
+import com.xingrongjinfu.utils.ObjectUtil;
+import org.apache.shiro.common.UserConstants;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,4 +56,21 @@ public class SupervisorService implements ISupervisorService {
         return supervisorDao.getSupervisor(supervisorId);
     }
 
+    @Override
+    public String checkPhone(Supervisor supervisor) {
+        if (supervisor.getSupervisorId() !=null ){
+            supervisor.setSupervisorId(null);
+        }
+        String phone=supervisor.getPhone();
+        Integer supervisorId=supervisor.getSupervisorId();
+        supervisor=new Supervisor();
+        supervisor.setPhone(phone);
+        supervisor.setSupervisorId(supervisorId);
+        Supervisor newSupervisor= supervisorDao.findPhone(supervisor);
+        if (ObjectUtil.isNotNull(newSupervisor)){
+            return UserConstants.NAME_NOT_UNIQUE;
+        }
+        return UserConstants.NAME_UNIQUE;
+
+    }
 }

@@ -181,7 +181,7 @@ $(function(){
 	$(document).on("click","#min_title_list li",function(){
 		var bStopIndex=$(this).index();
 		var iframe_box=$("#iframe_box");
-		/*$("#min_title_list li").removeClass("active").eq(bStopIndex).addClass("active");*/
+		$("#min_title_list li").removeClass("active").eq(bStopIndex).addClass("active");
 		iframe_box.find(".show_iframe").hide().eq(bStopIndex).show();
 	});
 	$(document).on("click","#min_title_list li i",function(){
@@ -198,7 +198,7 @@ $(function(){
 			$(this).remove();
 			$('#iframe_box').find('.show_iframe').eq(aCloseIndex).remove();	
 			num==0?num=0:num--;
-			// $("#min_title_list li").removeClass("active").eq(aCloseIndex-1).addClass("active");
+			$("#min_title_list li").removeClass("active").eq(aCloseIndex-1).addClass("active");
 			iframe_box.find(".show_iframe").hide().eq(aCloseIndex-1).show();
 			tabNavallwidth();
 		}else{

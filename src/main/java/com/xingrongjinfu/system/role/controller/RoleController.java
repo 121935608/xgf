@@ -168,4 +168,13 @@ public class RoleController extends BaseController
         return new Message(result);
     }
 
+    @RequestMapping(RoleConstant.CHECK_ROLE_UNIQUE)
+    public @ResponseBody String checkRole(Role role){
+        String uniqueFlag="0";
+        if (role !=null)
+        {
+            uniqueFlag=roleService.checkRole(role);
+        }
+        return uniqueFlag;
+    }
 }

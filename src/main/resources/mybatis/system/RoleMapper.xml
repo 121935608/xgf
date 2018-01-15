@@ -18,12 +18,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="findRoleByRole" parameterType="Role" resultType="Role">
-		SELECT * FROM sys_role where 1 = 1 AND roleId !=2
-		<if test="roleId != null and roleId != ''">
+		SELECT * FROM sys_role where 1=1
+		<if test="roleId != null ">
 			AND roleId = #{roleId}
 		</if>
 	</select>
 
+
+	<select id="findRole" parameterType="Role" resultType="Role">
+		SELECT * FROM sys_role WHERE roleName=#{roleName}
+		<if test="roleId !=null">AND roleId !=#{roleId}</if>
+	</select>
 
 	<select id="findUserById" parameterType="Role" resultType="Integer">
 		SELECT count(userId) FROM sys_user_role WHERE roleId=#{roleId}

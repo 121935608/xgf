@@ -155,7 +155,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="accountName != null and accountName != ''">#{accountName},</if>
  			<!--<if test="email != null and email != ''">#{email},</if>
  			<if test="mobilePhone != null and mobilePhone != ''">#{mobilePhone},</if>-->
- 			<if test="locked !=null and locked != ''">locked,</if>
+ 			<if test="locked !=null and locked != ''">#{locked},</if>
  			<!--<if test="description != null and description != ''">#{description},</if>-->
 			'S',
  			sysdate()

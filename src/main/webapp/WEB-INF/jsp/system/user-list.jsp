@@ -196,7 +196,7 @@ function user_start(obj,id){
 			dataType:"json",
 			success:function(data){
 				if(data.s == true){
-					$(obj).parents("tr").find(".td-manage").prepend('<a onClick="user_stop(this,'+id+')" href="javascript:;" title="停用" style="text-decoration:none"><span style=\'color: #0e90d2 \'>禁用</span></a>');
+					$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="user_stop(this,'+id+')" href="javascript:;" title="停用" ><span style=\'color: #0e90d2 \'>停用</span></a>');
 					$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
 					$(obj).remove();
 					parent.layer.msg('已启用!', {icon: 6,time:1000});
