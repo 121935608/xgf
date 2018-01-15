@@ -120,7 +120,13 @@ public class RoleController extends BaseController
         Integer id = role.getRoleId();
         if (id != null)
         {
-            result = roleService.deleteRoleById(role);
+            //删除角色前先查询角色是否绑定过用户
+            result= roleService.findUserById(role);
+            if (result==0) {
+                result = roleService.deleteRoleById(role);
+            }else {
+               result=0;
+            }
         }
         return new Message(result);
     }

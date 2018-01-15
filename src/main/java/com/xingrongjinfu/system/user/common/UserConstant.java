@@ -88,7 +88,11 @@ public class UserConstant
      * 请求地址：检查用户名唯一
      */
     public final static String CHECK_NAME_UNIQUE_URL = "checkNameUnique";
-    
+
+    /**
+     * 请求地址:修改用户时验证唯一
+     */
+    public final static String CHECK_NAME_URL="checkName";
 
     /**
      * 逻辑视图名：用户列表界面

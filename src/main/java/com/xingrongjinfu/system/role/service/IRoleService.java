@@ -74,6 +74,10 @@ public interface IRoleService
     public int deleteRoleById(Role role);
 
     /**
+     * 根据角色id查询是否绑定过用户
+     */
+    int findUserById(Role role);
+    /**
      * 根据条件分页查询角色对象
      * 
      * @param page 分页对象

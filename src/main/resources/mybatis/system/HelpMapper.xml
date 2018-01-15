@@ -37,7 +37,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="getUnreply" parameterType="String" resultType="Help">
 		SELECT f.feedBackId,u.userName,f.userId,f.question,f.addTime,f.reply,f.answer,f.replyTime
-		FROM t_feedBack f LEFT JOIN sys_user u ON f.userId=u.userId WHERE f.parentId=#{feedBackId}
+		FROM t_feedBack f LEFT JOIN sys_user u ON f.userId=u.userId
+		WHERE 1=1
+		<if test="_parameter!=null and _parameter!=''">
+			AND f.parentId=#{_parameter}
+		</if>
+
 	</select>
 
 	<select id="getReply" parameterType="String" resultMap="HelpResult">

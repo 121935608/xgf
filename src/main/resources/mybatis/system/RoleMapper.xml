@@ -23,7 +23,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			AND roleId = #{roleId}
 		</if>
 	</select>
-	
+
+
+	<select id="findUserById" parameterType="Role" resultType="Integer">
+		SELECT count(userId) FROM sys_user_role WHERE roleId=#{roleId}
+
+	</select>
 	<!-- 查询角色菜单权限 -->
 	<select id="queryRolePermission" parameterType="String" resultType="Permission">
 		SELECT (SELECT CASE WHEN r.permsId > '0' THEN 'true' END

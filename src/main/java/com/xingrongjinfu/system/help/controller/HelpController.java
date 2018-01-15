@@ -81,7 +81,10 @@ public class HelpController extends BaseController{
             help.setAddTimes(help.getAddTime()==null?"":sdf.format(help.getAddTime()));
             help.setReplyTimes(help.getReplyTime()==null ? "":sdf.format(help.getReplyTime()));
         }
-        modelAndView.addObject("unHelpInfo",unHelpInfo);
+        if (unHelpInfo ==null) {
+            unHelpInfo=helpService.getUnreply(null);
+        }
+        modelAndView.addObject("unHelpInfo", unHelpInfo);
         modelAndView.addObject("helpInfo",helpInfo);
         return modelAndView;
     }

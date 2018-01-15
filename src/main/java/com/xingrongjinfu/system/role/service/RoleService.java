@@ -94,6 +94,11 @@ public class RoleService implements IRoleService
         return roleDao.addUserRole(userRole);
     }
 
+    @Override
+    public int findUserById(Role role) {
+        return roleDao.findUserById(role);
+    }
+
     /**
      * 删除角色信息
      * 

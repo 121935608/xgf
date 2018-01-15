@@ -23,6 +23,11 @@ public interface IUserDao
      */
     public User findByUserName(String userName);
 
+
+    /**
+     * 根据当前用户判断是否唯一
+     */
+    User findByUser(User user);
     /**
      * 通过用户名ID用户
      * 

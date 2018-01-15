@@ -137,7 +137,7 @@ function role_del(obj,id){
 						parent.layer.msg('已删除!',{icon:1,time:1000});
 						loadData() ;
 					}else{
-						parent.layer.alert(data.m , {icon: 2,title:"系统提示"});
+						parent.layer.msg("该角色已绑定用户不能删除" , {icon: 2,title:"系统提示"});
 					}
 				},
 				

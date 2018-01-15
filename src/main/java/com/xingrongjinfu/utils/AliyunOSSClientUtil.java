@@ -28,6 +28,7 @@ public class AliyunOSSClientUtil{
    public static String FOLDER="xgf/platform/";
    //阿里云API的文件夹名称 商品图片
    public static String FOLDER2="xgf/imgFile/";
+
    
    /**
     * 获取阿里云OSS客户端对象

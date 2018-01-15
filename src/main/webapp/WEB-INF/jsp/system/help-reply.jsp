@@ -56,7 +56,7 @@
         submitHandler:function(form){
             var index = parent.layer.load();
             $.ajax({
-                url:"${context_url}/system/helpReply.action?feedBackId="+${unHelpInfo.feedBackId},
+                url:"${context_url}/system/helpReply.action?feedBackId=${unHelpInfo.feedBackId}",
                 type:'post',
                 async:true ,
                 cache:false ,

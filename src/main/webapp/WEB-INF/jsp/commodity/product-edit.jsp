@@ -174,7 +174,7 @@
 				<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>商品名称：</label>
 				<div class="formControls col-xs-8 col-sm-4">
 					<input type="file" onchange="pic(event)" id="picture" name="picture" accept="image/*">
-					<img alt="" id="myImg" src="" height="100px",width="100px">
+					<img alt="" id="myImg" src="${product.imgMain}" height="100px",width="100px">
 				</div>
 			</div>
 			<div class="col-xs-2 col-sm-2">
@@ -259,9 +259,9 @@
         country:{
 			required:true,
 		},
-        grade:{
+        /*grade:{
 			required:true,
-		},
+		},*/
         origin:{
 			required:true,
 		},

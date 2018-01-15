@@ -70,11 +70,11 @@ $("#form-user-modify").validate({
 	rules:{
         userName: {
             required: true,
-            minlength: 5,
+//            minlength: 5,
             isSpace: true,
             english: true,
             remote: {
-                url: "${context_root}/system/checkNameUnique.action",
+                url: "${context_root}/system/checkName.action?userId=${user.userId }",
                 type: "post",
                 dataType: "text",
                 data: {

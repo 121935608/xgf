@@ -40,7 +40,7 @@ public class UserService implements IUserService
     /**
      * 校验用户名称是否唯一
      * 
-     * @param userName 用户名
+     * @param
      * @return
      */
     @Override
@@ -56,6 +56,26 @@ public class UserService implements IUserService
         user.setUserName(username);
         User newUser = userDao.findByUserName(username);
         if (ObjectUtil.isNotNull(newUser) && newUser.getUserId() != userId)
+        {
+            return UserConstants.NAME_NOT_UNIQUE;
+        }
+        return UserConstants.NAME_UNIQUE;
+    }
+
+    @Override
+    public String checkName(User user) {
+
+        if (user.getUserId() == null)
+        {
+            user.setUserId("-1");
+        }
+        String username = user.getUserName();
+        String userId = user.getUserId();
+        user = new User();
+        user.setUserName(username);
+        user.setUserId(userId);
+        User newUser = userDao.findByUser(user);
+        if (ObjectUtil.isNotNull(newUser))
         {
             return UserConstants.NAME_NOT_UNIQUE;
         }
@@ -90,7 +110,7 @@ public class UserService implements IUserService
      * 根据条件分页查询用户对象
      * 
      * 
-     * @param page 分页对象
+     * @param
      * @return 用户信息集合信息
      */
     @Override
@@ -102,7 +122,7 @@ public class UserService implements IUserService
     /**
      * 通过用户名查询所属角色和权限
      * 
-     * @param userName
+     * @param
      * @return 用户对象信息
      */
     @Override

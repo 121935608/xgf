@@ -65,6 +65,11 @@ public interface IRoleDao
      */
     public int addUserRole(UserRole userRole);
 
+
+    /**
+     * 删除角色前先查询是否有用户绑定
+     */
+    int findUserById(Role role);
     /**
      * 删除角色信息
      * 

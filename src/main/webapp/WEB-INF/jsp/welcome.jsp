@@ -55,7 +55,7 @@
 			<tr style="width:600px;height: 40px;">
 				<td style="width:5%;text-align:center;">${n.count}</td>
 				<td style="width:30%;text-align:center;">${m.tradeCode}</td>
-				<td style="width:40%;">${m.addTime}</td>
+				<td style="width:40%;">${m.addTimes}</td>
 				<td style="width:25%">${m.money}</td>
 			</tr>
 			</c:forEach>
@@ -71,7 +71,7 @@
 					<tr style="width:600px;height: 40px;">
 						<td style="width:5%;text-align:center;">${n.count}</td>
 						<td style="width:30%;text-align:center;">${m.tradeCode}</td>
-						<td style="width:40%;">${m.addTime}</td>
+						<td style="width:40%;">${m.addTimes}</td>
 						<td style="width:25%">${m.money}</td>
 					</tr>
 				</c:forEach>

@@ -32,6 +32,10 @@ public interface IUserService
     public String checkNameUnique(User user);
 
     /**
+     * 修改时校验用户名
+     */
+    String checkName(User user);
+    /**
      * 通过用户名ID用户
      * 
      * @param userId 用户ID

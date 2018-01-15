@@ -29,6 +29,11 @@ public class UserDao extends DynamicObjectBaseDao implements IUserDao
         return (User) this.findForObject("SystemUserMapper.findByUserName", username);
     }
 
+    @Override
+    public User findByUser(User user) {
+        return (User) this.findForObject("SystemUserMapper.findByUser", user);
+    }
+
     /**
      * 通过用户名ID用户
      * 

@@ -45,8 +45,12 @@ $("#form-document-modify").validate({
 	submitHandler:function(form){
 		var index = parent.layer.load();
         var formData = new FormData($('#form-document-add')[0]);
-		$.ajax({
-			url:"${context_url}/system/modifyDocument.action?documentId="+${document.documentId},
+        var title=$("#title").val();
+        alert(title);
+        var status=$(":radio:checked").val();
+        alert(status);
+        $.ajax({
+			url:"${context_url}/system/modifyDocument.action?documentId=${document.documentId}&title="+title+"&status="+status,
 			type:'post',
             data:formData,
             mimeType: "multipart/form-data",

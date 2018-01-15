@@ -44,7 +44,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findByUserName" parameterType="String" resultType="User">
 		select * from sys_user where userName=#{userName}
 	</select>
-	
+
+	<select id="findByUser" parameterType="String" resultType="User">
+		select * from sys_user where userName=#{userName} AND userId !=#{userId}
+	</select>
+
 	<select id="findByUserId" parameterType="String" resultType="User">
 		select * from sys_user where userId=#{userId}
 	</select>

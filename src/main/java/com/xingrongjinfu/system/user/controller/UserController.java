@@ -225,6 +225,20 @@ public class UserController extends BaseController {
     }
 
     /**
+     * 修改时修改校验用户名
+     */
+    @RequestMapping(UserConstant.CHECK_NAME_URL)
+    public @ResponseBody String checkName(User user)
+    {
+        String uniqueFlag="0";
+        if (user !=null)
+        {
+            uniqueFlag=userService.checkName(user);
+        }
+        return uniqueFlag;
+    }
+
+    /**
      * 获取角色信息
      */
     public List<SysCode> getRoleList() {

@@ -1,5 +1,6 @@
 package com.xingrongjinfu.system.index.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.List;
 
@@ -71,10 +72,12 @@ public class WelcomeAction extends BaseController
         Integer orderCount=userService.findAllOrders();
         //封装交易数据
         List<Pays> payss=paysService.firstPageInfoQuery();
-        /*Integer i=1;
+        Integer i=1;
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         for (Pays pays :payss){
-            pays.setCashNum(i++);
-        }*/
+           /* pays.setCashNum(i++);*/
+            pays.setAddTimes(pays.getAddTime()==null?"":sdf.format(pays.getAddTime()));
+        }
         modelAndView.addObject("count",count);
         modelAndView.addObject("orderCount",orderCount);
         modelAndView.addObject("certificationCount",certificationCount);

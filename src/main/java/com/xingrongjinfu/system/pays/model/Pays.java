@@ -34,8 +34,17 @@ public class Pays implements Serializable
     private Integer status;
     private String remark;
     private Date addTime;
+    private String addTimes;
     private String addIP;
     private String storeName;
+
+    public String getAddTimes() {
+        return addTimes;
+    }
+
+    public void setAddTimes(String addTimes) {
+        this.addTimes = addTimes;
+    }
 
     public Integer getCashNum() {
         return cashNum;

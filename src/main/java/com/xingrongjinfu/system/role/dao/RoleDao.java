@@ -107,6 +107,12 @@ public class RoleDao extends DynamicObjectBaseDao implements IRoleDao
         return (int) this.save("SystemRoleMapper.addUserRole", userRole);
     }
 
+
+    @Override
+    public int findUserById(Role role) {
+        return (int)this.findForObject("SystemRoleMapper.findUserById",role);
+    }
+
     /**
      * 删除角色信息
      * 
