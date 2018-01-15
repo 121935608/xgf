@@ -110,4 +110,8 @@ public interface IRoleService
      */
     public int batchSavePremsRole(Integer roleId, String perms);
 
+    /**
+     * 校验角色唯一
+     */
+    String checkRole(Role role);
 }

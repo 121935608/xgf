@@ -48,4 +48,8 @@ public interface ISupervisorService {
      */
     int addSupervisor(Supervisor supervisor);
 
+    /**
+     * 校验手机号
+     */
+    String checkPhone(Supervisor supervisor);
 }

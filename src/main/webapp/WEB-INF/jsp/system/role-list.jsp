@@ -101,7 +101,7 @@ function query() {
     var endTime = $("#endTime").val();
     var jsonObject = '{\"roleName\":\"' + roleName + '\",\"beginTime\":\"' + beginTime + '\",\"endTime\":\"' + endTime + '\"}';
     
-    pageTable.fnSettings().sAjaxSource = encodeURI("${context_root}/system/roleList.action?jsonObject=" + jsonObject);
+    pageTable.fnSettings().sAjaxSource = encodeURI("${context_root}/system/roleList.action?roleName=" + roleName+"&beginTime="+beginTime+"&endTime="+endTime);
     pageTable.fnClearTable(0);
     pageTable.fnDraw();
 }

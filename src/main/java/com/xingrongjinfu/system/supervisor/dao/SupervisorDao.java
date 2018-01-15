@@ -59,4 +59,9 @@ public class SupervisorDao extends DynamicObjectBaseDao implements ISupervisorDa
         return supervisorPageInfo;
     }
 
+
+    @Override
+    public Supervisor findPhone(Supervisor supervisor) {
+        return (Supervisor) this.findForObject("SupervisorMapper.findPhone",supervisor);
+    }
 }

@@ -99,7 +99,7 @@
                     },
                     dataFilter: function (data, type) {
                         if (data == "0") return true;
-                        else return false;
+                        else return "该用户已存在";
                     }
                 }
             },

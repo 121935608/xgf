@@ -36,6 +36,11 @@ public class SupervisorConstant {
     public final static String SUPERVISOR_LIST_URL="supervisorList";
 
     /**
+     * 请求地址:校验手机号唯一
+     */
+    public final static String  CHECK_PHONE_URL="checkPhoneUnique";
+
+    /**
      * 请求地址:编辑督导员界面地址
      */
     public final static String SUPERVISOR_MODIFY_URL="toSupervisorModify";

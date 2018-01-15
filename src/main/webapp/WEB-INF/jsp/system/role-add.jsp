@@ -44,6 +44,20 @@ $("#form-role-add").validate({
 		roleName:{
 			required:true,
 			isSpace:true,
+            remote: {
+                url: "${context_root}/system/checkRoleUnique.action",
+                type: "post",
+                dataType: "text",
+                data: {
+                    name: function () {
+                        return $.trim($("#roleName").val());
+                    }
+                },
+                dataFilter: function (data, type) {
+                    if (data == "0") return true;
+                    else return "该角色已存在";
+                }
+            }
 		},
 		roleKey:{
 			required:true,
