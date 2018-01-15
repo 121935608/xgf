@@ -179,7 +179,7 @@ public class AdvertisementController extends BaseController {
      */
     @ActionControllerLog(title = "内容管理", action = "内容管理-删除广告", isSaveRequestData = true)
     @RequestMapping(AdvertisementConstant.DEL_URL)
-    public @ResponseBody Message deleteById(Advertisement advertisement)
+    public @ResponseBody Message deleteAdvertisementById(Advertisement advertisement)
     {
         int result = 0;
         String id = advertisement.getAdvertisementId();

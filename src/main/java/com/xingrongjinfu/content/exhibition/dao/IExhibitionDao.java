@@ -42,6 +42,8 @@ public interface IExhibitionDao
      */
 	public Exhibition findByExhibitionId(String exhibitionId);
 
+	public int deleteById(Exhibition exhibition);
+
 	
 
 }

@@ -169,9 +169,9 @@ public class CarouselController extends BaseController {
 	/**
      * 根据ID删除
      */
-    @ActionControllerLog(title = "内容管理", action = "内容管理-删除广告", isSaveRequestData = true)
+    @ActionControllerLog(title = "内容管理", action = "内容管理-删除轮播图", isSaveRequestData = true)
     @RequestMapping(CarouselConstant.DEL_URL)
-    public @ResponseBody Message deleteById(Carousel carousel)
+    public @ResponseBody Message deleteCarouselById(Carousel carousel)
     {
         int result = 0;
         String id = carousel.getCarouselId();

@@ -69,8 +69,7 @@ public class CarouselDao extends DynamicObjectBaseDao implements ICarouselDao
 
 	@Override
 	public int deleteById(Carousel carousel) {
-		// TODO Auto-generated method stub
-		return 0;
+		return (int) this.delete("ContentCarouselMapper.deleteCarouselInfo", carousel);
 	}
 
 }

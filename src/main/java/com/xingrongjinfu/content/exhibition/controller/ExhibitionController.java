@@ -18,6 +18,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.aliyun.oss.OSSException;
 import com.xingrongjinfu.content.ContentConstant;
+import com.xingrongjinfu.content.advertisement.common.AdvertisementConstant;
+import com.xingrongjinfu.content.advertisement.model.Advertisement;
 import com.xingrongjinfu.content.exhibition.common.ExhibitionConstant;
 import com.xingrongjinfu.content.exhibition.model.Exhibition;
 import com.xingrongjinfu.content.exhibition.service.IExhibitionService;
@@ -90,11 +92,27 @@ public class ExhibitionController extends BaseController {
 
 		return buildDatasTable(pageUtilEntity.getTotalResult(), tableDataInfo);
 	}
+	
+	/**
+     * 根据ID删除
+     */
+    @ActionControllerLog(title = "内容管理", action = "内容管理-删除展位", isSaveRequestData = true)
+    @RequestMapping(ExhibitionConstant.DEL_URL)
+    public @ResponseBody Message deleteExhibitionById(Exhibition exhibition)
+    {
+        int result = 0;
+        String id = exhibition.getExhibitionId();
+        if (id != null)
+        {           
+                result = exhibitionService.deleteById(exhibition);           
+        }
+        return new Message(result);
+    }
 
 	/**
 	 * 保存信息
 	 */
-	@ActionControllerLog(title = "展位管理", action = "展位管理-保存", isSaveRequestData = true)
+	@ActionControllerLog(title = "内容管理", action = "展位管理-保存", isSaveRequestData = true)
 	@RequestMapping(ExhibitionConstant.SAVE_EXHIBITION_URL)
 	public @ResponseBody Message saveExhibition(Exhibition exhibition,String exhibitionId,MultipartFile picture) {
 		int result = 0;		

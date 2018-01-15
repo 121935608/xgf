@@ -68,4 +68,9 @@ public class ExhibitionDao extends DynamicObjectBaseDao implements IExhibitionDa
 		return (Exhibition) this.findForObject("ContentExhibitionMapper.findByExhibitionId", exhibitionId);
 	}
 
+	@Override
+	public int deleteById(Exhibition exhibition) {
+		return (int) this.delete("ContentExhibitionMapper.deleteExhibitionInfo", exhibition);
+	}
+
 }

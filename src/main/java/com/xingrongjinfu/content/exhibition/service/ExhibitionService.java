@@ -70,5 +70,10 @@ public class ExhibitionService implements IExhibitionService
 	public Exhibition findByExhibitionId(String exhibitionId) {
 		return exhibitionDao.findByExhibitionId(exhibitionId);
 	}
+
+	@Override
+	public int deleteById(Exhibition exhibition) {
+		return exhibitionDao.deleteById(exhibition);
+	}
 	
 }
