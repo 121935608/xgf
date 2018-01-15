@@ -168,7 +168,7 @@ public class CarouselController extends BaseController {
 	
 	/**
      * 根据ID删除
-     *//*
+     */
     @ActionControllerLog(title = "内容管理", action = "内容管理-删除轮播图", isSaveRequestData = true)
     @RequestMapping(CarouselConstant.DEL_URL)
     public @ResponseBody Message deleteCarouselById(Carousel carousel)
@@ -181,7 +181,7 @@ public class CarouselController extends BaseController {
         }
         return new Message(result);
     }
-*/
+
 	/**
 	 * 启动/停用 操作
 	 */

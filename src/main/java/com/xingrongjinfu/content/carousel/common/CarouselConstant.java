@@ -41,7 +41,7 @@ public class CarouselConstant
     /**
      * 请求地址：删除信息
      */
-    public final static String DEL_URL = "deleteById";
+    public final static String DEL_URL = "deleteCarouselById";
 
 
     /**

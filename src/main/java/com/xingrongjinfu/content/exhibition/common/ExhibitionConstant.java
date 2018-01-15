@@ -36,7 +36,7 @@ public class ExhibitionConstant
     /**
      * 请求地址：删除信息
      */
-    public final static String DEL_URL = "deleteById";
+    public final static String DEL_URL = "deleteExhibitionById";
     
     /**
      * 逻辑视图名：跳转至列表界面

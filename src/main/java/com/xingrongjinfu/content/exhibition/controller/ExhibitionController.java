@@ -95,7 +95,7 @@ public class ExhibitionController extends BaseController {
 	
 	/**
      * 根据ID删除
-     *//*
+     */
     @ActionControllerLog(title = "内容管理", action = "内容管理-删除展位", isSaveRequestData = true)
     @RequestMapping(ExhibitionConstant.DEL_URL)
     public @ResponseBody Message deleteExhibitionById(Exhibition exhibition)
@@ -107,7 +107,7 @@ public class ExhibitionController extends BaseController {
                 result = exhibitionService.deleteById(exhibition);           
         }
         return new Message(result);
-    }*/
+    }
 
 	/**
 	 * 保存信息

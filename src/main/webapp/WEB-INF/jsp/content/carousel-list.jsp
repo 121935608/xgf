@@ -281,7 +281,7 @@
 		function carousel_del(obj,id){
 			parent.layer.confirm('确认要删除吗？',{icon: 3, title:'提示'},function(index){
 				$.ajax({
-					    url:"${context_root}/content/deleteById.action?carouselId=" + id, 
+					    url:"${context_root}/content/deleteCarouselById.action?carouselId=" + id, 
 						type:'post',
 						async:true ,
 						cache:false ,
