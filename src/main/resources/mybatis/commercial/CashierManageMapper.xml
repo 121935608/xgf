@@ -13,6 +13,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="addTime" column="addTime" />
 		<result property="updateTime" column="updateTime" />
 	</resultMap>
+	
+	<select id="findByCashierName" parameterType="String" resultType="CashierManage">
+		select * from t_cashier where cashierName=#{cashierName}
+	</select>
 
 	<select id="pageInfoQuery" parameterType="PageUtilEntity"
 		resultType="CashierManage" useCache="false">

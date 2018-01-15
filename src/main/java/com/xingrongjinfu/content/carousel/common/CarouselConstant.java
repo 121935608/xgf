@@ -37,6 +37,11 @@ public class CarouselConstant
      * 请求地址：启动/停用 操作
      */
     public final static String CHANGE_STATUS_URL = "changeCarouselStatus";
+    
+    /**
+     * 请求地址：删除信息
+     */
+    public final static String DEL_URL = "deleteById";
 
 
     /**

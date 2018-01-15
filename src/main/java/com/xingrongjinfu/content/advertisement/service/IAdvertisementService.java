@@ -48,4 +48,10 @@ public interface IAdvertisementService
      */
 	public Advertisement findByAdvertisementId(String advertisementId);
 
+	/**
+     * 删除信息
+     * 
+     */
+	public int deleteById(Advertisement advertisement);
+
 }

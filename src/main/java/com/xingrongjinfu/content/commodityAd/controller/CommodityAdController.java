@@ -96,6 +96,19 @@ public class CommodityAdController extends BaseController {
 		sysCodeList1.add(sysCode2);
 
 		modelAndView.addObject("statusList", sysCodeList1);
+		
+		List<SysCode> sysCodeList2 = new ArrayList<SysCode>();
+		SysCode sysCode3 = new SysCode();
+		sysCode3.setCodeid("1");
+		sysCode3.setCodevalue("横栏广告");
+		sysCodeList2.add(sysCode3);
+
+		SysCode sysCode4 = new SysCode();
+		sysCode4.setCodeid("2");
+		sysCode4.setCodevalue("fit广告");
+		sysCodeList2.add(sysCode4);
+
+		modelAndView.addObject("typeList", sysCodeList2);
 
 		return modelAndView;
 	}
@@ -119,6 +132,19 @@ public class CommodityAdController extends BaseController {
 		sysCodeList1.add(sysCode2);
 
 		modelAndView.addObject("statusList", sysCodeList1);
+		
+		List<SysCode> sysCodeList2 = new ArrayList<SysCode>();
+		SysCode sysCode3 = new SysCode();
+		sysCode3.setCodeid("1");
+		sysCode3.setCodevalue("横栏广告");
+		sysCodeList2.add(sysCode3);
+
+		SysCode sysCode4 = new SysCode();
+		sysCode4.setCodeid("2");
+		sysCode4.setCodevalue("fit广告");
+		sysCodeList2.add(sysCode4);
+
+		modelAndView.addObject("typeList", sysCodeList2);
 		
 		if (commodityAdId != null) {
 			modelAndView.addObject("commodityAd", this.commodityAdService.findByCommodityAdId(commodityAdId));

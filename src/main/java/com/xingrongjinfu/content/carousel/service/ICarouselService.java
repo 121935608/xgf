@@ -47,4 +47,6 @@ public interface ICarouselService
      */
 	public Carousel findByCarouselId(String carouselId);
 
+	public int deleteById(Carousel carousel);
+
 }

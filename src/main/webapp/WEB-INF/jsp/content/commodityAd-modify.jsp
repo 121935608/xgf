@@ -3,25 +3,36 @@
 <ys:contentHeader/>
 <body>
 <article class="page-container">
-	<form action="" method="post"  class="form form-horizontal" id="form-cashierManage-add">
+	<form action="" method="post"  class="form form-horizontal" id="form-commodityAd-modify">
+	
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>账号：</label>
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>类型：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="text" class="input-text" value="" placeholder="" id="cashierName" name="cashierName">
+			<y:select id="type" name="type"
+					codeGroup="${typeList}" selectedValue=""
+					cssClass="select" headerKey="0" headerValue="类型">
+			</y:select>
+			</div>
+		</div>
+	
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>标题：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" class="input-text" value="" placeholder="" id="commodityAdName" name="commodityAdName">
 			</div>
 		</div>
 		
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>密码：</label>
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>图片：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="password" class="input-text" value="" placeholder="" id="password" name="password">
+				<input type="file"  id="picture" name="picture">
 			</div>
 		</div>
 		
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>确认密码：</label>
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>URL：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="password" class="input-text" value="" placeholder="" id="confirmPassword" name="confirmPassword">
+				<input type="text" class="input-text" value="" placeholder="" id="url" name="url">
 			</div>
 		</div>
 		
@@ -45,24 +56,23 @@
 
 
 <script type="text/javascript">
-$("#form-cashierManage-add").validate({
+$("#form-commodityAd-modify").validate({
 	rules:{
-		
-		cashierName: {
-            required: true,
-            isSpace: true,
-        },
-		
-		password:{
+		type:{
 			required:true,
 			isSpace:true,
-			minlength: 6
 		},
-		confirmPassword: {
+		commodityAdName:{
+			required:true,
+			isSpace:true,
+		},
+		picture:{
+			required:true,
+			isSpace:true,
+		},
+		url: {
             required: true,
             isSpace: true,
-            minlength: 6,
-            equalTo: password
         },
 		status:{
 			required:true,
@@ -75,14 +85,17 @@ $("#form-cashierManage-add").validate({
 	success:"valid",
 	submitHandler:function(form){
 		var index = parent.layer.load();
+		var formData = new FormData($('#form-commodityAd-modify')[0]);
 		$.ajax({
-			url:"${context_root}/commercial/saveCashierManage.action", 
+			url:"${context_root}/content/saveCommodityAd.action", 
 			type:'post',
-			async:true ,
-			cache:false ,
-			data:$(form).serialize(),
-			dataType:"json",
+			data:formData,
+			mimeType: "multipart/form-data",
+			contentType: false,
+			cache:false,
+			processData: false,			
 			success:function(data){
+				var data = JSON.parse(data);
 				parent.layer.close(index);
 				if(data.s == true){
 					index = parent.layer.getFrameIndex(window.name);

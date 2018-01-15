@@ -70,5 +70,14 @@ public class AdvertisementService implements IAdvertisementService
 	public Advertisement findByAdvertisementId(String advertisementId) {
 		return advertisementDao.findByAdvertisementId(advertisementId);
 	}
+
+	/**
+     * 删除信息
+     * 
+     */
+	@Override
+	public int deleteById(Advertisement advertisement) {
+		return advertisementDao.deleteById(advertisement);
+	}
 	
 }

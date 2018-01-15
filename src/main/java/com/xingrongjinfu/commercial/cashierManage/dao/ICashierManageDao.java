@@ -6,6 +6,7 @@ import org.framework.base.util.TableDataInfo;
 
 import com.xingrongjinfu.commercial.cashierManage.model.CashierManage;
 import com.xingrongjinfu.commodity.label.model.Label;
+import com.xingrongjinfu.system.user.model.User;
 
 /**
  * 数据层
@@ -27,8 +28,9 @@ public interface ICashierManageDao
      */
     public int updateCashierManageInfo(CashierManage cashierManage);
 
+    /**
+     * 添加
+     */
 	public int addCashierManageInfo(CashierManage cashierManage);
-
-	
 
 }

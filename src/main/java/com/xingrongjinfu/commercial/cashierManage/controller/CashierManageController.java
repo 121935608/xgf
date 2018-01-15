@@ -25,6 +25,7 @@ import com.xingrongjinfu.commodity.label.model.Label;
 import com.xingrongjinfu.system.role.common.RoleConstant;
 import com.xingrongjinfu.system.role.model.Role;
 import com.xingrongjinfu.system.syscode.model.SysCode;
+import com.xingrongjinfu.system.user.common.UserConstant;
 import com.xingrongjinfu.system.user.model.User;
 
 /**
@@ -109,7 +110,8 @@ public class CashierManageController extends BaseController {
 
 		return new Message(result);
 	}
-
+	
+	
 	/**
 	 * 启动/停用 操作
 	 */

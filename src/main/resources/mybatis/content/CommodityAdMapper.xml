@@ -16,6 +16,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="url" column="url" />
 		<result property="carouselNum" column="carouselNum" />
 	</resultMap>
+	
+	<delete id="deleteCommodityAdInfo" parameterType="CommodityAd">
+ 		delete from t_commodityAd where 1=1
+ 		<if test="commodityAdId != null and commodityAdId  != ''">and commodityAdId = #{commodityAdId}</if>
+ 	</delete>
 
 	<select id="findByCommodityAdId" parameterType="String"
 		resultType="CommodityAd">

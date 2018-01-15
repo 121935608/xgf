@@ -179,8 +179,10 @@
 		        "bSearchable": false,
 		        "mRender": function(data, type, row) {
 		        	//编辑
-		            var toEdit = "<a title=\"编辑\" href=\"javascript:;\" onclick=\"carousel_edit('编辑','${context_root}/content/toCarouselModify.action?carouselId=" + row.carouselId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><i class=\"Hui-iconfont\">&#xe6df;</i></a>";
-		            return statusTools(row)  + "&nbsp;&nbsp;" + toEdit;
+		            var toEdit = "<a title=\"编辑\" href=\"javascript:;\" onclick=\"carousel_edit('编辑','${context_root}/content/toCarouselModify.action?carouselId=" + row.carouselId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>编辑</span></a>";
+		        	//删除
+		        	var toDelete = "<a title=\"删除\" href=\"javascript:;\" onclick=\"carousel_del(this,\'" + row.carouselId + "\')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>删除</span></a>";
+		        	return toEdit + "&nbsp;&nbsp;" + toDelete;
 		        }
 		    },
 			
@@ -272,6 +274,29 @@
 					},
 				}) ;
 				
+			});
+		}
+		
+		/*删除*/
+		function carousel_del(obj,id){
+			parent.layer.confirm('确认要删除吗？',{icon: 3, title:'提示'},function(index){
+				$.ajax({
+					    url:"${context_root}/content/deleteById.action?carouselId=" + id, 
+						type:'post',
+						async:true ,
+						cache:false ,
+						dataType:"json",
+						success:function(data){
+							if(data.s == true){
+								$(obj).parents("tr").remove();
+								parent.layer.msg('已删除!',{icon:1,time:1000});
+								loadData() ;
+							}else{
+								parent.layer.alert(data.m , {icon: 2,title:"系统提示"});
+							}
+						},
+						
+					}) ;
 			});
 		}
 	</script>

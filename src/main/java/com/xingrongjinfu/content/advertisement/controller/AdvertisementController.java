@@ -26,6 +26,8 @@ import com.xingrongjinfu.content.advertisement.service.IAdvertisementService;
 import com.xingrongjinfu.content.carousel.common.CarouselConstant;
 import com.xingrongjinfu.content.carousel.model.Carousel;
 import com.xingrongjinfu.content.exhibition.model.Exhibition;
+import com.xingrongjinfu.system.role.common.RoleConstant;
+import com.xingrongjinfu.system.role.model.Role;
 import com.xingrongjinfu.system.syscode.model.SysCode;
 import com.xingrongjinfu.utils.AliyunOSSClientUtil;
 
@@ -91,7 +93,7 @@ public class AdvertisementController extends BaseController {
 	 * 跳转修改界面
 	 */
 	@RequestMapping(AdvertisementConstant.TO_MODIFY_URL)
-	public ModelAndView toCarouselModify(@RequestParam(required = true) String advertisementId) {
+	public ModelAndView toAdvertisementModify(@RequestParam(required = true) String advertisementId) {
 		ModelAndView modelAndView = this.getModelAndView(AdvertisementConstant.MODIFY_PAGE);
 		
 		List<SysCode> sysCodeList1 = new ArrayList<SysCode>();
@@ -108,8 +110,9 @@ public class AdvertisementController extends BaseController {
 		modelAndView.addObject("statusList", sysCodeList1);
 		
 		if (advertisementId != null) {
-			modelAndView.addObject("advertisement", this.advertisementService.findByAdvertisementId(advertisementId));
+			modelAndView.addObject("advertisement",advertisementService.findByAdvertisementId(advertisementId));
 			modelAndView.addObject("advertisementId",advertisementId);
+			System.out.println("~~~~~~~~~"+modelAndView);
 		}
 
 		return modelAndView;
@@ -170,6 +173,22 @@ public class AdvertisementController extends BaseController {
 		return new Message(result);
 
 	}
+	
+	/**
+     * 根据ID删除
+     */
+    @ActionControllerLog(title = "内容管理", action = "内容管理-删除广告", isSaveRequestData = true)
+    @RequestMapping(AdvertisementConstant.DEL_URL)
+    public @ResponseBody Message deleteById(Advertisement advertisement)
+    {
+        int result = 0;
+        String id = advertisement.getAdvertisementId();
+        if (id != null)
+        {           
+                result = advertisementService.deleteById(advertisement);           
+        }
+        return new Message(result);
+    }
 
 	/**
 	 * 启动/停用 操作

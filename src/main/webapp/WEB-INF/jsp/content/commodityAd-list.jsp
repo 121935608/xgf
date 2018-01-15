@@ -94,9 +94,12 @@
 				"sClass" : "text-c",
 				"bSearchable" : false,
 				"mRender" : function(data, type, row) {
-					if (row.type != null) {
-						return row.type;
-					} else {
+					//1：横栏广告；2：fit广告
+					if (row.type == '1') {
+						return "横栏广告";
+					}else if (row.type == '2') {
+						return "fit广告";
+					}  else{
 						return "";
 					}
 				}

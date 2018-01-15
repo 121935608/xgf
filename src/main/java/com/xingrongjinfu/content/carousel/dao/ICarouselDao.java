@@ -41,6 +41,8 @@ public interface ICarouselDao
      */
 	public Carousel findByCarouselId(String carouselId);
 
+	public int deleteById(Carousel carousel);
+
 	
 
 }

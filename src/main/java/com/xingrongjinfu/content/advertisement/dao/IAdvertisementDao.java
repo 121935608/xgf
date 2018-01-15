@@ -42,6 +42,12 @@ public interface IAdvertisementDao
      */
 	public Advertisement findByAdvertisementId(String advertisementId);
 
+	/**
+     * 删除
+     * 
+     */
+	public int deleteById(Advertisement advertisement);
+
 	
 
 }

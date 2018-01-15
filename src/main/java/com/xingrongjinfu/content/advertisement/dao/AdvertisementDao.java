@@ -68,4 +68,13 @@ public class AdvertisementDao extends DynamicObjectBaseDao implements IAdvertise
 		return (Advertisement) this.findForObject("ContentAdvertisementMapper.findByAdvertisementId", advertisementId);
 	}
 
+	/**
+     * 删除信息
+     * 
+     */
+	@Override
+	public int deleteById(Advertisement advertisement) {
+		return (int) this.delete("ContentAdvertisementMapper.deleteAdvertisementInfo", advertisement);
+	}
+
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.xingrongjinfu.commercial.cashierManage.model.CashierManage;
 import com.xingrongjinfu.commodity.label.model.Label;
+import com.xingrongjinfu.system.user.model.User;
 
 /**
  * 数据层处理
@@ -50,10 +51,12 @@ public class CashierManageDao extends DynamicObjectBaseDao implements ICashierMa
         return this.update("CommercialCashierManageMapper.updateCashierManageInfo", cashierManage);
     }
 
+    /**
+     * 添加信息
+     * 
+     */
 	@Override
 	public int addCashierManageInfo(CashierManage cashierManage) {
 		return this.save("CommercialCashierManageMapper.addCashierManageInfo", cashierManage);
 	}
-
-	
 }

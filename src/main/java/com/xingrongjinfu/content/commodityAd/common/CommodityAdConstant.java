@@ -34,6 +34,11 @@ public class CommodityAdConstant
     public final static String SAVE_COMM_URL = "saveCommodityAd";
     
     /**
+     * 请求地址：删除信息
+     */
+    public final static String DEL_URL = "deleteById";
+    
+    /**
      * 请求地址：启动/停用 操作
      */
     public final static String CHANGE_STATUS_URL = "changeCommodityAdStatus";

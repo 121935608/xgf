@@ -20,6 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.aliyun.oss.OSSException;
 import com.xingrongjinfu.content.ContentConstant;
+import com.xingrongjinfu.content.advertisement.common.AdvertisementConstant;
+import com.xingrongjinfu.content.advertisement.model.Advertisement;
 import com.xingrongjinfu.content.carousel.common.CarouselConstant;
 import com.xingrongjinfu.content.carousel.model.Carousel;
 import com.xingrongjinfu.content.carousel.service.ICarouselService;
@@ -163,6 +165,22 @@ public class CarouselController extends BaseController {
 		return new Message(result);
 
 	}
+	
+	/**
+     * 根据ID删除
+     */
+    @ActionControllerLog(title = "内容管理", action = "内容管理-删除广告", isSaveRequestData = true)
+    @RequestMapping(CarouselConstant.DEL_URL)
+    public @ResponseBody Message deleteById(Carousel carousel)
+    {
+        int result = 0;
+        String id = carousel.getCarouselId();
+        if (id != null)
+        {           
+                result = carouselService.deleteById(carousel);           
+        }
+        return new Message(result);
+    }
 
 	/**
 	 * 启动/停用 操作

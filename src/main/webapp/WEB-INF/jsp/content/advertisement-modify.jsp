@@ -1,27 +1,30 @@
 ﻿<%@ page contentType="text/html; charset=UTF-8"%>
 <%@include file="/WEB-INF/jsp/common/taglibs.jspf"%>
+<%@page isELIgnored="false" %>
 <ys:contentHeader/>
 <body>
 <article class="page-container">
 	<form action="" method="post"  class="form form-horizontal" id="form-advertisement-modify">
+	<input type="hidden" class="input-text" id="advertisementId" name="advertisementId" value="${advertisement.advertisementId }">
+		
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>标题：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="text" class="input-text" value="" placeholder="" id="advertisementName" name="advertisementName">
+				<input type="text" class="input-text" value="" placeholder="" id="advertisementName" name="advertisementName" value="${advertisement.advertisementName }">
 			</div>
 		</div>
 		
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>图片：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="file"  id="picture" name="picture">
+				<input type="file"  id="picture" name="picture" value="${advertisement.advertisementImg }">
 			</div>
 		</div>
 		
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>URL：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="text" class="input-text" value="" placeholder="" id="advertisementUrl" name="advertisementUrl">
+				<input type="text" class="input-text" value="" placeholder="" id="advertisementUrl" name="advertisementUrl" value="${advertisement.advertisementUrl }">
 			</div>
 		</div>
 		
@@ -29,8 +32,8 @@
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>状态：</label>
 			<div class="formControls col-xs-8 col-sm-4">
 			<y:select id="status" name="status"
-					codeGroup="${statusList}" selectedValue=""
-					cssClass="select" headerKey="0" headerValue="状态">
+					codeGroup="${statusList}"
+					cssClass="select" headerKey="0" headerValue="状态" >
 			</y:select>
 			</div>
 		</div>

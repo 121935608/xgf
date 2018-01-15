@@ -42,6 +42,11 @@ public class CashierManageConstant
      * 请求地址：启动/停用 操作
      */
     public final static String CHANGE_STATUS_URL = "changeCashierManageStatus";
+    
+    /**
+     * 请求地址：检查账户唯一
+     */
+    public final static String CHECK_NAME_UNIQUE_URL = "checkNameUnique";
 
     /**
      * 逻辑视图名：列表界面
@@ -52,5 +57,5 @@ public class CashierManageConstant
      * 逻辑视图名：添加界面
      */
     public final static String ADD_PAGE = "commercial/cashierManage-add";
-
+   
 }

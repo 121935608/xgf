@@ -34,6 +34,11 @@ public class ExhibitionConstant
     public final static String SAVE_EXHIBITION_URL = "saveExhibition";
     
     /**
+     * 请求地址：删除信息
+     */
+    public final static String DEL_URL = "deleteById";
+    
+    /**
      * 逻辑视图名：跳转至列表界面
      */
     public final static String EXHIBITION_PAGE = "content/exhibition-list";

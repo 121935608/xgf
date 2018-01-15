@@ -68,5 +68,10 @@ public class CarouselService implements ICarouselService
 	public Carousel findByCarouselId(String carouselId) {
 		return carouselDao.findByCarouselId(carouselId);
 	}
+
+	@Override
+	public int deleteById(Carousel carousel) {
+		return carouselDao.deleteById(carousel);
+	}
 	
 }
