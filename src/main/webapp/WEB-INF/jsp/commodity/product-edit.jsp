@@ -2,11 +2,24 @@
 <%@include file="/WEB-INF/jsp/common/taglibs.jspf"%>
 <ys:contentHeader/>
 <body>
+<script>
+$(document).onload(function(){
+	alert("ddd");
+	var expresslist = '${product.imgOther}';
+		var express = expresslist.split(';');
+		alert(express);
+		$.each(express, function(index,ex){
+			alert("ss");
+			var div = document.getElementById("otherImg");
+			var path = '${imgPath}'+ex;
+			alert(path);
+			div.innerHTML="<img src="+path+"/><p><a style="text-decoration:none;">设为主图</a></p>";
+	});
+})
+</script>
 <script type="text/javascript" src="${context_url}/uiloader/static/kindeditor/kindeditor-all-min.js"></script>
 <script type="text/javascript" src="${context_url}/uiloader/static/kindeditor/kindeditor-all.js"></script>
 <script type="text/javascript" src="${context_url}/uiloader/static/kindeditor/lang/zh-CN.js"></script>
-<script>
-</script>
 	<div id="ul">
 		<ul>
 			<li class="page"  index="0"><div style="font-weight:bold;width:80px;height:30px;color:white;border-radius:5px;padding:5px;cursor:pointer;background:#1dc21d;border:2.5px solid #2da32d;">基本信息</div></li>
@@ -187,9 +200,9 @@
 				<img src="${product.imgMain}">
 				<p>主图</p>
 			</div>
-			<div class="col-xs-2 col-sm-2">
-				<img src="${product.imgOther}">
-				<p><a>设为主图</a></p>
+			
+			<div class="col-xs-2 col-sm-2" id="otherImg">
+				
 			</div>
 		</div>
 		<div class="row cl" style="margin-left:130px;margin-top:30px">
