@@ -6,7 +6,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<resultMap type="Advertisement" id="AdvertisementResult">
 		<result property="advertisementId" column="advertisementId" />
-		<result property="advertisementImg" column="advertisementImg" />
 		<result property="advertisementName" column="advertisementName" />
 		<result property="advertisementUrl" column="advertisementUrl" />
 		<result property="createTime" column="createTime" />
@@ -28,7 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="pageInfoQuery" parameterType="PageUtilEntity"
 		resultType="Advertisement" useCache="false">
 		SELECT
-		advertisementName,advertisementUrl,createTime,status
+		advertisementId,advertisementName,advertisementUrl,createTime,status
 		from
 		t_advertisement
 		WHERE 1=1
@@ -81,13 +80,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</selectKey>
 		insert into t_advertisement
 		( advertisementId,
-		<if test="advertisementImg != null and advertisementImg != ''">advertisementImg,</if>
 		<if test="advertisementName != null and advertisementName != ''">advertisementName,</if>
 		<if test="advertisementUrl != null and advertisementUrl != ''">advertisementUrl,</if>
 		createTime,updateTime,
 		<if test="status != null and status != ''">status</if>
 		)values(#{advertisementId},
-		<if test="advertisementImg != null and advertisementImg != ''">#{advertisementImg},</if>
 		<if test="advertisementName != null and advertisementName != ''">#{advertisementName},</if>
 		<if test="advertisementUrl != null and advertisementUrl != ''">#{advertisementUrl},</if>
 		sysdate(),sysdate(),

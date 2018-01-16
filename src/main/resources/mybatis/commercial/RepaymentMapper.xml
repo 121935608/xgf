@@ -15,6 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="repayDate" column="repayDate" />
 		<result property="withholdMoney" column="withholdMoney" />
 		<result property="withholdDate" column="withholdDate" />
+		<result property="rongbaoOrderNo" column="rongbaoOrderNo" />
 		<result property="dueFee" column="dueFee" />
 		<result property="addTime" column="addTime" />
 		<result property="status" column="status" />

@@ -5,26 +5,19 @@
 <body>
 <article class="page-container">
 	<form action="" method="post"  class="form form-horizontal" id="form-advertisement-modify">
-	<input type="hidden" class="input-text" id="advertisementId" name="advertisementId" value="${advertisement.advertisementId }">
-		
+	<%-- <input type="hidden" class="input-text" id="advertisementId" name="advertisementId" value="${advertisement.advertisementId }">
+	 --%>	
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>标题：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="text" class="input-text" value="" placeholder="" id="advertisementName" name="advertisementName" value="${advertisement.advertisementName }">
-			</div>
-		</div>
-		
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>图片：</label>
-			<div class="formControls col-xs-8 col-sm-4">
-				<input type="file"  id="picture" name="picture" value="${advertisement.advertisementImg }">
+				<input type="text" class="input-text"  placeholder="${advertisement.advertisementName }" id="advertisementName" name="advertisementName" value="${advertisement.advertisementName }">
 			</div>
 		</div>
 		
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>URL：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="text" class="input-text" value="" placeholder="" id="advertisementUrl" name="advertisementUrl" value="${advertisement.advertisementUrl }">
+				<input type="text" class="input-text"  placeholder="${advertisement.advertisementUrl }" id="advertisementUrl" name="advertisementUrl" value="${advertisement.advertisementUrl }">
 			</div>
 		</div>
 		
@@ -32,7 +25,7 @@
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>状态：</label>
 			<div class="formControls col-xs-8 col-sm-4">
 			<y:select id="status" name="status"
-					codeGroup="${statusList}"
+					codeGroup="${statusList}" selectedValue="${advertisement.status }"
 					cssClass="select" headerKey="0" headerValue="状态" >
 			</y:select>
 			</div>
@@ -54,10 +47,7 @@ $("#form-advertisement-modify").validate({
 			required:true,
 			isSpace:true,
 		},
-		picture:{
-			required:true,
-			isSpace:true,
-		},
+		
 		advertisementUrl: {
             required: true,
             isSpace: true,
@@ -68,22 +58,20 @@ $("#form-advertisement-modify").validate({
 		},
 		
 	},
+	
 	onkeyup:false,
 	focusCleanup:true,
 	success:"valid",
 	submitHandler:function(form){
 		var index = parent.layer.load();
-		var formData = new FormData($('#form-advertisement-modify')[0]);
 		$.ajax({
 			url:"${context_root}/content/saveAdvertisement.action", 
 			type:'post',
-			data:formData,
-			mimeType: "multipart/form-data",
-			contentType: false,
-			cache:false,
-			processData: false,			
+			async:true ,
+			cache:false ,
+			data:$(form).serialize(),
+			dataType:"json",
 			success:function(data){
-				var data = JSON.parse(data);
 				parent.layer.close(index);
 				if(data.s == true){
 					index = parent.layer.getFrameIndex(window.name);

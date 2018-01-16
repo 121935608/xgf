@@ -21,7 +21,7 @@ public interface ICarouselDao
      * 根据条件分页查询
      * 
      */
-    public List<TableDataInfo> pageInfoQuery(PageUtilEntity pageUtilEntity);
+    public List<Carousel> pageInfoQuery(PageUtilEntity pageUtilEntity);
     
     /**
      * 修改

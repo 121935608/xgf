@@ -25,13 +25,13 @@ public class CarouselDao extends DynamicObjectBaseDao implements ICarouselDao
      */
     @SuppressWarnings("unchecked")
     @Override
-    public List<TableDataInfo> pageInfoQuery(PageUtilEntity pageUtilEntity)
+    public List<Carousel> pageInfoQuery(PageUtilEntity pageUtilEntity)
     {
 
-        List<TableDataInfo> carouselPageInfo = null;
+        List<Carousel> carouselPageInfo = null;
         try
         {
-        	carouselPageInfo = (List<TableDataInfo>) this.findForList("ContentCarouselMapper.pageInfoQuery", pageUtilEntity);
+        	carouselPageInfo = (List<Carousel>) this.findForList("ContentCarouselMapper.pageInfoQuery", pageUtilEntity);
         }
         catch (Exception e)
         {

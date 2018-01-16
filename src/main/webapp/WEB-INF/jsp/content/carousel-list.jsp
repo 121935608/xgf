@@ -54,9 +54,9 @@
 				class="table table-border table-bordered table-hover table-bg table-sort">
 				<thead>
 					<tr class="text-c">
-						<th width="10%">编号</th>
-						<th width="10%">标题</th>
 						<th width="10%">序号</th>
+						<th width="10%">标题</th>
+						
 						<th width="10%">图片</th>
 						<th width="15%">访问量</th>
 						<th width="10%">创建时间</th>
@@ -71,13 +71,13 @@
 		var pageTable;
 		$(document).ready(function() {
 			var aoColumns = [ {
-				"sDefaultContent" : "编号",
+				"sDefaultContent" : "序号",
 				"bSortable" : false,
 				"sClass" : "text-c",
 				"bSearchable" : false,
 				"mRender" : function(data, type, row) {
-					if (row.carouselNum != null) {
-						return row.carouselNum;
+					if (row.sort != null) {
+						return row.sort;
 					} else {
 						return "";
 					}
@@ -98,19 +98,7 @@
 				}
 			},
 			
-			{
-				"sDefaultContent" : "序号",
-				"bSortable" : false,
-				"sClass" : "text-c",
-				"bSearchable" : false,
-				"mRender" : function(data, type, row) {
-					if (row.sort != null) {
-						return row.sort;
-					} else {
-						return "";
-					}
-				}
-			},
+			
 			
 			{
 				"sDefaultContent" : "图片",

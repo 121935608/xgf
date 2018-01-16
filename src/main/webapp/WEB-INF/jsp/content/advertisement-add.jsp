@@ -12,13 +12,6 @@
 		</div>
 		
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>图片：</label>
-			<div class="formControls col-xs-8 col-sm-4">
-				<input type="file"  id="picture" name="picture">
-			</div>
-		</div>
-		
-		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>URL：</label>
 			<div class="formControls col-xs-8 col-sm-4">
 				<input type="text" class="input-text" value="" placeholder="" id="advertisementUrl" name="advertisementUrl">
@@ -51,10 +44,7 @@ $("#form-advertisement-add").validate({
 			required:true,
 			isSpace:true,
 		},
-		picture:{
-			required:true,
-			isSpace:true,
-		},
+		
 		advertisementUrl: {
             required: true,
             isSpace: true,
@@ -65,22 +55,20 @@ $("#form-advertisement-add").validate({
 		},
 		
 	},
+	
 	onkeyup:false,
 	focusCleanup:true,
 	success:"valid",
 	submitHandler:function(form){
 		var index = parent.layer.load();
-		var formData = new FormData($('#form-advertisement-add')[0]);
 		$.ajax({
 			url:"${context_root}/content/saveAdvertisement.action", 
 			type:'post',
-			data:formData,
-			mimeType: "multipart/form-data",
-			contentType: false,
-			cache:false,
-			processData: false,			
+			async:true ,
+			cache:false ,
+			data:$(form).serialize(),
+			dataType:"json",
 			success:function(data){
-				var data = JSON.parse(data);
 				parent.layer.close(index);
 				if(data.s == true){
 					index = parent.layer.getFrameIndex(window.name);

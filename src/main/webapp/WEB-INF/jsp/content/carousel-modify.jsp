@@ -7,7 +7,7 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>标题：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="text" class="input-text" value="" placeholder="" id="carouselName" name="carouselName">
+				<input type="text" class="input-text" value="${carousel.carouselName }" placeholder="" id="carouselName" name="carouselName">
 			</div>
 		</div>
 		
@@ -21,7 +21,7 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>URL：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="text" class="input-text" value="" placeholder="" id="url" name="url">
+				<input type="text" class="input-text" value="${carousel.url }" placeholder="" id="url" name="url">
 			</div>
 		</div>
 		
@@ -29,7 +29,7 @@
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>状态：</label>
 			<div class="formControls col-xs-8 col-sm-4">
 			<y:select id="status" name="status"
-					codeGroup="${statusList}" selectedValue=""
+					codeGroup="${statusList}" selectedValue="${carousel.status }"
 					cssClass="select" headerKey="0" headerValue="状态">
 			</y:select>
 			</div>

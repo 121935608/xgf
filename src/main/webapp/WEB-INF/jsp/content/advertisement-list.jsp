@@ -16,7 +16,6 @@
 			<form role="form" class="text-c">
 				<div class="row">
 					<div class="row col-xs-6 col-sm-4 .col-md-4">
-						
 						<div class="col-xs-8 col-sm-8 .col-md-8">
 							<input type="text" placeholder="开始时间"
 								onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')||\'%y-%M-%d\'}'})"
@@ -81,6 +80,7 @@
 					}
 				}
 			},
+			
 			
 			{
 				"sDefaultContent" : "标题",

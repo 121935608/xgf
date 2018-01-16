@@ -44,13 +44,15 @@
 <script type="text/javascript"  charset="UTF-8">
 var pageTable;
 $(document).ready(function(){ 
-    var aoColumns = [
+	
+	var aoColumns = [
     {
         "sDefaultContent": "商品名称",
         "bSortable" : false,
         "sClass": "text-c",
         "bSearchable": false,
         "mRender": function(data, type, row) {
+        	
             if (row.commodityName != null) {
                 return row.commodityName;
             } else {
@@ -71,7 +73,7 @@ $(document).ready(function(){
             }
         }
     },
-    
+    alert(1)
     {
         "sDefaultContent": "采购数量",
         "bSortable" : false,

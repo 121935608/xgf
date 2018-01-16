@@ -107,8 +107,8 @@ public class CarouselController extends BaseController {
 		modelAndView.addObject("statusList", sysCodeList1);
 		
 		if (carouselId != null) {
-			modelAndView.addObject("carousel", this.carouselService.findByCarouselId(carouselId));
-			modelAndView.addObject("carouselId",carouselId);
+			Carousel carousel=carouselService.findByCarouselId(carouselId);
+			modelAndView.addObject("carousel",carousel);
 		}
 
 		return modelAndView;
@@ -129,9 +129,14 @@ public class CarouselController extends BaseController {
 				e.printStackTrace();
 			}
 		}
-		List<TableDataInfo> tableDataInfo = carouselService.pageInfoQuery(pageUtilEntity);
+		List<Carousel> tableDataInfo = carouselService.pageInfoQuery(pageUtilEntity);
+		Integer i=1;
+		for (Carousel carousel : tableDataInfo) {
+			carousel.setSort(pageUtilEntity.getPage()+(i++));
+			}
 
-		return buildDataTable(pageUtilEntity.getTotalResult(), tableDataInfo);
+
+		return buildDatasTable(pageUtilEntity.getTotalResult(), tableDataInfo);
 	}
 
 	/**
@@ -156,7 +161,9 @@ public class CarouselController extends BaseController {
 			e.printStackTrace();
             return new Message(result);
 		}
-		if (carouselId != null) {
+		
+		
+		if (carousel.getCarouselId() != null) {
 			result = carouselService.updateCarouselInfo(carousel);
 		} else {
 			result = carouselService.addCarouselInfo(carousel);

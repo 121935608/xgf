@@ -29,7 +29,7 @@ public class CarouselService implements ICarouselService
      * 根据条件分页查询
      */
     @Override
-    public List<TableDataInfo> pageInfoQuery(PageUtilEntity pageUtilEntity)
+    public List<Carousel> pageInfoQuery(PageUtilEntity pageUtilEntity)
     {
         return carouselDao.pageInfoQuery(pageUtilEntity);
     }

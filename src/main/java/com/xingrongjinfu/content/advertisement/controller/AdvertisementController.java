@@ -62,7 +62,6 @@ public class AdvertisementController extends BaseController {
 		sysCodeList1.add(sysCode2);
 
 		modelAndView.addObject("statusList", sysCodeList1);
-		
 		return modelAndView;
 	}
 
@@ -110,9 +109,9 @@ public class AdvertisementController extends BaseController {
 		modelAndView.addObject("statusList", sysCodeList1);
 		
 		if (advertisementId != null) {
-			modelAndView.addObject("advertisement",advertisementService.findByAdvertisementId(advertisementId));
-			modelAndView.addObject("advertisementId",advertisementId);
-			System.out.println("~~~~~~~~~"+modelAndView);
+
+			Advertisement advertisement=advertisementService.findByAdvertisementId(advertisementId);
+			modelAndView.addObject("advertisement",advertisement);
 		}
 
 		return modelAndView;
@@ -147,26 +146,14 @@ public class AdvertisementController extends BaseController {
 	 */
 	@ActionControllerLog(title = "广告通知", action = "广告通知-保存", isSaveRequestData = true)
 	@RequestMapping(AdvertisementConstant.SAVE_ADVER_URL)
-	public @ResponseBody Message saveAdvertisement(Advertisement advertisement,String advertisementId,MultipartFile picture) {
-		int result = 0;		
-		AliyunOSSClientUtil aliyunOSSClientUtil = new AliyunOSSClientUtil();
-		
-		try {
-			String key = aliyunOSSClientUtil.uploadImg(picture);
-			if(key!=null){
-				
-				String originalFilename = picture.getOriginalFilename();
-				String filePath = aliyunOSSClientUtil.FOLDER + originalFilename;
-				advertisement.setAdvertisementImg(filePath);
-				
-			}
-		} catch (OSSException e) {
-			e.printStackTrace();
-            return new Message(result);
-		}
-		if (advertisementId != null) {
+	public @ResponseBody Message saveAdvertisement(Advertisement advertisement) {
+		int result = 0;	
+		String id = advertisement.getAdvertisementId();
+		if (id != null) {
 			result = advertisementService.updateAdvertisementInfo(advertisement);
+			
 		} else {
+			
 			result = advertisementService.addAdvertisementInfo(advertisement);
 		}
 		
