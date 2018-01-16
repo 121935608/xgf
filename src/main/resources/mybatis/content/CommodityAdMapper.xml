@@ -58,8 +58,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		LEFT JOIN t_commodity b ON a.commodityId=b.commodityId
 		LEFT JOIN t_category c ON c.`categoryId`=a.categoryId
 		WHERE 1=1
-
-
 		<if test="relationMap.beginTime != null and relationMap.beginTime != ''">
 			AND DATE_FORMAT(a.createTime,'%Y%m%d') &gt;=
 			DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
@@ -68,16 +66,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			AND DATE_FORMAT(a.createTime,'%Y%m%d') &lt;=
 			DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
 		</if>
-
 		<if test="relationMap.type != null">
-			AND type = #{relationMap.type}
+			AND a.type = #{relationMap.type}
 		</if>
 		<if test="relationMap.status != null">
-			AND status = #{relationMap.status}
+			AND a.status = #{relationMap.status}
 		</if>
 		<if test="relationMap.fuzzyCondition != null and relationMap.fuzzyCondition != ''">
 			AND (
-			commodityAdName LIKE CONCAT(CONCAT('%',
+			a.commodityAdName LIKE CONCAT(CONCAT('%',
 			#{relationMap.fuzzyCondition}),'%')
 			)
 		</if>
