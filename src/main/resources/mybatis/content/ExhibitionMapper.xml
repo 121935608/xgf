@@ -28,7 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="pageInfoQuery" parameterType="PageUtilEntity"
 		resultType="Exhibition" useCache="false">
 		SELECT
-		a.exhibitionId,a.categoryName,a.exhibitionImg,a.createTime
+		a.exhibitionId,a.categoryName,a.exhibitionImg,a.createTime,a.status
 		from t_exhibition a
 		left join t_category b on a.categoryId = b.categoryId
 		WHERE 1=1
@@ -39,6 +39,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="relationMap.endTime != null and relationMap.endTime != ''">
 			AND DATE_FORMAT(createTime,'%Y%m%d') &lt;=
 			DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
+		</if>
+		<if test="relationMap.status != null and relationMap.status != ''">
+			AND a.status = #{relationMap.status}
 		</if>
 
 		<if
@@ -59,10 +62,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="exhibitionImg != null and exhibitionImg != ''">
 				exhibitionImg = #{exhibitionImg},
 			</if>
-			<if test="url != null and url != ''">
-				url = #{url}
+			<if test="status.toString() != null and status.toString() != ''">
+				status = #{status},
 			</if>
-			
 		</set>
 		where 1=1
 		<if test="exhibitionId != null and exhibitionId  != ''">
@@ -82,14 +84,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="categoryName != null and categoryName != ''">categoryName,</if>
 		<if test="categoryId != null and categoryId != ''">categoryId,</if>
 		<if test="exhibitionImg != null and exhibitionImg != ''">exhibitionImg,</if>
-		createTime,updateTime,		
-		<if test="url != null and url != ''">url</if>
+		createTime,updateTime,
+		<if test="status != null and status != ''">status</if>		
 		)values(#{exhibitionId},
 		<if test="categoryName != null and categoryName != ''">#{categoryName},</if>
 		<if test="categoryId != null and categoryId != ''">#{categoryId},</if>
 		<if test="exhibitionImg != null and exhibitionImg != ''">#{exhibitionImg},</if>
 		sysdate(),sysdate(),
-		<if test="url != null and url != ''">#{url}</if>		
+		<if test="status != null and status != ''">#{status}</if>
 		)
 	</insert>
 

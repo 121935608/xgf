@@ -27,6 +27,13 @@
 						</div>
 					</div>
 					
+					<div class="row  col-xs-3 col-sm-2 .col-md-2">
+						<y:select id="status" name="status"
+							codeGroup="${statusList}" selectedValue=""
+							cssClass="select" headerKey="" headerValue="状态">
+						</y:select>
+					</div>
+					
 					<div class="col-xs-3 col-sm-2 .col-md-2">
 						<input type="text" class="input-text" style="width: 250px"
 							placeholder="标题" id="fuzzyCondition" name="fuzzyCondition">
@@ -53,6 +60,7 @@
 						<th width="10%">标题</th>
 						<th width="10%">图片</th>
 						<th width="10%">创建时间</th>
+						<th width="15%">状态</th>
 						<th width="10%">操作</th>
 					</tr>
 				</thead>
@@ -118,6 +126,24 @@
 
 				}
 			},
+			
+			{
+				"sDefaultContent" : "状态",
+				"bSortable" : false,
+				"sClass" : "text-c",
+				"bSearchable" : false,
+				"mRender" : function(data, type, row) {
+					//1:启用；-1:禁用）
+					if (row.status == '1') {
+						return "启用";
+					} else if (row.status == '-1') {
+						return "禁用";
+					} else {
+						return "";
+					}
+				}
+			},
+			
 			{
 		        "sDefaultContent": "操作",
 		        "bSortable" : false,
@@ -141,11 +167,14 @@
 		
 		function query() {
 			var fuzzyCondition = $("#fuzzyCondition").val();
+			var status = $("#status").val();
 			var beginTime = $("#beginTime").val();
 			var endTime = $("#endTime").val();
 
 			pageTable.fnSettings().sAjaxSource = "${context_root}/content/exhibitionList.action?fuzzyCondition="
-					+ encodeURIComponent(encodeURIComponent(fuzzyCondition))					
+					+ encodeURIComponent(encodeURIComponent(fuzzyCondition))
+					+ "&status="
+					+ status
 					+ "&beginTime="
 					+ beginTime
 					+ "&endTime="

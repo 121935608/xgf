@@ -4,10 +4,12 @@
 <body>
 <article class="page-container">
 	<form action="" method="post"  class="form form-horizontal" id="form-exhibition-modify">
+		<input type="hidden" class="input-text" id="exhibitionId" name="exhibitionId" value="${exhibition.exhibitionId }">
+	
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>标题：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="text" class="input-text" value="" placeholder="" id="categoryName" name="categoryName">
+				<input type="text" class="input-text" value="${exhibition.categoryName }" placeholder="" id="categoryName" name="categoryName">
 			</div>
 		</div>
 		
@@ -19,9 +21,12 @@
 		</div>
 		
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>URL：</label>
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>状态：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="text" class="input-text" value="" placeholder="" id="url" name="url">
+			<y:select id="status" name="status"
+					codeGroup="${statusList}" selectedValue="${exhibition.status }"
+					cssClass="select" headerKey="0" headerValue="状态" >
+			</y:select>
 			</div>
 		</div>
 		
@@ -45,10 +50,11 @@ $("#form-exhibition-modify").validate({
 			required:true,
 			isSpace:true,
 		},
-		url: {
-            required: true,
-            isSpace: true,
-        },
+		status:{
+			required:true,
+			isSpace:true,
+		},
+		
 	},
 	onkeyup:false,
 	focusCleanup:true,

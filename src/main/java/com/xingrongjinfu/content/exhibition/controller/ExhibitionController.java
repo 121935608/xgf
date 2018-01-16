@@ -2,6 +2,7 @@ package com.xingrongjinfu.content.exhibition.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.aspectj.lang.annotation.ActionControllerLog;
@@ -23,6 +24,7 @@ import com.xingrongjinfu.content.advertisement.model.Advertisement;
 import com.xingrongjinfu.content.exhibition.common.ExhibitionConstant;
 import com.xingrongjinfu.content.exhibition.model.Exhibition;
 import com.xingrongjinfu.content.exhibition.service.IExhibitionService;
+import com.xingrongjinfu.system.syscode.model.SysCode;
 import com.xingrongjinfu.utils.AliyunOSSClientUtil;
 
 /**
@@ -42,7 +44,19 @@ public class ExhibitionController extends BaseController {
 	 */
 	@RequestMapping(ExhibitionConstant.EXHIBITION_URL)
 	public ModelAndView loadExhibition() {
-		ModelAndView modelAndView = this.getModelAndView(ExhibitionConstant.EXHIBITION_PAGE);		
+		ModelAndView modelAndView = this.getModelAndView(ExhibitionConstant.EXHIBITION_PAGE);
+		List<SysCode> sysCodeList1 = new ArrayList<SysCode>();
+		SysCode sysCode1 = new SysCode();
+		sysCode1.setCodeid("1");
+		sysCode1.setCodevalue("启用");
+		sysCodeList1.add(sysCode1);
+
+		SysCode sysCode2 = new SysCode();
+		sysCode2.setCodeid("-1");
+		sysCode2.setCodevalue("禁用");
+		sysCodeList1.add(sysCode2);
+
+		modelAndView.addObject("statusList", sysCodeList1);
 		return modelAndView;
 	}
 
@@ -52,6 +66,18 @@ public class ExhibitionController extends BaseController {
 	@RequestMapping(ExhibitionConstant.TO_ADD_URL)
 	public ModelAndView toExhibitionAdd(String exhibitionId) {
 		ModelAndView modelAndView = this.getModelAndView(ExhibitionConstant.ADD_PAGE);
+		List<SysCode> sysCodeList1 = new ArrayList<SysCode>();
+		SysCode sysCode1 = new SysCode();
+		sysCode1.setCodeid("1");
+		sysCode1.setCodevalue("启用");
+		sysCodeList1.add(sysCode1);
+
+		SysCode sysCode2 = new SysCode();
+		sysCode2.setCodeid("-1");
+		sysCode2.setCodevalue("禁用");
+		sysCodeList1.add(sysCode2);
+
+		modelAndView.addObject("statusList", sysCodeList1);
 		return modelAndView;
 	}
 	
@@ -61,9 +87,23 @@ public class ExhibitionController extends BaseController {
 	@RequestMapping(ExhibitionConstant.TO_MODIFY_URL)
 	public ModelAndView toExhibitionModify(@RequestParam(required = true) String exhibitionId) {
 		ModelAndView modelAndView = this.getModelAndView(ExhibitionConstant.MODIFY_PAGE);
+		
+		List<SysCode> sysCodeList1 = new ArrayList<SysCode>();
+		SysCode sysCode1 = new SysCode();
+		sysCode1.setCodeid("1");
+		sysCode1.setCodevalue("启用");
+		sysCodeList1.add(sysCode1);
+
+		SysCode sysCode2 = new SysCode();
+		sysCode2.setCodeid("-1");
+		sysCode2.setCodevalue("禁用");
+		sysCodeList1.add(sysCode2);
+
+		modelAndView.addObject("statusList", sysCodeList1);
+		
 		if (exhibitionId != null) {
-			modelAndView.addObject("exhibition", this.exhibitionService.findByExhibitionId(exhibitionId));
-			modelAndView.addObject("exhibitionId",exhibitionId);
+			Exhibition exhibition = exhibitionService.findByExhibitionId(exhibitionId);
+			modelAndView.addObject("exhibition",exhibition);
 		}
 
 		return modelAndView;

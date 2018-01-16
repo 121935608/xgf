@@ -4,6 +4,8 @@
 <body>
 <article class="page-container">
 	<form action="" method="post"  class="form form-horizontal" id="form-carousel-modify">
+	<input type="hidden" class="input-text" id="carouselId" name="carouselId" value="${carousel.carouselId }">
+	
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>标题：</label>
 			<div class="formControls col-xs-8 col-sm-4">
