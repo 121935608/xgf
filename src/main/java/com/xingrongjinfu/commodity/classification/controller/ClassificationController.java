@@ -152,10 +152,10 @@ public class ClassificationController extends BaseController {
 		String parentId = category.getParentId();
 		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!"+categoryId);
 		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!"+parentId);
-		if (categoryId != null) {
+		if (categoryId != null&&categoryId.length()!=0) {
 			result = classificationService.updateCategoryInfo(category);
 		} 
-		if(parentId.equals("0")){
+		else{
 			result = classificationService.addCategoryInfo(category);
 		}
 
