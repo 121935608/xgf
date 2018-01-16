@@ -61,27 +61,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 		<if test="relationMap.beginTime != null and relationMap.beginTime != ''">
-			AND DATE_FORMAT(createTime,'%Y%m%d') &gt;=
+			AND DATE_FORMAT(a.createTime,'%Y%m%d') &gt;=
 			DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
 		</if>
 		<if test="relationMap.endTime != null and relationMap.endTime != ''">
-			AND DATE_FORMAT(createTime,'%Y%m%d') &lt;=
+			AND DATE_FORMAT(a.createTime,'%Y%m%d') &lt;=
 			DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
 		</if>
 
-		<if test="relationMap.type != null and relationMap.type != ''">
+		<if test="relationMap.type != null">
 			AND type = #{relationMap.type}
 		</if>
-		<if test="relationMap.status != null and relationMap.status != ''">
+		<if test="relationMap.status != null">
 			AND status = #{relationMap.status}
 		</if>
-		<if
-			test="relationMap.fuzzyCondition != null and relationMap.fuzzyCondition != ''">
+		<if test="relationMap.fuzzyCondition != null and relationMap.fuzzyCondition != ''">
 			AND (
 			commodityAdName LIKE CONCAT(CONCAT('%',
 			#{relationMap.fuzzyCondition}),'%')
 			)
 		</if>
+		order by a.createTime desc
 	</select>
 
 	<!-- 修改信息 -->
