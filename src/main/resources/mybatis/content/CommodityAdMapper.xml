@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="commodityName" column="commodityName" />
 	</resultMap>
 	<resultMap type="Category" id="CategoryResult">
-		<result property="categoryId" column="categoryId"/>
+		<result property="categoryId" column="categoryId" />
 		<result property="categoryName" column="categoryName" />
 		<result property="type" column="type" />
 		<result property="img" column="img" />
@@ -30,34 +30,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="addTime" column="addTime" />
 		<result property="parentId" column="parentId" />
 	</resultMap>
-		<resultMap id="CommodityResult" type="Commodity">
+	<resultMap id="CommodityResult" type="Commodity">
 		<result column="commodityName" property="commodityName" />
 		<result column="commodityId" property="commodityId" />
 		<result column="categoryId" property="categoryId" />
 	</resultMap>
 	<delete id="deleteCommodityAdInfo" parameterType="CommodityAd">
- 		delete from t_commodityAd where 1=1
- 		<if test="commodityAdId != null and commodityAdId  != ''">and commodityAdId = #{commodityAdId}</if>
- 	</delete>
+		delete from t_commodityAd where 1=1
+		<if test="commodityAdId != null and commodityAdId  != ''">and commodityAdId = #{commodityAdId}</if>
+	</delete>
 
 	<select id="findByCommodityAdId" parameterType="String"
 		resultType="CommodityAd">
-		SELECT commodityAdId,a.categoryId categoryId,a.`type` `type`,commodityAdName,commodityAdImg,com.commodityId,
+		SELECT commodityAdId,a.categoryId categoryId,a.`type`
+		`type`,commodityAdName,commodityAdImg,com.commodityId,
 		com.commodityName commodityName,a.sort sort,a.status status
-		FROM t_commodityAd a 
-		LEFT JOIN t_category c ON c.`categoryId`=a.categoryId 
+		FROM
+		t_commodityAd a
+		LEFT JOIN t_category c ON c.`categoryId`=a.categoryId
 		LEFT JOIN t_commodity com ON com.commodityId=a.commodityId
-		WHERE commodityAdId=#{0}
+		WHERE
+		commodityAdId=#{0}
 	</select>
 
 	<select id="pageInfoQuery" parameterType="PageUtilEntity"
 		resultType="CommodityAd" useCache="false">
-		SELECT categoryName,a.commodityAdName,commodityAdId,a.createTime,a.status,a.`type` `type`
+		SELECT
+		categoryName,a.commodityAdName,commodityAdId,a.createTime,a.status,a.`type`
+		`type`
 		FROM
 		t_commodityAd a
-		LEFT JOIN t_commodity b ON a.commodityId=b.commodityId
-		LEFT JOIN t_category c ON c.`categoryId`=a.categoryId
+		LEFT JOIN t_commodity b ON
+		a.commodityId=b.commodityId
+		LEFT JOIN t_category c ON
+		c.`categoryId`=a.categoryId
 		WHERE 1=1
+		
 		<if test="relationMap.beginTime != null and relationMap.beginTime != ''">
 			AND DATE_FORMAT(a.createTime,'%Y%m%d') &gt;=
 			DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
@@ -66,16 +74,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			AND DATE_FORMAT(a.createTime,'%Y%m%d') &lt;=
 			DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
 		</if>
-		<if test="relationMap.type != null">
+		<if test="relationMap.type != null and relationMap.type != ''">
 			AND a.type = #{relationMap.type}
 		</if>
-		<if test="relationMap.status != null">
+		<if test="relationMap.status != null and relationMap.status != ''">
 			AND a.status = #{relationMap.status}
 		</if>
-		<if test="relationMap.fuzzyCondition != null and relationMap.fuzzyCondition != ''">
+		<if
+			test="relationMap.fuzzyCondition != null and relationMap.fuzzyCondition != ''">
 			AND (
-			a.commodityAdName LIKE CONCAT(CONCAT('%',
-			#{relationMap.fuzzyCondition}),'%')
+			a.commodityAdName LIKE CONCAT(CONCAT('%', #{relationMap.fuzzyCondition}),'%')
 			)
 		</if>
 		order by a.createTime desc
@@ -83,7 +91,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 修改信息 -->
 	<update id="updateCommodityAdInfo" parameterType="CommodityAd">
-		update t_commodityAd 
+		update t_commodityAd
 		<set>
 			<if test="commodityAdName != null and commodityAdName != ''">
 				commodityAdName = #{commodityAdName},
@@ -144,33 +152,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="sort != null and sort != ''">#{sort}</if>
 		)
 	</insert>
-	
+
 	<!-- 查询所有类型 -->
 	<select id="getAllType" resultType="int">
-		SELECT DISTINCT(`type`) `type` FROM t_commodityAd WHERE `status`=1
+		SELECT DISTINCT(`type`)
+		`type` FROM t_commodityAd WHERE `status`=1
 	</select>
-	
+
 	<!-- 查询所有分类 -->
 	<select id="getFL" resultType="Category">
-		SELECT * FROM  t_category c 
+		SELECT * FROM t_category c
 		WHERE c.status=1 AND c.parentId="0" AND c.type = "FL" ORDER BY c.sort
 	</select>
-	
+
 	<!-- 获取某分类的所有商品 -->
 	<select id="getCommoditys" parameterType="string" resultType="Commodity">
-		SELECT DISTINCT(c.commodityId) commodityId,c.commodityName commodityName 
-		FROM t_commodity c LEFT JOIN t_commodityAd a ON a.commodityId=c.commodityId 
+		SELECT DISTINCT(c.commodityId) commodityId,c.commodityName
+		commodityName
+		FROM t_commodity c LEFT JOIN t_commodityAd a ON
+		a.commodityId=c.commodityId
 		LEFT JOIN t_category ca ON ca.categoryId=a.categoryId
-		WHERE c.categoryId IN 
+		WHERE c.categoryId IN
 		(SELECT categoryId FROM t_category WHERE parentId=#{0})
 	</select>
-	
+
 	<!-- 获取某商品的所有分类商品 -->
-	<select id="getCommoditysByAdId" parameterType="string" resultType="map">
-		SELECT DISTINCT(c.commodityId) commodityId,c.commodityName commodityName 
-		FROM  t_commodity c LEFT JOIN t_category ca ON c.categoryId=ca.categoryId
-		WHERE ca.parentId = 
-		(SELECT t_category.categoryId FROM t_category LEFT JOIN t_commodityAd  ON t_commodityAd.categoryId=t_category.categoryId 
+	<select id="getCommoditysByAdId" parameterType="string"
+		resultType="map">
+		SELECT DISTINCT(c.commodityId) commodityId,c.commodityName
+		commodityName
+		FROM t_commodity c LEFT JOIN t_category ca ON c.categoryId=ca.categoryId
+		WHERE ca.parentId =
+		(SELECT t_category.categoryId FROM t_category LEFT JOIN t_commodityAd ON
+		t_commodityAd.categoryId=t_category.categoryId
 		WHERE t_commodityAd.commodityAdId=#{0}
 		)
 	</select>
