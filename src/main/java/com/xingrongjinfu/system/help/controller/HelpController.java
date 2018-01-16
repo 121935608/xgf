@@ -82,7 +82,7 @@ public class HelpController extends BaseController{
             help.setReplyTimes(help.getReplyTime()==null ? "":sdf.format(help.getReplyTime()));
         }
         if (unHelpInfo ==null) {
-            unHelpInfo=helpService.getUnreply(null);
+            unHelpInfo=helpService.getUnreply("");
         }
         modelAndView.addObject("unHelpInfo", unHelpInfo);
         modelAndView.addObject("helpInfo",helpInfo);

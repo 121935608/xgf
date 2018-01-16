@@ -27,8 +27,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="relationMap.endTime != null and relationMap.endTime != ''"><!-- 结束时间检索 -->
 			AND DATE_FORMAT(f.addTime,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
 		</if>
-		<if test="relationMap.userName !=null and relationMap.userName !=''">
-			AND f.answer=#{relationMap.userName}
+		<if test="relationMap.answer !=null and relationMap.answer !=''">
+			AND f.answer LIKE CONCAT(CONCAT('%', #{relationMap.answer}),'%')
 		</if>
 		<if test="relationMap.name !=null and relationMap.name !=''">
 			AND u.userName LIKE CONCAT(CONCAT('%', #{relationMap.name}),'%')

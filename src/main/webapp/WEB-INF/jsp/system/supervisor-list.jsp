@@ -150,7 +150,7 @@ function role_Authorize(title,url,w,h){
 
 /*督导员-停用*/
 function supervisor_stop(obj,id){
-	parent.layer.confirm('确认要删除吗？',{icon: 3, title:'提示'},function(index){
+	parent.layer.confirm('确认要停用吗？',{icon: 3, title:'提示'},function(index){
 		$.ajax({
 			    url:"${context_root}/system/changeSupervisorStatus.action?supervisorId=" + id+"&status=1",
 				type:'post',
@@ -183,7 +183,7 @@ function supervisor_start(obj, id) {
             dataType: "json",
             success: function (data) {
                 if (data.s == true) {
-                    $(obj).parents("tr").find(".td-manage").prepend('<a onClick="supervisor_stop(this,' + id + ')" href="javascript:;" title="停用" style="text-decoration:none"><span style=\'color: #0e90d2 \'>禁用</span></a>');
+                    $(obj).parents("tr").find(".td-manage").prepend('<a onClick="supervisor_stop(this,' + id + ')" href="javascript:;" title="停用" style="text-decoration:none"><span style=\'color: #0e90d2 \'>停用</span></a>');
                     $(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
                     $(obj).remove();
                     parent.layer.msg('已启用!', {icon: 6, time: 1000});

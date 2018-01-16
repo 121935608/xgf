@@ -58,7 +58,7 @@ public class SupervisorService implements ISupervisorService {
 
     @Override
     public String checkPhone(Supervisor supervisor) {
-        if (supervisor.getSupervisorId() !=null ){
+        if (supervisor.getSupervisorId() ==null ){
             supervisor.setSupervisorId(null);
         }
         String phone=supervisor.getPhone();

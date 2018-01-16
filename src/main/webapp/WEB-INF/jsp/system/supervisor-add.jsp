@@ -3,7 +3,7 @@
 <ys:contentHeader/>
 <body>
 <article class="page-container">
-	<form action="" method="post" class="form form-horizontal" id="form-role-modify">
+	<form action="" method="post" class="form form-horizontal" id="form-supervisor-add">
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>姓名：</label>
 			<div class="formControls col-xs-8 col-sm-4">
@@ -40,15 +40,25 @@
 </article>
 
 <script type="text/javascript">
-$("#form-role-modify").validate({
+    jQuery.validator.addMethod("chineseName", function (value, element) {
+        var chrnum =/^[\u4E00-\u9FA5]{2,4}$/;
+        return this.optional(element) || (chrnum.test(value));
+    }, "请输入中文");
+    jQuery.validator.addMethod("checkPhone", function (value, element) {
+        var chrnum =/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
+        return this.optional(element) || (chrnum.test(value));
+    }, "请输入正确的手机号");
+$("#form-supervisor-add").validate({
 	rules:{
         name:{
 			required:true,
 			isSpace:true,
+            chineseName:true,
 		},
         phone:{
 			required:true,
 			isSpace:true,
+            checkPhone:true,
             remote: {
                 url: "${context_root}/system/checkPhoneUnique.action",
                 type: "post",
@@ -60,7 +70,7 @@ $("#form-role-modify").validate({
                 },
                 dataFilter: function (data, type) {
                     if (data == "0") return true;
-                    else return "系统中已存在该电话号信息督导员";
+                    else return "已存在该电话号的督导员";
                 }
             }
 		},
@@ -69,16 +79,20 @@ $("#form-role-modify").validate({
 	focusCleanup:true,
 	success:"valid",
 	submitHandler:function(form){
-        var reg=/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
+        /*var reg=/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
 		var phone=$("#phone").val();
 		if (!reg.test(phone)){
 		    alert("请输入正确的手机号");
 		    return;
-		}
+		}*/
         var province=$("#province option:selected").val();
         var city=$("#city option:selected").val()
         var district=$("#district option:selected").val();
         var area=province+city+district;
+        if (area ===null ||area===''|| area===undefined ){
+            alert("请选择区域");
+            return;
+        }
 		var index = parent.layer.load();
 		$.ajax({
 			url:"${context_url}/system/supervisorAdd.action?area="+area,

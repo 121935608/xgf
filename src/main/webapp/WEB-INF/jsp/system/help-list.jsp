@@ -12,7 +12,7 @@
                     class="input-text Wdate" style="width:120px;" placeholder="开始时间">
         <input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'beginTime\')}',maxDate:'%y-%M-%d'})" id="endTime"
                class="input-text Wdate" style="width:120px;" placeholder="结束时间">
-        <input type="text" class="input-text" style="width:250px" placeholder="回复者" id="userName" name="userName">
+        <input type="text" class="input-text" style="width:250px" placeholder="回复者" id="answer" name="answer">
         <input type="text" class="input-text" style="width:250px" placeholder="会员" id="name" name="name">
         <button type="button" class="btn btn-success radius" onclick="query()"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
         </button>
@@ -140,12 +140,12 @@
     }
 
     function query() {
-        var userName = $("#userName").val();
+        var answer = $("#answer").val();
         var name = $("#name").val();
         var beginTime = $("#beginTime").val();
         var endTime = $("#endTime").val();
 
-        pageTable.fnSettings().sAjaxSource = encodeURI("${context_root}/system/helpList.action?userName=" + userName + "&name=" + name + "&beginTime=" + beginTime + "&endTime=" + endTime);
+        pageTable.fnSettings().sAjaxSource = encodeURI("${context_root}/system/helpList.action?answer=" + answer + "&name=" + name + "&beginTime=" + beginTime + "&endTime=" + endTime);
         pageTable.fnClearTable(0);
         pageTable.fnDraw();
     }

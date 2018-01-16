@@ -74,7 +74,7 @@
     <select id="findPhone" parameterType="Supervisor" resultType="Supervisor">
         SELECT * FROM sys_supervisor WHERE phone=#{phone}
         <if test="supervisorId !=null">
-            AND supervisorId=#{supervisorId}
+            AND supervisorId !=#{supervisorId}
         </if>
     </select>
 </mapper>

@@ -93,10 +93,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="findAllSupply" resultMap="ProductResult">
-		SELECT DISTINCT (supply) FROM t_commodity WHERE 1=1
+		SELECT supply FROM t_commodity WHERE 1=1
 		<if test="type!=null and type!=''">
 			AND type=#{type}
 		</if>
+		GROUP BY supply
 	</select>
 
 	<select id="findAllOrigin" resultMap="ProductResult">

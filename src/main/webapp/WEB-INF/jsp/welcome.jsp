@@ -44,38 +44,48 @@
 		</a>
 	</div>
 		<div style="clear:both;">
-		<table border="1" style="text-align:center;width:600px;float:left;margin-left: 10%;margin-right: 5%">
-			<tr style="width:600px;height:40px;border:0px;background-color: #D1D1D1">
-				<td style="width:15%;line-height: 40px;text-align: center;">交易记录</td>
-				<td style="width:35%"></td>
-				<td style="width:35%"></td>
-				<td style="text-align:center;width: 15%"><a href="${context_url}/dataCount/saleView.action" style="color:blue;">更多>></a></td>
-			</tr>
-			<c:forEach items="${pays}" var="m" varStatus="n">
-			<tr style="width:600px;height: 40px;">
-				<td style="width:5%;text-align:center;">${n.count}</td>
-				<td style="width:30%;text-align:center;">${m.tradeCode}</td>
-				<td style="width:40%;">${m.addTimes}</td>
-				<td style="width:25%">${m.money}</td>
-			</tr>
-			</c:forEach>
-		</table>
-			<table border="1" style="text-align:center;width:600px;float:left;">
-				<tr style="width:600px;height:40px;border:0px;background-color: #D1D1D1">
-					<td style="width:15%;line-height: 40px;text-align: center;">交易记录</td>
-					<td style="width:35%"></td>
-					<td style="width:35%"></td>
-					<td style="text-align:center;width: 15%"><a href="${context_url}/dataCount/saleView.action" style="color:blue;">更多>></a></td>
+			<table border="0">
+				<tr style="border: 0px">
+					<td>
+						<table border="1" style="text-align:center;width:50%;float:left;margin-left: 10%;margin-right: 5%">
+							<tr style="width:600px;height:40px;border:0px;background-color: #D1D1D1">
+								<td style="width:15%;line-height: 40px;text-align: center;">交易记录</td>
+								<td style="width:35%"></td>
+								<td style="width:35%"></td>
+								<td style="text-align:center;width: 15%"><a href="${context_url}/dataCount/saleView.action" style="color:blue;">更多>></a></td>
+							</tr>
+							<c:forEach items="${pays}" var="m" varStatus="n">
+								<tr style="width:600px;height: 40px;">
+									<td style="width:5%;text-align:center;">${n.count}</td>
+									<td style="width:30%;text-align:center;">${m.tradeCode}</td>
+									<td style="width:40%;">${m.addTimes}</td>
+									<td style="width:25%">${m.money}</td>
+								</tr>
+							</c:forEach>
+						</table>
+					</td>
+					<td>
+						<table border="1" style="text-align:center;width:50%;float:left;">
+							<tr style="width:600px;height:40px;border:0px;background-color: #D1D1D1">
+								<td style="width:15%;line-height: 40px;text-align: center;">交易记录</td>
+								<td style="width:35%"></td>
+								<td style="width:35%"></td>
+								<td style="text-align:center;width: 15%"><a href="${context_url}/dataCount/saleView.action" style="color:blue;">更多>></a></td>
+							</tr>
+							<c:forEach items="${pays}" var="m" varStatus="n">
+								<tr style="width:600px;height: 40px;">
+									<td style="width:5%;text-align:center;">${n.count}</td>
+									<td style="width:30%;text-align:center;">${m.tradeCode}</td>
+									<td style="width:40%;">${m.addTimes}</td>
+									<td style="width:25%">${m.money}</td>
+								</tr>
+							</c:forEach>
+						</table>
+					</td>
 				</tr>
-				<c:forEach items="${pays}" var="m" varStatus="n">
-					<tr style="width:600px;height: 40px;">
-						<td style="width:5%;text-align:center;">${n.count}</td>
-						<td style="width:30%;text-align:center;">${m.tradeCode}</td>
-						<td style="width:40%;">${m.addTimes}</td>
-						<td style="width:25%">${m.money}</td>
-					</tr>
-				</c:forEach>
 			</table>
+
+
 	</div>
 </div>
 
