@@ -39,8 +39,10 @@ public class Store {
 	    private String remark;//'审核说明',
 	    private Date addTime;//'添加时间',
 	    private Date updateTime;//'最近修改时间',
-	    
-	    private String accountName; // '用户账号',
+		// '用户账号',
+	    private String accountName;
+		//督导员的名字
+		private String name;
  
 
 		public String getStoreId() {
@@ -243,6 +245,14 @@ public class Store {
 
 		public void setAccountName(String accountName) {
 			this.accountName = accountName;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
 		}
 
 		public String toString()

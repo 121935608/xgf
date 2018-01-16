@@ -55,8 +55,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			creatTime=sysdate()
 		</set>
 		WHERE 1=1
-		<if test="documentId !=null and documentId !=''">
+		<if test="documentId !=null ">
 			AND documentId=#{documentId}
 		</if>
 	</update>
+
+	<select id="checkName" parameterType="Document" resultType="Document">
+		SELECT * FROM sys_document WHERE title=#{title}
+		<if test="documentId !=null">AND documentId=#{documentId}</if>
+	</select>
 </mapper> 

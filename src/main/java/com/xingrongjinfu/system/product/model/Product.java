@@ -48,6 +48,7 @@ public class Product {
     private String country;
     private String type;
     private String categoryName;
+    private String storage;
 
     public Integer getCommodityNum() {
         return commodityNum;
@@ -263,5 +264,13 @@ public class Product {
 
     public void setGrade(String grade) {
         this.grade = grade;
+    }
+
+    public String getStorage() {
+        return storage;
+    }
+
+    public void setStorage(String storage) {
+        this.storage = storage;
     }
 }

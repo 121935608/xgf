@@ -53,4 +53,9 @@ public class DocumentDao extends DynamicObjectBaseDao implements IDocumentDao {
     public int updateDocument(Document document) {
         return this.update("DocumentMapper.updateDocument",document);
     }
+
+    @Override
+    public Document checkName(Document document) {
+        return (Document) this.findForObject("DocumentMapper.checkName",document);
+    }
 }

@@ -31,6 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="type" property="type" />
 		<result column="categoryName" property="categoryName" />
 		<result column="grade" property="grade" />
+		<result column="storage" property="storage" />
 	</resultMap>
 
 	<resultMap id="ClassesResult" type="Classes">
@@ -155,6 +156,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="supply!=null and supply !=''">supply=#{supply},</if>
 			<if test="hint!=null and hint !=''">hint=#{hint},</if>
 			<if test="grade!=null and grade !=''">grade=#{grade},</if>
+			<if test="storage!=null and storage !=''">storage=#{storage},</if>
 			<if test="country!=null and country !=''">country=#{country},</if>
 			<if test="type!=null and type !=''">type=#{type},</if>
 			updateTime=sysdate()

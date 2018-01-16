@@ -110,7 +110,7 @@
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-3">备注</label>
 				<div class="formControls col-xs-8 col-sm-4">
-					<span>${bankaccount["remark"]}</span>
+					<span>${bankaccount.remark}</span>
 				</div>
 			</div>
 		</div>
@@ -125,23 +125,23 @@
 				<div class="col-xs-1 col-sm-1"> 
 				</div>
 				<div class="col-xs-2 col-sm-2">
-					<img alt="ssss" src="${store['licensePic']}">
+					<img style="width: 50px;height: 50px" src="${store['licensePic']}">
 					<p class="form-label">营业执照</p>
 				</div>
 				<div class="col-xs-2 col-sm-2">
-					<img alt="ssss" src="${store['frontStorePic']}">
+					<img style="width: 50px;height: 50px" src="${store['frontStorePic']}">
 					<p class="form-label">店铺门脸照</p>
 				</div>
 				<div class="col-xs-2 col-sm-2">
-					<img alt="ssss" src="${store['innerStorePic']}">
+					<img style="width: 50px;height: 50px" src="${store['innerStorePic']}">
 					<p class="form-label">店铺店内照</p>
 				</div>  
 				<div class="col-xs-2 col-sm-2">
-					<img alt="ssss" src="${store['contractPic']}">
+					<img style="width: 80%;height: 80%" src="${store['contractPic']}">
 					<p class="form-label">租赁合同</p>
 				</div> 
 				<div class="col-xs-2 col-sm-2">
-					<img alt="ssss" src="${store['utilitiesPic']}">
+					<img style="width: 50px;height: 50px" src="${store['utilitiesPic']}">
 					<p class="form-label">租赁水电费</p>
 				</div> 
 			</div>
@@ -161,7 +161,7 @@
 				<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>督导员</label>
 				
 				<div class="formControls col-xs-8 col-sm-4">
-						<y:select id="supervisorId" name="supervisorId" codeGroup="${supervisorList}" selectedValue="${store['supervisorId']}"
+						<y:select id="supervisorId" name="supervisorId" codeGroup="${supervisorList}" selectedValue="${store.supervisorId}"
 								cssClass="select" headerKey="" headerValue="请选择">
 						</y:select>
 				</div> 

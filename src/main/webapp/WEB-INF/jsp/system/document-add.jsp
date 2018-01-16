@@ -32,11 +32,30 @@
 </article>
 
 <script type="text/javascript">
+    jQuery.validator.addMethod("checkTitle", function (value, element) {
+        var chrnum =/[`~!@#$%^&*()_\-+=<>?:"{}|,.\/;'\\[\]·~！@#￥%……&*（）——\-+={}|《》？：“”【】、；‘’，。、]/;
+        return this.optional(element) || (!chrnum.test(value));
+    }, "不能含有特殊字符");
 $("#form-document-add").validate({
 	rules:{
         title:{
 			required:true,
 			isSpace:true,
+            checkTitle:true,
+            remote: {
+                url: "${context_root}/system/checkTitleUnique.action",
+                type: "post",
+                dataType: "text",
+                data: {
+                    name: function () {
+                        return $.trim($("#title").val());
+                    }
+                },
+                dataFilter: function (data, type) {
+                    if (data == "0") return true;
+                    else return "已存在该标题的公文";
+                }
+            }
 		},
         file:{
 			required:true,

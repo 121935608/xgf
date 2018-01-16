@@ -55,6 +55,7 @@
 				<th width="5%">费率</th>
 				<th width="5%">售价(元)</th>
 				<th width="5%">库存</th>
+				<th width="5%">存储方式</th>
 				<th width="5%">上下架</th>
 				<th width="5%">状态</th>
 				<th width="8%">操作</th>
@@ -74,8 +75,8 @@ $(document).ready(function(){
             "sClass": "text-c",
             "bSearchable": false,
             "mRender": function(data, type, row) {
-                if (row.commodityNum != null) {
-                    return row.commodityNum;
+                if (row.commodityId != null) {
+                    return row.commodityId;
                 } else {
                     return "";
                 }
@@ -253,6 +254,19 @@ $(document).ready(function(){
             }
         },
         {
+            "sDefaultContent": "存储方式",
+            "bSortable" : false,
+            "sClass": "text-c",
+            "bSearchable": false,
+            "mRender": function(data, type, row) {
+                if (row.storage !=null) {
+                    return row.storage;
+                }else {
+                    return "";
+                }
+            }
+        },
+        {
             "sDefaultContent": "上下架",
             "bSortable" : false,
             "sClass": "text-c",
@@ -312,7 +326,7 @@ function query() {
     var supply = $("#supply option:selected").val();
     var commodityStatus = $("#commodityStatus option:selected").val();
 	var commodityName =$("#commodityName").val();
-    pageTable.fnSettings().sAjaxSource = encodeURI("${context_root}/commodity/findProductList.action?classId="+classId+"&origin="+origin+"&category="+category+"&supply="+supply+"&commodityStatus="+commodityStatus+"&commodityName="+commodityName);
+    pageTable.fnSettings().sAjaxSource = encodeURI("${context_root}/commodity/findProductList.action?classId="+classId+"&origin="+origin+"&category="+category+"&supply="+supply+"&commodityStatus="+commodityStatus+"&commodityName="+commodityName+"&type=${product.type}");
     pageTable.fnClearTable(0);
     pageTable.fnDraw();
 }

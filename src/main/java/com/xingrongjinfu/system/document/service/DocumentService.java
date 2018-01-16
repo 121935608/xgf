@@ -12,6 +12,8 @@ package com.xingrongjinfu.system.document.service;
 
 import com.xingrongjinfu.system.document.dao.IDocumentDao;
 import com.xingrongjinfu.system.document.model.Document;
+import com.xingrongjinfu.utils.ObjectUtil;
+import org.apache.shiro.common.UserConstants;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,5 +53,14 @@ public class DocumentService implements IDocumentService
     @Override
     public int updateDocument(Document document) {
         return documentDao.updateDocument(document);
+    }
+
+    @Override
+    public String checkName(Document document) {
+        Document newDocument=documentDao.checkName(document);
+        if (ObjectUtil.isNotNull(newDocument)){
+            return UserConstants.NAME_NOT_UNIQUE;
+        }
+        return UserConstants.NAME_UNIQUE;
     }
 }

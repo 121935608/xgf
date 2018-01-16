@@ -47,4 +47,9 @@ public interface IDocumentService {
      * 文件的启用与禁用
      */
     int updateDocument(Document document);
+
+    /**
+     * 校验公文名唯一
+     */
+    String checkName(Document document);
 }

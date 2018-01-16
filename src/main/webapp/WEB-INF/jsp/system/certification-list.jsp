@@ -92,12 +92,12 @@ $(document).ready(function(){
            }
     },
     {
-        "mData": "supervisorId",  //督导员
+        "mData": "name",  //督导员
         "bSortable" : false,
         "sClass": "text-c",
         "mRender": function(data, type, row) {
-            if (row.supervisorId != null) {
-                return row.supervisorId;
+            if (row.name != null) {
+                return row.name;
             } else {
                 return "";
             }
@@ -143,7 +143,7 @@ $(document).ready(function(){
         "bSearchable": false,
         "mRender": function(data, type, row) {  
         	//编辑
-            var toEdit = "<a title=\"审核\" href=\"javascript:;\" onclick=\"certification_check('认证申请审核','${context_root}/merchant/checkCertification.action?storeId=" + row.storeId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><i class=\"Hui-iconfont\">&#xe6df;</i></a>";
+            var toEdit = "<a title=\"审核\" href=\"javascript:;\" onclick=\"certification_check('认证申请审核','${context_root}/merchant/checkCertification.action?storeId=" + row.storeId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>编辑</span></a>";
         	return toEdit;
         }
     },

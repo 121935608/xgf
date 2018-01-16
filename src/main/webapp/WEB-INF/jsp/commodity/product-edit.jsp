@@ -116,13 +116,13 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>费率：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input style="width: 100px;" type="text" class="input-text" autocomplete="off" disabled="disabled" maxlength="20"  placeholder="" id="taxRate" name="taxRate" value="${product.taxRate}">%
+				<input style="width: 100px;" type="text" class="input-text" autocomplete="off" maxlength="20"  placeholder="" id="taxRate" name="taxRate" value="${product.taxRate}">%
 			</div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>售价：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input style="width: 100px;" type="number" class="input-text" autocomplete="off" disabled="disabled" maxlength="20"  placeholder="" id="salePrice" name="salePrice" value="${product.salePrice}">元
+				<input style="width: 100px;" type="number" class="input-text" autocomplete="off" maxlength="20"  placeholder="" id="salePrice" name="salePrice" value="${product.salePrice}">元
 			</div>
 		</div>
 		<div class="row cl">
@@ -142,6 +142,12 @@
 			</div>
 		</div>
 
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>存储方式：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" class="input-text" autocomplete="off" disabled="disabled" maxlength="20"  placeholder="" id="storage" name="storage" value="${product.storage}">
+			</div>
+		</div>
 		<input type="hidden" class="input-text" autocomplete="off" maxlength="20"  placeholder="" id="type" name="type" value="${product.type}">
 		<input type="hidden" class="input-text" autocomplete="off" maxlength="20"  placeholder="" id="commodityId" name="commodityId" value="${product.commodityId}">
 

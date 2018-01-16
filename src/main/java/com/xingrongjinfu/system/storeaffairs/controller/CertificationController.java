@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.xingrongjinfu.commodity.classification.model.Category;
+import com.xingrongjinfu.system.supervisor.service.ISupervisorService;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.framework.core.controller.BaseController;
@@ -41,6 +43,9 @@ import com.xingrongjinfu.system.syscode.model.SysCode;
 class CertificationController extends BaseController {
 	@Autowired
     private ICertificationService certificationService;
+
+	@Autowired
+    private ISupervisorService supervisorService;
 
     /**
      * 跳转认证申请列表界面
@@ -200,6 +205,6 @@ class CertificationController extends BaseController {
     {
     	return certificationService.getBankAccountInfo(storeid);   
     }
-    
-    
+
+
 }

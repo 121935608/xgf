@@ -19,7 +19,6 @@ import com.xingrongjinfu.system.user.model.User;
 import com.xingrongjinfu.utils.AliyunOSSClientUtil;
 import org.springframework.web.multipart.MultipartFile;
 import org.framework.base.util.PageUtilEntity;
-import org.framework.base.util.TableDataInfo;
 import org.framework.core.controller.BaseController;
 import org.framework.core.model.Message;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -129,6 +128,12 @@ public class DocumentController extends BaseController {
         return new Message(result);
     }
 
+    /**
+     * 修改公文
+     * @param document
+     * @param file
+     * @return
+     */
     @RequestMapping(DocumentConstant.DOCUMENT_MODIFY)
     public @ResponseBody Message modifyDocument(Document document, MultipartFile file){
         int result=0;
@@ -152,5 +157,18 @@ public class DocumentController extends BaseController {
             }
         }
         return new Message(result);
+    }
+
+    /**
+     * 校验公文标题是否唯一
+     */
+    @RequestMapping(DocumentConstant.CHECK_NAME_URL)
+    public @ResponseBody String checkName(Document document){
+        String uniqueFlag="0";
+        if (document !=null)
+        {
+            uniqueFlag=documentService.checkName(document);
+        }
+        return uniqueFlag;
     }
 }

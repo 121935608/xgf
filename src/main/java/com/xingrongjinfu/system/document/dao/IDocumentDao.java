@@ -42,4 +42,9 @@ public interface IDocumentDao {
     * 修改文件信息
     */
    int updateDocument(Document document);
+
+   /**
+    * 校验公文名唯一
+    */
+   Document checkName(Document document);
 }

@@ -1,8 +1,8 @@
 ﻿<%@ page contentType="text/html; charset=UTF-8"%>
 <%@include file="/WEB-INF/jsp/common/taglibs.jspf"%>
-<ys:contentHeader title="督导员管理"/>
+<ys:contentHeader title="系统设置"/>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 系统管理 <span class="c-gray en">&gt;</span> 角色管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 系统管理 <span class="c-gray en">&gt;</span> 系统设置 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
 	<form action="" method="post" class="form form-horizontal" id="form-setting-add">
 		<div class="row cl">
@@ -32,19 +32,30 @@
 	</form>
 </div>
 <script type="text/javascript">
+    jQuery.validator.addMethod("checkRate", function (value, element) {
+        var chrnum =/[`~!@#$%^&*()_\-=<>?:"{}|,.\/;'\\[\]·~！@#￥%……&*（）——\-={}|《》？：“”【】、；‘’，。、]/;
+        return this.optional(element) || (!chrnum.test(value));
+    }, "不能含有特殊字符");
+    jQuery.validator.addMethod("checkNumber", function (value, element) {
+        var reg =/^(0|([1-9]\d*))(\.\d+)?$/;
+        return this.optional(element) || (reg.test(value));
+    }, "请输入正数");
     $("#form-setting-add").validate({
         rules:{
             xzfMethod:{
                 required:true,
                 isSpace:true,
+                checkRate:true,
             },
             xzfRate:{
                 required:true,
                 isSpace:true,
+                checkNumber:true,
             },
             orderRate:{
                 required:true,
                 isSpace:true,
+                checkNumber:true,
             },
         },
         onkeyup:false,

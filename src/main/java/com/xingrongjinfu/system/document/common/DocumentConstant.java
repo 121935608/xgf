@@ -73,4 +73,9 @@ public class DocumentConstant {
      * 常量:图片地址
      */
     public final static String URL="xrjf/xgf/";
+
+    /**
+     * 请求地址:校验标题名是否唯一
+     */
+    public final static String CHECK_NAME_URL="checkTitleUnique";
 }
