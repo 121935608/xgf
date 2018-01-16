@@ -27,6 +27,16 @@ public class Commodity {
     private Integer inPrice;
     private Integer payTaxes;
     private Integer profit;
+    private String commodityId;
+
+    
+    public String getCommodityId() {
+        return commodityId;
+    }
+
+    public void setCommodityId(String commodityId) {
+        this.commodityId = commodityId;
+    }
 
     public String getCommodityName() {
         return commodityName;
@@ -83,4 +93,12 @@ public class Commodity {
     public void setProfit(Integer profit) {
         this.profit = profit;
     }
+
+    @Override
+    public String toString() {
+        return "Commodity [commodityName=" + commodityName + ", commodityNo=" + commodityNo + ", saleNum=" + saleNum
+                + ", salePrice=" + salePrice + ", inPrice=" + inPrice + ", payTaxes=" + payTaxes + ", profit=" + profit
+                + ", commodityId=" + commodityId + "]";
+    }
+    
 }

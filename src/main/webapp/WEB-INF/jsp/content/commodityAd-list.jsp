@@ -60,7 +60,7 @@
 				class="table table-border table-bordered table-hover table-bg table-sort">
 				<thead>
 					<tr class="text-c">
-						<th width="10%">楼层</th>
+						<th width="10%">分类</th>
 						<th width="10%">类型</th>
 						<th width="10%">标题</th>
 						<th width="10%">创建时间</th>
@@ -75,13 +75,13 @@
 		var pageTable;
 		$(document).ready(function() {
 			var aoColumns = [ {
-				"sDefaultContent" : "楼层",
+				"sDefaultContent" : "分类",
 				"bSortable" : false,
 				"sClass" : "text-c",
 				"bSearchable" : false,
 				"mRender" : function(data, type, row) {
-					if (row.floor != null) {
-						return row.floor;
+					if (row.categoryName != null) {
+						return row.categoryName;
 					} else {
 						return "";
 					}

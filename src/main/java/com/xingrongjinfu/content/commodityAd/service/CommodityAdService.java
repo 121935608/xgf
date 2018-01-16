@@ -1,19 +1,17 @@
 package com.xingrongjinfu.content.commodityAd.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.xingrongjinfu.commercial.cashierManage.dao.ICashierManageDao;
-import com.xingrongjinfu.commercial.cashierManage.model.CashierManage;
-import com.xingrongjinfu.commodity.label.model.Label;
-import com.xingrongjinfu.content.carousel.dao.ICarouselDao;
-import com.xingrongjinfu.content.carousel.model.Carousel;
+import com.xingrongjinfu.commodity.classification.model.Category;
 import com.xingrongjinfu.content.commodityAd.dao.ICommodityAdDao;
 import com.xingrongjinfu.content.commodityAd.model.CommodityAd;
+import com.xingrongjinfu.system.commodity.model.Commodity;
 
 /**
  * 业务层处理
@@ -70,5 +68,27 @@ public class CommodityAdService implements ICommodityAdService
 	public CommodityAd findByCommodityAdId(String commodityAdId) {
 		return commodityAdDao.findByCommodityAdId(commodityAdId);
 	}
+
+    @Override
+    public List<Integer> getAllType() {
+        
+        return commodityAdDao.getAllType();
+    }
+
+    @Override
+    public List<Category> getFL() {
+        
+        return commodityAdDao.getFL();
+    }
+
+    @Override
+    public List<Commodity> getCommoditys(String categoryId) {
+        return commodityAdDao.getCommoditys(categoryId);
+    }
+
+    @Override
+    public List<Map<String, String>> getCommoditysByAdId(String commodityAdId) {
+        return commodityAdDao.getCommoditysByAdId(commodityAdId);
+    }
 	
 }

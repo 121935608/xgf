@@ -23,7 +23,30 @@ public class CommodityAd implements Serializable {
 	private String commodityDes;
 	private int floor;
 	private int sort;
-	public String getCommodityAdId() {
+	private String categoryId;
+	private String categoryName;
+	private String commodityName;
+	
+	
+	public String getCommodityName() {
+        return commodityName;
+    }
+    public void setCommodityName(String commodityName) {
+        this.commodityName = commodityName;
+    }
+    public String getCategoryName() {
+        return categoryName;
+    }
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+    public String getCategoryId() {
+        return categoryId;
+    }
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
+    }
+    public String getCommodityAdId() {
 		return commodityAdId;
 	}
 	public void setCommodityAdId(String commodityAdId) {
@@ -100,6 +123,6 @@ public class CommodityAd implements Serializable {
 		return "CommodityAd [commodityAdId=" + commodityAdId + ", commodityAdName=" + commodityAdName + ", commodityId="
 				+ commodityId + ", commodityAdImg=" + commodityAdImg + ", url=" + url + ", type=" + type
 				+ ", createTime=" + createTime + ", updateTime=" + updateTime + ", status=" + status + ", commodityDes="
-				+ commodityDes + ", floor=" + floor + ", sort=" + sort + "]";
+				+ commodityDes  + ", sort=" + sort + "]";
 	}	
 }

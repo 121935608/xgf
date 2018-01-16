@@ -42,6 +42,14 @@ public class CommodityAdConstant
      * 请求地址：启动/停用 操作
      */
     public final static String CHANGE_STATUS_URL = "changeCommodityAdStatus";
+    /**
+     * 请求地址：商品广告保存
+     */
+    public final static String SAVE_ADVERTISEMENT_URL = "saveAdvertisement";
+    /**
+     * 请求地址：商品广告保存
+     */
+    public final static String GET_COMMODITYS_URL = "getCommoditys";
 
 
     /**
