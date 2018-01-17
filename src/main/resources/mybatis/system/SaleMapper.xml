@@ -31,6 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				t.orderNumber LIKE CONCAT(CONCAT('%', #{relationMap.commodityName}),'%')
 				)
 			</if><!--关键词查询-->
+			ORDER BY t.addTime DESC
 		</select>
 
 </mapper> 

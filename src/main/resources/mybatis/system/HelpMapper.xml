@@ -33,6 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="relationMap.name !=null and relationMap.name !=''">
 			AND u.userName LIKE CONCAT(CONCAT('%', #{relationMap.name}),'%')
 		</if><!--关键词查询-->
+		ORDER BY f.addTime DESC
 	</select>
 
 	<select id="getUnreply" parameterType="Help" resultType="Help">
@@ -52,6 +53,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="feedBackId!=null and feedBackId !=''">
 		  AND f.parentId=#{feedBackId}
 		</if>
+		ORDER BY f.addTime ASC
 	</select>
 
 	<select id="getFirstHelp" parameterType="Help" resultType="Help">

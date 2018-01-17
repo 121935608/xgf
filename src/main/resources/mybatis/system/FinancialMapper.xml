@@ -28,7 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="relationMap.endTime != null and relationMap.endTime != ''"><!-- 结束时间检索 -->
 			AND DATE_FORMAT(a.addTime,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
 		</if>
-		<if test="relationMap.status !=null">
+		<if test="relationMap.status !=null and relationMap.status !=''">
 			AND a.amountStatus=#{relationMap.status}
 		</if>
 		<if test="relationMap.storeName !=null and relationMap.storeName !=''">

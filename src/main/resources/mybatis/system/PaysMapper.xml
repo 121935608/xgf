@@ -27,7 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="relationMap.endTime != null and relationMap.endTime != ''"><!-- 结束时间检索 -->
 			AND DATE_FORMAT(c.addTime,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
 		</if>
-		<if test="relationMap.payType !=null">
+		<if test="relationMap.payType !=null and relationMap.payType !='' ">
 			AND c.payType=#{relationMap.payType}
 		</if>
 		<if test="relationMap.storeName !=null and relationMap.storeName !=''">
@@ -37,6 +37,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			s.storeName LIKE CONCAT(CONCAT('%', #{relationMap.storeName}),'%')
 			)
 		</if><!--关键词查询-->
+		ORDER BY c.addTime DESC
 </select>
 
 	<select id="PaypageInfos" resultMap="PaysResult">

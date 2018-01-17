@@ -10,7 +10,7 @@
 			   class="input-text Wdate" style="width:120px;" placeholder="开始时间">
 		<input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'beginTime\')}',maxDate:'%y-%M-%d'})" id="endTime"
 			   class="input-text Wdate" style="width:120px;" placeholder="结束时间">
-		<input type="text" class="input-text" style="width:250px" placeholder="商品名称|商铺编号" id="commodityName" name="commodityName">
+		<input type="text" class="input-text" style="width:250px" placeholder="商品名称|商品编号" id="commodityName" name="commodityName">
 		<button type="button" class="btn btn-success radius" onclick="query()"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
 	</div>
 	<div class="mt-20">
