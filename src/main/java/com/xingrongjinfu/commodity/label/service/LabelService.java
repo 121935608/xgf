@@ -3,13 +3,13 @@ package com.xingrongjinfu.commodity.label.service;
 import java.util.List;
 
 import org.framework.base.util.PageUtilEntity;
-import org.framework.base.util.TableDataInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.xingrongjinfu.commodity.classification.model.Category;
+import com.xingrongjinfu.commodity.label.common.LabelConstant;
 import com.xingrongjinfu.commodity.label.dao.ILabelDao;
 import com.xingrongjinfu.commodity.label.model.Label;
+import com.xingrongjinfu.utils.ObjectUtil;
 
 
 /**
@@ -24,6 +24,35 @@ public class LabelService implements ILabelService
     @Autowired
     private ILabelDao labelDao;
 
+    /**
+     * 通过名字查询
+     */
+    @Override
+	public Label findByCategoryName(String categoryName) {
+		return labelDao.findByCategoryName(categoryName);
+	}
+    
+    /**
+     * 校验名称是否唯一
+     */
+    @Override
+	public String checkNameUnique(Label category) {
+		
+    	if(category.getCategoryId()==null){
+    		category.setCategoryId("-1");
+    	}
+    	String categoryName = category.getCategoryName();
+    	String categoryId = category.getCategoryId();
+    	category = new Label();
+    	category.setCategoryName(categoryName);
+    	Label newCategory = labelDao.findByCategoryName(categoryName);
+    	if(ObjectUtil.isNotNull(newCategory)&&newCategory.getCategoryId()!=categoryId){
+    		return LabelConstant.NAME_NOT_UNIQUE;
+    	}
+    	
+    	return LabelConstant.NAME_UNIQUE;
+	}
+    
     /**
      * 通过ID查询
      */
@@ -67,5 +96,20 @@ public class LabelService implements ILabelService
     {
         return labelDao.updateCategoryInfo(category);
     }
+
+
+    /**
+     * 删除信息
+     * 
+     */
+	@Override
+	public int deleteById(Label category) {
+		return labelDao.deleteById(category);
+	}
+
+	
+
+
+	
 
 }

@@ -47,10 +47,26 @@
 <script type="text/javascript">
 $("#form-carousel-add").validate({
 	rules:{
-		carouselName:{
-			required:true,
-			isSpace:true,
-		},
+		
+		carouselName: {
+            required: true,
+            isSpace: true,
+           remote: {
+                url: "${context_root}/content/checkCarouselNameUnique.action",
+                type: "post",
+                dataType: "text",
+                data: {
+                    name: function () {
+                        return $.trim($("#carouselName").val());
+                    }
+                },
+                dataFilter: function (data, type) {
+                    if (data == "0") return true;
+                    else return "该名称已存在";
+                }
+            }
+        },
+		
 		picture:{
 			required:true,
 			isSpace:true,
@@ -63,6 +79,12 @@ $("#form-carousel-add").validate({
 			required:true,
 			isSpace:true,
 		},
+		
+		messages: {
+            "carouselName": {
+                remote: "该名称已经存在"
+            }
+        },
 		
 	},
 	onkeyup:false,

@@ -17,6 +17,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="carouselNum" column="carouselNum" />
 	</resultMap>
 	
+	<select id="findByCarouselName" parameterType="String" resultType="Carousel">
+		select * from t_carousel where carouselName=#{carouselName}
+	</select>
+	
 	<delete id="deleteCarouselInfo" parameterType="Carousel">
  		delete from t_carousel where 1=1
  		<if test="carouselId != null and carouselId  != ''">and carouselId = #{carouselId}</if>

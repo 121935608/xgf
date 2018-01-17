@@ -24,6 +24,17 @@ public interface IAdvertisementService
     public List<Advertisement> pageInfoQuery(PageUtilEntity pageUtilEntity);
     
     /**
+     * 通过名字查询
+     * 
+     */
+    public Advertisement findByAdvertisementName(String advertisementName);
+    
+    /**
+     * 校验名称是否唯一
+     */
+    public String checkNameUnique(Advertisement advertisement);
+    
+    /**
      * 修改状态
      * 
      */

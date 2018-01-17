@@ -188,6 +188,19 @@ public class CarouselController extends BaseController {
         }
         return new Message(result);
     }
+    
+    /**
+     * 校验名称
+     */
+    @RequestMapping(CarouselConstant.CHECK_NAME_UNIQUE_URL)
+    public @ResponseBody
+    String checkNamesUnique(Carousel carousel) {
+        String uniqueFlag = "0";
+        if (carousel != null) {
+            uniqueFlag = carouselService.checkNameUnique(carousel);
+        }
+        return uniqueFlag;
+    }
 
 	/**
 	 * 启动/停用 操作

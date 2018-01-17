@@ -21,8 +21,14 @@ public class Label implements Serializable
     private int status;
     private Date addTime;
 	private String country;
-	
-	
+	private String parentId;
+
+	public String getParentId() {
+		return parentId;
+	}
+	public void setParentId(String parentId) {
+		this.parentId = parentId;
+	}
 	public Integer getLaberNum() {
 		return laberNum;
 	}

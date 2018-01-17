@@ -47,10 +47,23 @@
 <script type="text/javascript">
 $("#form-cashierManage-add").validate({
 	rules:{
-		
-		cashierName: {
+        cashierName: {
             required: true,
             isSpace: true,
+           remote: {
+                url: "${context_root}/commercial/checkCashierManageNameUnique.action",
+                type: "post",
+                dataType: "text",
+                data: {
+                    name: function () {
+                        return $.trim($("#cashierName").val());
+                    }
+                },
+                dataFilter: function (data, type) {
+                    if (data == "0") return true;
+                    else return "该名称已存在";
+                }
+            }
         },
 		
 		password:{

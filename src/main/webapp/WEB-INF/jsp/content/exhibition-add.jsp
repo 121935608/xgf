@@ -40,10 +40,24 @@
 <script type="text/javascript">
 $("#form-exhibition-add").validate({
 	rules:{
-		categoryName:{
-			required:true,
-			isSpace:true,
-		},
+		categoryName: {
+            required: true,
+            isSpace: true,
+           remote: {
+                url: "${context_root}/content/checkExhibitionNameUnique.action",
+                type: "post",
+                dataType: "text",
+                data: {
+                    name: function () {
+                        return $.trim($("#categoryName").val());
+                    }
+                },
+                dataFilter: function (data, type) {
+                    if (data == "0") return true;
+                    else return "该名称已存在";
+                }
+            }
+        },
 		picture:{
 			required:true,
 			isSpace:true,
@@ -53,6 +67,12 @@ $("#form-exhibition-add").validate({
 			required:true,
 			isSpace:true,
 		},
+		
+		messages: {
+            "categoryName": {
+                remote: "该名称已经存在"
+            }
+        },
 	},
 	onkeyup:false,
 	focusCleanup:true,

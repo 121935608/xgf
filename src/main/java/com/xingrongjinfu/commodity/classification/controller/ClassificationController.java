@@ -51,20 +51,6 @@ public class ClassificationController extends BaseController {
 	@RequestMapping(ClassificationConstant.CLASSIFICATION_URL)
 	public ModelAndView loadCommodityClassification() {
 		ModelAndView modelAndView = this.getModelAndView(ClassificationConstant.CLASSIFICATION_PAGE);
-
-		// 1 启用 -1禁用
-		/*List<SysCode> sysCodeList1 = new ArrayList<SysCode>();
-		SysCode sysCode1 = new SysCode();
-		sysCode1.setCodeid("1");
-		sysCode1.setCodevalue("启用");
-		sysCodeList1.add(sysCode1);
-
-		SysCode sysCode2 = new SysCode();
-		sysCode2.setCodeid("-1");
-		sysCode2.setCodevalue("禁用");
-		sysCodeList1.add(sysCode2);
-
-		modelAndView.addObject("statusList", sysCodeList1);*/
 		modelAndView.addObject("parents", getParentList());
 		return modelAndView;
 	}
@@ -150,12 +136,11 @@ public class ClassificationController extends BaseController {
 
 		String categoryId = category.getCategoryId();
 		String parentId = category.getParentId();
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!"+categoryId);
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!"+parentId);
 		if (categoryId != null&&categoryId.length()!=0) {
 			result = classificationService.updateCategoryInfo(category);
 		} 
 		else{
+			
 			result = classificationService.addCategoryInfo(category);
 		}
 

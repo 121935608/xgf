@@ -43,10 +43,24 @@
 <script type="text/javascript">
 $("#form-advertisement-modify").validate({
 	rules:{
-		advertisementName:{
-			required:true,
-			isSpace:true,
-		},
+		advertisementName: {
+            required: true,
+            isSpace: true,
+           remote: {
+                url: "${context_root}/content/checkAdvertisementNameUnique.action",
+                type: "post",
+                dataType: "text",
+                data: {
+                    name: function () {
+                        return $.trim($("#advertisementName").val());
+                    }
+                },
+                dataFilter: function (data, type) {
+                    if (data == "0") return true;
+                    else return "该名称已存在";
+                }
+            }
+        },
 		
 		advertisementUrl: {
             required: true,

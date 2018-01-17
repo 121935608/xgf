@@ -6,6 +6,7 @@ import org.framework.base.util.TableDataInfo;
 
 import com.xingrongjinfu.commercial.cashierManage.model.CashierManage;
 import com.xingrongjinfu.commodity.label.model.Label;
+import com.xingrongjinfu.content.advertisement.model.Advertisement;
 import com.xingrongjinfu.content.carousel.model.Carousel;
 import com.xingrongjinfu.content.exhibition.model.Exhibition;
 
@@ -22,6 +23,17 @@ public interface IExhibitionService
      * 
      */
     public List<Exhibition> pageInfoQuery(PageUtilEntity pageUtilEntity);
+    
+    /**
+     * 通过名字查询
+     * 
+     */
+    public Exhibition findByExhibitionName(String exhibitionName);
+    
+    /**
+     * 校验名称是否唯一
+     */
+    public String checkNameUnique(Exhibition exhibition);
     
     /**
      * 修改状态

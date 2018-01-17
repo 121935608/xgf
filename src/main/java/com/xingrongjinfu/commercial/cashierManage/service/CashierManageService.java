@@ -12,6 +12,8 @@ import com.xingrongjinfu.commercial.cashierManage.common.CashierManageConstant;
 import com.xingrongjinfu.commercial.cashierManage.dao.ICashierManageDao;
 import com.xingrongjinfu.commercial.cashierManage.model.CashierManage;
 import com.xingrongjinfu.commodity.label.model.Label;
+import com.xingrongjinfu.content.advertisement.common.AdvertisementConstant;
+import com.xingrongjinfu.content.advertisement.model.Advertisement;
 import com.xingrongjinfu.system.user.model.User;
 import com.xingrongjinfu.utils.ObjectUtil;
 
@@ -52,6 +54,28 @@ public class CashierManageService implements ICashierManageService
 	@Override
 	public int addCashierManageInfo(CashierManage cashierManage) {
 		return cashierManageDao.addCashierManageInfo(cashierManage);
+	}
+
+	@Override
+	public CashierManage findByCashierManageName(String cashierName) {
+		return cashierManageDao.findByCashierManageName(cashierName);
+	}
+
+	@Override
+	public String checkNameUnique(CashierManage cashierManage) {
+		if(cashierManage.getCashierId()==null){
+			cashierManage.setCashierId("-1");
+    	}
+    	String cashierName = cashierManage.getCashierName();
+    	String cashierId = cashierManage.getCashierId();
+    	cashierManage = new CashierManage();
+    	cashierManage.setCashierName(cashierName);
+    	CashierManage newCashierManage = cashierManageDao.findByCashierManageName(cashierName);
+    	if(ObjectUtil.isNotNull(newCashierManage)&&newCashierManage.getCashierId()!=cashierId){
+    		return CashierManageConstant.NAME_NOT_UNIQUE;
+    	}
+    	
+    	return CashierManageConstant.NAME_UNIQUE;
 	}
 	
 }

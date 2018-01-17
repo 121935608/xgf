@@ -2,9 +2,7 @@ package com.xingrongjinfu.commodity.label.service;
 
 import java.util.List;
 import org.framework.base.util.PageUtilEntity;
-import org.framework.base.util.TableDataInfo;
 
-import com.xingrongjinfu.commodity.classification.model.Category;
 import com.xingrongjinfu.commodity.label.model.Label;
 
 
@@ -16,6 +14,16 @@ import com.xingrongjinfu.commodity.label.model.Label;
  */
 public interface ILabelService
 {
+	/**
+     * 通过名字查询
+     * 
+     */
+    public Label findByCategoryName(String categoryName);
+    
+    /**
+     * 校验名称是否唯一
+     */
+    public String checkNameUnique(Label category);
 
     /**
      * 通过ID查询
@@ -48,5 +56,11 @@ public interface ILabelService
      * 
      */
     public int changeCategoryStatus(Label category);
+
+    /**
+     * 删除信息
+     * 
+     */
+	public int deleteById(Label category);
 
 }

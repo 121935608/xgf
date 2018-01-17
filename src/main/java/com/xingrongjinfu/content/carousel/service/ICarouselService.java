@@ -6,6 +6,7 @@ import org.framework.base.util.TableDataInfo;
 
 import com.xingrongjinfu.commercial.cashierManage.model.CashierManage;
 import com.xingrongjinfu.commodity.label.model.Label;
+import com.xingrongjinfu.content.advertisement.model.Advertisement;
 import com.xingrongjinfu.content.carousel.model.Carousel;
 
 /**
@@ -21,6 +22,17 @@ public interface ICarouselService
      * 
      */
     public List<Carousel> pageInfoQuery(PageUtilEntity pageUtilEntity);
+    
+    /**
+     * 通过名字查询
+     * 
+     */
+    public Carousel findByCarouselName(String carouselName);
+    
+    /**
+     * 校验名称是否唯一
+     */
+    public String checkNameUnique(Carousel carousel);
     
     /**
      * 修改状态

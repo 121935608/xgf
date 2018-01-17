@@ -7,6 +7,7 @@ import org.framework.core.dao.DynamicObjectBaseDao;
 import org.springframework.stereotype.Repository;
 
 import com.xingrongjinfu.commodity.label.model.Label;
+import com.xingrongjinfu.content.advertisement.model.Advertisement;
 import com.xingrongjinfu.content.carousel.model.Carousel;
 import com.xingrongjinfu.content.exhibition.model.Exhibition;
 
@@ -71,6 +72,11 @@ public class ExhibitionDao extends DynamicObjectBaseDao implements IExhibitionDa
 	@Override
 	public int deleteById(Exhibition exhibition) {
 		return (int) this.delete("ContentExhibitionMapper.deleteExhibitionInfo", exhibition);
+	}
+
+	@Override
+	public Exhibition findByExhibitionName(String categoryName) {
+		return (Exhibition) this.findForObject("ContentExhibitionMapper.findByExhibitionName", categoryName);
 	}
 
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.xingrongjinfu.commercial.cashierManage.model.CashierManage;
 import com.xingrongjinfu.commodity.label.model.Label;
+import com.xingrongjinfu.content.advertisement.model.Advertisement;
 import com.xingrongjinfu.system.user.model.User;
 
 /**
@@ -58,5 +59,10 @@ public class CashierManageDao extends DynamicObjectBaseDao implements ICashierMa
 	@Override
 	public int addCashierManageInfo(CashierManage cashierManage) {
 		return this.save("CommercialCashierManageMapper.addCashierManageInfo", cashierManage);
+	}
+
+	@Override
+	public CashierManage findByCashierManageName(String cashierName) {
+		return (CashierManage) this.findForObject("CommercialCashierManageMapper.findByCashierName", cashierName);
 	}
 }

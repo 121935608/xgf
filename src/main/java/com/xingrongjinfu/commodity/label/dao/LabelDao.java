@@ -2,7 +2,6 @@ package com.xingrongjinfu.commodity.label.dao;
 
 import java.util.List;
 import org.framework.base.util.PageUtilEntity;
-import org.framework.base.util.TableDataInfo;
 import org.framework.core.dao.DynamicObjectBaseDao;
 import org.springframework.stereotype.Repository;
 
@@ -17,6 +16,15 @@ import com.xingrongjinfu.commodity.label.model.Label;
 public class LabelDao extends DynamicObjectBaseDao implements ILabelDao
 {
 
+	/**
+     * 通过名字查询
+     * 
+     */
+	@Override
+	public Label findByCategoryName(String categoryName) {
+		return (Label) this.findForObject("CommodityLabelMapper.findByCategoryName", categoryName);
+	}
+	
     /**
      * 通过ID查询
      * 
@@ -64,4 +72,15 @@ public class LabelDao extends DynamicObjectBaseDao implements ILabelDao
     {
         return this.update("CommodityLabelMapper.updateCategoryInfo", category);
     }
+
+    /**
+     * 删除信息
+     * 
+     */
+	@Override
+	public int deleteById(Label category) {
+		return (int) this.delete("CommodityLabelMapper.deleteCategoryInfo", category);
+	}
+
+	
 }

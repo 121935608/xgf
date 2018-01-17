@@ -2,7 +2,6 @@ package com.xingrongjinfu.commodity.label.dao;
 
 import java.util.List;
 import org.framework.base.util.PageUtilEntity;
-import org.framework.base.util.TableDataInfo;
 
 import com.xingrongjinfu.commodity.label.model.Label;
 
@@ -19,6 +18,12 @@ public interface ILabelDao
      * 
      */
     public Label findByCategoryId(String categoryId);
+    
+    /**
+     * 通过名字查询
+     * 
+     */
+    public Label findByCategoryName(String categoryName);
 
     
     /**
@@ -39,5 +44,12 @@ public interface ILabelDao
      * 
      */
     public int updateCategoryInfo(Label category);
+
+
+    /**
+     * 删除
+     * 
+     */
+	public int deleteById(Label category);
 
 }

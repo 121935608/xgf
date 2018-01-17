@@ -19,6 +19,16 @@
 		</div>
 		
 		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>状态：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+			<y:select id="status" name="status"
+					codeGroup="${statusList}" selectedValue=""
+					cssClass="select" headerKey="0" headerValue="状态">
+			</y:select>
+			</div>
+		</div>
+		
+		<div class="row cl">
 			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
 				<input class="btn btn-primary radius" type="submit" id="save" value="&nbsp;&nbsp;确定&nbsp;&nbsp;">
 			</div>
@@ -29,15 +39,40 @@
 
 <script type="text/javascript">
 $("#form-label-add").validate({
-	rules:{
-		categoryName:{
-			required:true,
-			isSpace:true,
-		},
+	rules:{		
+		categoryName: {
+            required: true,
+            isSpace: true,
+            maxlength:8,
+           remote: {
+                url: "${context_root}/commodity/checkNamesUnique.action",
+                type: "post",
+                dataType: "text",
+                data: {
+                    name: function () {
+                        return $.trim($("#categoryName").val());
+                    }
+                },
+                dataFilter: function (data, type) {
+                    if (data == "0") return true;
+                    else return "该名称已存在";
+                }
+            }
+        },
+		
 		picture:{
 			required:true,
 			isSpace:true,
 		},
+		status:{
+			required:true,
+			isSpace:true,
+		},
+		messages: {
+            "categoryName": {
+                remote: "该名称已经存在"
+            }
+        },
 		
 	},
 	onkeyup:false,

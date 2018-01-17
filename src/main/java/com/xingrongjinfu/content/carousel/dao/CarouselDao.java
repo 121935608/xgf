@@ -7,6 +7,7 @@ import org.framework.core.dao.DynamicObjectBaseDao;
 import org.springframework.stereotype.Repository;
 
 import com.xingrongjinfu.commodity.label.model.Label;
+import com.xingrongjinfu.content.advertisement.model.Advertisement;
 import com.xingrongjinfu.content.carousel.model.Carousel;
 
 /**
@@ -70,6 +71,11 @@ public class CarouselDao extends DynamicObjectBaseDao implements ICarouselDao
 	@Override
 	public int deleteById(Carousel carousel) {
 		return (int) this.delete("ContentCarouselMapper.deleteCarouselInfo", carousel);
+	}
+
+	@Override
+	public Carousel findByCarouselName(String carouselName) {
+		return (Carousel) this.findForObject("ContentCarouselMapper.findByCarouselName", carouselName);
 	}
 
 }

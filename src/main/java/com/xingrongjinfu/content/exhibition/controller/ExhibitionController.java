@@ -21,6 +21,8 @@ import com.aliyun.oss.OSSException;
 import com.xingrongjinfu.content.ContentConstant;
 import com.xingrongjinfu.content.advertisement.common.AdvertisementConstant;
 import com.xingrongjinfu.content.advertisement.model.Advertisement;
+import com.xingrongjinfu.content.carousel.common.CarouselConstant;
+import com.xingrongjinfu.content.carousel.model.Carousel;
 import com.xingrongjinfu.content.exhibition.common.ExhibitionConstant;
 import com.xingrongjinfu.content.exhibition.model.Exhibition;
 import com.xingrongjinfu.content.exhibition.service.IExhibitionService;
@@ -180,4 +182,17 @@ public class ExhibitionController extends BaseController {
 		return new Message(result);
 
 	}
+	
+	/**
+     * 校验名称
+     */
+    @RequestMapping(ExhibitionConstant.CHECK_NAME_UNIQUE_URL)
+    public @ResponseBody
+    String checkNamesUnique(Exhibition exhibition) {
+        String uniqueFlag = "0";
+        if (exhibition != null) {
+            uniqueFlag = exhibitionService.checkNameUnique(exhibition);
+        }
+        return uniqueFlag;
+    }
 }

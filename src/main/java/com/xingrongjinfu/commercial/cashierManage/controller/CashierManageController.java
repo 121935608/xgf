@@ -22,6 +22,8 @@ import com.xingrongjinfu.commercial.cashierManage.model.CashierManage;
 import com.xingrongjinfu.commercial.cashierManage.service.ICashierManageService;
 import com.xingrongjinfu.commodity.label.common.LabelConstant;
 import com.xingrongjinfu.commodity.label.model.Label;
+import com.xingrongjinfu.content.advertisement.common.AdvertisementConstant;
+import com.xingrongjinfu.content.advertisement.model.Advertisement;
 import com.xingrongjinfu.system.role.common.RoleConstant;
 import com.xingrongjinfu.system.role.model.Role;
 import com.xingrongjinfu.system.syscode.model.SysCode;
@@ -111,6 +113,18 @@ public class CashierManageController extends BaseController {
 		return new Message(result);
 	}
 	
+	/**
+     * 校验名称
+     */
+    @RequestMapping(CashierManageConstant.CHECK_NAME_UNIQUE_URL)
+    public @ResponseBody
+    String checkNamesUnique(CashierManage cashierManage) {
+        String uniqueFlag = "0";
+        if (cashierManage != null) {
+            uniqueFlag = cashierManageService.checkNameUnique(cashierManage);
+        }
+        return uniqueFlag;
+    }
 	
 	/**
 	 * 启动/停用 操作

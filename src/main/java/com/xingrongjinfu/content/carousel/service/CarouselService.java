@@ -3,15 +3,14 @@ package com.xingrongjinfu.content.carousel.service;
 import java.util.List;
 
 import org.framework.base.util.PageUtilEntity;
-import org.framework.base.util.TableDataInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.xingrongjinfu.commercial.cashierManage.dao.ICashierManageDao;
-import com.xingrongjinfu.commercial.cashierManage.model.CashierManage;
-import com.xingrongjinfu.commodity.label.model.Label;
+import com.xingrongjinfu.content.advertisement.model.Advertisement;
+import com.xingrongjinfu.content.carousel.common.CarouselConstant;
 import com.xingrongjinfu.content.carousel.dao.ICarouselDao;
 import com.xingrongjinfu.content.carousel.model.Carousel;
+import com.xingrongjinfu.utils.ObjectUtil;
 
 /**
  * 业务层处理
@@ -72,6 +71,28 @@ public class CarouselService implements ICarouselService
 	@Override
 	public int deleteById(Carousel carousel) {
 		return carouselDao.deleteById(carousel);
+	}
+
+	@Override
+	public Carousel findByCarouselName(String carouselName) {
+		return carouselDao.findByCarouselName(carouselName);
+	}
+
+	@Override
+	public String checkNameUnique(Carousel carousel) {
+		if(carousel.getCarouselId()==null){
+			carousel.setCarouselId("-1");
+    	}
+    	String carouselName = carousel.getCarouselName();
+    	String carouselId = carousel.getCarouselId();
+    	carousel = new Carousel();
+    	carousel.setCarouselName(carouselName);
+    	Carousel newCarousel = carouselDao.findByCarouselName(carouselName);
+    	if(ObjectUtil.isNotNull(newCarousel)&&newCarousel.getCarouselId()!=carouselId){
+    		return CarouselConstant.NAME_NOT_UNIQUE;
+    	}
+    	
+    	return CarouselConstant.NAME_UNIQUE;
 	}
 	
 }

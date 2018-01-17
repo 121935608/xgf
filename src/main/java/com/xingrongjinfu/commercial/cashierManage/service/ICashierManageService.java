@@ -6,6 +6,7 @@ import org.framework.base.util.TableDataInfo;
 
 import com.xingrongjinfu.commercial.cashierManage.model.CashierManage;
 import com.xingrongjinfu.commodity.label.model.Label;
+import com.xingrongjinfu.content.advertisement.model.Advertisement;
 import com.xingrongjinfu.system.user.model.User;
 
 /**
@@ -21,6 +22,17 @@ public interface ICashierManageService
      * 
      */
     public List<TableDataInfo> pageInfoQuery(PageUtilEntity pageUtilEntity);
+    
+    /**
+     * 通过名字查询
+     * 
+     */
+    public CashierManage findByCashierManageName(String cashierName);
+    
+    /**
+     * 校验名称是否唯一
+     */
+    public String checkNameUnique(CashierManage cashierManage);
     
     /**
      * 修改状态

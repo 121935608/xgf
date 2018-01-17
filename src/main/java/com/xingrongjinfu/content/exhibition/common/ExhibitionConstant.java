@@ -53,5 +53,14 @@ public class ExhibitionConstant
      */
     public final static String MODIFY_PAGE = "content/exhibition-modify";
     
+    /**
+     * 请求地址：检查唯一
+     */
+    public final static String CHECK_NAME_UNIQUE_URL = "checkExhibitionNameUnique";
+    
+    /** 名称是否唯一的返回结果码 */
+    public final static String NAME_UNIQUE = "0";
+    public final static String NAME_NOT_UNIQUE = "1";
+    
     
 }

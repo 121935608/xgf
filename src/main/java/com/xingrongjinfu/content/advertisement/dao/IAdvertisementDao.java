@@ -25,6 +25,12 @@ public interface IAdvertisementDao
     public List<Advertisement> pageInfoQuery(PageUtilEntity pageUtilEntity);
     
     /**
+     * 通过名字查询
+     * 
+     */
+    public Advertisement findByAdvertisementName(String advertisementName);
+    
+    /**
      * 修改
      * 
      */

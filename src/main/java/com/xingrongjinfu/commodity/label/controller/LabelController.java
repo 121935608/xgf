@@ -1,5 +1,6 @@
 package com.xingrongjinfu.commodity.label.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.aspectj.lang.annotation.ActionControllerLog;
@@ -22,8 +23,13 @@ import com.xingrongjinfu.commodity.classification.model.Category;
 import com.xingrongjinfu.commodity.label.common.LabelConstant;
 import com.xingrongjinfu.commodity.label.model.Label;
 import com.xingrongjinfu.commodity.label.service.ILabelService;
+import com.xingrongjinfu.content.advertisement.common.AdvertisementConstant;
+import com.xingrongjinfu.content.advertisement.model.Advertisement;
+import com.xingrongjinfu.system.syscode.model.SysCode;
+import com.xingrongjinfu.system.user.common.UserConstant;
 import com.xingrongjinfu.system.user.model.User;
 import com.xingrongjinfu.utils.AliyunOSSClientUtil;
+import com.xingrongjinfu.utils.IdUtil;
 
 /**
  * 业务处理
@@ -42,7 +48,9 @@ public class LabelController extends BaseController {
 	 */
 	@RequestMapping(LabelConstant.LABEL_URL)
 	public ModelAndView loadCommodityLabel() {
-		return this.getModelAndView(LabelConstant.LABEL_PAGE);
+		ModelAndView modelAndView = this.getModelAndView(LabelConstant.LABEL_PAGE);
+		
+		return modelAndView;
 	}
 
 	/**
@@ -68,6 +76,20 @@ public class LabelController extends BaseController {
 	@RequestMapping(LabelConstant.TO_ADD_URL)
 	public ModelAndView toLabelAdd(String categoryId) {
 		ModelAndView modelAndView = this.getModelAndView(LabelConstant.ADD_PAGE);
+		
+		List<SysCode> sysCodeList1 = new ArrayList<SysCode>();
+		SysCode sysCode1 = new SysCode();
+		sysCode1.setCodeid("1");
+		sysCode1.setCodevalue("启用");
+		sysCodeList1.add(sysCode1);
+
+		SysCode sysCode2 = new SysCode();
+		sysCode2.setCodeid("-1");
+		sysCode2.setCodevalue("禁用");
+		sysCodeList1.add(sysCode2);
+
+		modelAndView.addObject("statusList", sysCodeList1);
+		
 		return modelAndView;
 	}
 
@@ -109,14 +131,57 @@ public class LabelController extends BaseController {
 	@RequestMapping(LabelConstant.TO_MODIFY_URL)
 	public ModelAndView toLabelModify(@RequestParam(required = true) String categoryId) {
 		ModelAndView modelAndView = this.getModelAndView(LabelConstant.MODIFY_PAGE);
+		
+		List<SysCode> sysCodeList1 = new ArrayList<SysCode>();
+		SysCode sysCode1 = new SysCode();
+		sysCode1.setCodeid("1");
+		sysCode1.setCodevalue("启用");
+		sysCodeList1.add(sysCode1);
+
+		SysCode sysCode2 = new SysCode();
+		sysCode2.setCodeid("-1");
+		sysCode2.setCodevalue("禁用");
+		sysCodeList1.add(sysCode2);
+
+		modelAndView.addObject("statusList", sysCodeList1);
+		
 		if (categoryId != null) {
-			modelAndView.addObject("category", this.labelService.findByCategoryId(categoryId));
-			modelAndView.addObject("categoryId",categoryId);
+			Label category = labelService.findByCategoryId(categoryId);
+			modelAndView.addObject("category",category);
 		}
 
 		return modelAndView;
 	}
 	
+	/**
+     * 根据ID删除
+     */
+    @ActionControllerLog(title = "商品管理", action = "商品管理-删除标签", isSaveRequestData = true)
+    @RequestMapping(LabelConstant.DEL_URL)
+    public @ResponseBody Message deleteLabelById(Label category)
+    {
+        int result = 0;
+        String id = category.getCategoryId();
+        if (id != null)
+        {           
+                result = labelService.deleteById(category);           
+        }
+        return new Message(result);
+    }
+    
+    /**
+     * 校验名称
+     */
+    @RequestMapping(LabelConstant.CHECK_NAME_UNIQUE_URL)
+    public @ResponseBody
+    String checkNamesUnique(Label category) {
+        String uniqueFlag = "0";
+        if (category != null) {
+            uniqueFlag = labelService.checkNameUnique(category);
+        }
+        return uniqueFlag;
+    }
+    
 	/**
      * 启动/停用 操作
      */

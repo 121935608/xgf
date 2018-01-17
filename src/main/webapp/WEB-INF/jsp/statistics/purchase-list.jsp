@@ -73,7 +73,7 @@ $(document).ready(function(){
             }
         }
     },
-    alert(1)
+
     {
         "sDefaultContent": "采购数量",
         "bSortable" : false,

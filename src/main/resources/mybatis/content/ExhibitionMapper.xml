@@ -18,6 +18,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		delete from t_exhibition where 1=1
  		<if test="exhibitionId != null and exhibitionId  != ''">and exhibitionId = #{exhibitionId}</if>
  	</delete>
+ 	
+ 	<select id="findByExhibitionName" parameterType="String" resultType="Exhibition">
+		select * from t_exhibition where categoryName=#{categoryName}
+	</select>
 
 	<select id="findByExhibitionId" parameterType="String"
 		resultType="Exhibition">

@@ -42,6 +42,16 @@ public class LabelConstant
      * 请求地址：保存&修改 信息
      */
     public final static String SAVE_URL = "saveLabel";
+    
+    /**
+     * 请求地址：删除信息
+     */
+    public final static String DEL_URL = "deleteLabelById";
+    
+    /**
+     * 请求地址：检查唯一
+     */
+    public final static String CHECK_NAME_UNIQUE_URL = "checkNamesUnique";
 
     /**
      * 请求地址：启动/停用 操作
@@ -64,5 +74,9 @@ public class LabelConstant
      * 逻辑视图名：修改界面
      */
     public final static String MODIFY_PAGE = "commodity/label-modify";
+    
+    /** 名称是否唯一的返回结果码 */
+    public final static String NAME_UNIQUE = "0";
+    public final static String NAME_NOT_UNIQUE = "1";
 
 }

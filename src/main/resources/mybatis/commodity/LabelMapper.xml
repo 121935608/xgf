@@ -22,6 +22,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from t_category where categoryId=#{categoryId}
 	</select>
 	
+	<select id="findByCategoryName" parameterType="String" resultType="Label">
+		select * from t_category where categoryName=#{categoryName}
+	</select>
+	
+	<delete id="deleteCategoryInfo" parameterType="Label">
+ 		delete from t_category where 1=1
+ 		<if test="categoryId != null and categoryId  != ''">and categoryId = #{categoryId}</if>
+ 	</delete>
+	
 	<!-- 修改信息 -->
 	<update id="updateCategoryInfo" parameterType="Label">
  		update t_category
@@ -57,13 +66,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			select uuid()
  		</selectKey>
  		insert into t_category
- 		(	categoryId,type,
+ 		(	categoryId,
  			<if test="categoryName != null and categoryName != ''">categoryName,</if>
- 			<if test="img != null and img != ''">img</if>
+ 			type,
+ 			<if test="img != null and img != ''">img,</if>
+ 			<if test="status != null and status != ''">status,</if>
+ 			addTime
  			
- 		)values(#{categoryId},"BQ",
+ 		)values(#{categoryId},
  			<if test="categoryName != null and categoryName != ''">#{categoryName},</if>
- 			<if test="img != null and img != ''">#{img}</if>
+ 			"BQ",
+ 			<if test="img != null and img != ''">#{img},</if>
+ 			<if test="status != null and status != ''">#{status},</if>
+ 			sysdate()
  		)
  	</insert>	
 </mapper> 
