@@ -268,8 +268,8 @@ public class ProductController extends BaseController{
         List<SysCode> sysCodeList = new ArrayList<SysCode>();
         for (Product product:products){
             SysCode sysCode = new SysCode();
-            sysCode.setCodeid(product.getSpecification());
-            sysCode.setCodevalue(product.getSpecification());
+            sysCode.setCodeid(product.getOrigin());
+            sysCode.setCodevalue(product.getOrigin());
             sysCodeList.add(sysCode);
         }
         return sysCodeList;

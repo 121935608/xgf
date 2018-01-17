@@ -35,12 +35,12 @@ public interface IHelpDao {
     /**
      * 查询未回复的反馈信息
      */
-    Help getUnreply(String feedBackId);
+    Help getUnreply(Help help);
 
     /**
      * 查询用户的所有反馈信息
      */
-    List<Help> getReply(String userId);
+    List<Help> getReply(Help help);
 
     /**
      * 回复信息
@@ -48,4 +48,9 @@ public interface IHelpDao {
      * @return
      */
     int updateHelpInfo(Help help);
+
+    /**
+     * 查询第一次提问信息
+     */
+    Help getFirstHelp(Help help);
 }

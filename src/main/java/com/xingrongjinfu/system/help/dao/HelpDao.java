@@ -39,15 +39,15 @@ public class HelpDao extends DynamicObjectBaseDao implements IHelpDao {
     }
 
     @Override
-    public Help getUnreply(String feedBackId) {
-        return (Help)this.findForObject("HelpMapper.getUnreply",feedBackId);
+    public Help getUnreply(Help help) {
+        return (Help)this.findForObject("HelpMapper.getUnreply",help);
     }
 
     @Override
-    public List<Help> getReply(String userId) {
+    public List<Help> getReply(Help help) {
         List<Help> helpInfo=null;
         try {
-            helpInfo=(List<Help>)this.findForList("HelpMapper.getReply",userId);
+            helpInfo=(List<Help>)this.findForList("HelpMapper.getReply",help);
         }catch (Exception e)
         {e.printStackTrace();}
         return helpInfo;
@@ -56,5 +56,10 @@ public class HelpDao extends DynamicObjectBaseDao implements IHelpDao {
     @Override
     public int updateHelpInfo(Help help) {
         return this.update("HelpMapper.updateHelpInfo",help);
+    }
+
+    @Override
+    public Help getFirstHelp(Help help) {
+        return (Help) this.findForObject("HelpMapper.getFirstHelp",help);
     }
 }

@@ -35,20 +35,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if><!--关键词查询-->
 	</select>
 
-	<select id="getUnreply" parameterType="String" resultType="Help">
+	<select id="getUnreply" parameterType="Help" resultType="Help">
 		SELECT f.feedBackId,u.userName,f.userId,f.question,f.addTime,f.reply,f.answer,f.replyTime
 		FROM t_feedBack f LEFT JOIN sys_user u ON f.userId=u.userId
-		WHERE 1=1
-		<if test="_parameter!=null and _parameter!=''">
-			AND f.parentId=#{_parameter}
+		WHERE f.userId=#{userId} AND f.reply is null
+		<if test="feedBackId!=null and feedBackId!=''">
+			AND f.parentId=#{feedBackId}
 		</if>
 
 	</select>
 
-	<select id="getReply" parameterType="String" resultMap="HelpResult">
+	<select id="getReply" parameterType="Help" resultMap="HelpResult">
 		SELECT f.feedBackId,u.userName,f.userId,f.question,f.addTime,f.reply,f.answer,f.replyTime
 		FROM t_feedBack f LEFT JOIN sys_user u ON f.userId=u.userId
-		WHERE f.parentId='0' AND f.userId=#{userId} AND f.reply is NOT null
+		WHERE  f.userId=#{userId} AND f.reply is NOT null
+		<if test="feedBackId!=null and feedBackId !=''">
+		  AND f.parentId=#{feedBackId}
+		</if>
+	</select>
+
+	<select id="getFirstHelp" parameterType="Help" resultType="Help">
+		SELECT f.feedBackId,u.userName,f.userId,f.question,f.addTime,f.reply,f.answer,f.replyTime
+		FROM t_feedBack f LEFT JOIN sys_user u ON f.userId=u.userId WHERE f.feedBackId=#{feedBackId}
 	</select>
 
 	<update id="updateHelpInfo" parameterType="Help">

@@ -36,15 +36,20 @@ public interface IHelpService {
     /**
      * 查询未回复的反馈信息
      */
-    Help getUnreply(String feedBackId);
+    Help getUnreply(Help help);
 
     /**
      * 查询用户的所有反馈信息
      */
-    List<Help> getReply(String userId);
+    List<Help> getReply(Help help);
 
     /**
      * 回复反馈信息
      */
     int updateHelpInfo(Help help);
+
+    /**
+     * 查询首次提问信息
+     */
+    Help getFirstHelp(Help help);
 }

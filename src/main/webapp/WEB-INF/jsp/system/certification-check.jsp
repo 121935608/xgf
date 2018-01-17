@@ -29,13 +29,13 @@
 				</div>
 			</div>
 			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-3">店长</label>
+				<label class="form-label col-xs-4 col-sm-3">店铺经营负责人或法人</label>
 				<div class="formControls col-xs-8 col-sm-4">
 					<span>${store["userName"]}</span> 
 				</div>
 			</div> 
 			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-3">身份证号码</label>
+				<label class="form-label col-xs-4 col-sm-3">负责人或法人身份证号码</label>
 				<div class="formControls col-xs-8 col-sm-4">
 					<span>${store["idCard"]}</span>
 				</div>
@@ -83,12 +83,12 @@
 					<span>${bankaccount["userName"]}</span>
 				</div>
 			</div>
-			<div class="row cl">
+			<%--<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-3">经营类型</label>
 				<div class="formControls col-xs-8 col-sm-4">
 					<span>${bankaccount["oprateType"]}</span>
 				</div>
-			</div>
+			</div>--%>
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-3">银行卡号</label>
 				<div class="formControls col-xs-8 col-sm-4">
@@ -125,23 +125,23 @@
 				<div class="col-xs-1 col-sm-1"> 
 				</div>
 				<div class="col-xs-2 col-sm-2">
-					<img style="width: 50px;height: 50px" src="${store['licensePic']}">
+					<img style="width: 120px;height: 120px" src="${store['licensePic']}">
 					<p class="form-label">营业执照</p>
 				</div>
 				<div class="col-xs-2 col-sm-2">
-					<img style="width: 50px;height: 50px" src="${store['frontStorePic']}">
+					<img style="width: 120px;height: 120px" src="${store['frontStorePic']}">
 					<p class="form-label">店铺门脸照</p>
 				</div>
 				<div class="col-xs-2 col-sm-2">
-					<img style="width: 50px;height: 50px" src="${store['innerStorePic']}">
+					<img style="width: 120px;height: 120px" src="${store['innerStorePic']}">
 					<p class="form-label">店铺店内照</p>
 				</div>  
 				<div class="col-xs-2 col-sm-2">
-					<img style="width: 80%;height: 80%" src="${store['contractPic']}">
+					<img style="width: 120px;height: 120px" src="${store['contractPic']}">
 					<p class="form-label">租赁合同</p>
 				</div> 
 				<div class="col-xs-2 col-sm-2">
-					<img style="width: 50px;height: 50px" src="${store['utilitiesPic']}">
+					<img style="width: 120px;height: 120px" src="${store['utilitiesPic']}">
 					<p class="form-label">租赁水电费</p>
 				</div> 
 			</div>
@@ -169,7 +169,7 @@
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-3">审核说明</label>
 				<div class="formControls col-xs-8 col-sm-6">
-					<textarea name="remark" cols="" rows="" class="textarea" placeholder="一般来说是写拒绝原因" datatype="*10-100" dragonfly="true" onKeyUp="textarealength(this,200)"></textarea>
+					<textarea name="remark" cols="" rows="" class="textarea"  placeholder="一般来说是写拒绝原因" datatype="*10-100" dragonfly="true" onKeyUp="textarealength(this,200)">${store.remark}</textarea>
 				</div>
 			</div>
 			<div class="row cl">

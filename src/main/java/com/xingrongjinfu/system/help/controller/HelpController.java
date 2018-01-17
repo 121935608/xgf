@@ -71,21 +71,39 @@ public class HelpController extends BaseController{
      * 跳转到回复界面
      */
     @RequestMapping(HelpConstant.HELP_REPLY_URL)
-    public ModelAndView loadReply(String feedBackId,String userId)
+    public ModelAndView loadReply(Help help)
     {
         ModelAndView modelAndView=this.getModelAndView(HelpConstant.HELP_REPLY_PAGE);
-        Help unHelpInfo=helpService.getUnreply(feedBackId);
-        List<Help> helpInfo=helpService.getReply(userId);
+        //调整回显时间
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        for (Help help:helpInfo){
-            help.setAddTimes(help.getAddTime()==null?"":sdf.format(help.getAddTime()));
-            help.setReplyTimes(help.getReplyTime()==null ? "":sdf.format(help.getReplyTime()));
+        //首次提问的信息
+        Help firstInfo=helpService.getFirstHelp(help);
+        firstInfo.setAddTimes(firstInfo.getAddTime()==null?"":sdf.format(firstInfo.getAddTime()));
+        firstInfo.setReplyTimes(firstInfo.getReplyTime()==null ?"":sdf.format(firstInfo.getReplyTime()));
+        //获取所有的已回复的追问信息
+        List<Help> helpInfo=helpService.getReply(help);
+        //获取未回复的追问信息
+        Help unHelpInfo=helpService.getUnreply(help);
+
+        for (Help helps:helpInfo){
+            helps.setAddTimes(helps.getAddTime()==null?"":sdf.format(helps.getAddTime()));
+            helps.setReplyTimes(helps.getReplyTime()==null ? "":sdf.format(helps.getReplyTime()));
         }
-        if (unHelpInfo ==null) {
-            unHelpInfo=helpService.getUnreply("");
-        }
-        modelAndView.addObject("unHelpInfo", unHelpInfo);
+        //把追问信息回显
         modelAndView.addObject("helpInfo",helpInfo);
+        if(unHelpInfo ==null && firstInfo.getReply()==null && helpInfo.size()==0){
+            //第一次提问
+            modelAndView.addObject("unHelpInfo", firstInfo);
+            modelAndView.addObject("firstInfo",null);
+        } else if (unHelpInfo ==null && firstInfo.getReply()!=null && helpInfo.size()>0) {
+            //一问一答
+            modelAndView.addObject("firstInfo",firstInfo);
+            modelAndView.addObject("unHelpInfo", null);
+        }else {
+            //有追问有回复的
+            modelAndView.addObject("firstInfo",firstInfo);
+            modelAndView.addObject("unHelpInfo", unHelpInfo);
+        }
         return modelAndView;
     }
 

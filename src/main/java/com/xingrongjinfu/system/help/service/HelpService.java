@@ -38,17 +38,22 @@ public class HelpService implements IHelpService{
     }
 
     @Override
-    public Help getUnreply(String feedBackId) {
-        return helpDao.getUnreply(feedBackId);
+    public Help getUnreply(Help help) {
+        return helpDao.getUnreply(help);
     }
 
     @Override
-    public List<Help> getReply(String userId) {
-        return helpDao.getReply(userId);
+    public List<Help> getReply(Help help) {
+        return helpDao.getReply(help);
     }
 
     @Override
     public int updateHelpInfo(Help help) {
         return helpDao.updateHelpInfo(help);
+    }
+
+    @Override
+    public Help getFirstHelp(Help help) {
+        return helpDao.getFirstHelp(help);
     }
 }
