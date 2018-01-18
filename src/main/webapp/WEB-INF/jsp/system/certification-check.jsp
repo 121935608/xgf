@@ -124,30 +124,30 @@
 			<div class="row cl"> 
 				<div class="col-xs-1 col-sm-1"> 
 				</div>
-				<div class="col-xs-2 col-sm-2">
+				<div class="col-xs-2 col-sm-2" >
 					<img style="width: 120px;height: 120px" src="${store['licensePic']}">
-					<p class="form-label">营业执照</p>
+					<p style="position: absolute;" class="form-label">营业执照</p>
 				</div>
 				<div class="col-xs-2 col-sm-2">
 					<img style="width: 120px;height: 120px" src="${store['frontStorePic']}">
-					<p class="form-label">店铺门脸照</p>
+					<p style="position: absolute;" class="form-label">店铺门脸照</p>
 				</div>
 				<div class="col-xs-2 col-sm-2">
 					<img style="width: 120px;height: 120px" src="${store['innerStorePic']}">
-					<p class="form-label">店铺店内照</p>
+					<p style="position: absolute;" class="form-label">店铺店内照</p>
 				</div>  
 				<div class="col-xs-2 col-sm-2">
 					<img style="width: 120px;height: 120px" src="${store['contractPic']}">
-					<p class="form-label">租赁合同</p>
+					<p style="position: absolute;" class="form-label">租赁合同</p>
 				</div> 
 				<div class="col-xs-2 col-sm-2">
 					<img style="width: 120px;height: 120px" src="${store['utilitiesPic']}">
-					<p class="form-label">租赁水电费</p>
+					<p style="position: absolute;" class="form-label">租赁水电费</p>
 				</div> 
 			</div>
 		</div>
 		  
-		<div class="info-div">
+		<div class="info-div" style="margin: auto">
 			<input type="hidden" class="input-text" id="storeId" name="storeId" value="${store['storeId']}">
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-3">审核结果</label>

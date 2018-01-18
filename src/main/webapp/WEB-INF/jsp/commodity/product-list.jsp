@@ -2,7 +2,7 @@
 <%@include file="/WEB-INF/jsp/common/taglibs.jspf"%>
 <ys:contentHeader title="督导员管理"/>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 商品管理 <span class="c-gray en">&gt;</span>商品列表  <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 商品管理 <span class="c-gray en">&gt;</span> <span id="cons">商品列表 </span> <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
 	
 	<div class="text-c">
@@ -66,6 +66,7 @@
 	</div>
 </div>
 <script type="text/javascript">
+
 var pageTable;
 $(document).ready(function(){ 
     var aoColumns = [
@@ -309,6 +310,13 @@ $(document).ready(function(){
     ];
     var url = "${context_root}/commodity/findProductList.action?type=${product.type}";
     pageTable = _Datatable_Init(pageTable, aoColumns, url);
+
+    var type='${product.type}';
+    if (type==='s'){
+		$("#cons").text("新增商品列表");
+	}else if (type==='c'){
+        $("#cons").text("商品列表");
+	}
 });
 
 function statusTools(row) {

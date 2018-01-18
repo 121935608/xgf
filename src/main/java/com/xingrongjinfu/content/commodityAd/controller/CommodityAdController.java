@@ -59,7 +59,7 @@ public class CommodityAdController extends BaseController {
 
 		SysCode sysCode2 = new SysCode();
 		sysCode2.setCodeid("-1");
-		sysCode2.setCodevalue("禁用");
+		sysCode2.setCodevalue("停用");
 		sysCodeList1.add(sysCode2);
 
 		modelAndView.addObject("statusList", sysCodeList1);
@@ -95,7 +95,7 @@ public class CommodityAdController extends BaseController {
 
 		SysCode sysCode2 = new SysCode();
 		sysCode2.setCodeid("-1");
-		sysCode2.setCodevalue("禁用");
+		sysCode2.setCodevalue("停用");
 		sysCodeList1.add(sysCode2);
 
 		modelAndView.addObject("statusList", sysCodeList1);
@@ -132,7 +132,7 @@ public class CommodityAdController extends BaseController {
 
 		SysCode sysCode2 = new SysCode();
 		sysCode2.setCodeid("-1");
-		sysCode2.setCodevalue("禁用");
+		sysCode2.setCodevalue("停用");
 		sysCodeList1.add(sysCode2);
 
 		modelAndView.addObject("statusList", sysCodeList1);

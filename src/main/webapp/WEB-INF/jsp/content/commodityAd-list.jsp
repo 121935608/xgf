@@ -137,14 +137,14 @@
 			 {
 				"sDefaultContent" : "状态",
 				"bSortable" : false,
-				"sClass" : "text-c",
+				"sClass" : "td-status text-c",
 				"bSearchable" : false,
 				"mRender" : function(data, type, row) {
 					//1:启用；-1:禁用）
 					if (row.status == '1') {
-						return "启用";
+						return "<span class=\"label label-success radius\">已启用</span>";
 					} else if (row.status == '-1') {
-						return "禁用";
+						return "<span class=\"label label-defaunt radius\">已停用</span>";
 					} else {
 						return "";
 					}
@@ -158,7 +158,7 @@
 		        "bSearchable": false,
 		        "mRender": function(data, type, row) {
 		        	//编辑
-		            var toEdit = "<a title=\"编辑\" href=\"javascript:;\" onclick=\"commodityAd_edit('编辑','${context_root}/content/toCommodityAdModify.action?commodityAdId=" + row.commodityAdId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><i class=\"Hui-iconfont\">&#xe6df;</i></a>";
+		            var toEdit = "<a title=\"编辑\" href=\"javascript:;\" onclick=\"commodityAd_edit('编辑','${context_root}/content/toCommodityAdModify.action?commodityAdId=" + row.commodityAdId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>编辑</span></a>";
 		            return statusTools(row)  + "&nbsp;&nbsp;" + toEdit;
 		        }
 		    },
@@ -171,9 +171,9 @@
 		
 		function statusTools(row) {
 		    if (row.status == '1') {
-		        return "<a style=\"text-decoration:none\" onClick=\"commodityAd_stop(this,\'" + row.commodityAdId + "\')\" href=\"javascript:;\" title=\"停用\"><i class=\"Hui-iconfont\">&#xe631;</i></a>";
+		        return "<a style=\"text-decoration:none\" onClick=\"commodityAd_stop(this,\'" + row.commodityAdId + "\')\" href=\"javascript:;\" title=\"停用\"><span style='color: #0e90d2 '>停用</span></a>";
 		    } else {
-		        return "<a style=\"text-decoration:none\" onClick=\"commodityAd_start(this,\'" + row.commodityAdId + "\')\" href=\"javascript:;\" title=\"启用\"><i class=\"Hui-iconfont\">&#xe615;</i></a>";
+		        return "<a style=\"text-decoration:none\" onClick=\"commodityAd_start(this,\'" + row.commodityAdId + "\')\" href=\"javascript:;\" title=\"启用\"><span style='color: #0e90d2 '>启用</span></a>";
 		    }
 		}
 		
@@ -220,7 +220,7 @@
 					dataType:"json",
 					success:function(data){
 						if(data.s == true){
-							$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="commodityAd_start(this,'+"'"+id+"'"+')" href="javascript:;" title="启用"><i class="Hui-iconfont">&#xe6e1;</i></a>');
+							$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="commodityAd_start(this,'+"'"+id+"'"+')" href="javascript:;" title="启用"><span style=\'color: #0e90d2 \'>启用</span></a>');
 							$(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已停用</span>');
 							$(obj).remove();
 							parent.layer.msg('已停用!',{icon: 5,time:1000});

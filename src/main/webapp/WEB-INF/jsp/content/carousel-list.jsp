@@ -153,7 +153,7 @@
 					if (row.status == '1') {
 						return "启用";
 					} else if (row.status == '-1') {
-						return "禁用";
+						return "停用";
 					} else {
 						return "";
 					}

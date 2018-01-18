@@ -19,8 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.aliyun.oss.OSSException;
-import com.xingrongjinfu.commodity.label.common.LabelConstant;
-import com.xingrongjinfu.commodity.label.model.Label;
 import com.xingrongjinfu.content.ContentConstant;
 import com.xingrongjinfu.content.advertisement.common.AdvertisementConstant;
 import com.xingrongjinfu.content.advertisement.model.Advertisement;
@@ -60,7 +58,7 @@ public class AdvertisementController extends BaseController {
 
 		SysCode sysCode2 = new SysCode();
 		sysCode2.setCodeid("-1");
-		sysCode2.setCodevalue("禁用");
+		sysCode2.setCodevalue("停用");
 		sysCodeList1.add(sysCode2);
 
 		modelAndView.addObject("statusList", sysCodeList1);
@@ -82,7 +80,7 @@ public class AdvertisementController extends BaseController {
 
 		SysCode sysCode2 = new SysCode();
 		sysCode2.setCodeid("-1");
-		sysCode2.setCodevalue("禁用");
+		sysCode2.setCodevalue("停用");
 		sysCodeList1.add(sysCode2);
 
 		modelAndView.addObject("statusList", sysCodeList1);
@@ -105,7 +103,7 @@ public class AdvertisementController extends BaseController {
 
 		SysCode sysCode2 = new SysCode();
 		sysCode2.setCodeid("-1");
-		sysCode2.setCodevalue("禁用");
+		sysCode2.setCodevalue("停用");
 		sysCodeList1.add(sysCode2);
 
 		modelAndView.addObject("statusList", sysCodeList1);
@@ -177,19 +175,6 @@ public class AdvertisementController extends BaseController {
                 result = advertisementService.deleteById(advertisement);           
         }
         return new Message(result);
-    }
-    
-    /**
-     * 校验名称
-     */
-    @RequestMapping(AdvertisementConstant.CHECK_NAME_UNIQUE_URL)
-    public @ResponseBody
-    String checkNamesUnique(Advertisement advertisement) {
-        String uniqueFlag = "0";
-        if (advertisement != null) {
-            uniqueFlag = advertisementService.checkNameUnique(advertisement);
-        }
-        return uniqueFlag;
     }
 
 	/**
