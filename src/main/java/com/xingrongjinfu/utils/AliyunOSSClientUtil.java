@@ -1,11 +1,7 @@
 package com.xingrongjinfu.utils;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -29,7 +25,8 @@ public class AliyunOSSClientUtil{
    //阿里云API的文件夹名称 商品图片
    public static String FOLDER2="xgf/imgFile/";
 
-   
+   //
+   public static String filePath = "";
    /**
     * 获取阿里云OSS客户端对象
     * @return
@@ -109,17 +106,18 @@ public class AliyunOSSClientUtil{
 	   String resultStr=null;
 	   try {
 		//InputStream is = new FileInputStream(file);
-		String fileName=file.getOriginalFilename();
+		String originalFilename=file.getOriginalFilename();
+		filePath = UuidUtil.get20UUID()+originalFilename.substring(originalFilename.indexOf("."));
 		Long fileSize = file.getSize();
 		ObjectMetadata metadata= new ObjectMetadata();
 		metadata.setContentLength(fileSize);
 		metadata.setCacheControl("no-cache");
 		metadata.setHeader("Pragma", "no-cache");
 		metadata.setContentEncoding("utf-8");
-		metadata.setContentType(getContentType(fileName));
-		metadata.setContentDisposition("filename/filesize="+fileName+"/"+fileSize+"Byte.");
+		metadata.setContentType(getContentType(filePath));
+		metadata.setContentDisposition("filename/filesize="+filePath+"/"+fileSize+"Byte.");
 	    //上传文件
-		PutObjectResult putResult= ossClient.putObject(bucketName, folder+fileName, file.getInputStream(),metadata);
+		PutObjectResult putResult= ossClient.putObject(bucketName, folder+filePath, file.getInputStream(),metadata);
 		resultStr=putResult.getETag();
 	   } catch (IOException e) {
 		e.printStackTrace();

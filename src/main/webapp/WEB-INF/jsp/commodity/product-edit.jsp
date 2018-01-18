@@ -2,24 +2,24 @@
 <%@include file="/WEB-INF/jsp/common/taglibs.jspf"%>
 <ys:contentHeader/>
 <body>
+
 <script>
-$(document).onload(function(){
-	alert("ddd");
-	var expresslist = '${product.imgOther}';
+$(document).ready(function(){
+		var expresslist = '${product.imgOther}';
 		var express = expresslist.split(';');
-		alert(express);
 		$.each(express, function(index,ex){
-			alert("ss");
-			var div = document.getElementById("otherImg");
-			var path = '${imgPath}'+ex;
-			alert(path);
-			div.innerHTML="<img src="+path+"/><p><a style="text-decoration:none;">设为主图</a></p>";
-	});
+		 if(express.length <= 1){
+			return;
+		}
+		 if(index+1 == express.length){
+			 return;
+		 }
+		var div = document.getElementById("otherImg");
+		var path = '${imgPath}'+ex;
+		div.innerHTML += "<img src="+path+" style=\"margin-left:30px;height:100px;width:100px;\" name=\"imgs\"><span>设为主图</span>";
+		});
 })
 </script>
-<script type="text/javascript" src="${context_url}/uiloader/static/kindeditor/kindeditor-all-min.js"></script>
-<script type="text/javascript" src="${context_url}/uiloader/static/kindeditor/kindeditor-all.js"></script>
-<script type="text/javascript" src="${context_url}/uiloader/static/kindeditor/lang/zh-CN.js"></script>
 	<div id="ul">
 		<ul>
 			<li class="page"  index="0"><div style="font-weight:bold;width:80px;height:30px;color:white;border-radius:5px;padding:5px;cursor:pointer;background:#1dc21d;border:2.5px solid #2da32d;">基本信息</div></li>
@@ -42,7 +42,9 @@ $(document).onload(function(){
 			  width:35px;
 			  cursor:pointer;
 			  /*backgroud: ../product/select.png*/
-}
+		}
+		.imgDiv span:hover{cursor:pointer;color:blue;}
+		.file{  filter:alpha(opacity:0);opacity: 0;width:0px }
 	</style>
 	<script type="text/javascript">
 	 $("ul li").click(function(){
@@ -53,6 +55,15 @@ $(document).onload(function(){
 	        div.css("display","block");
 	        $(".showOrHide").not(div).css("display","none");
 	    });
+	 /* 动态元素绑定事件 */
+	 $(document).on('click','.imgDiv span',function(){
+		 if($(this).text() == "主图"){
+			 return;
+		 }else{
+			 $(this).text("主图");
+			 $(".imgDiv span").not(this).text("设为主图");
+		 }
+	 })
 	</script>
 	<div style="clear:both"></div>
 	<article class="page-container">
@@ -190,18 +201,18 @@ $(document).onload(function(){
 		<!-- 上传图片 -->
 		<div class="showOrHide" style="display:none;text-align:center;margin-left:50px;">
 			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>商品名称：</label>
 				<div class="formControls col-xs-8 col-sm-4">
-					<input type="file" onchange="pic(event)" id="picture" name="picture" accept="image/*">
-					<img alt="" id="myImg" src="${product.imgMain}" height="100px",width="100px">
+				上传图片：
+					<input type='button' class='btn' value='浏览...'onclick="toChoose()" />
+					<input  type="file" id="picture" class="file" size="28" onchange="pic(event)"  name="picture" accept="image/*"/>
 				</div>
 			</div>
-			<div class="col-xs-2 col-sm-2">
-				<img src="${product.imgMain}">
-				<p>主图</p>
+			<div style="margin:0 auto" class="imgDiv">
+				<img src="${product.imgMain}" style="height:100px;width:100px;" name="imgs">
+				<span>主图</span>
 			</div>
 			
-			<div class="col-xs-2 col-sm-2" id="otherImg">
+			<div class="imgDiv" id="otherImg">
 				
 			</div>
 		</div>
@@ -251,6 +262,16 @@ $(document).onload(function(){
 		parent.layer.close(index);
 	}
 
+	function toChoose(){
+		var expresslist = '${product.imgOther}';
+		var express = expresslist.split(';');
+		var a = $("img").length;
+    	if(express.length > 3 || (a >3)){
+    		alert("最多只能选择四张图片!");
+    		return;
+    	}
+		document.getElementById('picture').click();
+	}
         //校验上传文件是否为图片格式
         function pic(e) {
             for (var i = 0; i < e.target.files.length; i++) {
@@ -262,7 +283,27 @@ $(document).onload(function(){
                 var freader = new FileReader();
                 freader.readAsDataURL(file);
                 freader.onload = function(e) {
-                    $("#myImg").attr("src",e.target.result);
+                	var formData = new FormData();
+                	formData.append("file",$("input[type=file]")[0].files[0]);
+                	$.ajax({
+                        url: '${context_root}/commodity/imgFile.action',
+                        type: 'POST',
+                        data: formData,
+                        async: false,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success: function (returndata) {
+                        	if(returndata.s == true){
+                        		var path = '${imgPath}'+returndata.m;
+                        		var div = document.getElementById("otherImg");
+                        		div.innerHTML += "<img src="+path+" style=\"margin-left:30px;height:100px;width:100px;\" name=\"imgs\"><span>设为主图</span>";
+            				}else{
+            					alert(returndata.m);
+            				}
+                        },
+                   });
+                	
                 }
             }
         }
@@ -307,10 +348,19 @@ $(document).onload(function(){
 	focusCleanup:true,
 	success:"valid",
 	submitHandler:function(form){
+		var formData = new FormData($('#form-product-update')[0]);
+		var allSpan = $(".imgDiv span").text().split("图");
+		var imgs = "";
+    	for(var i=0;i<allSpan.length;i++){
+    		if(allSpan[i] == "主"){
+    			var imgZ = $("img[name=imgs]").eq(i).attr("src");
+    		}else{
+    			imgs += $("img[name=imgs]").eq(i).attr("src")+",";
+    		}
+    	}
         var index = parent.layer.load();
-        var formData = new FormData($('#form-product-update')[0]);
 		$.ajax({
-			url:"${context_root}/commodity/saveProduct.action",
+			url:"${context_root}/commodity/saveProduct.action?imgZ="+imgZ+"&imgs="+imgs,
             type:'post',
             data:formData,
             mimeType: "multipart/form-data",

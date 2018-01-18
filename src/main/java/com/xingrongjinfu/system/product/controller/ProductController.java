@@ -10,21 +10,10 @@
  */
 package com.xingrongjinfu.system.product.controller;
 
-import com.alibaba.fastjson.JSONObject;
-import com.aliyun.oss.OSSException;
-import com.xingrongjinfu.commodity.classification.model.Category;
-import com.xingrongjinfu.system.SystemConstant;
-import com.xingrongjinfu.system.merchant.common.MerchantConstant;
-import com.xingrongjinfu.system.product.common.ProductConstant;
-import com.xingrongjinfu.system.product.model.Classes;
-import com.xingrongjinfu.system.product.model.Product;
-import com.xingrongjinfu.system.product.service.IProductService;
-import com.xingrongjinfu.system.syscode.model.SysCode;
-import com.xingrongjinfu.system.user.model.User;
-import com.xingrongjinfu.utils.AliyunOSSClientUtil;
-import com.xingrongjinfu.utils.PriceUtil;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.framework.base.util.PageUtilEntity;
-import org.framework.base.util.TableDataInfo;
 import org.framework.core.controller.BaseController;
 import org.framework.core.model.Message;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +23,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.alibaba.fastjson.JSONObject;
+import com.aliyun.oss.OSSException;
+import com.xingrongjinfu.commodity.classification.model.Category;
+import com.xingrongjinfu.system.SystemConstant;
+import com.xingrongjinfu.system.merchant.common.MerchantConstant;
+import com.xingrongjinfu.system.product.common.ProductConstant;
+import com.xingrongjinfu.system.product.model.Product;
+import com.xingrongjinfu.system.product.service.IProductService;
+import com.xingrongjinfu.system.syscode.model.SysCode;
+import com.xingrongjinfu.utils.AliyunOSSClientUtil;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -148,40 +145,31 @@ public class ProductController extends BaseController{
      * 提交商品
      */
     @RequestMapping(ProductConstant.PRODUCT_ADD_URL)
-    public @ResponseBody Message saveProduct(Product product,MultipartFile picture){
+    public @ResponseBody Message saveProduct(Product product,String imgs,String imgZ){
         int result=0;
-        String commodityId=product.getCommodityId();
-        if (commodityId !=null && commodityId!=""){
-            AliyunOSSClientUtil aliyunOSSClientUtil=new AliyunOSSClientUtil();
-            try {
-                System.out.println("图片名:"+picture.getOriginalFilename());
-                if (picture.getOriginalFilename()!=null && picture.getSize()>0) {
-                    String key = aliyunOSSClientUtil.uploadImgs(picture);
-                    if (key!=null) {
-                        String originalFilename = picture.getOriginalFilename();
-                        String filePath = aliyunOSSClientUtil.FOLDER2 + originalFilename;
-                        product.setImgMain(filePath);
-                    }
-                }
-              /*  product.setCountry(product.getCountry().equals("国内")?"1":"2");
-                product.setInPrice(product.getInPrice()*100);
-                product.setSalePrice(product.getSalePrice()*100);*/
-                //商品为c就是商品表中的信息
-                if (product.getType().equalsIgnoreCase("c")) {
-                    result = productService.updateProduct(product);
-                }else {
-                    //商品为s这里的提交还需将type改为c
-                    product.setType("s");
-                    result =productService.updateProduct(product);
-                }
-
-            }
-            catch (OSSException e)
-            {
-                e.printStackTrace();
-                return new Message(result);
+        String img = imgZ.replace("http://"+AliyunOSSClientUtil.BACKET_NAME+"."+AliyunOSSClientUtil.ENDPOINT+"/", "");
+        product.setImgMain(img);
+        String[] imgList = imgs.split(",");
+        String imgOther = "";
+        for(int i=0;i<imgList.length;i++){
+            String p = imgList[i].replace("http://"+AliyunOSSClientUtil.BACKET_NAME+"."+AliyunOSSClientUtil.ENDPOINT+"/", "");
+            if(!p.equals("undefined")){
+                imgOther += p+";";
             }
         }
+        product.setImgOther(imgOther);
+        String commodityId=product.getCommodityId();
+        if (commodityId !=null && commodityId!=""){
+               //商品为c就是商品表中的信息
+               if (product.getType().equalsIgnoreCase("c")) {
+                    result = productService.updateProduct(product);
+               }else {
+                   //商品为s这里的提交还需将type改为c
+                   product.setType("s");
+                   result =productService.updateProduct(product);
+               }
+            }
+
         return new Message(result);
     }
 
@@ -189,24 +177,20 @@ public class ProductController extends BaseController{
      * 富文本上传图片
      */
     @RequestMapping(ProductConstant.PRODUCT_IMFFILE_URL)
-    public Object imgFile(MultipartFile file){
+    public @ResponseBody Message imgFile(MultipartFile file){
         AliyunOSSClientUtil aliyunOSSClientUtil=new AliyunOSSClientUtil();
         JSONObject jsonObject = new JSONObject();
         try {
             String key = aliyunOSSClientUtil.uploadImgs(file);
-            String originalFilename = file.getOriginalFilename();
-            String filePath = aliyunOSSClientUtil.FOLDER2 + originalFilename;
+
+            String filePath = aliyunOSSClientUtil.FOLDER2 + AliyunOSSClientUtil.filePath;
             // 返回地址
-            jsonObject.put("error", 0);
-            jsonObject.put("url", filePath);
-            return jsonObject;
+            return new Message(true,filePath);
         }
         catch (OSSException e)
         {
             e.printStackTrace();
-            jsonObject.put("error", 1);
-            jsonObject.put("message", "对不起图片上传失败");
-            return jsonObject;
+            return new Message(false,"对不起图片上传失败!");
 
         }
 
