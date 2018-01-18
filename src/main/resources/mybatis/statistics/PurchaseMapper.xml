@@ -28,7 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM sys_user a
 		LEFT JOIN t_order b on a.userId = b.userId
 		LEFT JOIN t_order_detail c on c.orderNumber = b.orderNumber
-		LEFT JOIN t_commodity d ON c.commodityId = d.commodityId
+		RIGHT JOIN t_commodity d ON c.commodityId = d.commodityId
 		where 1=1 
 		 <if test="relationMap.userId != null and relationMap.userId != ''">
 			AND a.userId=#{relationMap.userId}
