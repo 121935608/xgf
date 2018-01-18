@@ -24,7 +24,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultType="Repayment" useCache="false">
-		SELECT a.repayNo,a.addTime,b.orderNumber,a.repayDate,a.planTotal,a.status FROM t_repay a 
+		SELECT a.repayNo,a.addTime,b.orderNumber,a.repayDate,a.planTotal/100 planTotal,a.status 
+		FROM t_repay a 
 		inner join t_order b on a.orderId = b.orderId
 		inner join sys_user s on a.userId = s.userId
 		WHERE 1=1

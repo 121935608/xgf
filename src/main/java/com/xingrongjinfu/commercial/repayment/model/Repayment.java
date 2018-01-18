@@ -15,13 +15,13 @@ public class Repayment implements Serializable {
 	private String repayNo;
 	private String orderId;
 	private String userId;
-	private int planTotal;
+	private double planTotal;
 	private Date planRepayDate;
-	private int repayMoney;
+	private double repayMoney;
 	private Date repayDate;
-	private int withholdMoney;
+	private double withholdMoney;
 	private Date withholdDate;
-	private int dueFee;
+	private double dueFee;
 	private Date addTime;
 	private int status;
 	private String remark;
@@ -49,10 +49,10 @@ public class Repayment implements Serializable {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public int getPlanTotal() {
+	public double getPlanTotal() {
 		return planTotal;
 	}
-	public void setPlanTotal(int planTotal) {
+	public void setPlanTotal(double planTotal) {
 		this.planTotal = planTotal;
 	}
 	public Date getPlanRepayDate() {
@@ -61,10 +61,10 @@ public class Repayment implements Serializable {
 	public void setPlanRepayDate(Date planRepayDate) {
 		this.planRepayDate = planRepayDate;
 	}
-	public int getRepayMoney() {
+	public double getRepayMoney() {
 		return repayMoney;
 	}
-	public void setRepayMoney(int repayMoney) {
+	public void setRepayMoney(double repayMoney) {
 		this.repayMoney = repayMoney;
 	}
 	public Date getRepayDate() {
@@ -73,10 +73,10 @@ public class Repayment implements Serializable {
 	public void setRepayDate(Date repayDate) {
 		this.repayDate = repayDate;
 	}
-	public int getWithholdMoney() {
+	public double getWithholdMoney() {
 		return withholdMoney;
 	}
-	public void setWithholdMoney(int withholdMoney) {
+	public void setWithholdMoney(double withholdMoney) {
 		this.withholdMoney = withholdMoney;
 	}
 	public Date getWithholdDate() {
@@ -85,10 +85,10 @@ public class Repayment implements Serializable {
 	public void setWithholdDate(Date withholdDate) {
 		this.withholdDate = withholdDate;
 	}
-	public int getDueFee() {
+	public double getDueFee() {
 		return dueFee;
 	}
-	public void setDueFee(int dueFee) {
+	public void setDueFee(double dueFee) {
 		this.dueFee = dueFee;
 	}
 	public Date getAddTime() {

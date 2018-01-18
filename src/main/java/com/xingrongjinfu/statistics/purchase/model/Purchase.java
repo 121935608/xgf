@@ -18,12 +18,12 @@ public class Purchase implements Serializable
 	private int commodityNum;
 	private String commodityName;
 	private Date addTime;
-	private int inPrice;
-	private int salePrice;
+	private double inPrice;
+	private double salePrice;
 	private double taxRate;
 	private Date unit;
 	private String imgMain;
-	private String totalPrice;
+	private double totalPrice;
 	private String commodityNo;
 	
 	public String getCommodityNo() {
@@ -68,16 +68,16 @@ public class Purchase implements Serializable
 	public void setAddTime(Date addTime) {
 		this.addTime = addTime;
 	}
-	public int getInPrice() {
+	public double getInPrice() {
 		return inPrice;
 	}
-	public void setInPrice(int inPrice) {
+	public void setInPrice(double inPrice) {
 		this.inPrice = inPrice;
 	}
-	public int getSalePrice() {
+	public double getSalePrice() {
 		return salePrice;
 	}
-	public void setSalePrice(int salePrice) {
+	public void setSalePrice(double salePrice) {
 		this.salePrice = salePrice;
 	}
 	public double getTaxRate() {
@@ -98,10 +98,10 @@ public class Purchase implements Serializable
 	public void setImgMain(String imgMain) {
 		this.imgMain = imgMain;
 	}
-	public String getTotalPrice() {
+	public double getTotalPrice() {
 		return totalPrice;
 	}
-	public void setTotalPrice(String totalPrice) {
+	public void setTotalPrice(double totalPrice) {
 		this.totalPrice = totalPrice;
 	}
 	@Override

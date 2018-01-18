@@ -16,7 +16,7 @@ public class Pays implements Serializable
 	private String userId;
 	private String tradeCode;
 	private int payType;
-	private int money;
+	private double money;
 	private int status;
 	private String remark;
 	private Date addTime;
@@ -45,10 +45,10 @@ public class Pays implements Serializable
 	public void setPayType(int payType) {
 		this.payType = payType;
 	}
-	public int getMoney() {
+	public double getMoney() {
 		return money;
 	}
-	public void setMoney(int money) {
+	public void setMoney(double money) {
 		this.money = money;
 	}
 	public int getStatus() {

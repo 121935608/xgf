@@ -18,7 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="pageInfoQuery" parameterType="PageUtilEntity"
 		resultType="Pays">
-		select tradeCode,addTime,money,payType
+		select tradeCode,addTime,money/100 money,payType
 		from m_cashier m
 		inner join sys_user s on m.userId = s.userId
 		where 1=1
@@ -52,7 +52,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select tradeCode,DATE_FORMAT(`addTime`,'%Y-%m-%d %H:%i:%S') `addTime`,money/100 money,payType
 		from m_cashier m
 		inner join sys_user s on m.userId = s.userId
-		/*limit 10*/
+		limit 10
 	</select>
 
 

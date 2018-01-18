@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="pageInfoQuery" parameterType="PageUtilEntity"
 		resultType="Financial">
-		select amountNum,addTime,totalMoney,xzfRate,amountMoney,status
+		select amountNum,addTime,totalMoney/100 totalMoney,xzfRate,amountMoney/100 amountMoney,status
 		from
 		m_amount m
 		inner join sys_user s on m.userId = s.userId

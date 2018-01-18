@@ -25,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="pageInfoQuery" parameterType="PageUtilEntity"
 		resultType="Procurement">
 		select
-		c.commodityName,d.commodityNo,c.orderNumber,c.addTime,c.commodityNum,c.totalPrice
+		c.commodityName,d.commodityNo,c.orderNumber,c.addTime,c.commodityNum,c.totalPrice/100 totalPrice
 		from sys_user a
 		RIGHT JOIN t_order b on a.userId = b.userId
 		LEFT JOIN

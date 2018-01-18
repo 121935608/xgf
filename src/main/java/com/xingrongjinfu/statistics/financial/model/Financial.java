@@ -15,9 +15,9 @@ public class Financial implements Serializable
     private String amountId;
 	private String userId;
 	private Date addTime;
-	private int totalMoney;
-	private int xzfRate;
-	private int amountMoney;
+	private double totalMoney;
+	private double xzfRate;
+	private double amountMoney;
 	private int status;
 	private String amountNum;
 	public String getAmountId() {
@@ -38,22 +38,22 @@ public class Financial implements Serializable
 	public void setAddTime(Date addTime) {
 		this.addTime = addTime;
 	}
-	public int getTotalMoney() {
+	public double getTotalMoney() {
 		return totalMoney;
 	}
-	public void setTotalMoney(int totalMoney) {
+	public void setTotalMoney(double totalMoney) {
 		this.totalMoney = totalMoney;
 	}
-	public int getXzfRate() {
+	public double getXzfRate() {
 		return xzfRate;
 	}
-	public void setXzfRate(int xzfRate) {
+	public void setXzfRate(double xzfRate) {
 		this.xzfRate = xzfRate;
 	}
-	public int getAmountMoney() {
+	public double getAmountMoney() {
 		return amountMoney;
 	}
-	public void setAmountMoney(int amountMoney) {
+	public void setAmountMoney(double amountMoney) {
 		this.amountMoney = amountMoney;
 	}
 	public int getStatus() {
