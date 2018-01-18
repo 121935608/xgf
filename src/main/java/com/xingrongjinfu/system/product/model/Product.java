@@ -28,8 +28,8 @@ public class Product {
     private String imgMain;
     private String imgOther;
     private String specification;
-    private Integer inPrice;
-    private Integer salePrice;
+    private Double inPrice;
+    private Double salePrice;
     private String tag;
     private String categoryId;
     private String info;
@@ -106,19 +106,19 @@ public class Product {
         this.specification = specification;
     }
 
-    public Integer getInPrice() {
+    public Double getInPrice() {
         return inPrice;
     }
 
-    public void setInPrice(Integer inPrice) {
+    public void setInPrice(Double inPrice) {
         this.inPrice = inPrice;
     }
 
-    public Integer getSalePrice() {
+    public Double getSalePrice() {
         return salePrice;
     }
 
-    public void setSalePrice(Integer salePrice) {
+    public void setSalePrice(Double salePrice) {
         this.salePrice = salePrice;
     }
 

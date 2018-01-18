@@ -44,7 +44,6 @@
 <script type="text/javascript"  charset="UTF-8">
 var pageTable;
 $(document).ready(function(){ 
-	
 	var aoColumns = [
     {
         "sDefaultContent": "商品名称",

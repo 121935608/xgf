@@ -23,10 +23,10 @@ public class Commodity {
     private String commodityName;
     private String commodityNo;
     private Integer saleNum;
-    private Integer salePrice;
-    private Integer inPrice;
-    private Integer payTaxes;
-    private Integer profit;
+    private Double salePrice;
+    private Double inPrice;
+    private Double payTaxes;
+    private Double profit;
     private String commodityId;
 
     
@@ -62,35 +62,35 @@ public class Commodity {
         this.saleNum = saleNum;
     }
 
-    public Integer getSalePrice() {
+    public Double getSalePrice() {
         return salePrice;
     }
 
-    public void setSalePrice(Integer salePrice) {
+    public void setSalePrice(Double salePrice) {
         this.salePrice = salePrice;
     }
 
-    public Integer getInPrice() {
+    public Double getInPrice() {
         return inPrice;
     }
 
-    public void setInPrice(Integer inPrice) {
+    public void setInPrice(Double inPrice) {
         this.inPrice = inPrice;
     }
 
-    public Integer getPayTaxes() {
+    public Double getPayTaxes() {
         return payTaxes;
     }
 
-    public void setPayTaxes(Integer payTaxes) {
+    public void setPayTaxes(Double payTaxes) {
         this.payTaxes = payTaxes;
     }
 
-    public Integer getProfit() {
+    public Double getProfit() {
         return profit;
     }
 
-    public void setProfit(Integer profit) {
+    public void setProfit(Double profit) {
         this.profit = profit;
     }
 

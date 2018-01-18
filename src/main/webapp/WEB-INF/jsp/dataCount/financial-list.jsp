@@ -96,7 +96,7 @@ $(document).ready(function(){
             "bSearchable": false,
             "mRender": function(data, type, row) {
                 if (row.totalMoney != null) {
-                    return row.totalMoney/100;
+                    return row.totalMoney;
                 } else {
                     return "";
                 }

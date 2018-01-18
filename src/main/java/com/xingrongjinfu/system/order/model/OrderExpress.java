@@ -29,7 +29,7 @@ public class OrderExpress {
     private String address;
     private Integer status;
     private Date addTime;
-    private Integer freight;
+    private Double freight;
 
     public String getExpressId() {
         return expressId;
@@ -87,11 +87,11 @@ public class OrderExpress {
         this.addTime = addTime;
     }
 
-    public Integer getFreight() {
+    public Double getFreight() {
         return freight;
     }
 
-    public void setFreight(Integer freight) {
+    public void setFreight(Double freight) {
         this.freight = freight;
     }
 }

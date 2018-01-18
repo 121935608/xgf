@@ -142,7 +142,7 @@ $(document).ready(function(){
             "bSearchable": false,
             "mRender": function(data, type, row) {
                 if (row.orderPrice !=null) {
-                    return row.orderPrice/100;
+                    return row.orderPrice;
                 }else {
                     return 0;
                 }

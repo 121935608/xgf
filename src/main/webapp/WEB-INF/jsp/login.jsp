@@ -70,9 +70,9 @@
                 <c:if test="${not empty param.forceLogout}">您已经被管理员强制退出。请重新登录</c:if>
                 ${errorMsg }</font>
         </form>
-        <div class="row cl">
-            <div class="formControls col-xs-8 col-xs-offset-8">
-            <a href="${pageContext.request.contextPath}/toModifyPassword.action" class="btn btn-success radius size-L">忘记密码?</a>
+        <div class="row cl" style="margin-top:2%;margin-right: -15%;">
+            <div class="formControls col-xs-8 col-xs-offset-8" >
+            <a href="${pageContext.request.contextPath}/toModifyPassword.action"  class="btn btn-success radius size-L">忘记密码?</a>
             </div>
         </div>
     </div>

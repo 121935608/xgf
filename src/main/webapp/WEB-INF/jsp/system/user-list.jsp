@@ -29,7 +29,7 @@
 	<table class="table table-border table-bordered table-hover table-bg table-sort">
 		<thead>
 			<tr class="text-c">
-				<th style="width: 7%;height: 20px;"><input  onclick="allSelect()" type="checkbox"name="allSel" value=""/></th>
+				<th style="width: 7%;height: 20px;"><input type="checkbox" name="selAll" onClick="funSelAll(this)" value=""/></th>
 				<th width="5%">账号</th>
 				<th width="10%">用户名</th>
 				<th width="10%">角色</th>
@@ -50,7 +50,7 @@ $(document).ready(function(){
 		"sClass": "text-c",
 		"bSearchable": false,
 		"mRender": function(data, type, row) {
-			return "<input class= \"userName\" type=\"checkbox\"name=\"checkName\" value="+row.userName+"></input>";
+			return "<input class= \"userName\" onClick=\"funSelOne(this)\" type=\"checkbox\"name=\"checkName\" value="+row.userName+"></input>";
 		}
 	},
 	{
@@ -113,13 +113,69 @@ function query() {
     var status = $("#statusSelect option:selected").val();
     var roleName = $("#roleName option:selected").val();
     var userName=$("#userName").val();
-    pageTable.fnSettings().sAjaxSource = "${context_root}/system/userList.action?status=" + status+"&roleName="+roleName+"&userName="+userName;
+    var reg =/[`~!@#$%^&*()_\-=<>?:"{}|,.\/;'\\[\]·~！@#￥%……&*（）——\-={}|《》？：“”【】、；‘’，。、]/;
+    if (reg.test(userName)){
+        alert("含有非法字符");
+        return;
+	}
+    pageTable.fnSettings().sAjaxSource =encodeURI("${context_root}/system/userList.action?status=" + status+"&roleName="+roleName+"&userName="+userName);
     pageTable.fnClearTable(0);
     pageTable.fnDraw();
 }
 
-function allSelect(){
-    $("input[name='checkName']").attr("checked","true");
+/*
+$(function(){
+//全选/全不选
+    $("#all").click(function(){
+        $("[name=checkName]:checkbox").attr("checked",this.checked);
+    });
+    $("[name=checkName]:checkbox").click(function(){
+        var flag=true;
+        $("[name=checkName]:checkbox").each(function(){
+            if(!this.checked){
+                flag=false;
+            }
+        });
+        $("#all").attr("checked",flag);
+    });
+});
+*/
+
+
+//当全选按钮，选中时，所有复选框被选中，当全选按钮不被选中时，所有的也不被选中
+function funSelAll(){
+    var selects=document.getElementsByName("checkName");
+    if(document.getElementsByName("selAll")[0].checked==true){
+        for(var i=0;i<selects.length;i++){
+            selects[i].checked=true;
+        }
+    }else{
+        for(var i=0;i<selects.length;i++){
+            selects[i].checked=false;
+        }
+    }
+}
+
+//当所有的复选框被选中时，全选按钮被选中，当其中任意一个或者多个没被选中时，全选按钮不被选中
+function funSelOne(){
+    var one=document.getElementsByName("checkName");
+    var all=document.getElementsByName("selAll")[0]
+    var selCount=0;
+    var unSelCount=0;
+    for(var i=0;i<one.length;i++){
+        if(one[i].checked==true){
+            selCount++;
+        }
+        if(one[i].checked==false){
+            unSelCount++;
+        }
+        if(selCount==one.length){
+            all.checked=true;
+        }
+        if(unSelCount>0){
+            all.checked=false;
+        }
+    }
 }
 /*用户-添加*/
 function user_add(title,url,w,h){
@@ -163,16 +219,17 @@ function user_resetPWD(obj,id){
 
 /*管理员-停用*/
 function user_stop(obj,id){
+    var id=id.toString();
 	parent.layer.confirm('确认要停用吗？',{icon: 3, title:'提示'},function(index){
 		$.ajax({
-			url:"${context_root}/system/changeUserStatus.action?userId=" + id +"&locked=1", 
+			url:"${context_root}/system/changeUserStatus.action?userId=" + id +"&locked=1",
 			type:'post',
 			async:true ,
 			cache:false ,
 			dataType:"json",
 			success:function(data){
 				if(data.s == true){
-					$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="user_start(this,'+id+')" href="javascript:;" title="启用"><span style=\'color: #0e90d2 \'>启用</span></a>');
+					$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="user_start(this,\'' + id +'\')" href="javascript:;" title="启用"><span style=\'color: #0e90d2 \'>启用</span></a>');
 					$(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已停用</span>');
 					$(obj).remove();
 					parent.layer.msg('已停用!',{icon: 5,time:1000});
@@ -187,6 +244,7 @@ function user_stop(obj,id){
 
 /*管理员-启用*/
 function user_start(obj,id){
+    var id=id.toString();
 	parent.layer.confirm('确认要启用吗？',{icon: 3, title:'提示'},function(index){
 		$.ajax({
 			url:"${context_root}/system/changeUserStatus.action?userId=" + id +"&locked=0", 
@@ -196,7 +254,7 @@ function user_start(obj,id){
 			dataType:"json",
 			success:function(data){
 				if(data.s == true){
-					$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="user_stop(this,'+id+')" href="javascript:;" title="停用" ><span style=\'color: #0e90d2 \'>停用</span></a>');
+					$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="user_stop(this, \'' + id +'\')" href="javascript:;" title="停用" ><span style=\'color: #0e90d2 \'>停用</span></a>');
 					$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
 					$(obj).remove();
 					parent.layer.msg('已启用!', {icon: 6,time:1000});

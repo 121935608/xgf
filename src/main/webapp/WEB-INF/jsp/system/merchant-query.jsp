@@ -17,6 +17,12 @@
 				</div>
 			</div>
 			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">营业执照号码</label>
+				<div class="formControls col-xs-8 col-sm-4">
+					<span>${accountInfo.licenseId}</span>
+				</div>
+			</div>
+			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-3">店长</label>
 				<div class="formControls col-xs-8 col-sm-4">
 					<span>${accountInfo.userName}</span>

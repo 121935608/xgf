@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="salePrice" property="salePrice" />
 	</resultMap>
 		<select id="pageInfoQuery" parameterType="PageUtilEntity" resultMap="SaleResult">
-			SELECT t.commodityName,c.commodityNo,t.orderNumber,t.addTime,t.commodityNum,t.salePrice
+			SELECT t.commodityName,c.commodityNo,t.orderNumber,t.addTime,t.commodityNum,t.salePrice/100 salePrice
 			FROM t_order_detail t LEFT JOIN t_commodity c ON t.commodityName=c.commodityName
 			WHERE 1=1
 			<if test="relationMap.beginTime != null and relationMap.beginTime != ''"><!-- 开始时间检索 -->

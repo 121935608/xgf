@@ -53,6 +53,10 @@ public class OrderController extends BaseController {
     @RequestMapping(OrderConstant.ORDER_MANAGE_URL)
     public ModelAndView loadOrderManage(){return this.getModelAndView(OrderConstant.ORDER_MANAGE_PAGE);}
 
+    /**
+     *
+     * @return
+     */
     @RequestMapping(OrderConstant.ORDER_MANAGE_LIST_URL)
     public ModelAndView orderManageList()
     {
@@ -72,18 +76,18 @@ public class OrderController extends BaseController {
         ModelAndView modelAndView=this.getModelAndView(OrderConstant.ORDER_LOOK_PAGE);
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         Order orders=orderService.findOrderInfo(orderNumber);
-        orders.setOrderPrice(orders.getOrderPrice()==null ? 0:orders.getOrderPrice()/100);
+        orders.setOrderPrice(orders.getOrderPrice()==null ? 0:orders.getOrderPrice());
         orders.setOrderTimes(orders.getOrderTime()==null ? "" :sdf.format(orders.getOrderTime()));
-        orders.setTotalPrice(orders.getTotalPrice()==null?0:orders.getTotalPrice()/100);
-        orders.setFreight(orders.getFreight()==null ?0:orders.getFreight()/100);
-        orders.setPayment(orders.getPayment()==null?0:orders.getPayment()/100);
+        orders.setTotalPrice(orders.getTotalPrice()==null?0:orders.getTotalPrice());
+        orders.setFreight(orders.getFreight()==null ?0:orders.getFreight());
+        orders.setPayment(orders.getPayment()==null?0:orders.getPayment());
         List<OrderDetail> orderDetails=orderService.findOrderDetailInfo(orderNumber);
         for (OrderDetail orderDetail:orderDetails){
-            if (orderDetail.getInPrice()==null){orderDetail.setInPrice(0);}
+            if (orderDetail.getInPrice()==null){orderDetail.setInPrice(0.00);}
             if (orderDetail.getCommodityNum()==null){orderDetail.setCommodityNum(0);}
             //总金额=数量*进价
-            orderDetail.setInPrice(orderDetail.getInPrice()/100);
-            Integer all=orderDetail.getInPrice()*orderDetail.getCommodityNum();
+            orderDetail.setInPrice(orderDetail.getInPrice());
+            Double all=orderDetail.getInPrice()*orderDetail.getCommodityNum();
             orderDetail.setTotalMoney(all);
         }
         modelAndView.addObject("orders",orders);

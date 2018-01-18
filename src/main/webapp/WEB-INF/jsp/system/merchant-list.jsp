@@ -12,7 +12,7 @@
            <select name="statusSelect" id="statusSelect" class="select" autocomplete="off">
                <option value="">状态</option>
                <option value="0">启用</option>
-               <option value="1" >禁用</option>
+               <option value="1" >停用</option>
            </select>
        </span>
        <input type="text" style="width: 250px;" class="input-text" placeholder="账号|店铺名称" id="search"
@@ -27,6 +27,7 @@
             <tr class="text-c">
                 <th width="6%">账号</th>
                 <th width="10%">店铺名称</th>
+                <th width="8%">营业执照号码</th>
                 <th width="8%">联系人</th>
                 <th width="8%">联系方式</th>
                 <th width="8%">状态</th>
@@ -52,7 +53,19 @@
                 "sClass": "text-c",
                 "defaultContent": ""
             },
-
+            {
+                "sDefaultContent": "营业执照号码",
+                "bSortable" : false,
+                "sClass": "text-c",
+                "bSearchable": false,
+                "mRender": function(data, type, row) {
+                    if (row.licenseId != null) {
+                        return row.licenseId;
+                    } else {
+                        return "";
+                    }
+                }
+            },
             {
                 "mData": "userName",
                 "bSortable" : false,
@@ -117,6 +130,7 @@
         var status = $("#statusSelect option:selected").val();
 
         var name=$("#search").val();
+
         //var jsonObject = '{\"beginTime\":\"' + beginTime + '\",\"endTime\":\"' + endTime + '\",\"source\":\"' + source + '\",\"type\":\"' + type + '\",\"status\":\"' + status + '\",\"phone\":\"' + phone + '\"}';
         pageTable.fnSettings().sAjaxSource =encodeURI("${context_root}/system/merchantList.action?status=" + status+"&name="+name);
         pageTable.fnClearTable(0);

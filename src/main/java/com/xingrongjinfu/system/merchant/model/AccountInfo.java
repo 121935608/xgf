@@ -42,6 +42,7 @@ public class AccountInfo implements Serializable
     private String idType;
     private String cIdCard;
     private String remark;
+    private String licenseId;
 
 
 
@@ -195,5 +196,13 @@ public class AccountInfo implements Serializable
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getLicenseId() {
+        return licenseId;
+    }
+
+    public void setLicenseId(String licenseId) {
+        this.licenseId = licenseId;
     }
 }

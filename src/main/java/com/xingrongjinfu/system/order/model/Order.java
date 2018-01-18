@@ -34,10 +34,10 @@ public class Order {
     private Date payTime;
     private Date arriveTime;
     private Integer number;
-    private Integer totalPrice;
-    private Integer freight;
-    private Integer payment;
-    private Integer orderPrice;
+    private Double totalPrice;
+    private Double freight;
+    private Double payment;
+    private Double orderPrice;
     private String orderStatus;
     private Integer status;
     private String userName;
@@ -120,35 +120,35 @@ public class Order {
         this.number = number;
     }
 
-    public Integer getTotalPrice() {
+    public Double getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(Integer totalPrice) {
+    public void setTotalPrice(Double totalPrice) {
         this.totalPrice = totalPrice;
     }
 
-    public Integer getFreight() {
+    public Double getFreight() {
         return freight;
     }
 
-    public void setFreight(Integer freight) {
+    public void setFreight(Double freight) {
         this.freight = freight;
     }
 
-    public Integer getPayment() {
+    public Double getPayment() {
         return payment;
     }
 
-    public void setPayment(Integer payment) {
+    public void setPayment(Double payment) {
         this.payment = payment;
     }
 
-    public Integer getOrderPrice() {
+    public Double getOrderPrice() {
         return orderPrice;
     }
 
-    public void setOrderPrice(Integer orderPrice) {
+    public void setOrderPrice(Double orderPrice) {
         this.orderPrice = orderPrice;
     }
 

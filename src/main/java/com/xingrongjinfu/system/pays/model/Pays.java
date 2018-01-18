@@ -29,7 +29,7 @@ public class Pays implements Serializable
     private String cashId;
     private String userId;
     private String tradeCode;
-    private Integer money;
+    private Double money;
     private Integer payType;
     private Integer status;
     private String remark;
@@ -78,11 +78,11 @@ public class Pays implements Serializable
         this.tradeCode = tradeCode;
     }
 
-    public Integer getMoney() {
+    public Double getMoney() {
         return money;
     }
 
-    public void setMoney(Integer money) {
+    public void setMoney(Double money) {
         this.money = money;
     }
 

@@ -54,7 +54,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 
 	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultMap="ProductResult">
-		SELECT c.*,t.categoryName FROM t_commodity c LEFT JOIN t_category t ON c.categoryId=t.categoryId
+		SELECT c.commodityId,c.commodityName,c.commodityNo,c.imgMain,c.imgOther,c.specification,c.inPrice/100 inPrice,
+		c.salePrice/100 salePrice,c.tag,c.categoryId,c.info,c.weight,c.commodityStatus,c.unit,c.stockNum,c.taxRate,
+		c.status,c.addTime,c.updateTime,c.origin,c.supply,c.hint,c.grade,c.country,c.type,c.storage,t.categoryName
+		FROM t_commodity c LEFT JOIN t_category t ON c.categoryId=t.categoryId
 		WHERE 1=1
 		<if test="relationMap.type !=null and relationMap.type!=''">
 			AND c.type=#{relationMap.type}
@@ -126,7 +129,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 
 	<select id="findProductById" parameterType="Product" resultType="Product">
-		SELECT c.*,t.categoryName FROM t_commodity c LEFT JOIN t_category t ON c.categoryId=t.categoryId
+		SELECT c.commodityId,c.commodityName,c.commodityNo,c.imgMain,c.imgOther,c.specification,c.inPrice/100 inPrice,
+		c.salePrice/100 salePrice,c.tag,c.categoryId,c.info,c.weight,c.commodityStatus,c.unit,c.stockNum,c.taxRate,
+		c.status,c.addTime,c.updateTime,c.origin,c.supply,c.hint,c.grade,c.country,c.type,c.storage,t.categoryName FROM t_commodity c LEFT JOIN t_category t ON c.categoryId=t.categoryId
 		WHERE 1=1
 		<if test="commodityId !=null and commodityId !=''">
 			AND commodityId =#{commodityId}
@@ -141,8 +146,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="imgMain!=null and imgMain !=''">imgMain=#{imgMain},</if>
 			<if test="imgOther!=null and imgOther !=''">imgOther=#{imgOther},</if>
 			<if test="specification!=null and specification !=''">specification=#{specification},</if>
-			<if test="inPrice!=null">inPrice=#{inPrice},</if>
-			<if test="salePrice!=null">salePrice=#{salePrice},</if>
+			<if test="inPrice!=null">inPrice=#{inPrice}*100,</if>
+			<if test="salePrice!=null">salePrice=#{salePrice}*100,</if>
 			<if test="tag!=null and tag !=''">tag=#{tag},</if>
 			<if test="categoryId!=null and categoryId !=''">categoryId=#{categoryId},</if>
 			<if test="info!=null and info !=''">info=#{info},</if>

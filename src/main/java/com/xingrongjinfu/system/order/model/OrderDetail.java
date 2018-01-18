@@ -28,14 +28,14 @@ public class OrderDetail {
     private Integer commodityNum;
     private String commodityName;
     private Date addTime;
-    private Integer inPrice;
-    private Integer salePrice;
+    private Double inPrice;
+    private Double salePrice;
     private Double taxRate;
     private String unit;
     private String imgMain;
-    private Integer totalPrice;
+    private Double totalPrice;
     private String commodityNo;
-    private Integer totalMoney;
+    private Double totalMoney;
 
     public String getOrderDetailId() {
         return orderDetailId;
@@ -85,22 +85,6 @@ public class OrderDetail {
         this.addTime = addTime;
     }
 
-    public Integer getInPrice() {
-        return inPrice;
-    }
-
-    public void setInPrice(Integer inPrice) {
-        this.inPrice = inPrice;
-    }
-
-    public Integer getSalePrice() {
-        return salePrice;
-    }
-
-    public void setSalePrice(Integer salePrice) {
-        this.salePrice = salePrice;
-    }
-
     public Double getTaxRate() {
         return taxRate;
     }
@@ -125,14 +109,6 @@ public class OrderDetail {
         this.imgMain = imgMain;
     }
 
-    public Integer getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(Integer totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
     public String getCommodityNo() {
         return commodityNo;
     }
@@ -141,11 +117,35 @@ public class OrderDetail {
         this.commodityNo = commodityNo;
     }
 
-    public Integer getTotalMoney() {
+    public Double getInPrice() {
+        return inPrice;
+    }
+
+    public void setInPrice(Double inPrice) {
+        this.inPrice = inPrice;
+    }
+
+    public Double getSalePrice() {
+        return salePrice;
+    }
+
+    public void setSalePrice(Double salePrice) {
+        this.salePrice = salePrice;
+    }
+
+    public Double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public Double getTotalMoney() {
         return totalMoney;
     }
 
-    public void setTotalMoney(Integer totalMoney) {
+    public void setTotalMoney(Double totalMoney) {
         this.totalMoney = totalMoney;
     }
 }

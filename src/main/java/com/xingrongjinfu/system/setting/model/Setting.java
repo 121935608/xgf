@@ -26,8 +26,8 @@ public class Setting implements Serializable
 
     private Integer systemId;
     private String xzfMethod;
-    private Integer xzfRate;
-    private Integer orderRate;
+    private Double xzfRate;
+    private Double orderRate;
     private Date settingTime;
     private Integer status;
     private String creator;
@@ -48,19 +48,19 @@ public class Setting implements Serializable
         this.xzfMethod = xzfMethod;
     }
 
-    public Integer getXzfRate() {
+    public Double getXzfRate() {
         return xzfRate;
     }
 
-    public void setXzfRate(Integer xzfRate) {
+    public void setXzfRate(Double xzfRate) {
         this.xzfRate = xzfRate;
     }
 
-    public Integer getOrderRate() {
+    public Double getOrderRate() {
         return orderRate;
     }
 
-    public void setOrderRate(Integer orderRate) {
+    public void setOrderRate(Double orderRate) {
         this.orderRate = orderRate;
     }
 

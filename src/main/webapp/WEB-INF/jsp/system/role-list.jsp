@@ -55,9 +55,9 @@ $(document).ready(function(){
         "bSearchable": false,
         "mRender": function(data, type, row) {
             if (row.status == '0') {
-                return "<span class=\"label label-success radius\">可用</span>";
+                return "<span class=\"label label-success radius\">已启用</span>";
             } else {
-                return "<span class=\"label label-defaunt radius\">不可用</span>";
+                return "<span class=\"label label-defaunt radius\">已停用</span>";
             }
         }
     },

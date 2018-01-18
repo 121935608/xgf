@@ -11,6 +11,7 @@
         <result column="phone" property="phone" jdbcType="VARCHAR" />
         <result column="locked" property="locked" jdbcType="INTEGER" />
         <result column="storeId" property="storeId" jdbcType="VARCHAR" />
+        <result column="licenseId" property="licenseId"  />
 
     </resultMap>
 
@@ -22,7 +23,7 @@
 
 
     <select id="pageInfoQuery" parameterType="PageUtilEntity" resultMap="MerchantResult">
-        SELECT s.userId,t.storeId,s.mobilePhone,t.storeName,t.userName,t.phone,s.locked
+        SELECT s.userId,t.storeId,s.mobilePhone,t.storeName,t.userName,t.phone,s.locked,t.licenseId
         FROM sys_user s
         LEFT JOIN t_store t ON s.userId=t.userId
         WHERE 1=1 AND s.type='B'
@@ -40,14 +41,14 @@
     </select>
 
     <select id="getMerchantInfo" parameterType="Merchant" resultType="Merchant">
-        SELECT s.userId,s.mobilePhone,t.storeName,t.userName,t.phone,s.locked
+        SELECT s.userId,s.mobilePhone,t.storeName,t.userName,t.phone,s.locked,t.licenseId
         FROM sys_user s
         LEFT JOIN t_store t ON s.userId=t.userId
         WHERE t.storeId=#{storeId}
     </select>
 
    <select id="userAccountQuery" resultType="AccountInfo">
-        SELECT s.storeName,s.userName,s.idCard,s.phone,s.area,s.address,
+        SELECT s.storeName,s.userName,s.idCard,s.phone,s.area,s.address,s.licenseId,
         s.frontPic,s.backPic,s.licensePic,s.frontStorePic,s.innerStorePic,
         b.bankType,b.accountType,b.userName bankUserName,b.cardNumber,
         b.idType,b.idCard cIdCard,b.remark
@@ -64,7 +65,7 @@
     </update>
 
     <select id="AccountpageInfoQuery" parameterType="PageUtilEntity" resultMap="BalanceResult">
-        SELECT * FROM t_balance
+        SELECT banId,userId,item,type,money/100 money,status,addTime FROM t_balance
         WHERE 1=1
         <if test="relationMap.userId!=null and relationMap.userId!=''">AND userId=#{relationMap.userId}</if>
     </select>

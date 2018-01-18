@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 
 	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultMap="FinancialResult">
-		SELECT a.amountId,a.amountNum,s.storeName,a.addTime,a.totalMoney,a.xzfRate,a.amountMoney,a.status,a.amountStatus
+		SELECT a.amountId,a.amountNum,s.storeName,a.addTime,a.totalMoney/100 totalMoney,a.xzfRate,a.amountMoney/100 amountMoney,a.status,a.amountStatus
 		 FROM m_amount a LEFT JOIN t_store s ON a.userId=s.userId
 		 WHERE 1=1
 		<if test="relationMap.beginTime != null and relationMap.beginTime != ''"><!-- 开始时间检索 -->
@@ -43,9 +43,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateAmountInfo" parameterType="Financial">
 		UPDATE m_amount
 		<set>
-			<if	test="totalMoney!=null">totalMoney=#{totalMoney},</if>
+			<if	test="totalMoney!=null">totalMoney=#{totalMoney}*100,</if>
 			<if	test="xzfRate!=null ">xzfRate=#{xzfRate},</if>
-			<if	test="amountMoney!=null ">amountMoney=#{amountMoney},</if>
+			<if	test="amountMoney!=null ">amountMoney=#{amountMoney}*100,</if>
 			<if	test="amountStatus!=null ">amountStatus=#{amountStatus},</if>
 			<if	test="status!=null ">status=#{status},</if>
 			updateTime=sysdate()

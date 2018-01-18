@@ -43,7 +43,7 @@
                 "bSearchable": false,
                 "mRender": function(data, type, row) {
                     if (row.addTime != null) {
-                        return formatDate(row.payTime,"yyyy-MM-dd hh:mm:ss");
+                        return formatDate(row.addTime,"yyyy-MM-dd hh:mm:ss");
                     } else {
                         return "";
                     }
@@ -56,7 +56,7 @@
                 "bSearchable": false,
                 "mRender": function(data, type, row) {
                     if (row.money != null) {
-                        return row.money/100;
+                        return row.money;
                     } else {
                         return "";
                     }

@@ -27,7 +27,7 @@ public class Balance implements Serializable
 {
     private static final long serialVersionUID = 1L;
     private Date addTime;
-    private Integer money;
+    private Double money;
     private String item;
     private String userId;
 
@@ -39,11 +39,11 @@ public class Balance implements Serializable
         this.addTime = addTime;
     }
 
-    public Integer getMoney() {
+    public Double getMoney() {
         return money;
     }
 
-    public void setMoney(Integer money) {
+    public void setMoney(Double money) {
         this.money = money;
     }
 

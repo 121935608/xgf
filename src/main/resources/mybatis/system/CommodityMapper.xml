@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultMap="CommodityResult">
-		SELECT c.commodityName,c.commodityNo,SUM(t.commodityNum) saleNum,c.salePrice,c.inPrice
+		SELECT c.commodityName,c.commodityNo,SUM(t.commodityNum) saleNum,c.salePrice/100 salePrice,c.inPrice/100 inPrice
 		FROM t_commodity c LEFT JOIN t_order_detail t ON c.commodityName=t.commodityName
 		WHERE 1=1
 		<if test="relationMap.beginTime != null and relationMap.beginTime != ''"><!-- 开始时间检索 -->
@@ -29,6 +29,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			c.commodityNo LIKE CONCAT(CONCAT('%', #{relationMap.commodityName}),'%')
 			)
 		</if><!--关键词查询-->
-		GROUP BY c.commodityNo,c.commodityName,c.salePrice,c.inPrice
+		GROUP BY c.commodityNo,c.commodityName,c.salePrice/100,c.inPrice/100
 	</select>
 </mapper> 

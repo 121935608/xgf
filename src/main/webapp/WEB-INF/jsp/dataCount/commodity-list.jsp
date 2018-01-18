@@ -79,7 +79,7 @@ $(document).ready(function(){
             "bSearchable": false,
             "mRender": function(data, type, row) {
                 if (row.salePrice != null) {
-                    return row.salePrice/100;
+                    return row.salePrice;
                 } else {
                     return 0;
                 }
@@ -92,7 +92,7 @@ $(document).ready(function(){
         "bSearchable": false,
         "mRender": function(data, type, row) {
             if (row.inPrice !=null) {
-                return row.inPrice/100;
+                return row.inPrice;
             }else {
                 return 0;
             }
@@ -105,7 +105,7 @@ $(document).ready(function(){
 		"bSearchable": false,
 		"mRender": function(data, type, row) {
 			if (row.payTaxes !=null) {
-				return row.payTaxes/100;
+				return row.payTaxes;
 			}else {
 				return 0;
 			}
@@ -118,7 +118,7 @@ $(document).ready(function(){
 		"bSearchable": false,
 		"mRender": function(data, type, row) {
 			if (row.profit !=null) {
-				return row.profit/100;
+				return row.profit;
 			}else {
 				return 0;
 			}

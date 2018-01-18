@@ -27,7 +27,7 @@ public class Sale {
     private String orderNumber;
     private Date addTime;
     private Integer commodityNum;
-    private Integer salePrice;
+    private Double salePrice;
 
 
     public String getCommodityName() {
@@ -70,11 +70,11 @@ public class Sale {
         this.commodityNum = commodityNum;
     }
 
-    public Integer getSalePrice() {
+    public Double getSalePrice() {
         return salePrice;
     }
 
-    public void setSalePrice(Integer salePrice) {
+    public void setSalePrice(Double salePrice) {
         this.salePrice = salePrice;
     }
 }

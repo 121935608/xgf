@@ -57,7 +57,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultMap="OrderResult">
-		SELECT o.orderNumber,o.orderTime,o.payTime,s.userName,o.orderPrice,t.platform,o.orderStatus
+		SELECT o.orderNumber,o.orderTime,o.payTime,s.userName,o.orderPrice/100 orderPrice,t.platform,o.orderStatus
 		FROM t_order o LEFT JOIN t_user_info t ON o.userId=t.userId
 		LEFT JOIN sys_user s ON o.userId=s.userId
 		WHERE 1=1
@@ -93,14 +93,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="findOrderInfo" parameterType="String" resultMap="OrderResult">
-		SELECT o.orderNumber,o.orderTime,s.userName,o.orderPrice,o.orderStatus,t.storeName,
-		t.userName userNames,t.phone,t.area,t.address,o.totalPrice,o.freight,o.payment
+		SELECT o.orderNumber,o.orderTime,s.userName,o.orderPrice/100 orderPrice,o.orderStatus,t.storeName,
+		t.userName userNames,t.phone,t.area,t.address,o.totalPrice/100 totalPrice,o.freight/100 freight,o.payment/100 payment
 		FROM t_order o LEFT JOIN sys_user s ON o.userId=s.userId
 		LEFT JOIN t_store t ON o.userId=t.userId WHERE o.orderNumber=#{orderNumber}
 	</select>
 
 	<select id="findOrderDetailInfo" parameterType="String" resultMap="OrderDetailResult">
-		SELECT d.commodityName,c.commodityNo,d.unit,d.commodityNum,d.inPrice
+		SELECT d.commodityName,c.commodityNo,d.unit,d.commodityNum,d.inPrice/100 inPrice
 		FROM t_order_detail d LEFT JOIN t_commodity c ON d.commodityId=c.commodityId
 		WHERE d.orderNumber=#{orderNumber}
 	</select>
@@ -116,7 +116,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 
 	<select id="ExpresspageInfoQuery" parameterType="PageUtilEntity" resultMap="OrderExpressResult">
-		SELECT * FROM t_express
+		SELECT expressId,expressNo,orderNumber,expressFirm,address,status,addTime,freight/100 freight FROM t_express
 		WHERE 1=1
 		<if test="relationMap.expressFirm !=null and relationMap.expressFirm !=''">
 			AND expressFirm=#{relationMap.expressFirm}

@@ -86,7 +86,7 @@ $(document).ready(function(){
             "bSearchable": false,
             "mRender": function(data, type, row) {
                 if (row.money != null) {
-                    return row.money/1000;
+                    return row.money;
                 } else {
                     return "";
                 }
