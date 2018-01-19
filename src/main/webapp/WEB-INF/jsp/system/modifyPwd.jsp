@@ -17,7 +17,7 @@
     <%@include file="/WEB-INF/jsp/common/import-css.jspf"%>
     <%@include file="/WEB-INF/jsp/common/import-js.jspf"%>
 </head>
-<body>
+<body style="background:#3283AC url(${context_url}/uiloader/static/h-ui.admin/images/xgf-login.png) no-repeat 0px 30%; background-size:100%;height:60%;">
 <link href="${context_url}/uiloader/static/h-ui/css/H-ui.min.css" rel="stylesheet" type="text/css"/>
 <link href="${context_url}/uiloader/static/h-ui.admin/css/H-ui.login.css" rel="stylesheet" type="text/css"/>
 <link href="${context_url}/uiloader/static/h-ui.admin/css/style.css" rel="stylesheet" type="text/css"/>
@@ -73,7 +73,7 @@
         color: red;
     }
 </style>
-<div class="main">
+<div class="main" style="padding-top: 20%;">
     <div id="step"></div>
     <form id="check-form">
         <div class="row cl">
@@ -118,7 +118,7 @@
    <%-- <div class="info">index：<span id="index"></span></div>--%>
     <!--  style="display:none;"-->
 </div>
-
+<div class="footer">Copyright 星融金服</div>
 <script type="text/javascript">
     var $step = $("#step");
     var $index = $("#index");

@@ -62,14 +62,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="relationMap.type !=null and relationMap.type!=''">
 			AND c.type=#{relationMap.type}
 		</if>
-		<if test="relationMap.classId!=null and relationMap.classId !=''">
-			AND t.categoryId=#{relationMap.classId}
+		<if test="relationMap.tag!=null and relationMap.tag !=''">
+			AND c.tag=#{relationMap.tag}
 		</if>
 		<if test="relationMap.origin!=null and relationMap.origin !=''">
 			AND c.origin=#{relationMap.origin}
 		</if>
-		<if test="relationMap.category!=null and relationMap.category !=''">
-			AND t.categoryId=#{relationMap.category}
+		<if test="relationMap.categoryId!=null and relationMap.categoryId !=''">
+			AND t.categoryId=#{relationMap.categoryId}
 		</if>
 		<if test="relationMap.supply!=null and relationMap.supply !=''">
 			AND	c.supply=#{relationMap.supply}

@@ -1,9 +1,21 @@
 ﻿<%@ page contentType="text/html; charset=UTF-8"%>
 <%@include file="/WEB-INF/jsp/common/taglibs.jspf"%>
 <ys:contentHeader title="企业认证申请表"/>
+<style>
+	.text-z{
+		overflow:hidden;
+		text-overflow:ellipsis;
+		white-space:nowrap;
+	}
+	.text-z:hover{
+		height: auto;
+		white-space: normal;
+	}
+</style>
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 商户相关 <span class="c-gray en">&gt;</span> 企业认证申请表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
-<div class="page-container"> 
+<div class="page-container">
+
 	<div style="min-height: 30px;">
 		<form role="form" class="text-c">
 		   <div class="row" >
@@ -35,7 +47,7 @@
 	</div>
 	
 	<div class="mt-20">
-	<table class="table table-border table-bordered table-hover table-bg table-sort">
+	<table class="table table-border table-bordered table-hover table-bg table-sort" style="table-layout:fixed;">
 		<thead>
 			<tr class="text-c">
 				<th width="10%">申请编号</th>
@@ -43,7 +55,7 @@
 				<th width="10%">账号</th>
 				<th width="10%">督导员 </th>
 				<th width="5%">状态</th>
-				<th width="15%">原因</th>
+				<th width="15%" style="word-break: break-all; word-wrap:break-word;">原因</th>
 				<th width="8%">操作</th>
 			</tr>
 		</thead>
@@ -127,7 +139,7 @@ $(document).ready(function(){
     {
         "mData": "remark",
         "bSortable" : false,
-        "sClass": "text-c",
+        "sClass": "text-c text-z",
        	"mRender": function(data, type, row) {
                if (row.remark != null) {
                    return row.remark;

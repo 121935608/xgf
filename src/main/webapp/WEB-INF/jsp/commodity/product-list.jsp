@@ -7,7 +7,7 @@
 	
 	<div class="text-c">
         <span class="select-box" style="width: 100px;border: hidden;">
-             <y:select id="classId" name="classId" codeGroup="${classes}" selectedValue=""
+             <y:select id="categoryId" name="categoryId" codeGroup="${classes}" selectedValue=""
                      cssClass="select" headerKey="" headerValue="分类">
              </y:select>
        </span>
@@ -18,7 +18,7 @@
        </span>
 
         <span class="select-box" style="width: 100px;border: hidden;">
-             <y:select id="category" name="category" codeGroup="${category}" selectedValue=""
+             <y:select id="tag" name="tag" codeGroup="${category}" selectedValue=""
                        cssClass="select" headerKey="" headerValue="标签">
              </y:select>
        </span>
@@ -328,13 +328,13 @@ function statusTools(row) {
 }
 
 function query() {
-    var classId = $("#classId option:selected").val();
+    var tag = $("#tag option:selected").val();
     var origin = $("#origin option:selected").val();
-    var category = $("#category option:selected").val();
+    var categoryId = $("#categoryId option:selected").val();
     var supply = $("#supply option:selected").val();
     var commodityStatus = $("#commodityStatus option:selected").val();
 	var commodityName =$("#commodityName").val();
-    pageTable.fnSettings().sAjaxSource = encodeURI("${context_root}/commodity/findProductList.action?classId="+classId+"&origin="+origin+"&category="+category+"&supply="+supply+"&commodityStatus="+commodityStatus+"&commodityName="+commodityName+"&type=${product.type}");
+    pageTable.fnSettings().sAjaxSource = encodeURI("${context_root}/commodity/findProductList.action?tag="+tag+"&origin="+origin+"&categoryId="+categoryId+"&supply="+supply+"&commodityStatus="+commodityStatus+"&commodityName="+commodityName+"&type=${product.type}");
     pageTable.fnClearTable(0);
     pageTable.fnDraw();
 }

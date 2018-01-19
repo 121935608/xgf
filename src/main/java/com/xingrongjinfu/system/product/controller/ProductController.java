@@ -204,9 +204,11 @@ public class ProductController extends BaseController{
         List<SysCode> sysCodeList = new ArrayList<SysCode>();
         for (Category category:categories){
             SysCode sysCode = new SysCode();
-            sysCode.setCodeid(category.getCategoryId());
-            sysCode.setCodevalue(category.getCategoryName());
-            sysCodeList.add(sysCode);
+            if (category!=null) {
+                sysCode.setCodeid(category.getCategoryId()==null?"":category.getCategoryId());
+                sysCode.setCodevalue(category.getCategoryName()==null?"":category.getCategoryName());
+                sysCodeList.add(sysCode);
+            }
         }
         return sysCodeList;
     }
@@ -220,9 +222,11 @@ public class ProductController extends BaseController{
         List<SysCode> sysCodeList = new ArrayList<SysCode>();
         for (Category category:categories){
             SysCode sysCode = new SysCode();
-            sysCode.setCodeid(category.getCategoryId());
-            sysCode.setCodevalue(category.getCategoryName());
-            sysCodeList.add(sysCode);
+            if (category!=null) {
+                sysCode.setCodeid(category.getCategoryName()==null?"":category.getCategoryName());
+                sysCode.setCodevalue(category.getCategoryName()==null?"":category.getCategoryName());
+                sysCodeList.add(sysCode);
+            }
         }
         return sysCodeList;
     }
@@ -236,9 +240,11 @@ public class ProductController extends BaseController{
         List<SysCode> sysCodeList = new ArrayList<SysCode>();
         for (Product product:products){
             SysCode sysCode = new SysCode();
-            sysCode.setCodeid(product.getSupply()==null ?"":product.getSupply());
-            sysCode.setCodevalue(product.getSupply()==null ?"":product.getSupply());
-            sysCodeList.add(sysCode);
+            if (product!=null) {
+                sysCode.setCodeid(null == product.getSupply() ? "" : product.getSupply());
+                sysCode.setCodevalue(product.getSupply() == null ? "" : product.getSupply());
+                sysCodeList.add(sysCode);
+            }
         }
         return sysCodeList;
     }
@@ -252,9 +258,11 @@ public class ProductController extends BaseController{
         List<SysCode> sysCodeList = new ArrayList<SysCode>();
         for (Product product:products){
             SysCode sysCode = new SysCode();
-            sysCode.setCodeid(product.getOrigin());
-            sysCode.setCodevalue(product.getOrigin());
-            sysCodeList.add(sysCode);
+            if (product !=null) {
+                sysCode.setCodeid(product.getOrigin()==null?"":product.getOrigin());
+                sysCode.setCodevalue(product.getOrigin()==null?"":product.getOrigin());
+                sysCodeList.add(sysCode);
+            }
         }
         return sysCodeList;
     }

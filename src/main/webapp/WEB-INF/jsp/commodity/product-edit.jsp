@@ -85,7 +85,7 @@ $(document).ready(function(){
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>商品分类：</label>
 			<div class="formControls col-xs-8 col-sm-4">
 			<span class="select-box" style="width: 100px;border: hidden;">
-             <y:select id="classId" name="classId" codeGroup="${classes}" selectedValue="${product.categoryId}"
+             <y:select id="categoryId" name="categoryId" codeGroup="${classes}" selectedValue="${product.categoryId}"
 					   cssClass="select" headerKey="" headerValue="分类">
 			 </y:select>
        		</span>
@@ -95,7 +95,7 @@ $(document).ready(function(){
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>商品标签：</label>
 			<div class="formControls col-xs-8 col-sm-4">
 			<span class="select-box" style="width: 100px;border: hidden;">
-             <y:select id="category" name="category" codeGroup="${category}" selectedValue="${product.categoryId}"
+             <y:select id="tag" name="tag" codeGroup="${category}" selectedValue="${product.tag}"
 					   cssClass="select" headerKey="" headerValue="标签">
 			 </y:select>
        		</span>
@@ -208,11 +208,11 @@ $(document).ready(function(){
 				</div>
 			</div>
 			<div style="margin:0 auto" class="imgDiv">
-				<img src="${product.imgMain}" style="height:100px;width:100px;" name="imgs">
+				<img src="${product.imgMain}" style="height:100px;width:100px;" name="imgs" id="imgs" ondblclick="todelImgs()">
 				<span>主图</span>
 			</div>
 			
-			<div class="imgDiv" id="otherImg">
+			<div class="imgDiv" id="otherImg" >
 				
 			</div>
 		</div>
@@ -261,7 +261,11 @@ $(document).ready(function(){
 		var index = parent.layer.getFrameIndex(window.name);
 		parent.layer.close(index);
 	}
-
+	function todelImgs() {
+		var imgs=$("#imgs").parent();
+		alert(imgs);
+        imgs.remove();
+    }
 	function toChoose(){
 		var expresslist = '${product.imgOther}';
 		var express = expresslist.split(';');
@@ -385,6 +389,7 @@ $(document).ready(function(){
 	}
 });
 </script>
+
 
 </body>
 </html>
