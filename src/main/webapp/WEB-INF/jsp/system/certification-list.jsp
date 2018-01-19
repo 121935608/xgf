@@ -39,12 +39,12 @@
 		<thead>
 			<tr class="text-c">
 				<th width="10%">申请编号</th>
-				<th width="15%">申请时间</th>
-				<th width="15%">账号</th>
+				<th width="10%">申请时间</th>
+				<th width="10%">账号</th>
 				<th width="10%">督导员 </th>
 				<th width="5%">状态</th>
 				<th width="15%">原因</th>
-				<th width="10%">操作</th>
+				<th width="8%">操作</th>
 			</tr>
 		</thead>
 	</table>

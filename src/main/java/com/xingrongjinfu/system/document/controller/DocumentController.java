@@ -116,6 +116,11 @@ public class DocumentController extends BaseController {
         return modelAndView;
     }
 
+    /**
+     * 公文管理的启用禁用
+     * @param document
+     * @return
+     */
     @RequestMapping(DocumentConstant.DOCUMENT_CHANGESTATUS_URL)
     public @ResponseBody Message changeStatus(Document document){
         int result=0;

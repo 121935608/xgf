@@ -38,8 +38,10 @@ public class PermissionConstant
      */
     public final static String SAVE_URL = "saveMenu";
 
-    
-    
+    /**
+     * 请求地址:校验添加的菜单唯一
+     */
+    public final static String CHECK_MENU_UNIQUE_URL="checkMenuUnique";
 
     /**
      * 逻辑视图名：查询菜单列表界面

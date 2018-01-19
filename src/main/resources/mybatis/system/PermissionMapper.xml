@@ -81,5 +81,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			sysdate()
  		)
  	</insert>
- 	
+
+	<select id="checkMenuName" parameterType="Permission" resultType="Permission">
+		SELECT * FROM sys_permission WHERE permsName=#{permsName} AND parentId =#{parentId}
+	</select>
 </mapper> 

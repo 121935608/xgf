@@ -86,6 +86,7 @@ public class MenuController extends BaseController
      * 获取菜单详细信息
      * 
      */
+
     @RequestMapping(PermissionConstant.VIEW_URL)
     public @ResponseBody Permission getMenu(Integer permsId)
     {
@@ -117,6 +118,19 @@ public class MenuController extends BaseController
         return new Message(result);
     }
 
+
+    /**
+     * 校验添加的二级菜单名唯一
+     */
+   /* @RequestMapping(PermissionConstant.CHECK_MENU_UNIQUE_URL)
+    public @ResponseBody String checkUnique(Permission permission){
+        String uniqueFlag="0";
+        if (permission !=null)
+        {
+            uniqueFlag=permissionService.checkMenuName(permission);
+        }
+        return uniqueFlag;
+    }*/
     /**
      * 保存菜单信息
      */
@@ -126,16 +140,18 @@ public class MenuController extends BaseController
     {
         int result = 0;
         Integer permsId = permission.getPermsId();
+        result=permissionService.checkMenuName(permission);
+        if (result!=0) {
+            if (permsId != null) {
+                result = permissionService.updatePermission(permission);
+            } else {
+                result = permissionService.insertPermission(permission);
+            }
+            return new Message(result);
+        }else {
+            return new Message(false,"该菜单在当前目录下已存在");
+        }
 
-        if (permsId != null)
-        {
-            result = permissionService.updatePermission(permission);
-        }
-        else
-        {
-            result = permissionService.insertPermission(permission);
-        }
-        return new Message(result);
     }
 
     /**

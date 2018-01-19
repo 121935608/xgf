@@ -62,7 +62,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 
 	
 	<select id="repaymentpageInfoQuery"  parameterType="PageUtilEntity"  resultType="Repay">
-		select a.repayNo,a.addTime,c.orderNumber,b.storeName,a.repayDate,a.planTotal,a.status
+		select a.repayNo,a.addTime,c.orderNumber,b.storeName,a.repayDate,a.planTotal/100 planTotal,a.status
 			from t_repay a 
 			LEFT join  t_store b on a.userId=b.userId 
 			LEFT join  t_order c on a.userId=c.userId 

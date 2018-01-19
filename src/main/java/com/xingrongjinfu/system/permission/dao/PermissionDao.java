@@ -119,4 +119,9 @@ public class PermissionDao extends DynamicObjectBaseDao implements IPermissionDa
         }
         return parentList;
     }
+
+    @Override
+    public Permission checkMenuName(Permission permission) {
+        return (Permission) this.findForObject("SystemPermissionMapper.checkMenuName",permission);
+    }
 }

@@ -1,6 +1,9 @@
 package com.xingrongjinfu.system.permission.service;
 
 import java.util.List;
+
+import com.xingrongjinfu.utils.ObjectUtil;
+import org.apache.shiro.common.UserConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.xingrongjinfu.system.permission.dao.IPermissionDao;
@@ -94,4 +97,24 @@ public class PermissionService implements IPermissionService
         return permissionDao.findPermissionByPid(parentId);
     }
 
+
+    @Override
+    public int checkMenuName(Permission permission) {
+        int notUnique=0;
+        int unique=1;
+        //一级菜单不校验重复
+        if (permission.getParentId()==0){
+            return unique;
+            //二级菜单校验
+        }else {
+            Permission newPermission=permissionDao.checkMenuName(permission);
+            //查询有结果就不唯一
+            if (ObjectUtil.isNotNull(newPermission)){
+                return notUnique;
+            }
+            //没有结果则是唯一的
+            return unique;
+        }
+
+    }
 }

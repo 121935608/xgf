@@ -64,4 +64,9 @@ public interface IPermissionService
      * @return 菜单对象
      */
     public List<Permission> findPermissionByPid(String parentId);
+
+    /**
+     * 校验二级菜单唯一
+     */
+    int checkMenuName(Permission permission);
 }

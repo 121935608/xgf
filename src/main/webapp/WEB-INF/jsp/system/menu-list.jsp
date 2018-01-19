@@ -151,7 +151,9 @@
 			$("select option[value='"+data.parentId+"']").attr("selected", "selected");
 		})
 	}
-	
+
+    /*var parentId=$("#parentId option:selected").val();
+    alert(parentId);*/
 	$("#form-menu-save").validate({
 		rules:{
 			parentId:{
@@ -159,7 +161,21 @@
 			},
 			permsName:{
 				isSpace:true,
-				required:true
+				required:true,
+               /* remote: {
+                    url: "${context_root}/system/checkMenuUnique.action?parentId="+$("#parentId option:selected").val(),
+                    type: "post",
+                    dataType: "text",
+                    data: {
+                        name: function () {
+                            return $.trim($("#permsName").val());
+                        }
+                    },
+                    dataFilter: function (data, type) {
+                        if (data == "0") return true;
+                        else return "该菜单已存在";
+                    }
+                }*/
 			},
 			permsUrl:{
 				isSpace:true,

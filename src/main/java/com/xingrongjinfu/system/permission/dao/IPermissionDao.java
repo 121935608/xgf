@@ -65,4 +65,9 @@ public interface IPermissionDao
      * @return 菜单对象
      */
     public List<Permission> findPermissionByPid(String parentId);
+
+    /**
+     * 校验二级菜单名唯一
+     */
+    Permission checkMenuName(Permission permission);
 }
