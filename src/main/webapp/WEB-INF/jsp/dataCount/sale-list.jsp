@@ -104,7 +104,7 @@ $(document).ready(function(){
 		"bSearchable": false,
 		"mRender": function(data, type, row) {
 			if (row.commodityNum !=null && row.salePrice!=null) {
-				return row.commodityNum*row.salePrice/100;
+				return row.commodityNum*row.salePrice;
 			}else {
 				return 0;
 			}
