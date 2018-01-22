@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="pageInfoQuery" parameterType="PageUtilEntity"
 		resultType="Pays">
 		select tradeCode,addTime,money/100 money,payType
-		from m_cashier m
+		from m_cashFlow m
 		inner join sys_user s on m.userId = s.userId
 		where 1=1
 		<if test="relationMap.userId != null and relationMap.userId != ''">
@@ -44,13 +44,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			AND (
 			tradeCode LIKE CONCAT(CONCAT('%',#{relationMap.fuzzyCondition}),'%')
 			)
-			order by m.addTime desc
+			order by m.addTime
 		</if>
 	</select>
 	<select id="PayPageInfoQuery"
 		resultType="Pays">
 		select tradeCode,DATE_FORMAT(`addTime`,'%Y-%m-%d %H:%i:%S') `addTime`,money/100 money,payType
-		from m_cashier m
+		from m_cashFlow m
 		inner join sys_user s on m.userId = s.userId
 		limit 10
 	</select>

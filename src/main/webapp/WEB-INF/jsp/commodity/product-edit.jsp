@@ -16,7 +16,7 @@ $(document).ready(function(){
 		 }
 		var div = document.getElementById("otherImg");
 		var path = '${imgPath}'+ex;
-		div.innerHTML += "<img src="+path+" style=\"margin-left:30px;height:100px;width:100px;\" ondblclick=\"todelImgs(this)\" name=\"imgs\"><span>设为主图</span>";
+		div.innerHTML += "<img src="+path+" style=\"margin-left:30px;height:100px;width:100px;\" name=\"imgs\" id=\"imgs\" ondblclick=\"todelImgs(this)\"><span>设为主图</span>";
 		});
 })
 </script>
@@ -152,13 +152,19 @@ $(document).ready(function(){
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>规格：</label>
 			<div class="formControls col-xs-8 col-sm-4">
+				<input style="width: 100px;" type="text" class="input-text" autocomplete="off" disabled="disabled" maxlength="20"  placeholder="" id="specification" name="specification" value="${product.specification}">#
+			</div>
+		</div>
+		<%--<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>规格：</label>
+			<div class="formControls col-xs-8 col-sm-4">
 			<span class="select-box" style="width: 100px;border: hidden;">
              <y:select id="specification" name="specification" codeGroup="${specification}" selectedValue="${product.specification}"
 					   cssClass="select" headerKey="" headerValue="规格">
 			 </y:select>
        		</span>
 			</div>
-		</div>
+		</div>--%>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>库存：</label>
 			<div class="formControls col-xs-8 col-sm-4">
@@ -208,7 +214,7 @@ $(document).ready(function(){
 				</div>
 			</div>
 			<div style="margin:0 auto" class="imgDiv">
-				<img src="${product.imgMain}" style="height:100px;width:100px;" name="imgs" ondblclick="todelImgs(this)">
+				<img src="${product.imgMain}" style="height:100px;width:100px;" name="imgs">
 				<span>主图</span>
 			</div>
 			
@@ -262,19 +268,29 @@ $(document).ready(function(){
 		parent.layer.close(index);
 	}
 	function todelImgs(obj) {
-        var bbb = $(obj).next("span").text();
-        var span = $(obj).next("span");
-	    if("主图"==bbb) {
-            alert("主图不允许删除！");
+	    alert("000");
+	    var id=$(obj).attr("id");
+	    alert(id);
+        var aaa = $(obj).nextElementSibling.text();
+//	    var aaa=$("#aaa").text();
+	    alert(aaa);
+	    if("主图"===aaa) {
+            alert("主图不允许删除");
             return;
+//        file.after(file.clone().val(""));
+            alert("222");
         }else{
-        	obj.remove();
-            span.remove();
+            var file = $(obj)
+            file.remove();
+            alert("333");
 		}
+
     }
 	function toChoose(){
+		var expresslist = '${product.imgOther}';
+		var express = expresslist.split(';');
 		var a = $("img").length;
-    	if(a >3){
+    	if(express.length > 3 || (a >3)){
     		alert("最多只能选择四张图片!");
     		return;
     	}
@@ -305,7 +321,7 @@ $(document).ready(function(){
                         	if(returndata.s == true){
                         		var path = '${imgPath}'+returndata.m;
                         		var div = document.getElementById("otherImg");
-                        		div.innerHTML += "<img src="+path+" style=\"margin-left:30px;height:100px;width:100px;\" ondblclick=\"todelImgs(this)\" name=\"imgs\"><span>设为主图</span>";
+                        		div.innerHTML += "<img src="+path+" style=\"margin-left:30px;height:100px;width:100px;\" name=\"imgs\"  id=\"imgs\" ondblclick=\"todelImgs(this)\"><span>设为主图</span>";
             				}else{
             					alert(returndata.m);
             				}
@@ -336,9 +352,9 @@ $(document).ready(function(){
         unit:{
 			required:true,
 		},
-        weight:{
+       /* weight:{
 			required:true,
-		},
+		},*/
         inPrice:{
 			required:true,
 		},

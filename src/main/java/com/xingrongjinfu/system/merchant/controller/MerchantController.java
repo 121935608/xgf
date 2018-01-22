@@ -65,7 +65,7 @@ public class MerchantController extends BaseController {
     }
 
     /**
-     * 跳转到产看商户界面
+     * 跳转到查看商户界面
      * @param
      * @return
      */

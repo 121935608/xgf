@@ -30,6 +30,7 @@ public class Balance implements Serializable
     private Double money;
     private String item;
     private String userId;
+    private Double remain;
 
     public Date getAddTime() {
         return addTime;
@@ -61,5 +62,13 @@ public class Balance implements Serializable
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public Double getRemain() {
+        return remain;
+    }
+
+    public void setRemain(Double remain) {
+        this.remain = remain;
     }
 }

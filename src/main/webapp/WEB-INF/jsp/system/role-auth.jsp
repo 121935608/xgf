@@ -43,7 +43,9 @@ $(document).ready(function(){
 				perms += tmpNode.id;
 			}
 		}
-		
+		if(zTreeNodes.size()===0){
+		   alert("000");
+        }
 		$.ajax({
 			url:" ${pageContext.request.contextPath}/system/savePermissions.action" ,
 			data : {'roleId':roleId,'perms':perms} ,

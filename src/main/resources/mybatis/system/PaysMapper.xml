@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="PaypageInfoQuery" parameterType="PageUtilEntity" resultMap="PaysResult">
 		SELECT c.tradeCode,c.addTime,s.storeName,c.money/100 money,c.payType
-		FROM m_cashier c LEFT JOIN t_store s ON c.userId=s.userId
+		FROM m_cashFlow c LEFT JOIN t_store s ON c.userId=s.userId
 		WHERE 1=1
 		<if test="relationMap.beginTime != null and relationMap.beginTime != ''"><!-- 开始时间检索 -->
 			AND DATE_FORMAT(c.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
@@ -42,7 +42,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="PaypageInfos" resultMap="PaysResult">
 		SELECT c.tradeCode,c.addTime,s.storeName,c.money/100 money,c.payType
-		FROM m_cashier c LEFT JOIN t_store s ON c.userId=s.userId LIMIT 0,11
+		FROM m_cashFlow c LEFT JOIN t_store s ON c.userId=s.userId LIMIT 0,11
 
 </select>
 

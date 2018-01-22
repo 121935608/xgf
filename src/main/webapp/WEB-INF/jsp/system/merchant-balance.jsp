@@ -69,7 +69,11 @@
                 "sClass": "text-c",
                 "bSearchable": false,
                 "mRender": function(data, type, row) {
+                    if (row.remain != null) {
+                        return row.remain;
+                    } else {
                         return "";
+                    }
                 }
             },
             {

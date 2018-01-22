@@ -108,14 +108,14 @@ $(document).ready(function(){
                        if(row.orderStatus==1){
                            return "待支付";
 					   }else if (row.orderStatus==2){
-                           return "待发货";
+                           return "已支付";
 					   }
 					   else if(row.orderStatus==3){
-                           return "待收货";
+                           return "已支付";
 					   }else if (row.orderStatus==4){
-                           return "待还款";
+                           return "已支付";
 					   }else if(row.orderStatus==5){
-                           return "完成";
+                           return "已支付";
 					   }
                 } else {
                     return "";

@@ -19,6 +19,7 @@
         <result column="addTime" property="addTime"/>
         <result column="item" property="item"/>
         <result column="money" property="money"/>
+        <result column="remain" property="remain"/>
     </resultMap>
 
 
@@ -65,7 +66,7 @@
     </update>
 
     <select id="AccountpageInfoQuery" parameterType="PageUtilEntity" resultMap="BalanceResult">
-        SELECT banId,userId,item,type,money/100 money,status,addTime FROM t_balance
+        SELECT banId,userId,item,type,money/100 money,status,addTime,remain/100 FROM t_balance
         WHERE 1=1
         <if test="relationMap.userId!=null and relationMap.userId!=''">AND userId=#{relationMap.userId}</if>
     </select>
