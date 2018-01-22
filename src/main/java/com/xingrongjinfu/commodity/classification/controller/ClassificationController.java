@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,9 +22,6 @@ import com.xingrongjinfu.commodity.CommodityConstant;
 import com.xingrongjinfu.commodity.classification.common.ClassificationConstant;
 import com.xingrongjinfu.commodity.classification.model.Category;
 import com.xingrongjinfu.commodity.classification.service.IClassificationService;
-import com.xingrongjinfu.system.permission.common.PermissionConstant;
-import com.xingrongjinfu.system.permission.model.Permission;
-import com.xingrongjinfu.system.product.model.Product;
 import com.xingrongjinfu.system.syscode.model.SysCode;
 import com.xingrongjinfu.utils.AliyunOSSClientUtil;
 import com.xingrongjinfu.utils.ObjectUtil;
@@ -125,7 +121,7 @@ public class ClassificationController extends BaseController {
 			if (key != null) {
 
 				String originalFilename = picture.getOriginalFilename();
-				String filePath = aliyunOSSClientUtil.FOLDER + originalFilename;
+				String filePath = aliyunOSSClientUtil.FOLDER + aliyunOSSClientUtil.filePath;
 				category.setImg(filePath);
 
 			}

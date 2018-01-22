@@ -33,7 +33,7 @@
 				<label class="form-label col-xs-4 col-sm-3"><span
 					class="c-red">*</span>图片：</label>
 				<div class="formControls col-xs-8 col-sm-4">
-					<input type="file" id="img" name="picture">
+					<input type="file" id="img" accept="image/*" name="picture" onchange="changImg(event)">
 				</div>
 			</div>
 
@@ -48,6 +48,24 @@
 
 
 	<script type="text/javascript">
+	//校验上传文件是否为图片格式
+	 function changImg(e){
+	     for (var i = 0; i < e.target.files.length; i++) {
+	         var file = e.target.files.item(i);
+	         if (!(/^image\/.*$/i.test(file.type))) {
+	             continue; //不是图片 就跳出这一次循环
+	         }
+	         var imagSize =  document.getElementById("img").files[0].size;
+	     	if(imagSize>1024*1024*3){
+	             alert("图片最大为3M！");
+	             document.getElementById("img").value="";
+	             return;
+	         }
+	         //实例化FileReader API
+	         var freader = new FileReader();
+	         freader.readAsDataURL(file);
+	     }
+	 }
 		$("#form-classification-add")
 				.validate(
 						{

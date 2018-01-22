@@ -19,8 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.aliyun.oss.OSSException;
 import com.xingrongjinfu.content.ContentConstant;
-import com.xingrongjinfu.content.advertisement.common.AdvertisementConstant;
-import com.xingrongjinfu.content.advertisement.model.Advertisement;
 import com.xingrongjinfu.content.exhibition.common.ExhibitionConstant;
 import com.xingrongjinfu.content.exhibition.model.Exhibition;
 import com.xingrongjinfu.content.exhibition.service.IExhibitionService;
@@ -156,17 +154,19 @@ public class ExhibitionController extends BaseController {
 	@RequestMapping(ExhibitionConstant.SAVE_EXHIBITION_URL)
 	public @ResponseBody Message saveExhibition(Exhibition exhibition,String exhibitionId,MultipartFile picture) {
 		int result = 0;		
-		AliyunOSSClientUtil aliyunOSSClientUtil = new AliyunOSSClientUtil();
 		
 		try {
-			String key = aliyunOSSClientUtil.uploadImg(picture);
-			if(key!=null){
-				
-				String originalFilename = picture.getOriginalFilename();
-				String filePath = aliyunOSSClientUtil.FOLDER + originalFilename;
-				exhibition.setExhibitionImg(filePath);
-				
-			}
+		    if(picture.getSize() != 0){
+    		    AliyunOSSClientUtil aliyunOSSClientUtil = new AliyunOSSClientUtil();
+    			String key = aliyunOSSClientUtil.uploadImg(picture);
+    			if(key!=null){
+    				
+    				String originalFilename = picture.getOriginalFilename();
+    				String filePath = aliyunOSSClientUtil.FOLDER + AliyunOSSClientUtil.filePath;
+    				exhibition.setExhibitionImg(filePath);
+    				
+    			}
+		    }
 		} catch (OSSException e) {
 			e.printStackTrace();
             return new Message(result);

@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.aspectj.lang.annotation.ActionControllerLog;
 import org.framework.base.util.PageUtilEntity;
-import org.framework.base.util.TableDataInfo;
 import org.framework.core.controller.BaseController;
 import org.framework.core.model.Message;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,18 +17,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.aliyun.oss.OSSException;
 import com.xingrongjinfu.commodity.CommodityConstant;
-import com.xingrongjinfu.commodity.classification.common.ClassificationConstant;
-import com.xingrongjinfu.commodity.classification.model.Category;
 import com.xingrongjinfu.commodity.label.common.LabelConstant;
 import com.xingrongjinfu.commodity.label.model.Label;
 import com.xingrongjinfu.commodity.label.service.ILabelService;
-import com.xingrongjinfu.content.advertisement.common.AdvertisementConstant;
-import com.xingrongjinfu.content.advertisement.model.Advertisement;
 import com.xingrongjinfu.system.syscode.model.SysCode;
-import com.xingrongjinfu.system.user.common.UserConstant;
-import com.xingrongjinfu.system.user.model.User;
 import com.xingrongjinfu.utils.AliyunOSSClientUtil;
-import com.xingrongjinfu.utils.IdUtil;
 
 /**
  * 业务处理
@@ -100,17 +92,19 @@ public class LabelController extends BaseController {
 	@RequestMapping(LabelConstant.SAVE_URL)
 	public @ResponseBody Message saveCategory(Label category, String categoryId,MultipartFile picture) {
 		int result = 0;		
-		AliyunOSSClientUtil aliyunOSSClientUtil = new AliyunOSSClientUtil();
 		
 		try {
-			String key = aliyunOSSClientUtil.uploadImg(picture);
-			if(key!=null){
-				
-				String originalFilename = picture.getOriginalFilename();
-				String filePath = aliyunOSSClientUtil.FOLDER + originalFilename;
-				category.setImg(filePath);
-				
-			}
+		    if(picture.getSize() !=0){
+    		    AliyunOSSClientUtil aliyunOSSClientUtil = new AliyunOSSClientUtil();
+    			String key = aliyunOSSClientUtil.uploadImg(picture);
+    			if(key!=null){
+    				
+    				String originalFilename = picture.getOriginalFilename();
+    				String filePath = aliyunOSSClientUtil.FOLDER + aliyunOSSClientUtil.filePath;
+    				category.setImg(filePath);
+    				
+    			}
+		    }
 		} catch (OSSException e) {
 			e.printStackTrace();
             return new Message(result);

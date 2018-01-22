@@ -14,14 +14,15 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>图片：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="file"  id="picture" name="picture">
+				<input type="file" onchange="pic(event)" id="picture" name="picture" accept="image/*">
+				<img alt="" id="myImg" src="" height="100px",width="100px">
 			</div>
 		</div>
 		
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>URL：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="text" class="input-text" value="" placeholder="" id="url" name="url">
+				<input type="url" class="input-text" value="" placeholder="" id="url" name="url">
 			</div>
 		</div>
 		
@@ -30,7 +31,7 @@
 			<div class="formControls col-xs-8 col-sm-4">
 			<y:select id="status" name="status"
 					codeGroup="${statusList}" selectedValue=""
-					cssClass="select" headerKey="0" headerValue="状态">
+					cssClass="select" headerKey="" headerValue="状态">
 			</y:select>
 			</div>
 		</div>
@@ -45,10 +46,31 @@
 
 
 <script type="text/javascript">
+//校验上传文件是否为图片格式
+function pic(e) {
+	for (var i = 0; i < e.target.files.length; i++) {  
+        var file = e.target.files.item(i);  
+        if (!(/^image\/.*$/i.test(file.type))) {  
+            continue; //不是图片 就跳出这一次循环  
+        }
+        var imagSize =  document.getElementById("picture").files[0].size;
+    	if(imagSize>1024*1024*3){
+            alert("图片最大为3M！");
+            document.getElementById("picture").value="";
+            return;
+        }
+        //实例化FileReader API  
+        var freader = new FileReader();  
+        freader.readAsDataURL(file);  
+        freader.onload = function(e) {  
+            $("#myImg").attr("src",e.target.result);  
+        }  
+    }  
+} 
 $("#form-carousel-add").validate({
 	rules:{
 		
-		carouselName: {
+		/* carouselName: {
             required: true,
             isSpace: true,
            remote: {
@@ -65,7 +87,7 @@ $("#form-carousel-add").validate({
                     else return "该名称已存在";
                 }
             }
-        },
+        }, */
 		
 		picture:{
 			required:true,
@@ -80,11 +102,11 @@ $("#form-carousel-add").validate({
 			isSpace:true,
 		},
 		
-		messages: {
+		/* messages: {
             "carouselName": {
                 remote: "该名称已经存在"
             }
-        },
+        }, */
 		
 	},
 	onkeyup:false,

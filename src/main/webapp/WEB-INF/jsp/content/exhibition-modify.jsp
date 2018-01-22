@@ -3,6 +3,11 @@
 <ys:contentHeader/>
 <body>
 <article class="page-container">
+<style>
+	.picture{width: 150px;height:150px;position:absolute;left: 2;cursor:pointer;border-color: orange;
+             filter:alpha(opacity:0);opacity: 0  }
+        .image{position:absolute; border-color: red;left: 2;cursor:pointer;} 
+</style>
 	<form action="" method="post"  class="form form-horizontal" id="form-exhibition-modify">
 		<input type="hidden" class="input-text" id="exhibitionId" name="exhibitionId" value="${exhibition.exhibitionId }">
 	
@@ -14,18 +19,19 @@
 		</div>
 		
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>图片：</label>
+			<label class="form-label col-xs-4 col-sm-3">图片：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="file"  id="picture" name="picture">
+				<img src="${imgPath}${exhibition.exhibitionImg}" width="80px" height="80px" class="image" id="image">
+	        	<input type="file" class="picture" id="picture" accept="image/*" name="picture" onchange="changImg(event)">
 			</div>
 		</div>
 		
-		<div class="row cl">
+		<div class="row cl" style="margin-top:80px">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>状态：</label>
 			<div class="formControls col-xs-8 col-sm-4">
 			<y:select id="status" name="status"
 					codeGroup="${statusList}" selectedValue="${exhibition.status }"
-					cssClass="select" headerKey="0" headerValue="状态" >
+					cssClass="select" headerKey="" headerValue="状态" >
 			</y:select>
 			</div>
 		</div>
@@ -40,31 +46,34 @@
 
 
 <script type="text/javascript">
+//校验上传文件是否为图片格式
+function changImg(e){
+    for (var i = 0; i < e.target.files.length; i++) {
+        var file = e.target.files.item(i);
+        if (!(/^image\/.*$/i.test(file.type))) {
+            continue; //不是图片 就跳出这一次循环
+        }
+        var imagSize =  document.getElementById("picture").files[0].size;
+    	if(imagSize>1024*1024*3){
+            alert("图片最大为3M！");
+            document.getElementById("picture").value="";
+            return;
+        }
+        //实例化FileReader API
+        var freader = new FileReader();
+        freader.readAsDataURL(file);
+        freader.onload = function(e) {
+            $("#image").attr("src",e.target.result);
+        }
+    }
+}
 $("#form-exhibition-modify").validate({
 	rules:{
-		categoryName: {
-            required: true,
-            isSpace: true,
-           remote: {
-                url: "${context_root}/content/checkExhibitionNameUnique.action",
-                type: "post",
-                dataType: "text",
-                data: {
-                    name: function () {
-                        return $.trim($("#categoryName").val());
-                    }
-                },
-                dataFilter: function (data, type) {
-                    if (data == "0") return true;
-                    else return "该名称已存在";
-                }
-            }
-        },
-		picture:{
+		status:{
 			required:true,
 			isSpace:true,
 		},
-		status:{
+		categoryName:{
 			required:true,
 			isSpace:true,
 		},

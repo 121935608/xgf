@@ -22,6 +22,7 @@
 </div>
 <script type="text/javascript">
 var pageTable;
+var imgpath="${imgPath}";
 $(document).ready(function(){ 
     var aoColumns = [
     {
@@ -56,13 +57,9 @@ $(document).ready(function(){
     "bSortable" : false,
     "sClass": "text-c",
     "bSearchable": false,
-    "mRender": function(data, type, row) {
-        if (row.img != null) {
-            return row.img;
-        } else {
-            return "";
-        }
-    }
+	"mRender": function(data, type, row) {
+		return "<img src=\""+imgpath+row.img +"\"  style=\"width:50px;height:50px\"/>";
+	}
 },
    
     {

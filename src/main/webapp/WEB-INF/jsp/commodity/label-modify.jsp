@@ -3,6 +3,11 @@
 <ys:contentHeader/>
 <body>
 <article class="page-container">
+<style>
+	.picture{width: 150px;height:150px;position:absolute;left: 2;cursor:pointer;border-color: orange;
+             filter:alpha(opacity:0);opacity: 0  }
+        .image{position:absolute; border-color: red;left: 2;cursor:pointer;} 
+</style>
 	<form action="" method="post" class="form form-horizontal" id="form-label-modify">
 		<input type="hidden" class="input-text" id="categoryId" name="categoryId"   value="${category.categoryId }">
 		<div class="row cl">
@@ -15,11 +20,12 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>图片：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="file" id="picture" name="picture">
+				<img src="${imgPath}${category.img}" width="80px" height="80px" class="image" id="image">
+	        	<input type="file" class="picture" id="picture" accept="image/*" name="picture" onchange="changImg(event)">
 			</div>
 		</div>
 		
-		<div class="row cl">
+		<div class="row cl"style="margin-top:80px">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>状态：</label>
 			<div class="formControls col-xs-8 col-sm-4">
 			<y:select id="status" name="status"
@@ -38,9 +44,30 @@
 </article>
 
 <script type="text/javascript">
+//校验上传文件是否为图片格式
+function changImg(e){
+    for (var i = 0; i < e.target.files.length; i++) {
+        var file = e.target.files.item(i);
+        if (!(/^image\/.*$/i.test(file.type))) {
+            continue; //不是图片 就跳出这一次循环
+        }
+        var imagSize =  document.getElementById("picture").files[0].size;
+    	if(imagSize>1024*1024*3){
+            alert("图片最大为3M！");
+            document.getElementById("picture").value="";
+            return;
+        }
+        //实例化FileReader API
+        var freader = new FileReader();
+        freader.readAsDataURL(file);
+        freader.onload = function(e) {
+            $("#image").attr("src",e.target.result);
+        }
+    }
+}
 $("#form-label-modify").validate({
 	rules:{
-		categoryName: {
+		/* categoryName: {
             required: true,
             isSpace: true,
             maxlength:8,
@@ -58,8 +85,12 @@ $("#form-label-modify").validate({
                     else return "该名称已存在";
                 }
             }
-        },
-		picture:{
+        }, */
+        categoryName:{
+			required:true,
+			isSpace:true,
+		},
+		status:{
 			required:true,
 			isSpace:true,
 		},

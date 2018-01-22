@@ -69,6 +69,7 @@
 	</div>
 	<script type="text/javascript" charset="UTF-8">
 		var pageTable;
+		var imgpath="${imgPath}";
 		$(document).ready(function() {
 			var aoColumns = [ {
 				"sDefaultContent" : "序号",
@@ -105,13 +106,9 @@
 				"bSortable" : false,
 				"sClass" : "text-c",
 				"bSearchable" : false,
-				"mRender" : function(data, type, row) {
-					if (row.carouselImg != null) {
-						return row.carouselImg;
-					} else {
-						return "";
-					}
-				}
+				"mRender": function(data, type, row) {
+		        	return "<img src=\""+imgpath+row.carouselImg +"\"  style=\"width:50px;height:50px\"/>";
+		        }
 			},
 			
 			{

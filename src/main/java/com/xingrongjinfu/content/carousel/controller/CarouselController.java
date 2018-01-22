@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.aspectj.lang.annotation.ActionControllerLog;
 import org.framework.base.util.PageUtilEntity;
-import org.framework.base.util.TableDataInfo;
 import org.framework.core.controller.BaseController;
 import org.framework.core.model.Message;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.aliyun.oss.OSSException;
 import com.xingrongjinfu.content.ContentConstant;
-import com.xingrongjinfu.content.advertisement.common.AdvertisementConstant;
-import com.xingrongjinfu.content.advertisement.model.Advertisement;
 import com.xingrongjinfu.content.carousel.common.CarouselConstant;
 import com.xingrongjinfu.content.carousel.model.Carousel;
 import com.xingrongjinfu.content.carousel.service.ICarouselService;
@@ -146,17 +143,17 @@ public class CarouselController extends BaseController {
 	@RequestMapping(CarouselConstant.SAVE_CAROUSEL_URL)
 	public @ResponseBody Message saveCarousel(Carousel carousel,String carouselId,MultipartFile picture) {
 		int result = 0;		
-		AliyunOSSClientUtil aliyunOSSClientUtil = new AliyunOSSClientUtil();
 		
 		try {
-			String key = aliyunOSSClientUtil.uploadImg(picture);
-			if(key!=null){
-				
-				String originalFilename = picture.getOriginalFilename();
-				String filePath = aliyunOSSClientUtil.FOLDER + originalFilename;
-				carousel.setCarouselImg(filePath);
-				
-			}
+		    if(picture.getSize()!=0){
+    		    AliyunOSSClientUtil aliyunOSSClientUtil = new AliyunOSSClientUtil();
+    			String key = aliyunOSSClientUtil.uploadImg(picture);
+    			if(key!=null){
+    				
+    				String filePath = aliyunOSSClientUtil.FOLDER + AliyunOSSClientUtil.filePath;
+    				carousel.setCarouselImg(filePath);
+    			}
+		    }
 		} catch (OSSException e) {
 			e.printStackTrace();
             return new Message(result);

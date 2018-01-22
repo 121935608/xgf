@@ -17,7 +17,7 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>URL：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="text" class="input-text"  placeholder="${advertisement.advertisementUrl }" id="advertisementUrl" name="advertisementUrl" value="${advertisement.advertisementUrl }">
+				<input type="url" class="input-text"  placeholder="${advertisement.advertisementUrl }" id="advertisementUrl" name="advertisementUrl" value="${advertisement.advertisementUrl }">
 			</div>
 		</div>
 		
@@ -26,7 +26,7 @@
 			<div class="formControls col-xs-8 col-sm-4">
 			<y:select id="status" name="status"
 					codeGroup="${statusList}" selectedValue="${advertisement.status }"
-					cssClass="select" headerKey="0" headerValue="状态" >
+					cssClass="select" headerKey="" headerValue="状态" >
 			</y:select>
 			</div>
 		</div>
@@ -43,7 +43,7 @@
 <script type="text/javascript">
 $("#form-advertisement-modify").validate({
 	rules:{
-		advertisementName: {
+		/* advertisementName: {
             required: true,
             isSpace: true,
            remote: {
@@ -60,9 +60,13 @@ $("#form-advertisement-modify").validate({
                     else return "该名称已存在";
                 }
             }
-        },
+        }, */
 		
 		advertisementUrl: {
+            required: true,
+            isSpace: true,
+        },
+        advertisementName: {
             required: true,
             isSpace: true,
         },

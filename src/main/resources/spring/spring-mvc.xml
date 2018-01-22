@@ -65,7 +65,7 @@
 	<!-- 启用文件上传支持 -->
     <bean id="multipartResolver"
         class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <property name="maxUploadSize" value="10000000" />
+        <property name="maxUploadSize" value="3145728" />
         <property name="maxInMemorySize" value="1024000" />
     </bean>
 	

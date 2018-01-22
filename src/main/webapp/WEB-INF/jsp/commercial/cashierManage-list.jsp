@@ -11,21 +11,25 @@
 			class="Hui-iconfont">&#xe68f;</i></a>
 	</nav>
 	<div class="page-container">
-	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="cashierManage_add('添加账号','${context_root}/commercial/toCashierManageAdd.action','','610')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加账号</a></span></div>
-	
-		<div style="min-height: 30px;">
+	<div class="cl pd-5 bg-1 bk-gray mt-20"> 
+		<span class="l">
+			<a href="javascript:;" onclick="cashierManage_add('添加账号','${context_root}/commercial/toCashierManageAdd.action','','610')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加账号</a>
+		</span>
+		<div style="min-height: 30px;margin-left:75%;">
 			<form role="form" class="text-c">
 				<div class="row">
 					<div class="col-xs-3 col-sm-2 .col-md-2">
 						<input type="text" class="input-text" style="width: 250px"
 							placeholder="账号" id="fuzzyCondition" name="fuzzyCondition">
 					</div>
-					<div class="col-xs-3 col-sm-2 .col-md-2">
+					<div style="margin-left:75%;" >
 						<button type="button" class="btn btn-success radius" onclick="query()"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
 					</div>
 				</div>
 			</form>
 		</div>
+	</div>
+	
 
 		<div class="mt-20">
 			<table

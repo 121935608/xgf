@@ -178,7 +178,7 @@ public class CommodityAdController extends BaseController {
     			if(key!=null){
     				
     				String originalFilename = picture.getOriginalFilename();
-    				String filePath = aliyunOSSClientUtil.FOLDER + originalFilename;
+    				String filePath = aliyunOSSClientUtil.FOLDER + AliyunOSSClientUtil.filePath;
     				commodityAd.setCommodityAdImg(filePath);
     				
     			}

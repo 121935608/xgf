@@ -55,7 +55,7 @@
 			<div class="formControls col-xs-8 col-sm-4">
 			<y:select id="status" name="status"
 					codeGroup="${statusList}" selectedValue=""
-					cssClass="select" headerKey="0" headerValue="--请选择--">
+					cssClass="select" headerKey="" headerValue="--请选择--">
 			</y:select>
 			</div>
 		</div>
@@ -78,6 +78,12 @@ function pic(e) {
         if (!(/^image\/.*$/i.test(file.type))) {  
             continue; //不是图片 就跳出这一次循环  
         }  
+        var imagSize =  document.getElementById("picture").files[0].size;
+    	if(imagSize>1024*1024*3){
+            alert("图片最大为3M！");
+            document.getElementById("picture").value="";
+            return;
+        }
         //实例化FileReader API  
         var freader = new FileReader();  
         freader.readAsDataURL(file);  
