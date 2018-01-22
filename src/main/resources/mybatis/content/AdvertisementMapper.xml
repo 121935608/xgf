@@ -35,7 +35,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from
 		t_advertisement
 		WHERE 1=1
-
 		<if test="relationMap.beginTime != null and relationMap.beginTime != ''">
 			AND DATE_FORMAT(createTime,'%Y%m%d') &gt;=
 			DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
@@ -58,7 +57,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 修改信息 -->
 	<update id="updateAdvertisementInfo" parameterType="Advertisement">
-		update t_advertisement updateTime=sysdate(),
+		update t_advertisement 
 		<set>
 			<if test="advertisementName != null and advertisementName != ''">
 				advertisementName = #{advertisementName},
@@ -69,6 +68,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="status.toString() != null and status.toString() != ''">
 				status = #{status},
 			</if>
+			updateTime=sysdate(),
 		</set>
 		where 1=1
 		<if test="advertisementId != null and advertisementId  != ''">
