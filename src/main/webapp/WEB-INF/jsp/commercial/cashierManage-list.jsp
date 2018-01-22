@@ -15,19 +15,13 @@
 		<span class="l">
 			<a href="javascript:;" onclick="cashierManage_add('添加账号','${context_root}/commercial/toCashierManageAdd.action','','610')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加账号</a>
 		</span>
-		<div style="min-height: 30px;margin-left:75%;">
 			<form role="form" class="text-c">
 				<div class="row">
-					<div class="col-xs-3 col-sm-2 .col-md-2">
 						<input type="text" class="input-text" style="width: 250px"
 							placeholder="账号" id="fuzzyCondition" name="fuzzyCondition">
-					</div>
-					<div style="margin-left:75%;" >
 						<button type="button" class="btn btn-success radius" onclick="query()"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
-					</div>
 				</div>
 			</form>
-		</div>
 	</div>
 	
 
@@ -69,9 +63,9 @@
 				"mRender" : function(data, type, row) {
 					//0:启用；1:禁用）
 					if (row.status == '0') {
-						return "启用";
+						return "<span class=\"label label-success radius\">已启用</span>";
 					} else if (row.status == '1') {
-						return "禁用";
+						return "<span class=\"label label-defaunt radius\">已停用</span>";
 					} else {
 						return "";
 					}
@@ -106,9 +100,9 @@
 		
 		function statusTools(row) {
 		    if (row.status == '0') {
-		        return "<a style=\"text-decoration:none\" onClick=\"cashierManage_stop(this,\'" + row.cashierId + "\')\" href=\"javascript:;\" title=\"停用\"><i class=\"Hui-iconfont\">&#xe631;</i></a>";
+		        return "<a style=\"text-decoration:none\" onClick=\"cashierManage_stop(this,\'" + row.cashierId + "\')\" href=\"javascript:;\" title=\"停用\"><i class=\"Hui-iconfont\">停用</i></a>";
 		    } else {
-		        return "<a style=\"text-decoration:none\" onClick=\"cashierManage_start(this,\'" + row.cashierId + "\')\" href=\"javascript:;\" title=\"启用\"><i class=\"Hui-iconfont\">&#xe615;</i></a>";
+		        return "<a style=\"text-decoration:none\" onClick=\"cashierManage_start(this,\'" + row.cashierId + "\')\" href=\"javascript:;\" title=\"启用\"><i class=\"Hui-iconfont\">启用</i></a>";
 		    }
 		}
 
@@ -128,7 +122,7 @@
 					dataType:"json",
 					success:function(data){
 						if(data.s == true){
-							$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="cashierManage_start(this,'+"'"+id+"'"+')" href="javascript:;" title="启用"><i class="Hui-iconfont">&#xe6e1;</i></a>');
+							$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="cashierManage_start(this,'+"'"+id+"'"+')" href="javascript:;" title="启用"><i class="Hui-iconfont">启用</i></a>');
 							$(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已停用</span>');
 							$(obj).remove();
 							parent.layer.msg('已停用!',{icon: 5,time:1000});
@@ -152,7 +146,7 @@
 					dataType:"json",
 					success:function(data){
 						if(data.s == true){
-							$(obj).parents("tr").find(".td-manage").prepend('<a onClick="cashierManage_stop(this,'+"'"+id+"'"+')" href="javascript:;" title="停用" style="text-decoration:none"><i class="Hui-iconfont">&#xe631;</i></a>');
+							$(obj).parents("tr").find(".td-manage").prepend('<a onClick="cashierManage_stop(this,'+"'"+id+"'"+')" href="javascript:;" title="停用" style="text-decoration:none"><i class="Hui-iconfont">停用</i></a>');
 							$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
 							$(obj).remove();
 							parent.layer.msg('已启用!', {icon: 6,time:1000});

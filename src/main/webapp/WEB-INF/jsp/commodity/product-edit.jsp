@@ -273,10 +273,8 @@ $(document).ready(function(){
 		}
     }
 	function toChoose(){
-		var expresslist = '${product.imgOther}';
-		var express = expresslist.split(';');
 		var a = $("img").length;
-    	if(express.length > 3 || (a >3)){
+    	if(a >3){
     		alert("最多只能选择四张图片!");
     		return;
     	}

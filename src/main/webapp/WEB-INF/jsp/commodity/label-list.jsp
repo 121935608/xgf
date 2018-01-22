@@ -14,6 +14,7 @@
 				<th width="5%">序号</th>
 				<th width="10%">标签名称</th>
 				<th width="10%">图片</th>
+				<th width="10%">状态</th>
 				<th width="10%">操作</th>
 			</tr>
 		</thead>
@@ -61,7 +62,21 @@ $(document).ready(function(){
 		return "<img src=\""+imgpath+row.img +"\"  style=\"width:50px;height:50px\"/>";
 	}
 },
-   
+{
+	"sDefaultContent" : "状态",
+	"bSortable" : false,
+	"sClass" : "text-c td-status",
+	"bSearchable" : false,
+	"mRender" : function(data, type, row) {
+		if (row.status == 1) {
+			return "<span class=\"label label-success radius\">已启用</span>";
+		} else if (row.status == -1) {
+			return "<span class=\"label label-defaunt radius\">已停用</span>";
+		} else {
+			return "";
+		}
+	}
+}, 
     {
         "sDefaultContent": "编辑",
         "bSortable" : false,

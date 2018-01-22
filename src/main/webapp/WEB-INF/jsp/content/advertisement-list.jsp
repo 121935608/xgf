@@ -133,9 +133,9 @@
 				"mRender" : function(data, type, row) {
 					//1:启用；-1:禁用）
 					if (row.status == '1') {
-						return "启用";
+						return "<span class=\"label label-success radius\">已启用</span>";
 					} else if (row.status == '-1') {
-						return "停用";
+						return "<span class=\"label label-defaunt radius\">已停用</span>";
 					} else {
 						return "";
 					}

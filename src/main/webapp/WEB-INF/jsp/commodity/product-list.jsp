@@ -302,7 +302,7 @@ $(document).ready(function(){
             "bSearchable": false,
             "mRender": function(data, type, row) {
                 //查看
-                var toEdit = "<a title=\"添加商品\" href=\"javascript:;\" onclick=\"product_edit('添加商品','${context_root}/commodity/toEditProduct.action?commodityId=" + row.commodityId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>编辑</span></a>";
+                var toEdit = "<a title=\"添加商品\" href=\"javascript:;\" onclick=\"product_edit('编辑商品','${context_root}/commodity/toEditProduct.action?commodityId=" + row.commodityId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>编辑</span></a>";
 
                 return statusTools(row)+"&nbsp;&nbsp;"+toEdit;
             }

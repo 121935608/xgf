@@ -30,7 +30,7 @@
 			<div class="formControls col-xs-8 col-sm-4">
 			<y:select id="status" name="status"
 					codeGroup="${statusList}" selectedValue="${category.status }"
-					cssClass="select" headerKey="0" headerValue="状态" >
+					cssClass="select" headerKey="" headerValue="状态" >
 			</y:select>
 			</div>
 		</div>
