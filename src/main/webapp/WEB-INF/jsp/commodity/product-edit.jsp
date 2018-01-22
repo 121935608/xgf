@@ -16,7 +16,7 @@ $(document).ready(function(){
 		 }
 		var div = document.getElementById("otherImg");
 		var path = '${imgPath}'+ex;
-		div.innerHTML += "<img src="+path+" style=\"margin-left:30px;height:100px;width:100px;\" name=\"imgs\"><span>设为主图</span>";
+		div.innerHTML += "<img src="+path+" style=\"margin-left:30px;height:100px;width:100px;\" ondblclick=\"todelImgs(this)\" name=\"imgs\"><span>设为主图</span>";
 		});
 })
 </script>
@@ -208,7 +208,7 @@ $(document).ready(function(){
 				</div>
 			</div>
 			<div style="margin:0 auto" class="imgDiv">
-				<img src="${product.imgMain}" style="height:100px;width:100px;" name="imgs" id="imgs" ondblclick="todelImgs()">
+				<img src="${product.imgMain}" style="height:100px;width:100px;" name="imgs" ondblclick="todelImgs(this)">
 				<span>主图</span>
 			</div>
 			
@@ -261,10 +261,16 @@ $(document).ready(function(){
 		var index = parent.layer.getFrameIndex(window.name);
 		parent.layer.close(index);
 	}
-	function todelImgs() {
-		var imgs=$("#imgs").parent();
-		alert(imgs);
-        imgs.remove();
+	function todelImgs(obj) {
+        var bbb = $(obj).next("span").text();
+        var span = $(obj).next("span");
+	    if("主图"==bbb) {
+            alert("主图不允许删除！");
+            return;
+        }else{
+        	obj.remove();
+            span.remove();
+		}
     }
 	function toChoose(){
 		var expresslist = '${product.imgOther}';
@@ -301,7 +307,7 @@ $(document).ready(function(){
                         	if(returndata.s == true){
                         		var path = '${imgPath}'+returndata.m;
                         		var div = document.getElementById("otherImg");
-                        		div.innerHTML += "<img src="+path+" style=\"margin-left:30px;height:100px;width:100px;\" name=\"imgs\"><span>设为主图</span>";
+                        		div.innerHTML += "<img src="+path+" style=\"margin-left:30px;height:100px;width:100px;\" ondblclick=\"todelImgs(this)\" name=\"imgs\"><span>设为主图</span>";
             				}else{
             					alert(returndata.m);
             				}
