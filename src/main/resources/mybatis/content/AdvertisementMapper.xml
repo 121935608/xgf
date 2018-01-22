@@ -53,11 +53,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			advertisementName LIKE CONCAT(CONCAT('%', #{relationMap.fuzzyCondition}),'%')
 			)
 		</if>
+		order by createTime desc
 	</select>
 
 	<!-- 修改信息 -->
 	<update id="updateAdvertisementInfo" parameterType="Advertisement">
-		update t_advertisement
+		update t_advertisement updateTime=sysdate(),
 		<set>
 			<if test="advertisementName != null and advertisementName != ''">
 				advertisementName = #{advertisementName},
@@ -86,12 +87,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		( advertisementId,
 		<if test="advertisementName != null and advertisementName != ''">advertisementName,</if>
 		<if test="advertisementUrl != null and advertisementUrl != ''">advertisementUrl,</if>
-		createTime,updateTime,
+		createTime,
 		<if test="status != null and status != ''">status</if>
 		)values(#{advertisementId},
 		<if test="advertisementName != null and advertisementName != ''">#{advertisementName},</if>
 		<if test="advertisementUrl != null and advertisementUrl != ''">#{advertisementUrl},</if>
-		sysdate(),sysdate(),
+		sysdate(),
 		<if test="status != null and status != ''">#{status}</if>
 		)
 	</insert>

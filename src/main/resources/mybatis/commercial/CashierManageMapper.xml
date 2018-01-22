@@ -35,6 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			b.cashierName LIKE CONCAT(CONCAT('%',#{relationMap.fuzzyCondition}),'%')
 			)
 		</if>
+		order by b.addTime desc
 	</select>
 	
 	<!-- 修改信息 -->

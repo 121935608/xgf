@@ -52,6 +52,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 						carouselName LIKE CONCAT(CONCAT('%', #{relationMap.fuzzyCondition}),'%')
 						)
 			</if>
+			order by createTime desc
 	</select>
 	
 	<!-- 修改信息 -->
@@ -103,7 +104,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="sort != null and sort != ''">sort,</if>
  			<if test="carouselImg != null and carouselImg != ''">carouselImg,</if>
  			<if test="visitNum != null and visitNum != ''">visitNum,</if>
- 			createTime,updateTime,
+ 			createTime,
  			<if test="status != null and status != ''">status,</if>
  			<if test="url != null and url != ''">url</if>
  			<!-- <if test="carouselNum != null and carouselNum != ''">carouselNum</if>	 -->		
@@ -112,7 +113,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="sort != null and sort != ''">#{sort},</if>
  			<if test="carouselImg != null and carouselImg != ''">#{carouselImg},</if>
  			<if test="visitNum != null and visitNum != ''">#{visitNum},</if>
- 			sysdate(),sysdate(),
+ 			sysdate(),
  			<if test="status != null and status != ''">#{status},</if>
  			<if test="url != null and url != ''">#{url}</if>
  			<!-- <if test="carouselNum != null and carouselNum != ''">#{carouselNum}</if> -->

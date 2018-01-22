@@ -44,7 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			AND (
 			tradeCode LIKE CONCAT(CONCAT('%',#{relationMap.fuzzyCondition}),'%')
 			)
-			order by m.addTime
+			order by m.addTime desc
 		</if>
 	</select>
 	<select id="PayPageInfoQuery"

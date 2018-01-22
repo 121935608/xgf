@@ -16,6 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultType="Label" useCache="false">
 		SELECT categoryId,categoryName,status,img FROM t_category WHERE type = "BQ"	
+		ORDER BY sort ASC ,`addTime` DESC
 	</select>
 	
 	<select id="findByCategoryId" parameterType="String" resultType="Label">
@@ -49,10 +50,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="status.toString() != null and status.toString() != ''">
  			status = #{status},
  			</if>
- 			<if test="addTime != null and addTime != ''">
- 			addTime = #{addTime}
- 			</if>
- 			
  		</set>
  		where 1=1
  		<if test="categoryId != null and categoryId  != ''">

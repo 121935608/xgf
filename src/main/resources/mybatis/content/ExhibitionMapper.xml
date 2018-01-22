@@ -54,11 +54,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			a.categoryName LIKE CONCAT(CONCAT('%', #{relationMap.fuzzyCondition}),'%')
 			)
 		</if>
+		order by createTime desc
 	</select>
 
 	<!-- 修改信息 -->
 	<update id="updateExhibitionInfo" parameterType="Exhibition">
-		update t_exhibition
+		update t_exhibition updateTime=sysdate(),
 		<set>
 			<if test="categoryName != null and categoryName != ''">
 				categoryName = #{categoryName},
@@ -88,13 +89,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="categoryName != null and categoryName != ''">categoryName,</if>
 		<if test="categoryId != null and categoryId != ''">categoryId,</if>
 		<if test="exhibitionImg != null and exhibitionImg != ''">exhibitionImg,</if>
-		createTime,updateTime,
+		createTime,
 		<if test="status != null and status != ''">status</if>		
 		)values(#{exhibitionId},
 		<if test="categoryName != null and categoryName != ''">#{categoryName},</if>
 		<if test="categoryId != null and categoryId != ''">#{categoryId},</if>
 		<if test="exhibitionImg != null and exhibitionImg != ''">#{exhibitionImg},</if>
-		sysdate(),sysdate(),
+		sysdate(),
 		<if test="status != null and status != ''">#{status}</if>
 		)
 	</insert>
