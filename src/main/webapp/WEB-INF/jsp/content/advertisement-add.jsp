@@ -41,7 +41,7 @@
 $("#form-advertisement-add").validate({
 	rules:{
 		
-		advertisementName: {
+		 /* advertisementName: {
             required: true,
             isSpace: true,
            remote: {
@@ -58,7 +58,7 @@ $("#form-advertisement-add").validate({
                     else return "该名称已存在";
                 }
             }
-        },
+        }, */
 		
 		advertisementUrl: {
             required: true,
@@ -69,12 +69,12 @@ $("#form-advertisement-add").validate({
 			isSpace:true,
 		},
 		
-		messages: {
+		/*  messages: {
             "advertisementName": {
                 remote: "该名称已经存在"
             }
         },
-		
+		 */
 	},
 	
 	onkeyup:false,
@@ -82,14 +82,17 @@ $("#form-advertisement-add").validate({
 	success:"valid",
 	submitHandler:function(form){
 		var index = parent.layer.load();
+		var formData = new FormData($('#form-advertisement-add')[0]);
 		$.ajax({
 			url:"${context_root}/content/saveAdvertisement.action", 
 			type:'post',
-			async:true ,
-			cache:false ,
-			data:$(form).serialize(),
-			dataType:"json",
+			mimeType: "multipart/form-data",
+			contentType: false,
+			cache:false,
+			processData: false,
+			data:formData,
 			success:function(data){
+				var data = JSON.parse(data);
 				parent.layer.close(index);
 				if(data.s == true){
 					index = parent.layer.getFrameIndex(window.name);
