@@ -120,7 +120,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="sort != null and sort != ''">
 				sort = #{sort},
 			</if>
-			updateTime = #{updateTime}
+			updateTime = sysdate()
 		</set>
 		where commodityAdId = #{commodityAdId}
 	</update>

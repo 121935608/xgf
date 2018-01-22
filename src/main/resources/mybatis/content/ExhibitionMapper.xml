@@ -59,7 +59,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 修改信息 -->
 	<update id="updateExhibitionInfo" parameterType="Exhibition">
-		update t_exhibition updateTime=sysdate(),
+		update t_exhibition 
 		<set>
 			<if test="categoryName != null and categoryName != ''">
 				categoryName = #{categoryName},
@@ -70,6 +70,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="status.toString() != null and status.toString() != ''">
 				status = #{status},
 			</if>
+			updateTime=sysdate(),
 		</set>
 		where 1=1
 		<if test="exhibitionId != null and exhibitionId  != ''">
