@@ -25,6 +25,8 @@ public class User implements Serializable
     private String createTime;
     private String status;
     private Integer verifyCode;
+    private String oldPassword;
+    private String type;
 
     private String roleName; // 角色临时字段
     private Integer roleId;
@@ -185,6 +187,22 @@ public class User implements Serializable
 
     public void setVerifyCode(Integer verifyCode) {
         this.verifyCode = verifyCode;
+    }
+
+    public String getOldPassword() {
+        return oldPassword;
+    }
+
+    public void setOldPassword(String oldPassword) {
+        this.oldPassword = oldPassword;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     @Override

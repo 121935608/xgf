@@ -120,6 +120,10 @@ public class UserConstant
     public final static String CHANGE_PWD_PAGE = "system/user-changePwd";
 
     /**
+     * 请求地址:校验旧密码
+     */
+    public final static String CHECK_OLDPASSWORD_URL ="checkOldPassword";
+    /**
      * 请求地址:修改密码地址
      */
     public final static String MODIFY_PASSWORD="toModifyPassword";

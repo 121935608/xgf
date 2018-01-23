@@ -94,6 +94,7 @@ public class UserController extends BaseController {
         return modelAndView;
     }
 
+
     /**
      * 跳转用户修改密码界面
      */
@@ -106,6 +107,18 @@ public class UserController extends BaseController {
         return modelAndView;
     }
 
+    /**
+     * 校验旧密码是否正确
+     */
+    @RequestMapping(UserConstant.CHECK_OLDPASSWORD_URL)
+    public @ResponseBody
+    String checkOldPassword(User user) {
+        String uniqueFlag = "0";
+        if (user != null) {
+            uniqueFlag = userService.checkOldPassword(user);
+        }
+        return uniqueFlag;
+    }
     /**
      * 查询用户列表
      */

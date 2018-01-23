@@ -93,6 +93,10 @@ public interface IUserDao
     public int updateUserInfo(User user);
 
     /**
+     * 修改密码
+     */
+    int updateUserPassword(User user);
+    /**
      * 删除用户信息
      * 
      * @param user 用户信息

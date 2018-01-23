@@ -1,7 +1,12 @@
 package com.xingrongjinfu.system.user.service;
 
+import java.util.HashMap;
 import java.util.List;
+
+import com.xingrongjinfu.system.user.common.UserConstant;
+import com.xingrongjinfu.utils.*;
 import org.apache.shiro.common.UserConstants;
+import org.apache.shiro.common.utils.Md5Utils;
 import org.apache.shiro.service.PasswordService;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
@@ -11,7 +16,6 @@ import com.xingrongjinfu.system.permission.model.Permission;
 import com.xingrongjinfu.system.role.model.Role;
 import com.xingrongjinfu.system.user.dao.IUserDao;
 import com.xingrongjinfu.system.user.model.User;
-import com.xingrongjinfu.utils.ObjectUtil;
 
 /**
  * 用户 业务层处理
@@ -176,9 +180,32 @@ public class UserService implements IUserService
     @Override
     public int changePassword(User user)
     {
-        String password = new PasswordService().encryptPassword(user.getUserName(), user.getPassword(), "");
-        user.setPassword(password);
-        return updateUserInfo(user);
+        int fail=0;
+        String newpassword = new PasswordService().encryptPassword(user.getUserName(), user.getPassword(), "");
+        user.setPassword(newpassword);
+        if (user.getType().equalsIgnoreCase("B")) {
+            String password= Md5Utils.hash(user.getUserName()+user.getPassword());
+            String param="{\"username\":\""+user.getUserName()+"\",\"password\":\""+password+"\"}";
+            String url= UserConstant.USER_SERVICE_URL+"/uaa/auth/modify?q="+param;
+            String returnMsg= HttpClientUtil.sendGet(url);
+
+            if(StringUtil.nullOrBlank(returnMsg)){
+                return fail;
+            }
+            //转出json字符串
+            HashMap returnMap= null;
+            try {
+                returnMap = DesUtils.stringToMap(returnMsg);
+            } catch (DecryptExcption decryptExcption) {
+                decryptExcption.printStackTrace();
+            }
+
+            String code=String.valueOf(returnMap.get("code"));
+            if(code.equals("-1")){
+                return fail;
+            }
+        }
+        return userDao.updateUserPassword(user);
     }
 
     /**
@@ -239,10 +266,45 @@ public class UserService implements IUserService
 
     @Override
     public int updatePassword(User user) {
-        String password = new PasswordService().encryptPassword(user.getUserName(), user.getPassword(), "");
-        user.setPassword(password);
+        int fail=0;
+        String newpassword = new PasswordService().encryptPassword(user.getUserName(), user.getPassword(), "");
+        user.setPassword(newpassword);
+        String password= Md5Utils.hash(user.getUserName()+user.getPassword());
+        String param="{\"username\":\""+user.getUserName()+"\",\"password\":\""+password+"\"}";
+        String url= UserConstant.USER_SERVICE_URL+"/uaa/auth/modify?q="+param;
+        String returnMsg= HttpClientUtil.sendGet(url);
+
+        if(StringUtil.nullOrBlank(returnMsg)){
+            return fail;
+        }
+        //转出json字符串
+        HashMap returnMap= null;
+        try {
+            returnMap = DesUtils.stringToMap(returnMsg);
+        } catch (DecryptExcption decryptExcption) {
+            decryptExcption.printStackTrace();
+        }
+
+        String code=String.valueOf(returnMap.get("code"));
+        if(code.equals("-1")){
+            return fail;
+        }
         return userDao.updatePassword(user);
 
+    }
+
+    @Override
+    public String checkOldPassword(User user) {
+        String notIdentical="1";
+        String identical="0";
+        if (user.getUserId() !=null) {
+            User oldUser=userDao.findByUserId(user.getUserId());
+            String oldPassword = new PasswordService().encryptPassword(oldUser.getUserName(), user.getOldPassword(), "");
+           if (oldPassword.equals(oldUser.getPassword())){
+                return identical;
+           }
+        }
+        return notIdentical;
     }
 
     @Override

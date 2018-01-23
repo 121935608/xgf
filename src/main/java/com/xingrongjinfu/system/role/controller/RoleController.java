@@ -161,7 +161,7 @@ public class RoleController extends BaseController
     {
         int result = 0;
 
-        if (roleId != null)
+        if (roleId != null )
         {
             result = roleService.batchSavePremsRole(roleId, perms);
         }

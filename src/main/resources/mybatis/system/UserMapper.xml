@@ -16,6 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="description" column="description" />
 		<result property="locked" column="locked" />
 		<result property="createTime" column="createTime" />
+		<result property="type" column="type" />
 		<collection property="roles" javaType="java.util.List" resultMap="RoleResult" />
 	</resultMap>
 
@@ -60,7 +61,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="findByUserPermission" parameterType="String"
 		resultMap="UserResult">
-		SELECT u.userId,u.userName,u.accountName,r.roleId,r.roleName,m.permsId,m.permsName,m.parentId,m.permsKey,m.permsType,m.permsUrl
+		SELECT u.userId,u.userName,u.type,u.accountName,r.roleId,r.roleName,m.permsId,m.permsName,m.parentId,m.permsKey,m.permsType,m.permsUrl
 		FROM sys_user u 
 		LEFT JOIN sys_user_role ur ON ur.userId=u.userId
 		JOIN sys_role r ON r.roleId=ur.roleId
@@ -90,7 +91,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultType="User" useCache="false">
-		SELECT u.userId,u.userName,u.accountName,roleName,u.email,u.mobilePhone,u.locked,u.createTime FROM
+		SELECT u.userId,u.userName,u.accountName,roleName,u.email,u.mobilePhone,u.locked,u.createTime,u.type FROM
 		sys_user u LEFT JOIN sys_user_role ur ON ur.userId=u.userId
 		LEFT JOIN sys_role r ON r.roleId=ur.roleId
 		WHERE type='S'
@@ -126,6 +127,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		<if test="userId != null and userId  != ''">and userId = #{userId}</if>
  	</update>
 
+	<update id="updateUserPassword" parameterType="User">
+		UPDATE sys_user
+		<set>
+			<if test="password !=null and password !=''"> password =#{password}</if>
+		</set>
+		WHERE userId=#{userId}
+	</update>
 	<!-- 修改B端用户密码 -->
 	<update id="updatePassword" parameterType="User" >
 		UPDATE sys_user

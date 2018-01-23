@@ -31,21 +31,23 @@ $(document).ready(function(){
 	
 	$("#perms").bind("click" , function(){
 		var nodes = zTree.getCheckedNodes();
-		var tmpNode;
-		var perms = "";
+        if(nodes.length==0){
+            alert("至少选择一个二级权限");
+            return;
+        }
+        var tmpNode;
+        var perms = "";
+
 		var roleId = '${roleId}';
-		
-		for(var i=0; i<nodes.length; i++){
-			tmpNode = nodes[i];
+        for(var i=0; i<nodes.length; i++){
+            tmpNode = nodes[i];
+            alert(nodes.length);
 			if(i!=nodes.length-1){
 				perms += tmpNode.id+",";
 			}else{
 				perms += tmpNode.id;
 			}
 		}
-		/*if(zTreeNodes.size()===0){
-		   alert("000");
-        }*/
 		$.ajax({
 			url:" ${pageContext.request.contextPath}/system/savePermissions.action" ,
 			data : {'roleId':roleId,'perms':perms} ,

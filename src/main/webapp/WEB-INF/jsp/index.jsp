@@ -9,6 +9,11 @@ function logout() {
 		location.href = '${context_root}/logout.action';
 	}
 }
+
+/*密码-修改*/
+function change_password(title,url,w,h){
+    layer_show(title,url,w,h);
+}
 </script>
 <body>
 <header class="navbar-wrapper">
@@ -24,8 +29,10 @@ function logout() {
 			<nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
 				<ul class="cl">
 					<li>${currentUser.accountName }</li>
+					<li><a title="修改密码" href="javascript:;" onclick="change_password('修改密码','${context_root}/system/toChangePwd.action?userId=${currentUser.userId }','600','270')" class="ml-5" style="text-decoration:none">修改密码</a></li>
 					<li class="dropDown dropDown_hover"> <a href="#" class="dropDown_A">${currentUser.userName } <i class="Hui-iconfont">&#xe6d5;</i></a>
 						<ul class="dropDown-menu menu radius box-shadow">
+
 							<li><a _href="${context_root}/system/userInfoDeail.action" data-title="个人信息" onClick="Hui_admin_tab(this)">个人信息</a></li>
 							<li><a id="loginOut" href=javascript:logout()>退出</a></li>
 						</ul>

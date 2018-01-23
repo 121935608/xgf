@@ -294,7 +294,7 @@
         dataType: "json",
         success: function(data){
             if(data.s == true){
-                parent.layer.alert("手机验证码发送成功", {icon: 5,title:"系统提示"});
+                parent.layer.alert("手机验证码发送成功", {icon: 6,title:"系统提示"});
             }else{
                 parent.layer.alert("修改密码失败", {icon: 2,title:"系统提示"});
             }

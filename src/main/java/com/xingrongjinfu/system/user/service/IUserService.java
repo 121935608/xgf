@@ -92,6 +92,10 @@ public interface IUserService
     public int changeUserStatus(User user);
 
     /**
+     * 校验输入的旧密码是否正确
+     */
+    String checkOldPassword(User user);
+    /**
      * 修改用户密码
      * 
      * @param user 用户信息

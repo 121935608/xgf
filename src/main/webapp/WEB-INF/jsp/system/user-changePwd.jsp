@@ -4,10 +4,17 @@
 <article class="page-container">
 	<form action="/${context_root}/system/changeUserPwd.action" method="post" class="form form-horizontal" id="form-change-password">
 	    <input type="hidden" name="userId" id="userId" value="${user.userId}">
+		<input type="hidden" name="type" id="type" value="${user.type}">
 	    <input type="hidden" name="userName" id="userName" value="${user.userName}">
-		<div class="row cl">
+		<%--<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>账户：</label>
 			<div class="formControls col-xs-8 col-sm-4"> ${user.userName } </div>
+		</div>--%>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>旧密码：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="password" name="oldPassword" id="oldPassword" class="input-text"/>
+			</div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>新密码：</label>
@@ -31,6 +38,25 @@
 <script type="text/javascript">
 $("#form-change-password").validate({
 	rules:{
+        oldPassword:{
+            required:true,
+            isSpace:true,
+            minlength: 6,
+            remote: {
+                url: "${context_root}/system/checkOldPassword.action?userId=${user.userId }",
+                type: "post",
+                dataType: "text",
+                data: {
+                    name: function () {
+                        return $.trim($("#oldPassword").val());
+                    }
+                },
+                dataFilter: function (data, type) {
+                    if (data == "0") return true;
+                    else return "旧密码输入错误";
+                }
+            }
+		},
 		password:{
 			required:true,
 			isSpace:true,
