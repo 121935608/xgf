@@ -37,17 +37,16 @@ $(document).ready(function(){
         }
         var tmpNode;
         var perms = "";
-
 		var roleId = '${roleId}';
         for(var i=0; i<nodes.length; i++){
             tmpNode = nodes[i];
-            alert(nodes.length);
 			if(i!=nodes.length-1){
 				perms += tmpNode.id+",";
 			}else{
 				perms += tmpNode.id;
 			}
 		}
+
 		$.ajax({
 			url:" ${pageContext.request.contextPath}/system/savePermissions.action" ,
 			data : {'roleId':roleId,'perms':perms} ,
