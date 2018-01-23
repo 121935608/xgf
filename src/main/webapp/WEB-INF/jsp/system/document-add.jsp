@@ -13,7 +13,7 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>公文内容：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-			<input type="button" click="toChoose()">浏览...
+				<button type="button" onclick="toChoose()" style="width: 100px;" >浏览...</button>
 				<input type="file" id="file" name="file" accept="application/msword" style="display:none;">
 			</div>
 		</div>

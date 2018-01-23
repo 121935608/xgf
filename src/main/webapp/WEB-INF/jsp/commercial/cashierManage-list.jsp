@@ -58,7 +58,7 @@
 			 {
 				"sDefaultContent" : "状态",
 				"bSortable" : false,
-				"sClass" : "text-c",
+				"sClass" : "td-status text-c",
 				"bSearchable" : false,
 				"mRender" : function(data, type, row) {
 					//0:启用；1:禁用）
