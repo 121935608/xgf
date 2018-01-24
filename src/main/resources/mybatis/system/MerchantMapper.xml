@@ -66,8 +66,9 @@
     </update>
 
     <select id="AccountpageInfoQuery" parameterType="PageUtilEntity" resultMap="BalanceResult">
-        SELECT banId,userId,item,type,money/100 money,status,addTime,remain/100 FROM t_balance
+        SELECT banId,userId,item,type,money/100 money,status,addTime,remain/100 as remain FROM t_balance
         WHERE 1=1
         <if test="relationMap.userId!=null and relationMap.userId!=''">AND userId=#{relationMap.userId}</if>
+        ORDER BY addTime desc
     </select>
 </mapper>
