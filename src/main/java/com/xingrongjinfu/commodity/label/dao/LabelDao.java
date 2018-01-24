@@ -1,6 +1,8 @@
 package com.xingrongjinfu.commodity.label.dao;
 
 import java.util.List;
+import java.util.Map;
+
 import org.framework.base.util.PageUtilEntity;
 import org.framework.core.dao.DynamicObjectBaseDao;
 import org.springframework.stereotype.Repository;
@@ -81,6 +83,12 @@ public class LabelDao extends DynamicObjectBaseDao implements ILabelDao
 	public int deleteById(Label category) {
 		return (int) this.delete("CommodityLabelMapper.deleteCategoryInfo", category);
 	}
+
+    @Override
+    public int isExistByName(Map map) {
+        
+        return (int) this.findForObject("CommodityLabelMapper.isExistByName", map);
+    }
 
 	
 }

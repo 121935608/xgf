@@ -52,6 +52,10 @@ public class LabelConstant
      * 请求地址：检查唯一
      */
     public final static String CHECK_NAME_UNIQUE_URL = "checkNamesUnique";
+    /**
+     * 请求地址：检查唯一
+     */
+    public final static String ISEXIST_BY_NAME_URL = "isExistByName";
 
     /**
      * 请求地址：启动/停用 操作

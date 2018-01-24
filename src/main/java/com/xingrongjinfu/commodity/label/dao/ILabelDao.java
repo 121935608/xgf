@@ -1,6 +1,8 @@
 package com.xingrongjinfu.commodity.label.dao;
 
 import java.util.List;
+import java.util.Map;
+
 import org.framework.base.util.PageUtilEntity;
 
 import com.xingrongjinfu.commodity.label.model.Label;
@@ -51,5 +53,6 @@ public interface ILabelDao
      * 
      */
 	public int deleteById(Label category);
-
+	
+	public int isExistByName(Map map);
 }

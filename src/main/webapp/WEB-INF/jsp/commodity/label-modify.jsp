@@ -44,6 +44,7 @@
 </article>
 
 <script type="text/javascript">
+var categoryId='${category.categoryId }';
 //校验上传文件是否为图片格式
 function changImg(e){
     for (var i = 0; i < e.target.files.length; i++) {
@@ -67,17 +68,20 @@ function changImg(e){
 }
 $("#form-label-modify").validate({
 	rules:{
-		/* categoryName: {
+		 categoryName: {
             required: true,
             isSpace: true,
             maxlength:8,
-           remote: {
-                url: "${context_root}/commodity/checkNamesUnique.action",
+           	remote: {
+                url: "${context_root}/commodity/isExistByName.action",
                 type: "post",
                 dataType: "text",
                 data: {
-                    name: function () {
+                	categoryName: function () {
                         return $.trim($("#categoryName").val());
+                    },
+                    categoryId: function () {
+                        return categoryId;
                     }
                 },
                 dataFilter: function (data, type) {
@@ -85,7 +89,7 @@ $("#form-label-modify").validate({
                     else return "该名称已存在";
                 }
             }
-        }, */
+        },
         categoryName:{
 			required:true,
 			isSpace:true,
@@ -94,7 +98,6 @@ $("#form-label-modify").validate({
 			required:true,
 			isSpace:true,
 		},
-		
 	},
 	onkeyup:false,
 	focusCleanup:true,

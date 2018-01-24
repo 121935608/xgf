@@ -1,7 +1,9 @@
 package com.xingrongjinfu.commodity.label.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.aspectj.lang.annotation.ActionControllerLog;
 import org.framework.base.util.PageUtilEntity;
@@ -174,6 +176,16 @@ public class LabelController extends BaseController {
             uniqueFlag = labelService.checkNameUnique(category);
         }
         return uniqueFlag;
+    }
+    /**
+     * 校验名称
+     */
+    @RequestMapping(LabelConstant.ISEXIST_BY_NAME_URL)
+    public @ResponseBody int isExistByName(String categoryName,String categoryId) {
+        Map map = new HashMap<>();
+        map.put("categoryName", categoryName);
+        map.put("categoryId", categoryId);
+        return labelService.isExistByName(map);
     }
     
 	/**

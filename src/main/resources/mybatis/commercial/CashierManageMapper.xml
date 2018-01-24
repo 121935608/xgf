@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		resultType="CashierManage" useCache="false">
 		select b.cashierId,b.cashierName,b.status
 		from sys_user a
-		LEFT JOIN t_cashier b ON
+		RIGHT JOIN t_cashier b ON
 		a.userId = b.userId
 		
 		WHERE 1=1 

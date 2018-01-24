@@ -24,7 +24,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="findByCategoryName" parameterType="String" resultType="Label">
-		select * from t_category where categoryName=#{categoryName}
+		select * from t_category where categoryName=#{categoryName} AND `type`="BQ" AND `status`=1
+	</select>
+	<select id="isExistByName" parameterType="map" resultType="int">
+		SELECT COUNT(*) FROM t_category WHERE `categoryName`=#{categoryName} 
+		AND `type`="BQ" AND `status`=1 AND categoryId!= #{categoryId}
 	</select>
 	
 	<delete id="deleteCategoryInfo" parameterType="Label">

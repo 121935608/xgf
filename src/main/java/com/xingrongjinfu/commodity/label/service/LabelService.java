@@ -1,6 +1,7 @@
 package com.xingrongjinfu.commodity.label.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.framework.base.util.PageUtilEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,6 +107,12 @@ public class LabelService implements ILabelService
 	public int deleteById(Label category) {
 		return labelDao.deleteById(category);
 	}
+
+    @Override
+    public int isExistByName(Map map) {
+        
+        return labelDao.isExistByName(map);
+    }
 
 	
 
