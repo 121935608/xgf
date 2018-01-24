@@ -191,7 +191,7 @@
 
 		zTreeTools.getCheckedNodes = function(checked) {
 			var childKey = this.setting.data.key.children;
-			/*checked = (checked !== false);*/
+			checked = (checked !== false);
 			return data.getTreeCheckedNodes(this.setting, data.getRoot(this.setting)[childKey], checked);
 		}
 

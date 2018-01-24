@@ -186,8 +186,8 @@ $(document).ready(function(){
 			<div class="formControls col-xs-8 col-sm-4">
 				<span class="select-box" style="width: 120px;">
 				   <select name="commodityStatus" id="commodityStatus" class="select" autocomplete="off">
-					   <option value="0">上架</option>
-					   <option value="1" >下架</option>
+					   <option value="0" ${product.commodityStatus=="0"?"selected='selected'":''}>上架</option>
+					   <option value="1" ${product.commodityStatus=="1"?"selected='selected'":''}>下架</option>
 				   </select>
        			</span>
 			</div>
