@@ -13,7 +13,8 @@
 
     <title>${title}</title>
     <link rel="Bookmark" href="/favicon.ico" >
-	<link rel="Shortcut Icon" href="/favicon.ico" />
+	<%--<link rel="Shortcut Icon" href="/favicon.ico" />--%>
+    <link rel="shortcut icon" type="image/x-icon" href="${context_url}/uiloader/static/h-ui/images/favicon.ico" />
     <%@include file="/WEB-INF/jsp/common/import-css.jspf"%>
     <%@include file="/WEB-INF/jsp/common/import-js.jspf"%>
 </head>
