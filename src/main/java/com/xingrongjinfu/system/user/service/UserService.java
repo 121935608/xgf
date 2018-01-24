@@ -271,6 +271,7 @@ public class UserService implements IUserService
         user.setPassword(newpassword);
         String password= Md5Utils.hash(user.getUserName()+user.getPassword());
         String param="{\"username\":\""+user.getUserName()+"\",\"password\":\""+password+"\"}";
+        //调用用户中心
         String url= UserConstant.USER_SERVICE_URL+"/uaa/auth/modify?q="+param;
         String returnMsg= HttpClientUtil.sendGet(url);
 
