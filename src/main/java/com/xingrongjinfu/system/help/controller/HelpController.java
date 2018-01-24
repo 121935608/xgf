@@ -56,7 +56,6 @@ public class HelpController extends BaseController{
     @RequestMapping(HelpConstant.HELP_LIST_URL)
     public ModelAndView helpList()
     {
-        ModelAndView modelAndJsonView = this.getModelAndJsonView();
         PageUtilEntity pageUtilEntity=this.getPageUtilEntity();
         List<Help>tableDataInfo=helpService.HelpPageInfoQuery(pageUtilEntity);
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
@@ -64,15 +63,13 @@ public class HelpController extends BaseController{
         for (Help help :tableDataInfo){
             help.setReplyTimes(help.getReplyTime()==null ? "":sdf.format(help.getReplyTime()));
             help.setNumber(pageUtilEntity.getPage()+(i++));
-            //首次提问的信息
+           /* //首次提问的信息
             Help firstInfo=helpService.getFirstHelp(help);
             //获取所有的已回复的追问信息
             List<Help> helpInfo=helpService.getReply(help);
             //获取未回复的追问信息
             Help unHelpInfo=helpService.getUnreply(help);
 
-            //把追问信息回显
-            modelAndJsonView.addObject("helpInfo",helpInfo);
             if(unHelpInfo ==null && firstInfo.getReply()==null && helpInfo.size()==0){
                 //第一次提问
                 help.setToReply("0");
@@ -85,12 +82,9 @@ public class HelpController extends BaseController{
             }
             else {
                 help.setToReply("0");
-            }
+            }*/
         }
-        modelAndJsonView.addObject("recordsTotal", pageUtilEntity.getTotalResult());
-        modelAndJsonView.addObject("recordsFiltered", pageUtilEntity.getTotalResult());
-        modelAndJsonView.addObject("data", tableDataInfo);
-        return modelAndJsonView;
+       return buildDatasTable(pageUtilEntity.getTotalResult(),tableDataInfo);
     }
 
     /**
