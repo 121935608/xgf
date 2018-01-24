@@ -214,7 +214,7 @@ $(document).ready(function(){
 				</div>
 			</div>
 			<div style="margin:0 auto" class="imgDiv">
-				<img src="${product.imgMain}" style="height:100px;width:100px;" name="imgs">
+				<img src="${product.imgMain}" style="height:100px;width:100px;" name="imgs" ondblclick="todelImgs(this)">
 				<span>主图</span>
 			</div>
 			
@@ -267,26 +267,31 @@ $(document).ready(function(){
 		var index = parent.layer.getFrameIndex(window.name);
 		parent.layer.close(index);
 	}
-	function todelImgs(obj) {
-	    alert("000");
-	    var id=$(obj).attr("id");
-	    alert(id);
+	/*function todelImgs(obj) {
         var aaa = $(obj).nextElementSibling.text();
-//	    var aaa=$("#aaa").text();
-	    alert(aaa);
 	    if("主图"===aaa) {
             alert("主图不允许删除");
             return;
 //        file.after(file.clone().val(""));
-            alert("222");
         }else{
             var file = $(obj)
             file.remove();
-            alert("333");
 		}
 
-    }
-	function toChoose(){
+    }*/
+        function todelImgs(obj) {
+            var bbb = $(obj).next("span").text();
+            var span = $(obj).next("span");
+            if("主图"==bbb) {
+                alert("主图不允许删除！");
+                return;
+            }else{
+                obj.remove();
+                span.remove();
+            }
+        }
+
+        function toChoose(){
 		var expresslist = '${product.imgOther}';
 		var express = expresslist.split(';');
 		var a = $("img").length;

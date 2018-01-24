@@ -8,7 +8,7 @@
 	<div class="text-c">
 		<span class="select-box" style="width: 120px;">
 		   <select name="statusSelect" id="statusSelect" class="select" autocomplete="off">
-			   <option value="">启用状态</option>
+			   <option value="">状态</option>
 			   <option value="0">启用</option>
 			   <option value="1">禁用</option>
 		   </select>
@@ -108,7 +108,7 @@ $(document).ready(function(){
         "bSearchable": false,
         "mRender": function(data, type, row) {
         	//编辑
-            var toEdit = "<a title=\"修改\" href=\"javascript:;\" onclick=\"role_edit('修改公文','${context_root}/system/toDocumentModify.action?documentId=" + row.documentId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>修改</span></a>";
+            var toEdit = "<a title=\"编辑\" href=\"javascript:;\" onclick=\"role_edit('修改公文','${context_root}/system/toDocumentModify.action?documentId=" + row.documentId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>编辑</span></a>";
         	return statusTools(row) + "&nbsp;&nbsp;"+toEdit;
         }
     },

@@ -62,6 +62,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="checkName" parameterType="Document" resultType="Document">
 		SELECT * FROM sys_document WHERE title=#{title}
-		<if test="documentId !=null">AND documentId=#{documentId}</if>
+		<if test="documentId !=null">AND documentId !=#{documentId}</if>
 	</select>
 </mapper> 

@@ -13,7 +13,8 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>公文内容：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="file" id="file" name="file">
+				<button type="button" onclick="toChoose()" style="width: 100px;" >浏览...</button>
+				<input type="file" id="file" name="file" accept="application/msword" style="display:none;">
 			</div>
 		</div>
 		<div class="row cl">
@@ -32,11 +33,34 @@
 </article>
 
 <script type="text/javascript">
+    jQuery.validator.addMethod("checkTitle", function (value, element) {
+        var chrnum =/[`~!@#$%^&*()_\-+=<>?:"{}|,.\/;'\\[\]·~！@#￥%……&*（）——\-+={}|《》？：“”【】、；‘’，。、]/;
+        return this.optional(element) || (!chrnum.test(value));
+    }, "不能含有特殊字符");
+    function toChoose(){
+        alert("上传格式为.doc或.docx！");
+        $("input[type=file]").click();
+    }
 $("#form-document-modify").validate({
 	rules:{
         title:{
 			required:true,
 			isSpace:true,
+            checkTitle:true,
+            remote: {
+                url: "${context_root}/system/checkTitleUnique.action?documentId=${document.documentId}",
+                type: "post",
+                dataType: "text",
+                data: {
+                    name: function () {
+                        return $.trim($("#title").val());
+                    }
+                },
+                dataFilter: function (data, type) {
+                    if (data == "0") return true;
+                    else return "已存在该标题的公文";
+                }
+            }
 		},
 	},
 	onkeyup:false,
@@ -46,9 +70,7 @@ $("#form-document-modify").validate({
 		var index = parent.layer.load();
         var formData = new FormData($('#form-document-add')[0]);
         var title=$("#title").val();
-        alert(title);
         var status=$(":radio:checked").val();
-        alert(status);
         $.ajax({
 			url:"${context_url}/system/modifyDocument.action?documentId=${document.documentId}&title="+title+"&status="+status,
 			type:'post',

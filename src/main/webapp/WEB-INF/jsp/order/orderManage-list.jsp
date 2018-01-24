@@ -106,7 +106,7 @@ $(document).ready(function(){
             "mRender": function(data, type, row) {
                 if (row.orderStatus !=null) {
                        if(row.orderStatus==1){
-                           return "待支付";
+                           return "未支付";
 					   }else if (row.orderStatus==2){
                            return "已支付";
 					   }
