@@ -85,9 +85,9 @@ public class LabelDao extends DynamicObjectBaseDao implements ILabelDao
 	}
 
     @Override
-    public int isExistByName(Map map) {
+    public Label isExistByName(Label label) {
         
-        return (int) this.findForObject("CommodityLabelMapper.isExistByName", map);
+        return (Label) this.findForObject("CommodityLabelMapper.isExistByName", label);
     }
 
 	

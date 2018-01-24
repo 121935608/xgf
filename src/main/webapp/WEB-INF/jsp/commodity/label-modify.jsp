@@ -3,11 +3,11 @@
 <ys:contentHeader/>
 <body>
 <article class="page-container">
-<style>
+<%--<style>
 	.picture{width: 150px;height:150px;position:absolute;left: 2;cursor:pointer;border-color: orange;
              filter:alpha(opacity:0);opacity: 0  }
         .image{position:absolute; border-color: red;left: 2;cursor:pointer;} 
-</style>
+</style>--%>
 	<form action="" method="post" class="form form-horizontal" id="form-label-modify">
 		<input type="hidden" class="input-text" id="categoryId" name="categoryId"   value="${category.categoryId }">
 		<div class="row cl">
@@ -71,29 +71,22 @@ $("#form-label-modify").validate({
 		 categoryName: {
             required: true,
             isSpace: true,
-            maxlength:8,
-           	remote: {
-                url: "${context_root}/commodity/isExistByName.action",
-                type: "post",
-                dataType: "text",
-                data: {
-                	categoryName: function () {
-                        return $.trim($("#categoryName").val());
-                    },
-                    categoryId: function () {
-                        return categoryId;
-                    }
-                },
-                dataFilter: function (data, type) {
-                    if (data == "0") return true;
-                    else return "该名称已存在";
-                }
-            }
+		    maxlength:8,
+            remote: {
+                 url: "${context_root}/commodity/isExistByName.action?categoryId=${category.categoryId }",
+                 type: "post",
+                 dataType: "text",
+                 data: {
+                     name: function () {
+                         return $.trim($("#categoryName").val());
+                     }
+                 },
+                 dataFilter: function (data, type) {
+                     if (data == "0") return true;
+                     else return "该名称已存在";
+                 }
+             },
         },
-        categoryName:{
-			required:true,
-			isSpace:true,
-		},
 		status:{
 			required:true,
 			isSpace:true,

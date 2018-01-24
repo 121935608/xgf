@@ -181,11 +181,13 @@ public class LabelController extends BaseController {
      * 校验名称
      */
     @RequestMapping(LabelConstant.ISEXIST_BY_NAME_URL)
-    public @ResponseBody int isExistByName(String categoryName,String categoryId) {
-        Map map = new HashMap<>();
-        map.put("categoryName", categoryName);
-        map.put("categoryId", categoryId);
-        return labelService.isExistByName(map);
+    public @ResponseBody String  isExistByName(Label label) {
+		String uniqueFlag="0";
+		if (label !=null)
+		{
+			uniqueFlag =labelService.isExistByName(label);
+		}
+		return uniqueFlag;
     }
     
 	/**

@@ -3,6 +3,7 @@ package com.xingrongjinfu.commodity.label.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.shiro.common.UserConstants;
 import org.framework.base.util.PageUtilEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -109,9 +110,13 @@ public class LabelService implements ILabelService
 	}
 
     @Override
-    public int isExistByName(Map map) {
+    public String isExistByName(Label label) {
         
-        return labelDao.isExistByName(map);
+        Label newLabel= labelDao.isExistByName(label);
+        if (ObjectUtil.isNotNull(newLabel)){
+            return UserConstants.NAME_NOT_UNIQUE;
+        }
+        return UserConstants.NAME_UNIQUE;
     }
 
 	

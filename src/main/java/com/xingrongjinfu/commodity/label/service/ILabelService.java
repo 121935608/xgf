@@ -64,5 +64,11 @@ public interface ILabelService
      * 
      */
 	public int deleteById(Label category);
-	public int isExistByName(Map map);
+
+    /**
+     * 修改标签时校验名称是否唯一
+     * @param map
+     * @return
+     */
+	public String  isExistByName(Label label);
 }
