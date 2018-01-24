@@ -291,7 +291,7 @@ public class UserController extends BaseController {
         return new Message(result);
     }
 
-    /**
+   /**
      * 忘记密码修改密码
      * @return
      */

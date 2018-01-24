@@ -181,8 +181,6 @@ public class UserService implements IUserService
     public int changePassword(User user)
     {
         int fail=0;
-        String newpassword = new PasswordService().encryptPassword(user.getUserName(), user.getPassword(), "");
-        user.setPassword(newpassword);
         if (user.getType().equalsIgnoreCase("B")) {
             String password= Md5Utils.hash(user.getUserName()+user.getPassword());
             String param="{\"username\":\""+user.getUserName()+"\",\"password\":\""+password+"\"}";
@@ -205,6 +203,8 @@ public class UserService implements IUserService
                 return fail;
             }
         }
+        String newpassword = new PasswordService().encryptPassword(user.getUserName(), user.getPassword(), "");
+        user.setPassword(newpassword);
         return userDao.updateUserPassword(user);
     }
 
@@ -267,14 +267,12 @@ public class UserService implements IUserService
     @Override
     public int updatePassword(User user) {
         int fail=0;
-        String newpassword = new PasswordService().encryptPassword(user.getUserName(), user.getPassword(), "");
-        user.setPassword(newpassword);
         String password= Md5Utils.hash(user.getUserName()+user.getPassword());
+        String newPassword = new PasswordService().encryptPassword(user.getUserName(), user.getPassword(), "");
+        user.setPassword(newPassword);
         String param="{\"username\":\""+user.getUserName()+"\",\"password\":\""+password+"\"}";
-        //调用用户中心
         String url= UserConstant.USER_SERVICE_URL+"/uaa/auth/modify?q="+param;
         String returnMsg= HttpClientUtil.sendGet(url);
-
         if(StringUtil.nullOrBlank(returnMsg)){
             return fail;
         }
@@ -287,11 +285,11 @@ public class UserService implements IUserService
         }
 
         String code=String.valueOf(returnMap.get("code"));
+        System.out.println("code:"+code);
         if(code.equals("-1")){
             return fail;
         }
         return userDao.updatePassword(user);
-
     }
 
     @Override

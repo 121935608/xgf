@@ -150,9 +150,9 @@ public class UserConstant
     public final static String USER_VERLIFY="sendVerify";
 
     /**
-     * 请求地址:用户中心地址
+     * 请求地址:用户中心地址  101.132.32.72:8101
      */
-    public final static String USER_SERVICE_URL="http://101.132.32.72:8101";
+    public final static String USER_SERVICE_URL="http://192.168.0.204:8881";
     /**
      * 请求地址:校验验证码
      */
