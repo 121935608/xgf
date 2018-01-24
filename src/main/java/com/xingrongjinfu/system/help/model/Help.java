@@ -41,6 +41,8 @@ public class Help implements Serializable
     private Date replyTime;
     private String replyTimes;//格式时间
     private Integer status;
+    //是否已经回复了
+    private String toReply;
 
     public Integer getNumber() {
         return number;
@@ -144,5 +146,13 @@ public class Help implements Serializable
 
     public void setAddTimes(String addTimes) {
         this.addTimes = addTimes;
+    }
+
+    public String getToReply() {
+        return toReply;
+    }
+
+    public void setToReply(String toReply) {
+        this.toReply = toReply;
     }
 }

@@ -39,11 +39,29 @@
 </article>
 
 <script type="text/javascript">
+    jQuery.validator.addMethod("checkRoleName", function (value, element) {
+        var chrnum =/[`~!@#$%^&*()_\-=<>?:"{}|,.\/;'\\[\]·~！@#￥%……&*（）——\-={}|《》？：“”【】、；‘’，。、]/;
+        return this.optional(element) || (!chrnum.test(value));
+    }, "角色名不能为数字、特殊符号");
+    jQuery.validator.addMethod("checkNumber", function (value, element) {
+        var reg =/^[0-9]*$/ ;
+        return this.optional(element) || (!reg.test(value));
+    }, "角色名不能为数字、特殊符号");
+    jQuery.validator.addMethod("checkRoleKey", function (value, element) {
+        var chrnum =/[`~!@#$%^&*()_\-=<>?:"{}|,.\/;'\\[\]·~！@#￥%……&*（）——\-={}|《》？：“”【】、；‘’，。、]/;
+        return this.optional(element) || (!chrnum.test(value));
+    }, "角色标识不能为数字、特殊符号");
+    jQuery.validator.addMethod("checkRoleNumber", function (value, element) {
+        var reg =/^[0-9]*$/ ;
+        return this.optional(element) || (!reg.test(value));
+    }, "角色标识不能为数字、特殊符号");
 $("#form-role-modify").validate({
 	rules:{
 		roleName:{
 			required:true,
 			isSpace:true,
+            checkRoleName:true,
+            checkNumber:true,
             remote: {
                 url: "${context_root}/system/checkRoleUnique.action?roleId=${role.roleId }",
                 type: "post",
@@ -62,6 +80,8 @@ $("#form-role-modify").validate({
 		roleKey:{
 			required:true,
 			isSpace:true,
+            checkRoleKey:true,
+            checkRoleNumber:true,
 		},
 	},
 	onkeyup:false,

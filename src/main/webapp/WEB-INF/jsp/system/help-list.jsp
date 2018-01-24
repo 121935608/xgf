@@ -123,7 +123,7 @@
                 "mRender": function (data, type, row) {
                     //回复
                     var toReply = "<a title=\"回复\" href=\"javascript:;\" onclick=\"user_reply('回复','${context_root}/system/toReply.action?feedBackId=" + row.feedBackId +"&userId="+row.userId+"','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>回复</span></a>";
-                    return toReply;
+                    return statusTools(row);
                 }
             },
         ];
@@ -132,10 +132,10 @@
     });
 
     function statusTools(row) {
-        if (row.locked == '0') {
-            return "<a style=\"text-decoration:none\" onClick=\"user_stop(this,\'" + row.userId + "\')\" href=\"javascript:;\" title=\"停用\"><i class=\"Hui-iconfont\">&#xe631;</i></a>";
-        } else {
-            return "<a style=\"text-decoration:none\" onClick=\"user_start(this,\'" + row.userId + "\')\" href=\"javascript:;\" title=\"启用\"><i class=\"Hui-iconfont\">&#xe615;</i></a>";
+        if (row.toReply == '0') {
+            return "<a title=\"回复\" href=\"javascript:;\" onclick=\"user_reply('回复','${context_root}/system/toReply.action?feedBackId=" + row.feedBackId +"&userId="+row.userId+"','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>回复</span></a>";
+        } else if(row.toReply =='1') {
+            return "<a style=\"cursor: default;\" title=\"回复\">回复</a>";
         }
     }
 
