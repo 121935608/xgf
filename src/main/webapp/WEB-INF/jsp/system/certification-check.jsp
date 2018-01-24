@@ -147,7 +147,7 @@
 			</div>
 		</div>
 		  
-		<div class="info-div" style="margin: auto">
+		<div class="info-div" style="margin: auto;margin-top:50px;">
 			<input type="hidden" class="input-text" id="storeId" name="storeId" value="${store['storeId']}">
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-3">审核结果</label>
