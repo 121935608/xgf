@@ -26,12 +26,12 @@
 								id="endTime" class="input-text Wdate" style="width: 120px;">
 						</div>
 					</div>
-					<div class="row  col-xs-3 col-sm-2 .col-md-2">
+					<%-- <div class="row  col-xs-3 col-sm-2 .col-md-2">
 						<y:select id="type" name="type"
 							codeGroup="${typeList}" selectedValue=""
 							cssClass="select" headerKey="" headerValue="类型">
 						</y:select>
-					</div>
+					</div> --%>
 					<div class="row  col-xs-3 col-sm-2 .col-md-2">
 						<y:select id="status" name="status"
 							codeGroup="${statusList}" selectedValue=""
@@ -61,7 +61,7 @@
 				<thead>
 					<tr class="text-c">
 						<th width="10%">分类</th>
-						<th width="10%">类型</th>
+						<!-- <th width="10%">类型</th> -->
 						<th width="10%">标题</th>
 						<th width="10%">创建时间</th>
 						<th width="15%">状态</th>
@@ -88,7 +88,7 @@
 				}
 			},
 			
-			{
+			/* {
 				"sDefaultContent" : "类型",
 				"bSortable" : false,
 				"sClass" : "text-c",
@@ -103,7 +103,7 @@
 						return "";
 					}
 				}
-			},
+			}, */
 			
 			{
 				"sDefaultContent" : "标题",
