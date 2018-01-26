@@ -44,4 +44,13 @@ public class MemberConstant {
      * 逻辑视图名:添加会员资料界面
      */
     public final static String MEMBERSHIP_ADD_PAGE="member/membership-add";
+    /**
+     * 请求地址:校验会员名是否唯一
+     */
+    public final static String MEMBERSHIP_CHECK_NAME_URL="checkNameUnique";
+
+    /**
+     * 请求地址:更新会员信息
+     */
+    public final static String MEMBERSHIP_SAVE_URL="saveMember";
 }

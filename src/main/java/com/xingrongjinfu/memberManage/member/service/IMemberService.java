@@ -32,4 +32,9 @@ public interface IMemberService {
      * @return
      */
     List<Membership>pageQueryInfo(PageUtilEntity pageUtilEntity);
+
+    /**
+     * 校验用户名
+     */
+    String checkName(Membership membership);
 }

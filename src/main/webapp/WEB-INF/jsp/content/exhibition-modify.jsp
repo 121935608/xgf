@@ -25,8 +25,13 @@
 	        	<input type="file" class="picture" id="picture" accept="image/*" name="picture" onchange="changImg(event)">
 			</div>
 		</div>
-		
-		<div class="row cl" style="margin-top:80px">
+		<div class="row cl"style="margin-top:80px">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>URL：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="url" class="input-text" value="${exhibition.url }" placeholder="" id="url" name="url">
+			</div>
+		</div>
+		<div class="row cl" >
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>状态：</label>
 			<div class="formControls col-xs-8 col-sm-4">
 			<y:select id="status" name="status"
@@ -70,6 +75,10 @@ function changImg(e){
 $("#form-exhibition-modify").validate({
 	rules:{
 		status:{
+			required:true,
+			isSpace:true,
+		},
+		url:{
 			required:true,
 			isSpace:true,
 		},

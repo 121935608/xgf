@@ -12,6 +12,8 @@ package com.xingrongjinfu.memberManage.member.service;
 
 import com.xingrongjinfu.memberManage.member.dao.IMemberDao;
 import com.xingrongjinfu.memberManage.member.model.Membership;
+import com.xingrongjinfu.utils.ObjectUtil;
+import org.apache.shiro.common.UserConstants;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +38,14 @@ public class MemberService implements IMemberService {
     @Override
     public List<Membership> pageQueryInfo(PageUtilEntity pageUtilEntity) {
         return memberDao.pageQueryInfo(pageUtilEntity);
+    }
+
+    @Override
+    public String checkName(Membership membership) {
+        Membership newMembership =memberDao.checkName(membership);
+        if (ObjectUtil.isNotNull(newMembership)){
+            return UserConstants.NAME_NOT_UNIQUE;
+        }
+        return UserConstants.NAME_UNIQUE;
     }
 }

@@ -40,4 +40,9 @@ public class MemberDao extends DynamicObjectBaseDao implements IMemberDao {
         }
         return pageQueryInfo;
     }
+
+    @Override
+    public Membership checkName(Membership membership) {
+        return (Membership) this.findForObject("MemberMapper.checkName",membership);
+    }
 }

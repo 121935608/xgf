@@ -111,7 +111,7 @@ public class CommodityAdController extends BaseController {
 //		sysCode4.setCodevalue("fit广告");
 //		sysCodeList2.add(sysCode4);
 //
-		modelAndView.addObject("typeList", this.getAllType());
+		//modelAndView.addObject("typeList", this.getAllType());
 		modelAndView.addObject("FLList", this.getFL());
 
 		return modelAndView;
@@ -137,7 +137,7 @@ public class CommodityAdController extends BaseController {
 
 		modelAndView.addObject("statusList", sysCodeList1);
 		modelAndView.addObject("CommodityAd", this.commodityAdService.findByCommodityAdId(commodityAdId));
-		modelAndView.addObject("typeList", this.getAllType());
+		//modelAndView.addObject("typeList", this.getAllType());
         modelAndView.addObject("FLList", this.getFL());
         modelAndView.addObject("commoditysList", this.getCommoditysByAdId(commodityAdId));
 		return modelAndView;

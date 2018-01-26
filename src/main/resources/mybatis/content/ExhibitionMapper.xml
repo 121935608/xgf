@@ -12,6 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="createTime" column="createTime" />
 		<result property="updateTime" column="updateTime" />
 		<result property="status" column="status" />
+		<result property="url" column="url" />
 	</resultMap>
 	
 	<delete id="deleteExhibitionInfo" parameterType="Exhibition">
@@ -32,7 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="pageInfoQuery" parameterType="PageUtilEntity"
 		resultType="Exhibition" useCache="false">
 		SELECT
-		a.exhibitionId,a.categoryName,a.exhibitionImg,a.createTime,a.status
+		a.exhibitionId,a.categoryName,a.exhibitionImg,a.createTime,a.status,a.url
 		from t_exhibition a
 		left join t_category b on a.categoryId = b.categoryId
 		WHERE 1=1
@@ -67,6 +68,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="exhibitionImg != null and exhibitionImg != ''">
 				exhibitionImg = #{exhibitionImg},
 			</if>
+			<if test="url != null and url != ''">
+				url = #{url},
+			</if>
 			<if test="status.toString() != null and status.toString() != ''">
 				status = #{status},
 			</if>
@@ -90,12 +94,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="categoryName != null and categoryName != ''">categoryName,</if>
 		<if test="categoryId != null and categoryId != ''">categoryId,</if>
 		<if test="exhibitionImg != null and exhibitionImg != ''">exhibitionImg,</if>
+		<if test="url != null and url != ''">url,</if>
 		createTime,
 		<if test="status != null and status != ''">status</if>		
 		)values(#{exhibitionId},
 		<if test="categoryName != null and categoryName != ''">#{categoryName},</if>
 		<if test="categoryId != null and categoryId != ''">#{categoryId},</if>
 		<if test="exhibitionImg != null and exhibitionImg != ''">#{exhibitionImg},</if>
+		<if test="url != null and url != ''">#{url},</if>
 		sysdate(),
 		<if test="status != null and status != ''">#{status}</if>
 		)

@@ -20,6 +20,12 @@
 		</div>
 		
 		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>URL：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="url" class="input-text" value="" placeholder="" id="url" name="url">
+			</div>
+		</div>
+		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>状态：</label>
 			<div class="formControls col-xs-8 col-sm-4">
 			<y:select id="status" name="status"
@@ -45,7 +51,7 @@ function pic(e) {
         var file = e.target.files.item(i);  
         if (!(/^image\/.*$/i.test(file.type))) {  
             continue; //不是图片 就跳出这一次循环  
-        }  
+        }
           
         	var imagSize =  document.getElementById("picture").files[0].size;
         	if(imagSize>1024*1024*3){
@@ -91,6 +97,10 @@ $("#form-exhibition-add").validate({
 		},
 		
         status:{
+			required:true,
+			isSpace:true,
+		},
+        url:{
 			required:true,
 			isSpace:true,
 		},

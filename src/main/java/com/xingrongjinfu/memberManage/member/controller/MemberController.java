@@ -19,9 +19,11 @@ import org.apache.shiro.common.utils.SessionUtils;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.framework.core.controller.BaseController;
+import org.framework.core.model.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.text.SimpleDateFormat;
@@ -97,5 +99,27 @@ public class MemberController extends BaseController{
     @RequestMapping(MemberConstant.MEMBERSHIP_ADD_URL)
     public ModelAndView loadAddMember(){
         return this.getModelAndView(MemberConstant.MEMBERSHIP_ADD_PAGE);
+    }
+
+    /**
+     * 校验会员名是否唯一
+     */
+    @RequestMapping(MemberConstant.MEMBERSHIP_CHECK_NAME_URL)
+    public @ResponseBody String checkName(Membership membership){
+        String uniqueFlag="0";
+        if (membership !=null)
+        {
+            uniqueFlag=memberService.checkName(membership);
+        }
+        return uniqueFlag;
+    }
+
+    /**
+     * 添加或更新会员信息
+     */
+    @RequestMapping(MemberConstant.MEMBERSHIP_SAVE_URL)
+    public @ResponseBody
+    Message updateMember(Membership membership){
+        return new Message(0);
     }
 }

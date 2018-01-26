@@ -19,14 +19,14 @@
 				</y:select>
 			</div>
 		</div>
-		<div class="row cl">
+		<%-- <div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>类型：</label>
 			<div class="formControls col-xs-8 col-sm-4">
 				<y:select id="type" name="type" codeGroup="${typeList}" selectedValue="${CommodityAd.type }"
 							  cssClass="select" headerKey="" headerValue="--请选择--">
 				</y:select>
 			</div>
-		</div>
+		</div> --%>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>标题：</label>
 			<div class="formControls col-xs-8 col-sm-4">

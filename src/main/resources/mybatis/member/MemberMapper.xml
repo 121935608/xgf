@@ -42,4 +42,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		AND storeId=#{relationMap.storeId}
 	</select>
+
+	<select id="checkName" parameterType="Member" resultType="Member">
+		SELECT * FROM m_member WHERE memberNo=#{memberNo}
+		<if test="memberId !=null and memberId !=''">
+			AND memberId=#{memberId}
+		</if>
+	</select>
 </mapper> 

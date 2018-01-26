@@ -32,4 +32,9 @@ public interface IMemberDao {
      * @return
      */
     List<Membership>pageQueryInfo(PageUtilEntity pageUtilEntity);
+
+    /**
+     * 校验用户名
+     */
+    Membership checkName(Membership membership);
 }

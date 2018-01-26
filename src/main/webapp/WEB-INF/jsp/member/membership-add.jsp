@@ -3,7 +3,7 @@
 <ys:contentHeader/>
 <body>
 <article class="page-container">
-	<form action="" method="post" class="form form-horizontal" id="form-user-add">
+	<form action="" method="post" class="form form-horizontal" id="form-member-add">
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>会员号：</label>
 			<div class="formControls col-xs-8 col-sm-4">
@@ -42,8 +42,17 @@
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>会员等级：</label>
-			<div class="formControls col-xs-7 col-sm-4 skin-minimal">
-				<y:radio codeGroup="sys-locked" name="codeStrus" selectedValue="0"/>
+			<div class="formControls col-xs-8 col-sm-4">
+				<span class="select-box" style="width: 120px;">
+				   <select name="level" id="level" class="select" autocomplete="off">
+					   <option value="">请选择会员等级</option>
+					   <option value="A">A</option>
+					   <option value="B">B</option>
+					   <option value="C">C</option>
+					   <option value="D">D</option>
+					   <option value="E">E</option>
+				   </select>
+				</span>
 			</div>
 		</div>
 		<div class="row cl">
@@ -81,14 +90,14 @@
 
 
 <script type="text/javascript">
-$("#form-user-add").validate({
-	/*rules:{
-        userName:{
+$("#form-member-add").validate({
+	rules:{
+        memberNo:{
             required:true,
             minlength: 5,
             isSpace:true,
             remote: {
-                url: "/system/checkNameUnique.action",
+                url: "/member/checkNameUnique.action",
                 type: "post",
                 dataType: "text",
                 data: {
@@ -102,45 +111,43 @@ $("#form-user-add").validate({
                 }
             }
 		},
-		password:{
-			required:true,
-			isSpace:true,
-			minlength: 6
-		},
-		repeatPassword:{
-			required:true,
-			isSpace:true,
-			minlength: 6,
-			equalTo: password
-		},
-		accountName:{
+        name:{
 			required:true,
 			isSpace:true,
 		},
-		email:{
+        addTime:{
+			required:true,
+			isSpace:true,
+		},
+        timeLimit:{
+			required:true,
+			isSpace:true,
+		},
+        score:{
 			required:true,
 			email:true
 		},
-		mobilePhone:{
+        address:{
 			required:true,
 			isPhone:true
 		},
-		roleId:{
-			required:true,
-		},
+        level:{
+            required:true,
+            isPhone:true
+        },
 	},
 	messages: {
-        "userName": {
-            remote: "该用户已经存在"
+        "memberNo": {
+            remote: "该会员号已经存在"
         }
-    },*/
+    },
 	onkeyup:false,
 	focusCleanup:true,
 	success:"valid",
 	submitHandler:function(form){
 		var index = parent.layer.load();
 		$.ajax({
-			url:"${context_root}/system/saveMember.action",
+			url:"${context_root}/member/saveMember.action",
 			type:'post',
 			async:true ,
 			cache:false ,
