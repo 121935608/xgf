@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -120,6 +121,16 @@ public class MemberController extends BaseController{
     @RequestMapping(MemberConstant.MEMBERSHIP_SAVE_URL)
     public @ResponseBody
     Message updateMember(Membership membership){
-        return new Message(0);
+        int result=0;
+        String memberId=membership.getMemberId();
+        if (memberId !=null && memberId !=""){
+            //id存在则更新信息
+
+        }else {
+            //不存在则插入数据
+           Timestamp timestamp=new Timestamp(membership.getAddTime().getTime());
+           result= memberService.addMember(membership);
+        }
+        return new Message(result);
     }
 }

@@ -37,4 +37,9 @@ public interface IMemberDao {
      * 校验用户名
      */
     Membership checkName(Membership membership);
+
+    /**
+     * 添加会员
+     */
+    int addMember(Membership membership);
 }

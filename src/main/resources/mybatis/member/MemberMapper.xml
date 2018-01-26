@@ -49,4 +49,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			AND memberId=#{memberId}
 		</if>
 	</select>
+
+	<insert id="addMember" parameterType="Member">
+		INSERT INTO m_member(
+		<if test="memberId !=null and memberId !=''">memberId,</if>
+		<if test="storeId !=null and storeId !=''">storeId,</if>
+		<if test="memberNo !=null and memberNo !=''">memberNo,</if>
+		<if test="name !=null and name !=''">name,</if>
+		<if test="birthday !=null and birthday !=''">birthday,</if>
+		<if test="qq !=null and qq !=''">qq,</if>
+		<if test="email !=null and email !=''">email,</if>
+		<if test="address !=null and address !=''">address,</if>
+		<if test="level !=null and level !=''">level,</if>
+		<if test="score !=null and score !=''">score,</if>
+		<if test="timeLimit !=null and timeLimit !=''">timeLimit,</if>
+		<if test="remark !=null and remark !=''">remark,</if>
+		<if test="addTime !=null and addTime !=''">addTime,</if>
+		<if test="updateTime !=null and updateTime !=''">updateTime,</if>
+		status
+		)VALUES (
+		<if test="memberId !=null and memberId !=''">#{memberId},</if>
+		<if test="storeId !=null and storeId !=''">#{storeId},</if>
+		<if test="memberNo !=null and memberNo !=''">#{memberNo},</if>
+		<if test="name !=null and name !=''">#{name},</if>
+		<if test="birthday !=null and birthday !=''">#{birthday},</if>
+		<if test="qq !=null and qq !=''">#{qq},</if>
+		<if test="email !=null and email !=''">#{email},</if>
+		<if test="address !=null and address !=''">#{address},</if>
+		<if test="level !=null and level !=''">#{level},</if>
+		<if test="score !=null and score !=''">#{score},</if>
+		<if test="timeLimit !=null and timeLimit !=''">#{timeLimit},</if>
+		<if test="remark !=null and remark !=''">#{remark},</if>
+		sysdate(),
+		<if test="updateTime !=null and updateTime !=''">#{updateTime},</if>
+		1
+		)
+	</insert>
 </mapper> 

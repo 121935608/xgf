@@ -94,8 +94,8 @@ $("#form-member-add").validate({
 	rules:{
         memberNo:{
             required:true,
-            minlength: 5,
             isSpace:true,
+			isPhone:true,
             remote: {
                 url: "/member/checkNameUnique.action",
                 type: "post",
@@ -117,23 +117,18 @@ $("#form-member-add").validate({
 		},
         addTime:{
 			required:true,
-			isSpace:true,
 		},
         timeLimit:{
 			required:true,
-			isSpace:true,
 		},
         score:{
 			required:true,
-			email:true
 		},
         address:{
 			required:true,
-			isPhone:true
 		},
         level:{
             required:true,
-            isPhone:true
         },
 	},
 	messages: {

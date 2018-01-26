@@ -48,4 +48,9 @@ public class MemberService implements IMemberService {
         }
         return UserConstants.NAME_UNIQUE;
     }
+
+    @Override
+    public int addMember(Membership membership) {
+        return memberDao.addMember(membership);
+    }
 }
