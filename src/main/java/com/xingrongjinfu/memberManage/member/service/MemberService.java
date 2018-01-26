@@ -53,4 +53,14 @@ public class MemberService implements IMemberService {
     public int addMember(Membership membership) {
         return memberDao.addMember(membership);
     }
+
+    @Override
+    public Membership findMembership(Membership membership) {
+        return memberDao.findMembership(membership);
+    }
+
+    @Override
+    public int updateMember(Membership membership) {
+        return memberDao.updateMember(membership);
+    }
 }

@@ -42,4 +42,14 @@ public interface IMemberDao {
      * 添加会员
      */
     int addMember(Membership membership);
+
+    /**
+     * 查询会员信息
+     */
+    Membership findMembership(Membership membership);
+
+    /**
+     * 更新会员信息
+     */
+    int updateMember(Membership membership);
 }

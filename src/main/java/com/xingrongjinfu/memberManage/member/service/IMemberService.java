@@ -42,4 +42,14 @@ public interface IMemberService {
      * 添加会员
      */
     int addMember(Membership membership);
+
+    /**
+     * 查询会员资料
+     */
+    Membership findMembership(Membership membership);
+
+    /**
+     * 更新会员资料
+     */
+    int updateMember(Membership membership);
 }

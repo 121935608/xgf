@@ -39,7 +39,7 @@ public class Membership {
     private String isLimit;
     private String remark;
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH-mm-ss")
-    private Date addTime;
+    private String addTime;
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH-mm-ss")
     private Date updateTime;
     private Integer status;
@@ -141,11 +141,10 @@ public class Membership {
         this.remark = remark;
     }
 
-    public Date getAddTime() {
+    public String getAddTime() {
         return addTime;
     }
-
-    public void setAddTime(Date addTime) {
+    public void setAddTime(String addTime) {
         this.addTime = addTime;
     }
 

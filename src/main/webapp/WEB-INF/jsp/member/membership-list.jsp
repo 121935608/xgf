@@ -137,8 +137,8 @@
                 "bSearchable": false,
                 "mRender": function(data, type, row) {
                     //查看
-                    var toLook = "<a title=\"查看\" href=\"javascript:;\" onclick=\"member_look('查看','${context_root}/merchant/checkCertification.action?storeId=" + row.storeId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>查看</span></a>";
-                    return toLook;
+                    var toEdit = "<a title=\"编辑\" href=\"javascript:;\" onclick=\"member_edit('编辑','${context_root}/member/toEditMember.action?memberId=" + row.memberId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>编辑</span></a>";
+                    return toEdit;
                 }
             },
         ];
@@ -169,33 +169,10 @@
         layer_show(title,url,w,h);
     }
 
-
-    function sign(){
-        {
-            var data={
-                "account": "test@bestsign.cn",
-                "mail": "test@bestsign.cn",
-                "mobile": "13800001234",
-                "name": "杭州上上签",
-                "userType": "2"
-            }
-            $.ajax({
-                url:"https://openapi.bestsign.cn/openapi/v3/user/reg/",
-                type:'post',
-                async:true ,
-                cache:false ,
-                data:data,
-                dataType:"json",
-                success:function(data){
-                    alert(22222);
-                },
-                error:function(data){debugger
-                    alert(data);
-                }
-            });
-        }
+    /*添加会员*/
+    function member_edit(title,url,w,h){
+        layer_show(title,url,w,h);
     }
-
 
 </script>
 </body>

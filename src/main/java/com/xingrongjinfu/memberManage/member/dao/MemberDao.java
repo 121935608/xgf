@@ -50,4 +50,14 @@ public class MemberDao extends DynamicObjectBaseDao implements IMemberDao {
     public int addMember(Membership membership) {
         return (int)this.save("MemberMapper.addMember",membership);
     }
+
+    @Override
+    public Membership findMembership(Membership membership) {
+        return (Membership)this.findForObject("MemberMapper.findMembership",membership);
+    }
+
+    @Override
+    public int updateMember(Membership membership) {
+        return (int)this.update("MemberMapper.updateMember",membership);
+    }
 }

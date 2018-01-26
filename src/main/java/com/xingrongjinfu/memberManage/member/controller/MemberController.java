@@ -15,6 +15,7 @@ import com.xingrongjinfu.memberManage.member.model.Membership;
 import com.xingrongjinfu.memberManage.member.service.IMemberService;
 import com.xingrongjinfu.system.SystemConstant;
 import com.xingrongjinfu.system.user.model.User;
+import com.xingrongjinfu.utils.IdUtil;
 import org.apache.shiro.common.utils.SessionUtils;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
@@ -99,7 +100,14 @@ public class MemberController extends BaseController{
      */
     @RequestMapping(MemberConstant.MEMBERSHIP_ADD_URL)
     public ModelAndView loadAddMember(){
-        return this.getModelAndView(MemberConstant.MEMBERSHIP_ADD_PAGE);
+       ModelAndView modelAndView=this.getModelAndView(MemberConstant.MEMBERSHIP_ADD_PAGE);
+        String storeId=(String)SessionUtils.getSession().getAttribute("storeId");
+        if (storeId ==null || storeId ==""){
+            storeId="-1";
+        }
+        System.out.println("storeId:"+storeId);
+        modelAndView.addObject("storeId", storeId);
+        return modelAndView;
     }
 
     /**
@@ -125,12 +133,25 @@ public class MemberController extends BaseController{
         String memberId=membership.getMemberId();
         if (memberId !=null && memberId !=""){
             //id存在则更新信息
-
+            result=memberService.updateMember(membership);
         }else {
             //不存在则插入数据
-           Timestamp timestamp=new Timestamp(membership.getAddTime().getTime());
+           membership.setMemberId(IdUtil.get32UUID());
            result= memberService.addMember(membership);
         }
         return new Message(result);
+    }
+
+    /**
+     * 跳转到编辑页面
+     */
+    @RequestMapping(MemberConstant.MEMBERSHIP_EDIT_URL)
+    public ModelAndView loadEditPage(Membership membership){
+        ModelAndView modelAndView=this.getModelAndView(MemberConstant.MEMBERSHIP_EDIT_PAGE);
+        if(membership.getMemberId() !=null && membership.getMemberId()!=""){
+            Membership membershipInfo=memberService.findMembership(membership);
+            modelAndView.addObject("membership",membershipInfo);
+        }
+        return modelAndView;
     }
 }

@@ -167,10 +167,10 @@ $(document).ready(function(){
             "sClass": "text-c",
             "bSearchable": false,
             "mRender": function(data, type, row) {
-                if (row.status == 1) {
+                if (row.country == "1") {
                     return "国内";
-                } else if(row.status == 2) {
-                    return "国外";
+                } else if(row.country == "2") {
+                    return "进口";
                 }else {
                     return "";
                 }

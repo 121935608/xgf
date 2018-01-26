@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 
 	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultMap="MemberResult">
-		SELECT memberNo,name,level,score,addTime,DATE_FORMAT(timeLimit,'%Y-%m-%d %H:%i:%S') timeLimit FROM m_member
+		SELECT memberId,memberNo,name,level,score,addTime,DATE_FORMAT(timeLimit,'%Y-%m-%d %H:%i:%S') timeLimit FROM m_member
 		WHERE 1=1
 		<if test="relationMap.beginTime != null and relationMap.beginTime != ''"><!-- 开始时间检索 -->
 			AND DATE_FORMAT(timeLimit,'%Y-%m-%d %H:%i:%S') &gt;=sysdate()
@@ -46,7 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="checkName" parameterType="Member" resultType="Member">
 		SELECT * FROM m_member WHERE memberNo=#{memberNo}
 		<if test="memberId !=null and memberId !=''">
-			AND memberId=#{memberId}
+			AND memberId !=#{memberId}
 		</if>
 	</select>
 
@@ -61,7 +61,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="email !=null and email !=''">email,</if>
 		<if test="address !=null and address !=''">address,</if>
 		<if test="level !=null and level !=''">level,</if>
-		<if test="score !=null and score !=''">score,</if>
+		<if test="score !=null">score,</if>
 		<if test="timeLimit !=null and timeLimit !=''">timeLimit,</if>
 		<if test="remark !=null and remark !=''">remark,</if>
 		<if test="addTime !=null and addTime !=''">addTime,</if>
@@ -77,12 +77,45 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="email !=null and email !=''">#{email},</if>
 		<if test="address !=null and address !=''">#{address},</if>
 		<if test="level !=null and level !=''">#{level},</if>
-		<if test="score !=null and score !=''">#{score},</if>
+		<if test="score !=null ">#{score},</if>
 		<if test="timeLimit !=null and timeLimit !=''">#{timeLimit},</if>
 		<if test="remark !=null and remark !=''">#{remark},</if>
-		sysdate(),
+		<if test="addTime !=null and addTime !=''">sysdate(),</if>
 		<if test="updateTime !=null and updateTime !=''">#{updateTime},</if>
 		1
 		)
 	</insert>
+
+	<select id="findMembership" parameterType="Member"  resultType="Member">
+		SELECT memberId,memberNo,name,level,score,addTime,DATE_FORMAT(timeLimit,'%Y-%m-%d %H:%i:%S') timeLimit,qq,email,address,remark
+		FROM m_member
+		WHERE memberId =#{memberId}
+	</select>
+
+	<update id="updateMember" parameterType="Member">
+		UPDATE m_member
+		<set >
+			<if test="memberNo !=null and memberNo!=''">
+				memberNo=#{memberNo},
+			</if>
+			<if test="name !=null and name!=''">
+				name=#{name},
+			</if>
+			<if test="birthday !=null and birthday !=''">birthday= #{birthday},</if>
+			<if test="qq !=null and qq !=''">qq=#{qq},</if>
+			<if test="email !=null and email !=''">email= #{email},</if>
+			<if test="address !=null and address !=''">address= #{address},</if>
+			<if test="level !=null and level !=''">level= #{level},</if>
+			<if test="score !=null ">score= #{score},</if>
+			<if test="timeLimit !=null and timeLimit !=''">timeLimit= #{timeLimit},</if>
+			<if test="remark !=null and remark !=''">remark=#{remark},</if>
+			<if test="addTime !=null and addTime !=''">addTime=#{addTime},</if>
+			<if test="updateTime !=null and updateTime !=''">updateTime=sysdate(),</if>
+			<if test="status !=null ">status=#{status}</if>
+		</set>
+		WHERE 1=1
+		<if test="memberId !=null and memberId !=''">
+			AND memberId=#{memberId}
+		</if>
+	</update>
 </mapper> 

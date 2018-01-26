@@ -53,4 +53,14 @@ public class MemberConstant {
      * 请求地址:更新会员信息
      */
     public final static String MEMBERSHIP_SAVE_URL="saveMember";
+
+    /**
+     * 请求地址:跳转到编辑页面
+     */
+    public final static String MEMBERSHIP_EDIT_URL="toEditMember";
+
+    /**
+     * 逻辑视图名:编辑页面
+     */
+    public final static String MEMBERSHIP_EDIT_PAGE="member/membership-edit";
 }

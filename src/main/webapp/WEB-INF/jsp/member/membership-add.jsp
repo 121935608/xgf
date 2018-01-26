@@ -5,6 +5,11 @@
 <article class="page-container">
 	<form action="" method="post" class="form form-horizontal" id="form-member-add">
 		<div class="row cl">
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="hidden" class="input-text" value="${storeId}" placeholder="" id="storeId" name="storeId">
+			</div>
+		</div>
+		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>会员号：</label>
 			<div class="formControls col-xs-8 col-sm-4">
 				<input type="text" class="input-text" value="" placeholder="" name="memberNo" id="memberNo">
@@ -90,6 +95,24 @@
 
 
 <script type="text/javascript">
+
+    //设置表单中的初始时间，比当前时间多一小时
+    var now = new Date();
+    now.setHours(now.getHours());
+    var str = now.getFullYear() + "-" + fix((now.getMonth() + 1), 2) + "-" + fix(now.getDate(), 2) + "T" + fix(now.getHours(), 2) + ":" + fix(now.getMinutes(), 2);
+    $("#addTime").val(str);
+    //将datetime-local转换为Date
+    x = $("#addTime").val();
+    now.setFullYear(parseInt(x.substring(0, 4)));
+    now.setMonth(parseInt(x.substring(5, 7)) - 1);
+    now.setDate(parseInt(x.substring(8, 10)));
+    now.setHours(parseInt(x.substring(11, 13)));
+    now.setMinutes(parseInt(x.substring(14, 16)));
+
+    //将日期格式化为两位，不足补零
+    function fix(num, length) {
+        return ('' + num).length < length ? ((new Array(length + 1)).join('0') + num).slice(-length) : '' + num;
+    }
 $("#form-member-add").validate({
 	rules:{
         memberNo:{
