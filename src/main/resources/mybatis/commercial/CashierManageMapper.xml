@@ -24,8 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from sys_user a
 		RIGHT JOIN t_cashier b ON
 		a.userId = b.userId
-		
-		WHERE 1=1 
+		WHERE 1=1
 		<if test="relationMap.userId != null and relationMap.userId != ''">
 			AND a.userId=#{relationMap.userId}
 		</if>

@@ -215,4 +215,9 @@ public class UserDao extends DynamicObjectBaseDao implements IUserDao
     public int findAllOrders() {
         return (int)this.findForObject("SystemUserMapper.findAllOrders",null);
     }
+
+    @Override
+    public String findStoredIdByUserId(String userId) {
+        return (String) this.findForObject("SystemUserMapper.findStoredIdByUserId",userId);
+    }
 }

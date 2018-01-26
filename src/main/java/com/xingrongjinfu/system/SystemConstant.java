@@ -27,4 +27,9 @@ public interface SystemConstant
      * 模块请求地址:商品列表
      */
     public final static String COMMODITY_URL="/commodity";
+
+    /**
+     * 模块请求地址:会员/用户管理
+     */
+    public final static String MEMBER_URL="/member";
 }

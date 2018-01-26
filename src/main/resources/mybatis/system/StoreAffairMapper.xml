@@ -47,7 +47,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	 
-	<select id="updateCheckToStore"  parameterType="Store"   resultType="java.lang.Integer">
+	<update id="updateCheckToStore"  parameterType="Store">
 		update  t_store  
 		<set>
  			<if test="supervisorId != null and supervisorId != ''">supervisorId = #{supervisorId},</if>
@@ -56,7 +56,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		</set>
  		where  storeId= #{storeId} 
 		
-	</select>
+	</update>
 	 
 	 
 	 
@@ -65,8 +65,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select a.repayNo,a.addTime,c.orderNumber,b.storeName,a.repayDate,a.planTotal/100 planTotal,a.status
 			from t_repay a 
 			LEFT join  t_store b on a.userId=b.userId 
-			LEFT join  t_order c on a.userId=c.userId 
-			where 1=1 
+			LEFT join  t_order c on a.orderId=c.orderId
+		where 1=1
 			<if test="relationMap.dateType=='addTime'">
 				<if test="relationMap.beginTime != null and relationMap.beginTime != ''"> 
 					AND DATE_FORMAT(a.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')

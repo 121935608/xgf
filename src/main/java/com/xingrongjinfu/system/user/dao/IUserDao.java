@@ -134,4 +134,9 @@ public interface IUserDao
      * 查询贷款申请人数
      */
     int findAllOrders();
+
+    /**
+     * 查询当前用户的商铺id
+     */
+    String findStoredIdByUserId(String userId);
 }

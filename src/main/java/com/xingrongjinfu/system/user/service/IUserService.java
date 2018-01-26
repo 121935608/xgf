@@ -158,4 +158,9 @@ public interface IUserService
      * 查询所有的贷款人数
      */
     int findAllOrders();
+
+    /**
+     * 查询用户的商户id
+     */
+    String findStoredIdByUserId(String userId);
 }

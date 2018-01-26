@@ -318,4 +318,9 @@ public class UserService implements IUserService
     public int findAllOrders() {
         return userDao.findAllOrders();
     }
+
+    @Override
+    public String findStoredIdByUserId(String userId) {
+        return userDao.findStoredIdByUserId(userId);
+    }
 }

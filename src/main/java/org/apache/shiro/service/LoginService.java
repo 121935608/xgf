@@ -2,6 +2,7 @@ package org.apache.shiro.service;
 
 import org.apache.shiro.common.UserConstants;
 import org.apache.shiro.common.utils.MessageUtils;
+import org.apache.shiro.common.utils.SessionUtils;
 import org.apache.shiro.common.utils.SystemLogUtils;
 import org.apache.shiro.exception.JCaptchaException;
 import org.apache.shiro.exception.RoleBlockedException;
@@ -81,6 +82,8 @@ public class LoginService
             throw new UserBlockedException(user.getDescription());
         }
 
+        String storeId=userService.findStoredIdByUserId(user.getUserId());
+        SessionUtils.getSession().setAttribute("storeId",storeId);
         Role role = userService.findRoleByUserId(user.getUserId());
 
         if (UserConstants.blocked.equals(role.getStatus()))

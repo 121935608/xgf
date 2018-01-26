@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MemberMapper">
+	<resultMap id="MemberResult" type="Member">
+		<result column="memberId" property="memberId" />
+		<result column="storeId" property="storeId" />
+		<result column="memberNo" property="memberNo" />
+		<result column="name" property="name" />
+		<result column="birthday" property="birthday" />
+		<result column="qq" property="qq" />
+		<result column="email" property="email" />
+		<result column="address" property="address" />
+		<result column="level" property="level" />
+		<result column="score" property="score" />
+		<result column="timeLimit" property="timeLimit" />
+		<result column="remark" property="remark" />
+		<result column="addTime" property="addTime" />
+		<result column="updateTime" property="updateTime" />
+		<result column="status" property="status" />
+	</resultMap>
+
+	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultMap="MemberResult">
+		SELECT memberNo,name,level,score,addTime,DATE_FORMAT(timeLimit,'%Y-%m-%d %H:%i:%S') timeLimit FROM m_member
+		WHERE 1=1
+		<if test="relationMap.beginTime != null and relationMap.beginTime != ''"><!-- 开始时间检索 -->
+			AND DATE_FORMAT(timeLimit,'%Y-%m-%d %H:%i:%S') &gt;=sysdate()
+		</if>
+		<if test="relationMap.endTime != null and relationMap.endTime != ''"><!-- 结束时间检索 -->
+			AND DATE_FORMAT(timeLimit,'%Y-%m-%d %H:%i:%S') &lt; sysdate()
+		</if>
+		<if test="relationMap.memberLevel !=null and relationMap.memberLevel !='' ">
+			AND level=#{relationMap.memberLevel}
+		</if>
+		<if test="relationMap.memberNo!=null and relationMap.memberNo !=''">
+			AND (
+			memberNo LIKE CONCAT(CONCAT('%', #{relationMap.memberNo}),'%')
+			OR
+			name LIKE CONCAT(CONCAT('%', #{relationMap.memberNo}),'%')
+			)
+		</if>
+		AND storeId=#{relationMap.storeId}
+	</select>
+</mapper> 
