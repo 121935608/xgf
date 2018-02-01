@@ -57,15 +57,10 @@ public class ImportExcel<T> {
 		    		Method method=methods.get(cellNum); 
 		    		cell= ((Sheet)sheet).getCell(cellNum, rowNum);
 		    		Class paramClass= methods.get(cellNum).getParameterTypes()[0];
+		    		if(cellNum == 0 && null == cell.getContents())continue;
 		    		if(cell.getType()==CellType.LABEL || cell.getType()==CellType.NUMBER){
 		    			String str = cell.getContents(); 
 		    			//System.out.println(str);
-		    			if(cellNum==0){
-		    				if(str==null){
-		    					return list;
-		    				}
-		    			}
-		    			System.out.println(cellNum); 
 		    			if(paramClass.equals(Integer.class)){
 		    				if("".equals(str))str="0";
 		    				method.invoke(t, new Object[]{Integer.valueOf(str)});

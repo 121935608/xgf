@@ -273,7 +273,7 @@ public class RegisterController extends BaseController{
                     //检验商品名、条码唯一   分类、单位、供应商编号存在
                     Map map = new HashMap();
                     if(null == register.getCommodityName() || null == register.getCommodityNo()){
-                        return new Message(false,"请输入商品名称和条码！");
+                        continue;
                     }
                     map.put("commodityName", register.getCommodityName());
                     map.put("commodityNo", register.getCommodityNo());

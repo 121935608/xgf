@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<select id="queryCategorys" resultMap="CategoryResult">
-		SELECT * FROM t_category WHERE type = "FL" order by sort asc
+		SELECT * FROM t_category WHERE type = "FL" and `status`=1 order by sort asc
 	</select>
 	
 	<select id="findByCategoryId" parameterType="String" resultType="Category">
@@ -24,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="findCategoryByPid" parameterType="String" resultType="Category">
-		SELECT * FROM t_category WHERE parentId = "0" order by sort asc
+		SELECT * FROM t_category WHERE parentId = "0" and `status`=1 order by sort asc
 	</select>
 	
 	<delete id="deleteCategoryInfo" parameterType="Category">
