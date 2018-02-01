@@ -86,7 +86,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			a.commodityAdName LIKE CONCAT(CONCAT('%', #{relationMap.fuzzyCondition}),'%')
 			)
 		</if>
-		order by a.sort asc,a.createTime desc
+		order by a.sort asc
 	</select>
 
 	<!-- 修改信息 -->

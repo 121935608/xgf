@@ -31,11 +31,12 @@
 			</div>
 		</div>
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3">图片：</label>
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>图片：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="file"  id="picture" accept="image/*" name="picture" onchange="changImg(event)">
+			<div id="img"></div>
+	        	<input type="file" class="picture" id="picture" accept="image/*" name="picture" onchange="changImg(event)">
 			</div>
-		</div>
+		</div> 
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>排序：</label>
 			<div class="formControls col-xs-8 col-sm-4">
@@ -93,7 +94,7 @@
 		function beforeRemove(treeId, treeNode) {
 			parent.layer.confirm("确认删除菜单【 " + treeNode.name + "】吗？",function(index){
 				$.ajax({
-						url:"${context_root}/commodity/delMenu.action" ,
+						url:"${context_root}/fenlei/delMenu.action" ,
 						data : {'categoryId':treeNode.id,'parentId':treeNode.pId} ,
 						type:'post',
 						async:true ,
@@ -117,11 +118,12 @@
 	 function onClick(e,treeId, treeNode) {
 		var zTree = $.fn.zTree.getZTreeObj("classificationTree");
 		zTree.expandNode(treeNode);
-		$.post("${context_root}/commodity/getMenu.action?categoryId=" + treeNode.id , function(data){
+		var path = '${imgPath}';
+		$.post("${context_root}/fenlei/getMenu.action?categoryId=" + treeNode.id , function(data){
 			$("#categoryId").val(data.parentId);
 			$("#categoryId").val(data.categoryId);
 			$("#categoryName").val(data.categoryName);
-			$("#img").val(data.img);
+			/* $("#img").append("<img src="+path+data.img+" style=\"width:80px;height:80px;\""); */
 			$("#status").val(data.status);
 			$("#sort").val(data.sort);
 			
@@ -134,7 +136,7 @@
 	
 	 $(document).ready(function(){
 			var t = $("#classificationTree");
-			$.post("${context_root}/commodity/classificationList.action", function(data){
+			$.post("${context_root}/fenlei/fenleiList.action", function(data){
 				t = $.fn.zTree.init(t, setting, data);
 				t.expandAll(true);
 			});
@@ -170,7 +172,7 @@
 			status:{
 				isSpace:true,
 				required:true
-			}, 
+			},
 			sort:{
 				isSpace:true,
 				required:true
@@ -184,7 +186,7 @@
 			var index = parent.layer.load();
 			var formData = new FormData($('#form-classification-save')[0]);
 			$.ajax({
-				url:"${context_root}/commodity/saveClassification.action", 
+				url:"${context_root}/fenlei/saveFenlei.action", 
 				type:'post',
 				data:formData,
 				mimeType: "multipart/form-data",
@@ -239,7 +241,7 @@
 			$("#status").append(selectOption);
 			$("select option[value='0']").remove();
 		}
-	} 
+	}
 	 
 </SCRIPT> 
 </body>

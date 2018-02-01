@@ -170,7 +170,7 @@ $(document).ready(function(){
                 if (row.country == "1") {
                     return "国内";
                 } else if(row.country == "2") {
-                    return "进口";
+                    return "国外";
                 }else {
                     return "";
                 }

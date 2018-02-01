@@ -115,16 +115,18 @@ public class ClassificationController extends BaseController {
 	public @ResponseBody Message saveCategory(Category category, MultipartFile picture) {
 		int result = 0;
 		
-		AliyunOSSClientUtil aliyunOSSClientUtil = new AliyunOSSClientUtil();
 		try {
-			String key = aliyunOSSClientUtil.uploadImg(picture);
-			if (key != null) {
-
-				String originalFilename = picture.getOriginalFilename();
-				String filePath = aliyunOSSClientUtil.FOLDER + aliyunOSSClientUtil.filePath;
-				category.setImg(filePath);
-
-			}
+		    if(picture.getSize() != 0){
+		        AliyunOSSClientUtil aliyunOSSClientUtil = new AliyunOSSClientUtil();
+		        String key = aliyunOSSClientUtil.uploadImg(picture);
+		        if (key != null) {
+		            
+		            String originalFilename = picture.getOriginalFilename();
+		            String filePath = aliyunOSSClientUtil.FOLDER + aliyunOSSClientUtil.filePath;
+		            category.setImg(filePath);
+		            
+		        }
+		    }
 		} catch (OSSException e) {
 			e.printStackTrace();
 			return new Message(result);

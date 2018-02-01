@@ -51,6 +51,11 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.xingrongjinfu.system.product.model.Product" alias="Product"/>
 		<typeAlias type="com.xingrongjinfu.system.product.model.Classes" alias="Classes"/>
 		<typeAlias type="com.xingrongjinfu.memberManage.member.model.Membership" alias="Member"/>
+		<typeAlias type="com.xingrongjinfu.commodity.fenlei.model.Fenlei" alias="Fenlei"/>
+		<typeAlias type="com.xingrongjinfu.commodity.register.model.Register" alias="Register"/>
+		<typeAlias type="com.xingrongjinfu.commodity.register.model.RegisterExp" alias="RegisterExp"/>
+		<typeAlias type="com.xingrongjinfu.commodity.supply.model.Supply" alias="Supply"/>
+		<typeAlias type="com.xingrongjinfu.commodity.unit.model.Unit" alias="Unit"/>
 		<!-- 分页 -->
 		<typeAlias type="org.framework.base.util.TableDataInfo" alias="TableDataInfo"/>
 		<typeAlias type="org.framework.base.util.PageUtilEntity" alias="PageUtilEntity"/>
