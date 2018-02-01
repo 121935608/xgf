@@ -287,23 +287,27 @@ public class RegisterController extends BaseController{
                         map.put("supplierCode", register.getSupplierCode());
                     }
                     Map m = registerService.isExist(map);
-                    
-                    if(null != m.get("commodityName")){
+                    if(null == m){
+                        return new Message(false,"请输入正确的编号！");
+                    }
+                    if(null != m.get("commodityId")){
                         return new Message(false,"商品  "+register.getCommodityName()+"  已存在！");
                     }
-                    if(null == m.get("unitId")){
-                        return new Message(false,"输入的单位编号有误！");
+                    if(null != register.getUnitCode()){
+                        if(null == m.get("unitId")){
+                            return new Message(false,"输入的单位编号有误！");
+                        }
+                        register.setUnitId((String) m.get("unitId"));
                     }
-                    register.setUnitId((String) m.get("unitId"));
-                    if(null != m.get("supply")){
-                        if((int) m.get("supply") == 0){
-                            return new Message(false,"输入的供应商编号有误！");
+                    if(null != register.getSupplierId()){
+                        if(null == m.get("supplierId")){
+                                return new Message(false,"输入的供应商编号有误！");
                         }
                         register.setSupplierId((String) m.get("supplierId"));
                     }
-                    if(null != m.get("category")){
-                        if((int) m.get("category") == 0){
-                            return new Message(false,"输入的单位编号有误！");
+                    if(null != register.getCategoryId()){
+                        if(null == m.get("categoryId")){
+                                return new Message(false,"输入的分类编号有误！");
                         }
                         register.setCategoryId((String) m.get("categoryId"));
                     }
@@ -343,24 +347,27 @@ public class RegisterController extends BaseController{
                         map.put("supplierCode", register.getSupplierCode());
                     }
                     Map m = registerService.isExist(map);
-                    if(null == m.get("commodityName")){
+                    if(null == m){
                         return new Message(false,"商品  "+register.getCommodityName()+"  不存在！");
                     }
-                    if(null != m.get("unit")){
-                        if((int) m.get("unit") == 0){
+                    if(null == m.get("commodityId")){
+                        return new Message(false,"商品  "+register.getCommodityName()+"  不存在！");
+                    }
+                    if(null != register.getUnitCode()){
+                        if(null == m.get("unitId")){
                             return new Message(false,"输入的单位编号有误！");
                         }
                         register.setUnitId((String) m.get("unitId"));
                     }
-                    if(null != m.get("supply")){
-                        if((int) m.get("supply") == 0){
-                            return new Message(false,"输入的供应商编号有误！");
+                    if(null != register.getSupplierId()){
+                        if(null == m.get("supplierId")){
+                                return new Message(false,"输入的供应商编号有误！");
                         }
                         register.setSupplierId((String) m.get("supplierId"));
                     }
-                    if(null != m.get("category")){
-                        if((int) m.get("category") == 0){
-                            return new Message(false,"输入的单位编号有误！");
+                    if(null != register.getCategoryId()){
+                        if(null == m.get("categoryId")){
+                                return new Message(false,"输入的分类编号有误！");
                         }
                         register.setCategoryId((String) m.get("categoryId"));
                     }
@@ -390,7 +397,10 @@ public class RegisterController extends BaseController{
                     map.put("commodityName", register.getCommodityName());
                     map.put("commodityNo", register.getCommodityNo());
                     Map m = registerService.isExist(map);
-                    if(null == m.get("commodityName")){
+                    if(null == m){
+                        return new Message(false,"商品  "+register.getCommodityName()+"  不存在！");
+                    }
+                    if(null == m.get("commodityId")){
                         return new Message(false,"商品  "+register.getCommodityName()+"  不存在！");
                     }
                     register.setUpdateTime(new Date());
