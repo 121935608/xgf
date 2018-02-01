@@ -95,7 +95,7 @@ public class ClassificationController extends BaseController {
         String parentId = category.getParentId();
         //如果有商品分类是该分类 则不能删除
         int n = classificationService.queryCom(categoryId);
-        if(n == 0){
+        if(n != 0){
             return new Message(false, "该分类不能被删除！");
         }
         if (ObjectUtil.isNotNull(categoryId) || ObjectUtil.isNotNull(parentId))
