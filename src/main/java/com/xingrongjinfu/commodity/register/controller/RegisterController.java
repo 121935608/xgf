@@ -274,8 +274,7 @@ public class RegisterController extends BaseController{
                     //检验商品名、条码唯一   分类、单位、供应商编号存在
                     Map map = new HashMap();
                     if(null == register.getCommodityName() || null == register.getCommodityNo()){
-                        list.remove(register);
-                        continue;
+                        return new Message(false,"请输入商品名称和条码！");
                     }
                     map.put("commodityName", register.getCommodityName());
                     map.put("commodityNo", register.getCommodityNo());
@@ -414,8 +413,6 @@ public class RegisterController extends BaseController{
             e.printStackTrace();
             return new Message(false,"导入失败！"); 
         }
-        if(list.size()==0)
-            return new Message(false,"请输入有效信息！");
         return new Message(true,"导入成功！"); 
     }
     /**

@@ -41,7 +41,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="type != null and type != ''">type = #{type},</if>
  			<if test="img != null and img != ''">img = #{img},</if>
  			<if test="sort != null and sort != ''">sort = #{sort},</if>
- 			<if test="status.toString() != null and status.toString() != ''">status = #{status},</if>
  			<if test="addTime != null and addTime != ''">addTime = #{addTime},</if>
  			<if test="parentId != null and parentId != ''">parentId = #{parentId}</if>
  		</set>
