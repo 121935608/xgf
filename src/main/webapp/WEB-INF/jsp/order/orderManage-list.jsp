@@ -157,7 +157,7 @@ $(document).ready(function(){
                 if (row.platform!=null){
                     if (row.platform=='Android') {
                         return "Android";
-                    } else if(row.platform == 'ios') {
+                    } else if(row.platform == 'iOS') {
                         return "IOS";}
                 }else {
                     return "";
