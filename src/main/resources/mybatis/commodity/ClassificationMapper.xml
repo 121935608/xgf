@@ -28,7 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<delete id="deleteCategoryInfo" parameterType="Category">
- 		delete from t_category where 1=1
+ 		update t_category set status=-1 where 1=1
  		<if test="categoryId != null and categoryId  != ''">and categoryId = #{categoryId}</if>
  		<if test="parentId != null and parentId  != ''">and parentId = #{parentId}</if>
  	</delete>
@@ -74,4 +74,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="parentId != null and parentId != ''">#{parentId}</if>
  		)
  	</insert>	
+ 	
+ 	<select id="queryCom" parameterType="string" resultType="int">
+ 		SELECT COUNT(*) FROM t_category c RIGHT JOIN t_commodity m ON c.categoryId=m.categoryId 
+ 		WHERE c.categoryId =#{0}
+ 	</select>
 </mapper> 

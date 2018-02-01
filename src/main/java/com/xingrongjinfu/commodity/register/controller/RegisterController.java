@@ -262,9 +262,10 @@ public class RegisterController extends BaseController{
         String storeId = (String) SessionUtils.getSession().getAttribute("storeId");
         String[] fields=new String[]{ "commodityName","commodityNo","categoryCode","unitCode","supplierCode","salePrice",
                 "inPrice","vipPrice","discount","stockNum","upperLimit","lowerLimit"};
+        List<Register> list = new ArrayList<>();
         try {
             ImportExcel<Register> ie=new ImportExcel<Register>();
-            List<Register> list=ie.readExcel(file.getInputStream(), fields, new Register().getClass().getName());
+            list=ie.readExcel(file.getInputStream(), fields, new Register().getClass().getName());
             if(list.size()==0){return new Message(false,"没有数据！"); }
             int n = list.size();
             //新增商品
@@ -273,6 +274,7 @@ public class RegisterController extends BaseController{
                     //检验商品名、条码唯一   分类、单位、供应商编号存在
                     Map map = new HashMap();
                     if(null == register.getCommodityName() || null == register.getCommodityNo()){
+                        list.remove(register);
                         continue;
                     }
                     map.put("commodityName", register.getCommodityName());
@@ -412,7 +414,9 @@ public class RegisterController extends BaseController{
             e.printStackTrace();
             return new Message(false,"导入失败！"); 
         }
-        return new Message(true,"导入成功！");
+        if(list.size()==0)
+            return new Message(false,"请输入有效信息！");
+        return new Message(true,"导入成功！"); 
     }
     /**
      * Description: 获取分类<br/>

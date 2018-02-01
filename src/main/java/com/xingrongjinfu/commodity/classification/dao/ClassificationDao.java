@@ -3,13 +3,10 @@ package com.xingrongjinfu.commodity.classification.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
-import org.framework.base.util.PageUtilEntity;
-import org.framework.base.util.TableDataInfo;
 import org.framework.core.dao.DynamicObjectBaseDao;
 import org.springframework.stereotype.Repository;
 
 import com.xingrongjinfu.commodity.classification.model.Category;
-import com.xingrongjinfu.system.permission.model.Permission;
 
 /**
  * 数据层处理
@@ -72,6 +69,12 @@ public class ClassificationDao extends DynamicObjectBaseDao implements IClassifi
 	public int deleteCategory(Category category) {
 		return (int) this.delete("CommodityClassificationMapper.deleteCategoryInfo", category);
 	}
+
+    @Override
+    public int queryCom(String id) {
+       
+        return (int) this.findForObject("CommodityClassificationMapper.queryCom", id);
+    }
 
 	
 

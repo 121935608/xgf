@@ -89,11 +89,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="findAllClass" resultMap="CategoryResult">
-		SELECT categoryId,categoryName FROM t_category WHERE type='FL' AND parentId !='0'
+		SELECT categoryId,categoryName FROM t_category WHERE type='FL' AND parentId !='0' and status=1
 	</select>
 
 	<select id="findAllCategory" resultMap="CategoryResult">
-		SELECT categoryId,categoryName FROM t_category WHERE type='BQ'
+		SELECT categoryId,categoryName FROM t_category WHERE type='BQ' and status=1
 	</select>
 
 	<select id="findAllSupply" resultMap="ProductResult">
@@ -101,6 +101,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="type!=null and type!=''">
 			AND type=#{type}
 		</if>
+		and status=1
 		GROUP BY supply
 	</select>
 
@@ -109,6 +110,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="type!=null and type!=''">
 			AND type=#{type}
 		</if>
+		and status=1
 	</select>
 
 	<update id="changeStatus" parameterType="Product">

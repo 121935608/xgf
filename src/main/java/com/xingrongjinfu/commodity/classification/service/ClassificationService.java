@@ -2,14 +2,11 @@ package com.xingrongjinfu.commodity.classification.service;
 
 import java.util.List;
 
-import org.framework.base.util.PageUtilEntity;
-import org.framework.base.util.TableDataInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.xingrongjinfu.commodity.classification.dao.IClassificationDao;
 import com.xingrongjinfu.commodity.classification.model.Category;
-import com.xingrongjinfu.system.user.model.User;
 
 /**
  * 业务层处理
@@ -73,5 +70,11 @@ public class ClassificationService implements IClassificationService {
 	public int deleteCategory(Category category) {
 		return classificationDao.deleteCategory(category);
 	}
+
+    @Override
+    public int queryCom(String id) {
+        
+        return classificationDao.queryCom(id);
+    }
 
 }

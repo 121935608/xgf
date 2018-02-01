@@ -57,15 +57,17 @@ $("#download").attr("href", '${context_root}'+molUrl);
         cache:false,
         processData: false,
         success: function (data) {
-        	alert(data);
+        	var data = JSON.parse(data);
         	if(data.s == true){
         		index = parent.layer.getFrameIndex(window.name);
 				parent.layer.msg("导入成功,正在刷新数据请稍后……",{icon:1,time: 1000,shade: [0.1,'#fff']},function(){
-					window.parent.location.reload();
+				window.parent.location.reload();
 				});
 			}else if(data.s == false){
-				var mm = data.m;
-				alert(mm);
+				index = parent.layer.getFrameIndex(window.name);
+				parent.layer.msg(data.m,{icon:2,time: 1000,shade: [0.1,'#fff']},function(){
+				window.parent.location.reload();
+				});
 			}
         },
         error:function(data){

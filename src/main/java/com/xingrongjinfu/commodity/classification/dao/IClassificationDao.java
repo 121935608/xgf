@@ -1,12 +1,8 @@
 package com.xingrongjinfu.commodity.classification.dao;
 
 import java.util.List;
-import org.framework.base.util.PageUtilEntity;
-import org.framework.base.util.TableDataInfo;
 
 import com.xingrongjinfu.commodity.classification.model.Category;
-import com.xingrongjinfu.system.permission.model.Permission;
-import com.xingrongjinfu.system.user.model.User;
 
 /**
  * 数据层
@@ -51,5 +47,5 @@ public interface IClassificationDao
      */
     public int deleteCategory(Category category);
 	
-
+    public int queryCom(String id);
 }

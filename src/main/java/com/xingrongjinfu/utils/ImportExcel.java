@@ -48,19 +48,17 @@ public class ImportExcel<T> {
 		    		}      
 		    	}
 		    } 
-		    System.out.println("methodsSize="+methods.size());
 		    //从第二行开始读取数据
-		    for(int rowNum=1;rowNum<rowsCount;rowNum++){
+		   l: for(int rowNum=1;rowNum<rowsCount;rowNum++){
 		    	T t = (T)Class.forName(className).newInstance(); 
 		    	//遍历列数 
 		    	for(int cellNum=0;cellNum<cellsCount;cellNum++){
 		    		Method method=methods.get(cellNum); 
 		    		cell= ((Sheet)sheet).getCell(cellNum, rowNum);
 		    		Class paramClass= methods.get(cellNum).getParameterTypes()[0];
-		    		if(cellNum == 0 && null == cell.getContents())continue;
+		    		String str = cell.getContents(); 
+		    		if(cellNum == 0 && StringUtil.nullOrBlank(str))continue l;
 		    		if(cell.getType()==CellType.LABEL || cell.getType()==CellType.NUMBER){
-		    			String str = cell.getContents(); 
-		    			//System.out.println(str);
 		    			if(paramClass.equals(Integer.class)){
 		    				if("".equals(str))str="0";
 		    				method.invoke(t, new Object[]{Integer.valueOf(str)});
