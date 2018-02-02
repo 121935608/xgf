@@ -56,11 +56,11 @@ public class RegisterDao extends DynamicObjectBaseDao implements IRegisterDao {
         return (Map) this.findForObject("RegisterMapper.isExist", map);
     }
     @Override
-    public int impRegisterList(List<Register> list) {
+    public int updateImpExcel(List<Register> list) {
         int a = 0;
         try
         {
-            a =  this.batchSave("RegisterMapper.addRegisterList", list);
+            a =  this.batchSave("RegisterMapper.updateImpExcel", list);
         }
         catch (Exception e)
         {
@@ -71,7 +71,11 @@ public class RegisterDao extends DynamicObjectBaseDao implements IRegisterDao {
     @Override
     public void updateRegisterList(List<Register> list) throws Exception {
         
-        this.batchUpdate("RegisterMapper.updateRegisterList", list);
+        this.batchSave("RegisterMapper.updateRegisterList", list);
+    }
+    @Override
+    public void updateStockList(List<Register> list) throws Exception {
+        this.batchSave("RegisterMapper.updateStockList", list);
     }
 
 }

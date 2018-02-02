@@ -51,13 +51,17 @@ public class RegisterService implements IRegisterService {
         return registerDao.isExist(map);
     }
     @Override
-    public int impRegisterList(List<Register> list) {
+    public int updateImpExcel(List<Register> list) {
         
-        return registerDao.impRegisterList(list);
+        return registerDao.updateImpExcel(list);
     }
     @Override
     public void updateRegisterList(List<Register> list) throws Exception {
         registerDao.updateRegisterList(list);
+    }
+    @Override
+    public void updateStockList(List<Register> list) throws Exception {
+        registerDao.updateStockList(list);
     }
 
 }

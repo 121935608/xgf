@@ -30,7 +30,9 @@ public interface IRegisterService {
     
     public Map isExist(Map map);
     
-    public int impRegisterList(List<Register> list);
+    public int updateImpExcel(List<Register> list);
     
     public void updateRegisterList(List<Register> list) throws Exception;
+    
+    public void updateStockList(List<Register> list) throws Exception;
 }

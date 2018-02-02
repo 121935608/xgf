@@ -300,13 +300,13 @@ public class RegisterController extends BaseController{
                         }
                         register.setUnitId((String) m.get("unitId"));
                     }
-                    if(null != register.getSupplierId()){
+                    if(null != register.getSupplierCode()){
                         if(null == m.get("supplierId")){
                                 return new Message(false,"输入的供应商编号有误！");
                         }
                         register.setSupplierId((String) m.get("supplierId"));
                     }
-                    if(null != register.getCategoryId()){
+                    if(null != register.getCategoryCode()){
                         if(null == m.get("categoryId")){
                                 return new Message(false,"输入的分类编号有误！");
                         }
@@ -318,14 +318,14 @@ public class RegisterController extends BaseController{
                     register.setCommodityStatus("0");
                     register.setStatus(1);
                     register.setStoreId(storeId);
-                    if(0 != register.getInPrice())
+                    if(null != register.getInPrice())
                         register.setInPrice(register.getInPrice()*100);
-                    if(0 != register.getSalePrice())
+                    if(null != register.getSalePrice())
                         register.setSalePrice(register.getSalePrice()*100);
-                    if(0 != register.getVipPrice())
+                    if(null != register.getVipPrice())
                         register.setVipPrice(register.getVipPrice()*100);
                 }
-                n=registerService.impRegisterList(list);
+                n=registerService.updateImpExcel(list);
                 return new Message(true,"导入成功，添加数据"+n+"条！"); 
             }
             //覆盖商品
@@ -360,24 +360,24 @@ public class RegisterController extends BaseController{
                         }
                         register.setUnitId((String) m.get("unitId"));
                     }
-                    if(null != register.getSupplierId()){
+                    if(null != register.getSupplierCode()){
                         if(null == m.get("supplierId")){
                                 return new Message(false,"输入的供应商编号有误！");
                         }
                         register.setSupplierId((String) m.get("supplierId"));
                     }
-                    if(null != register.getCategoryId()){
+                    if(null != register.getCategoryCode()){
                         if(null == m.get("categoryId")){
                                 return new Message(false,"输入的分类编号有误！");
                         }
                         register.setCategoryId((String) m.get("categoryId"));
                     }
                     register.setUpdateTime(new Date());
-                    if(0 != register.getInPrice())
+                    if(null != register.getInPrice())
                         register.setInPrice(register.getInPrice()*100);
-                    if(0 != register.getSalePrice())
+                    if(null != register.getSalePrice())
                         register.setSalePrice(register.getSalePrice()*100);
-                    if(0 != register.getVipPrice())
+                    if(null != register.getVipPrice())
                         register.setVipPrice(register.getVipPrice()*100);
                 }
                 registerService.updateRegisterList(list);
@@ -406,7 +406,7 @@ public class RegisterController extends BaseController{
                     }
                     register.setUpdateTime(new Date());
                 }
-                registerService.updateRegisterList(list);
+                registerService.updateStockList(list);
                 return new Message(true,"导入成功，追加库存数据"+n+"条！"); 
             }
         } catch (Exception e) {

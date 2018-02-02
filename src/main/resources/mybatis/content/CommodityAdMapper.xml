@@ -74,9 +74,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			AND DATE_FORMAT(a.createTime,'%Y%m%d') &lt;=
 			DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
 		</if>
-		<if test="relationMap.type != null and relationMap.type != ''">
-			AND a.type = #{relationMap.type}
-		</if>
 		<if test="relationMap.status != null and relationMap.status != ''">
 			AND a.status = #{relationMap.status}
 		</if>

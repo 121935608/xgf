@@ -4,7 +4,10 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import org.apache.shiro.common.utils.Md5Utils;
 import org.aspectj.lang.annotation.ActionControllerLog;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
@@ -20,14 +23,7 @@ import com.xingrongjinfu.commercial.CommercialConstant;
 import com.xingrongjinfu.commercial.cashierManage.common.CashierManageConstant;
 import com.xingrongjinfu.commercial.cashierManage.model.CashierManage;
 import com.xingrongjinfu.commercial.cashierManage.service.ICashierManageService;
-import com.xingrongjinfu.commodity.label.common.LabelConstant;
-import com.xingrongjinfu.commodity.label.model.Label;
-import com.xingrongjinfu.content.advertisement.common.AdvertisementConstant;
-import com.xingrongjinfu.content.advertisement.model.Advertisement;
-import com.xingrongjinfu.system.role.common.RoleConstant;
-import com.xingrongjinfu.system.role.model.Role;
 import com.xingrongjinfu.system.syscode.model.SysCode;
-import com.xingrongjinfu.system.user.common.UserConstant;
 import com.xingrongjinfu.system.user.model.User;
 
 /**
@@ -106,6 +102,14 @@ public class CashierManageController extends BaseController {
 		String cashierId = cashierManage.getCashierId();
 
 		if (cashierId == null) {
+		    String name = cashierManage.getCashierName();
+		    String regex = "^[0-9a-zA_Z]+$";
+		    Pattern p = Pattern.compile(regex);
+		    Matcher m = p.matcher(name);
+		    if(!m.matches()){
+		        return new Message(false, "账号格式不正确！");
+		    }
+		    cashierManage.setPassword(Md5Utils.hash(name+cashierManage.getPassword()));
 			cashierManage.setUserId(this.getCurrentUser().getUserId());
 			result = cashierManageService.addCashierManageInfo(cashierManage);
 		}

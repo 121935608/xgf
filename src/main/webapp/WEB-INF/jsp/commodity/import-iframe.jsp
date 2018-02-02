@@ -1,7 +1,7 @@
 ﻿<%@ page contentType="text/html; charset=UTF-8"%>
 <%@include file="/WEB-INF/jsp/common/taglibs.jspf"%>
 <ys:contentHeader title="商品管理"/>
-<body style="margin:0 auto;"> 
+<body style="margin:0 auto;line-height:40px;"> 
 <style>
 	span{line-height:35px;}
 	span{font-size:12px;}

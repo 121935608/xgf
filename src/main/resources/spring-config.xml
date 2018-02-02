@@ -53,8 +53,27 @@
         <property name="maxPoolPreparedStatementPerConnectionSize" value="${druid.maxPoolPreparedStatementPerConnectionSize}" />
 
         <!-- 配置监控统计拦截的filters -->
-        <property name="filters" value="${druid.filters}" />
+        <!-- <property name="filters" value="${druid.filters}" /> -->
+        <!-- proxyFilters与filters不要同时存在 -->
+        <property name="proxyFilters">  
+            <list>  
+                <ref bean="stat-filter" />  
+                <ref bean="wall-filter"/>  
+            </list>  
+        </property>
 	</bean>
+	
+	<bean id="stat-filter" class="com.alibaba.druid.filter.stat.StatFilter">  
+	    <property name="slowSqlMillis" value="10000" />  
+	    <property name="logSlowSql" value="true" />  
+	</bean>  
+	<bean id="wall-filter" class="com.alibaba.druid.wall.WallFilter">  
+        <property name="config" ref="wall-config" />  
+    </bean>  
+      
+    <bean id="wall-config" class="com.alibaba.druid.wall.WallConfig">  
+        <property name="multiStatementAllow" value="true" />  
+    </bean> 
 
 	<!-- 配置mybatis的sqlSessionFactory -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
