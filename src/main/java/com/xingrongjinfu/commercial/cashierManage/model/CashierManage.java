@@ -13,12 +13,27 @@ public class CashierManage implements Serializable {
 
 	private String cashierId;
 	private String cashierName;
+	private String name;
 	private String password;
-	private String userId;
+	private String storeId;
 	private int status;
 	private Date addTime;
 	private Date updateTime;
-	public String getCashierId() {
+	
+	
+	public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getStoreId() {
+        return storeId;
+    }
+    public void setStoreId(String storeId) {
+        this.storeId = storeId;
+    }
+    public String getCashierId() {
 		return cashierId;
 	}
 	public void setCashierId(String cashierId) {
@@ -35,12 +50,6 @@ public class CashierManage implements Serializable {
 	}
 	public void setPassword(String password) {
 		this.password = password;
-	}
-	public String getUserId() {
-		return userId;
-	}
-	public void setUserId(String userId) {
-		this.userId = userId;
 	}
 	public int getStatus() {
 		return status;
@@ -59,11 +68,5 @@ public class CashierManage implements Serializable {
 	}
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
-	}
-	@Override
-	public String toString() {
-		return "CashierManage [cashierId=" + cashierId + ", cashierName=" + cashierName + ", password=" + password
-				+ ", userId=" + userId + ", status=" + status + ", addTime=" + addTime + ", updateTime=" + updateTime
-				+ "]";
 	}
 }

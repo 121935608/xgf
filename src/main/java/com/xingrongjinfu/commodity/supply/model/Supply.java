@@ -7,9 +7,18 @@ public class Supply {
     private String storeId;
     private String supplierName;
     private String supplierCode;
+    private String contactName;
     private String phone;
     private Integer status;
     private Date addTime;
+    
+    
+    public String getContactName() {
+        return contactName;
+    }
+    public void setContactName(String contactName) {
+        this.contactName = contactName;
+    }
     public String getSupplierId() {
         return supplierId;
     }

@@ -62,9 +62,9 @@
 				"bSearchable" : false,
 				"mRender" : function(data, type, row) {
 					//0:启用；1:禁用）
-					if (row.status == '0') {
+					if (row.status == 1) {
 						return "<span class=\"label label-success radius\">已启用</span>";
-					} else if (row.status == '1') {
+					} else if (row.status == -1) {
 						return "<span class=\"label label-defaunt radius\">已停用</span>";
 					} else {
 						return "";
@@ -99,7 +99,7 @@
 		}
 		
 		function statusTools(row) {
-		    if (row.status == '0') {
+		    if (row.status == 1) {
 		        return "<a style=\"text-decoration:none\" onClick=\"cashierManage_stop(this,\'" + row.cashierId + "\')\" href=\"javascript:;\" title=\"停用\"><i class=\"Hui-iconfont\">停用</i></a>";
 		    } else {
 		        return "<a style=\"text-decoration:none\" onClick=\"cashierManage_start(this,\'" + row.cashierId + "\')\" href=\"javascript:;\" title=\"启用\"><i class=\"Hui-iconfont\">启用</i></a>";
@@ -115,7 +115,7 @@
 		function cashierManage_stop(obj,id){
 			parent.layer.confirm('确认要停用吗？',{icon: 3, title:'提示'},function(index){
 				$.ajax({
-					url:"${context_root}/commercial/changeCashierManageStatus.action?cashierId=" + id +"&status=1", 
+					url:"${context_root}/commercial/changeCashierManageStatus.action?cashierId=" + id +"&status=-1", 
 					type:'post',
 					async:true ,
 					cache:false ,
@@ -139,7 +139,7 @@
 		function cashierManage_start(obj,id){
 			parent.layer.confirm('确认要启用吗？',{icon: 3, title:'提示'},function(index){
 				$.ajax({
-					url:"${context_root}/commercial/changeCashierManageStatus.action?cashierId=" + id +"&status=0", 
+					url:"${context_root}/commercial/changeCashierManageStatus.action?cashierId=" + id +"&status=1", 
 					type:'post',
 					async:true ,
 					cache:false ,

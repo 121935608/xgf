@@ -8,6 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.shiro.common.utils.Md5Utils;
+import org.apache.shiro.common.utils.SessionUtils;
 import org.aspectj.lang.annotation.ActionControllerLog;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
@@ -24,7 +25,7 @@ import com.xingrongjinfu.commercial.cashierManage.common.CashierManageConstant;
 import com.xingrongjinfu.commercial.cashierManage.model.CashierManage;
 import com.xingrongjinfu.commercial.cashierManage.service.ICashierManageService;
 import com.xingrongjinfu.system.syscode.model.SysCode;
-import com.xingrongjinfu.system.user.model.User;
+import com.xingrongjinfu.utils.UuidUtil;
 
 /**
  * 业务处理
@@ -56,12 +57,12 @@ public class CashierManageController extends BaseController {
 		
 		List<SysCode> sysCodeList1 = new ArrayList<SysCode>();
 		SysCode sysCode1 = new SysCode();
-		sysCode1.setCodeid("0");
+		sysCode1.setCodeid(1+"");
 		sysCode1.setCodevalue("启用");
 		sysCodeList1.add(sysCode1);
 
 		SysCode sysCode2 = new SysCode();
-		sysCode2.setCodeid("1");
+		sysCode2.setCodeid("-1");
 		sysCode2.setCodevalue("禁用");
 		sysCodeList1.add(sysCode2);
 
@@ -77,7 +78,7 @@ public class CashierManageController extends BaseController {
 	public ModelAndView CashierManageList() {
 
 		PageUtilEntity pageUtilEntity = this.getPageUtilEntity();
-		User user = this.getCurrentUser();
+		String storeId = (String) SessionUtils.getSession().getAttribute("storeId");
 		String fuzzyCondition = pageUtilEntity.getRelationMap().get("fuzzyCondition");
 		if (fuzzyCondition != null && !fuzzyCondition.equals("")) {
 			try {
@@ -86,7 +87,7 @@ public class CashierManageController extends BaseController {
 				e.printStackTrace();
 			}
 		}
-		pageUtilEntity.getRelationMap().put("userId", user.getUserId());
+		pageUtilEntity.getRelationMap().put("storeId", storeId);
 		List<TableDataInfo> tableDataInfo = cashierManageService.pageInfoQuery(pageUtilEntity);
 
 		return buildDataTable(pageUtilEntity.getTotalResult(), tableDataInfo);
@@ -100,7 +101,7 @@ public class CashierManageController extends BaseController {
 	public @ResponseBody Message saveCashierManage(CashierManage cashierManage) {
 		int result = 0;
 		String cashierId = cashierManage.getCashierId();
-
+		String storeId = (String) SessionUtils.getSession().getAttribute("storeId");
 		if (cashierId == null) {
 		    String name = cashierManage.getCashierName();
 		    String regex = "^[0-9a-zA_Z]+$";
@@ -109,8 +110,10 @@ public class CashierManageController extends BaseController {
 		    if(!m.matches()){
 		        return new Message(false, "账号格式不正确！");
 		    }
+		    cashierManage.setCashierId(UuidUtil.get32UUID());
 		    cashierManage.setPassword(Md5Utils.hash(name+cashierManage.getPassword()));
-			cashierManage.setUserId(this.getCurrentUser().getUserId());
+			cashierManage.setStoreId(storeId);
+			cashierManage.setStatus(1);
 			result = cashierManageService.addCashierManageInfo(cashierManage);
 		}
 

@@ -45,4 +45,10 @@ public class FenleiDao extends DynamicObjectBaseDao implements IFenleiDao {
         return (int) this.delete("FenleiMapper.deleteCategoryInfo", fenlei);
     }
 
+    @Override
+    public int queryCom(String id) {
+        
+        return (int) this.findForObject("FenleiMapper.queryCom", id);
+    }
+
 }

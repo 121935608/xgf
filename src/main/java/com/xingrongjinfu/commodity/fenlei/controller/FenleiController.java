@@ -92,6 +92,11 @@ public class FenleiController extends BaseController{
         int result = 0;
         String categoryId = category.getCategoryId();
         String parentId = category.getParentId();
+        //如果有商品分类是该分类 则不能删除
+        int n = fenleiService.queryCom(categoryId);
+        if(n != 0){
+            return new Message(false, "该分类不能被删除！");
+        }
         if (ObjectUtil.isNotNull(categoryId) || ObjectUtil.isNotNull(parentId))
         {
             result = fenleiService.deleteCategory(category);

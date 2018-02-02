@@ -41,4 +41,6 @@ public interface IFenleiService {
      * 
      */
     public int deleteCategory(Fenlei fenlei);
+    
+    public int queryCom(String id);
 }

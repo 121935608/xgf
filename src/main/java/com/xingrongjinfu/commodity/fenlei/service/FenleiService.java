@@ -49,4 +49,10 @@ public class FenleiService implements IFenleiService{
         return fenleiDao.deleteCategory(fenlei);
     }
 
+    @Override
+    public int queryCom(String id) {
+        
+        return fenleiDao.queryCom(id);
+    }
+
 }

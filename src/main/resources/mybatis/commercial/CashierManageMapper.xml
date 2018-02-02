@@ -25,8 +25,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		RIGHT JOIN t_cashier b ON
 		a.userId = b.userId
 		WHERE 1=1
-		<if test="relationMap.userId != null and relationMap.userId != ''">
-			AND a.userId=#{relationMap.userId}
+		<if test="relationMap.storeId != null and relationMap.storeId != ''">
+			AND b.storeId=#{relationMap.storeId}
 		</if>
 		<if
 			test="relationMap.fuzzyCondition != null and relationMap.fuzzyCondition != ''">
@@ -44,14 +44,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="cashierName != null and cashierName != ''">
  			cashierName = #{cashierName},
  			</if>
+ 			<if test="name != null and name != ''">
+ 			name = #{name},
+ 			</if>
  			<if test="password != null and password != ''">
  			password = #{password},</if>
  			
- 			<if test="status.toString() != null and status.toString() != ''">
+ 			<if test="status != null and status != ''">
  			status = #{status},
- 			</if>
- 			<if test="addTime != null and addTime != ''">
- 			addTime = #{addTime},
  			</if>
  			<if test="updateTime != null and updateTime != ''">
  			updateTime = #{updateTime}
@@ -66,21 +66,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	
  	<!-- 插入信息 -->
  	<insert id="addCashierManageInfo" parameterType="CashierManage" keyProperty="cashierId">
- 		<selectKey keyProperty="cashierId" resultType="java.lang.String" order="BEFORE">
- 			select uuid()
- 		</selectKey>
  		insert into t_cashier(cashierId,
  			<if test="cashierName != null and cashierName != ''">cashierName,</if>
  			<if test="password != null and password != ''">password,</if>
- 			<if test="userId != null and userId != ''">userId,</if>
+ 			<if test="name != null and name != ''">name,</if>
+ 			<if test="storeId != null and storeId != ''">storeId,</if>
  			<if test="status != null and status != ''">status,</if>
- 			addTime,updateTime
+ 			addTime
  		)values(#{cashierId},
  			<if test="cashierName != null and cashierName != ''">#{cashierName},</if>
  			<if test="password != null and password != ''">#{password},</if>
- 			<if test="userId != null and userId != ''">#{userId},</if>
+ 			<if test="name != null and name != ''">#{name},</if>
+ 			<if test="storeId != null and storeId != ''">#{storeId},</if>
  			<if test="status != null and status != ''">#{status},</if>
- 			sysdate(),sysdate()
+ 			sysdate()
  		)
  	</insert>
 
