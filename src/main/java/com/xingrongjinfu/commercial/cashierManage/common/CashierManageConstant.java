@@ -27,6 +27,10 @@ public class CashierManageConstant
      * 请求地址：跳转至添加界面
      */
     public final static String TO_ADD_URL = "toCashierManageAdd";
+    /**
+     * 请求地址：跳转至修改界面
+     */
+    public final static String TO_MODIFY_URL = "toCashierManageModify";
 
     /**
      * 请求地址：列表查询
@@ -42,6 +46,10 @@ public class CashierManageConstant
      * 请求地址：启动/停用 操作
      */
     public final static String CHANGE_STATUS_URL = "changeCashierManageStatus";
+    /**
+     * 请求地址：修改收银员
+     */
+    public final static String MODIFY_URL = "modifyCashierManage";
     
     /**
      * 逻辑视图名：列表界面
@@ -52,6 +60,10 @@ public class CashierManageConstant
      * 逻辑视图名：添加界面
      */
     public final static String ADD_PAGE = "commercial/cashierManage-add";
+    /**
+     * 逻辑视图名：修改界面
+     */
+    public final static String MODIFY_PAGE = "commercial/cashierManage-modify";
     
     /**
      * 请求地址：检查唯一

@@ -13,7 +13,7 @@
 	<div class="page-container">
 	<div class="cl pd-5 bg-1 bk-gray mt-20"> 
 		<span class="l">
-			<a href="javascript:;" onclick="cashierManage_add('添加账号','${context_root}/commercial/toCashierManageAdd.action','','610')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加账号</a>
+			<a href="javascript:;" onclick="cashierManage_add('添加账号','${context_root}/commercial/toCashierManageAdd.action','','410')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加账号</a>
 		</span>
 			<form role="form" class="text-c">
 				<div class="row">
@@ -78,7 +78,9 @@
 		        "sClass": "td-manage text-c",
 		        "bSearchable": false,
 		        "mRender": function(data, type, row) {
-		            return statusTools(row);
+		        	//编辑
+		            var toEdit = "<a title=\"编辑\" href=\"javascript:;\" onclick=\"cashier_edit('编辑','${context_root}/commercial/toCashierManageModify.action?cashierId=" + row.cashierId + "','','410')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>编辑</span></a>";
+		        	return statusTools(row)  + "&nbsp;&nbsp;" + toEdit;
 		        }
 		    },
 			
@@ -108,6 +110,10 @@
 
 		/*添加*/
 		function cashierManage_add(title,url,w,h){
+			layer_show(title,url,w,h);
+		}
+		/*编辑*/
+		function cashier_edit(title,url,w,h){
 			layer_show(title,url,w,h);
 		}
 		

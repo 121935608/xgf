@@ -589,5 +589,15 @@ public class StringUtil {
 	            return false;// 格式错误
 	        }
 	    }
-	  
+	  /**
+	 * Description:生成编号 <br/>
+	 *
+	 * @author huYL
+	 * @param prefix
+	 * @return
+	 */
+	public static String getNo(String prefix){
+	      int random = (int) ((Math.random()*9+1)*100000);
+	      return prefix+"_"+random;
+	  }
 }

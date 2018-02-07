@@ -97,10 +97,11 @@ public class RegisterController extends BaseController{
         modelAndView.addObject("unit", getUnit(storeId));
         Register register = registerService.getRegisterById(commodityId);
         modelAndView.addObject("register", register);
+        modelAndView.addObject("categorys", getCategoryByCommodity(commodityId));
         return modelAndView;
     }
     /**
-     * Description: 跳转登记编辑页面<br/>
+     * Description: 跳转登记导入页面<br/>
      *
      * @author huYL
      * @return
@@ -469,4 +470,29 @@ public class RegisterController extends BaseController{
         }
         return sysCodeList;
     }
+    /**
+     * Description: 获取某分类的所有小类<br/>
+     *
+     * @author huYL
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(RegisterConstant.GET_CATEGORYS_URL)
+    public List<Fenlei> getCategorys(String parentCategoryId)throws Exception{
+        List<Fenlei> typeList = fenleiService.getCategorys(parentCategoryId);
+        return typeList;
+        
+    }
+    /**
+     * Description: 获取某商品的所有小分类<br/>
+     *
+     * @author huYL
+     * @return
+     */
+    public List<Fenlei> getCategoryByCommodity(String commodityId)throws Exception{
+        List<Fenlei> typeList = registerService.getCategoryByCommodity(commodityId);
+        return typeList;
+        
+    }
+    
 }

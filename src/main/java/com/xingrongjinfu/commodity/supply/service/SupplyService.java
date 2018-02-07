@@ -1,6 +1,7 @@
 package com.xingrongjinfu.commodity.supply.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
@@ -43,6 +44,11 @@ public class SupplyService implements ISupplyService {
     public int addSupply(Supply supply) {
         
         return supplyDao.addSupply(supply);
+    }
+    @Override
+    public int getByName(Map map) {
+        
+        return supplyDao.getByName(map);
     }
 
 }

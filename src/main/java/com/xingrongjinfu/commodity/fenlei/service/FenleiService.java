@@ -55,4 +55,12 @@ public class FenleiService implements IFenleiService{
         return fenleiDao.queryCom(id);
     }
 
+    @Override
+    public List<Fenlei> getCategorys(String id)throws Exception {
+       
+        return fenleiDao.getCategorys(id);
+    }
+
+
+
 }

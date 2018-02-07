@@ -1,6 +1,7 @@
 package com.xingrongjinfu.commodity.supply.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
@@ -19,4 +20,6 @@ public interface ISupplyDao {
     int updateSupply(Supply supply);
     
     int addSupply(Supply supply);
+    
+    int getByName(Map map);
 }

@@ -6,6 +6,7 @@ import java.util.Map;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 
+import com.xingrongjinfu.commodity.fenlei.model.Fenlei;
 import com.xingrongjinfu.commodity.register.model.Register;
 import com.xingrongjinfu.commodity.register.model.RegisterExp;
 
@@ -35,4 +36,6 @@ public interface IRegisterDao {
     public void updateRegisterList(List<Register> list) throws Exception;
     
     public void updateStockList(List<Register> list) throws Exception;
+    
+    public List<Fenlei> getCategoryByCommodity(String id) throws Exception;
 }

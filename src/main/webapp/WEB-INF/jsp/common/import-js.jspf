@@ -13,3 +13,6 @@
 <script type="text/javascript" src="${context_url}/uiloader/static/kindeditor/kindeditor-all-min.js"></script>
 <script type="text/javascript" src="${context_url}/uiloader/static/kindeditor/kindeditor-all.js"></script>
 <script type="text/javascript" src="${context_url}/uiloader/static/kindeditor/lang/zh-CN.js"></script>
+<script type="text/javascript" src="${context_url}/uiloader/static/highCharts/highcharts.js"></script>
+<script type="text/javascript" src="${context_url}/uiloader/static/highCharts/series-label.js"></script>
+<script type="text/javascript" src="${context_url}/uiloader/static/highCharts/exporting.js"></script>

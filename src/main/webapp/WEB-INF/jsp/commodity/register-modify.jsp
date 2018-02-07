@@ -43,10 +43,20 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>分类：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-			<y:select id="categoryId" name="categoryId"
+			<y:select id="parentCategoryId" name="parentCategoryId"
 					codeGroup="${fenlei}" selectedValue="${register.categoryId}"
 					cssClass="select" headerKey="" headerValue="--请选择--">
 			</y:select>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>商品：</label>
+			<div class="formControls col-xs-8 col-sm-4" id="goods">
+				<select id="categoryId" style="width:150px;height:28px" name='categoryId'>
+					<c:forEach items="${categorys}" var="c" >
+						<option value="${c.commodityId}"<c:if test="${c.categoryName eq register.categoryName}">selected</c:if>>${c.categoryName }</option>
+					</c:forEach>
+				</select>
 			</div>
 		</div>
 		<div class="row cl">
@@ -134,6 +144,30 @@ function changImg(e) {
         }
     }
 }
+//商品分类
+$("#categoryId").click(function (){
+		var parentCategoryId = $("#parentCategoryId option:selected").val();
+		if(parentCategoryId == ""){
+			alert("请选择商品分类！");
+			return;
+		}
+})
+	$("#parentCategoryId").click(function (){
+		var parentCategoryId = $("#parentCategoryId option:selected").val();
+		$.ajax({
+			url:"${context_root}/commodity/getCategorys.action?parentCategoryId="+parentCategoryId,
+			type:'post',
+			async:true ,
+			cache:false ,
+			dataType:"json",
+			success:function(data){
+				$("#categoryId").empty();
+				for(var i=0;i<data.length;i++){
+					$("#categoryId").append("<option value='"+data[i].categoryId+"'>"+data[i].categoryName+"</option>");
+				}
+			},
+		});
+	})
 $("#form-register-modify").validate({
 	rules:{		
 		/* categoryName: {

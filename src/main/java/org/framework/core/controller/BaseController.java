@@ -1,10 +1,9 @@
 package org.framework.core.controller;
 
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
-
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.ShiroConstants;
@@ -16,6 +15,7 @@ import org.framework.core.web.DatatablesSupport;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.xingrongjinfu.system.user.model.User;
 
 /**

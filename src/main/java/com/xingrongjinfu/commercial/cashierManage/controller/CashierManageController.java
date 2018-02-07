@@ -3,7 +3,9 @@ package com.xingrongjinfu.commercial.cashierManage.controller;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -70,6 +72,17 @@ public class CashierManageController extends BaseController {
 
 		return modelAndView;
 	}
+	/**
+	 * 跳转修改界面
+	 */
+	@RequestMapping(CashierManageConstant.TO_MODIFY_URL)
+	public ModelAndView toCashierManageModify(String cashierId) {
+	    ModelAndView modelAndView = this.getModelAndView(CashierManageConstant.MODIFY_PAGE);
+	    
+	    CashierManage cash = cashierManageService.findByCashierId(cashierId);
+	    modelAndView.addObject("cash", cash);
+	    return modelAndView;
+	}
 
 	/**
 	 * 查询列表
@@ -101,20 +114,26 @@ public class CashierManageController extends BaseController {
 	public @ResponseBody Message saveCashierManage(CashierManage cashierManage) {
 		int result = 0;
 		String cashierId = cashierManage.getCashierId();
-		String storeId = (String) SessionUtils.getSession().getAttribute("storeId");
-		if (cashierId == null) {
-		    String name = cashierManage.getCashierName();
-		    String regex = "^[0-9a-zA_Z]+$";
-		    Pattern p = Pattern.compile(regex);
-		    Matcher m = p.matcher(name);
-		    if(!m.matches()){
-		        return new Message(false, "账号格式不正确！");
-		    }
-		    cashierManage.setCashierId(UuidUtil.get32UUID());
+		String name = cashierManage.getCashierName();
+		String regex = "^[0-9a-zA_Z]+$";
+		Pattern p = Pattern.compile(regex);
+		Matcher m = p.matcher(name);
+		if(!m.matches()){
+		    return new Message(false, "账号格式不正确！");
+		}
+		if(cashierManage.getPassword().equals("......")){
+		    cashierManage.setPassword("");
+		}else{
 		    cashierManage.setPassword(Md5Utils.hash(name+cashierManage.getPassword()));
+		}
+		if (cashierId == null) {
+		    String storeId = (String) SessionUtils.getSession().getAttribute("storeId");
+		    cashierManage.setCashierId(UuidUtil.get32UUID());
 			cashierManage.setStoreId(storeId);
 			cashierManage.setStatus(1);
 			result = cashierManageService.addCashierManageInfo(cashierManage);
+		}else{
+		    result = cashierManageService.updateCashierManageInfo(cashierManage);
 		}
 
 		return new Message(result);
@@ -125,12 +144,14 @@ public class CashierManageController extends BaseController {
      */
     @RequestMapping(CashierManageConstant.CHECK_NAME_UNIQUE_URL)
     public @ResponseBody
-    String checkNamesUnique(CashierManage cashierManage) {
-        String uniqueFlag = "0";
-        if (cashierManage != null) {
-            uniqueFlag = cashierManageService.checkNameUnique(cashierManage);
+    int checkNamesUnique(String cashierName,String cashierId) {
+        Map map = new HashMap();
+        map.put("cashierName", cashierName);
+        if(null != cashierId){
+            map.put("cashierId", cashierId);
         }
-        return uniqueFlag;
+        int n = cashierManageService.getByName(map);
+        return n;
     }
 	
 	/**

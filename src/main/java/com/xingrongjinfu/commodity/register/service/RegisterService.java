@@ -8,6 +8,7 @@ import org.framework.base.util.TableDataInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.xingrongjinfu.commodity.fenlei.model.Fenlei;
 import com.xingrongjinfu.commodity.register.dao.IRegisterDao;
 import com.xingrongjinfu.commodity.register.model.Register;
 import com.xingrongjinfu.commodity.register.model.RegisterExp;
@@ -63,5 +64,9 @@ public class RegisterService implements IRegisterService {
     public void updateStockList(List<Register> list) throws Exception {
         registerDao.updateStockList(list);
     }
-
+    @Override
+    public List<Fenlei> getCategoryByCommodity(String id) throws Exception {
+      
+        return registerDao.getCategoryByCommodity(id);
+    }
 }

@@ -8,7 +8,7 @@
 <script type="text/javascript" src="${context_root}/uiloader/lib/zTree/v3/js/jquery.ztree.all-3.5.min.js"></script>
 <body class="pos-r">
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 商品管理 <span class="c-gray en">&gt;</span> 分类管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
-<div class="pos-a" style="width:150px;left:0;height:100%; border-right:1px solid #e5e5e5; background-color:#f5f5f5">
+<div class="pos-a" style="width:180px;left:0;height:100%; border-right:1px solid #e5e5e5; background-color:#f5f5f5">
 	<ul id="classificationTree" class="ztree">
 	</ul>
 </div>
@@ -24,8 +24,14 @@
 				</y:select>
 			</div>
 		</div>  
+		<div class="row cl" style="display:none;" id="code">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>分类编号：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" class="input-text" value="" id="categoryCode" name="categoryCode" readonly="true">
+			</div>
+		</div>
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>分类：</label>
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>分类名称：</label>
 			<div class="formControls col-xs-8 col-sm-4">
 				<input type="text" class="input-text" value="" placeholder="分类名称" id="categoryName" name="categoryName">
 			</div>
@@ -126,6 +132,8 @@
 			/* $("#img").append("<img src="+path+data.img+" style=\"width:80px;height:80px;\""); */
 			$("#status").val(data.status);
 			$("#sort").val(data.sort);
+			$("#categoryCode").val(data.categoryCode);
+			$("#code").css("display","block");
 			
 			$("input[name=available][value='"+data.available+"']").iCheck('check');
 			$("#parentId option").removeAttr("selected");

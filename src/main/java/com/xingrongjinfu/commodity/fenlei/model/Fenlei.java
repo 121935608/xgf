@@ -7,10 +7,27 @@ public class Fenlei {
     private String storeId;
     private String parentId;//大类Id
     private String categoryName;//类别名
+    private String categoryCode;//分类编号
     private String img;//标签图片
     private Integer sort;//排序
     private Date addTime;
     private Integer status;
+    private Integer commodityId;
+    
+    
+    
+    public Integer getCommodityId() {
+        return commodityId;
+    }
+    public void setCommodityId(Integer commodityId) {
+        this.commodityId = commodityId;
+    }
+    public String getCategoryCode() {
+        return categoryCode;
+    }
+    public void setCategoryCode(String categoryCode) {
+        this.categoryCode = categoryCode;
+    }
     public String getCategoryId() {
         return categoryId;
     }

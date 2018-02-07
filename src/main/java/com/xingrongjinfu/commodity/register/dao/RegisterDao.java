@@ -8,6 +8,7 @@ import org.framework.base.util.TableDataInfo;
 import org.framework.core.dao.DynamicObjectBaseDao;
 import org.springframework.stereotype.Repository;
 
+import com.xingrongjinfu.commodity.fenlei.model.Fenlei;
 import com.xingrongjinfu.commodity.register.model.Register;
 import com.xingrongjinfu.commodity.register.model.RegisterExp;
 @Repository
@@ -77,5 +78,8 @@ public class RegisterDao extends DynamicObjectBaseDao implements IRegisterDao {
     public void updateStockList(List<Register> list) throws Exception {
         this.batchSave("RegisterMapper.updateStockList", list);
     }
-
+    @Override
+    public List<Fenlei> getCategoryByCommodity(String id) throws Exception {
+        return (List<Fenlei>) this.findForList("RegisterMapper.getCategoryByCommodity", id);
+    }
 }

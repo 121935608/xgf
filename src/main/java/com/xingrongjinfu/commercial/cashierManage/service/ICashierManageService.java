@@ -1,13 +1,12 @@
 package com.xingrongjinfu.commercial.cashierManage.service;
 
 import java.util.List;
+import java.util.Map;
+
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 
 import com.xingrongjinfu.commercial.cashierManage.model.CashierManage;
-import com.xingrongjinfu.commodity.label.model.Label;
-import com.xingrongjinfu.content.advertisement.model.Advertisement;
-import com.xingrongjinfu.system.user.model.User;
 
 /**
  *  业务层
@@ -46,6 +45,10 @@ public interface ICashierManageService
      */
 	public int addCashierManageInfo(CashierManage cashierManage);
 	
+	public CashierManage findByCashierId(String id);
 	
+	int getByName(Map map);
+	
+	public int updateCashierManageInfo(CashierManage cashierManage);
 
 }

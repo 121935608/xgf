@@ -38,6 +38,10 @@ public class RegisterConstant {
      */
     public final static String IMP_RIGISTER_URL = "impRegisterList";
     /**
+     * 请求地址：小分类
+     */
+    public final static String GET_CATEGORYS_URL = "getCategorys";
+    /**
      * 请求地址：跳转到登记添加页面
      */
     public final static String TO_REGISTER_ADD = "toRegisterAdd";

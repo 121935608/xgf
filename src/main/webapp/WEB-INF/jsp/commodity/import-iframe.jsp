@@ -60,7 +60,7 @@ $("#download").attr("href", '${context_root}'+molUrl);
         	var data = JSON.parse(data);
         	if(data.s == true){
         		index = parent.layer.getFrameIndex(window.name);
-				parent.layer.msg("导入成功,正在刷新数据请稍后……",{icon:1,time: 1000,shade: [0.1,'#fff']},function(){
+				parent.layer.msg(data.m,{icon:1,time: 1000,shade: [0.1,'#fff']},function(){
 				window.parent.location.reload();
 				});
 			}else if(data.s == false){

@@ -44,4 +44,9 @@ public interface IFenleiDao {
     
     public int queryCom(String id);
     
+    public List<Fenlei> getCategorys(String id) throws Exception;
+    
+    
+    
+    
 }

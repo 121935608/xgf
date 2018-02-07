@@ -1,6 +1,7 @@
 package com.xingrongjinfu.commodity.supply.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
@@ -52,6 +53,12 @@ public class SupplyDao extends DynamicObjectBaseDao implements ISupplyDao {
     public int addSupply(Supply supply) {
         
         return this.save("SupplyMapper.addSupply", supply);
+    }
+
+    @Override
+    public int getByName(Map map) {
+        
+        return (int) this.findForObject("SupplyMapper.getByName", map);
     }
 
 }

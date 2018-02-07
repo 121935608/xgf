@@ -1,8 +1,8 @@
 package com.xingrongjinfu.commercial.cashierManage.service;
 
 import java.util.List;
+import java.util.Map;
 
-import org.apache.shiro.common.UserConstants;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +11,6 @@ import org.springframework.stereotype.Service;
 import com.xingrongjinfu.commercial.cashierManage.common.CashierManageConstant;
 import com.xingrongjinfu.commercial.cashierManage.dao.ICashierManageDao;
 import com.xingrongjinfu.commercial.cashierManage.model.CashierManage;
-import com.xingrongjinfu.commodity.label.model.Label;
-import com.xingrongjinfu.content.advertisement.common.AdvertisementConstant;
-import com.xingrongjinfu.content.advertisement.model.Advertisement;
-import com.xingrongjinfu.system.user.model.User;
 import com.xingrongjinfu.utils.ObjectUtil;
 
 /**
@@ -77,5 +73,23 @@ public class CashierManageService implements ICashierManageService
     	
     	return CashierManageConstant.NAME_UNIQUE;
 	}
+
+    @Override
+    public CashierManage findByCashierId(String id) {
+        
+        return cashierManageDao.findByCashierId(id);
+    }
+
+    @Override
+    public int getByName(Map map) {
+        
+        return cashierManageDao.getByName(map);
+    }
+
+    @Override
+    public int updateCashierManageInfo(CashierManage cashierManage) {
+        
+        return cashierManageDao.updateCashierManageInfo(cashierManage);
+    }
 	
 }

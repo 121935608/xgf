@@ -1,5 +1,6 @@
 package com.xingrongjinfu.commodity.register.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class Register {
@@ -12,7 +13,7 @@ public class Register {
     public Double inPrice;//进价（单位为分）
     public Double vipPrice;//会员价
     public Integer discount;//是否折扣，1是，-1否
-    public Integer stockNum;//库存
+    public BigDecimal stockNum;//库存
     public Integer upperLimit;//库存上限
     public Integer lowerLimit;//库存下限
     
@@ -184,10 +185,10 @@ public class Register {
     public void setCommodityStatus(String commodityStatus) {
         this.commodityStatus = commodityStatus;
     }
-    public Integer getStockNum() {
+    public BigDecimal getStockNum() {
         return stockNum;
     }
-    public void setStockNum(Integer stockNum) {
+    public void setStockNum(BigDecimal stockNum) {
         this.stockNum = stockNum;
     }
     public Integer getUpperLimit() {

@@ -61,12 +61,12 @@ $("#form-cashierManage-add").validate({
                 type: "post",
                 dataType: "text",
                 data: {
-                    name: function () {
+                	cashierName: function () {
                         return $.trim($("#cashierName").val());
                     }
                 },
                 dataFilter: function (data, type) {
-                    if (data == "0") return true;
+                    if (data == 0) return true;
                     else return "该名称已存在";
                 }
             }

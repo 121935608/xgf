@@ -1,15 +1,14 @@
 package com.xingrongjinfu.commercial.cashierManage.dao;
 
 import java.util.List;
+import java.util.Map;
+
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.framework.core.dao.DynamicObjectBaseDao;
 import org.springframework.stereotype.Repository;
 
 import com.xingrongjinfu.commercial.cashierManage.model.CashierManage;
-import com.xingrongjinfu.commodity.label.model.Label;
-import com.xingrongjinfu.content.advertisement.model.Advertisement;
-import com.xingrongjinfu.system.user.model.User;
 
 /**
  * 数据层处理
@@ -65,4 +64,16 @@ public class CashierManageDao extends DynamicObjectBaseDao implements ICashierMa
 	public CashierManage findByCashierManageName(String cashierName) {
 		return (CashierManage) this.findForObject("CommercialCashierManageMapper.findByCashierName", cashierName);
 	}
+
+    @Override
+    public CashierManage findByCashierId(String id) {
+        
+        return (CashierManage) this.findForObject("CommercialCashierManageMapper.findByCashierId", id);
+    }
+
+    @Override
+    public int getByName(Map map) {
+        
+        return (int) this.findForObject("CommercialCashierManageMapper.getByName", map);
+    }
 }

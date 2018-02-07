@@ -25,6 +25,7 @@ import com.xingrongjinfu.commodity.fenlei.service.IFenleiService;
 import com.xingrongjinfu.system.syscode.model.SysCode;
 import com.xingrongjinfu.utils.AliyunOSSClientUtil;
 import com.xingrongjinfu.utils.ObjectUtil;
+import com.xingrongjinfu.utils.StringUtil;
 
 @Controller
 @RequestMapping(FenleiConstant.FENLEI_URL)
@@ -64,7 +65,7 @@ public class FenleiController extends BaseController{
             categoryMap.put("id", category.getCategoryId());
             categoryMap.put("pId", category.getParentId());
             categoryMap.put("isParent", category.getParentId().equals("0") ? true : false);
-            categoryMap.put("name", category.getCategoryName());
+            categoryMap.put("name", category.getCategoryCode() + "  "+category.getCategoryName());
             categoryMap.put("open", false);
             resMapTrees.add(categoryMap);
         }
@@ -142,6 +143,7 @@ public class FenleiController extends BaseController{
         } 
         else{
             category.setStoreId(storeId);
+            category.setCategoryCode(StringUtil.getNo("C"));
             category.setStatus(1);
             result = fenleiService.addCategoryInfo(category);
         }
