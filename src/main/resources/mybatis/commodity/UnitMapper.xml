@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="UnitMapper">
+	<resultMap type="Unit" id="UnitResult">
+		<result property="unitId" column="unitId" />
+		<result property="storeId" column="storeId" />
+		<result property="unitCode" column="unitCode" />
+		<result property="unitName" column="unitName" />
+		<result property="status" column="status" />
+		<result property="addTime" column="addTime" />
+	</resultMap>
+	
+	<select id="getAll" parameterType="string" resultType="Unit">
+		SELECT * FROM m_unit WHERE `status`=1 AND storeId=#{0} ORDER BY `addTime` DESC
+	</select>
+	
+	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultType="Unit" useCache="false">
+		SELECT * FROM m_unit 
+		WHERE storeId=#{relationMap.storeId} ORDER BY `addTime` DESC
+	</select>
+	
+	<select id="getByName" parameterType="map" resultType="int">
+		SELECT count(1) FROM m_unit WHERE unitName=#{unitName}
+		<if test="unitCode != null and unitCode != ''">
+			and unitCode!=#{unitCode}
+		</if>
+	</select>
+	
+	<insert id="addUnit" parameterType="Unit">
+		INSERT INTO m_unit(unitId,storeId,unitCode,
+		<if test="unitName != null and unitName != ''">unitName,</if>
+		<if test="status != null and status != ''">status,</if>
+		addTime)
+		values(#{unitId},#{storeId},#{unitCode},
+		<if test="unitName != null and unitName != ''">#{unitName},</if>
+		<if test="status != null and status != ''">#{status},</if>
+		sysdate())
+	</insert>
+	
+	<select id="getByCode" parameterType="string" resultType="Unit">
+		SELECT * FROM m_unit WHERE unitCode=#{unitCode}
+	</select>
+	
+	<update id="updateUnit" parameterType="Unit">
+		UPDATE m_unit
+		<set>
+			<if test="unitName != null and unitName != ''">unitName = #{unitName},</if>
+			addTime = sysdate()
+		</set>
+		where unitCode = #{unitCode}
+	</update>
+</mapper>

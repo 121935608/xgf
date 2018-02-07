@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CashMapper">
+
+	<resultMap type="CashDetail" id="CashDetailResult">
+		<result property="detailId" column="detailId" />
+		<result property="cashId" column="cashId" />
+		<result property="commodityId" column="commodityId" />
+		<result property="commodityNo" column="commodityNo" />
+		<result property="commodityName" column="commodityName" />
+		<result property="number" column="number" />
+		<result property="unitName" column="unitName" />
+		<result property="inPrice" column="inPrice" />
+		<result property="salePrice" column="salePrice" />
+		<result property="vipPrice" column="vipPrice" />
+		<result property="totalPrice" column="totalPrice" />
+		<result property="totalVipPrice" column="totalVipPrice" />
+		<result property="addTime" column="addTime" />
+		<result property="status" column="status" />
+		<result property="commodityCode" column="commodityCode" />
+		<result property="lirun" column="lirun" />
+	</resultMap>
+	<resultMap type="CashFlow" id="CashFlowResult">
+		<result property="cashId" column="cashId" />
+		<result property="tradeCode" column="tradeCode" />
+		<result property="userId" column="userId" />
+		<result property="storeId" column="storeId" />
+		<result property="machineNo" column="machineNo" />
+		<result property="cashierId" column="cashierId" />
+		<result property="menberId" column="menberId" />
+		<result property="type" column="type" />
+		<result property="payType" column="payType" />
+		<result property="totalMoney" column="totalMoney" />
+		<result property="money" column="money" />
+		<result property="number" column="number" />
+		<result property="status" column="status" />
+		<result property="remark" column="remark" />
+		<result property="addTime" column="addTime" />
+		<result property="addIP" column="addIP" />
+		<result property="cashName" column="cashName" />
+		<result property="memberName" column="memberName" />
+		<collection property="cashDetail" javaType="java.util.List" resultMap="CashDetailResult" />
+	</resultMap>
+	<resultMap type="Register" id="RegisterResult">
+		<result property="commodityId" column="commodityId" />
+		<result property="commodityCode" column="commodityCode" />
+		<result property="commodityName" column="commodityName" />
+		<result property="commodityNo" column="commodityNo" />
+	</resultMap>
+	<select id="pageInfoQuery" parameterType="PageUtilEntity"
+		resultType="CashFlow">
+		SELECT c.cashId,tradeCode,c.userId,machineNo,c.type type,m.name cashName,me.name memberName,payType,
+		c.totalMoney/100 totalMoney,c.money/100 money,c.number,c.addTime,d.commodityId,com.commodityName
+		FROM m_cashFlow c LEFT JOIN t_cashier m ON c.cashierId=m.cashierId
+		LEFT JOIN m_cashDetail d ON d.cashId=c.cashId
+		LEFT JOIN m_member me ON me.memberId=c.menberId
+		LEFT JOIN m_commodity com ON d.commodityId=com.commodityId
+		WHERE c.storeId=#{relationMap.storeId} AND c.status=1
+		<if test="relationMap.commodityNo != null and relationMap.commodityNo != ''">
+			AND (
+			com.commodityName LIKE CONCAT(CONCAT('%', #{relationMap.commodityNo}),'%') or
+			com.commodityCode LIKE CONCAT(CONCAT('%',#{relationMap.commodityNo}),'%') or
+			com.commodityNo LIKE CONCAT(CONCAT('%',#{relationMap.commodityNo}),'%') 
+			)
+		</if>
+		<if test="relationMap.beginTime != null and relationMap.beginTime != ''">
+			AND DATE_FORMAT(c.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
+		</if>
+		<if test="relationMap.endTime != null and relationMap.endTime != ''">
+			AND DATE_FORMAT(c.addTime,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
+		</if>
+		order by c.addTime desc
+	</select>
+	
+	<select id="getComById" parameterType="string" resultType="CashDetail">
+		SELECT d.commodityId,d.commodityName,d.totalVipPrice totalVipPrice,d.number number,d.totalPrice totalPrice
+		FROM m_cashFlow c LEFT JOIN m_cashDetail d ON d.cashId=c.cashId
+		where c.`cashId`=#{0}
+	</select>
+	
+	<select id="getById" parameterType="string" resultType="CashFlow">
+		SELECT cashId,tradeCode,money/100 money FROM m_cashFlow WHERE cashId=#{0}
+	</select>
+	
+	<select id="cashCountpageInfoQuery" parameterType="string" resultType="CashFlow">
+		SELECT f.cashierId cashierId,m.name cashName,m.addTime,
+		SUM(IF(payType=0,money/100,0)) xianjin,
+		SUM(IF(payType=1,money/100,0)) zhifubao,
+		SUM(IF(payType=2,money/100,0)) weixin,
+		SUM(IF(payType=3,money/100,0)) yinlian,
+		SUM(IF(payType=4,money/100,0)) baitiao
+		FROM m_cashFlow f LEFT JOIN t_cashier m ON f.cashierId=m.cashierId 
+		WHERE f.storeId=#{relationMap.storeId} AND f.status=1
+		<if test="relationMap.beginTime != null and relationMap.beginTime != ''">
+			AND DATE_FORMAT(f.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
+		</if>
+		<if test="relationMap.endTime != null and relationMap.endTime != ''">
+			AND DATE_FORMAT(f.addTime,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
+		</if>
+		<if test="relationMap.cashName != null and relationMap.cashName != ''">
+			AND m.name LIKE CONCAT(CONCAT('%', #{relationMap.cashName}),'%')
+		</if>
+		GROUP BY f.cashierId,m.addTime
+		ORDER BY m.addTime DESC
+	</select>
+	
+	<select id="sellWaterpageInfoQuery" parameterType="string" resultType="CashDetail">
+		SELECT c.commodityCode commodityCode,d.commodityName commodityName,c.commodityNo commodityNo,
+		d.addTime `addTime`,d.unitName unitName,
+		d.number number,d.totalVipPrice/100 totalVipPrice,d.inPrice/100*d.number inPrice
+		FROM m_cashDetail d LEFT JOIN m_cashFlow f ON d.cashId=f.cashId 
+		LEFT JOIN m_commodity c ON d.commodityId=c.commodityId
+		WHERE f.storeId=#{relationMap.storeId} AND f.status=1
+		<if test="relationMap.beginTime != null and relationMap.beginTime != ''">
+			AND DATE_FORMAT(d.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
+		</if>
+		<if test="relationMap.endTime != null and relationMap.endTime != ''">
+			AND DATE_FORMAT(d.addTime,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
+		</if>
+		<if test="relationMap.commodityNo != null and relationMap.commodityNo != ''">
+			AND (
+			d.commodityName LIKE CONCAT(CONCAT('%', #{relationMap.commodityNo}),'%') or
+			c.commodityCode LIKE CONCAT(CONCAT('%',#{relationMap.commodityNo}),'%') or
+			c.commodityNo LIKE CONCAT(CONCAT('%',#{relationMap.commodityNo}),'%') 
+			)
+		</if>
+		ORDER BY d.addTime DESC
+	</select>
+	<select id="saleCountpageInfoQuery" parameterType="string" resultType="CashDetail">
+		SELECT
+		c.commodityCode commodityCode,c.commodityNo commodityNo,a.commodityId,a.commodityName,
+		a.totalVipPrice,a.inPrice,a.lirun,a.number,a.unitName FROM
+		(
+			SELECT d.unitName unitName,d.commodityId commodityId,d.commodityName commodityName,
+				SUM(number) number,
+				SUM(d.totalVipPrice / 100) totalVipPrice,
+				SUM(d.inPrice / 100 * d.number) inPrice,
+				SUM(d.totalVipPrice / 100) - SUM(d.inPrice / 100 * d.number) lirun
+			FROM m_cashDetail d WHERE cashId IN (
+					SELECT cashId FROM m_cashFlow WHERE storeId = #{relationMap.storeId} AND status = 1
+				<if test="relationMap.beginTime != null and relationMap.beginTime != ''">
+					AND DATE_FORMAT(addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
+				</if>
+				<if test="relationMap.endTime != null and relationMap.endTime != ''">
+					AND DATE_FORMAT(addTime,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
+				</if>
+			)
+			GROUP BY commodityName,commodityId,unitName
+		) AS a
+		LEFT JOIN m_commodity c ON a.commodityId = c.commodityId
+		where 1=1
+		<if test="relationMap.commodityNo != null and relationMap.commodityNo != ''">
+			AND (
+			a.commodityName LIKE CONCAT(CONCAT('%', #{relationMap.commodityNo}),'%') or
+			c.commodityCode LIKE CONCAT(CONCAT('%',#{relationMap.commodityNo}),'%') or
+			c.commodityNo LIKE CONCAT(CONCAT('%',#{relationMap.commodityNo}),'%') 
+			)
+		</if>
+	</select>
+	
+</mapper>

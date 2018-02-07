@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="RegisterMapper">
+	<resultMap type="Register" id="RegisterResult">
+		<result property="commodityId" column="commodityId" />
+		<result property="commodityCode" column="commodityCode" />
+		<result property="storeId" column="storeId" />
+		<result property="commodityName" column="commodityName" />
+		<result property="commodityNo" column="commodityNo" />
+		<result property="imgMain" column="imgMain" />
+		<result property="specification" column="specification" />
+		<result property="inPrice" column="inPrice" />
+		<result property="salePrice" column="salePrice" />
+		<result property="vipPrice" column="vipPrice" />
+		<result property="tag" column="tag" />
+		<result property="categoryId" column="categoryId" />
+		<result property="info" column="info" />
+		<result property="weight" column="weight" />
+		<result property="commodityStatus" column="commodityStatus" />
+		<result property="unitId" column="unitId" />
+		<result property="stockNum" column="stockNum" />
+		<result property="upperLimit" column="upperLimit" />
+		<result property="lowerLimit" column="lowerLimit" />
+		<result property="discount" column="discount" />
+		<result property="status" column="status" />
+		<result property="productionDate" column="productionDate" />
+		<result property="guaranteeDay" column="guaranteeDay" />
+		<result property="addTime" column="addTime" />
+		<result property="updateTime" column="updateTime" />
+		<result property="supplierId" column="supplierId" />
+		<result property="grade" column="grade" />
+		<result property="storage" column="storage" />
+		<result property="categoryName" column="categoryName" />
+		<result property="unitName" column="unitName" />
+		<result property="supplierName" column="supplierName" />
+		<result property="categoryCode" column="categoryCode" />
+		<result property="unitCode" column="unitCode" />
+		<result property="supplierCode" column="supplierCode" />
+	</resultMap>
+	<resultMap type="Fenlei" id="FenleiResult">
+		<result property="categoryId" column="categoryId"/>
+		<result property="storeId" column="storeId"/>
+		<result property="parentId" column="parentId"/>
+		<result property="categoryName" column="categoryName"/>
+		<result property="categoryCode" column="categoryCode"/>
+		<result property="img" column="img"/>
+		<result property="sort" column="sort"/>
+		<result property="commodityId" column="commodityId"/>
+		<result property="status" column="status"/>
+	</resultMap>
+	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultType="Register" useCache="false">
+		SELECT commodityId,commodityCode,m.storeId,commodityName,commodityNo,imgMain,specification,inPrice/100 inPrice,
+		salePrice/100 salePrice,vipPrice/100 vipPrice,tag,m.categoryId,info,
+		weight,commodityStatus,unitName,stockNum,upperLimit,lowerLimit,discount,m.status status,productionDate,
+		guaranteeDay,m.addTime `addTime`,m.updateTime updateTime,supplierName,grade,storage,
+		(SELECT categoryName FROM m_category WHERE categoryId =(SELECT parentId FROM m_category WHERE categoryId= m.categoryId)) categoryName
+		FROM m_commodity m left join m_category c on m.categoryId=c.categoryId
+		LEFT JOIN m_unit u ON u.unitId=m.unitId
+		LEFT JOIN m_supplier s ON s.supplierId=m.supplierId
+		where 1=1
+		and m.storeId=#{relationMap.storeId}
+		and m.status=1
+		<if test="relationMap.categoryId != null and relationMap.categoryId  != ''">
+			AND c.categoryId IN (SELECT categoryId FROM m_category WHERE parentId=#{relationMap.categoryId})
+		</if>
+		<if test="relationMap.status != null and relationMap.status  != ''">
+			and m.status=#{relationMap.status}
+		</if>
+		<if test="relationMap.discount != null and relationMap.discount  != ''">
+			and m.discount=#{relationMap.discount}
+		</if>
+		<if test="relationMap.commodityNo != null and relationMap.commodityNo  != ''">
+			AND
+				(
+					 m.commodityNo LIKE CONCAT(CONCAT('%', #{relationMap.commodityNo}),'%')
+					 OR 
+					 m.commodityName LIKE CONCAT(CONCAT('%', #{relationMap.commodityNo}),'%')
+					 OR 
+					 m.commodityCode LIKE CONCAT(CONCAT('%', #{relationMap.commodityNo}),'%')
+				)
+		</if>
+		<if test="relationMap.condition != null and relationMap.condition  == 0">
+			and m.stockNum between m.lowerLimit and m.upperLimit
+		</if>
+		<if test="relationMap.condition != null and relationMap.condition  == -1">
+			and m.stockNum &lt; m.lowerLimit 
+		</if>
+		<if test="relationMap.condition != null and relationMap.condition  == 1">
+			and m.stockNum &gt; m.upperLimit
+		</if>
+		order by addTime desc
+	</select>
+
+	<insert id="addRegister" parameterType="Register">
+		INSERT INTO m_commodity(
+		<if test="commodityId != null and commodityId != ''">commodityId,</if>
+		<if test="commodityCode != null and commodityCode != ''">commodityCode,</if>
+		<if test="storeId != null and storeId != ''">storeId,</if>
+		<if test="commodityName != null and commodityName != ''">commodityName,</if>
+		<if test="commodityNo != null and commodityNo != ''">commodityNo,</if>
+		<if test="supplierId != null and supplierId != ''">supplierId,</if>
+		<if test="imgMain != null and imgMain != ''">imgMain,</if>
+		<if test="specification != null and specification != ''">specification,</if>
+		<if test="inPrice != null and inPrice != ''">inPrice,</if>
+		<if test="salePrice != null and salePrice != ''">salePrice,</if>
+		<if test="vipPrice != null and vipPrice != ''">vipPrice,</if>
+		<if test="tag != null and tag != ''">tag,</if>
+		<if test="categoryId != null and categoryId != ''">categoryId,</if>
+		<if test="info != null and info != ''">info,</if>
+		<if test="weight != null and weight != ''">weight,</if>
+		<if test="commodityStatus != null and commodityStatus != ''">commodityStatus,</if>
+		<if test="unitId != null and unitId != ''">unitId,</if>
+		<if test="stockNum != null and stockNum != ''">stockNum,</if>
+		<if test="upperLimit != null and upperLimit != ''">upperLimit,</if>
+		<if test="lowerLimit != null and lowerLimit != ''">lowerLimit,</if>
+		<if test="discount != null and discount != ''">discount,</if>
+		<if test="status != null and status != ''">status,</if>
+		<if test="productionDate != null and productionDate != ''">productionDate,</if>
+		<if test="guaranteeDay != null and guaranteeDay != ''">guaranteeDay,</if>
+		<if test="grade != null and grade != ''">grade,</if>
+		<if test="storage != null and storage != ''">storage,</if>
+		addTime)
+		values(
+		<if test="commodityId != null and commodityId != ''">#{commodityId},</if>
+		<if test="commodityCode != null and commodityCode != ''">#{commodityCode},</if>
+		<if test="storeId != null and storeId != ''">#{storeId},</if>
+		<if test="commodityName != null and commodityName != ''">#{commodityName},</if>
+		<if test="commodityNo != null and commodityNo != ''">#{commodityNo},</if>
+		<if test="supplierId != null and supplierId != ''">#{supplierId},</if>
+		<if test="imgMain != null and imgMain != ''">#{imgMain},</if>
+		<if test="specification != null and specification != ''">#{specification},</if>
+		<if test="inPrice != null and inPrice != ''">#{inPrice},</if>
+		<if test="salePrice != null and salePrice != ''">#{salePrice},</if>
+		<if test="vipPrice != null and vipPrice != ''">#{vipPrice},</if>
+		<if test="tag != null and tag != ''">#{tag},</if>
+		<if test="categoryId != null and categoryId != ''">#{categoryId},</if>
+		<if test="info != null and info != ''">#{info},</if>
+		<if test="weight != null and weight != ''">#{weight},</if>
+		<if test="commodityStatus != null and commodityStatus != ''">#{commodityStatus},</if>
+		<if test="unitId != null and unitId != ''">#{unitId},</if>
+		<if test="stockNum != null and stockNum != ''">#{stockNum},</if>
+		<if test="upperLimit != null and upperLimit != ''">#{upperLimit},</if>
+		<if test="lowerLimit != null and lowerLimit != ''">#{lowerLimit},</if>
+		<if test="discount != null and discount != ''">#{discount},</if>
+		<if test="status != null and status != ''">#{status},</if>
+		<if test="productionDate != null and productionDate != ''">#{productionDate},</if>
+		<if test="guaranteeDay != null and guaranteeDay != ''">#{guaranteeDay},</if>
+		<if test="grade != null and grade != ''">#{grade},</if>
+		<if test="storage != null and storage != ''">#{storage},</if>
+		sysdate())
+	</insert>
+	
+	<select id="getRegisterById" parameterType="string" resultType="Register">
+		SELECT commodityId,commodityCode,m.storeId,commodityName,commodityNo,imgMain,specification,inPrice/100 inPrice,
+		salePrice/100 salePrice,vipPrice/100 vipPrice,tag,c.categoryName categoryName,info,
+		weight,commodityStatus,m.unitId unitId,stockNum,upperLimit,lowerLimit,discount,m.status STATUS,productionDate,
+		guaranteeDay,m.addTime `addTime`,m.updateTime updateTime,m.supplierId supplierId,grade,STORAGE,
+		(SELECT categoryId FROM m_category WHERE categoryId =(SELECT parentId FROM m_category WHERE categoryId= m.categoryId)) categoryId 
+		FROM m_commodity m LEFT JOIN m_category c ON m.categoryId=c.categoryId
+		LEFT JOIN m_unit u ON u.unitId=m.unitId
+		LEFT JOIN m_supplier s ON s.supplierId=m.supplierId
+		where m.commodityId=#{0}
+	</select>
+	
+	<update id="updateRegister" parameterType="Register">
+		UPDATE m_commodity
+		<set>
+			<if test="commodityName != null and commodityName != ''">commodityName = #{commodityName},</if>
+			<if test="commodityNo != null and commodityNo != ''">commodityNo = #{commodityNo},</if>
+			<if test="supplierId != null and supplierId != ''">supplierId = #{supplierId},</if>
+			<if test="imgMain != null and imgMain != ''">imgMain = #{imgMain},</if>
+			<if test="specification != null and specification != ''">specification = #{specification},</if>
+			<if test="inPrice != null and inPrice != ''">inPrice = #{inPrice},</if>
+			<if test="salePrice != null and salePrice != ''">salePrice = #{salePrice},</if>
+			<if test="vipPrice != null and vipPrice != ''">vipPrice = #{vipPrice},</if>
+			<if test="tag != null and tag != ''">tag = #{tag},</if>
+			<if test="categoryId != null and categoryId != ''">categoryId = #{categoryId},</if>
+			<if test="info != null and info != ''">info = #{info},</if>
+			<if test="weight != null and weight != ''">weight = #{weight},</if>
+			<if test="commodityStatus != null and commodityStatus != ''">commodityStatus = #{commodityStatus},</if>
+			<if test="unitId != null and unitId != ''">unitId= #{unitId},</if>
+			<if test="stockNum != null and stockNum != ''">stockNum = #{stockNum},</if>
+			<if test="upperLimit != null and upperLimit != ''">upperLimit = #{upperLimit},</if>
+			<if test="lowerLimit != null and lowerLimit != ''">lowerLimit = #{lowerLimit},</if>
+			<if test="discount != null and discount != ''">discount = #{discount},</if>
+			<if test="status != null and status != ''">status = #{status},</if>
+			<if test="productionDate != null and productionDate != ''">productionDate = #{productionDate},</if>
+			<if test="guaranteeDay != null and guaranteeDay != ''">guaranteeDay = #{guaranteeDay},</if>
+			<if test="grade != null and grade != ''">grade = #{grade},</if>
+			<if test="storage != null and storage != ''">storage = #{storage},</if>
+			updateTime = sysdate()
+		</set>
+		where commodityId = #{commodityId}
+	</update>
+	
+	<update id="updateStatus" parameterType="string">
+		UPDATE m_commodity SET `status`=-1 WHERE commodityId = #{0}
+	</update>
+	
+	<select id="getExpRegisterList" parameterType="java.util.Map" resultType="RegisterExp" useCache="false">
+		SELECT commodityCode,commodityName,commodityNo,supplierName,c.categoryName categoryName,
+		unitName,inPrice/100 inPrice,salePrice/100 salePrice,vipPrice/100 vipPrice,
+		case 
+		when discount=1 then '是' 
+		when discount=-1 then '否' end as discount,
+		stockNum,upperLimit,lowerLimit,
+		case when m.commodityStatus="0" then '启用' 
+		when m.commodityStatus="-1" then '禁用' end as commodityStatus
+		FROM m_commodity m left join m_category c on m.categoryId=c.categoryId
+		LEFT JOIN m_unit u ON u.unitId=m.unitId
+		LEFT JOIN m_supplier s ON s.supplierId=m.supplierId
+		where 1=1
+		and m.status=1
+		<if test="storeId != null and storeId  != ''">
+			and m.storeId=#{storeId}
+		</if>
+		<if test="categoryId != null and categoryId  != ''">
+			AND c.categoryId IN (SELECT categoryId FROM m_category WHERE parentId=#{categoryId})
+		</if>
+		<if test="status != null and status  != ''">
+			and m.status=#{status}
+		</if>
+		<if test="discount != null and discount  != ''">
+			and m.discount=#{discount}
+		</if>
+		<if test="commodityNo != null and commodityNo  != ''">
+			AND
+				(
+					 m.commodityNo LIKE CONCAT(CONCAT('%', #{commodityNo}),'%')
+					 OR 
+					 m.commodityName LIKE CONCAT(CONCAT('%', #{commodityNo}),'%')
+					 OR 
+					 m.commodityCode LIKE CONCAT(CONCAT('%', #{commodityNo}),'%')
+				)
+		</if>
+	</select>
+	
+	<select id="isExist" parameterType="map" resultType="map">
+		SELECT 
+			<if test="unitCode != null and unitCode  != ''">
+				(SELECT unitId FROM m_unit WHERE unitCode=#{unitCode}) unitId,
+			</if>
+			<if test="supplierCode != null and supplierCode  != ''">
+				(SELECT supplierId FROM m_supplier WHERE supplierCode=#{supplierCode}) supplierId, 
+			</if>
+			<if test="categoryCode != null and categoryCode  != ''">
+				(SELECT categoryId FROM m_category WHERE categoryCode=#{categoryCode} and parentId =0) categoryId ,
+			</if>
+		(SELECT commodityId FROM m_commodity WHERE commodityName=#{commodityName} OR commodityNo=#{commodityNo}) commodityId
+		 from DUAL
+	</select>
+	
+	<insert id="updateImpExcel" parameterType="java.util.List">
+ 			
+ 			insert into m_commodity (
+ 			commodityId,commodityCode,commodityName,commodityNo,storeId,commodityStatus,
+ 			status,categoryId,supplierId,unitId,
+ 			salePrice,
+ 			inPrice,
+ 			vipPrice,
+ 			discount,
+ 			stockNum,
+ 			upperLimit,
+ 			lowerLimit,
+ 			addTime
+ 			)
+ 			values
+ 			<foreach collection="list" item="item" index="index" separator=",">
+ 			( #{item.commodityId},#{item.commodityCode},#{item.commodityName},#{item.commodityNo},
+ 			#{item.storeId},#{item.commodityStatus},#{item.status},
+			#{item.categoryId},
+			#{item.supplierId},
+			#{item.unitId},
+			#{item.salePrice},
+			#{item.inPrice},
+			#{item.vipPrice},
+			#{item.discount},
+			#{item.stockNum},
+			#{item.upperLimit},
+			#{item.lowerLimit},
+			#{item.addTime}
+ 			)
+			</foreach>
+ 	</insert>
+ 	
+ 	
+ 	<update id="updateRegisterList" parameterType="java.util.List" >
+ 		
+         	<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+              update m_commodity 
+				<set>
+                  <if test="item.categoryId !=null and item.categoryId != ''">
+                      categoryId=#{item.categoryId},
+                  </if>
+                  <if test="item.supplierId != null or item.supplierId != ''">
+                      supplierId=#{item.supplierId},
+                  </if>
+                  <if test="item.unitId != null or item.unitId != ''">
+                      unitId=#{item.unitId},
+                  </if>
+                  <if test="item.salePrice != null or item.salePrice != ''">
+                      salePrice=#{item.salePrice},
+                  </if>
+                  <if test="item.inPrice != null or item.inPrice != ''">
+                      inPrice=#{item.inPrice},
+                  </if>
+                  <if test="item.vipPrice != null or item.vipPrice != ''">
+                      vipPrice=#{item.vipPrice},
+                  </if>
+                  <if test="item.discount != null or item.discount != ''">
+                      discount=#{item.discount},
+                  </if>
+                  <if test="item.stockNum != null or item.stockNum != ''">
+                      stockNum=#{item.stockNum},
+                  </if>
+                  <if test="item.upperLimit != null or item.upperLimit != ''">
+                      upperLimit=#{item.upperLimit},
+                  </if>
+                  <if test="item.lowerLimit != null or item.lowerLimit != ''">
+                      lowerLimit=#{item.lowerLimit},
+                  </if>
+                  updateTime = #{item.updateTime} 
+                  </set> 
+                  where commodityNo = #{item.commodityNo}
+              </foreach>
+ 	</update>
+ 	<update id="updateStockList" parameterType="java.util.List" >
+ 		
+         	<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+              update m_commodity 
+				  <set>
+	                  stockNum=#{item.stockNum},
+	                  updateTime = #{item.updateTime} 
+                  </set>
+                  where commodityNo = #{item.commodityNo}
+              </foreach>
+ 	</update>
+ 	<select id="getCategoryByCommodity" parameterType="string" resultType="Fenlei">
+ 		SELECT categoryId,categoryName FROM m_category WHERE parentId =
+		(SELECT c.parentId 
+		FROM m_commodity m LEFT JOIN m_category c ON m.categoryId=c.categoryId 
+		WHERE m.commodityId=#{0})
+ 	</select>
+</mapper>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FenleiMapper">
+
+	<resultMap type="Fenlei" id="FenleiResult">
+		<result property="categoryId" column="categoryId"/>
+		<result property="storeId" column="storeId"/>
+		<result property="parentId" column="parentId"/>
+		<result property="categoryName" column="categoryName"/>
+		<result property="categoryCode" column="categoryCode"/>
+		<result property="img" column="img"/>
+		<result property="sort" column="sort"/>
+		<result property="addTime" column="addTime"/>
+		<result property="status" column="status"/>
+	</resultMap>
+	
+	<select id="getAll" parameterType="string" resultType="Fenlei">
+		SELECT * FROM m_category WHERE parentId="0" AND`status`=1 AND storeId=#{0} ORDER BY sort ASC
+	</select>
+	
+	<select id="queryCategorys" resultMap="FenleiResult" parameterType="string">
+		SELECT * FROM m_category WHERE storeId=#{0} and `status`=1  order by sort asc
+	</select>
+	
+	<select id="findByCategoryId" parameterType="String" resultType="Fenlei">
+		select * from m_category where categoryId=#{categoryId}
+	</select>
+	
+	<select id="findCategoryByPid" parameterType="String" resultType="Fenlei">
+		SELECT * FROM m_category WHERE parentId = "0" and storeId=#{0}  order by sort asc
+	</select>
+	
+	<delete id="deleteCategoryInfo" parameterType="Fenlei">
+ 		update m_category set status=-1 where 1=1
+ 		<if test="categoryId != null and categoryId  != ''">and categoryId = #{categoryId}</if>
+ 		<if test="parentId != null and parentId  != ''">and parentId = #{parentId}</if>
+ 	</delete>
+	
+	<!-- 修改信息 -->
+	<update id="updateCategoryInfo" parameterType="Fenlei">
+ 		update m_category
+ 		<set>
+ 			<if test="categoryName != null and categoryName != ''">categoryName = #{categoryName},</if>
+ 			<if test="img != null and img != ''">img = #{img},</if>
+ 			<if test="sort != null and sort != ''">sort = #{sort},</if>
+ 			<if test="addTime != null and addTime != ''">addTime = #{addTime},</if>
+ 			<if test="parentId != null and parentId != ''">parentId = #{parentId}</if>
+ 		</set>
+ 		where 1=1
+ 		<if test="categoryId != null and categoryId  != ''">and categoryId = #{categoryId}</if>
+ 	</update>
+	
+	<!-- 插入信息 -->
+ 	<insert id="addCategoryInfo" parameterType="Fenlei"  keyProperty="categoryId">
+ 		<selectKey keyProperty="categoryId" resultType="java.lang.String" order="BEFORE">
+ 			select uuid()
+ 		</selectKey>
+ 		insert into m_category
+ 		(	categoryId,
+ 			<if test="categoryName != null and categoryName != ''">categoryName,</if>
+ 			<if test="img != null and img != ''">img,</if>
+ 			<if test="sort != null and sort != ''">sort,</if>
+ 			<if test="status != null and status != ''">status,</if>
+ 			<if test="categoryCode != null and categoryCode != ''">categoryCode,</if>
+ 			addTime,
+ 			<if test="parentId != null and parentId != ''">parentId,</if>
+ 			<if test="storeId != null and storeId != ''">storeId</if>
+ 			
+ 		)values(#{categoryId},
+ 			<if test="categoryName != null and categoryName != ''">#{categoryName},</if>
+ 			<if test="img != null and img != ''">#{img},</if>
+ 			<if test="sort != null and sort != ''">#{sort},</if>
+ 			<if test="status != null and status != ''">#{status},</if>
+ 			<if test="categoryCode != null and categoryCode != ''">#{categoryCode},</if>
+ 			sysdate(),
+ 			<if test="parentId != null and parentId != ''">#{parentId},</if>
+ 			<if test="storeId != null and storeId != ''">#{storeId}</if>
+ 		)
+ 	</insert>
+ 	
+ 	<select id="queryCom" parameterType="string" resultType="int">
+ 		SELECT COUNT(*) FROM m_category c RIGHT JOIN m_commodity m ON c.categoryId=m.categoryId 
+ 		WHERE c.categoryId =#{0}
+ 	</select>
+ 	
+ 	<select id="getCategorys" parameterType="string" resultType="Fenlei">
+ 		SELECT categoryId,categoryName FROM m_category WHERE parentId=#{0}
+ 	</select>
+ 	
+</mapper>
