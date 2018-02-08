@@ -1,6 +1,7 @@
 package com.xingrongjinfu.commodity.fenlei.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.xingrongjinfu.commodity.fenlei.model.Fenlei;
 
@@ -42,11 +43,11 @@ public interface IFenleiDao {
      */
     public int deleteCategory(Fenlei fenlei);
     
-    public int queryCom(String id);
+    public int queryCom(Map map);
     
     public List<Fenlei> getCategorys(String id) throws Exception;
     
-    
+    int getByName(Map map);
     
     
 }

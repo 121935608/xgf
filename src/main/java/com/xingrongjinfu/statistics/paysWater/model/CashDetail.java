@@ -20,8 +20,15 @@ public class CashDetail {
     private Integer status;
     private String commodityCode;
     private BigDecimal lirun;
+    private String categoryName;
     
     
+    public String getCategoryName() {
+        return categoryName;
+    }
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
     public BigDecimal getLirun() {
         return lirun;
     }

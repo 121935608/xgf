@@ -91,10 +91,14 @@ public class FenleiController extends BaseController{
     public @ResponseBody Message delMenu(Fenlei category)
     {
         int result = 0;
+        String storeId = (String) SessionUtils.getSession().getAttribute("storeId");
         String categoryId = category.getCategoryId();
         String parentId = category.getParentId();
         //如果有商品分类是该分类 则不能删除
-        int n = fenleiService.queryCom(categoryId);
+        Map map = new HashMap<>();
+        map.put("storeId", storeId);
+        map.put("categoryId", categoryId);
+        int n = fenleiService.queryCom(map);
         if(n != 0){
             return new Message(false, "该分类不能被删除！");
         }
@@ -136,12 +140,22 @@ public class FenleiController extends BaseController{
             e.printStackTrace();
             return new Message(result);
         }
-
+        Map m = new HashMap();
         String categoryId = category.getCategoryId();
+        String categoryName = category.getCategoryName();
+        m.put("categoryName", categoryName);
+        m.put("storeId", storeId);
         if (categoryId != null&&categoryId.length()!=0) {
+            m.put("categoryId", categoryId);
+            if(fenleiService.getByName(m)>0){
+                return new Message(false,"该分类已存在！");
+            }
             result = fenleiService.updateCategoryInfo(category);
         } 
         else{
+            if(fenleiService.getByName(m)>0){
+                return new Message(false,"该分类已存在！");
+            }
             category.setStoreId(storeId);
             category.setCategoryCode(StringUtil.getNo("C"));
             category.setStatus(1);

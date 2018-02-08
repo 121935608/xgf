@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="getByName" parameterType="map" resultType="int">
-		SELECT count(1) FROM m_unit WHERE unitName=#{unitName}
+		SELECT count(1) FROM m_unit WHERE unitName=#{unitName} and storeId=#{storeId}
 		<if test="unitCode != null and unitCode != ''">
 			and unitCode!=#{unitCode}
 		</if>

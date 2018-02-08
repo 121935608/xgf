@@ -1,6 +1,7 @@
 package com.xingrongjinfu.commodity.fenlei.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,15 +51,21 @@ public class FenleiService implements IFenleiService{
     }
 
     @Override
-    public int queryCom(String id) {
+    public int queryCom(Map map) {
         
-        return fenleiDao.queryCom(id);
+        return fenleiDao.queryCom(map);
     }
 
     @Override
     public List<Fenlei> getCategorys(String id)throws Exception {
        
         return fenleiDao.getCategorys(id);
+    }
+
+    @Override
+    public int getByName(Map map) {
+        
+        return fenleiDao.getByName(map);
     }
 
 

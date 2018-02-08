@@ -19,4 +19,10 @@ public interface ICashService {
     
     public List<CashDetail> saleCountpageInfoQuery(PageUtilEntity pageUtilEntity);
     
+    public List<CashFlow> saleGraphCombo(String storeId);
+    
+    public List<CashFlow> passengerAnalysisGraph(String storeId);
+    
+    public List<CashDetail> saleGraphPie(String storeId);
+    
 }

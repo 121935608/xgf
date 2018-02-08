@@ -86,4 +86,46 @@ public class CashDao extends DynamicObjectBaseDao implements ICashDao {
         return userPageInfo;
     }
 
+    @Override
+    public List<CashFlow> saleGraphCombo(String storeId) {
+        List<CashFlow> cashFlowList = null;
+        try
+        {
+            cashFlowList = (List<CashFlow>) this.findForList("CashMapper.saleGraphCombo", storeId);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return cashFlowList;
+    }
+
+    @Override
+    public List<CashDetail> saleGraphPie(String storeId) {
+        List<CashDetail> cashFlowList = null;
+        try
+        {
+            cashFlowList = (List<CashDetail>) this.findForList("CashMapper.saleGraphPie", storeId);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return cashFlowList;
+    }
+
+    @Override
+    public List<CashFlow> passengerAnalysisGraph(String storeId) {
+        List<CashFlow> cashFlowList = null;
+        try
+        {
+            cashFlowList = (List<CashFlow>) this.findForList("CashMapper.passengerAnalysisGraph", storeId);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return cashFlowList;
+    }
+
 }

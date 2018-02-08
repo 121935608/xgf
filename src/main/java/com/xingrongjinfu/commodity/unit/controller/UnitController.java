@@ -104,7 +104,9 @@ public class UnitController extends BaseController{
      */
     @RequestMapping(UnitConstant.CHECK_UNITNAME)
     public @ResponseBody int checkUnitName(String unitName,String unitCode) {
+        String storeId = (String) SessionUtils.getSession().getAttribute("storeId");
         Map map = new HashMap();
+        map.put("storeId", storeId);
         map.put("unitName", unitName);
         if(null != unitCode){
             map.put("unitCode", unitCode);

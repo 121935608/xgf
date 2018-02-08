@@ -1,6 +1,7 @@
 package com.xingrongjinfu.commodity.fenlei.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.framework.core.dao.DynamicObjectBaseDao;
 import org.springframework.stereotype.Repository;
@@ -46,15 +47,21 @@ public class FenleiDao extends DynamicObjectBaseDao implements IFenleiDao {
     }
 
     @Override
-    public int queryCom(String id) {
+    public int queryCom(Map map) {
         
-        return (int) this.findForObject("FenleiMapper.queryCom", id);
+        return (int) this.findForObject("FenleiMapper.queryCom", map);
     }
 
     @Override
     public List<Fenlei> getCategorys(String id) throws Exception {
         
         return (List<Fenlei>) this.findForList("FenleiMapper.getCategorys", id);
+    }
+
+    @Override
+    public int getByName(Map map) {
+        
+        return (int) this.findForObject("FenleiMapper.getByName", map);
     }
 
    

@@ -21,6 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="status" column="status" />
 		<result property="commodityCode" column="commodityCode" />
 		<result property="lirun" column="lirun" />
+		<result property="categoryName" column="categoryName" />
 	</resultMap>
 	<resultMap type="CashFlow" id="CashFlowResult">
 		<result property="cashId" column="cashId" />
@@ -29,7 +30,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="storeId" column="storeId" />
 		<result property="machineNo" column="machineNo" />
 		<result property="cashierId" column="cashierId" />
-		<result property="menberId" column="menberId" />
+		<result property="menberNo" column="menberNo" />
 		<result property="type" column="type" />
 		<result property="payType" column="payType" />
 		<result property="totalMoney" column="totalMoney" />
@@ -41,6 +42,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="addIP" column="addIP" />
 		<result property="cashName" column="cashName" />
 		<result property="memberName" column="memberName" />
+		<result property="lirun" column="lirun" />
+		<result property="maolilv" column="maolilv" />
+		<result property="hour" column="hour" />
 		<collection property="cashDetail" javaType="java.util.List" resultMap="CashDetailResult" />
 	</resultMap>
 	<resultMap type="Register" id="RegisterResult">
@@ -51,11 +55,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	<select id="pageInfoQuery" parameterType="PageUtilEntity"
 		resultType="CashFlow">
-		SELECT c.cashId,tradeCode,c.userId,machineNo,c.type type,m.name cashName,me.name memberName,payType,
+		SELECT c.cashId,tradeCode,c.userId,machineNo,c.type type,m.name cashName,c.menberNo memberName,payType,
 		c.totalMoney/100 totalMoney,c.money/100 money,c.number,c.addTime,d.commodityId,com.commodityName
 		FROM m_cashFlow c LEFT JOIN t_cashier m ON c.cashierId=m.cashierId
 		LEFT JOIN m_cashDetail d ON d.cashId=c.cashId
-		LEFT JOIN m_member me ON me.memberId=c.menberId
 		LEFT JOIN m_commodity com ON d.commodityId=com.commodityId
 		WHERE c.storeId=#{relationMap.storeId} AND c.status=1
 		<if test="relationMap.commodityNo != null and relationMap.commodityNo != ''">
@@ -84,7 +87,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT cashId,tradeCode,money/100 money FROM m_cashFlow WHERE cashId=#{0}
 	</select>
 	
-	<select id="cashCountpageInfoQuery" parameterType="string" resultType="CashFlow">
+	<select id="cashCountpageInfoQuery" parameterType="PageUtilEntity" resultType="CashFlow">
 		SELECT f.cashierId cashierId,m.name cashName,m.addTime,
 		SUM(IF(payType=0,money/100,0)) xianjin,
 		SUM(IF(payType=1,money/100,0)) zhifubao,
@@ -106,7 +109,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ORDER BY m.addTime DESC
 	</select>
 	
-	<select id="sellWaterpageInfoQuery" parameterType="string" resultType="CashDetail">
+	<select id="sellWaterpageInfoQuery" parameterType="PageUtilEntity" resultType="CashDetail">
 		SELECT c.commodityCode commodityCode,d.commodityName commodityName,c.commodityNo commodityNo,
 		d.addTime `addTime`,d.unitName unitName,
 		d.number number,d.totalVipPrice/100 totalVipPrice,d.inPrice/100*d.number inPrice
@@ -128,7 +131,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		ORDER BY d.addTime DESC
 	</select>
-	<select id="saleCountpageInfoQuery" parameterType="string" resultType="CashDetail">
+	<select id="saleCountpageInfoQuery" parameterType="PageUtilEntity" resultType="CashDetail">
 		SELECT
 		c.commodityCode commodityCode,c.commodityNo commodityNo,a.commodityId,a.commodityName,
 		a.totalVipPrice,a.inPrice,a.lirun,a.number,a.unitName FROM
@@ -159,5 +162,48 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			)
 		</if>
 	</select>
+	<select id="saleGraphCombo" parameterType="string" resultType="CashFlow">
+		SELECT IFNULL(SUM(f.money/100),0) money,IFNULL(SUM(f.number),0) number,
+		DATE_FORMAT(f.addTime,'%Y-%m-%d') cashId,
+		IFNULL(SUM(d.totalVipPrice/100) - SUM(d.inPrice/100*d.number),0) lirun,
+		IFNULL(FORMAT((SUM(d.totalVipPrice/100) - SUM(d.inPrice/100*d.number))/SUM(f.money/100),2),0) maolilv
+		FROM m_cashFlow f
+		LEFT JOIN m_cashDetail d ON d.cashId=f.cashId
+		WHERE DATE_SUB(CURDATE(), INTERVAL 7 DAY) &lt;= DATE(f.addTime) 
+		AND f.storeId = #{storeId} AND f.`status` = 1
+		GROUP BY DATE_FORMAT(f.addTime,'%Y-%m-%d')
+		ORDER BY DATE_FORMAT(f.addTime,'%Y-%m-%d')
+	</select>
+	<select id="saleGraphPie" parameterType="string" resultType="CashDetail">
+		select a.categoryName categoryName,sum(totalVipPrice) totalVipPrice from
+		(select categoryId,categoryName from m_category 
+		where storeId=#{storeId} AND status = 1 AND parentId="0") a
+		left join m_category c on a.categoryId=c.parentId
+		left join m_commodity co on co.categoryId=c.categoryId
+		left join m_cashDetail d on d.commodityId=co.commodityId
+		group by a.categoryName
+	</select>
+	<select id="passengerAnalysisGraph" parameterType="string" resultType="CashFlow">
+		SELECT CASE WHEN HOUR(`addTime`)  BETWEEN 8 AND 9 THEN '08:00:00'
+             WHEN HOUR(`addTime`)  BETWEEN 9 AND 10 THEN '09:00:00'
+             WHEN HOUR(`addTime`)  BETWEEN 11 AND 12 THEN '11:00:00'
+             WHEN HOUR(`addTime`)  BETWEEN 12 AND 13 THEN '12:00:00'
+             WHEN HOUR(`addTime`)  BETWEEN 13 AND 14 THEN '13:00:00'
+             WHEN HOUR(`addTime`)  BETWEEN 14 AND 15 THEN '14:00:00'
+             WHEN HOUR(`addTime`)  BETWEEN 15 AND 16 THEN '15:00:00'
+             WHEN HOUR(`addTime`)  BETWEEN 16 AND 17 THEN '16:00:00'
+             WHEN HOUR(`addTime`)  BETWEEN 17 AND 18 THEN '17:00:00'
+             WHEN HOUR(`addTime`)  BETWEEN 18 AND 19 THEN '18:00:00'
+             WHEN HOUR(`addTime`)  BETWEEN 19 AND 20 THEN '19:00:00'
+             WHEN HOUR(`addTime`)  BETWEEN 20 AND 21 THEN '20:00:00'
+             WHEN HOUR(`addTime`)  BETWEEN 21 AND 22 THEN '21:00:00'
+             WHEN HOUR(`addTime`)  BETWEEN 22 AND 23 THEN '23:00:00'
+             END `hour`,count(*) number
+             FROM m_cashFlow WHERE storeId=#{storeId} AND `status`=1
+             GROUP BY `hour`
+             ORDER BY `hour`
+	</select>
+	
+	
 	
 </mapper>

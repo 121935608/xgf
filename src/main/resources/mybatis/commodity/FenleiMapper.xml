@@ -80,13 +80,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		)
  	</insert>
  	
- 	<select id="queryCom" parameterType="string" resultType="int">
+ 	<select id="queryCom" parameterType="map" resultType="int">
  		SELECT COUNT(*) FROM m_category c RIGHT JOIN m_commodity m ON c.categoryId=m.categoryId 
- 		WHERE c.categoryId =#{0}
+ 		WHERE c.categoryId =#{categoryId} and m.storeId=#{storeId}
  	</select>
  	
  	<select id="getCategorys" parameterType="string" resultType="Fenlei">
  		SELECT categoryId,categoryName FROM m_category WHERE parentId=#{0}
  	</select>
  	
+ 	<select id="getByName" parameterType="map" resultType="int">
+		SELECT count(1) FROM m_category WHERE categoryName=#{categoryName} and storeId=#{storeId}
+		<if test="categoryId != null and categoryId != ''">
+			and categoryId!=#{categoryId}
+		</if>
+	</select>
 </mapper>

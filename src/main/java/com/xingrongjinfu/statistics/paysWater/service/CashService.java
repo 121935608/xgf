@@ -39,4 +39,17 @@ public class CashService implements ICashService {
         List<CashDetail> list =  cashDao.saleCountpageInfoQuery(pageUtilEntity);
         return list;
     }
+    @Override
+    public List<CashFlow> saleGraphCombo(String storeId) {
+        return cashDao.saleGraphCombo(storeId);
+    }
+    @Override
+    public List<CashDetail> saleGraphPie(String storeId) {
+        return cashDao.saleGraphPie(storeId);
+    }
+    @Override
+    public List<CashFlow> passengerAnalysisGraph(String storeId) {
+       
+        return cashDao.passengerAnalysisGraph(storeId);
+    }
 }

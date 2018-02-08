@@ -14,7 +14,7 @@ public class CashFlow {
     private String machineNo;
     private Integer type;
     private String cashierId;
-    private String menberId;
+    private String menberNo;
     private Integer payType;
     private BigDecimal totalMoney;
     private BigDecimal money;
@@ -32,9 +32,29 @@ public class CashFlow {
     private BigDecimal weixin;
     private BigDecimal yinlian;
     private BigDecimal baitiao;
+    private BigDecimal lirun;
+    private BigDecimal maolilv;
     
     
     
+    public String getMenberNo() {
+        return menberNo;
+    }
+    public void setMenberNo(String menberNo) {
+        this.menberNo = menberNo;
+    }
+    public BigDecimal getLirun() {
+        return lirun;
+    }
+    public void setLirun(BigDecimal lirun) {
+        this.lirun = lirun;
+    }
+    public BigDecimal getMaolilv() {
+        return maolilv;
+    }
+    public void setMaolilv(BigDecimal maolilv) {
+        this.maolilv = maolilv;
+    }
     public BigDecimal getXianjin() {
         return xianjin;
     }
@@ -137,12 +157,6 @@ public class CashFlow {
     public void setCashierId(String cashierId) {
         this.cashierId = cashierId;
     }
-    public String getMenberId() {
-        return menberId;
-    }
-    public void setMenberId(String menberId) {
-        this.menberId = menberId;
-    }
     public Integer getPayType() {
         return payType;
     }
@@ -184,6 +198,16 @@ public class CashFlow {
     }
     public void setAddIP(String addIP) {
         this.addIP = addIP;
+    }
+    @Override
+    public String toString() {
+        return "CashFlow [cashId=" + cashId + ", tradeCode=" + tradeCode + ", userId=" + userId + ", storeId=" + storeId
+                + ", machineNo=" + machineNo + ", type=" + type + ", cashierId=" + cashierId + ", menberNo=" + menberNo
+                + ", payType=" + payType + ", totalMoney=" + totalMoney + ", money=" + money + ", number=" + number
+                + ", status=" + status + ", remark=" + remark + ", addTime=" + addTime + ", addIP=" + addIP
+                + ", cashName=" + cashName + ", memberName=" + memberName + ", cashDetail=" + cashDetail + ", register="
+                + register + ", xianjin=" + xianjin + ", zhifubao=" + zhifubao + ", weixin=" + weixin + ", yinlian="
+                + yinlian + ", baitiao=" + baitiao + ", lirun=" + lirun + ", maolilv=" + maolilv + "]";
     }
     
     

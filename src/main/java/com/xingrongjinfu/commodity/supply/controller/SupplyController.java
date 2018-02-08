@@ -125,7 +125,9 @@ public class SupplyController extends BaseController{
     @RequestMapping(SupplyConstant.CHECK_SUPPLY_NAME)
     public @ResponseBody int checkSupplyName(String supplierName,String supplierCode) {
         Map map = new HashMap();
+        String storeId = (String) SessionUtils.getSession().getAttribute("storeId");
         map.put("supplierName", supplierName);
+        map.put("storeId", storeId);
         if(null != supplierCode){
             map.put("supplierCode", supplierCode);
         }

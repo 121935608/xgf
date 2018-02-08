@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM m_supplier WHERE supplierCode=#{supplierCode}
 	</select>
 	<select id="getByName" parameterType="map" resultType="int">
-		SELECT count(1) FROM m_supplier WHERE supplierName=#{supplierName}
+		SELECT count(1) FROM m_supplier WHERE supplierName=#{supplierName} and storeId=#{storeId}
 		<if test="supplierCode != null and supplierCode != ''">
 			and supplierCode!=#{supplierCode}
 		</if>
