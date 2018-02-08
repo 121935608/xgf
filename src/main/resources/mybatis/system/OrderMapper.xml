@@ -62,10 +62,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		LEFT JOIN sys_user s ON o.userId=s.userId
 		WHERE 1=1
 		<if test="relationMap.beginTime != null and relationMap.beginTime != ''"><!-- 开始时间检索 -->
-			AND DATE_FORMAT(t.orderTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
+			AND DATE_FORMAT(o.orderTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
 		</if>
 		<if test="relationMap.endTime != null and relationMap.endTime != ''"><!-- 结束时间检索 -->
-			AND DATE_FORMAT(t.orderTime,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
+			AND DATE_FORMAT(o.orderTime,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
 		</if>
 		<if test="relationMap.payType != null and relationMap.payType != ''">
 			<choose>

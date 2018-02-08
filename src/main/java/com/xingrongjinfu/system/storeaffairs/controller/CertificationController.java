@@ -9,11 +9,13 @@ import java.util.Map;
 
 import com.xingrongjinfu.commodity.classification.model.Category;
 import com.xingrongjinfu.system.supervisor.service.ISupervisorService;
+import com.xingrongjinfu.utils.HttpUtils;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.framework.core.controller.BaseController;
 import org.framework.core.model.Message;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -46,6 +48,12 @@ class CertificationController extends BaseController {
 
 	@Autowired
     private ISupervisorService supervisorService;
+
+	@Value("${addCustomer}")
+    private String addCustomer;
+
+    @Value("${filePush}")
+    private String filePush;
 
     /**
      * 跳转认证申请列表界面
@@ -174,6 +182,10 @@ class CertificationController extends BaseController {
         if (id != null&&!id.equals(""))
         {
             result = certificationService.saveCertificationCheck(store);
+            HashMap map=new HashMap();
+            map.put("userId",store.getUserId());
+            HttpUtils.sendPost(addCustomer,map.toString());
+            HttpUtils.sendPost(filePush,map.toString());
         }
         return new Message(result);
     }

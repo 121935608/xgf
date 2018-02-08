@@ -151,6 +151,7 @@ public class CommodityAdController extends BaseController {
 
 		PageUtilEntity pageUtilEntity = this.getPageUtilEntity();
 		String fuzzyCondition = pageUtilEntity.getRelationMap().get("fuzzyCondition");
+
 		if (fuzzyCondition != null && !fuzzyCondition.equals("")) {
 			try {
 				pageUtilEntity.getRelationMap().put("fuzzyCondition", URLDecoder.decode(fuzzyCondition, "utf-8"));

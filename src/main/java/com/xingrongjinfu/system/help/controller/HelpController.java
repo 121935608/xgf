@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -137,6 +138,7 @@ public class HelpController extends BaseController{
         User user=this.getCurrentUser();
         help.setAnswer(user.getUserName());
         help.setFeedBackId(feedBackId);
+        help.setReplyTime(new Date());
         result= helpService.updateHelpInfo(help);
         return new Message(result);
     }
