@@ -165,7 +165,7 @@ public class ProductController extends BaseController{
                     result = productService.updateProduct(product);
                }else {
                    //商品为s这里的提交还需将type改为c
-                   product.setType("s");
+                   product.setType("c");
                    result =productService.updateProduct(product);
                }
             }
