@@ -89,7 +89,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			OR
 			s.userName LIKE CONCAT(CONCAT('%', #{relationMap.orderNumber}),'%')
 			)
-		</if><!--关键词查询-->
+		</if>
+		<!--关键词查询-->
+	     order by o.orderTime DESC 
 	</select>
 	
 	<select id="findOrderInfo" parameterType="String" resultMap="OrderResult">
