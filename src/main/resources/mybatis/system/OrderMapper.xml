@@ -57,8 +57,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultMap="OrderResult">
-		SELECT o.orderNumber,o.orderTime,o.payTime,s.userName,o.orderPrice/100 orderPrice,t.platform,o.orderStatus
-		FROM t_order o LEFT JOIN t_user_info t ON o.userId=t.userId
+		SELECT o.orderNumber,o.orderTime,o.payTime,s.userName,o.orderPrice/100 orderPrice,o.platform,o.orderStatus
+		FROM t_order o
 		LEFT JOIN sys_user s ON o.userId=s.userId
 		WHERE 1=1
 		<if test="relationMap.beginTime != null and relationMap.beginTime != ''"><!-- 开始时间检索 -->
@@ -78,7 +78,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</choose>
 		</if>
 		<if test="relationMap.platform != null and relationMap.platform != ''">
-			AND t.platform=#{relationMap.platform}
+			AND o.platform=#{relationMap.platform}
 		</if>
 		<if test="relationMap.orderStatus != null and relationMap.orderStatus != ''">
 			AND o.orderStatus=#{relationMap.orderStatus}

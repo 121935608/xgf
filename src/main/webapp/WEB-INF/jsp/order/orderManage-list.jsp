@@ -21,7 +21,7 @@
            <select name="platform" id="platform" class="select" autocomplete="off">
                <option value="">订单来源</option>
                <option value="Android">Android</option>
-               <option value="iOS" >IOS</option>
+               <option value="iOS" >iOS</option>
            </select>
        </span>
 		<span class="select-box" style="width: 120px;">
@@ -155,13 +155,15 @@ $(document).ready(function(){
             "bSearchable": false,
             "mRender": function(data, type, row) {
                 if (row.platform!=null){
-                    if (row.platform=='Android') {
+                    if (row.platform=="Android") {
                         return "Android";
-                    } else if(row.platform == 'iOS') {
-                        return "IOS";}
+                    } else if(row.platform =="iOS") {
+                        return "iOS";}
                 }else {
                     return "";
                 }
+
+//                row.platform;
             }
         },
         {
