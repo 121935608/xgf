@@ -193,7 +193,7 @@ function change_password(title,url,w,h){
 
 /*重置密码*/
 function user_resetPWD(obj,id){
-    parent.layer.confirm('确认执行改操作？',{icon: 3, title:'提示'},function(index){
+    parent.layer.confirm('确认执行该操作？',{icon: 3, title:'提示'},function(index){
         var userName=[];
         $(":checkbox:checked").each(function(){ userName.push($(this).val());});
         if (userName ==null || userName ==''){
@@ -208,7 +208,7 @@ function user_resetPWD(obj,id){
             dataType:"json",
             success:function(data){
                 if(data.s == true){
-                    parent.layer.msg('已重置!',{icon: 5,time:1000});
+                    parent.layer.msg('已重置!密码重置为123456',{icon: 5,time:1000});
                 }else{
                     parent.layer.msg("重置失败" , {icon: 2,title:"系统提示"});
                 }

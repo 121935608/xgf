@@ -196,7 +196,7 @@ class CertificationController extends BaseController {
             String result1= HttpClientUtil.httpPostRequest(addCustomer,map);
 //            String result1= HttpUtils.sendPost(addCustomer,map.toString());
 //            String result2=HttpUtils.sendPost(filePush,map.toString());
-            String result2=HttpClientUtil.httpPostRequest(addCustomer,map);
+            String result2=HttpClientUtil.httpPostRequest(filePush,map);
         }
         return new Message(result);
     }

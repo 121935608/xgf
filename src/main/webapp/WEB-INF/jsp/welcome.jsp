@@ -49,7 +49,7 @@
 					<td>
 						<table border="1" style="text-align:center;width:50%;float:left;margin-left: 10%;margin-right: 5%">
 							<tr style="width:600px;height:40px;border:0px;background-color: #D1D1D1">
-								<td style="width:15%;line-height: 40px;text-align: center;">交易记录</td>
+								<td style="width:15%;text-align: center;">交易记录</td>
 								<td style="width:35%"></td>
 								<td style="width:35%"></td>
 								<td style="text-align:center;width: 15%"><a href="${context_url}/dataCount/saleView.action" style="color:blue;">更多>></a></td>
@@ -67,7 +67,7 @@
 					<td>
 						<table border="1" style="text-align:center;width:50%;float:left;">
 							<tr style="width:600px;height:40px;border:0px;background-color: #D1D1D1">
-								<td style="width:15%;line-height: 40px;text-align: center;">交易记录</td>
+								<td style="width:15%;text-align: center;">交易记录</td>
 								<td style="width:35%"></td>
 								<td style="width:35%"></td>
 								<td style="text-align:center;width: 15%"><a href="${context_url}/dataCount/saleView.action" style="color:blue;">更多>></a></td>
