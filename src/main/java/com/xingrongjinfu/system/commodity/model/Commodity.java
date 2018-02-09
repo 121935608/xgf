@@ -28,6 +28,9 @@ public class Commodity {
     private Double payTaxes;
     private Double profit;
     private String commodityId;
+    private Double totalInPrice;
+    private Double totalPrice;
+    private String unit;
 
     
     public String getCommodityId() {
@@ -92,6 +95,30 @@ public class Commodity {
 
     public void setProfit(Double profit) {
         this.profit = profit;
+    }
+
+    public Double getTotalInPrice() {
+        return totalInPrice;
+    }
+
+    public void setTotalInPrice(Double totalInPrice) {
+        this.totalInPrice = totalInPrice;
+    }
+
+    public Double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 
     @Override

@@ -19,6 +19,7 @@
 			<tr class="text-c">
 				<th width="10%">商品名称</th>
 				<th width="10%">商品编号</th>
+				<th width="10%">单位</th>
 				<th width="10%">销售数量</th>
 				<th width="10%">销售金额(元) </th>
 				<th width="10%">进价(元)</th>
@@ -47,13 +48,26 @@ $(document).ready(function(){
             }
         },
         {
-            "sDefaultContent": "商品编号",
+            "sDefaultContent": "商品条码",
             "bSortable" : false,
             "sClass": "text-c",
             "bSearchable": false,
             "mRender": function(data, type, row) {
                 if (row.commodityNo != null) {
                     return row.commodityNo;
+                } else {
+                    return "";
+                }
+            }
+        },
+        {
+            "sDefaultContent": "单位",
+            "bSortable" : false,
+            "sClass": "text-c",
+            "bSearchable": false,
+            "mRender": function(data, type, row) {
+                if (row.unit != null) {
+                    return row.unit;
                 } else {
                     return "";
                 }
@@ -78,8 +92,8 @@ $(document).ready(function(){
             "sClass": "text-c",
             "bSearchable": false,
             "mRender": function(data, type, row) {
-                if (row.salePrice != null) {
-                    return row.salePrice;
+                if (row.totalPrice != null) {
+                    return row.totalPrice;
                 } else {
                     return 0;
                 }
@@ -91,8 +105,8 @@ $(document).ready(function(){
         "sClass": "td-status text-c",
         "bSearchable": false,
         "mRender": function(data, type, row) {
-            if (row.inPrice !=null) {
-                return row.inPrice;
+            if (row.totalInPrice !=null) {
+                return row.totalInPrice;
             }else {
                 return 0;
             }
@@ -104,8 +118,8 @@ $(document).ready(function(){
 		"sClass": "td-status text-c",
 		"bSearchable": false,
 		"mRender": function(data, type, row) {
-			if (row.payTaxes !=null) {
-				return row.payTaxes;
+			if (row.totalPrice !=null) {
+				return (row.totalPrice*0.17).toFixed(2);
 			}else {
 				return 0;
 			}
@@ -117,8 +131,8 @@ $(document).ready(function(){
 		"sClass": "td-status text-c",
 		"bSearchable": false,
 		"mRender": function(data, type, row) {
-			if (row.profit !=null) {
-				return row.profit;
+			if (row.totalPrice !=null) {
+				return (row.totalPrice-row.totalInPrice-row.totalPrice*0.17).toFixed(2);
 			}else {
 				return 0;
 			}

@@ -55,22 +55,22 @@ public class CommodityController extends BaseController{
     {
         PageUtilEntity pageUtilEntity=this.getPageUtilEntity();
         List<Commodity> tableDataInfo=commodityService.pageInfoQuery(pageUtilEntity);
-        for (Commodity commodity :tableDataInfo){
-            //纳税 数量*进价*17%
-            if (commodity.getSaleNum()==null) {commodity.setSaleNum(0);}
-            if (commodity.getSalePrice()==null) {commodity.setSalePrice(0.00);}
-            if (commodity.getInPrice()==null) {commodity.setInPrice(0.00);}
-            Double taxes=(commodity.getSaleNum()*commodity.getSalePrice()*17)/100;
-            commodity.setPayTaxes(taxes);
-            //利润 (售价-进价)*数量-纳税
-            Double profits=null;
-            if (commodity.getSaleNum()!=0) {
-                 profits = (commodity.getSalePrice() - commodity.getInPrice()) * commodity.getSaleNum() - taxes;
-            }else {
-                profits=0.00;
-            }
-            commodity.setProfit(profits);
-        }
+//        for (Commodity commodity :tableDataInfo){
+//            //纳税 数量*进价*17%
+//            if (commodity.getSaleNum()==null) {commodity.setSaleNum(0);}
+//            if (commodity.getSalePrice()==null) {commodity.setSalePrice(0.00);}
+//            if (commodity.getInPrice()==null) {commodity.setInPrice(0.00);}
+//            Double taxes=(commodity.getSaleNum()*commodity.getSalePrice()*17)/100;
+//            commodity.setPayTaxes(taxes);
+//            //利润 (售价-进价)*数量-纳税
+//            Double profits=null;
+//            if (commodity.getSaleNum()!=0) {
+//                 profits = (commodity.getSalePrice() - commodity.getInPrice()) * commodity.getSaleNum() - taxes;
+//            }else {
+//                profits=0.00;
+//            }
+//            commodity.setProfit(profits);
+//        }
         return buildDatasTable(pageUtilEntity.getTotalResult(),tableDataInfo);
     }
 }
