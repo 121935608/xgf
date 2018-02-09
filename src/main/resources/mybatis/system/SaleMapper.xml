@@ -10,12 +10,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="orderNumber" property="orderNumber" />
 		<result column="addTime" property="addTime" />
 		<result column="commodityNum" property="commodityNum" />
+		<result column="unit" property="unit" />
+		<result column="totalPrice" property="totalPrice" />
 		<result column="salePrice" property="salePrice" />
 	</resultMap>
 		<select id="pageInfoQuery" parameterType="PageUtilEntity" resultMap="SaleResult">
-			SELECT t.commodityName,c.commodityNo,t.orderNumber,t.addTime,t.commodityNum,t.salePrice/100 salePrice
-			FROM t_order_detail t LEFT JOIN t_commodity c ON t.commodityName=c.commodityName
-			WHERE 1=1
+			SELECT t.commodityId,t.orderNumber,t.commodityNo,t.commodityName,t.unit,t.totalPrice totalPrice,t.addTime,t.commodityNum  FROM t_order_detail t where 1=1
 			<if test="relationMap.beginTime != null and relationMap.beginTime != ''"><!-- 开始时间检索 -->
 				AND DATE_FORMAT(t.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
 			</if>

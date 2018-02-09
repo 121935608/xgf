@@ -23,7 +23,6 @@
 				<th width="10%">销售数量</th>
 				<th width="10%">销售金额(元) </th>
 				<th width="10%">进价(元)</th>
-				<th width="10%">纳税(元)</th>
 				<th width="10%">利润(元)</th>
 			</tr>
 		</thead>
@@ -93,7 +92,7 @@ $(document).ready(function(){
             "bSearchable": false,
             "mRender": function(data, type, row) {
                 if (row.totalPrice != null) {
-                    return row.totalPrice;
+                    return row.totalPrice/100;
                 } else {
                     return 0;
                 }
@@ -106,25 +105,13 @@ $(document).ready(function(){
         "bSearchable": false,
         "mRender": function(data, type, row) {
             if (row.totalInPrice !=null) {
-                return row.totalInPrice;
+                return row.totalInPrice/100;
             }else {
                 return 0;
             }
         }
     },
-	{
-		"sDefaultContent": "纳税",
-		"bSortable" : false,
-		"sClass": "td-status text-c",
-		"bSearchable": false,
-		"mRender": function(data, type, row) {
-			if (row.totalPrice !=null) {
-				return (row.totalPrice*0.17).toFixed(2);
-			}else {
-				return 0;
-			}
-		}
-	},
+
 	{
 		"sDefaultContent": "利润",
 		"bSortable" : false,
@@ -132,7 +119,7 @@ $(document).ready(function(){
 		"bSearchable": false,
 		"mRender": function(data, type, row) {
 			if (row.totalPrice !=null) {
-				return (row.totalPrice-row.totalInPrice-row.totalPrice*0.17).toFixed(2);
+				return (row.totalPrice-row.totalInPrice)/100;
 			}else {
 				return 0;
 			}

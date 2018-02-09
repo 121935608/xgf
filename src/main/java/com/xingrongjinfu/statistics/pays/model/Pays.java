@@ -21,6 +21,34 @@ public class Pays implements Serializable
 	private String remark;
 	private Date addTime;
 	private String addIP;
+	private String storeId;
+	private String cashNo;
+	private String cashName;
+
+	public String getCashName() {
+		return cashName;
+	}
+
+	public void setCashName(String cashName) {
+		this.cashName = cashName;
+	}
+
+	public String getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(String storeId) {
+		this.storeId = storeId;
+	}
+
+	public String getCashNo() {
+		return cashNo;
+	}
+
+	public void setCashNo(String cashNo) {
+		this.cashNo = cashNo;
+	}
+
 	public String getCashId() {
 		return cashId;
 	}

@@ -41,6 +41,8 @@
 				<th width="10%">创建时间</th>
 				<th width="10%">收款金额（元）</th>
 				<th width="10%">支付方式</th>
+				<th width="10%">流水号</th>
+				<th width="10%">收银员</th>
 				
 			</tr>
 		</thead>
@@ -58,8 +60,8 @@ $(document).ready(function(){
         "sClass": "text-c",
         "bSearchable": false,
         "mRender": function(data, type, row) {
-            if (row.tradeCode != null) {
-                return row.tradeCode;
+            if (row.cashNo != null) {
+                return row.cashNo;
             } else {
                 return "";
             }
@@ -106,15 +108,37 @@ $(document).ready(function(){
         		return "支付宝支付";
         	}else if(row.payType=='2'){
         		return "微信支付";
-        	}else if(row.payType=='3'){
-        		return "银联支付";
-        	}else if(row.payType=='4'){
-        		return "京东白条支付";
         	}else{
-        		return "";
+        		return "现金";
         	} 
         } 	
     },
+        {
+            "sDefaultContent": "流水号",
+            "bSortable" : false,
+            "sClass": "text-c",
+            "bSearchable": false,
+            "mRender": function(data, type, row) {
+                if (row.tradeCode != null) {
+                    return row.tradeCode;
+                } else {
+                    return "";
+                }
+            }
+        },
+        {
+            "sDefaultContent": "收银员",
+            "bSortable" : false,
+            "sClass": "text-c",
+            "bSearchable": false,
+            "mRender": function(data, type, row) {
+                if (row.cashName != null) {
+                    return row.cashName;
+                } else {
+                    return "";
+                }
+            }
+        },
   ];
     var url = "${context_root}/statistics/paysList.action";
     pageTable = _Datatable_Init(pageTable, aoColumns, url); 

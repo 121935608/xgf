@@ -21,6 +21,7 @@
 				<th width="10%">商品编号</th>
 				<th width="10%">订单号</th>
 				<th width="10%">创建时间</th>
+				<th width="6%">单位</th>
 				<th width="10%">销售数量</th>
 				<th width="10%">销售金额(元)</th>
 			</tr>
@@ -84,6 +85,19 @@ $(document).ready(function(){
             }
         }
     },
+        {
+            "sDefaultContent": "单位",
+            "bSortable" : false,
+            "sClass": "td-status text-c",
+            "bSearchable": false,
+            "mRender": function(data, type, row) {
+                if (row.unit !=null) {
+                    return row.unit;
+                }else {
+                    return 0;
+                }
+            }
+        },
 	{
 		"sDefaultContent": "销售数量",
 		"bSortable" : false,
@@ -103,8 +117,8 @@ $(document).ready(function(){
 		"sClass": "td-status text-c",
 		"bSearchable": false,
 		"mRender": function(data, type, row) {
-			if (row.commodityNum !=null && row.salePrice!=null) {
-				return row.commodityNum*row.salePrice;
+			if (row.totalPrice!=null) {
+				return row.totalPrice/100;
 			}else {
 				return 0;
 			}

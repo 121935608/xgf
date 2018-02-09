@@ -5,6 +5,7 @@ import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.shiro.common.utils.SessionUtils;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.framework.core.controller.BaseController;
@@ -40,6 +41,11 @@ public class PayController extends BaseController {
 
 		// 支付类型1支付宝2微信支付3银联4京东白条
 		List<SysCode> sysCodeList = new ArrayList<SysCode>();
+		SysCode sysCode0 = new SysCode();
+		sysCode0.setCodeid("0");
+		sysCode0.setCodevalue("现金");
+		sysCodeList.add(sysCode0);
+
 		SysCode sysCode1 = new SysCode();
 		sysCode1.setCodeid("1");
 		sysCode1.setCodevalue("支付宝支付");
@@ -49,16 +55,6 @@ public class PayController extends BaseController {
 		sysCode2.setCodeid("2");
 		sysCode2.setCodevalue("微信支付");
 		sysCodeList.add(sysCode2);
-
-		SysCode sysCode3 = new SysCode();
-		sysCode3.setCodeid("3");
-		sysCode3.setCodevalue("银联支付");
-		sysCodeList.add(sysCode3);
-
-		SysCode sysCode4 = new SysCode();
-		sysCode4.setCodeid("4");
-		sysCode4.setCodevalue("京东白条支付");
-		sysCodeList.add(sysCode4);
 
 		modelAndView.addObject("payTypeList", sysCodeList);
 		return modelAndView;
@@ -80,6 +76,8 @@ public class PayController extends BaseController {
 				e.printStackTrace();
 			}
 		}
+		String storeId = (String) SessionUtils.getSession().getAttribute("storeId");
+		pageUtilEntity.getRelationMap().put("storeId", storeId);
 		List<TableDataInfo> tableDataInfo = paysService.pageInfoQuery(pageUtilEntity);
 
 		return buildDataTable(pageUtilEntity.getTotalResult(), tableDataInfo);

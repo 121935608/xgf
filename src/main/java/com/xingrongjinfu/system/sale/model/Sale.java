@@ -28,7 +28,25 @@ public class Sale {
     private Date addTime;
     private Integer commodityNum;
     private Double salePrice;
+    private Double totalPrice;
+    private String unit;
 
+
+    public Double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
 
     public String getCommodityName() {
         return commodityName;

@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="StatisticsPaysMapper">
 
-	<resultMap type="Pays" id="PaysResult">
+	<resultMap type="Pay" id="PaysResult">
 		<result property="cashId" column="cashId" />
 		<result property="userId" column="userId" />
 		<result property="tradeCode" column="tradeCode" />
@@ -14,14 +14,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="remark" column="remark" />
 		<result property="addTime" column="addTime" />
 		<result property="addIP" column="addIP" />
+		<result property="storeId" column="storeId" />
+		<result property="cashNo" column="cashNo" />
+		<result property="cashName" column="cashName" />
 	</resultMap>
 
-	<select id="pageInfoQuery" parameterType="PageUtilEntity"
-		resultType="Pays">
-		select tradeCode,addTime,money/100 money,payType
-		from m_cashFlow m
-		inner join sys_user s on m.userId = s.userId
-		where 1=1
+	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultType="Pay">
+		select m.tradeCode,m.cashNo,m.addTime,m.money/100 money,m.payType,c.`name` cashName from m_cashFlow m
+		LEFT JOIN t_cashier c on c.cashierId=m.cashierId where  m.storeId= #{relationMap.storeId} and m.`status`=1
 		<if test="relationMap.userId != null and relationMap.userId != ''">
 			AND m.userId=#{relationMap.userId}
 		</if>
@@ -36,13 +36,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		
 		<if test="relationMap.payType != null and relationMap.payType != ''">
-				AND payType = #{relationMap.payType}
+				AND m.payType = #{relationMap.payType}
 			</if> 
 
 		<if
 			test="relationMap.fuzzyCondition != null and relationMap.fuzzyCondition != ''">
 			AND (
-			tradeCode LIKE CONCAT(CONCAT('%',#{relationMap.fuzzyCondition}),'%')
+			m.cashNo LIKE CONCAT(CONCAT('%',#{relationMap.fuzzyCondition}),'%')
 			)
 			order by m.addTime
 		</if>
