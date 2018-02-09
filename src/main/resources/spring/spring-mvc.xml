@@ -68,5 +68,6 @@
         <property name="maxUploadSize" value="3145728" />
         <property name="maxInMemorySize" value="1024000" />
     </bean>
-	
+	<!-- 参数配置信息 -->
+	<context:property-placeholder location="classpath:resources.properties" />
 </beans>  

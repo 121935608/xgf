@@ -348,6 +348,12 @@ $(document).ready(function(){
         commodityName:{
 			required:true,
 		},
+        tag:{
+            required:true,
+		},
+		categoryId:{
+            required:true,
+		},
         commodityNo:{
 			required:true,
 		},

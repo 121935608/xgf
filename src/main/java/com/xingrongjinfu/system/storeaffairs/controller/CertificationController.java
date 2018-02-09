@@ -9,6 +9,7 @@ import java.util.Map;
 
 import com.xingrongjinfu.commodity.classification.model.Category;
 import com.xingrongjinfu.system.supervisor.service.ISupervisorService;
+import com.xingrongjinfu.utils.HttpClientUtil;
 import com.xingrongjinfu.utils.HttpUtils;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
@@ -49,11 +50,19 @@ class CertificationController extends BaseController {
 	@Autowired
     private ISupervisorService supervisorService;
 
-	@Value("${addCustomer}")
-    private String addCustomer;
+    public String addCustomer;
 
+
+    public String filePush;
+
+    @Value("${addCustomer}")
+    public void setAddCustomer(String addCustomer) {
+        this.addCustomer = addCustomer;
+    }
     @Value("${filePush}")
-    private String filePush;
+    public void setFilePush(String filePush) {
+        this.filePush = filePush;
+    }
 
     /**
      * 跳转认证申请列表界面
@@ -175,17 +184,19 @@ class CertificationController extends BaseController {
      * 提交审核内容
      */
     @RequestMapping(StoreaffairConstant.CERTIFICATION_CHECK_SUBMIT) 
-    public @ResponseBody Message saveCertificationCheck(Store store)
-    {
+    public @ResponseBody Message saveCertificationCheck(Store store) throws UnsupportedEncodingException {
         int result = 0;
         String id = store.getStoreId();
+        Store store1=certificationService.getStoreInfo(id);
         if (id != null&&!id.equals(""))
         {
             result = certificationService.saveCertificationCheck(store);
             HashMap map=new HashMap();
-            map.put("userId",store.getUserId());
-            HttpUtils.sendPost(addCustomer,map.toString());
-            HttpUtils.sendPost(filePush,map.toString());
+            map.put("userId",store1.getUserId());
+            String result1= HttpClientUtil.httpPostRequest(addCustomer,map);
+//            String result1= HttpUtils.sendPost(addCustomer,map.toString());
+//            String result2=HttpUtils.sendPost(filePush,map.toString());
+            String result2=HttpClientUtil.httpPostRequest(addCustomer,map);
         }
         return new Message(result);
     }
