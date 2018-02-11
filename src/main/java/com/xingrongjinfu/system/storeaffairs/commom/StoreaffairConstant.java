@@ -54,11 +54,28 @@ public class StoreaffairConstant {
 	     * 请求地址：跳转至还款计划表
 	     */
 	    public final static String REPAYMENT_URL = "repaymentView";
+	    /**
+	     * 请求地址：跳转至还款对账页面
+	     */
+	    public final static String TO_REPAY_MODIFY_URL = "toRepayModify";
+	    /**
+	     * 请求地址：保存对账
+	     */
+	    public final static String REPAY_MODIFY = "modifyRepay";
+	    /**
+	     * 请求地址：还款明细
+	     */
+	    public final static String REPAY_DETAIL = "getRepayDetail";
 	    
 	    /**
-	     * 逻辑视图名：跳转至企业认证申请查询列表界面
+	     * 逻辑视图名：跳转至还款列表界面
 	     */
 	    public final static String REPAYMENT_PAGE = "system/repayment-list";
+	    
+	    /**
+	     * 逻辑视图名：跳转至还款对账界面
+	     */
+	    public final static String REPAY_MODIFY_PAGE = "system/repayment-modify";
 
 	    /**
 	     * 请求地址：企业认证申请查询

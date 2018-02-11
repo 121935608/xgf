@@ -1,11 +1,15 @@
 package com.xingrongjinfu.system.storeaffairs.service;
  
 import java.util.List;
+
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;  
-import com.xingrongjinfu.system.storeaffairs.dao.IRepaymentDao; 
+import org.springframework.stereotype.Service;
+
+import com.xingrongjinfu.system.storeaffairs.dao.IRepaymentDao;
+import com.xingrongjinfu.system.storeaffairs.model.Repay;
+import com.xingrongjinfu.system.storeaffairs.model.RepayDetail; 
 
 /**
  * 角色管理 业务层处理
@@ -30,7 +34,31 @@ public class RepaymentService implements IRepaymentService
     public List<TableDataInfo> repaymentListQuery(PageUtilEntity pageUtilEntity)
     {
         return repaymentDao.repaymentListQuery(pageUtilEntity);
-    } 
-  
+    }
+
+
+
+    @Override
+    public Repay getByRepayId(String id) {
+        
+        return repaymentDao.getByRepayId(id);
+    }
+
+
+
+    @Override
+    public int updateRepay(Repay repay,RepayDetail repayDetail) {
+        int n = repaymentDao.updateRepay(repay);
+        repaymentDao.addRepayDetail(repayDetail);
+        return n;
+    }
+
+
+
+    @Override
+    public List<RepayDetail> getRepayDetail(String id) {
+        
+        return repaymentDao.getRepayDetail(id);
+    }
 	 
 }

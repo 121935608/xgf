@@ -62,11 +62,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 
 	
 	<select id="repaymentpageInfoQuery"  parameterType="PageUtilEntity"  resultType="Repay">
-		select a.repayNo,a.addTime,c.orderNumber,b.storeName,a.repayDate,a.planTotal/100 planTotal,a.status
+		select a.repayId repayId,a.repayNo,a.addTime,c.orderNumber,b.storeName,a.repayDate,a.planTotal/100 planTotal,a.status,
+		a.repayMoney/100 repayMoney,(a.planTotal/100-a.repayMoney/100) withholdMoney
 			from t_repay a 
 			LEFT join  t_store b on a.userId=b.userId 
 			LEFT join  t_order c on a.orderId=c.orderId
 		where 1=1
+		<if test="relationMap.type != null and relationMap.type=='B'.toString()">
+			AND b.storeId=#{relationMap.storeId}
+		</if>
 			<if test="relationMap.dateType=='addTime'">
 				<if test="relationMap.beginTime != null and relationMap.beginTime != ''"> 
 					AND DATE_FORMAT(a.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
@@ -96,6 +100,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ORDER BY a.addTime ASC
 	</select>
 	 
+	 <select id="getByRepayId" parameterType="string" resultType="Repay">
+	 	SELECT repayId,repayNo,planTotal/100 planTotal,repayMoney/100 repayMoney,remark,
+	 	(planTotal/100-repayMoney/100) withholdMoney 
+		FROM t_repay WHERE repayId=#{0}
+	 </select>
+	 
+	 <update id="updateRepay" parameterType="Repay">
+		UPDATE t_repay
+		<set>
+			repayMoney = #{repayMoney},
+			repayDate = #{repayDate},
+			status = #{status},
+			repayType = #{repayType},
+			updateTime = #{updateTime}
+		</set>
+		where repayId = #{repayId}
+	</update>
+	 <insert id="addRepayDetail" parameterType="RepayDetail">
+		INSERT INTO t_repay_detail(repayDetailId,repayId,remark,userId,
+		<if test="repayMoney != null and repayMoney != ''">repayMoney,</if>
+		<if test="repayType != null and repayType != ''">repayType,</if>
+		repayTime)
+		values(#{repayDetailId},#{repayId},#{remark},#{userId},
+		<if test="repayMoney != null and repayMoney != ''">#{repayMoney},</if>
+		<if test="repayType != null and repayType != ''">#{repayType},</if>
+		#{repayTime})
+	</insert>
+	
+	<select id="getRepayDetail" parameterType="string" resultType="RepayDetail">
+		SELECT * FROM t_repay_detail WHERE repayId=#{0} ORDER BY repayTime DESC 
+	</select>
 	 
 	 
 </mapper> 

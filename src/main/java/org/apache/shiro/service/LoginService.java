@@ -1,5 +1,7 @@
 package org.apache.shiro.service;
 
+import java.util.Map;
+
 import org.apache.shiro.common.UserConstants;
 import org.apache.shiro.common.utils.MessageUtils;
 import org.apache.shiro.common.utils.SessionUtils;
@@ -82,8 +84,14 @@ public class LoginService
             throw new UserBlockedException(user.getDescription());
         }
 
-        String storeId=userService.findStoredIdByUserId(user.getUserId());
-        SessionUtils.getSession().setAttribute("storeId",storeId);
+        Map m =userService.findStoredIdByUserId(user.getUserId());
+        if(null != m){
+            if(null != m.get("storeId"))
+                SessionUtils.getSession().setAttribute("storeId",m.get("storeId"));
+            if(null != m.get("type"))
+                SessionUtils.getSession().setAttribute("type",m.get("type"));
+        }
+        
         Role role = userService.findRoleByUserId(user.getUserId());
 
         if (UserConstants.blocked.equals(role.getStatus()))

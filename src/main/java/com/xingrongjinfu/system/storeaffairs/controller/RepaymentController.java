@@ -1,26 +1,31 @@
 package com.xingrongjinfu.system.storeaffairs.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.net.URLDecoder;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
+import org.apache.shiro.common.utils.SessionUtils;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.framework.core.controller.BaseController;
 import org.framework.core.model.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping; 
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.xingrongjinfu.system.SystemConstant; 
-import com.xingrongjinfu.system.storeaffairs.commom.StoreaffairConstant;  
-import com.xingrongjinfu.system.storeaffairs.service.ICertificationService;
+import com.xingrongjinfu.system.SystemConstant;
+import com.xingrongjinfu.system.storeaffairs.commom.StoreaffairConstant;
+import com.xingrongjinfu.system.storeaffairs.model.Repay;
+import com.xingrongjinfu.system.storeaffairs.model.RepayDetail;
 import com.xingrongjinfu.system.storeaffairs.service.IRepaymentService;
-import com.xingrongjinfu.system.syscode.model.SysCode; 
+import com.xingrongjinfu.system.syscode.model.SysCode;
+import com.xingrongjinfu.system.user.model.User;
+import com.xingrongjinfu.utils.UuidUtil; 
 
 
 /**
@@ -37,7 +42,7 @@ class RepaymentController extends BaseController {
 	
 
     /**
-     * 跳转认证申请列表界面
+     * 跳转还款界面
      */
     @RequestMapping(StoreaffairConstant.REPAYMENT_URL)
     public ModelAndView repaymentPage()
@@ -70,18 +75,32 @@ class RepaymentController extends BaseController {
             dateTypeList.add(sysCode4); 
              
         modelAndView.addObject("dateTypeList", dateTypeList);
-         
+        String type = (String) SessionUtils.getSession().getAttribute("type");
+        modelAndView.addObject("type", type);
         return modelAndView;
     }
-
-   
     /**
-     * 查询认证申请列表
+     * 跳转还款对账界面
+     */
+    @RequestMapping(StoreaffairConstant.TO_REPAY_MODIFY_URL)
+    public ModelAndView toRepayModify(String repayId)
+    { 
+        ModelAndView modelAndView = this.getModelAndView(StoreaffairConstant.REPAY_MODIFY_PAGE);
+        Repay repay = repaymentService.getByRepayId(repayId);
+        modelAndView.addObject("repay", repay);
+        return modelAndView;
+    }
+    /**
+     * 查询还款列表
      */
     @RequestMapping(StoreaffairConstant.REPAYMENT_LIST)
-    public ModelAndView repaymentList()
+    public ModelAndView modifyRepay()
     {
+        String storeId = (String) SessionUtils.getSession().getAttribute("storeId");
+        String type = (String) SessionUtils.getSession().getAttribute("type");
         PageUtilEntity pageUtilEntity = this.getPageUtilEntity();
+        pageUtilEntity.getRelationMap().put("storeId", storeId);
+        pageUtilEntity.getRelationMap().put("type", type);
         String fuzzyCondition=pageUtilEntity.getRelationMap().get("fuzzyCondition");
         if(fuzzyCondition!=null&&!fuzzyCondition.equals("")){
         	try {
@@ -94,6 +113,42 @@ class RepaymentController extends BaseController {
 
         return buildDataTable(pageUtilEntity.getTotalResult(), tableDataInfo);
     }
- 
+    /**
+     * 对账保存
+     */
+    @RequestMapping(StoreaffairConstant.REPAY_MODIFY)
+    public @ResponseBody Message modifyRepay(Repay repay,Integer type) {
+        User user = getCurrentUser();
+        repay.setRepayMoney(repay.getDueFee().multiply(new BigDecimal(100)).add(repay.getRepayMoney().multiply(new BigDecimal(100))));
+        repay.setRepayDate(new Date());
+        repay.setUpdateTime(new Date());
+        if(type == 1){
+            repay.setStatus(1);
+            repay.setRepayType(2);
+        }else if(type == 0){
+            repay.setStatus(0);
+            repay.setRepayType(2);
+        }
+        
+        RepayDetail repayDetail = new RepayDetail();
+        repayDetail.setRepayDetailId(UuidUtil.get32UUID());
+        repayDetail.setRepayId(repay.getRepayId());
+        if(null != repay.getRemark())
+            repayDetail.setRemark(repay.getRemark());
+        repayDetail.setRepayMoney(repay.getDueFee().multiply(new BigDecimal(100)));
+        repayDetail.setUserId(user.getUserId());
+        repayDetail.setRepayType(2);
+        repayDetail.setRepayTime(new Date());
+        int n = repaymentService.updateRepay(repay,repayDetail);
+        return new Message(n);
+    }
+    /**
+     * 还款明细
+     */
+    @RequestMapping(StoreaffairConstant.REPAY_DETAIL)
+    public @ResponseBody List<RepayDetail> getRepayDetail(String repayId) {
+        List<RepayDetail> repayDetail = repaymentService.getRepayDetail(repayId);
+        return repayDetail;
+    }
     
 }

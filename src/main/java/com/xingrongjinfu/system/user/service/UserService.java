@@ -2,9 +2,8 @@ package com.xingrongjinfu.system.user.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import com.xingrongjinfu.system.user.common.UserConstant;
-import com.xingrongjinfu.utils.*;
 import org.apache.shiro.common.UserConstants;
 import org.apache.shiro.common.utils.Md5Utils;
 import org.apache.shiro.service.PasswordService;
@@ -12,10 +11,17 @@ import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.xingrongjinfu.system.permission.model.Permission;
 import com.xingrongjinfu.system.role.model.Role;
+import com.xingrongjinfu.system.user.common.UserConstant;
 import com.xingrongjinfu.system.user.dao.IUserDao;
 import com.xingrongjinfu.system.user.model.User;
+import com.xingrongjinfu.utils.DecryptExcption;
+import com.xingrongjinfu.utils.DesUtils;
+import com.xingrongjinfu.utils.HttpClientUtil;
+import com.xingrongjinfu.utils.ObjectUtil;
+import com.xingrongjinfu.utils.StringUtil;
 
 /**
  * 用户 业务层处理
@@ -320,7 +326,7 @@ public class UserService implements IUserService
     }
 
     @Override
-    public String findStoredIdByUserId(String userId) {
+    public Map findStoredIdByUserId(String userId) {
         return userDao.findStoredIdByUserId(userId);
     }
 }

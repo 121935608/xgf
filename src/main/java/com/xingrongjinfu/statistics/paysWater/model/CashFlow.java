@@ -34,9 +34,16 @@ public class CashFlow {
     private BigDecimal baitiao;
     private BigDecimal lirun;
     private BigDecimal maolilv;
+    private String hour;
     
     
     
+    public String getHour() {
+        return hour;
+    }
+    public void setHour(String hour) {
+        this.hour = hour;
+    }
     public String getMenberNo() {
         return menberNo;
     }
