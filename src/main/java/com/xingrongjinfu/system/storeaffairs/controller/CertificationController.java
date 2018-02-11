@@ -184,19 +184,21 @@ class CertificationController extends BaseController {
      * 提交审核内容
      */
     @RequestMapping(StoreaffairConstant.CERTIFICATION_CHECK_SUBMIT) 
-    public @ResponseBody Message saveCertificationCheck(Store store) throws UnsupportedEncodingException {
+    public @ResponseBody Message saveCertificationCheck(Store store,String process) throws UnsupportedEncodingException {
         int result = 0;
         String id = store.getStoreId();
-        Store store1=certificationService.getStoreInfo(id);
+        if("APRYES".equals(process)){
         if (id != null&&!id.equals(""))
         {
-            result = certificationService.saveCertificationCheck(store);
             HashMap map=new HashMap();
-            map.put("userId",store1.getUserId());
+            map.put("userId",store.getUserId());
             String result1= HttpClientUtil.httpPostRequest(addCustomer,map);
 //            String result1= HttpUtils.sendPost(addCustomer,map.toString());
 //            String result2=HttpUtils.sendPost(filePush,map.toString());
             String result2=HttpClientUtil.httpPostRequest(filePush,map);
+            result = certificationService.saveCertificationCheck(store);
+//            Store store1=certificationService.getStoreInfo(id);
+        }
         }
         return new Message(result);
     }
