@@ -185,7 +185,7 @@ class CertificationController extends BaseController {
         int result = 0;
         String id = store.getStoreId();
         Store store2=certificationService.getStoreInfo(id);
-        System.out.println("后台bug"+new Date()+store2.getUserId());
+        System.out.println("后台bug888888888"+new Date()+store2.getUserId());
         if("APRYES".equals(process)){
             if (id != null&&!id.equals(""))
         {
