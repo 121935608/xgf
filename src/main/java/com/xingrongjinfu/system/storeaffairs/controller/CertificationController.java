@@ -192,9 +192,11 @@ class CertificationController extends BaseController {
         {
             HashMap map=new HashMap();
             map.put("userId",store.getUserId());
+            //调用app添加客户接口
             String result1= HttpClientUtil.httpPostRequest(addCustomer,map);
 //            String result1= HttpUtils.sendPost(addCustomer,map.toString());
 //            String result2=HttpUtils.sendPost(filePush,map.toString());
+            //调用app发送文件接口
             String result2=HttpClientUtil.httpPostRequest(filePush,map);
             result = certificationService.saveCertificationCheck(store);
 //            Store store1=certificationService.getStoreInfo(id);
