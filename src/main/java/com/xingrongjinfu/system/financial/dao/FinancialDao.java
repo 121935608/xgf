@@ -10,13 +10,15 @@
  */
 package com.xingrongjinfu.system.financial.dao;
 
-import com.xingrongjinfu.system.financial.model.Financial;
+import java.util.List;
+
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.framework.core.dao.DynamicObjectBaseDao;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import com.xingrongjinfu.system.financial.model.Financial;
+import com.xingrongjinfu.system.financial.model.FinancialDetail;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -43,5 +45,32 @@ public class FinancialDao extends DynamicObjectBaseDao implements IFinancialDao 
     @Override
     public int updateAmountInfo(Financial financial) {
         return this.update("FinancialMapper.updateAmountInfo",financial);
+    }
+
+    @Override
+    public Financial getByNum(String id) {
+        return (Financial) this.findForObject("FinancialMapper.getByNum", id);
+    }
+
+    @Override
+    public List<FinancialDetail> getDetail(String id) {
+        List<FinancialDetail> tableDataInfo=null;
+        try {
+            tableDataInfo=(List<FinancialDetail>)this.findForList("FinancialMapper.getDetail",id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tableDataInfo;
+    }
+
+    @Override
+    public int updateAmount(Financial financial) {
+        
+        return this.update("FinancialMapper.updateAmount", financial);
+    }
+
+    @Override
+    public int addAmountDetail(FinancialDetail financialDetail) {
+        return this.save("FinancialMapper.addAmountDetail", financialDetail);
     }
 }

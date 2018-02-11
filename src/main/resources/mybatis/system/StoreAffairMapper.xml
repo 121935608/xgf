@@ -134,7 +134,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<select id="getRepayDetail" parameterType="string" resultType="RepayDetail">
-		SELECT * FROM t_repay_detail WHERE repayId=#{0} ORDER BY repayTime DESC 
+SELECT  repayDetailId,repayId,repayMoney/100 repayMoney,repayTime,repayType,operator,remark 
+		FROM t_repay_detail WHERE repayId=#{0} ORDER BY repayTime DESC
 	</select>
 	 
 	 
