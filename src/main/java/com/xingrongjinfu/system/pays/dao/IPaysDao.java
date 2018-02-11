@@ -32,5 +32,5 @@ public interface IPaysDao {
     List<TableDataInfo>pageInfoQuery(PageUtilEntity pageUtilEntity);
 
 
-    List<Pays> firstPageInfoQuery();
+    List<Pays> firstPageInfoQuery(String storeId);
 }

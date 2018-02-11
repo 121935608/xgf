@@ -34,6 +34,14 @@ public interface ICertificationDao
      * 获取商户信息
      */
     public  Store getStoreInfo(String storeid);
+
+
+    /**
+     *  根据用户Id获取商户信息
+     */
+    public  Store getStoreInfoByUserId(String userId);
+
+
     
     /**
      * 获取银行账户信息

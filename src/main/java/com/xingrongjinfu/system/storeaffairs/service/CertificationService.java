@@ -47,7 +47,16 @@ public class CertificationService implements ICertificationService
     {
     	return certificationDao.getStoreInfo(storeid);   
     }
-    
+
+
+    /**
+     *  根据用户Id获取商户信息
+     */
+    public  Store getStoreInfoByUserId(String userId)
+    {
+        return certificationDao.getStoreInfoByUserId(userId);
+    }
+
     
     /**
      * 获取银行账户信息

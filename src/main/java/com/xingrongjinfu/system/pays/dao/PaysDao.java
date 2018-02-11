@@ -11,6 +11,7 @@
 package com.xingrongjinfu.system.pays.dao;
 
 import com.xingrongjinfu.system.pays.model.Pays;
+import org.apache.ibatis.annotations.Param;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.framework.core.dao.DynamicObjectBaseDao;
@@ -43,10 +44,10 @@ public class PaysDao extends DynamicObjectBaseDao implements IPaysDao {
     }
 
     @Override
-    public List<Pays> firstPageInfoQuery() {
+    public List<Pays> firstPageInfoQuery(String storeId) {
         List<Pays> pageInfoQuery=null;
         try {
-            pageInfoQuery=(List<Pays>)this.findForList("StatisticsPaysMapper.PayPageInfoQuery",null);
+            pageInfoQuery=(List<Pays>)this.findForList("StatisticsPaysMapper.PayPageInfoQuery",storeId);
         }catch (Exception e)
         {
             e.printStackTrace();

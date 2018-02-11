@@ -36,5 +36,5 @@ public interface IPaysService {
     /**
      * 首页查询
      */
-    List<Pays>firstPageInfoQuery();
+    List<Pays> firstPageInfoQuery(String storeId);
 }

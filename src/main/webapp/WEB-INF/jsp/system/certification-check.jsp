@@ -12,6 +12,14 @@
 		margin: 0px ;
 		text-align: right;
 	}
+	img{
+		cursor: pointer;
+		transition: all 0.6s;
+	}
+	img:hover{
+		transform: scale(3.6);
+		z-index:9999999;
+	}
 </style>
 <body>
 <article class="page-container"> 
@@ -141,7 +149,7 @@
 					<p style="position: absolute;" class="form-label">租赁合同</p>
 				</div> 
 				<div class="col-xs-2 col-sm-2">
-					<img style="width: 120px;height: 120px" src="${store['utilitiesPic']}">
+					<img style="width: 120px;height: 120px;" src="${store['utilitiesPic']}">
 					<p style="position: absolute;" class="form-label">租赁水电费</p>
 				</div> 
 			</div>

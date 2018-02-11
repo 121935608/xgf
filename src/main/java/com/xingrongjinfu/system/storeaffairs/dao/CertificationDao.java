@@ -81,6 +81,25 @@ public class CertificationDao extends DynamicObjectBaseDao implements ICertifica
         }
 		return storeInfo;
     }
+
+    /**
+     * 根据用户Id获取商户信息
+     */
+    @Override
+    public  Store getStoreInfoByUserId(String userId)
+    {
+        Store storeInfo = null;
+        try
+        {
+            storeInfo = (Store) this.findForObject("StoreAffairMapper.getStoreInfoByUserId", userId);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return storeInfo;
+    }
+
     
     /**
      * 获取银行账户信息

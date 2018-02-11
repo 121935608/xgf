@@ -44,46 +44,43 @@
 		</a>
 	</div>
 		<div style="clear:both;">
-			<table border="0">
-				<tr style="border: 0px">
-					<td>
-						<table border="1" style="text-align:center;width:50%;float:left;margin-left: 10%;margin-right: 5%">
-							<tr style="width:600px;height:40px;border:0px;background-color: #D1D1D1">
+			<div border="0">
+					<div style="width: 50%;float: left;text-align:center;">
+						<table border="1" style="text-align:center;margin:0 auto;width:80%;float:left;margin-left: 10%;margin-right: 10%">
+							<tr style="width:100%;height:40px;border:0px;background-color: #D1D1D1">
 								<td style="width:15%;text-align: center;">交易记录</td>
 								<td style="width:35%"></td>
 								<td style="width:35%"></td>
-								<td style="text-align:center;width: 15%"><a href="${context_url}/dataCount/saleView.action" style="color:blue;">更多>></a></td>
+								<td style="text-align:center;width: 15%"><a href="${context_url}/dataCount/paysView.action" style="color:blue;">更多>></a></td>
 							</tr>
 							<c:forEach items="${pays}" var="m" varStatus="n">
-								<tr style="width:600px;height: 40px;">
+								<tr style="width:100%;height: 40px;">
 									<td style="width:5%;text-align:center;">${n.count}</td>
-									<td style="width:30%;text-align:center;">${m.tradeCode}</td>
-									<td style="width:40%;">${m.addTimes}</td>
-									<td style="width:25%">${m.money}</td>
+									<td style="width:40%;text-align:center;">${m.storeName}</td>
+									<td style="width:35%;">${m.payTypes}</td>
+									<td style="width:20%">${m.money}</td>
 								</tr>
 							</c:forEach>
 						</table>
-					</td>
-					<td>
-						<table border="1" style="text-align:center;width:50%;float:left;">
-							<tr style="width:600px;height:40px;border:0px;background-color: #D1D1D1">
+					</div>
+				    <div style="width: 50%;float: left;text-align:center;">
+						<table border="1" style="text-align:center;margin:0 auto;width:80%;float:left;margin-left: 10%;margin-right: 10%"">
+							<tr style="width:100%;height:40px;border:0px;background-color: #D1D1D1">
 								<td style="width:15%;text-align: center;">交易记录</td>
 								<td style="width:35%"></td>
 								<td style="width:35%"></td>
-								<td style="text-align:center;width: 15%"><a href="${context_url}/dataCount/saleView.action" style="color:blue;">更多>></a></td>
+								<td style="text-align:center;width: 15%"><a href="${context_url}/dataCount/paysView.action" style="color:blue;">更多>></a></td>
 							</tr>
 							<c:forEach items="${pays}" var="m" varStatus="n">
-								<tr style="width:600px;height: 40px;">
+								<tr style="width:100%;height: 40px;">
 									<td style="width:5%;text-align:center;">${n.count}</td>
-									<td style="width:30%;text-align:center;">${m.tradeCode}</td>
-									<td style="width:40%;">${m.addTimes}</td>
-									<td style="width:25%">${m.money}</td>
+									<td style="width:40%;text-align:center;">${m.tradeCode}</td>
+									<td style="width:35%;">${m.addTimes}</td>
+									<td style="width:20%">${m.money}</td>
 								</tr>
 							</c:forEach>
 						</table>
-					</td>
-				</tr>
-			</table>
+			         </div>
 
 
 	</div>

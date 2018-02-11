@@ -38,7 +38,7 @@ public class PaysService implements IPaysService {
     }
 
     @Override
-    public List<Pays> firstPageInfoQuery() {
-        return paysDao.firstPageInfoQuery();
+    public List<Pays> firstPageInfoQuery(String storeId) {
+        return paysDao.firstPageInfoQuery(storeId);
     }
 }

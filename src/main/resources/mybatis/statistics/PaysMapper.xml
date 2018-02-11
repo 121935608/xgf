@@ -47,13 +47,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			order by m.addTime
 		</if>
 	</select>
-	<select id="PayPageInfoQuery"
-		resultType="Pays">
-		select tradeCode,DATE_FORMAT(`addTime`,'%Y-%m-%d %H:%i:%S') `addTime`,money/100 money,payType
+
+
+	<select id="PayPageInfoQuerys" resultType="Pays">
+		select tradeCode,DATE_FORMAT(`addTime`,'%Y-%m-%d %H:%i:%S') `addTime`,storeId,money/100 money,payType
 		from m_cashFlow m
 		inner join sys_user s on m.userId = s.userId
 		limit 10
 	</select>
 
+
+	<select id="PayPageInfoQuery" resultType="Pays" parameterType="java.lang.String">
+		SELECT
+	tradeCode,
+	DATE_FORMAT(
+		m.addTime,
+		'%Y-%m-%d %H:%i:%S'
+	) `addTime`,m.storeId,
+	round(money / 100,2) money,
+	payType
+FROM
+	m_cashFlow m
+		<if test="_parameter != null and _parameter != ''">
+			inner JOIN t_store s ON
+			s.storeId=m.storeId
+			where s.storeId=#{_parameter}
+		</if>
+		ORDER BY addTime desc LIMIT 10
+
+	</select>
 
 </mapper> 

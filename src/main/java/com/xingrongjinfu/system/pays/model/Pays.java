@@ -37,6 +37,24 @@ public class Pays implements Serializable
     private String addTimes;
     private String addIP;
     private String storeName;
+    private String payTypes;
+    private String storeId;
+
+    public String getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(String storeId) {
+        this.storeId = storeId;
+    }
+
+    public String getPayTypes() {
+        return payTypes;
+    }
+
+    public void setPayTypes(String payTypes) {
+        this.payTypes = payTypes;
+    }
 
     public String getAddTimes() {
         return addTimes;
