@@ -1,10 +1,7 @@
 package com.xingrongjinfu.system.storeaffairs.model;
 
-import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
-
-import com.xingrongjinfu.system.permission.model.Permission;
 
 
 	/**
@@ -18,15 +15,17 @@ public class Repay {
 	    private String repayNo;  //'还款单号',
 	    private String orderId;  //'订单id',
 	    private String userId;  //'用户Id',
-	    private String planTotal;  //'应还总额（分）',
+	    private BigDecimal planTotal;  //'应还总额（分）',
 	    private Date planRepayDate;  //'应还日期',
-	    private String repayMoney;  //'实还（分）',
+	    private BigDecimal repayMoney;  //'实还（分）',
 	    private Date repayDate;  //'实际还款日期',
-	    private String withholdMoney;  //'代扣金额',
+	    private BigDecimal withholdMoney;  //'代扣金额',
 	    private Date withholdDate;  //'代扣时间',
-	    private String dueFee;  //'逾期费用（分）',
+	    private BigDecimal dueFee;  //'逾期费用（分）',
 	    private Date addTime;  //'添加时间',
-	    private String status;  //'状态：0 待还款 1 已还款 -1 未出账',
+	    private Date updateTime;  
+	    private Integer status;  //'状态：0 待还款 1 已还款 -1 未出账',
+	    private Integer repayType;  
 	    private String remark;  //'备注'
 	    
 	    private String orderNumber;  //'状态：0 待还款 1 已还款 -1 未出账',
@@ -105,15 +104,6 @@ public class Repay {
 
 
 
-		public String getPlanTotal() {
-			return planTotal;
-		}
-
-
-
-		public void setPlanTotal(String planTotal) {
-			this.planTotal = planTotal;
-		}
 
 
 
@@ -129,15 +119,6 @@ public class Repay {
 
 
 
-		public String getRepayMoney() {
-			return repayMoney;
-		}
-
-
-
-		public void setRepayMoney(String repayMoney) {
-			this.repayMoney = repayMoney;
-		}
 
 
 
@@ -153,16 +134,6 @@ public class Repay {
 
 
 
-		public String getWithholdMoney() {
-			return withholdMoney;
-		}
-
-
-
-		public void setWithholdMoney(String withholdMoney) {
-			this.withholdMoney = withholdMoney;
-		}
-
 
 
 		public Date getWithholdDate() {
@@ -174,20 +145,6 @@ public class Repay {
 		public void setWithholdDate(Date withholdDate) {
 			this.withholdDate = withholdDate;
 		}
-
-
-
-		public String getDueFee() {
-			return dueFee;
-		}
-
-
-
-		public void setDueFee(String dueFee) {
-			this.dueFee = dueFee;
-		}
-
-
 
 		public Date getAddTime() {
 			return addTime;
@@ -201,19 +158,91 @@ public class Repay {
 
 
 
-		public String getStatus() {
-			return status;
-		}
+		public BigDecimal getPlanTotal() {
+            return planTotal;
+        }
 
 
 
-		public void setStatus(String status) {
-			this.status = status;
-		}
+        public void setPlanTotal(BigDecimal planTotal) {
+            this.planTotal = planTotal;
+        }
 
 
 
-		public String getRemark() {
+        public BigDecimal getRepayMoney() {
+            return repayMoney;
+        }
+
+
+
+        public void setRepayMoney(BigDecimal repayMoney) {
+            this.repayMoney = repayMoney;
+        }
+
+
+
+        public BigDecimal getWithholdMoney() {
+            return withholdMoney;
+        }
+
+
+
+        public void setWithholdMoney(BigDecimal withholdMoney) {
+            this.withholdMoney = withholdMoney;
+        }
+
+
+
+        public BigDecimal getDueFee() {
+            return dueFee;
+        }
+
+
+
+        public void setDueFee(BigDecimal dueFee) {
+            this.dueFee = dueFee;
+        }
+
+
+
+        public Date getUpdateTime() {
+            return updateTime;
+        }
+
+
+
+        public void setUpdateTime(Date updateTime) {
+            this.updateTime = updateTime;
+        }
+
+
+
+        public Integer getStatus() {
+            return status;
+        }
+
+
+
+        public void setStatus(Integer status) {
+            this.status = status;
+        }
+
+
+
+        public Integer getRepayType() {
+            return repayType;
+        }
+
+
+
+        public void setRepayType(Integer repayType) {
+            this.repayType = repayType;
+        }
+
+
+
+        public String getRemark() {
 			return remark;
 		}
 

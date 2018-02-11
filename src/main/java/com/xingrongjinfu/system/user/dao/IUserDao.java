@@ -1,8 +1,11 @@
 package com.xingrongjinfu.system.user.dao;
 
 import java.util.List;
+import java.util.Map;
+
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
+
 import com.xingrongjinfu.system.permission.model.Permission;
 import com.xingrongjinfu.system.role.model.Role;
 import com.xingrongjinfu.system.user.model.User;
@@ -138,5 +141,5 @@ public interface IUserDao
     /**
      * 查询当前用户的商铺id
      */
-    String findStoredIdByUserId(String userId);
+    Map findStoredIdByUserId(String userId);
 }

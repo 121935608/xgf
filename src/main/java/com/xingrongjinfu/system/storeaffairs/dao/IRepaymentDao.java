@@ -1,8 +1,12 @@
 package com.xingrongjinfu.system.storeaffairs.dao;
 
 import java.util.List;
+
 import org.framework.base.util.PageUtilEntity;
-import org.framework.base.util.TableDataInfo; 
+import org.framework.base.util.TableDataInfo;
+
+import com.xingrongjinfu.system.storeaffairs.model.Repay;
+import com.xingrongjinfu.system.storeaffairs.model.RepayDetail; 
 
 /**
  * 角色管理 数据层
@@ -18,4 +22,12 @@ public interface IRepaymentDao
      * @return  
      */
     public List<TableDataInfo> repaymentListQuery(PageUtilEntity pageUtilEntity); 
+    
+    Repay getByRepayId(String id);
+    
+    int updateRepay(Repay repay);
+    
+    int addRepayDetail(RepayDetail repayDetail);
+    
+    List<RepayDetail> getRepayDetail(String id);
 }

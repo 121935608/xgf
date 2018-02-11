@@ -9,26 +9,56 @@
 <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
 <script type="text/javascript">
-
-/* 设置日期，当前日期的前七天 */
-
-var dateArray = ["8:00","9:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00"]; 
 var data1 = new Array();
 var data2 = new Array();
-var data3 = new Array();
-var data4 = new Array();
-
+var dateArray = ["08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00"]; 
 $.get("${context_root}/statistics/passengerAnalysisGraph.action",function(data){
 	var oChart = new Highcharts.Chart(oOptions);
-	for(var i = 0;i<data.length;i++){
-		var oSeries = {
-                data: [{
-                    name: data[i].hour,
-                    y: parseInt(data[i].number)
-                }]
-            };
-       oChart.addSeries(oSeries);
+	var n = 0;
+	l:for(var i = 0; i<16;i++){
+		if(data1.length == 16){
+			break l;
+		}
+		if(n == data.length){
+			for(var j = 0;j<16-i;j++){
+				data1.push(dateArray[i]);
+				var oSeries = {
+						name: '人数',
+		                data: [{
+		                    name: dateArray[i],
+		                    y: 0
+		                }]
+		            };
+				oChart.addSeries(oSeries);
+			}
+		}else{
+			console.log(data[n]);
+			console.log(data[n].hour);
+			if(data[n].hour==dateArray[i]){
+				data1.push(dateArray[i]);
+				var oSeries = {
+						name: '人数',
+		                data: [{
+		                    name: dateArray[i],
+		                    y: parseInt(data[n].number)
+		                }]
+		            };
+				oChart.addSeries(oSeries);
+				n ++;
+			}else{
+				data1.push(dateArray[i]);
+				var oSeries = {
+						name: '人数',
+		                data: [{
+		                    name: dateArray[i],
+		                    y: 0
+		                }]
+		            };
+				oChart.addSeries(oSeries);
+			}
+		}
 	}
+    
 });
 var oOptions = {
         chart: {
@@ -39,8 +69,7 @@ var oOptions = {
             text: '今日客流分析'
         },
         xAxis: {
-            categories:dateArray,
-            crosshair: true
+        	type: 'category'
         },
         yAxis: {
             min: 0,
@@ -48,19 +77,11 @@ var oOptions = {
                 text: '人数'
             }
         },
-        tooltip: {
-            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
-            footerFormat: '</table>',
-            shared: true,
-            useHTML: true
+        legend: {
+            enabled: false
         },
-        plotOptions: {
-            column: {
-                pointPadding: 0.2,
-                borderWidth: 0
-            }
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.y:.1f}</b>',
         }
 	}
 </script>

@@ -1,10 +1,13 @@
 package com.xingrongjinfu.system.user.dao;
 
 import java.util.List;
+import java.util.Map;
+
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.framework.core.dao.DynamicObjectBaseDao;
 import org.springframework.stereotype.Repository;
+
 import com.xingrongjinfu.system.permission.model.Permission;
 import com.xingrongjinfu.system.role.model.Role;
 import com.xingrongjinfu.system.user.model.User;
@@ -217,7 +220,7 @@ public class UserDao extends DynamicObjectBaseDao implements IUserDao
     }
 
     @Override
-    public String findStoredIdByUserId(String userId) {
-        return (String) this.findForObject("SystemUserMapper.findStoredIdByUserId",userId);
+    public Map findStoredIdByUserId(String userId) {
+        return (Map) this.findForObject("SystemUserMapper.findStoredIdByUserId",userId);
     }
 }

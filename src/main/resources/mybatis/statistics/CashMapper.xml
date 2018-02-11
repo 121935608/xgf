@@ -184,24 +184,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		group by a.categoryName
 	</select>
 	<select id="passengerAnalysisGraph" parameterType="string" resultType="CashFlow">
-		SELECT CASE WHEN HOUR(`addTime`)  BETWEEN 8 AND 9 THEN '08:00:00'
-             WHEN HOUR(`addTime`)  BETWEEN 9 AND 10 THEN '09:00:00'
-             WHEN HOUR(`addTime`)  BETWEEN 11 AND 12 THEN '11:00:00'
-             WHEN HOUR(`addTime`)  BETWEEN 12 AND 13 THEN '12:00:00'
-             WHEN HOUR(`addTime`)  BETWEEN 13 AND 14 THEN '13:00:00'
-             WHEN HOUR(`addTime`)  BETWEEN 14 AND 15 THEN '14:00:00'
-             WHEN HOUR(`addTime`)  BETWEEN 15 AND 16 THEN '15:00:00'
-             WHEN HOUR(`addTime`)  BETWEEN 16 AND 17 THEN '16:00:00'
-             WHEN HOUR(`addTime`)  BETWEEN 17 AND 18 THEN '17:00:00'
-             WHEN HOUR(`addTime`)  BETWEEN 18 AND 19 THEN '18:00:00'
-             WHEN HOUR(`addTime`)  BETWEEN 19 AND 20 THEN '19:00:00'
-             WHEN HOUR(`addTime`)  BETWEEN 20 AND 21 THEN '20:00:00'
-             WHEN HOUR(`addTime`)  BETWEEN 21 AND 22 THEN '21:00:00'
-             WHEN HOUR(`addTime`)  BETWEEN 22 AND 23 THEN '23:00:00'
-             END `hour`,count(*) number
+		SELECT CASE WHEN HOUR(`addTime`)  BETWEEN 8 AND 9 THEN '08:00'
+             WHEN HOUR(`addTime`)  BETWEEN 9 AND 10 THEN '09:00'
+             WHEN HOUR(`addTime`)  BETWEEN 11 AND 12 THEN '11:00'
+             WHEN HOUR(`addTime`)  BETWEEN 12 AND 13 THEN '12:00'
+             WHEN HOUR(`addTime`)  BETWEEN 13 AND 14 THEN '13:00'
+             WHEN HOUR(`addTime`)  BETWEEN 14 AND 15 THEN '14:00'
+             WHEN HOUR(`addTime`)  BETWEEN 15 AND 16 THEN '15:00'
+             WHEN HOUR(`addTime`)  BETWEEN 16 AND 17 THEN '16:00'
+             WHEN HOUR(`addTime`)  BETWEEN 17 AND 18 THEN '17:00'
+             WHEN HOUR(`addTime`)  BETWEEN 18 AND 19 THEN '18:00'
+             WHEN HOUR(`addTime`)  BETWEEN 19 AND 20 THEN '19:00'
+             WHEN HOUR(`addTime`)  BETWEEN 20 AND 21 THEN '20:00'
+             WHEN HOUR(`addTime`)  BETWEEN 21 AND 22 THEN '21:00' 
+             WHEN HOUR(`addTime`)  BETWEEN 22 AND 23 THEN '23:00'
+             END hour,count(*) number
              FROM m_cashFlow WHERE storeId=#{storeId} AND `status`=1
-             GROUP BY `hour`
-             ORDER BY `hour`
+             <!-- and DATE_FORMAT(`addTime`,'%Y-%m-%d')=date_format(now(),'%Y-%m-%d') -->
+             GROUP BY hour
+             ORDER BY hour
 	</select>
 	
 	

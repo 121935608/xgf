@@ -197,7 +197,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 
-	<select id="findStoredIdByUserId" parameterType="String" resultType="String">
-		SELECT t.storeId FROM sys_user s LEFT JOIN t_store t ON s.userId=t.userId WHERE s.userId=#{userId}
+	<select id="findStoredIdByUserId" parameterType="String" resultType="map">
+		SELECT t.storeId storeId,s.type `type` FROM sys_user s LEFT JOIN t_store t ON s.userId=t.userId WHERE s.userId=#{userId}
 	</select>
 </mapper>
