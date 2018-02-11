@@ -1,6 +1,16 @@
 ﻿<%@ page contentType="text/html; charset=UTF-8" %>
 <%@include file="/WEB-INF/jsp/common/taglibs.jspf" %>
 <ys:contentHeader title="商户管理列表"/>
+<style>
+	img{
+	cursor: pointer;
+	transition: all 0.6s;
+}
+img:hover{
+	transform: scale(3.6);
+	z-index:9999999;
+}
+</style>
 <body>
 <div class="page-container">
 	<div class="mt-20">
