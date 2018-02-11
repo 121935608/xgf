@@ -191,6 +191,7 @@ class CertificationController extends BaseController {
             if (id != null&&!id.equals(""))
         {
             Store store1=certificationService.getStoreInfo(id);
+            System.out.println(store1.getUserId());
             HashMap map=new HashMap();
             map.put("userId",store1.getUserId());
             //调用app添加客户接口
