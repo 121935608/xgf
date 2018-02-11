@@ -2,10 +2,7 @@ package com.xingrongjinfu.system.storeaffairs.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import com.xingrongjinfu.commodity.classification.model.Category;
 import com.xingrongjinfu.system.supervisor.service.ISupervisorService;
@@ -191,7 +188,7 @@ class CertificationController extends BaseController {
             if (id != null&&!id.equals(""))
         {
             Store store1=certificationService.getStoreInfo(id);
-            System.out.println(store1.getUserId());
+            System.out.println(new Date()+store1.getUserId());
             HashMap map=new HashMap();
             map.put("userId",store1.getUserId());
             //调用app添加客户接口
