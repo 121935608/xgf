@@ -83,16 +83,18 @@ public class GraphController {
         String storeId = (String) SessionUtils.getSession().getAttribute("storeId");
         List<CashDetail> list = cashService.saleGraphPie(storeId);
         double count = 0;
-        for (CashDetail cashDetail : list) {
-            if(null != cashDetail.getTotalVipPrice())
-                count += cashDetail.getTotalVipPrice().doubleValue();
-        }
-        for (CashDetail cashDetail : list) {
-            if(null != cashDetail.getTotalVipPrice()){
-                if(count != 0)
-                    cashDetail.setTotalVipPrice(new BigDecimal(Double.toString(cashDetail.getTotalVipPrice().doubleValue()/count*100)).setScale(2, BigDecimal.ROUND_HALF_UP));
-            }else{
-                cashDetail.setTotalVipPrice(new BigDecimal("0"));
+        if(null != list){
+            for (CashDetail cashDetail : list) {
+                if(null != cashDetail.getTotalVipPrice())
+                    count += cashDetail.getTotalVipPrice().doubleValue();
+            }
+            for (CashDetail cashDetail : list) {
+                if(null != cashDetail.getTotalVipPrice()){
+                    if(count != 0)
+                        cashDetail.setTotalVipPrice(new BigDecimal(Double.toString(cashDetail.getTotalVipPrice().doubleValue()/count*100)).setScale(2, BigDecimal.ROUND_HALF_UP));
+                }else{
+                    cashDetail.setTotalVipPrice(new BigDecimal("0"));
+                }
             }
         }
         return list;

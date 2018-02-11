@@ -41,7 +41,7 @@
 	<div class="mt-20">
 	<table class="table table-border table-bordered table-hover table-bg table-sort">
 		<thead>
-			<tr class="text-c">
+			<tr class="text-c" id="thead">
 				<th width="14%">还款单号</th>
 				<th width="10%">创建时间</th>
 				<th width="12%">订单号</th>
@@ -159,15 +159,17 @@ $(document).ready(function(){
         }
     },
     {
-        "sDefaultContent": "操作",
+        "sDefaultContent": "",
         "bSortable" : false,
         "sClass": "td-manage text-c",
         "bSearchable": false,
         "mRender": function(data, type, row) {
         	var type = '${type}';
         	if(type == 'B'){
-        		$("#do").css("display","none");
-        		$(".td-manage").css("display","none");
+        		$("thead").children("tr").children("th:last").css("display","none");
+        		$('tr').find('td:last').css("display","none");
+        		return;
+        		/* $(".td-manage").css("display","none"); */
         	}
         	if(row.withholdMoney == "0"){
         		return "";
@@ -218,13 +220,15 @@ function query() {
 					}else if(data[i].repayType == 2){
 						type = "财务结算";
 					}
-					var tr = "<tr><td style=\"text-align:right;border-top:0px;\">"+formatDate(data[i].repayTime,"yyyy-MM-dd hh:mm:ss")+"</td><td style=\"border-left:0px;text-align:right;border-top:0px;\"></td><td style=\"border-left:0px;border-top:0px;text-align:right;\">"+type+"</td><td style=\"border-left:0px;border-top:0px;text-align:right;\"></td><td style=\"border-left:0px;border-top:0px;text-align:right;\">"+data[i].repayMoney+"</td><td style=\"border-left:0px;border-top:0px;\"></td><td style=\"border-top:0px;border-left:0px;text-align:right;\">"+data[i].remark+"</td><td style=\"border-left:0px;border-top:0px;\"></td><td style=\"border-top:0px;border-left:0px;\"></td></tr>";
+					if(i==data.length-1)
+						var tr = "<tr><td style=\"text-align:center;border-top:0px;\"></td><td style=\"text-align:center;border-top:0px;border-left:0px;\">"+formatDate(data[i].repayTime,"yyyy-MM-dd hh:mm:ss")+"</td><td style=\"border-left:0px;border-top:0px;text-align:center;\"></td><td style=\"border-left:0px;border-top:0px;text-align:center;\">"+type+"</td><td style=\"border-left:0px;border-top:0px;\"></td><td style=\"border-left:0px;border-top:0px;text-align:center;\">"+data[i].repayMoney+"</td><td style=\"border-left:0px;border-top:0px;\"></td><td style=\"border-top:0px;border-left:0px;text-align:center;\">"+(data[i].remark==null?"":data[i].remark)+"</td><td style=\"border-top:0px;border-left:0px;\"></td></tr>";
+						else var tr = "<tr><td style=\"text-align:center;border-top:0px;border-bottom:0px;\"></td><td style=\"text-align:center;border-top:0px;border-left:0px;border-bottom:0px;\">"+formatDate(data[i].repayTime,"yyyy-MM-dd hh:mm:ss")+"</td><td style=\"border-left:0px;border-top:0px;text-align:center;border-bottom:0px;\"></td><td style=\"border-left:0px;border-top:0px;text-align:center;border-bottom:0px;\">"+type+"</td><td style=\"border-bottom:0px;border-left:0px;border-top:0px;\"></td><td style=\"border-left:0px;border-top:0px;text-align:center;border-bottom:0px;\">"+data[i].repayMoney+"</td><td style=\"border-left:0px;border-top:0px;border-bottom:0px;\"></td><td style=\"border-top:0px;border-left:0px;text-align:center;border-bottom:0px;\">"+(data[i].remark==null?"":data[i].remark)+"</td><td style=\"border-top:0px;border-left:0px;border-bottom:0px;\"></td></tr>";
 					$(obj).parent("td").parent("tr").after(tr);
 				}
 				if(data.length == 0){
-					var tr = "<tr><td style=\"text-align:right;\">时间</td><td style=\"border-left:0px;\"></td><td style=\"border-left:0px;text-align:right;\">结算方式</td><td style=\"border-left:0px;text-align:right;\"></td><td style=\"border-left:0px;text-align:right;\">结算金额</td><td style=\"border-left:0px;text-align:right;\"></td><td style=\"border-left:0px;text-align:right;\">备注</td><td style=\"border-left:0px;\"></td><td style=\"border-left:0px;\"></td></tr>";
+					var tr = "<tr><td></td><td style=\"text-align:center;border-left:0px;\">时间</td><td style=\"border-left:0px;text-align:center;\"></td><td style=\"border-left:0px;text-align:center;\">结算方式</td><td style=\"border-left:0px;text-align:center;\"></td><td style=\"border-left:0px;text-align:center;\">结算金额</td><td style=\"border-left:0px;\"></td><td style=\"border-left:0px;text-align:center;\">备注</td><td style=\"border-left:0px;\"></td></tr>";
 				}else{
-					var tr = "<tr><td style=\"text-align:right;border-bottom:0px;\">时间</td><td style=\"border-left:0px;border-bottom:0px;\"></td><td style=\"border-left:0px;border-bottom:0px;text-align:right;\">结算方式</td><td style=\"border-left:0px;text-align:right;border-bottom:0px;\"></td><td style=\"border-left:0px;border-bottom:0px;text-align:right;\">结算金额</td><td style=\"border-left:0px;border-bottom:0px;text-align:right;\"></td><td style=\"border-left:0px;text-align:right;border-bottom:0px;\">备注</td><td style=\"border-left:0px;border-bottom:0px;\"></td><td style=\"border-bottom:0px;border-left:0px;\"></td></tr>";
+					var tr = "<tr><td style=\"border-bottom:0px;\"></td><td style=\"text-align:center;border-bottom:0px;border-left:0px;\">时间</td><td style=\"border-left:0px;text-align:center;border-bottom:0px;\"></td><td style=\"border-left:0px;border-bottom:0px;text-align:center;\">结算方式</td><td style=\"border-left:0px;border-bottom:0px;text-align:center;\"></td><td style=\"border-left:0px;border-bottom:0px;text-align:center;\">结算金额</td><td style=\"border-left:0px;border-bottom:0px;\"></td><td style=\"border-left:0px;text-align:center;border-bottom:0px;\">备注</td><td style=\"border-bottom:0px;border-left:0px;\"></td></tr>";
 				}
 				$(obj).parent("td").parent("tr").after(tr);
 				$(obj).parent("td").children("span").first().css("display","none");

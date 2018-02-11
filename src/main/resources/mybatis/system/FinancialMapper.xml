@@ -19,9 +19,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 
 	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultMap="FinancialResult">
-		SELECT a.amountId,a.amountNum,s.storeName,a.addTime,a.totalMoney/100 totalMoney,a.xzfRate,a.amountMoney/100 amountMoney,a.status,a.amountStatus
+		SELECT a.amountId,a.amountNum,s.storeName,a.addTime,a.totalMoney/100 totalMoney,a.xzfRate*100 xzfRate,
+		a.amountMoney/100 amountMoney,a.status,a.amountStatus,a.closeMoney/100 closeMoney,
+		a.amountMoney/100-a.closeMoney/100 openMoney
 		 FROM m_amount a LEFT JOIN t_store s ON a.userId=s.userId
 		 WHERE 1=1
+		 <if test="relationMap.type != null and relationMap.type=='B'.toString()">
+			AND a.storeId=#{relationMap.storeId}
+		</if>
 		<if test="relationMap.beginTime != null and relationMap.beginTime != ''"><!-- 开始时间检索 -->
 			AND DATE_FORMAT(a.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
 		</if>
@@ -38,21 +43,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			s.storeName LIKE CONCAT(CONCAT('%', #{relationMap.storeName}),'%')
 			)
 		</if><!--关键词查询-->
+		ORDER BY a.addTime DESC
 	</select>
 
-	<update id="updateAmountInfo" parameterType="Financial">
+	<update id="updateAmount" parameterType="Financial">
 		UPDATE m_amount
 		<set>
-			<if	test="totalMoney!=null">totalMoney=#{totalMoney}*100,</if>
-			<if	test="xzfRate!=null ">xzfRate=#{xzfRate},</if>
-			<if	test="amountMoney!=null ">amountMoney=#{amountMoney}*100,</if>
-			<if	test="amountStatus!=null ">amountStatus=#{amountStatus},</if>
-			<if	test="status!=null ">status=#{status},</if>
-			updateTime=sysdate()
+			<if	test="closeMoney!=null">closeMoney=#{closeMoney}*100,</if>
+			updateTime=#{updateTime},amountStatus=#{amountStatus},status=#{status}
 		</set>
 		WHERE 1=1
 		<if test="amountId !=null and amountId !=''">
 			AND amountId=#{amountId}
 		</if>
 	</update>
+	
+	<select id="getDetail" parameterType="string" resultType="FinancialDetail">
+		SELECT d.*,userName FROM m_amount_detail d LEFT JOIN sys_user u  
+		ON u.userId=d.userId
+		WHERE amountId=#{0}
+	</select>
+	
+	<select id="getByNum" parameterType="string" resultType="Financial">
+		SELECT a.amountId,a.amountNum,s.storeName,a.addTime,a.totalMoney/100 totalMoney,a.xzfRate,
+		a.amountMoney/100 amountMoney,a.status,a.amountStatus,a.closeMoney/100 closeMoney,
+		a.amountMoney/100-a.closeMoney/100 openMoney
+		 FROM m_amount a LEFT JOIN t_store s ON a.userId=s.userId
+		 WHERE a.amountId=#{0}
+	</select>
+	
+	<insert id="addAmountDetail" parameterType="FinancialDetail">
+		insert into m_amount_detail(amountDetailId,amountId,money,userId,
+		<if test="remark != null and remark !=''">remark,</if>
+		addTime
+		)values(#{amountDetailId},#{amountId},#{money}*100,#{userId},
+		<if test="remark != null and remark !=''">#{remark},</if>
+		#{addTime}
+		)
+	</insert>
 </mapper> 

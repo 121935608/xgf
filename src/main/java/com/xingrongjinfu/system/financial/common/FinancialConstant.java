@@ -29,9 +29,25 @@ public class FinancialConstant {
      * 逻辑视图名:财务结算界面
      */
     public final static String FINANCIAL_PAGE="dataCount/financial-list";
+    /**
+     * 逻辑视图名:财务结算对账界面
+     */
+    public final static String FINANCIAL_MODIFY_PAGE="dataCount/financial-modify";
 
     /**
      * 请求地址:查询财务信息
      */
     public final static String FINANCIAL_LIST_URL="findFinancialList";
+    /**
+     * 请求地址:跳转对账页面
+     */
+    public final static String FINANCIAL_MODIFY_URL="toFinancialModify";
+    /**
+     * 请求地址:修改财务信息
+     */
+    public final static String FINANCIAL_MODIFY="modifyFinancial";
+    /**
+     * 请求地址:查询财务信息明细
+     */
+    public final static String GET_DETAIL="getDetail";
 }

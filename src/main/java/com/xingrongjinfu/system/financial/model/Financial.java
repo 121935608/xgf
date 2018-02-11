@@ -11,6 +11,7 @@
 package com.xingrongjinfu.system.financial.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -28,14 +29,74 @@ public class Financial implements Serializable
     private String userId;
     private Date addTime;
     private Date updateTime;
-    private Double totalMoney;
-    private Double xzfRate;
-    private Double amountMoney;
+    private BigDecimal totalMoney;
+    private BigDecimal xzfRate;
+    private BigDecimal amountMoney;
+    private BigDecimal fee;
+    private BigDecimal closeMoney;
+    private BigDecimal openMoney;
     private Integer amountStatus;
     private Integer status;
     private String storeName;
     private String amountNum;
+    private String remark;
 
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public BigDecimal getOpenMoney() {
+        return openMoney;
+    }
+
+    public void setOpenMoney(BigDecimal openMoney) {
+        this.openMoney = openMoney;
+    }
+
+    public BigDecimal getTotalMoney() {
+        return totalMoney;
+    }
+
+    public void setTotalMoney(BigDecimal totalMoney) {
+        this.totalMoney = totalMoney;
+    }
+
+    public BigDecimal getXzfRate() {
+        return xzfRate;
+    }
+
+    public void setXzfRate(BigDecimal xzfRate) {
+        this.xzfRate = xzfRate;
+    }
+
+    public BigDecimal getAmountMoney() {
+        return amountMoney;
+    }
+
+    public void setAmountMoney(BigDecimal amountMoney) {
+        this.amountMoney = amountMoney;
+    }
+
+    public BigDecimal getFee() {
+        return fee;
+    }
+
+    public void setFee(BigDecimal fee) {
+        this.fee = fee;
+    }
+
+    public BigDecimal getCloseMoney() {
+        return closeMoney;
+    }
+
+    public void setCloseMoney(BigDecimal closeMoney) {
+        this.closeMoney = closeMoney;
+    }
 
     public String getAmountId() {
         return amountId;
@@ -67,30 +128,6 @@ public class Financial implements Serializable
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
-    }
-
-    public Double getTotalMoney() {
-        return totalMoney;
-    }
-
-    public void setTotalMoney(Double totalMoney) {
-        this.totalMoney = totalMoney;
-    }
-
-    public Double getXzfRate() {
-        return xzfRate;
-    }
-
-    public void setXzfRate(Double xzfRate) {
-        this.xzfRate = xzfRate;
-    }
-
-    public Double getAmountMoney() {
-        return amountMoney;
-    }
-
-    public void setAmountMoney(Double amountMoney) {
-        this.amountMoney = amountMoney;
     }
 
     public Integer getStatus() {

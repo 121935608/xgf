@@ -10,14 +10,16 @@
  */
 package com.xingrongjinfu.system.financial.service;
 
-import com.xingrongjinfu.system.financial.dao.IFinancialDao;
-import com.xingrongjinfu.system.financial.model.Financial;
+import java.util.List;
+
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.xingrongjinfu.system.financial.dao.IFinancialDao;
+import com.xingrongjinfu.system.financial.model.Financial;
+import com.xingrongjinfu.system.financial.model.FinancialDetail;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -40,5 +42,24 @@ public class FinancialService implements IFinancialService {
     @Override
     public int updateAmountInfo(Financial financial) {
         return financialDao.updateAmountInfo(financial);
+    }
+
+    @Override
+    public Financial getByNum(String id) {
+       
+        return financialDao.getByNum(id);
+    }
+
+    @Override
+    public List<FinancialDetail> getDetail(String id) {
+        return financialDao.getDetail(id);
+    }
+
+    @Override
+    public int updateAmount(Financial financial,FinancialDetail financialDetail) {
+        int n = financialDao.addAmountDetail(financialDetail);
+        if(n > 0)
+         n = financialDao.updateAmount(financial);
+        return n;
     }
 }

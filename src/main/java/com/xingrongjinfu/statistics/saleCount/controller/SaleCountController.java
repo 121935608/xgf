@@ -43,19 +43,20 @@ public class SaleCountController extends BaseController {
         pageUtilEntity.getRelationMap().put("storeId", storeId);
         List<CashDetail> tableDataInfo = cashService.saleCountpageInfoQuery(pageUtilEntity);
         double count = 0.0;
-        for (CashDetail data : tableDataInfo) {
-            if(null != data.getTotalVipPrice())
-                count += data.getTotalVipPrice().doubleValue();
-        }
-        for (CashDetail data : tableDataInfo) {
-            if(null != data.getTotalVipPrice()){
-                if(count != 0)
-                    data.setTotalPrice(new BigDecimal(Double.toString(data.getTotalVipPrice().doubleValue()/count*100)).setScale(2, BigDecimal.ROUND_HALF_UP));
-            }else{
-                data.setTotalPrice(new BigDecimal("0"));
+        if(null != tableDataInfo){
+            for (CashDetail data : tableDataInfo) {
+                if(null != data.getTotalVipPrice())
+                    count += data.getTotalVipPrice().doubleValue();
+            }
+            for (CashDetail data : tableDataInfo) {
+                if(null != data.getTotalVipPrice()){
+                    if(count != 0)
+                        data.setTotalPrice(new BigDecimal(Double.toString(data.getTotalVipPrice().doubleValue()/count*100)).setScale(2, BigDecimal.ROUND_HALF_UP));
+                }else{
+                    data.setTotalPrice(new BigDecimal("0"));
+                }
             }
         }
-        
         return buildDatasTable(pageUtilEntity.getTotalResult(), tableDataInfo);
     }
 }

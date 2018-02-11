@@ -10,11 +10,13 @@
  */
 package com.xingrongjinfu.system.financial.service;
 
-import com.xingrongjinfu.system.financial.model.Financial;
+import java.util.List;
+
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 
-import java.util.List;
+import com.xingrongjinfu.system.financial.model.Financial;
+import com.xingrongjinfu.system.financial.model.FinancialDetail;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -37,4 +39,10 @@ public interface IFinancialService {
      * 更新财务信息
      */
     int updateAmountInfo(Financial financial);
+    
+    Financial getByNum(String id);
+    
+    List<FinancialDetail> getDetail(String id);
+    
+    int updateAmount(Financial financial,FinancialDetail financialDetail);
 }

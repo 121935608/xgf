@@ -4,7 +4,10 @@
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 数据统计 <span class="c-gray en">&gt;</span> 财务结算 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
-	
+<style>
+	#show:hover{cursor:pointer;color:blue;}
+	#hide:hover{cursor:pointer;color:blue;}
+</style>
 	<div class="text-c">
 		<input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')||\'%y-%M-%d\'}'})" id="beginTime"
 			   class="input-text Wdate" style="width:120px;" placeholder="开始时间">
@@ -19,13 +22,6 @@
                <option value="4" >京东白条</option>
            </select>
        </span>--%>
-		<span class="select-box" style="width: 120px;">
-           <select name="statusSelect" id="statusSelect" class="select" autocomplete="off">
-               <option value="">转账状态</option>
-               <option value="0">已结清</option>
-               <option value="1" >未结清</option>
-           </select>
-       </span>
 		<input type="text" class="input-text" style="width:250px" placeholder="结算单号|商铺名称" id="storeName" name="storeName">
 		<button type="button" class="btn btn-success radius" onclick="query()"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
 	</div>
@@ -37,9 +33,11 @@
 				<th width="10%">创建日期</th>
 				<th width="15%">商铺名称</th>
 				<th width="10%">合计金额(元) </th>
-				<th width="5%">费率</th>
-				<th width="10%">结算金额(元)</th>
-				<th width="10%">转账状态</th>
+				<th width="5%">手续费</th>
+				<th width="10%">应结金额(元)</th>
+				<th width="10%">已结金额(元)</th>
+				<th width="10%">未结金额(元)</th>
+				<th width="10%">操作</th>
 
 			</tr>
 		</thead>
@@ -57,7 +55,7 @@ $(document).ready(function(){
             "bSearchable": false,
             "mRender": function(data, type, row) {
                 if (row.amountNum != null) {
-                    return row.amountNum;
+                    return "<span id=\"show\" onClick=\"getDetail(this,\'" + row.amountId + "\')\">+</span><span id=\"hide\" style=\"display:none\" onClick=\"hideRows(this,\'" + row.amountId + "\')\">-</span>&nbsp;&nbsp;<span>"+row.amountNum+"</span>";
                 } else {
                     return "";
                 }
@@ -103,22 +101,22 @@ $(document).ready(function(){
             }
         },
     {
-        "sDefaultContent": "费率",
+        "sDefaultContent": "手续费",
         "bSortable" : false,
-        "sClass": "td-status text-c",
+        "sClass": "text-c",
         "bSearchable": false,
         "mRender": function(data, type, row) {
             if (row.xzfRate !=null) {
-                return row.xzfRate;
+                return row.xzfRate+"%";
             }else {
                 return "";
             }
         }
     },
         {
-            "sDefaultContent": "结算金额",
+            "sDefaultContent": "应结金额",
             "bSortable" : false,
-            "sClass": "td-status text-c",
+            "sClass": "text-c",
             "bSearchable": false,
             "mRender": function(data, type, row) {
                 if (row.amountMoney !=null) {
@@ -129,105 +127,108 @@ $(document).ready(function(){
             }
         },
         {
-            "sDefaultContent": "转账状态",
+            "sDefaultContent": "已结金额",
             "bSortable" : false,
-            "sClass": "td-status text-c",
+            "sClass": "text-c",
             "bSearchable": false,
             "mRender": function(data, type, row) {
-                if (row.amountStatus == 0) {
-                    return "已结清";
-                } else if(row.amountStatus == 1) {
-                    return "未结清";
+            	if (row.closeMoney !=null) {
+                    return row.closeMoney;
                 }else {
                     return "";
                 }
             }
         },
+        {
+            "sDefaultContent": "未结金额",
+            "bSortable" : false,
+            "sClass": "text-c",
+            "bSearchable": false,
+            "mRender": function(data, type, row) {
+            	if (row.openMoney !=null) {
+                    return row.openMoney;
+                }else {
+                    return "";
+                }
+            }
+        },
+        {
+            "sDefaultContent": "",
+            "bSortable" : false,
+            "sClass": "td-manage text-c",
+            "bSearchable": false,
+            "mRender": function(data, type, row) {
+            	var type = '${type}';
+            	if(type == 'B'){
+            		$("thead").children("tr").children("th:last").css("display","none");
+            		$('tr').find('td:last').css("display","none");
+            		return;
+            		/* $(".td-manage").css("display","none"); */
+            	}
+            	if(row.openMoney == "0"){
+            		return "";
+            	}
+                //对账
+                var toEdit = "<a title=\"对账\" href=\"javascript:;\" onclick=\"financial_edit('对账','${context_root}/dataCount/toFinancialModify.action?amountId=" + row.amountId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>对账</span></a>";
+            	return  toEdit ;
+            }
+        }
     ];
     var url = "${context_root}/dataCount/findFinancialList.action";
     pageTable = _Datatable_Init(pageTable, aoColumns, url);
 });
 
-function statusTools(row) {
-    if (row.status == '0') {
-        return "<a style=\"text-decoration:none\" onClick=\"user_stop(this,\'" + row.documentId + "\')\" href=\"javascript:;\" title=\"停用\">停用</a>";
-    } else {
-        return "<a style=\"text-decoration:none\" onClick=\"user_start(this,\'" + row.documentId + "\')\" href=\"javascript:;\" title=\"启用\">启用</a>";
-    }
-}
 
 function query() {
     var beginTime = $("#beginTime").val();
     var endTime = $("#endTime").val();
-    var status = $("#statusSelect option:selected").val();
 	var storeName =$("#storeName").val();
     pageTable.fnSettings().sAjaxSource = encodeURI("${context_root}/dataCount/findFinancialList.action?beginTime="+beginTime+"&endTime="+endTime+"&status="+status+"&storeName="+storeName);
     pageTable.fnClearTable(0);
     pageTable.fnDraw();
 }
 
-
-/*角色-添加*/
-function role_add(title,url,w,h){
-	layer_show(title,url,w,h);
+function getDetail(obj,amountId){
+	$.ajax({
+		url:"${context_root}/dataCount/getDetail.action?amountId="+amountId,
+		type:'post',
+		async:true ,
+		cache:false ,
+		dataType:"json",
+		success:function(data){
+			$(obj).parent("td").parent("tr").parent("tbody").children("tr").each(function(i){                   // 遍历 tr
+				   $(this).children("td").eq(0).children("span").first().css("display","inline");
+				   $(this).children("td").eq(0).children("span").eq(1).css("display","none");
+				   var oth = $("tbody").children("tr[role=row]");
+					$("tbody").children("tr").not(oth).css("display","none");
+			});
+			for(var i=data.length-1;i>=0;i--){
+				if(i==data.length-1)
+					var tr = "<tr><td style=\"text-align:center;border-top:0px;\"></td><td style=\"text-align:center;border-top:0px;border-left:0px;\">"+formatDate(data[i].addTime,"yyyy-MM-dd hh:mm:ss")+"</td><td style=\"border-left:0px;border-top:0px;text-align:center;\"></td><td style=\"border-left:0px;border-top:0px;text-align:center;\">"+data[i].money/100+"</td><td style=\"border-left:0px;border-top:0px;\"></td><td style=\"border-left:0px;border-top:0px;text-align:center;\">"+data[i].userName+"</td><td style=\"border-left:0px;border-top:0px;\"></td><td style=\"border-top:0px;border-left:0px;text-align:center;\">"+(data[i].remark==null?"":data[i].remark)+"</td><td style=\"border-top:0px;border-left:0px;\"></td></tr>";
+					else var tr = "<tr><td style=\"text-align:center;border-top:0px;border-bottom:0px;\"></td><td style=\"text-align:center;border-top:0px;border-left:0px;border-bottom:0px;\">"+formatDate(data[i].addTime,"yyyy-MM-dd hh:mm:ss")+"</td><td style=\"border-left:0px;border-top:0px;text-align:center;border-bottom:0px;\"></td><td style=\"border-left:0px;border-top:0px;text-align:center;border-bottom:0px;\">"+data[i].money/100+"</td><td style=\"border-bottom:0px;border-left:0px;border-top:0px;\"></td><td style=\"border-left:0px;border-top:0px;text-align:center;border-bottom:0px;\">"+data[i].userName+"</td><td style=\"border-left:0px;border-top:0px;border-bottom:0px;\"></td><td style=\"border-top:0px;border-left:0px;text-align:center;border-bottom:0px;\">"+(data[i].remark==null?"":data[i].remark)+"</td><td style=\"border-top:0px;border-left:0px;border-bottom:0px;\"></td></tr>";
+					$(obj).parent("td").parent("tr").after(tr);
+			}
+			if(data.length == 0){
+				var tr = "<tr><td></td><td style=\"text-align:center;border-left:0px;\">时间</td><td style=\"border-left:0px;text-align:center;\"></td><td style=\"border-left:0px;text-align:center;\">结算金额</td><td style=\"border-left:0px;text-align:center;\"></td><td style=\"border-left:0px;text-align:center;\">操作者</td><td style=\"border-left:0px;\"></td><td style=\"border-left:0px;text-align:center;\">备注</td><td style=\"border-left:0px;\"></td></tr>";
+			}else{
+				var tr = "<tr><td style=\"border-bottom:0px;\"></td><td style=\"text-align:center;border-bottom:0px;border-left:0px;\">时间</td><td style=\"border-left:0px;text-align:center;border-bottom:0px;\"></td><td style=\"border-left:0px;border-bottom:0px;text-align:center;\">结算金额</td><td style=\"border-left:0px;border-bottom:0px;text-align:center;\"></td><td style=\"border-left:0px;border-bottom:0px;text-align:center;\">操作者</td><td style=\"border-left:0px;border-bottom:0px;\"></td><td style=\"border-left:0px;text-align:center;border-bottom:0px;\">备注</td><td style=\"border-bottom:0px;border-left:0px;\"></td></tr>";
+			}
+			$(obj).parent("td").parent("tr").after(tr);
+			$(obj).parent("td").children("span").first().css("display","none");
+			$(obj).parent("td").children("span").eq(1).css("display","inline");
+			
+		},
+	});
 }
-
-/*角色-编辑*/
-function role_edit(title,url,w,h){
-	layer_show(title,url,w,h);
+/*对账*/
+function financial_edit(title,url,w,h){
+layer_show(title,url,w,h);
 }
-
-/*角色-授权*/
-function role_Authorize(title,url,w,h){
-	layer_show(title,url,w,h);
-}
-
-/*停用*/
-function user_stop(obj,id){
-    parent.layer.confirm('确认要停用吗？',{icon: 3, title:'提示'},function(index){
-        $.ajax({
-            url:"${context_root}/system/changeDocumentStatus.action?documentId=" + id +"&status=1",
-            type:'post',
-            async:true ,
-            cache:false ,
-            dataType:"json",
-            success:function(data){
-                if(data.s == true){
-                    $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="user_start(this,'+id+')" href="javascript:;" title="启用">启用</a>');
-                    $(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已停用</span>');
-                    $(obj).remove();
-                    parent.layer.msg('已停用!',{icon: 5,time:1000});
-                }else{
-                    parent.layer.alert(data.m , {icon: 2,title:"系统提示"});
-                }
-            },
-        }) ;
-
-    });
-}
-
-/*启用*/
-function user_start(obj,id){
-    parent.layer.confirm('确认要启用吗？',{icon: 3, title:'提示'},function(index){
-        $.ajax({
-            url:"${context_root}/system/changeDocumentStatus.action?documentId=" + id +"&status=0",
-            type:'post',
-            async:true ,
-            cache:false ,
-            dataType:"json",
-            success:function(data){
-                if(data.s == true){
-                    $(obj).parents("tr").find(".td-manage").prepend('<a onClick="user_stop(this,'+id+')" href="javascript:;" title="停用" style="text-decoration:none">停用</a>');
-                    $(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
-                    $(obj).remove();
-                    parent.layer.msg('已启用!', {icon: 6,time:1000});
-                }else{
-                    parent.layer.alert(data.m , {icon: 2,title:"系统提示"});
-                }
-            },
-        }) ;
-
-    });
+function hideRows(obj){
+var oth = $("tbody").children("tr[role=row]");
+$("tbody").children("tr").not(oth).css("display","none");
+$(obj).parent("td").children("span").first().css("display","inline");
+$(obj).parent("td").children("span").eq(1).css("display","none");
 }
 </script> 
 </body>

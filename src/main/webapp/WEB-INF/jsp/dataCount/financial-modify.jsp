@@ -10,24 +10,23 @@
 </style>
 <center>
 <article class="page-container">
-	<form action="" method="post" class="form form-horizontal" id="form-repay-modify">
-		<input type="hidden" class="input-text" id="repayId" name="repayId" value="${repay.repayId }">
-		<input type="hidden" class="input-text" id="withholdMoney" name="withholdMoney" value="${repay.withholdMoney }">
-		<input type="hidden" class="input-text" id="repayMoney" name="repayMoney" value="${repay.repayMoney }">
-		<input type="hidden" class="input-text" id="planTotal" name="planTotal" value="${repay.planTotal }">
+	<form action="" method="post" class="form form-horizontal" id="form-financial-modify">
+		<input type="hidden" class="input-text" id="amountMoney" name="amountMoney" value="${financial.amountMoney }">
+		<input type="hidden" class="input-text" id="closeMoney" name="closeMoney" value="${financial.closeMoney }">
+		<input type="hidden" class="input-text" id="amountId" name="amountId" value="${financial.amountId }">
 		<div id="table">
 			<table>
 				<tr>
-					<td>还款单号</td>
-					<td>${repay.repayNo }</td>
+					<td>结算单号</td>
+					<td>${financial.amountNum }</td>
 				</tr>
 				<tr>
-					<td>结余金额</td>
-					<td>${repay.withholdMoney }&nbsp;元</td>
+					<td>应结金额</td>
+					<td>${financial.openMoney }&nbsp;元</td>
 				</tr>
 				<tr>
-					<td>还款金额</td>
-					<td><input type="number" name="dueFee" id="dueFee"/>&nbsp;元</td>
+					<td>结算金额</td>
+					<td><input type="number" name="fee" id="fee"/>&nbsp;元</td>
 				</tr>
 				<tr>
 					<td>备注</td>
@@ -44,9 +43,9 @@
 </article>
 </center>
 <script type="text/javascript">
-$("#form-repay-modify").validate({
+$("#form-financial-modify").validate({
 	rules:{
-		dueFee:{
+		fee:{
 			required:true,
 		}
 	},
@@ -54,17 +53,17 @@ $("#form-repay-modify").validate({
 	focusCleanup:true,
 	success:"valid",
 	submitHandler:function(form){
-		var dueFee = $("#dueFee").val();
+		var fee = $("#fee").val();
 		var type = 0;
-		if(parseFloat(dueFee) > parseFloat('${repay.withholdMoney }')){
-			alert("还款金额过大！");
+		if(parseFloat(fee) > parseFloat('${financial.openMoney }')){
+			alert("结算金额过大！");
 			return;
-		}else if(dueFee == '${repay.withholdMoney }'){
+		}else if(fee == '${financial.openMoney }'){
 			type = 1;
 		}
 		var index = parent.layer.load();
 		$.ajax({
-			url:"${context_root}/merchant/modifyRepay.action?type="+type, 
+			url:"${context_root}/dataCount/modifyFinancial.action?type="+type, 
 			type:'post',
 			async:true ,
 			cache:false ,
