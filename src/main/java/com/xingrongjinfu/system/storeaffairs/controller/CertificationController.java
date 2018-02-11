@@ -188,10 +188,11 @@ class CertificationController extends BaseController {
         int result = 0;
         String id = store.getStoreId();
         if("APRYES".equals(process)){
-        if (id != null&&!id.equals(""))
+            if (id != null&&!id.equals(""))
         {
+            Store store1=certificationService.getStoreInfo(id);
             HashMap map=new HashMap();
-            map.put("userId",store.getUserId());
+            map.put("userId",store1.getUserId());
             //调用app添加客户接口
             String result1= HttpClientUtil.httpPostRequest(addCustomer,map);
 //            String result1= HttpUtils.sendPost(addCustomer,map.toString());
@@ -199,7 +200,6 @@ class CertificationController extends BaseController {
             //调用app发送文件接口
             String result2=HttpClientUtil.httpPostRequest(filePush,map);
             result = certificationService.saveCertificationCheck(store);
-//            Store store1=certificationService.getStoreInfo(id);
         }
         }
         return new Message(result);
