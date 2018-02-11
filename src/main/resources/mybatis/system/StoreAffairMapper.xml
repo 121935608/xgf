@@ -48,7 +48,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getBankAccountInfo"  parameterType="java.lang.String"   resultType="BankAccount">
 		select bankType,accountType,userName,cardNumber,idType,idCard,remark
 		 from t_bankCard 
-		where userId=(select userId from t_store where storeId = #{storeId}) 
+		where userId=(select userId from t_store where storeId = #{storeId})  and bankType=0
 	</select>
 	
 	 
