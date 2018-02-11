@@ -184,6 +184,8 @@ class CertificationController extends BaseController {
     public @ResponseBody Message saveCertificationCheck(Store store,String process) throws UnsupportedEncodingException {
         int result = 0;
         String id = store.getStoreId();
+        Store store2=certificationService.getStoreInfo(id);
+        System.out.println("后台bug"+new Date()+store2.getUserId());
         if("APRYES".equals(process)){
             if (id != null&&!id.equals(""))
         {
