@@ -79,7 +79,12 @@ public class RegisterDao extends DynamicObjectBaseDao implements IRegisterDao {
         this.batchSave("RegisterMapper.updateStockList", list);
     }
     @Override
-    public List<Fenlei> getCategoryByCommodity(String id) throws Exception {
-        return (List<Fenlei>) this.findForList("RegisterMapper.getCategoryByCommodity", id);
+    public List<Fenlei> getCategoryByCommodity(Map map) throws Exception {
+        return (List<Fenlei>) this.findForList("RegisterMapper.getCategoryByCommodity", map);
+    }
+    @Override
+    public int checkCategoryName(Map map) {
+        
+        return (int) this.findForObject("RegisterMapper.checkCategoryName", map);
     }
 }

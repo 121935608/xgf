@@ -42,6 +42,10 @@ public class RegisterConstant {
      */
     public final static String GET_CATEGORYS_URL = "getCategorys";
     /**
+     * 请求地址：验证商品名唯一
+     */
+    public final static String CHECK_CATEGORY_NAME = "checkCategoryName";
+    /**
      * 请求地址：跳转到登记添加页面
      */
     public final static String TO_REGISTER_ADD = "toRegisterAdd";

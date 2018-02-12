@@ -57,9 +57,9 @@ public class FenleiService implements IFenleiService{
     }
 
     @Override
-    public List<Fenlei> getCategorys(String id)throws Exception {
+    public List<Fenlei> getCategorys(Map map)throws Exception {
        
-        return fenleiDao.getCategorys(id);
+        return fenleiDao.getCategorys(map);
     }
 
     @Override

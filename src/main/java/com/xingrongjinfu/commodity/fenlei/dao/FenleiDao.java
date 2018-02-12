@@ -53,9 +53,9 @@ public class FenleiDao extends DynamicObjectBaseDao implements IFenleiDao {
     }
 
     @Override
-    public List<Fenlei> getCategorys(String id) throws Exception {
+    public List<Fenlei> getCategorys(Map map) throws Exception {
         
-        return (List<Fenlei>) this.findForList("FenleiMapper.getCategorys", id);
+        return (List<Fenlei>) this.findForList("FenleiMapper.getCategorys", map);
     }
 
     @Override

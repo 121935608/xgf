@@ -48,9 +48,6 @@
 					cssClass="select" headerKey="" headerValue="--请选择--">
 			</y:select>
 			</div>
-		</div>
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>商品：</label>
 			<div class="formControls col-xs-8 col-sm-4" id="goods">
 				<select id="categoryId" style="width:150px;height:28px" name='categoryId'>
 					<c:forEach items="${categorys}" var="c" >
@@ -170,17 +167,19 @@ $("#categoryId").click(function (){
 	})
 $("#form-register-modify").validate({
 	rules:{		
-		/* categoryName: {
+		commodityName: {
             required: true,
             isSpace: true,
-            maxlength:8,
            remote: {
-                url: "${context_root}/commodity/checkNamesUnique.action",
+                url: "${context_root}/commodity/checkCategoryName.action",
                 type: "post",
                 dataType: "text",
                 data: {
-                    name: function () {
-                        return $.trim($("#categoryName").val());
+                	commodityName: function () {
+                        return $.trim($("#commodityName").val());
+                    },
+                    commodityId: function () {
+                        return $.trim($("#commodityId").val());
                     }
                 },
                 dataFilter: function (data, type) {
@@ -188,21 +187,12 @@ $("#form-register-modify").validate({
                     else return "该名称已存在";
                 }
             }
-        }, */
-		
-        commodityName:{
-			required:true,
-			isSpace:true,
-		},
+        }, 
 		commodityNo:{
 			required:true,
 			isSpace:true,
 		},
 		supplierId:{
-			required:true,
-			isSpace:true,
-		},
-		categoryId:{
 			required:true,
 			isSpace:true,
 		},

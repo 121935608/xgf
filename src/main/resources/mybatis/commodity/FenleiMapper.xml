@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<select id="getAll" parameterType="string" resultType="Fenlei">
-		SELECT * FROM m_category WHERE parentId="0" AND`status`=1 AND storeId=#{0} ORDER BY sort ASC
+		SELECT * FROM m_category WHERE parentId='0' AND`status`=1 AND storeId=#{0} ORDER BY sort ASC
 	</select>
 	
 	<select id="queryCategorys" resultMap="FenleiResult" parameterType="string">
@@ -29,7 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="findCategoryByPid" parameterType="String" resultType="Fenlei">
-		SELECT * FROM m_category WHERE parentId = "0" and storeId=#{0}  order by sort asc
+		SELECT * FROM m_category WHERE parentId = '0' AND`status`=1 and storeId=#{0}  order by sort asc
 	</select>
 	
 	<delete id="deleteCategoryInfo" parameterType="Fenlei">
@@ -85,8 +85,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		WHERE c.categoryId =#{categoryId} and m.storeId=#{storeId}
  	</select>
  	
- 	<select id="getCategorys" parameterType="string" resultType="Fenlei">
- 		SELECT categoryId,categoryName FROM m_category WHERE parentId=#{0}
+ 	<select id="getCategorys" parameterType="map" resultType="Fenlei">
+ 		SELECT categoryId,categoryName FROM m_category WHERE parentId=#{parentId} and storeId=#{storeId}
+ 		and status=1
  	</select>
  	
  	<select id="getByName" parameterType="map" resultType="int">
@@ -94,5 +95,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="categoryId != null and categoryId != ''">
 			and categoryId!=#{categoryId}
 		</if>
+		and status=1
 	</select>
 </mapper>

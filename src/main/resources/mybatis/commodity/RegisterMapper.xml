@@ -337,10 +337,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                   where commodityNo = #{item.commodityNo}
               </foreach>
  	</update>
- 	<select id="getCategoryByCommodity" parameterType="string" resultType="Fenlei">
+ 	<select id="getCategoryByCommodity" parameterType="map" resultType="Fenlei">
  		SELECT categoryId,categoryName FROM m_category WHERE parentId =
 		(SELECT c.parentId 
 		FROM m_commodity m LEFT JOIN m_category c ON m.categoryId=c.categoryId 
-		WHERE m.commodityId=#{0})
+		WHERE m.commodityId=#{commodityId}) and status=1 and storeId=#{storeId}
  	</select>
+ 	
+ 	<select id="checkCategoryName" parameterType="map" resultType="int">
+		SELECT count(1) FROM m_commodity WHERE commodityName=#{commodityName} and storeId=#{storeId}
+		<if test="commodityId != null and commodityId != ''">
+			and commodityId!=#{commodityId}
+		</if>
+	</select>
 </mapper>

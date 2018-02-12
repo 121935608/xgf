@@ -65,8 +65,12 @@ public class RegisterService implements IRegisterService {
         registerDao.updateStockList(list);
     }
     @Override
-    public List<Fenlei> getCategoryByCommodity(String id) throws Exception {
+    public List<Fenlei> getCategoryByCommodity(Map map) throws Exception {
       
-        return registerDao.getCategoryByCommodity(id);
+        return registerDao.getCategoryByCommodity(map);
+    }
+    @Override
+    public int checkCategoryName(Map map) {
+        return registerDao.checkCategoryName(map);
     }
 }

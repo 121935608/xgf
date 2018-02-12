@@ -45,6 +45,6 @@ public interface IFenleiService {
     
     public int queryCom(Map map);
     
-    public List<Fenlei> getCategorys(String id)throws Exception;
+    public List<Fenlei> getCategorys(Map map)throws Exception;
     int getByName(Map map);
 }

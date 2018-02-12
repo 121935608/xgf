@@ -61,7 +61,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getDetail" parameterType="string" resultType="FinancialDetail">
 		SELECT d.*,userName FROM m_amount_detail d LEFT JOIN sys_user u  
 		ON u.userId=d.userId
-		WHERE amountId=#{0}
+		WHERE amountId=#{0} order by addTime desc
 	</select>
 	
 	<select id="getByNum" parameterType="string" resultType="Financial">

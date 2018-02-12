@@ -97,7 +97,7 @@ public class RegisterController extends BaseController{
         modelAndView.addObject("unit", getUnit(storeId));
         Register register = registerService.getRegisterById(commodityId);
         modelAndView.addObject("register", register);
-        modelAndView.addObject("categorys", getCategoryByCommodity(commodityId));
+        modelAndView.addObject("categorys", getCategoryByCommodity(commodityId,storeId));
         return modelAndView;
     }
     /**
@@ -212,7 +212,7 @@ public class RegisterController extends BaseController{
         ExportExcel<RegisterExp> ee=new ExportExcel<RegisterExp>(); 
         String[] headers=new String[]{"序号","编码","商品名称","条码","供货商","分类","单位","进价（元）","售价（元）","会员价（元）","折扣","库存","库存上限","库存下限","状态"};
         response.setContentType("application/force-download");// 设置强制下载不打开
-        response.addHeader("Content-Disposition","attachment;fileName=export.xlsx");// 设置文件名
+        response.addHeader("Content-Disposition","attachment;fileName=export.xls");// 设置文件名
         try {
            OutputStream output = response.getOutputStream();
            ee.exportExcel("商品信息", headers, list, output); 
@@ -235,9 +235,9 @@ public class RegisterController extends BaseController{
     @RequestMapping(RegisterConstant.IMP_RIGISTER_MODEL_URL)
     public @ResponseBody Message getImpExcelModel(HttpServletResponse response){
         response.setContentType("application/force-download");// 设置强制下载不打开
-        response.addHeader("Content-Disposition","attachment;fileName=export.xlsx");// 设置文件名
+        response.addHeader("Content-Disposition","attachment;fileName=export.xls");// 设置文件名
         try {
-           InputStream is= RegisterController.class.getClassLoader().getResource("../jsp/excelModel/model_pro.xlsx").openStream();
+           InputStream is= RegisterController.class.getClassLoader().getResource("../jsp/excelModel/model_pro.xls").openStream();
            OutputStream output = response.getOutputStream();
            int ch;
            while ((ch = is.read()) != -1) {
@@ -479,7 +479,11 @@ public class RegisterController extends BaseController{
     @ResponseBody
     @RequestMapping(RegisterConstant.GET_CATEGORYS_URL)
     public List<Fenlei> getCategorys(String parentCategoryId)throws Exception{
-        List<Fenlei> typeList = fenleiService.getCategorys(parentCategoryId);
+        String storeId = (String) SessionUtils.getSession().getAttribute("storeId");
+        Map map = new HashMap();
+        map.put("storeId", storeId);
+        map.put("parentId", parentCategoryId);
+        List<Fenlei> typeList = fenleiService.getCategorys(map);
         return typeList;
         
     }
@@ -489,10 +493,27 @@ public class RegisterController extends BaseController{
      * @author huYL
      * @return
      */
-    public List<Fenlei> getCategoryByCommodity(String commodityId)throws Exception{
-        List<Fenlei> typeList = registerService.getCategoryByCommodity(commodityId);
+    public List<Fenlei> getCategoryByCommodity(String commodityId,String storeId)throws Exception{
+        Map map = new HashMap();
+        map.put("commodityId", commodityId);
+        map.put("storeId", storeId);
+        List<Fenlei> typeList = registerService.getCategoryByCommodity(map);
         return typeList;
         
     }
-    
+    /**
+     * 商品名是否存在
+     */
+    @RequestMapping(RegisterConstant.CHECK_CATEGORY_NAME)
+    public @ResponseBody int checkCategoryName(String commodityName,String commodityId) {
+        String storeId = (String) SessionUtils.getSession().getAttribute("storeId");
+        Map map = new HashMap();
+        map.put("storeId", storeId);
+        map.put("commodityName", commodityName);
+        if(null != commodityId){
+            map.put("commodityId", commodityId);
+        }
+        int n = registerService.checkCategoryName(map);
+        return n;
+    }
 }

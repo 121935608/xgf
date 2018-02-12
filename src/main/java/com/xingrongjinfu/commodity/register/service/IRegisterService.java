@@ -37,5 +37,7 @@ public interface IRegisterService {
     
     public void updateStockList(List<Register> list) throws Exception;
     
-    public List<Fenlei> getCategoryByCommodity(String id) throws Exception;
+    public List<Fenlei> getCategoryByCommodity(Map map) throws Exception;
+    
+    int checkCategoryName(Map map);
 }
