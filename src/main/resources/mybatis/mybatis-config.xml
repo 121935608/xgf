@@ -61,6 +61,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.xingrongjinfu.statistics.pays.model.Pays" alias="Pay"/>
 		<typeAlias type="com.xingrongjinfu.system.storeaffairs.model.RepayDetail" alias="RepayDetail"/>
 		<typeAlias type="com.xingrongjinfu.system.financial.model.FinancialDetail" alias="FinancialDetail"/>
+		<typeAlias type="com.xingrongjinfu.statistics.cashCount.model.Amount" alias="Amount" />
+
 		<!-- 分页 -->
 		<typeAlias type="org.framework.base.util.TableDataInfo" alias="TableDataInfo"/>
 		<typeAlias type="org.framework.base.util.PageUtilEntity" alias="PageUtilEntity"/>

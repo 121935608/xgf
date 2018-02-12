@@ -161,4 +161,9 @@ public class DynamicObjectBaseDao
         return sqlSessionTemplate.selectMap(str, obj, key);
     }
 
+    public Object findForList(String str) throws Exception
+    {
+        return sqlSessionTemplate.selectList(str);
+    }
+
 }

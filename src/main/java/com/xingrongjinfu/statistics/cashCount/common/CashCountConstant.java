@@ -13,4 +13,8 @@ public class CashCountConstant {
      * 逻辑视图名：收银统计列表页面
      */
     public final static String CASH_LIST_PAGE = "statistics/cashCount-list";
+
+    public final static String CASH_COUNT_DAY="cashCountForDay";
+
+
 }
