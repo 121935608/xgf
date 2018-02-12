@@ -18,6 +18,12 @@ $(document).ready(function(){
 		var path = '${imgPath}'+ex;
 		div.innerHTML += "<img src="+path+" style=\"margin-left:30px;height:100px;width:100px;\" name=\"imgs\" id=\"imgs\" ondblclick=\"todelImgs(this)\"><span>设为主图</span>";
 		});
+		var main = '${product.imgMain}';
+		if(main!=null && main !=""){
+			$("#main img").attr("src",main);
+		}else{
+			$("#main").remove();
+		}
 })
 </script>
 	<div id="ul">
@@ -213,8 +219,8 @@ $(document).ready(function(){
 					<input  type="file" id="picture" class="file" size="28" onchange="pic(event)"  name="picture" accept="image/*"/>
 				</div>
 			</div>
-			<div style="margin:0 auto" class="imgDiv">
-				<img src="${product.imgMain}" style="height:100px;width:100px;" name="imgs" ondblclick="todelImgs(this)">
+			<div style="margin:0 auto" class="imgDiv" id="main">
+				<img style="height:100px;width:100px;" name="imgs" ondblclick="todelImgs(this)">
 				<span>主图</span>
 			</div>
 			
@@ -267,18 +273,6 @@ $(document).ready(function(){
 		var index = parent.layer.getFrameIndex(window.name);
 		parent.layer.close(index);
 	}
-	/*function todelImgs(obj) {
-        var aaa = $(obj).nextElementSibling.text();
-	    if("主图"===aaa) {
-            alert("主图不允许删除");
-            return;
-//        file.after(file.clone().val(""));
-        }else{
-            var file = $(obj)
-            file.remove();
-		}
-
-    }*/
         function todelImgs(obj) {
             var bbb = $(obj).next("span").text();
             var span = $(obj).next("span");

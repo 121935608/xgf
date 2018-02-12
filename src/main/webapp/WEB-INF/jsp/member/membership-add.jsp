@@ -21,22 +21,11 @@
 				<input type="text" class="input-text" autocomplete="off" value="" placeholder="" name="name" id="name">
 			</div>
 		</div>
-		<%--<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>电话：</label>
-			<div class="formControls col-xs-8 col-sm-4">
-				<input type="text" class="input-text" autocomplete="off"  placeholder=""  name="phoneCode">
-			</div>
-		</div>--%>
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>开卡时间：</label>
-			<div class="formControls col-xs-8 col-sm-4">
-				<input type="text" class="input-text" value="" placeholder="" id="addTime" name="addTime">
-			</div>
-		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>有效期至：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="text" class="input-text" value="" placeholder="" id="timeLimit" name="timeLimit">
+		<input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'timeLimit\')||\'%y-%M-%d\'}'})" id="timeLimit"
+			   class="input-text Wdate">
 			</div>
 		</div>
 		<div class="row cl">
@@ -96,23 +85,6 @@
 
 <script type="text/javascript">
 
-    //设置表单中的初始时间，比当前时间多一小时
-    var now = new Date();
-    now.setHours(now.getHours());
-    var str = now.getFullYear() + "-" + fix((now.getMonth() + 1), 2) + "-" + fix(now.getDate(), 2) + "T" + fix(now.getHours(), 2) + ":" + fix(now.getMinutes(), 2);
-    $("#addTime").val(str);
-    //将datetime-local转换为Date
-    x = $("#addTime").val();
-    now.setFullYear(parseInt(x.substring(0, 4)));
-    now.setMonth(parseInt(x.substring(5, 7)) - 1);
-    now.setDate(parseInt(x.substring(8, 10)));
-    now.setHours(parseInt(x.substring(11, 13)));
-    now.setMinutes(parseInt(x.substring(14, 16)));
-
-    //将日期格式化为两位，不足补零
-    function fix(num, length) {
-        return ('' + num).length < length ? ((new Array(length + 1)).join('0') + num).slice(-length) : '' + num;
-    }
 $("#form-member-add").validate({
 	rules:{
         memberNo:{
@@ -120,12 +92,12 @@ $("#form-member-add").validate({
             isSpace:true,
 			isPhone:true,
             remote: {
-                url: "/member/checkNameUnique.action",
+                url: "${context_root}/member/checkNameUnique.action",
                 type: "post",
                 dataType: "text",
                 data: {
-                	name : function() {
-                        return $.trim($("#userName").val());
+                	memberNo : function() {
+                        return $.trim($("#memberNo").val());
                     }
                 },
                 dataFilter: function(data, type) {
@@ -137,9 +109,6 @@ $("#form-member-add").validate({
         name:{
 			required:true,
 			isSpace:true,
-		},
-        addTime:{
-			required:true,
 		},
         timeLimit:{
 			required:true,
@@ -154,11 +123,6 @@ $("#form-member-add").validate({
             required:true,
         },
 	},
-	messages: {
-        "memberNo": {
-            remote: "该会员号已经存在"
-        }
-    },
 	onkeyup:false,
 	focusCleanup:true,
 	success:"valid",

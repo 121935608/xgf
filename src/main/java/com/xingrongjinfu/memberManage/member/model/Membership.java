@@ -10,8 +10,6 @@
  */
 package com.xingrongjinfu.memberManage.member.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.util.Date;
 
 /**
@@ -34,13 +32,10 @@ public class Membership {
     private String address;
     private String level;
     private Integer score;
-    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH-mm-ss")
     private String timeLimit;
     private String isLimit;
     private String remark;
-    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH-mm-ss")
-    private String addTime;
-    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH-mm-ss")
+    private Date addTime;
     private Date updateTime;
     private Integer status;
 
@@ -141,10 +136,10 @@ public class Membership {
         this.remark = remark;
     }
 
-    public String getAddTime() {
+    public Date getAddTime() {
         return addTime;
     }
-    public void setAddTime(String addTime) {
+    public void setAddTime(Date addTime) {
         this.addTime = addTime;
     }
 

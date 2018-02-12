@@ -10,15 +10,13 @@
  */
 package com.xingrongjinfu.memberManage.member.controller;
 
-import com.xingrongjinfu.memberManage.member.common.MemberConstant;
-import com.xingrongjinfu.memberManage.member.model.Membership;
-import com.xingrongjinfu.memberManage.member.service.IMemberService;
-import com.xingrongjinfu.system.SystemConstant;
-import com.xingrongjinfu.system.user.model.User;
-import com.xingrongjinfu.utils.IdUtil;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
 import org.apache.shiro.common.utils.SessionUtils;
 import org.framework.base.util.PageUtilEntity;
-import org.framework.base.util.TableDataInfo;
 import org.framework.core.controller.BaseController;
 import org.framework.core.model.Message;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +25,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import com.xingrongjinfu.memberManage.member.common.MemberConstant;
+import com.xingrongjinfu.memberManage.member.model.Membership;
+import com.xingrongjinfu.memberManage.member.service.IMemberService;
+import com.xingrongjinfu.system.SystemConstant;
+import com.xingrongjinfu.utils.IdUtil;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -137,6 +135,7 @@ public class MemberController extends BaseController{
         }else {
             //不存在则插入数据
            membership.setMemberId(IdUtil.get32UUID());
+           membership.setAddTime(new Date());
            result= memberService.addMember(membership);
         }
         return new Message(result);

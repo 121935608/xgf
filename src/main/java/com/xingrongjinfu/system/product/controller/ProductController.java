@@ -33,6 +33,7 @@ import com.xingrongjinfu.system.product.model.Product;
 import com.xingrongjinfu.system.product.service.IProductService;
 import com.xingrongjinfu.system.syscode.model.SysCode;
 import com.xingrongjinfu.utils.AliyunOSSClientUtil;
+import com.xingrongjinfu.utils.StringUtil;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -107,7 +108,11 @@ public class ProductController extends BaseController{
         String commodityId=product.getCommodityId();
         if (commodityId !=null && commodityId !=""){
             Product products=productService.findProductById(product);
-            products.setImgMain(products.getImgMain()==null?"" : MerchantConstant.ALIYUN_URL+products.getImgMain());
+            if(!StringUtil.nullOrBlank(products.getImgMain())){
+                products.setImgMain(MerchantConstant.ALIYUN_URL+products.getImgMain());
+            }else{
+                products.setImgMain("");
+            }
             modelAndView.addObject("product",products);
             //分类
             modelAndView.addObject("classes",getClassList());
@@ -147,8 +152,12 @@ public class ProductController extends BaseController{
     @RequestMapping(ProductConstant.PRODUCT_ADD_URL)
     public @ResponseBody Message saveProduct(Product product,String imgs,String imgZ){
         int result=0;
-        String img = imgZ.replace("http://"+AliyunOSSClientUtil.BACKET_NAME+"."+AliyunOSSClientUtil.ENDPOINT+"/", "");
-        product.setImgMain(img);
+        if(!imgZ.equals("undefined")){
+            String img = imgZ.replace("http://"+AliyunOSSClientUtil.BACKET_NAME+"."+AliyunOSSClientUtil.ENDPOINT+"/", "");
+            product.setImgMain(img);
+        }else{
+            return new Message(false,"请选择主图！");
+        }
         String[] imgList = imgs.split(",");
         String imgOther = "";
         for(int i=0;i<imgList.length;i++){

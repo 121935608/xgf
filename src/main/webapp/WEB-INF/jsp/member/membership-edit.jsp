@@ -26,18 +26,6 @@
 				<input type="text" class="input-text" autocomplete="off" value="${membership.name}" placeholder="" name="name" id="name">
 			</div>
 		</div>
-		<%--<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>电话：</label>
-			<div class="formControls col-xs-8 col-sm-4">
-				<input type="text" class="input-text" autocomplete="off"  placeholder=""  name="phoneCode">
-			</div>
-		</div>--%>
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>开卡时间：</label>
-			<div class="formControls col-xs-8 col-sm-4">
-				<input type="text" class="input-text" value="${membership.addTime}" placeholder="" id="addTime" name="addTime">
-			</div>
-		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>有效期至：</label>
 			<div class="formControls col-xs-8 col-sm-4">
@@ -100,20 +88,6 @@
 
 
 <script type="text/javascript">
-
-
-    /*//将datetime-local转换为Date
-    x = $("#addTime").val();
-    now.setFullYear(parseInt(x.substring(0, 4)));
-    now.setMonth(parseInt(x.substring(5, 7)) - 1);
-    now.setDate(parseInt(x.substring(8, 10)));
-    now.setHours(parseInt(x.substring(11, 13)));
-    now.setMinutes(parseInt(x.substring(14, 16)));
-
-    //将日期格式化为两位，不足补零
-    function fix(num, length) {
-        return ('' + num).length < length ? ((new Array(length + 1)).join('0') + num).slice(-length) : '' + num;
-    }*/
 $("#form-member-edit").validate({
 	rules:{
         memberNo:{
@@ -121,12 +95,12 @@ $("#form-member-edit").validate({
             isSpace:true,
 			isPhone:true,
             remote: {
-                url: "/member/checkNameUnique.action?memberId=${membership.memberId}",
+                url: "${context_root}/member/checkNameUnique.action?memberId=${membership.memberId}",
                 type: "post",
                 dataType: "text",
                 data: {
-                	name : function() {
-                        return $.trim($("#userName").val());
+                	memberNo : function() {
+                        return $.trim($("#memberNo").val());
                     }
                 },
                 dataFilter: function(data, type) {

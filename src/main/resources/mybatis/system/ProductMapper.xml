@@ -86,6 +86,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			c.commodityNo LIKE CONCAT(CONCAT('%', #{relationMap.commodityName}),'%')
 			)
 		</if>
+		order by c.addTime desc
 	</select>
 
 	<select id="findAllClass" resultMap="CategoryResult">
@@ -141,12 +142,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<update id="updateProduct" parameterType="Product" >
-		UPDATE t_commodity
+		UPDATE t_commodity 
 		<set>
+			imgOther=#{imgOther},
 			<if test="commodityName!=null and commodityName !=''">commodityName=#{commodityName},</if>
 			<if test="commodityNo!=null and commodityNo !=''">commodityNo=#{commodityNo},</if>
 			<if test="imgMain!=null and imgMain !=''">imgMain=#{imgMain},</if>
-			<if test="imgOther!=null and imgOther !=''">imgOther=#{imgOther},</if>
 			<if test="specification!=null and specification !=''">specification=#{specification},</if>
 			<if test="inPrice!=null">inPrice=#{inPrice}*100,</if>
 			<if test="salePrice!=null">salePrice=#{salePrice}*100,</if>
