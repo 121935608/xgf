@@ -24,7 +24,7 @@
 			<c:forEach items="${cashFlow.cashDetail }" var="f">
 				<tr>
 					<td>${f.commodityName}</td>
-					<td>${f.number}</td>
+					<td>${f.commodityNo}${f.unitName}</td>
 					<td>${f.totalPrice}</td>
 					<td>${f.totalVipPrice}</td>
 				</tr>

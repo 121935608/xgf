@@ -44,8 +44,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			AND (
 			m.cashNo LIKE CONCAT(CONCAT('%',#{relationMap.fuzzyCondition}),'%')
 			)
-			order by m.addTime
 		</if>
+			order by m.addTime desc
 	</select>
 
 

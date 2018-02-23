@@ -66,7 +66,7 @@ $(document).ready(function(){
         "sClass": "text-c",
         "mRender": function(data, type, row) {
             if (row.repayNo != null) {
-                return "<span id=\"show\" onClick=\"getRepayDetail(this,\'" + row.repayId + "\')\">+</span><span id=\"hide\" style=\"display:none\" onClick=\"hideRows(this,\'" + row.repayId + "\')\">-</span>&nbsp;&nbsp;<span>"+row.repayNo+"</span>";
+                return "<span style=\"color:blue;\" id=\"show\" onClick=\"getRepayDetail(this,\'" + row.repayId + "\')\">+</span><span id=\"hide\" style=\"display:none;color:blue;\" onClick=\"hideRows(this,\'" + row.repayId + "\')\">-</span>&nbsp;&nbsp;<span>"+row.repayNo+"</span>";
             } else {
                 return "";
             }

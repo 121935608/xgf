@@ -55,8 +55,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	<select id="pageInfoQuery" parameterType="PageUtilEntity"
 		resultType="CashFlow">
-		SELECT c.cashId,tradeCode,c.userId,machineNo,c.type type,m.name cashName,c.menberNo memberName,payType,
-		c.totalMoney/100 totalMoney,c.money/100 money,c.number,c.addTime,d.commodityId,com.commodityName
+		SELECT DISTINCT(c.cashId),tradeCode,c.userId,machineNo,c.type type,m.name cashName,c.menberNo memberName,payType,
+		c.totalMoney/100 totalMoney,c.money/100 money,c.number,c.addTime
 		FROM m_cashFlow c LEFT JOIN t_cashier m ON c.cashierId=m.cashierId
 		LEFT JOIN m_cashDetail d ON d.cashId=c.cashId
 		LEFT JOIN m_commodity com ON d.commodityId=com.commodityId
@@ -78,7 +78,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="getComById" parameterType="string" resultType="CashDetail">
-		SELECT d.commodityId,d.commodityName,d.totalVipPrice totalVipPrice,d.number number,d.totalPrice totalPrice
+		SELECT d.commodityId,d.commodityName,d.totalVipPrice/100 totalVipPrice,
+		d.number number,d.totalPrice/100 totalPrice,unitName
 		FROM m_cashFlow c LEFT JOIN m_cashDetail d ON d.cashId=c.cashId
 		where c.`cashId`=#{0}
 	</select>

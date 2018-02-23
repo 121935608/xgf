@@ -24,14 +24,14 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>有效期至：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-		<input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'timeLimit\')||\'%y-%M-%d\'}'})" id="timeLimit"
+		<input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'timeLimi\')||\'%y-%M-%d\'}'})" id="timeLimi"
 			   class="input-text Wdate">
 			</div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>会员积分：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="text" class="input-text" value="" placeholder="" id="score" name="score">
+				<input type="number" class="input-text" value="" placeholder="" id="score" name="score">
 			</div>
 		</div>
 		<div class="row cl">
@@ -110,7 +110,7 @@ $("#form-member-add").validate({
 			required:true,
 			isSpace:true,
 		},
-        timeLimit:{
+        timeLimi:{
 			required:true,
 		},
         score:{
@@ -128,8 +128,9 @@ $("#form-member-add").validate({
 	success:"valid",
 	submitHandler:function(form){
 		var index = parent.layer.load();
+		var timeLimi = $("#timeLimi").val();
 		$.ajax({
-			url:"${context_root}/member/saveMember.action",
+			url:"${context_root}/member/saveMember.action?timeLimi="+timeLimi,
 			type:'post',
 			async:true ,
 			cache:false ,

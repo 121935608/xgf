@@ -23,6 +23,17 @@ public class CashService implements ICashService {
     public CashFlow getById(String id) {
         List<CashDetail> list = cashDao.getComById(id);
         CashFlow cashFlow = cashDao.getById(id);
+        String number = "";
+        for (CashDetail cashDetail : list) {
+            if(null != cashDetail.getNumber()){
+                number = cashDetail.getNumber().toString();
+                int n = number.lastIndexOf(".00");
+                if(n != -1){
+                    number = number.substring(0,n);
+                }
+                cashDetail.setCommodityNo(number);
+            }
+        }
         cashFlow.setCashDetail(list);
         return cashFlow;
     }

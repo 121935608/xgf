@@ -161,7 +161,7 @@ $("#form-register-add").validate({
 	rules:{		
 		commodityName: {
             required: true,
-            isSpace: true,
+            isSpace: false,
            remote: {
                 url: "${context_root}/commodity/checkCategoryName.action",
                 type: "post",
@@ -216,14 +216,17 @@ $("#form-register-add").validate({
 		stockNum:{
 			required:true,
 			isSpace:true,
+			min:0
 		},
 		upperLimit:{
 			required:true,
 			isSpace:true,
+			min:0
 		},
 		lowerLimit:{
 			required:true,
 			isSpace:true,
+			min:0
 		},
 		status:{
 			required:true,
@@ -234,6 +237,12 @@ $("#form-register-add").validate({
 	focusCleanup:true,
 	success:"valid",
 	submitHandler:function(form){
+		var upperLimit = $("#upperLimit").val();
+		var lowerLimit = $("#lowerLimit").val();
+		if(upperLimit < lowerLimit){
+			alert("库存下限大于库存上限！");
+			return;
+		}
 		var index = parent.layer.load();
 		var formData = new FormData($('#form-register-add')[0]);
 		$.ajax({

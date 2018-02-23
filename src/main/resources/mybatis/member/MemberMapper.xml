@@ -40,7 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			name LIKE CONCAT(CONCAT('%', #{relationMap.memberNo}),'%')
 			)
 		</if>
-		AND storeId=#{relationMap.storeId}
+		AND storeId=#{relationMap.storeId} order by addTime desc
 	</select>
 
 	<select id="checkName" parameterType="Member" resultType="Member">
@@ -63,10 +63,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="level !=null and level !=''">level,</if>
 		<if test="score !=null">score,</if>
 		<if test="timeLimit !=null and timeLimit !=''">timeLimit,</if>
-		<if test="remark !=null and remark !=''">remark,</if>
-		<if test="addTime !=null and addTime !=''">addTime,</if>
-		<if test="updateTime !=null and updateTime !=''">updateTime,</if>
-		status
+		remark,addTime,status
 		)VALUES (
 		<if test="memberId !=null and memberId !=''">#{memberId},</if>
 		<if test="storeId !=null and storeId !=''">#{storeId},</if>
@@ -79,15 +76,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="level !=null and level !=''">#{level},</if>
 		<if test="score !=null ">#{score},</if>
 		<if test="timeLimit !=null and timeLimit !=''">#{timeLimit},</if>
-		<if test="remark !=null and remark !=''">#{remark},</if>
-		<if test="addTime !=null and addTime !=''">sysdate(),</if>
-		<if test="updateTime !=null and updateTime !=''">#{updateTime},</if>
-		1
+		#{remark},sysdate(),1
 		)
 	</insert>
 
 	<select id="findMembership" parameterType="Member"  resultType="Member">
-		SELECT memberId,memberNo,name,level,score,addTime,DATE_FORMAT(timeLimit,'%Y-%m-%d %H:%i:%S') timeLimit,qq,email,address,remark
+		SELECT memberId,memberNo,name,level,score,addTime,DATE_FORMAT(timeLimit,'%Y-%m-%d') timeLimit,qq,email,address,remark
 		FROM m_member
 		WHERE memberId =#{memberId}
 	</select>
@@ -107,11 +101,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="address !=null and address !=''">address= #{address},</if>
 			<if test="level !=null and level !=''">level= #{level},</if>
 			<if test="score !=null ">score= #{score},</if>
-			<if test="timeLimit !=null and timeLimit !=''">timeLimit= #{timeLimit},</if>
-			<if test="remark !=null and remark !=''">remark=#{remark},</if>
-			<if test="addTime !=null and addTime !=''">addTime=#{addTime},</if>
-			<if test="updateTime !=null and updateTime !=''">updateTime=sysdate(),</if>
-			<if test="status !=null ">status=#{status}</if>
+			<if test="timeLimit !=null and timeLimit !=''">timeLimit=#{timeLimit},</if>
+			<if test="status !=null ">status=#{status},</if>
+			remark=#{remark},updateTime=sysdate()
 		</set>
 		WHERE 1=1
 		<if test="memberId !=null and memberId !=''">

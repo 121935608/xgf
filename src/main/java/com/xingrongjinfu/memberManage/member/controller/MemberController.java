@@ -10,6 +10,7 @@
  */
 package com.xingrongjinfu.memberManage.member.controller;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -77,8 +78,7 @@ public class MemberController extends BaseController{
             if (membership.getTimeLimit()!=null) {
                 int aaa=0;
                 try {
-                    Date date=sdf.parse(membership.getTimeLimit());
-                    if (date.getTime()-sdf.parse(sdf.format(new Date())).getTime() <0) {
+                    if (sdf.parse(membership.getTimeLimit()).getTime()-sdf.parse(sdf.format(new Date())).getTime() <0) {
                         membership.setIsLimit("过期");
                     } else {
                         membership.setIsLimit("未过期");
@@ -123,19 +123,22 @@ public class MemberController extends BaseController{
 
     /**
      * 添加或更新会员信息
+     * @throws ParseException 
      */
     @RequestMapping(MemberConstant.MEMBERSHIP_SAVE_URL)
     public @ResponseBody
-    Message updateMember(Membership membership){
+    Message updateMember(Membership membership,String timeLimi) throws ParseException{
         int result=0;
         String memberId=membership.getMemberId();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        //membership.setTimeLimit(sdf.parse(timeLimi));
+        membership.setTimeLimit(timeLimi);
         if (memberId !=null && memberId !=""){
             //id存在则更新信息
             result=memberService.updateMember(membership);
         }else {
             //不存在则插入数据
            membership.setMemberId(IdUtil.get32UUID());
-           membership.setAddTime(new Date());
            result= memberService.addMember(membership);
         }
         return new Message(result);

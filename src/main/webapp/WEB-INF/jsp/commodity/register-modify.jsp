@@ -7,6 +7,17 @@
              filter:alpha(opacity:0);opacity: 0  }
         .image{position:absolute; border-color: red;left: 2;cursor:pointer;} 
 </style>
+<script type="text/javascript">
+	/* value="${register.stockNum}" */
+	$(document).ready(function(){
+		var stock = '${register.stockNum}'.toString();
+		var n = stock.lastIndexOf(".00");
+		if(n != -1){
+			stock = stock.substring(0,n);
+		}
+		$("#stockNum").val(stock);
+	})
+</script>
 <article class="page-container">
 
 	<form action="" method="post"  class="form form-horizontal" id="form-register-modify">
@@ -95,7 +106,7 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>库存：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="number" class="input-text" value="${register.stockNum}" placeholder="" id="stockNum" name="stockNum" style="width:150px">
+				<input type="number" class="input-text" placeholder="" id="stockNum" name="stockNum" style="width:150px">
 			</div>
 		</div>
 		<div class="row cl">
@@ -219,14 +230,17 @@ $("#form-register-modify").validate({
 		stockNum:{
 			required:true,
 			isSpace:true,
+			min:0
 		},
 		upperLimit:{
 			required:true,
 			isSpace:true,
+			min:0
 		},
 		lowerLimit:{
 			required:true,
 			isSpace:true,
+			min:0
 		},
 		status:{
 			required:true,
@@ -237,6 +251,12 @@ $("#form-register-modify").validate({
 	focusCleanup:true,
 	success:"valid",
 	submitHandler:function(form){
+		var upperLimit = $("#upperLimit").val();
+		var lowerLimit = $("#lowerLimit").val();
+		if(upperLimit < lowerLimit){
+			alert("库存下限大于库存上限！");
+			return;
+		}
 		var index = parent.layer.load();
 		var formData = new FormData($('#form-register-modify')[0]);
 		$.ajax({

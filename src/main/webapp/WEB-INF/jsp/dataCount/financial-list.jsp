@@ -2,7 +2,7 @@
 <%@include file="/WEB-INF/jsp/common/taglibs.jspf"%>
 <ys:contentHeader title="财务结算"/>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 数据统计 <span class="c-gray en">&gt;</span> 财务结算 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 商户相关 <span class="c-gray en">&gt;</span> 财务结算 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
 <style>
 	#show:hover{cursor:pointer;color:blue;}
@@ -29,14 +29,14 @@
 	<table class="table table-border table-bordered table-hover table-bg table-sort">
 		<thead>
 			<tr class="text-c">
-				<th width="10%">结算单号</th>
+				<th width="12%">结算单号</th>
 				<th width="10%">创建日期</th>
 				<th width="15%">商铺名称</th>
-				<th width="10%">合计金额(元) </th>
-				<th width="5%">手续费</th>
-				<th width="10%">应结金额(元)</th>
-				<th width="10%">已结金额(元)</th>
-				<th width="10%">未结金额(元)</th>
+				<th width="8%">合计金额(元) </th>
+				<th width="8%">手续费</th>
+				<th width="8%">应结金额(元)</th>
+				<th width="8%">已结金额(元)</th>
+				<th width="8%">未结金额(元)</th>
 				<th width="10%">操作</th>
 
 			</tr>
@@ -55,7 +55,7 @@ $(document).ready(function(){
             "bSearchable": false,
             "mRender": function(data, type, row) {
                 if (row.amountNum != null) {
-                    return "<span id=\"show\" onClick=\"getDetail(this,\'" + row.amountId + "\')\">+</span><span id=\"hide\" style=\"display:none\" onClick=\"hideRows(this,\'" + row.amountId + "\')\">-</span>&nbsp;&nbsp;<span>"+row.amountNum+"</span>";
+                    return "<span style=\"color:blue;\" id=\"show\" onClick=\"getDetail(this,\'" + row.amountId + "\')\">+</span><span id=\"hide\" style=\"display:none;color:blue;\" onClick=\"hideRows(this,\'" + row.amountId + "\')\">-</span>&nbsp;&nbsp;<span>"+row.amountNum+"</span>";
                 } else {
                     return "";
                 }
