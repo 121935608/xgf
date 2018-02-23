@@ -87,6 +87,14 @@ $(document).ready(function(){
 				<input type="text" class="input-text" autocomplete="off" disabled="disabled" maxlength="20"  placeholder="" id="commodityNo" name="commodityNo" value="${product.commodityNo}">
 			</div>
 		</div>
+
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>商品描述：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" class="input-text" autocomplete="off"  maxlength="20"  placeholder="" id="commodityDes" name="commodityDes" value="${product.commodityDes}">
+			</div>
+		</div>
+
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>商品分类：</label>
 			<div class="formControls col-xs-8 col-sm-4">
@@ -159,6 +167,13 @@ $(document).ready(function(){
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>规格：</label>
 			<div class="formControls col-xs-8 col-sm-4">
 				<input style="width: 100px;" type="text" class="input-text" autocomplete="off" disabled="disabled" maxlength="20"  placeholder="" id="specification" name="specification" value="${product.specification}">#
+			</div>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>价格规格：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input style="width: 100px;" type="text" class="input-text" autocomplete="off"  maxlength="20"  placeholder="" id="priceSpecification" name="priceSpecification" value="${product.priceSpecification}">#
 			</div>
 		</div>
 		<%--<div class="row cl">
@@ -348,12 +363,18 @@ $(document).ready(function(){
 		categoryId:{
             required:true,
 		},
+		priceSpecification:{
+            required:true,
+        },
         commodityNo:{
 			required:true,
 		},
         country:{
 			required:true,
 		},
+		commodityDes:{
+            required:true,
+        },
         /*grade:{
 			required:true,
 		},*/

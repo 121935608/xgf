@@ -45,16 +45,18 @@
 				<th width="8%">商品名称</th>
 				<th width="8%">商品条码</th>
 				<th width="5%">分类 </th>
-				<th width="8%">产地</th>
-				<th width="5%">重量</th>
+				<th width="5%">产地</th>
+				<th width="3%">重量</th>
 				<th width="3%">单位</th>
 				<th width="5%">国内/国外</th>
-				<th width="5%">等级</th>
+				<th width="3%">等级</th>
 				<th width="5%">规格</th>
+				<th width="5%">价格规格</th>
+				<th width="5%">商品描述</th>
 				<th width="5%">进价(元)</th>
-				<th width="5%">费率</th>
+				<th width="3%">费率</th>
 				<th width="5%">售价(元)</th>
-				<th width="5%">库存</th>
+				<th width="4%">库存</th>
 				<th width="5%">存储方式</th>
 				<th width="5%">上下架</th>
 				<th width="5%">状态</th>
@@ -197,6 +199,32 @@ $(document).ready(function(){
             "mRender": function(data, type, row) {
                 if (row.specification !=null) {
                     return row.specification;
+                }else {
+                    return "";
+                }
+            }
+        },
+        {
+            "sDefaultContent": "价格规格",
+            "bSortable" : false,
+            "sClass": "text-c",
+            "bSearchable": false,
+            "mRender": function(data, type, row) {
+                if (row.priceSpecification !=null) {
+                    return row.priceSpecification;
+                }else {
+                    return "";
+                }
+            }
+        },
+        {
+            "sDefaultContent": "商品描述",
+            "bSortable" : false,
+            "sClass": "text-c",
+            "bSearchable": false,
+            "mRender": function(data, type, row) {
+                if (row.commodityDes !=null) {
+                    return row.commodityDes;
                 }else {
                     return "";
                 }

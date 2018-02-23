@@ -49,6 +49,24 @@ public class Product {
     private String type;
     private String categoryName;
     private String storage;
+    private String commodityDes;
+    private String priceSpecification;
+
+    public String getPriceSpecification() {
+        return priceSpecification;
+    }
+
+    public void setPriceSpecification(String priceSpecification) {
+        this.priceSpecification = priceSpecification;
+    }
+
+    public String getCommodityDes() {
+        return commodityDes;
+    }
+
+    public void setCommodityDes(String commodityDes) {
+        this.commodityDes = commodityDes;
+    }
 
     public Integer getCommodityNum() {
         return commodityNum;
