@@ -396,6 +396,7 @@ $(document).ready(function(){
         salePrice:{
 			required:true,
 		},
+		
         stockNum:{
 			required:true,
 		},

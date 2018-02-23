@@ -85,6 +85,7 @@ $(document).ready(function(){
                 }
             }
         },
+
         {
             "sDefaultContent": "商品名称",
             "bSortable" : false,
