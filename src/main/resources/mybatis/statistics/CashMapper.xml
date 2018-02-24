@@ -201,7 +201,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
              WHEN HOUR(`addTime`)  BETWEEN 22 AND 23 THEN '23:00'
              END hour,count(*) number
              FROM m_cashFlow WHERE storeId=#{storeId} AND `status`=1
-             <!-- and DATE_FORMAT(`addTime`,'%Y-%m-%d')=date_format(now(),'%Y-%m-%d') -->
+             and DATE_FORMAT(`addTime`,'%Y-%m-%d')=date_format(now(),'%Y-%m-%d')
              GROUP BY hour
              ORDER BY hour
 	</select>

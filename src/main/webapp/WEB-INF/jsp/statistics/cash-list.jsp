@@ -102,13 +102,13 @@ $(document).ready(function(){
         "defaultContent": ""
     },
     {
-        "mData": "money",
+        "mData": "totalMoney",
         "bSortable" : false,
         "sClass": "text-c",
         "defaultContent": ""
     },
     {
-        "mData": "totalMoney",
+        "mData": "money",
         "bSortable" : false,
         "sClass": "text-c",
         "defaultContent": ""

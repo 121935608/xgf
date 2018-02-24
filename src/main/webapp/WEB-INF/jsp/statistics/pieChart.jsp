@@ -23,44 +23,44 @@
 <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 <script type="text/javascript">
 $.get("${context_root}/statistics/pieList.action",function(data){
-	var oChart = new Highcharts.Chart(oOptions);
-	for(var i = 0;i<data.length;i++){
-		var oSeries = {
-				name: '营业占比',
-	            colorByPoint: true,
-                data: [{
-                    name: data[i].categoryName,
-                    y: parseFloat(data[i].totalVipPrice)
-                }]
-            };
-       oChart.addSeries(oSeries);
-	}
+	$('#container').highcharts().series[0].setData(data);
 });
-	var oOptions = {
-        chart: {
-        	renderTo: 'container',
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
-        },
-        title: {
-            text: '营业占比统计'
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: false
-                },
-                showInLegend: true
-            }
-        }
-	}
+	$('#container').highcharts({  
+        chart: {  
+            plotBackgroundColor: null,  
+            plotBorderWidth: null,  
+            plotShadow: false  
+        },  
+        title: {  
+            text: '营业占比统计'  
+        },  
+        tooltip: {  
+            headerFormat: '{series.name}<br>',  
+            pointFormat: '{point.name}: <b>{point.percentage:.2f}%</b>'  
+        },  
+        plotOptions: {  
+            pie: {  
+                allowPointSelect: true,  
+                cursor: 'pointer',  
+                dataLabels: {  
+                    enabled: true,  
+                    formatter: function() { 
+            		    return  this.point.name + Highcharts.numberFormat(this.percentage,2) + '%';
+            		},  
+                    style: {  
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'blue'  
+                    },
+                    showInLegend: true,
+                    colors: ['#d5355b', '#b232c5', '#9cc101'],
+                }  
+            }  
+        },  
+        series: [{  
+            type: 'pie',  
+            name: '各分类支出占比',  
+        }]  
+          
+    });
 function query() {
     var beginTime = $("#beginTime").val();
     var endTime = $("#endTime").val();

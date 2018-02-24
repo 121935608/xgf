@@ -21,7 +21,7 @@ public class Procurement implements Serializable
 	private double inPrice;
 	private double salePrice;
 	private double taxRate;
-	private Date unit;
+	private String unit;
 	private String imgMain;
 	private double totalPrice;
 	private String commodityNo;
@@ -85,10 +85,10 @@ public class Procurement implements Serializable
 	public void setTaxRate(double taxRate) {
 		this.taxRate = taxRate;
 	}
-	public Date getUnit() {
+	public String getUnit() {
 		return unit;
 	}
-	public void setUnit(Date unit) {
+	public void setUnit(String unit) {
 		this.unit = unit;
 	}
 	public String getImgMain() {

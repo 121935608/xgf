@@ -15,7 +15,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="salePrice" property="salePrice" />
 	</resultMap>
 		<select id="pageInfoQuery" parameterType="PageUtilEntity" resultMap="SaleResult">
-			SELECT t.commodityId,t.orderNumber,t.commodityNo,t.commodityName,t.unit,t.totalPrice totalPrice,t.addTime,t.commodityNum  FROM t_order_detail t where 1=1
+			SELECT t.commodityId,t.orderNumber,t.commodityNo,t.commodityName,
+			t.unit,t.totalPrice totalPrice,t.addTime,t.commodityNum  
+			FROM t_order_detail t RIGHT JOIN t_order o ON t.orderNumber=o.orderNumber
+			where 1=1 AND o.orderStatus!=1 AND o.status=1
 			<if test="relationMap.beginTime != null and relationMap.beginTime != ''"><!-- 开始时间检索 -->
 				AND DATE_FORMAT(t.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
 			</if>

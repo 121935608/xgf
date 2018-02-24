@@ -10,19 +10,20 @@
  */
 package com.xingrongjinfu.system.commodity.controller;
 
-import com.xingrongjinfu.system.SystemConstant;
-import com.xingrongjinfu.system.commodity.common.CommodityConstant;
-import com.xingrongjinfu.system.commodity.model.Commodity;
-import com.xingrongjinfu.system.commodity.service.ICommodityService;
+import java.util.List;
+
 import org.framework.base.util.PageUtilEntity;
-import org.framework.base.util.TableDataInfo;
 import org.framework.core.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
+import com.xingrongjinfu.system.SystemConstant;
+import com.xingrongjinfu.system.commodity.common.CommodityConstant;
+import com.xingrongjinfu.system.commodity.model.Commodity;
+import com.xingrongjinfu.system.commodity.service.ICommodityService;
+import com.xingrongjinfu.utils.StringUtil;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -71,6 +72,13 @@ public class CommodityController extends BaseController{
 //            }
 //            commodity.setProfit(profits);
 //        }
+        int index = 0;
+        for (Commodity commodity : tableDataInfo) {
+            if(StringUtil.nullOrBlank(commodity.getCommodityId())){
+                index = tableDataInfo.indexOf(commodity);
+            }
+        }
+        tableDataInfo.remove(index);
         return buildDatasTable(pageUtilEntity.getTotalResult(),tableDataInfo);
     }
 }

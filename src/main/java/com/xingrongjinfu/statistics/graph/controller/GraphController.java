@@ -1,7 +1,10 @@
 package com.xingrongjinfu.statistics.graph.controller;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.shiro.common.utils.SessionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,24 +82,29 @@ public class GraphController {
      * 销售饼图数据
      */
     @RequestMapping(GraphConstant.PIE_LIST)
-    public @ResponseBody List<CashDetail> pieList(String commodityId) {
+    public @ResponseBody List pieList(String commodityId) {
         String storeId = (String) SessionUtils.getSession().getAttribute("storeId");
         List<CashDetail> list = cashService.saleGraphPie(storeId);
         double count = 0;
+        List<Map<String,Object>> data = new ArrayList<Map<String,Object>>();
         if(null != list){
             for (CashDetail cashDetail : list) {
                 if(null != cashDetail.getTotalVipPrice())
                     count += cashDetail.getTotalVipPrice().doubleValue();
             }
             for (CashDetail cashDetail : list) {
+                Map<String,Object> map = new HashMap<String,Object>();
                 if(null != cashDetail.getTotalVipPrice()){
                     if(count != 0)
                         cashDetail.setTotalVipPrice(new BigDecimal(Double.toString(cashDetail.getTotalVipPrice().doubleValue()/count*100)).setScale(2, BigDecimal.ROUND_HALF_UP));
                 }else{
                     cashDetail.setTotalVipPrice(new BigDecimal("0"));
                 }
+                map.put("name", cashDetail.getCategoryName());
+                map.put("y", cashDetail.getTotalVipPrice());
+                data.add(map);
             }
         }
-        return list;
+        return data;
     }
 }

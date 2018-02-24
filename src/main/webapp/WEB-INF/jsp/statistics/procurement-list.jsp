@@ -2,7 +2,7 @@
 <%@include file="/WEB-INF/jsp/common/taglibs.jspf"%>
 <ys:contentHeader title="采购登记表"/>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 商户相关 <span class="c-gray en">&gt;</span> 采购登记表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 数据统计 <span class="c-gray en">&gt;</span> 采购登记表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container"> 
 	<div style="min-height: 30px;">
 		<form role="form" class="text-c">
@@ -33,9 +33,10 @@
 		<thead>
 			<tr class="text-c">
 				<th width="10%">商品名称</th>
-				<th width="10%">商品编号</th>
+				<th width="10%">商品条码</th>
 				<th width="10%">订单号</th>
 				<th width="10%">创建时间</th>
+				<th width="10%">单位</th>
 				<th width="15%">采购数量</th>
 				<th width="10%">采购金额</th>
 			</tr>
@@ -64,7 +65,7 @@ $(document).ready(function(){
     },
     
     {
-        "sDefaultContent": "商品编号",
+        "sDefaultContent": "商品条码",
         "bSortable" : false,
         "sClass": "text-c",
         "bSearchable": false,
@@ -107,6 +108,19 @@ $(document).ready(function(){
 		}
 	},
 	
+	{
+        "sDefaultContent": "单位",
+        "bSortable" : false,
+        "sClass": "text-c",
+        "bSearchable": false,
+        "mRender": function(data, type, row) {
+            if (row.unit != null) {
+                return row.unit;
+            } else {
+                return "";
+            }
+        }
+    },
 	{
         "sDefaultContent": "采购数量",
         "bSortable" : false,

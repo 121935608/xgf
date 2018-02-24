@@ -2,7 +2,7 @@
 <%@include file="/WEB-INF/jsp/common/taglibs.jspf"%>
 <ys:contentHeader title="财务结算"/>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 商户相关 <span class="c-gray en">&gt;</span> 财务结算 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>数据统计 <span class="c-gray en">&gt;</span> <span id="cons"> </span> <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
 <style>
 	#show:hover{cursor:pointer;color:blue;}
@@ -176,6 +176,12 @@ $(document).ready(function(){
     ];
     var url = "${context_root}/dataCount/findFinancialList.action";
     pageTable = _Datatable_Init(pageTable, aoColumns, url);
+    var type='${type}';
+    if (type=='S'){
+		$("#cons").text("商家收银结算");
+	}else if (type=='B'){
+        $("#cons").text("收银日结");
+	}
 });
 
 

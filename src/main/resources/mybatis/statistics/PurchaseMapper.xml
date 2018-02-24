@@ -24,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="pageInfoQuery" parameterType="PageUtilEntity"
 		resultType="Purchase">
 		select
-		c.commodityName,d.commodityNo,sum(c.commodityNum) commodityNum,sum(c.totalPrice/100) totalPrice
+		c.commodityName,d.commodityNo,sum(c.commodityNum) commodityNum,sum(c.totalPrice/100) totalPrice,c.unit
 		FROM sys_user a
 		LEFT JOIN t_order b on a.userId = b.userId
 		LEFT JOIN t_order_detail c on c.orderNumber = b.orderNumber
@@ -54,7 +54,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			#{relationMap.fuzzyCondition}),'%')
 			)
 		</if>
-		GROUP BY c.commodityName,d.commodityNo
+		GROUP BY c.commodityName,d.commodityNo,c.unit
 	</select>
 
 
