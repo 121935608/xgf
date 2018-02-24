@@ -18,7 +18,7 @@
 	}
 	img:hover{
 		transform: scale(3.6);
-		z-index:9999999;
+		z-index:999999900;
 	}
 </style>
 <body>
@@ -132,30 +132,32 @@
 			<div class="row cl"> 
 				<div class="col-xs-1 col-sm-1"> 
 				</div>
-				<div class="col-xs-2 col-sm-2" >
-					<img style="width: 120px;height: 120px" src="${store['licensePic']}">
-					<p style="position: absolute;" class="form-label">营业执照</p>
+				<div class="col-xs-2 col-sm-2" style="z-index: 1" onmouseover="function a() {
+				  style.zIndex=9
+				}">
+					<img style="width: 120px;height: 120px;z-index: 1" src="${store['licensePic']}">
+					<p style="position: absolute;z-index: 1" class="form-label">营业执照</p>
 				</div>
-				<div class="col-xs-2 col-sm-2">
-					<img style="width: 120px;height: 120px" src="${store['frontStorePic']}">
-					<p style="position: absolute;" class="form-label">店铺门脸照</p>
+				<div class="col-xs-2 col-sm-2" style="z-index: 1">
+					<img style="width: 120px;height: 120px;z-index: 1" src="${store['frontStorePic']}">
+					<p style="position: absolute;z-index: 1" class="form-label">店铺门脸照</p>
 				</div>
-				<div class="col-xs-2 col-sm-2">
-					<img style="width: 120px;height: 120px" src="${store['innerStorePic']}">
-					<p style="position: absolute;" class="form-label">店铺店内照</p>
+				<div class="col-xs-2 col-sm-2" style="z-index: 1">
+					<img style="width: 120px;height: 120px;z-index: 1" src="${store['innerStorePic']}">
+					<p style="position: absolute;z-index: 1" class="form-label">店铺店内照</p>
 				</div>  
-				<div class="col-xs-2 col-sm-2">
-					<img style="width: 120px;height: 120px" src="${store['contractPic']}">
-					<p style="position: absolute;" class="form-label">租赁合同</p>
+				<div class="col-xs-2 col-sm-2" style="z-index: 1">
+					<img style="width: 120px;height: 120px;z-index: 1" src="${store['contractPic']}">
+					<p style="position: absolute;z-index: 1" class="form-label">租赁合同</p>
 				</div> 
-				<div class="col-xs-2 col-sm-2">
-					<img style="width: 120px;height: 120px;" src="${store['utilitiesPic']}">
-					<p style="position: absolute;" class="form-label">租赁水电费</p>
+				<div class="col-xs-2 col-sm-2" style="z-index: 1">
+					<img style="width: 120px;height: 120px;z-index: 1" src="${store['utilitiesPic']}">
+					<p style="position: absolute;z-index: 1" class="form-label">租赁水电费</p>
 				</div> 
 			</div>
 		</div>
 		  
-		<div class="info-div" style="margin: auto;margin-top:50px;">
+		<div class="info-div" style="margin: auto;margin-top:50px;z-index: 1">
 			<input type="hidden" class="input-text" id="storeId" name="storeId" value="${store['storeId']}">
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-3">审核结果</label>
