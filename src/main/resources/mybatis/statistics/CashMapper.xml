@@ -164,16 +164,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 	</select>
 	<select id="saleGraphCombo" parameterType="string" resultType="CashFlow">
-		SELECT IFNULL(SUM(f.money/100),0) money,IFNULL(SUM(f.number),0) number,
-		DATE_FORMAT(f.addTime,'%Y-%m-%d') cashId,
-		IFNULL(SUM(d.totalVipPrice/100) - SUM(d.inPrice/100*d.number),0) lirun,
-		IFNULL(FORMAT((SUM(d.totalVipPrice/100) - SUM(d.inPrice/100*d.number))/SUM(f.money/100),2),0) maolilv
-		FROM m_cashFlow f
-		LEFT JOIN m_cashDetail d ON d.cashId=f.cashId
-		WHERE DATE_SUB(CURDATE(), INTERVAL 7 DAY) &lt;= DATE(f.addTime) 
-		AND f.storeId = #{storeId} AND f.`status` = 1
-		GROUP BY DATE_FORMAT(f.addTime,'%Y-%m-%d')
-		ORDER BY DATE_FORMAT(f.addTime,'%Y-%m-%d')
+		SELECT IFNULL(SUM(money),0) money,SUM(number) number,cashId,SUM(lirun) lirun,SUM(maolilv) maolilv
+		 FROM (SELECT
+			IFNULL(SUM(f.money/100),0) money,
+			f.number,
+			DATE_FORMAT(f.addTime, '%Y-%m-%d') cashId,
+			IFNULL(SUM(d.totalVipPrice/100) - SUM(d.inPrice/100 * d.number),0) lirun,
+			IFNULL(FORMAT((SUM(d.totalVipPrice/100)-SUM(d.inPrice/100*d.number))/SUM(f.money/100),2),0) maolilv
+			FROM m_cashFlow f
+			LEFT JOIN m_cashDetail d ON d.cashId = f.cashId
+			WHERE DATE_SUB(CURDATE(), INTERVAL 7 DAY) &lt;= DATE(f.addTime)
+			AND f.storeId = "51e6ecd897914ccdb5ed51149458bd0a"
+			AND f.`status` = 1
+			GROUP BY DATE_FORMAT(f.addTime, '%Y-%m-%d'),f.number
+			ORDER BY DATE_FORMAT(f.addTime, '%Y-%m-%d')) AS a GROUP BY cashId
 	</select>
 	<select id="saleGraphPie" parameterType="string" resultType="CashDetail">
 		select a.categoryName categoryName,sum(totalVipPrice) totalVipPrice from

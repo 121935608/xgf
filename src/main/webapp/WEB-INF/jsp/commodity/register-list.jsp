@@ -188,7 +188,7 @@ function excel_out() {
     var jsonObject = '{\"status\":\"' + status + '\",\"categoryId\":\"' + categoryId + '\",\"discount\":\"' + discount + '\",\"commodityNo\":\"' + commodityNo + '\"}';
     var elemIF = document.createElement("iframe");   
     elemIF.src = "${context_root}/commodity/expRegisterList.action?jsonObject="+jsonObject;   
-    elemIF.style.display = "none";   
+    elemIF.style.display = "none";
     document.body.appendChild(elemIF);
 }
 function excel_in() {

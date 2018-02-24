@@ -180,7 +180,7 @@ $("#form-register-modify").validate({
 	rules:{		
 		commodityName: {
             required: true,
-            isSpace: true,
+            isSpace: false,
            remote: {
                 url: "${context_root}/commodity/checkCategoryName.action",
                 type: "post",
@@ -200,10 +200,6 @@ $("#form-register-modify").validate({
             }
         }, 
 		commodityNo:{
-			required:true,
-			isSpace:true,
-		},
-		categoryId:{
 			required:true,
 			isSpace:true,
 		},
@@ -261,6 +257,9 @@ $("#form-register-modify").validate({
 			alert("库存下限大于库存上限！");
 			return;
 		}
+		var categoryId = $("#categoryId").val();
+		alert(categoryId);
+		return;
 		var index = parent.layer.load();
 		var formData = new FormData($('#form-register-modify')[0]);
 		$.ajax({
