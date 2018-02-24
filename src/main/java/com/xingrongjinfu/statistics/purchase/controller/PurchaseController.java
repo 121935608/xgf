@@ -11,9 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.xingrongjinfu.statistics.StatisticsConstant;
-import com.xingrongjinfu.statistics.procurement.common.ProcurementConstant;
-import com.xingrongjinfu.statistics.procurement.service.IProcurementService;
 import com.xingrongjinfu.statistics.purchase.common.PurchaseConstant;
 import com.xingrongjinfu.statistics.purchase.service.IPurchaseService;
 import com.xingrongjinfu.system.user.model.User;
@@ -56,7 +55,6 @@ public class PurchaseController extends BaseController
 				e.printStackTrace();
 			}
         }
-		System.out.println(user+"!!!!!!!!!!!!");
 		pageUtilEntity.getRelationMap().put("userId", user.getUserId());
 		List<TableDataInfo> tableDataInfo = purchaseService.pageInfoQuery(pageUtilEntity);
 

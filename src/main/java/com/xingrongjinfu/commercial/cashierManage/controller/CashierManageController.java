@@ -130,7 +130,6 @@ public class CashierManageController extends BaseController {
 		    String storeId = (String) SessionUtils.getSession().getAttribute("storeId");
 		    cashierManage.setCashierId(UuidUtil.get32UUID());
 			cashierManage.setStoreId(storeId);
-			cashierManage.setStatus(1);
 			result = cashierManageService.addCashierManageInfo(cashierManage);
 		}else{
 		    result = cashierManageService.updateCashierManageInfo(cashierManage);

@@ -10,13 +10,14 @@
  */
 package com.xingrongjinfu.memberManage.member.dao;
 
-import com.xingrongjinfu.memberManage.member.model.Membership;
+import java.util.List;
+import java.util.Map;
+
 import org.framework.base.util.PageUtilEntity;
-import org.framework.base.util.TableDataInfo;
 import org.framework.core.dao.DynamicObjectBaseDao;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import com.xingrongjinfu.memberManage.member.model.Membership;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -59,5 +60,11 @@ public class MemberDao extends DynamicObjectBaseDao implements IMemberDao {
     @Override
     public int updateMember(Membership membership) {
         return (int)this.update("MemberMapper.updateMember",membership);
+    }
+
+    @Override
+    public int getByName(Map map) {
+        
+        return (int) this.findForObject("MemberMapper.getByName", map);
     }
 }

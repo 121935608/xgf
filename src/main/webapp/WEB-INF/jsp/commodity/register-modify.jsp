@@ -203,6 +203,10 @@ $("#form-register-modify").validate({
 			required:true,
 			isSpace:true,
 		},
+		categoryId:{
+			required:true,
+			isSpace:true,
+		},
 		supplierId:{
 			required:true,
 			isSpace:true,
@@ -253,7 +257,7 @@ $("#form-register-modify").validate({
 	submitHandler:function(form){
 		var upperLimit = $("#upperLimit").val();
 		var lowerLimit = $("#lowerLimit").val();
-		if(upperLimit < lowerLimit){
+		if(parseFloat(upperLimit) < parseFloat(lowerLimit)){
 			alert("库存下限大于库存上限！");
 			return;
 		}

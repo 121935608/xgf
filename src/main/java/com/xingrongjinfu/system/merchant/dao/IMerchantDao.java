@@ -10,14 +10,14 @@
  */
 package com.xingrongjinfu.system.merchant.dao;
 
-import com.xingrongjinfu.system.merchant.model.AccountInfo;
-import com.xingrongjinfu.system.merchant.model.Merchant;
-import com.xingrongjinfu.system.user.model.User;
+import java.util.List;
+
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 
-import java.util.List;
-import java.util.Map;
+import com.xingrongjinfu.system.merchant.model.AccountInfo;
+import com.xingrongjinfu.system.merchant.model.Merchant;
+import com.xingrongjinfu.system.user.model.User;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -32,7 +32,7 @@ public interface IMerchantDao {
 
     List<TableDataInfo>pageInfoQuery(PageUtilEntity pageUtilEntity);
 
-    AccountInfo getUserAccount(Merchant merchant);
+    AccountInfo getUserAccount(String storeId);
 
     int changeMerchantStatus(User user);
 

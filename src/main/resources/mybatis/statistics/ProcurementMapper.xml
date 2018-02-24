@@ -32,8 +32,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		t_order_detail c on c.orderNumber = b.orderNumber
 		RIGHT JOIN t_commodity
 		d ON c.commodityId = d.commodityId
-		where 1=1
-
+		where 1=1 AND b.orderStatus!=1 AND b.status=1
 		<if test="relationMap.userId != null and relationMap.userId != ''">
 			AND a.userId=#{relationMap.userId}
 		</if>

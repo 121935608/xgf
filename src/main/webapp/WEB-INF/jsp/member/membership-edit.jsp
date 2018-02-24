@@ -91,25 +91,28 @@
 <script type="text/javascript">
 $("#form-member-edit").validate({
 	rules:{
-        memberNo:{
-            required:true,
-            isSpace:true,
-			isPhone:true,
-            remote: {
-                url: "${context_root}/member/checkNameUnique.action?memberId=${membership.memberId}",
+		memberNo: {
+            required: true,
+            isSpace: true,
+            isPhone:true,
+           remote: {
+                url: "${context_root}/member/checkNameUnique.action",
                 type: "post",
                 dataType: "text",
                 data: {
-                	memberNo : function() {
+                	memberNo: function () {
                         return $.trim($("#memberNo").val());
+                    },
+                    memberId: function () {
+                        return $.trim($("#memberId").val());
                     }
                 },
-                dataFilter: function(data, type) {
-                    if (data == "0") return true;
-                    else return false;
+                dataFilter: function (data, type) {
+                    if (data == 0) return true;
+                    else return "该名称已存在";
                 }
             }
-		},
+        }, 
         name:{
 			required:true,
 			isSpace:true,
@@ -130,11 +133,6 @@ $("#form-member-edit").validate({
             required:true,
         },
 	},
-	messages: {
-        "memberNo": {
-            remote: "该会员号已经存在"
-        }
-    },
 	onkeyup:false,
 	focusCleanup:true,
 	success:"valid",

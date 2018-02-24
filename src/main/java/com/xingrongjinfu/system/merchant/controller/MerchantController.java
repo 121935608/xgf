@@ -10,26 +10,24 @@
  */
 package com.xingrongjinfu.system.merchant.controller;
 
-import com.xingrongjinfu.system.SystemConstant;
-import com.xingrongjinfu.system.merchant.common.MerchantConstant;
-import com.xingrongjinfu.system.merchant.model.AccountInfo;
-import com.xingrongjinfu.system.merchant.model.Merchant;
-import com.xingrongjinfu.system.merchant.service.IMerchantService;
-import com.xingrongjinfu.system.user.model.User;
-import org.aspectj.lang.annotation.ActionControllerLog;
+import java.util.List;
+
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.framework.core.controller.BaseController;
 import org.framework.core.model.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
-import java.util.Map;
+import com.xingrongjinfu.system.SystemConstant;
+import com.xingrongjinfu.system.merchant.common.MerchantConstant;
+import com.xingrongjinfu.system.merchant.model.AccountInfo;
+import com.xingrongjinfu.system.merchant.model.Merchant;
+import com.xingrongjinfu.system.merchant.service.IMerchantService;
+import com.xingrongjinfu.system.user.model.User;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -70,10 +68,10 @@ public class MerchantController extends BaseController {
      * @return
      */
     @RequestMapping(MerchantConstant.MERCHANT_QUERY_URL)
-    public ModelAndView merchantQuery(Merchant merchant)
+    public ModelAndView merchantQuery(String storeId)
     {
         ModelAndView modelAndView=this.getModelAndView(MerchantConstant.MERCHANT_QUERY_PAGE);
-        AccountInfo accountInfo= merchantService.getUserAccount(merchant);
+        AccountInfo accountInfo= merchantService.getUserAccount(storeId);
         if (accountInfo !=null) {
             accountInfo.setFrontPic(accountInfo.getFrontPic() == null ? "" : (MerchantConstant.ALIYUN_URL + accountInfo.getFrontPic()));
             accountInfo.setBackPic(accountInfo.getBackPic() == null ? "" : (MerchantConstant.ALIYUN_URL + accountInfo.getBackPic()));

@@ -48,12 +48,14 @@
         WHERE t.storeId=#{storeId}
     </select>
 
-   <select id="userAccountQuery" resultType="AccountInfo">
-        SELECT s.storeName,s.userName,s.idCard,s.phone,s.area,s.address,s.licenseId,
-        s.frontPic,s.backPic,s.licensePic,s.frontStorePic,s.innerStorePic,
+   <select id="userAccountQuery" resultType="AccountInfo" parameterType="string">
+        SELECT s.userId,s.storeName,s.userName,s.idCard,s.phone,s.area,s.address,s.licenseId,
+        c.frontPic frontPic,c.backPic backPic,s.licensePic,s.frontStorePic,s.innerStorePic,
         b.bankType,b.accountType,b.userName bankUserName,b.cardNumber,
         b.idType,b.idCard cIdCard,b.remark
-        FROM t_store s LEFT JOIN t_bankCard b ON s.userId=b.userId WHERE s.storeId=#{storeId}
+        FROM t_store s LEFT JOIN (SELECT * FROM t_bankCard WHERE bankType=0 AND `status`=1) b ON s.userId=b.userId 
+        LEFT JOIN (SELECT * FROM t_user_cert WHERE `status`=1) c ON s.userId=c.userId
+        WHERE s.storeId=#{storeId}
     </select>
 
     <update id="updateMerchantInfo" parameterType="User">

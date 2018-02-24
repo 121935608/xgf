@@ -79,7 +79,8 @@ $("#form-cashierManage-add").validate({
 		},
 		name:{
 			required:true,
-			isSpace:true
+			isSpace:true,
+			maxlength:20
 		},
 		confirmPassword: {
             required: true,
