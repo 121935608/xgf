@@ -10,17 +10,16 @@
  */
 package com.xingrongjinfu.system.merchant.dao;
 
-import com.xingrongjinfu.system.merchant.model.AccountInfo;
-import com.xingrongjinfu.system.merchant.model.Merchant;
-import com.xingrongjinfu.system.user.model.User;
+import java.util.List;
+
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.framework.core.dao.DynamicObjectBaseDao;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.xingrongjinfu.system.merchant.model.AccountInfo;
+import com.xingrongjinfu.system.merchant.model.Merchant;
+import com.xingrongjinfu.system.user.model.User;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -50,12 +49,12 @@ public class MerchantDao extends DynamicObjectBaseDao implements IMerchantDao {
     }
 
     @Override
-    public AccountInfo getUserAccount(Merchant merchant)
+    public AccountInfo getUserAccount(String storeId)
     {
         AccountInfo userAccountInfo = null;
         try
         {
-            userAccountInfo=(AccountInfo)this.findForObject("MerchantMapper.userAccountQuery",merchant);
+            userAccountInfo=(AccountInfo)this.findForObject("MerchantMapper.userAccountQuery",storeId);
         }
         catch (Exception e)
         {e.printStackTrace();}

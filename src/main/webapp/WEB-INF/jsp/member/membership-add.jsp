@@ -87,25 +87,25 @@
 
 $("#form-member-add").validate({
 	rules:{
-        memberNo:{
-            required:true,
-            isSpace:true,
-			isPhone:true,
-            remote: {
+		memberNo: {
+            required: true,
+            isSpace: true,
+            isPhone:true,
+           remote: {
                 url: "${context_root}/member/checkNameUnique.action",
                 type: "post",
                 dataType: "text",
                 data: {
-                	memberNo : function() {
+                	memberNo: function () {
                         return $.trim($("#memberNo").val());
                     }
                 },
-                dataFilter: function(data, type) {
-                    if (data == "0") return true;
-                    else return false;
+                dataFilter: function (data, type) {
+                    if (data == 0) return true;
+                    else return "该名称已存在";
                 }
             }
-		},
+        }, 
         name:{
 			required:true,
 			isSpace:true,

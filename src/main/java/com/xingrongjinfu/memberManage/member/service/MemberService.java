@@ -10,16 +10,17 @@
  */
 package com.xingrongjinfu.memberManage.member.service;
 
-import com.xingrongjinfu.memberManage.member.dao.IMemberDao;
-import com.xingrongjinfu.memberManage.member.model.Membership;
-import com.xingrongjinfu.utils.ObjectUtil;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.shiro.common.UserConstants;
 import org.framework.base.util.PageUtilEntity;
-import org.framework.base.util.TableDataInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.xingrongjinfu.memberManage.member.dao.IMemberDao;
+import com.xingrongjinfu.memberManage.member.model.Membership;
+import com.xingrongjinfu.utils.ObjectUtil;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -62,5 +63,10 @@ public class MemberService implements IMemberService {
     @Override
     public int updateMember(Membership membership) {
         return memberDao.updateMember(membership);
+    }
+
+    @Override
+    public int getByName(Map map) {
+        return memberDao.getByName(map);
     }
 }

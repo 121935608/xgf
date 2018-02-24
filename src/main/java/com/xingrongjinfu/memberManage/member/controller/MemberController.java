@@ -14,7 +14,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.shiro.common.utils.SessionUtils;
 import org.framework.base.util.PageUtilEntity;
@@ -31,6 +33,7 @@ import com.xingrongjinfu.memberManage.member.model.Membership;
 import com.xingrongjinfu.memberManage.member.service.IMemberService;
 import com.xingrongjinfu.system.SystemConstant;
 import com.xingrongjinfu.utils.IdUtil;
+import com.xingrongjinfu.utils.StringUtil;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -112,13 +115,16 @@ public class MemberController extends BaseController{
      * 校验会员名是否唯一
      */
     @RequestMapping(MemberConstant.MEMBERSHIP_CHECK_NAME_URL)
-    public @ResponseBody String checkName(Membership membership){
-        String uniqueFlag="0";
-        if (membership !=null)
-        {
-            uniqueFlag=memberService.checkName(membership);
+    public @ResponseBody int checkName(String memberNo,String memberId){
+        String storeId = (String) SessionUtils.getSession().getAttribute("storeId");
+        Map map = new HashMap();
+        map.put("storeId", storeId);
+        map.put("memberNo", memberNo);
+        if(null != memberId){
+            map.put("memberId", memberId);
         }
-        return uniqueFlag;
+        int n = memberService.getByName(map);
+        return n;
     }
 
     /**
@@ -130,9 +136,11 @@ public class MemberController extends BaseController{
     Message updateMember(Membership membership,String timeLimi) throws ParseException{
         int result=0;
         String memberId=membership.getMemberId();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        //membership.setTimeLimit(sdf.parse(timeLimi));
         membership.setTimeLimit(timeLimi);
+        String phone = membership.getMemberNo();
+        if(!StringUtil.checkPhone(phone)){
+            return new Message(false,"请输入正确的手机号！");
+        }
         if (memberId !=null && memberId !=""){
             //id存在则更新信息
             result=memberService.updateMember(membership);

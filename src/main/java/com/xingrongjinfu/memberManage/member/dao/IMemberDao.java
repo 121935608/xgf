@@ -10,11 +10,12 @@
  */
 package com.xingrongjinfu.memberManage.member.dao;
 
-import com.xingrongjinfu.memberManage.member.model.Membership;
-import org.framework.base.util.PageUtilEntity;
-import org.framework.base.util.TableDataInfo;
-
 import java.util.List;
+import java.util.Map;
+
+import org.framework.base.util.PageUtilEntity;
+
+import com.xingrongjinfu.memberManage.member.model.Membership;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -52,4 +53,6 @@ public interface IMemberDao {
      * 更新会员信息
      */
     int updateMember(Membership membership);
+    
+    int getByName(Map map);
 }

@@ -49,7 +49,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			AND memberId !=#{memberId}
 		</if>
 	</select>
-
+	<select id="getByName" parameterType="map" resultType="int">
+		SELECT count(1) FROM m_member WHERE memberNo=#{memberNo} and storeId=#{storeId}
+		<if test="memberId != null and memberId != ''">
+			and memberId!=#{memberId}
+		</if>
+	</select>
 	<insert id="addMember" parameterType="Member">
 		INSERT INTO m_member(
 		<if test="memberId !=null and memberId !=''">memberId,</if>
