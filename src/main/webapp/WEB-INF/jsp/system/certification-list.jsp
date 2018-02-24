@@ -52,8 +52,9 @@
 			<tr class="text-c">
 				<th width="10%">申请编号</th>
 				<th width="10%">申请时间</th>
-				<th width="10%">账号</th>
-				<th width="10%">督导员 </th>
+				<th width="8%">账号</th>
+				<th width="5%">督导员</th>
+				<th width="8%">银行卡号</th>
 				<th width="5%">状态</th>
 				<th width="15%" style="word-break: break-all; word-wrap:break-word;">原因</th>
 				<th width="8%">操作</th>
@@ -114,6 +115,18 @@ $(document).ready(function(){
                 return "";
             }
         }
+    },
+    {
+       "mData": "cardNumber",  //督导员
+       "bSortable" : false,
+       "sClass": "text-c",
+       "mRender": function(data, type, row) {
+           if (row.cardNumber != null) {
+                return row.cardNumber;
+               } else {
+               return "";
+               }
+           }
     },
     {
         "sDefaultContent": "状态",

@@ -67,18 +67,18 @@
 				</div>
 			</div>
 		</div>
-		<div class="info-div"  style="display:none">
+		<div class="info-div">
 			<div class="row cl"> 
 				<div class="col-xs-3 col-sm-2">
 					<h4>银行资料</h4>
 				</div>
 			</div> 
-			<div class="row cl">
+		<%--	<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-3">银行类型</label>
 				<div class="formControls col-xs-8 col-sm-4">
 					<span>${bankaccount["bankType"]}</span>
 				</div>
-			</div>
+			</div>--%>
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-3">开户行类型</label>
 				<div class="formControls col-xs-8 col-sm-4">

@@ -5,9 +5,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="StoreAffairMapper"> 
 
 	<select id="CertificationpageInfoQuery"  parameterType="PageUtilEntity"  resultType="Store">
-		select a.storeId,a.storeNo,a.addTime,b.accountName,s.`name`,a.process,a.remark
-		from t_store a LEFT join  sys_user b on a.userId=b.userId LEFT JOIN sys_supervisor s on s.supervisorId=a.supervisorId
-		where 1=1
+		select a.storeId,a.storeNo,a.addTime,b.accountName,s.`name`,a.process,a.remark,bc.cardNumber
+		from t_store a
+		LEFT join  sys_user b
+		on a.userId=b.userId
+		LEFT JOIN sys_supervisor s
+		on s.supervisorId=a.supervisorId
+		left join t_bankCard bc
+		on bc.userId=a.userId
+		where 1=1 and bc.bankType=0
 			<if test="relationMap.accountName != null and relationMap.accountName != ''">
 				AND (
 					b.accountName LIKE CONCAT(CONCAT('%', #{relationMap.accountName}),'%')

@@ -43,7 +43,16 @@ public class Store {
 	    private String accountName;
 		//督导员的名字
 		private String name;
- 
+		//默认银行卡号
+		private String cardNumber;
+
+		public String getCardNumber() {
+			return cardNumber;
+		}
+
+		public void setCardNumber(String cardNumber) {
+			this.cardNumber = cardNumber;
+		}
 
 		public String getStoreId() {
 			return storeId;
