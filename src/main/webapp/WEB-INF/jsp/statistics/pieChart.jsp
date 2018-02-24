@@ -24,6 +24,7 @@
 <script type="text/javascript">
 $.get("${context_root}/statistics/pieList.action",function(data){
 	$('#container').highcharts().series[0].setData(data);
+	//$('#container').highcharts().series[0].setData([{name: "干货", y: 5.34},{name: "新鲜水果", y: 9.66},{name: "水产", y: 4}]);
 });
 	$('#container').highcharts({  
         chart: {  

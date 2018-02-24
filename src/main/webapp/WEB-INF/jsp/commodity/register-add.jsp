@@ -161,7 +161,7 @@ $("#form-register-add").validate({
 	rules:{		
 		commodityName: {
             required: true,
-            isSpace: false,
+            isSpace: true,
            remote: {
                 url: "${context_root}/commodity/checkCategoryName.action",
                 type: "post",
