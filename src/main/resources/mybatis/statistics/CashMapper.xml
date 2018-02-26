@@ -56,7 +56,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="pageInfoQuery" parameterType="PageUtilEntity"
 		resultType="CashFlow">
 		SELECT DISTINCT(c.cashId),tradeCode,c.userId,machineNo,c.type type,m.name cashName,c.menberNo memberName,payType,
-		c.totalMoney/100 totalMoney,c.money/100 money,c.number,c.addTime
+		round(c.totalMoney/100,2) totalMoney,round(c.money/100,2) money,c.number,c.addTime
 		FROM m_cashFlow c LEFT JOIN t_cashier m ON c.cashierId=m.cashierId
 		LEFT JOIN m_cashDetail d ON d.cashId=c.cashId
 		LEFT JOIN m_commodity com ON d.commodityId=com.commodityId
@@ -78,14 +78,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="getComById" parameterType="string" resultType="CashDetail">
-		SELECT d.commodityId,d.commodityName,d.totalVipPrice/100 totalVipPrice,
-		d.number number,d.totalPrice/100 totalPrice,unitName
+		SELECT d.commodityId,d.commodityName,round(d.totalVipPrice/100,2) totalVipPrice,
+		d.number number,round(d.totalPrice/100,2) totalPrice,unitName
 		FROM m_cashFlow c LEFT JOIN m_cashDetail d ON d.cashId=c.cashId
 		where c.`cashId`=#{0}
 	</select>
 	
 	<select id="getById" parameterType="string" resultType="CashFlow">
-		SELECT cashId,tradeCode,money/100 money FROM m_cashFlow WHERE cashId=#{0}
+		SELECT cashId,tradeCode,round(money/100,2) money FROM m_cashFlow WHERE cashId=#{0}
 	</select>
 	
 	<select id="cashCountpageInfoQuery" parameterType="PageUtilEntity" resultType="CashFlow">
