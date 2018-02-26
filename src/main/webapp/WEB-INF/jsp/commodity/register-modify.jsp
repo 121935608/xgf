@@ -131,6 +131,7 @@
 
 
 <script type="text/javascript">
+var parentCategoryId = $("#parentCategoryId option:selected").val();
 //校验上传文件是否为图片格式
 function changImg(e) {
 	for (var i = 0; i < e.target.files.length; i++) {  
@@ -251,15 +252,20 @@ $("#form-register-modify").validate({
 	focusCleanup:true,
 	success:"valid",
 	submitHandler:function(form){
+		var id = $("#parentCategoryId option:selected").val();
+		if(id != parentCategoryId){
+			var categoryId = $("#categoryId option:selected").val();
+			if(categoryId == null){
+				alert("请选择商品分类！");
+				return;
+			}
+		}
 		var upperLimit = $("#upperLimit").val();
 		var lowerLimit = $("#lowerLimit").val();
 		if(parseFloat(upperLimit) < parseFloat(lowerLimit)){
 			alert("库存下限大于库存上限！");
 			return;
 		}
-		var categoryId = $("#categoryId").val();
-		alert(categoryId);
-		return;
 		var index = parent.layer.load();
 		var formData = new FormData($('#form-register-modify')[0]);
 		$.ajax({
