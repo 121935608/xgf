@@ -7,14 +7,17 @@
 </style>
 <script type="text/javascript" src="${context_root}/uiloader/lib/zTree/v3/js/jquery.ztree.all-3.5.min.js"></script>
 <body class="pos-r">
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 商品管理 <span class="c-gray en">&gt;</span> 商品分类 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
-<div class="pos-a" style="width:180px;left:0;height:100%; border-right:1px solid #e5e5e5; background-color:#f5f5f5">
-	<ul id="classificationTree" class="ztree">
-	</ul>
-</div>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 商品管理 <span class="c-gray en">&gt;</span> 分类管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+
 
 <article class="page-container">
-	<form action="" method="post" class="form form-horizontal" id="form-classification-save" style="margin-left:130px;">
+	<div style="width:100%;">
+	<div class="pos-a" style="width:20%;float: left;height:100%; border-right:1px solid #e5e5e5; background-color:#f5f5f5">
+	<ul id="classificationTree" class="ztree">
+	</ul>
+    </div>
+	<div style="width:80%;height:100%;float:right;">
+	<form action="" method="post" class="form form-horizontal" id="form-classification-save">
 	    <input type="hidden" value="" id="categoryId" name="categoryId">
 	     <div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>目录：</label>
@@ -64,6 +67,8 @@
 			</div>
 		</div>
 	</form>
+	</div>
+	</div>
 </article>
 <SCRIPT type="text/javascript">
 	  var setting = {
