@@ -1,6 +1,7 @@
 package com.xingrongjinfu.statistics.paysWater.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
@@ -23,6 +24,6 @@ public interface ICashService {
     
     public List<CashFlow> passengerAnalysisGraph(String storeId);
     
-    public List<CashDetail> saleGraphPie(String storeId);
+    public List<CashDetail> saleGraphPie(Map map);
     
 }

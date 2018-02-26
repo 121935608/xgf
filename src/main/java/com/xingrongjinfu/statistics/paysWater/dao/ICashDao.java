@@ -1,6 +1,7 @@
 package com.xingrongjinfu.statistics.paysWater.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
@@ -25,5 +26,5 @@ public interface ICashDao {
     
     public List<CashFlow> passengerAnalysisGraph(String storeId);
     
-    public List<CashDetail> saleGraphPie(String storeId);
+    public List<CashDetail> saleGraphPie(Map map);
 }

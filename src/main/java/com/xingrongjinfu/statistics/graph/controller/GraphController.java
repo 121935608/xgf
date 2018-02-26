@@ -82,9 +82,15 @@ public class GraphController {
      * 销售饼图数据
      */
     @RequestMapping(GraphConstant.PIE_LIST)
-    public @ResponseBody List pieList(String commodityId) {
+    public @ResponseBody List pieList(String beginTime,String endTime) {
         String storeId = (String) SessionUtils.getSession().getAttribute("storeId");
-        List<CashDetail> list = cashService.saleGraphPie(storeId);
+        Map m = new HashMap<>();
+        m.put("storeId", storeId);
+        if(null != beginTime)
+            m.put("beginTime", beginTime);
+        if(null != endTime)
+            m.put("endTime", endTime);
+        List<CashDetail> list = cashService.saleGraphPie(m);
         double count = 0;
         List<Map<String,Object>> data = new ArrayList<Map<String,Object>>();
         if(null != list){

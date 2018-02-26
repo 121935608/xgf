@@ -1,6 +1,7 @@
 package com.xingrongjinfu.statistics.paysWater.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
@@ -101,11 +102,11 @@ public class CashDao extends DynamicObjectBaseDao implements ICashDao {
     }
 
     @Override
-    public List<CashDetail> saleGraphPie(String storeId) {
+    public List<CashDetail> saleGraphPie(Map map) {
         List<CashDetail> cashFlowList = null;
         try
         {
-            cashFlowList = (List<CashDetail>) this.findForList("CashMapper.saleGraphPie", storeId);
+            cashFlowList = (List<CashDetail>) this.findForList("CashMapper.saleGraphPie", map);
         }
         catch (Exception e)
         {

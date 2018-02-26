@@ -1,6 +1,7 @@
 package com.xingrongjinfu.statistics.paysWater.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
@@ -55,8 +56,8 @@ public class CashService implements ICashService {
         return cashDao.saleGraphCombo(storeId);
     }
     @Override
-    public List<CashDetail> saleGraphPie(String storeId) {
-        return cashDao.saleGraphPie(storeId);
+    public List<CashDetail> saleGraphPie(Map map) {
+        return cashDao.saleGraphPie(map);
     }
     @Override
     public List<CashFlow> passengerAnalysisGraph(String storeId) {
