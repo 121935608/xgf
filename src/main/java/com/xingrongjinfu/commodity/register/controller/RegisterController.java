@@ -200,16 +200,22 @@ public class RegisterController extends BaseController{
      * @throws Exception 
      */
     @RequestMapping(RegisterConstant.EXPORT_RIGISTER_URL)
-    public @ResponseBody Message expRegisterList(HttpServletResponse response,Map<String,String> RelationMap) throws Exception {
+    public @ResponseBody Message expRegisterList(HttpServletResponse response,String status,
+            String categoryId,Integer discount,String commodityNo) throws Exception {
         String storeId = (String) SessionUtils.getSession().getAttribute("storeId");
-        RelationMap.put("storeId", storeId);
-        List<RegisterExp> list = registerService.getExpRegisterList(RelationMap);
+        Map map = new HashMap<>();
+        map.put("status", status);
+        map.put("categoryId", categoryId);
+        map.put("discount", discount);
+        map.put("commodityNo", commodityNo);
+        map.put("storeId", storeId);
+        List<RegisterExp> list = registerService.getExpRegisterList(map);
         int num = 0;
         for (RegisterExp register : list) {
             num++;
             register.setNum(num);
         }
-        ExportExcel<RegisterExp> ee=new ExportExcel<RegisterExp>(); 
+        ExportExcel<RegisterExp> ee=new ExportExcel<RegisterExp>();
         String[] headers=new String[]{"序号","编码","商品名称","条码","供货商","分类","单位","进价（元）","售价（元）","会员价（元）","折扣","库存","库存上限","库存下限","状态"};
         response.setContentType("application/force-download");// 设置强制下载不打开
         response.addHeader("Content-Disposition","attachment;fileName=export.xls");// 设置文件名

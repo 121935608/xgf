@@ -185,9 +185,9 @@ function excel_out() {
     var categoryId = $("#categoryId option:selected").val();
     var discount = $("#discount option:selected").val();
     var commodityNo=$("#commodityNo").val();
-    var jsonObject = '{\"status\":\"' + status + '\",\"categoryId\":\"' + categoryId + '\",\"discount\":\"' + discount + '\",\"commodityNo\":\"' + commodityNo + '\"}';
-    var elemIF = document.createElement("iframe");   
-    elemIF.src = "${context_root}/commodity/expRegisterList.action?jsonObject="+jsonObject;   
+    //var jsonObject = '{\"status\":\"' + status + '\",\"categoryId\":\"' + categoryId + '\",\"discount\":\"' + discount + '\",\"commodityNo\":\"' + commodityNo + '\"}';
+    var elemIF = document.createElement("iframe");
+    elemIF.src = "${context_root}/commodity/expRegisterList.action?status="+status+"&categoryId="+categoryId+"&discount="+discount+"&commodityNo="+commodityNo;
     elemIF.style.display = "none";
     document.body.appendChild(elemIF);
 }
