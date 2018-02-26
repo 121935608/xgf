@@ -15,7 +15,6 @@
 					</div>
 				</div>
 		<div style="margin-right:10%;">
-			<input type="text" class="input-text" style="width:250px" placeholder="商品编码|商品名称|商品条码" id="commodityNo" name="commodityNo">
 			<button type="button" class="btn btn-success radius" onclick="query()"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
 		</div>
 	</div>
@@ -70,18 +69,7 @@ function query() {
         url: "${context_root}/statistics/pieList.action?beginTime="+beginTime+"&endTime="+endTime,  
         dataType: "json",  
         success: function(data){  
-        	var oChart = new Highcharts.Chart(oOptions);
-        	for(var i = 0;i<data.length;i++){
-        		var oSeries = {
-        				name: '营业占比',
-        	            colorByPoint: true,
-                        data: [{
-                            name: data[i].categoryName,
-                            y: parseFloat(data[i].totalVipPrice)
-                        }]
-                    };
-               oChart.addSeries(oSeries);
-        	}
+        	$('#container').highcharts().series[0].setData(data);
         }  
      });  
 } 

@@ -207,7 +207,7 @@ function excel_in() {
 }
 /*停用*/
 function register_stop(obj,id){
-	parent.layer.confirm('确认要停用吗？',{icon: 3, title:'提示'},function(index){
+	parent.layer.confirm('该商品存在库存，确认要停用吗？',{icon: 3, title:'提示'},function(index){
 		$.ajax({
 			url:"${context_root}/commodity/changeRegisterStatus.action?commodityId=" + id +"&status=-1", 
 			type:'post',

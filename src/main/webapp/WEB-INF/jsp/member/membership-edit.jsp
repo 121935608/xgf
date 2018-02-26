@@ -125,6 +125,7 @@ $("#form-member-edit").validate({
 		},
         score:{
 			required:true,
+			min:0
 		},
         address:{
 			required:true,

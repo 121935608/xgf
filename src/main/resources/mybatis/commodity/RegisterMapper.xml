@@ -246,7 +246,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				(SELECT supplierId FROM m_supplier WHERE supplierCode=#{supplierCode}) supplierId, 
 			</if>
 			<if test="categoryCode != null and categoryCode  != ''">
-				(SELECT categoryId FROM m_category WHERE categoryCode=#{categoryCode} and parentId =0) categoryId ,
+				(SELECT categoryId FROM m_category WHERE categoryCode=#{categoryCode} and parentId =!0) categoryId ,
 			</if>
 		(SELECT commodityId FROM m_commodity WHERE commodityName=#{commodityName} OR commodityNo=#{commodityNo}) commodityId
 		 from DUAL
