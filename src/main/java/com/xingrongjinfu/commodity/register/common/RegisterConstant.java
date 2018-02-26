@@ -22,9 +22,9 @@ public class RegisterConstant {
      */
     public final static String MODIFY_REGISTER_URL = "modifyRegister";
     /**
-     * 请求地址：登记删除
+     * 请求地址：登记启用停用
      */
-    public final static String DELETE_REGISTER_URL = "deleteRegister";
+    public final static String CHANGE_REGISTER_STATUS_URL = "changeRegisterStatus";
     /**
      * 请求地址：登记导出
      */

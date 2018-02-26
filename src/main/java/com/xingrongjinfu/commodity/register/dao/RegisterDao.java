@@ -42,9 +42,9 @@ public class RegisterDao extends DynamicObjectBaseDao implements IRegisterDao {
         return this.update("RegisterMapper.updateRegister", register);
     }
     @Override
-    public int updateStatus(String commodityId) {
+    public int updateStatus(Map map) {
         
-        return this.update("RegisterMapper.updateStatus", commodityId);
+        return this.update("RegisterMapper.updateStatus", map);
     }
     @Override
     public List<RegisterExp> getExpRegisterList(Map map) throws Exception {

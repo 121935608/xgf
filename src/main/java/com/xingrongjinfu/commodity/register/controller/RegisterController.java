@@ -185,11 +185,14 @@ public class RegisterController extends BaseController{
         return new Message(result);
     }
     /**
-     * 登记删除
+     * 登记启用停用
      */
-    @RequestMapping(RegisterConstant.DELETE_REGISTER_URL)
-    public @ResponseBody Message deleteRegister(String commodityId) {
-        int result = registerService.updateStatus(commodityId);
+    @RequestMapping(RegisterConstant.CHANGE_REGISTER_STATUS_URL)
+    public @ResponseBody Message changeRegisterStatus(String commodityId,String status) {
+        Map map = new HashMap<>();
+        map.put("commodityId", commodityId);
+        map.put("commodityStatus", status);
+        int result = registerService.updateStatus(map);
         return new Message(result);
     }
     /**

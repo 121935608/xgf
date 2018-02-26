@@ -17,8 +17,8 @@
        </select>
        <select id="status" name="status" style="width:150px;height:33px;">
        		<option disabled selected style='display:none;' value="">状态</option>
-       		<option value="1">启用</option>
-       		<option value="-1">禁用</option>
+       		<option value="0">启用</option>
+       		<option value="-1">停用</option>
        </select>
 		<input type="text" class="input-text" style="width:250px" placeholder="编码|商品名称|商品条码" id="commodityNo" name="commodityNo">
 		<button type="button" class="btn btn-success radius" onclick="query()"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
@@ -156,16 +156,20 @@ $(document).ready(function(){
         "mRender": function(data, type, row) {
             //编辑
             var toEdit = "<a title=\"编辑\" href=\"javascript:;\" onclick=\"register_edit('编辑','${context_root}/commodity/toRegisterModify.action?commodityId=" + row.commodityId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>编辑</span></a>";
-            //删除
-            var toDelete = "<a title=\"删除\" href=\"javascript:;\" onclick=\"register_del(this,\'" + row.commodityId + "\')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>删除</span></a>";
-        	return toEdit  + "&nbsp;&nbsp;" + toDelete ;
+        	return statusTools(row) + "&nbsp;&nbsp;" + toEdit  ;
         }
     },
     ];
     var url = "${context_root}/commodity/registerList.action";
     pageTable = _Datatable_Init(pageTable, aoColumns, url);
 });
-
+function statusTools(row) {
+    if (row.commodityStatus == "0") {
+        return "<a style=\"text-decoration:none\" onClick=\"register_stop(this,\'" + row.commodityId + "\')\" href=\"javascript:;\" title=\"停用\"><span style='color: #0e90d2 '>停用</span></a>";
+    } else {
+        return "<a style=\"text-decoration:none\" onClick=\"register_start(this,\'" + row.commodityId + "\')\" href=\"javascript:;\" title=\"启用\"><span style='color: #0e90d2 '>启用</span></a>";
+    }
+}
 function query() {
     var status = $("#status option:selected").val();
     var categoryId = $("#categoryId option:selected").val();
@@ -185,7 +189,6 @@ function excel_out() {
     var categoryId = $("#categoryId option:selected").val();
     var discount = $("#discount option:selected").val();
     var commodityNo=$("#commodityNo").val();
-    //var jsonObject = '{\"status\":\"' + status + '\",\"categoryId\":\"' + categoryId + '\",\"discount\":\"' + discount + '\",\"commodityNo\":\"' + commodityNo + '\"}';
     var elemIF = document.createElement("iframe");
     elemIF.src = "${context_root}/commodity/expRegisterList.action?status="+status+"&categoryId="+categoryId+"&discount="+discount+"&commodityNo="+commodityNo;
     elemIF.style.display = "none";
@@ -202,7 +205,53 @@ function excel_in() {
 		  content: url
 	});
 }
+/*停用*/
+function register_stop(obj,id){
+	parent.layer.confirm('确认要停用吗？',{icon: 3, title:'提示'},function(index){
+		$.ajax({
+			url:"${context_root}/commodity/changeRegisterStatus.action?commodityId=" + id +"&status=-1", 
+			type:'post',
+			async:true ,
+			cache:false ,
+			dataType:"json",
+			success:function(data){
+				if(data.s == true){
+					$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="register_start(this,'+"'"+id+"'"+')" href="javascript:;" title="启用"><span style=\'color: #0e90d2 \'>启用</span></a>');
+					$(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">停用</span>');
+					$(obj).remove();
+					parent.layer.msg('已停用!',{icon: 5,time:1000});
+				}else{
+					parent.layer.alert(data.m , {icon: 2,title:"系统提示"});
+				}
+			},
+		}) ;
+		
+	});
+}
 
+/*启用*/
+function register_start(obj,id){
+	parent.layer.confirm('确认要启用吗？',{icon: 3, title:'提示'},function(index){
+		$.ajax({
+			url:"${context_root}/commodity/changeRegisterStatus.action?commodityId=" + id +"&status=0", 
+			type:'post',
+			async:true ,
+			cache:false ,
+			dataType:"json",
+			success:function(data){
+				if(data.s == true){
+					$(obj).parents("tr").find(".td-manage").prepend('<a onClick="register_stop(this,'+"'"+id+"'"+')" href="javascript:;" title="停用" style="text-decoration:none"><span style=\'color: #0e90d2 \'>停用</span></a>');
+					$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">启用</span>');
+					$(obj).remove();
+					parent.layer.msg('已启用!', {icon: 6,time:1000});
+				}else{
+					parent.layer.alert(data.m , {icon: 2,title:"系统提示"});
+				}
+			},
+		}) ;
+		
+	});
+}
 /*用户-编辑*/
 function register_edit(title,url,w,h){
 	layer_show(title,url,w,h);

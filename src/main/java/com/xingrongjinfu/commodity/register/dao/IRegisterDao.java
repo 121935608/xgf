@@ -25,7 +25,7 @@ public interface IRegisterDao {
     
     public int updateRegister(Register register);
     
-    public int updateStatus(String commodityId);
+    public int updateStatus(Map map);
     
     public List<RegisterExp> getExpRegisterList(Map map)throws Exception;
     

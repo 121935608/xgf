@@ -66,7 +66,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			AND c.categoryId IN (SELECT categoryId FROM m_category WHERE parentId=#{relationMap.categoryId})
 		</if>
 		<if test="relationMap.status != null and relationMap.status  != ''">
-			and m.status=#{relationMap.status}
+			and m.commodityStatus=#{relationMap.status}
 		</if>
 		<if test="relationMap.discount != null and relationMap.discount  != ''">
 			and m.discount=#{relationMap.discount}
@@ -195,8 +195,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where commodityId = #{commodityId}
 	</update>
 	
-	<update id="updateStatus" parameterType="string">
-		UPDATE m_commodity SET `status`=-1 WHERE commodityId = #{0}
+	<update id="updateStatus" parameterType="map">
+		UPDATE m_commodity SET `commodityStatus`=#{commodityStatus} WHERE commodityId = #{commodityId}
 	</update>
 	
 	<select id="getExpRegisterList" parameterType="java.util.Map" resultType="RegisterExp" useCache="false">

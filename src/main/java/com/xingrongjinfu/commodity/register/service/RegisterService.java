@@ -37,9 +37,9 @@ public class RegisterService implements IRegisterService {
         return registerDao.updateRegister(register);
     }
     @Override
-    public int updateStatus(String commodityId) {
+    public int updateStatus(Map map) {
         
-        return registerDao.updateStatus(commodityId);
+        return registerDao.updateStatus(map);
     }
     @Override
     public List<RegisterExp> getExpRegisterList(Map map) throws Exception {
