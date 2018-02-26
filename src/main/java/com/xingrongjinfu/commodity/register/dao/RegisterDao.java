@@ -57,6 +57,11 @@ public class RegisterDao extends DynamicObjectBaseDao implements IRegisterDao {
         return (Map) this.findForObject("RegisterMapper.isExist", map);
     }
     @Override
+    public Map isExistByNameAndNo(Map map) {
+        
+        return (Map) this.findForObject("RegisterMapper.isExistByNameAndNo", map);
+    }
+    @Override
     public int updateImpExcel(List<Register> list) {
         int a = 0;
         try

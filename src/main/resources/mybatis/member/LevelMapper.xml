@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="LevelMapper">
+	<resultMap id="LevelResult" type="Level">
+		<result column="levelId" property="levelId" />
+		<result column="levelNo" property="levelNo" />
+		<result column="storeId" property="storeId" />
+		<result column="discount" property="discount" />
+		<result column="score" property="score" />
+		<result column="addTime" property="addTime" />
+		<result column="remark" property="remark" />
+		<result column="status" property="status" />
+		<result column="addWay" property="addWay" />
+	</resultMap>
+	
+	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultMap="LevelResult" useCache="false">
+		SELECT levelId,levelNo,discount,score,addWay FROM m_level 
+		WHERE `status`=1 and storeId=#{relationMap.storeId}
+		ORDER BY `addTime` DESC 
+	</select>
+	
+	<select id="queryLevelExist" parameterType="string" resultType="Level">
+		SELECT levelId,levelNo FROM m_level WHERE `status`=1 and storeId=#{storeId}
+	</select>
+	
+	<insert id="addLevel" parameterType="Level">
+		INSERT INTO m_level(levelId,storeId,levelNo,status,
+		<if test="discount != null and discount != ''">discount,</if>
+		<if test="score != null and score != ''">score,</if>
+		<if test="addWay != null and addWay != ''">addWay,</if>
+		addTime)
+		values(#{levelId},#{storeId},#{levelNo},#{status},
+		<if test="discount != null and discount != ''">#{discount},</if>
+		<if test="score != null and score != ''">#{score},</if>
+		<if test="addWay != null and addWay != ''">#{addWay},</if>
+		sysdate())
+	</insert>
+	
+	<update id="updateLevel" parameterType="Level">
+		UPDATE m_level
+		<set>
+			<if test="levelNo != null and levelNo != ''">levelNo = #{levelNo},</if>
+			<if test="discount != null and discount != ''">discount = #{discount},</if>
+			<if test="score != null and score != ''">score = #{score},</if>
+			addTime = sysdate()
+		</set>
+		where levelId = #{levelId}
+	</update>
+	
+	<select id="getById" parameterType="string" resultType="Level">
+		SELECT levelId,levelNo,discount,score FROM m_level WHERE levelId=#{0}
+	</select>
+</mapper>

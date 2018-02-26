@@ -52,6 +52,11 @@ public class RegisterService implements IRegisterService {
         return registerDao.isExist(map);
     }
     @Override
+    public Map isExistByNameAndNo(Map map) {
+        
+        return registerDao.isExistByNameAndNo(map);
+    }
+    @Override
     public int updateImpExcel(List<Register> list) {
         
         return registerDao.updateImpExcel(list);

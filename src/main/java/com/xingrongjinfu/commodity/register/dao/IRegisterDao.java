@@ -31,6 +31,8 @@ public interface IRegisterDao {
     
     public Map isExist(Map map);
     
+    public Map isExistByNameAndNo(Map map);
+    
     public int updateImpExcel(List<Register> list);
     
     public void updateRegisterList(List<Register> list) throws Exception;

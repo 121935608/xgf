@@ -62,6 +62,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.xingrongjinfu.system.storeaffairs.model.RepayDetail" alias="RepayDetail"/>
 		<typeAlias type="com.xingrongjinfu.system.financial.model.FinancialDetail" alias="FinancialDetail"/>
 		<typeAlias type="com.xingrongjinfu.statistics.cashCount.model.Amount" alias="Amount" />
+		<typeAlias type="com.xingrongjinfu.memberManage.level.model.Level" alias="Level" />
 
 		<!-- 分页 -->
 		<typeAlias type="org.framework.base.util.TableDataInfo" alias="TableDataInfo"/>

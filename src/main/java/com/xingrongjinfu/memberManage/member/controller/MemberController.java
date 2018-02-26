@@ -106,7 +106,6 @@ public class MemberController extends BaseController{
         if (storeId ==null || storeId ==""){
             storeId="-1";
         }
-        System.out.println("storeId:"+storeId);
         modelAndView.addObject("storeId", storeId);
         return modelAndView;
     }

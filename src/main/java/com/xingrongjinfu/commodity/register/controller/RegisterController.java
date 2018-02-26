@@ -357,7 +357,7 @@ public class RegisterController extends BaseController{
                     if(null != register.getSupplierCode()){
                         map.put("supplierCode", register.getSupplierCode());
                     }
-                    Map m = registerService.isExist(map);
+                    Map m = registerService.isExistByNameAndNo(map);
                     if(null == m){
                         return new Message(false,"商品  "+register.getCommodityName()+"  不存在！");
                     }

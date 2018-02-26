@@ -21,7 +21,7 @@ package com.xingrongjinfu.memberManage.member.common;
 public class MemberConstant {
 
     /**
-     * 请求地址:跳转到会员资料
+     * 请求地址:跳转到会员资料  memberGradeView
      */
     public final static String MEMBERSHIP_URL="membershipView";
 
