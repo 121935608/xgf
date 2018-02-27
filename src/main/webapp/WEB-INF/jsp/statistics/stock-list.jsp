@@ -23,7 +23,7 @@
 	<table class="table table-border table-bordered table-hover table-bg table-sort">
 		<thead>
 			<tr class="text-c">
-				<th width="8%">编码</th>
+				<th width="10%">编码</th>
 				<th width="8%">商品名称</th>
 				<th width="8%">商品条码</th>
 				<th width="8%">供货商</th>
@@ -31,7 +31,7 @@
 				<th width="7%">单位</th>
 				<th width="7%">库存上限</th>
 				<th width="7%">库存下限</th>
-				<th width="7%">库存</th>
+				<th width="6%">库存</th>
 			</tr>
 		</thead>
 	</table>

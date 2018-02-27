@@ -164,19 +164,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 	</select>
 	<select id="saleGraphCombo" parameterType="string" resultType="CashFlow">
-		SELECT IFNULL(SUM(money),0) money,SUM(number) number,cashId,SUM(lirun) lirun,SUM(maolilv) maolilv
-		 FROM (SELECT
-			IFNULL(SUM(f.money/100),0) money,
+			SELECT ROUND(IFNULL(SUM(money),0),2) money,SUM(number) number,cashId,ROUND(SUM(lirun),2) lirun,
+			ROUND(SUM(lirun)/SUM(money),2) maolilv
+		 	FROM (SELECT
+			IFNULL((f.money/100),0) money,
 			f.number,
 			DATE_FORMAT(f.addTime, '%Y-%m-%d') cashId,
-			IFNULL(SUM(d.totalVipPrice/100) - SUM(d.inPrice/100 * d.number),0) lirun,
-			IFNULL(FORMAT((SUM(d.totalVipPrice/100)-SUM(d.inPrice/100*d.number))/SUM(f.money/100),2),0) maolilv
+			IFNULL(SUM(d.totalVipPrice/100) - SUM(d.inPrice/100 * d.number),0) lirun
 			FROM m_cashFlow f
 			LEFT JOIN m_cashDetail d ON d.cashId = f.cashId
 			WHERE DATE_SUB(CURDATE(), INTERVAL 7 DAY) &lt;= DATE(f.addTime)
 			AND f.storeId = #{0}
 			AND f.`status` = 1
-			GROUP BY DATE_FORMAT(f.addTime, '%Y-%m-%d'),f.number
+			GROUP BY DATE_FORMAT(f.addTime, '%Y-%m-%d'),f.number,f.money
 			ORDER BY DATE_FORMAT(f.addTime, '%Y-%m-%d')) AS a GROUP BY cashId
 	</select>
 	<select id="saleGraphPie" parameterType="map" resultType="CashDetail">
@@ -197,20 +197,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		group by a.categoryName
 	</select>
 	<select id="passengerAnalysisGraph" parameterType="string" resultType="CashFlow">
-		SELECT CASE WHEN HOUR(`addTime`)  BETWEEN 8 AND 9 THEN '08:00'
-             WHEN HOUR(`addTime`)  BETWEEN 9 AND 10 THEN '09:00'
-             WHEN HOUR(`addTime`)  BETWEEN 11 AND 12 THEN '11:00'
-             WHEN HOUR(`addTime`)  BETWEEN 12 AND 13 THEN '12:00'
-             WHEN HOUR(`addTime`)  BETWEEN 13 AND 14 THEN '13:00'
-             WHEN HOUR(`addTime`)  BETWEEN 14 AND 15 THEN '14:00'
-             WHEN HOUR(`addTime`)  BETWEEN 15 AND 16 THEN '15:00'
-             WHEN HOUR(`addTime`)  BETWEEN 16 AND 17 THEN '16:00'
-             WHEN HOUR(`addTime`)  BETWEEN 17 AND 18 THEN '17:00'
-             WHEN HOUR(`addTime`)  BETWEEN 18 AND 19 THEN '18:00'
-             WHEN HOUR(`addTime`)  BETWEEN 19 AND 20 THEN '19:00'
-             WHEN HOUR(`addTime`)  BETWEEN 20 AND 21 THEN '20:00'
-             WHEN HOUR(`addTime`)  BETWEEN 21 AND 22 THEN '21:00' 
-             WHEN HOUR(`addTime`)  BETWEEN 22 AND 23 THEN '23:00'
+		SELECT CASE WHEN HOUR(`addTime`)  &gt;= 8 AND HOUR(`addTime`) &lt;9 THEN '08:00'
+             WHEN HOUR(`addTime`)  &gt;= 9 AND HOUR(`addTime`) &lt;10 THEN '09:00'
+             WHEN HOUR(`addTime`)  &gt;= 11 AND HOUR(`addTime`) &lt;12 THEN '11:00'
+             WHEN HOUR(`addTime`)  &gt;= 12 AND HOUR(`addTime`) &lt;13 THEN '12:00'
+             WHEN HOUR(`addTime`)  &gt;= 13 AND HOUR(`addTime`) &lt;14 THEN '13:00'
+             WHEN HOUR(`addTime`)  &gt;= 14 AND HOUR(`addTime`) &lt;15 THEN '14:00'
+             WHEN HOUR(`addTime`)  &gt;= 15 AND HOUR(`addTime`) &lt;16 THEN '15:00'
+             WHEN HOUR(`addTime`)  &gt;= 16 AND HOUR(`addTime`) &lt;17 THEN '16:00'
+             WHEN HOUR(`addTime`)  &gt;= 17 AND HOUR(`addTime`) &lt;18 THEN '17:00'
+             WHEN HOUR(`addTime`)  &gt;= 18 AND HOUR(`addTime`) &lt;19 THEN '18:00'
+             WHEN HOUR(`addTime`)  &gt;= 19 AND HOUR(`addTime`) &lt;20 THEN '19:00'
+             WHEN HOUR(`addTime`)  &gt;= 20 AND HOUR(`addTime`) &lt;21 THEN '20:00'
+             WHEN HOUR(`addTime`)  &gt;= 21 AND HOUR(`addTime`) &lt;22 THEN '21:00' 
+             WHEN HOUR(`addTime`)  &gt;= 22 AND HOUR(`addTime`) &lt;23 THEN '23:00'
              END hour,count(*) number
              FROM m_cashFlow WHERE storeId=#{storeId} AND `status`=1
              and DATE_FORMAT(`addTime`,'%Y-%m-%d')=date_format(now(),'%Y-%m-%d')

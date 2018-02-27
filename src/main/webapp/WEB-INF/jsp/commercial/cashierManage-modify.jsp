@@ -78,6 +78,11 @@ $("#form-cashierManage-modify").validate({
 				required:true,
 				isSpace:true
 			},
+			name:{
+				required:true,
+				isSpace:true,
+				maxlength:20
+			},
 			confirmPassword: {
 	            required: true,
 	            isSpace: true,

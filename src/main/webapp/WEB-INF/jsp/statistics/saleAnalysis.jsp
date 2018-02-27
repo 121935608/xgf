@@ -42,8 +42,8 @@ var n = 0;
 		}else{
 			var addTime = formatDateTime(data[n].cashId);
 			if(Date.parse(addTime)==Date.parse(dateArray[i])){
-				data1.push(parseInt(data[n].money));
-				data2.push(parseInt(data[n].number));
+				data1.push(parseFloat(data[n].money));
+				data2.push(parseFloat(data[n].number));
 				data3.push(parseFloat(data[n].lirun));
 				data4.push(parseFloat(data[n].maolilv));
 				n ++;
@@ -57,10 +57,6 @@ var n = 0;
 	}
 	aa();
 });
-console.log(data1);
-console.log(data2);
-console.log(data3);
-console.log(data4);
 function formatDateTime(timeStamp) {   
 	var date = new Date(timeStamp);
 	Y = date.getFullYear() + '-';

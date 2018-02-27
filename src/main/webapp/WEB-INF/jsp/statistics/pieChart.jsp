@@ -8,15 +8,14 @@
 <i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
 <div class="text-c">
-	<div class="row col-xs-6 col-sm-4 .col-md-4" > 
-					<div class="col-xs-8 col-sm-8 .col-md-8" style="margin-left:90%;">
+	<div class="cl pd-5 bg-1 bk-gray mt-20"> 
+			<form role="form" class="text-c">
+				<div class="row">
 						<input type="text" placeholder="开始时间" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')||\'%y-%M-%d\'}'})" id="beginTime" class="input-text Wdate" style="width:120px;">
 						<input type="text" placeholder="结束时间" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'beginTime\')}',maxDate:'%y-%M-%d'})" id="endTime" class="input-text Wdate" style="width:120px;">
-					</div>
+						<button type="button" class="btn btn-success radius" onclick="query()"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
 				</div>
-		<div style="margin-right:10%;">
-			<button type="button" class="btn btn-success radius" onclick="query()"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
-		</div>
+			</form>
 	</div>
 </div>
 <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
