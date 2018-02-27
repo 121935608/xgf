@@ -31,6 +31,7 @@
 				<thead>
 					<tr class="text-c">
 						<th width="10%">账号</th>
+						<th width="10%">姓名</th>
 						<th width="10%">状态</th>
 						<th width="10%">操作</th>
 					</tr>
@@ -41,7 +42,8 @@
 	<script type="text/javascript" charset="UTF-8">
 		var pageTable;
 		$(document).ready(function() {
-			var aoColumns = [ {
+			var aoColumns = [ 
+			{
 				"sDefaultContent" : "账号",
 				"bSortable" : false,
 				"sClass" : "text-c",
@@ -49,6 +51,19 @@
 				"mRender" : function(data, type, row) {
 					if (row.cashierName != null) {
 						return row.cashierName;
+					} else {
+						return "";
+					}
+				}
+			},
+			{
+				"sDefaultContent" : "姓名",
+				"bSortable" : false,
+				"sClass" : "text-c",
+				"bSearchable" : false,
+				"mRender" : function(data, type, row) {
+					if (row.name != null) {
+						return row.name;
 					} else {
 						return "";
 					}

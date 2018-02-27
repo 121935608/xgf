@@ -212,6 +212,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
              WHEN HOUR(`addTime`)  &gt;= 20 AND HOUR(`addTime`) &lt;21 THEN '20:00'
              WHEN HOUR(`addTime`)  &gt;= 21 AND HOUR(`addTime`) &lt;22 THEN '21:00' 
              WHEN HOUR(`addTime`)  &gt;= 22 AND HOUR(`addTime`) &lt;23 THEN '23:00'
+             ELSE '00:00'
              END hour,count(*) number
              FROM m_cashFlow WHERE storeId=#{storeId} AND `status`=1
              and DATE_FORMAT(`addTime`,'%Y-%m-%d')=date_format(now(),'%Y-%m-%d')
