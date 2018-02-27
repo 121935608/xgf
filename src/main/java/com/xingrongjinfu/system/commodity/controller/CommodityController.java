@@ -76,9 +76,9 @@ public class CommodityController extends BaseController{
         for (Commodity commodity : tableDataInfo) {
             if(StringUtil.nullOrBlank(commodity.getCommodityId())){
                 index = tableDataInfo.indexOf(commodity);
+                tableDataInfo.remove(index);
             }
         }
-        tableDataInfo.remove(index);
         return buildDatasTable(pageUtilEntity.getTotalResult(),tableDataInfo);
     }
 }
