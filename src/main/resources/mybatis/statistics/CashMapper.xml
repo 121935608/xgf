@@ -199,6 +199,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="passengerAnalysisGraph" parameterType="string" resultType="CashFlow">
 		SELECT CASE WHEN HOUR(`addTime`)  &gt;= 8 AND HOUR(`addTime`) &lt;9 THEN '08:00'
              WHEN HOUR(`addTime`)  &gt;= 9 AND HOUR(`addTime`) &lt;10 THEN '09:00'
+             WHEN HOUR(`addTime`)  &gt;= 10 AND HOUR(`addTime`) &lt;11 THEN '10:00'
              WHEN HOUR(`addTime`)  &gt;= 11 AND HOUR(`addTime`) &lt;12 THEN '11:00'
              WHEN HOUR(`addTime`)  &gt;= 12 AND HOUR(`addTime`) &lt;13 THEN '12:00'
              WHEN HOUR(`addTime`)  &gt;= 13 AND HOUR(`addTime`) &lt;14 THEN '13:00'
