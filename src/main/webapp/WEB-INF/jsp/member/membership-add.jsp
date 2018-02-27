@@ -37,16 +37,10 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>会员等级：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<span class="select-box" style="width: 120px;">
-				   <select name="level" id="level" class="select" autocomplete="off">
-					   <option value="">请选择会员等级</option>
-					   <option value="A">A</option>
-					   <option value="B">B</option>
-					   <option value="C">C</option>
-					   <option value="D">D</option>
-					   <option value="E">E</option>
-				   </select>
-				</span>
+			<y:select id="level" name="level"
+					codeGroup="${level}" selectedValue=""
+					cssClass="select" headerKey="" headerValue="--请选择--">
+			</y:select>
 			</div>
 		</div>
 		<div class="row cl">

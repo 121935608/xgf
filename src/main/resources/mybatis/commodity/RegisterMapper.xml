@@ -240,29 +240,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="isExist" parameterType="map" resultType="map">
 		SELECT 
 			<if test="unitCode != null and unitCode  != ''">
-				(SELECT unitId FROM m_unit WHERE unitCode=#{unitCode}) unitId,
+				(SELECT unitId FROM m_unit WHERE unitCode=#{unitCode} AND storeId=#{storeId}) unitId,
 			</if>
 			<if test="supplierCode != null and supplierCode  != ''">
-				(SELECT supplierId FROM m_supplier WHERE supplierCode=#{supplierCode}) supplierId, 
+				(SELECT supplierId FROM m_supplier WHERE supplierCode=#{supplierCode} AND storeId=#{storeId}) supplierId, 
 			</if>
 			<if test="categoryCode != null and categoryCode  != ''">
-				(SELECT categoryId FROM m_category WHERE categoryCode=#{categoryCode} and parentId !=0) categoryId ,
+				(SELECT categoryId FROM m_category WHERE categoryCode=#{categoryCode} and parentId != '0' AND storeId=#{storeId}) categoryId ,
 			</if>
-		(SELECT commodityId FROM m_commodity WHERE commodityName=#{commodityName} OR commodityNo=#{commodityNo}) commodityId
+		(SELECT commodityId FROM m_commodity WHERE storeId=#{storeId} and (commodityName=#{commodityName} OR commodityNo=#{commodityNo})) commodityId
 		 from DUAL
 	</select>
 	<select id="isExistByNameAndNo" parameterType="map" resultType="map">
 		SELECT 
 			<if test="unitCode != null and unitCode  != ''">
-				(SELECT unitId FROM m_unit WHERE unitCode=#{unitCode}) unitId,
+				(SELECT unitId FROM m_unit WHERE unitCode=#{unitCode} AND storeId=#{storeId}) unitId,
 			</if>
 			<if test="supplierCode != null and supplierCode  != ''">
-				(SELECT supplierId FROM m_supplier WHERE supplierCode=#{supplierCode}) supplierId, 
+				(SELECT supplierId FROM m_supplier WHERE supplierCode=#{supplierCode} AND storeId=#{storeId}) supplierId, 
 			</if>
 			<if test="categoryCode != null and categoryCode  != ''">
-				(SELECT categoryId FROM m_category WHERE categoryCode=#{categoryCode} and parentId !=0) categoryId ,
+				(SELECT categoryId FROM m_category WHERE categoryCode=#{categoryCode} and parentId !='0' AND storeId=#{storeId}) categoryId ,
 			</if>
-		(SELECT commodityId FROM m_commodity WHERE commodityName=#{commodityName} and commodityNo=#{commodityNo}) commodityId
+		(SELECT commodityId FROM m_commodity WHERE commodityName=#{commodityName} and commodityNo=#{commodityNo} AND storeId=#{storeId}) commodityId
 		 from DUAL
 	</select>
 	

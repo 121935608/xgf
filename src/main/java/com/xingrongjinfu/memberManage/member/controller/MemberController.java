@@ -12,6 +12,7 @@ package com.xingrongjinfu.memberManage.member.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -28,10 +29,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.xingrongjinfu.memberManage.level.model.Level;
+import com.xingrongjinfu.memberManage.level.service.ILevelService;
 import com.xingrongjinfu.memberManage.member.common.MemberConstant;
 import com.xingrongjinfu.memberManage.member.model.Membership;
 import com.xingrongjinfu.memberManage.member.service.IMemberService;
 import com.xingrongjinfu.system.SystemConstant;
+import com.xingrongjinfu.system.syscode.model.SysCode;
 import com.xingrongjinfu.utils.IdUtil;
 import com.xingrongjinfu.utils.StringUtil;
 
@@ -49,6 +53,8 @@ public class MemberController extends BaseController{
 
     @Autowired
     private IMemberService memberService;
+    @Autowired
+    private ILevelService levelService;
 
     /**
      * 加载会员资料界面
@@ -107,6 +113,7 @@ public class MemberController extends BaseController{
             storeId="-1";
         }
         modelAndView.addObject("storeId", storeId);
+        modelAndView.addObject("level", getLevel(storeId));
         return modelAndView;
     }
 
@@ -161,6 +168,26 @@ public class MemberController extends BaseController{
             Membership membershipInfo=memberService.findMembership(membership);
             modelAndView.addObject("membership",membershipInfo);
         }
+        String storeId = (String) SessionUtils.getSession().getAttribute("storeId");
+        modelAndView.addObject("level", getLevel(storeId));
         return modelAndView;
+    }
+    /**
+     * Description: 获取等级<br/>
+     *
+     * @author huYL
+     * @return
+     * @throws Exception
+     */
+    public List<SysCode> getLevel(String storeId){
+        List<Level> list = levelService.queryLevelExist(storeId);
+        List<SysCode> sysCodeList = new ArrayList<SysCode>();
+        for (Level level:list){
+            SysCode sysCode = new SysCode();
+            sysCode.setCodeid(level.getLevelNo());
+            sysCode.setCodevalue(level.getLevelNo());
+            sysCodeList.add(sysCode);
+        }
+        return sysCodeList;
     }
 }

@@ -20,7 +20,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="updateTime" property="updateTime" />
 		<result column="status" property="status" />
 	</resultMap>
-
+	<resultMap id="LevelResult" type="Level">
+		<result column="levelId" property="levelId" />
+		<result column="levelNo" property="levelNo" />
+		<result column="storeId" property="storeId" />
+		<result column="discount" property="discount" />
+		<result column="score" property="score" />
+		<result column="addTime" property="addTime" />
+		<result column="remark" property="remark" />
+		<result column="status" property="status" />
+		<result column="addWay" property="addWay" />
+	</resultMap>
 	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultMap="MemberResult">
 		SELECT memberId,memberNo,name,level,score,addTime,DATE_FORMAT(timeLimit,'%Y-%m-%d %H:%i:%S') timeLimit FROM m_member
 		WHERE 1=1
@@ -86,7 +96,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 
 	<select id="findMembership" parameterType="Member"  resultType="Member">
-		SELECT memberId,memberNo,name,level,score,addTime,DATE_FORMAT(timeLimit,'%Y-%m-%d') timeLimit,qq,email,address,remark
+		SELECT memberId,memberNo,name,level,score,addTime,
+		DATE_FORMAT(timeLimit,'%Y-%m-%d') timeLimit,
+		qq,email,address,remark
 		FROM m_member
 		WHERE memberId =#{memberId}
 	</select>
@@ -115,4 +127,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			AND memberId=#{memberId}
 		</if>
 	</update>
+	
+	<select id="getLevel" parameterType="string" resultType="Level">
+		
+	</select>
 </mapper> 
