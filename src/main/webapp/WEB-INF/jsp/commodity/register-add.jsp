@@ -59,19 +59,19 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>进价（元）：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="text" class="input-text" value="" placeholder="" id="inPrice" name="inPrice">
+				<input type="number" class="input-text" value="" placeholder="" id="inPrice" name="inPrice">
 			</div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>售价（元）：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="text" class="input-text" value="" placeholder="" id="salePrice" name="salePrice">
+				<input type="number" class="input-text" value="" placeholder="" id="salePrice" name="salePrice">
 			</div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>会员价（元）：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="text" class="input-text" value="" placeholder="" id="vipPrice" name="vipPrice">
+				<input type="number" class="input-text" value="" placeholder="" id="vipPrice" name="vipPrice">
 			</div>
 		</div>
 		<div class="row cl">
@@ -200,14 +200,17 @@ $("#form-register-add").validate({
 		inPrice:{
 			required:true,
 			isSpace:true,
+			min:0
 		},
 		salePrice:{
 			required:true,
 			isSpace:true,
+			min:0
 		},
 		vipPrice:{
 			required:true,
 			isSpace:true,
+			min:0
 		},
 		discount:{
 			required:true,

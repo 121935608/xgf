@@ -82,12 +82,12 @@ public class MemberController extends BaseController{
         PageUtilEntity pageUtilEntity=this.getPageUtilEntity();
         List<Membership> tableDataInfos=memberService.pageQueryInfo(pageUtilEntity);
         Calendar c=Calendar.getInstance();
-        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
         for(Membership membership:tableDataInfos){
             if (membership.getTimeLimit()!=null) {
                 int aaa=0;
                 try {
-                    if (sdf.parse(membership.getTimeLimit()).getTime()-sdf.parse(sdf.format(new Date())).getTime() <0) {
+                    if (sdf.parse(membership.getTimeLimit()).before(sdf.parse(sdf.format(new Date())))) {
                         membership.setIsLimit("过期");
                     } else {
                         membership.setIsLimit("未过期");
