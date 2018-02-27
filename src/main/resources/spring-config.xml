@@ -21,7 +21,8 @@
 	<context:component-scan base-package="com.xingrongjinfu.*.*.dao" />
 	<context:component-scan base-package="com.xingrongjinfu.*.*.service" />
 	<context:component-scan base-package="org.apache.shiro.service" />
-	
+	<context:component-scan base-package="com.xingrongjinfu.statistics.cashCount.Service" />
+
 	<!-- 配置数据源 -->
 
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">

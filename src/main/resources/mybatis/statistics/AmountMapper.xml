@@ -17,11 +17,41 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 
 
-	<select id="countCashFlowDay"  parameterType="string"
-		resultType="Amount">
-		select SUM(c.money) totalMoney,c.storeId storeId  from m_cashFlow  c
-        where date_format(c.addTime,'%Y-%m-%d')=#{0}
-        GROUP BY c.storeId
-
+	<select id="findXzfRate"  parameterType="string"
+		resultType="Double">
+		SELECT s.xzfRate as xzfRate from sys_setting s  ORDER BY s.settingTime desc limit 1
 	</select>
+
+	<select id="countCashFlowDay"  parameterType="string"
+			resultType="Amount">
+		select IFNULL(SUM(c.money),0) totalMoney,c.storeId storeId  from m_cashFlow  c
+		where date_format(c.addTime,'%Y-%m-%d')=#{0}
+		GROUP BY c.storeId
+	</select>
+
+
+
+
+	<insert id="addAmont" parameterType="Amount">
+		INSERT INTO m_amount(
+		<if test="amountId !=null and amountId !=''">amountId,</if>
+		<if test="amountNum !=null and amountNum !=''">amountNum,</if>
+		<if test="storeId !=null and storeId !=''">storeId,</if>
+		addTime,
+		<if test="totalMoney !=null and totalMoney !=''">totalMoney,</if>
+		<if test="xzfRate !=null and xzfRate !=''">xzfRate,</if>
+		<if test="amountStatus !=null and amountStatus !=''">amountStatus,</if>
+		status
+		)VALUES (
+		<if test="amountId !=null and amountId !=''">#{amountId},</if>
+		<if test="amountNum !=null and amountNum !=''">#{amountNum},</if>
+		<if test="storeId !=null and storeId !=''">#{storeId},</if>
+		#{addTime},
+		<if test="totalMoney !=null and totalMoney !=''">#{totalMoney},</if>
+		<if test="xzfRate !=null and xzfRate !=''">#{xzfRate},</if>
+		<if test="amountStatus !=null and amountStatus !=''">#{amountStatus},</if>
+		1
+		)
+	</insert>
+
 </mapper> 
