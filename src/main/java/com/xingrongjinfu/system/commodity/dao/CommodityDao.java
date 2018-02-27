@@ -11,10 +11,12 @@
 package com.xingrongjinfu.system.commodity.dao;
 
 import com.xingrongjinfu.system.commodity.model.Commodity;
+import com.xingrongjinfu.utils.StringUtil;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.core.dao.DynamicObjectBaseDao;
 import org.springframework.stereotype.Repository;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**

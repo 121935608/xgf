@@ -10,6 +10,7 @@
  */
 package com.xingrongjinfu.system.commodity.controller;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.framework.base.util.PageUtilEntity;
@@ -72,13 +73,21 @@ public class CommodityController extends BaseController{
 //            }
 //            commodity.setProfit(profits);
 //        }
-        int index = 0;
-        for (Commodity commodity : tableDataInfo) {
+//        int count=0;
+        Iterator<Commodity> it=tableDataInfo.iterator();
+        while(it.hasNext()){
+            Commodity commodity=it.next();
             if(StringUtil.nullOrBlank(commodity.getCommodityId())){
-                index = tableDataInfo.indexOf(commodity);
-                tableDataInfo.remove(index);
+               it.remove();
             }
         }
+//        int index = 0;
+//        for (Commodity commodity : tableDataInfo) {
+//            if(StringUtil.nullOrBlank(commodity.getCommodityId())){
+//                index = tableDataInfo.indexOf(commodity);
+//                tableDataInfo.remove(index);
+//            }
+//        }
         return buildDatasTable(pageUtilEntity.getTotalResult(),tableDataInfo);
     }
 }
