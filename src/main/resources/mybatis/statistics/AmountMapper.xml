@@ -40,6 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		addTime,
 		<if test="totalMoney !=null and totalMoney !=''">totalMoney,</if>
 		<if test="xzfRate !=null and xzfRate !=''">xzfRate,</if>
+		<if test="amountMoney !=null and amountMoney !=''">amountMoney,</if>
 		<if test="amountStatus !=null and amountStatus !=''">amountStatus,</if>
 		status
 		)VALUES (
@@ -49,6 +50,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{addTime},
 		<if test="totalMoney !=null and totalMoney !=''">#{totalMoney},</if>
 		<if test="xzfRate !=null and xzfRate !=''">#{xzfRate},</if>
+		<if test="amountMoney !=null and amountMoney !=''">#{amountMoney},</if>
 		<if test="amountStatus !=null and amountStatus !=''">#{amountStatus},</if>
 		1
 		)

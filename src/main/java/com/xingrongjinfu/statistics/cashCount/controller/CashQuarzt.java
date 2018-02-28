@@ -38,6 +38,7 @@ public class CashQuarzt {
                   amount.setAddTime(new Date());
                   amount.setXzfRate(xzfRate);
                   amount.setAmountStatus(1);
+                  amount.setAmountMoney(amount.getTotalMoney()-(amount.getTotalMoney()*(xzfRate/100)));
                   amontService.addAmont(amount);
               }
           }
