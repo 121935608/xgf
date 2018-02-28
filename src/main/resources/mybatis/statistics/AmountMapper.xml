@@ -24,9 +24,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="countCashFlowDay"  parameterType="string"
 			resultType="Amount">
-		select IFNULL(SUM(c.money),0) totalMoney,c.storeId storeId  from m_cashFlow  c
+
+        SELECT IFNULL(SUM(t.totalMoney),0) totalMoney,t.storeId storeId  from (
+        select IFNULL(SUM(c.money),0) totalMoney,c.storeId storeId ,c.type,c.payType from m_cashFlow  c
 		where date_format(c.addTime,'%Y-%m-%d')=#{0}
-		GROUP BY c.storeId
+		GROUP BY c.storeId,c.type ,c.payType HAVING c.type=1 and c.payType !=0) t GROUP BY t.storeId
 	</select>
 
 
