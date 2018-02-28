@@ -42,12 +42,8 @@ public class SaleCountController extends BaseController {
         String storeId = (String) SessionUtils.getSession().getAttribute("storeId");
         pageUtilEntity.getRelationMap().put("storeId", storeId);
         List<CashDetail> tableDataInfo = cashService.saleCountpageInfoQuery(pageUtilEntity);
-        double count = 0.0;
+        double count = cashService.getTotal(pageUtilEntity);
         if(null != tableDataInfo){
-            for (CashDetail data : tableDataInfo) {
-                if(null != data.getTotalVipPrice())
-                    count += data.getTotalVipPrice().doubleValue();
-            }
             for (CashDetail data : tableDataInfo) {
                 if(null != data.getTotalVipPrice()){
                     if(count != 0)

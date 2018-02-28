@@ -42,4 +42,5 @@ public interface IRegisterService {
     public List<Fenlei> getCategoryByCommodity(Map map) throws Exception;
     
     int checkCategoryName(Map map);
+    
 }

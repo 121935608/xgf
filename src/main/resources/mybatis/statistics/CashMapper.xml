@@ -53,6 +53,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="commodityName" column="commodityName" />
 		<result property="commodityNo" column="commodityNo" />
 	</resultMap>
+	
+	<!-- 收银流水 -->
 	<select id="pageInfoQuery" parameterType="PageUtilEntity"
 		resultType="CashFlow">
 		SELECT DISTINCT(c.cashId),tradeCode,c.userId,machineNo,c.type type,m.name cashName,c.menberNo memberName,payType,
@@ -88,6 +90,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT cashId,tradeCode,round(money/100,2) money FROM m_cashFlow WHERE cashId=#{0}
 	</select>
 	
+	<!-- 收银统计 -->
 	<select id="cashCountpageInfoQuery" parameterType="PageUtilEntity" resultType="CashFlow">
 		SELECT f.cashierId cashierId,m.name cashName,m.addTime,
 		SUM(IF(payType=0,money/100,0)) xianjin,
@@ -96,7 +99,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SUM(IF(payType=3,money/100,0)) yinlian,
 		SUM(IF(payType=4,money/100,0)) baitiao
 		FROM m_cashFlow f LEFT JOIN t_cashier m ON f.cashierId=m.cashierId 
-		WHERE f.storeId=#{relationMap.storeId} AND f.status=1
+		WHERE f.storeId=#{relationMap.storeId} AND f.status=1 and f.type = '1'
 		<if test="relationMap.beginTime != null and relationMap.beginTime != ''">
 			AND DATE_FORMAT(f.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
 		</if>
@@ -110,13 +113,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ORDER BY m.addTime DESC
 	</select>
 	
+	<!-- 商品销售流水 -->
 	<select id="sellWaterpageInfoQuery" parameterType="PageUtilEntity" resultType="CashDetail">
 		SELECT c.commodityCode commodityCode,d.commodityName commodityName,c.commodityNo commodityNo,
 		d.addTime `addTime`,d.unitName unitName,
 		d.number number,d.totalVipPrice/100 totalVipPrice,d.inPrice/100*d.number inPrice
 		FROM m_cashDetail d LEFT JOIN m_cashFlow f ON d.cashId=f.cashId 
 		LEFT JOIN m_commodity c ON d.commodityId=c.commodityId
-		WHERE f.storeId=#{relationMap.storeId} AND f.status=1
+		WHERE f.storeId=#{relationMap.storeId} AND f.status=1 and f.type = '1'
 		<if test="relationMap.beginTime != null and relationMap.beginTime != ''">
 			AND DATE_FORMAT(d.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
 		</if>
@@ -132,10 +136,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		ORDER BY d.addTime DESC
 	</select>
+	
+	<!-- 销售统计表 -->
 	<select id="saleCountpageInfoQuery" parameterType="PageUtilEntity" resultType="CashDetail">
 		SELECT
 		c.commodityCode commodityCode,c.commodityNo commodityNo,a.commodityId,a.commodityName,
-		a.totalVipPrice,a.inPrice,a.lirun,a.number,a.unitName FROM
+		ROUND(a.totalVipPrice,2) totalVipPrice,ROUND(a.inPrice,2) inPrice,ROUND(a.lirun,2) lirun,
+		ROUND(a.number,2) number,a.unitName FROM
 		(
 			SELECT d.unitName unitName,d.commodityId commodityId,d.commodityName commodityName,
 				SUM(number) number,
@@ -143,7 +150,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				SUM(d.inPrice / 100 * d.number) inPrice,
 				SUM(d.totalVipPrice / 100) - SUM(d.inPrice / 100 * d.number) lirun
 			FROM m_cashDetail d WHERE cashId IN (
-					SELECT cashId FROM m_cashFlow WHERE storeId = #{relationMap.storeId} AND status = 1
+					SELECT cashId FROM m_cashFlow WHERE storeId = #{relationMap.storeId} AND status = 1 AND `type` = '1'
 				<if test="relationMap.beginTime != null and relationMap.beginTime != ''">
 					AND DATE_FORMAT(addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
 				</if>
@@ -162,7 +169,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			c.commodityNo LIKE CONCAT(CONCAT('%',#{relationMap.commodityNo}),'%') 
 			)
 		</if>
+		ORDER BY a.totalVipPrice DESC
 	</select>
+	
+	<!-- 销售总额 -->
+	<select id="getTotal" parameterType="string" resultType="double">
+		SELECT IFNULL(SUM(money)/100,0) money FROM m_cashFlow 
+		WHERE storeId = #{relationMap.storeId} AND `status` = 1 AND `type` = '1'
+		<if test="relationMap.beginTime != null and relationMap.beginTime != ''">
+			AND DATE_FORMAT(addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
+		</if>
+		<if test="relationMap.endTime != null and relationMap.endTime != ''">
+			AND DATE_FORMAT(addTime,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
+		</if>
+		<if test="relationMap.commodityNo != null and relationMap.commodityNo != ''">
+			AND (
+			d.commodityName LIKE CONCAT(CONCAT('%', #{relationMap.commodityNo}),'%') or
+			c.commodityCode LIKE CONCAT(CONCAT('%',#{relationMap.commodityNo}),'%') or
+			d.commodityNo LIKE CONCAT(CONCAT('%',#{relationMap.commodityNo}),'%') 
+			)
+		</if>
+	</select>
+	
+	<!-- 销售分析图表 -->
 	<select id="saleGraphCombo" parameterType="string" resultType="CashFlow">
 			SELECT ROUND(IFNULL(SUM(money),0),2) money,SUM(number) number,cashId,ROUND(SUM(lirun),2) lirun,
 			ROUND(SUM(lirun)/SUM(money),2) maolilv
@@ -175,17 +204,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			LEFT JOIN m_cashDetail d ON d.cashId = f.cashId
 			WHERE DATE_SUB(CURDATE(), INTERVAL 7 DAY) &lt;= DATE(f.addTime)
 			AND f.storeId = #{0}
-			AND f.`status` = 1
+			AND f.`status` = 1 and f.type='1'
 			GROUP BY DATE_FORMAT(f.addTime, '%Y-%m-%d'),f.number,f.money
 			ORDER BY DATE_FORMAT(f.addTime, '%Y-%m-%d')) AS a GROUP BY cashId
 	</select>
+	
+	<!-- 销售饼图 -->
 	<select id="saleGraphPie" parameterType="map" resultType="CashDetail">
 		select a.categoryName categoryName,sum(totalVipPrice) totalVipPrice from
 		(select categoryId,categoryName from m_category 
 		where storeId=#{storeId} AND status = 1 AND parentId="0") a
 		left join m_category c on a.categoryId=c.parentId
 		left join m_commodity co on co.categoryId=c.categoryId
-		left join (SELECT * FROM m_cashDetail WHERE 1=1 
+		left join (SELECT t.* FROM m_cashDetail t
+		LEFT JOIN m_cashFlow f ON t.cashId=f.cashId
+		WHERE 1=1 AND f.type='1'
 		<if test="beginTime != null and beginTime != ''">
 			AND DATE_FORMAT(addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{beginTime},'%Y%m%d')
 		</if>
@@ -196,6 +229,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		on d.commodityId=co.commodityId
 		group by a.categoryName
 	</select>
+	
+	<!-- 今日客流分析 -->
 	<select id="passengerAnalysisGraph" parameterType="string" resultType="CashFlow">
 		SELECT CASE WHEN HOUR(`addTime`)  &gt;= 8 AND HOUR(`addTime`) &lt;9 THEN '08:00'
              WHEN HOUR(`addTime`)  &gt;= 9 AND HOUR(`addTime`) &lt;10 THEN '09:00'
@@ -214,7 +249,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
              WHEN HOUR(`addTime`)  &gt;= 22 AND HOUR(`addTime`) &lt;23 THEN '23:00'
              ELSE '00:00'
              END hour,count(*) number
-             FROM m_cashFlow WHERE storeId=#{storeId} AND `status`=1
+             FROM m_cashFlow WHERE storeId=#{storeId} AND `status`=1 and type='1'
              and DATE_FORMAT(`addTime`,'%Y-%m-%d')=date_format(now(),'%Y-%m-%d')
              GROUP BY hour
              ORDER BY hour

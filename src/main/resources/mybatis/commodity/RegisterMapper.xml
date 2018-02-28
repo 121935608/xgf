@@ -359,9 +359,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	</select>
  	
  	<select id="checkCategoryName" parameterType="map" resultType="int">
-		SELECT count(1) FROM m_commodity WHERE commodityName=#{commodityName} and storeId=#{storeId}
+		SELECT count(1) FROM m_commodity WHERE storeId=#{storeId}
 		<if test="commodityId != null and commodityId != ''">
 			and commodityId!=#{commodityId}
+		</if>
+		<if test="commodityName != null and commodityName != ''">
+			and commodityName=#{commodityName}
+		</if>
+		<if test="commodityNo != null and commodityNo != ''">
+			and commodityNo=#{commodityNo}
 		</if>
 	</select>
 </mapper>

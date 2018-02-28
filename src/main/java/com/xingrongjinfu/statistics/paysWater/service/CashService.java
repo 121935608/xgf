@@ -64,4 +64,9 @@ public class CashService implements ICashService {
        
         return cashDao.passengerAnalysisGraph(storeId);
     }
+    @Override
+    public double getTotal(PageUtilEntity pageUtilEntity) {
+        
+        return cashDao.getTotal(pageUtilEntity);
+    }
 }

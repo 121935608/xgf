@@ -129,4 +129,9 @@ public class CashDao extends DynamicObjectBaseDao implements ICashDao {
         return cashFlowList;
     }
 
+    @Override
+    public double getTotal(PageUtilEntity pageUtilEntity) {
+        return (double) this.findForObject("CashMapper.getTotal", pageUtilEntity);
+    }
+
 }

@@ -514,16 +514,21 @@ public class RegisterController extends BaseController{
         
     }
     /**
-     * 商品名是否存在
+     * 商品名、商品条码是否存在
      */
     @RequestMapping(RegisterConstant.CHECK_CATEGORY_NAME)
-    public @ResponseBody int checkCategoryName(String commodityName,String commodityId) {
+    public @ResponseBody int checkCategoryName(String commodityName,String commodityId,String commodityNo) {
         String storeId = (String) SessionUtils.getSession().getAttribute("storeId");
         Map map = new HashMap();
         map.put("storeId", storeId);
-        map.put("commodityName", commodityName);
         if(null != commodityId){
             map.put("commodityId", commodityId);
+        }
+        if(null != commodityName){
+            map.put("commodityName", commodityName);
+        }
+        if(null != commodityNo){
+            map.put("commodityNo", commodityNo);
         }
         int n = registerService.checkCategoryName(map);
         return n;

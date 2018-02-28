@@ -27,4 +27,6 @@ public interface ICashDao {
     public List<CashFlow> passengerAnalysisGraph(String storeId);
     
     public List<CashDetail> saleGraphPie(Map map);
+    
+    public double getTotal(PageUtilEntity pageUtilEntity);
 }

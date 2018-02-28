@@ -26,4 +26,6 @@ public interface ICashService {
     
     public List<CashDetail> saleGraphPie(Map map);
     
+    public double getTotal(PageUtilEntity pageUtilEntity);
+    
 }

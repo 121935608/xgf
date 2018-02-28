@@ -200,10 +200,27 @@ $("#form-register-modify").validate({
                 }
             }
         }, 
-		commodityNo:{
-			required:true,
-			isSpace:true,
-		},
+        commodityNo: {
+            required: true,
+            isSpace: false,
+           remote: {
+                url: "${context_root}/commodity/checkCategoryName.action",
+                type: "post",
+                dataType: "text",
+                data: {
+                	commodityNo: function () {
+                        return $.trim($("#commodityNo").val());
+                    },
+                    commodityId: function () {
+                        return $.trim($("#commodityId").val());
+                    }
+                },
+                dataFilter: function (data, type) {
+                    if (data == "0") return true;
+                    else return "该商品条码已存在";
+                }
+            }
+        }, 
 		supplierId:{
 			required:true,
 			isSpace:true,

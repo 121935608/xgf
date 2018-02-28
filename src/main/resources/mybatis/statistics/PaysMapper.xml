@@ -21,7 +21,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultType="Pay">
 		select m.tradeCode,m.cashNo,m.addTime,m.money/100 money,m.payType,c.`name` cashName from m_cashFlow m
-		LEFT JOIN t_cashier c on c.cashierId=m.cashierId where  m.storeId= #{relationMap.storeId} and m.`status`=1
+		LEFT JOIN t_cashier c on c.cashierId=m.cashierId where  
+		m.storeId= #{relationMap.storeId} and m.`status`=1 and m.type='1'
 		<if test="relationMap.userId != null and relationMap.userId != ''">
 			AND m.userId=#{relationMap.userId}
 		</if>

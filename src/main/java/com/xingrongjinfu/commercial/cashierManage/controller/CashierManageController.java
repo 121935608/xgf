@@ -144,8 +144,10 @@ public class CashierManageController extends BaseController {
     @RequestMapping(CashierManageConstant.CHECK_NAME_UNIQUE_URL)
     public @ResponseBody
     int checkNamesUnique(String cashierName,String cashierId) {
+        String storeId = (String) SessionUtils.getSession().getAttribute("storeId");
         Map map = new HashMap();
         map.put("cashierName", cashierName);
+        map.put("storeId", storeId);
         if(null != cashierId){
             map.put("cashierId", cashierId);
         }
