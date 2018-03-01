@@ -187,23 +187,12 @@ $(document).ready(function(){
 				<input style="width: 100px;" type="text" class="input-text" autocomplete="off"  maxlength="20"  placeholder="" id="priceSpecification" name="priceSpecification" value="${product.priceSpecification}">#
 			</div>
 		</div>
-		<%--<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>规格：</label>
-			<div class="formControls col-xs-8 col-sm-4">
-			<span class="select-box" style="width: 100px;border: hidden;">
-             <y:select id="specification" name="specification" codeGroup="${specification}" selectedValue="${product.specification}"
-					   cssClass="select" headerKey="" headerValue="规格">
-			 </y:select>
-       		</span>
-			</div>
-		</div>--%>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>库存：</label>
 			<div class="formControls col-xs-8 col-sm-4">
 				<input type="text" class="input-text" autocomplete="off" disabled="disabled" maxlength="20"  placeholder="" id="stockNum" name="stockNum" value="${product.stockNum}">
 			</div>
 		</div>
-
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>存储方式：</label>
 			<div class="formControls col-xs-8 col-sm-4">
@@ -244,6 +233,7 @@ $(document).ready(function(){
 					<input type='button' class='btn' value='浏览...'onclick="toChoose()" />
 					<input  type="file" id="picture" class="file" size="28" onchange="pic(event)"  name="picture" accept="image/*"/>
 				</div>
+			<div style="clear:both;margin-right:70%;font-size:12px;">温馨提示：双击图片删除</div>
 			</div>
 			<div style="margin:0 auto" class="imgDiv" id="main">
 				<img style="height:100px;width:100px;" name="imgs" ondblclick="todelImgs(this)">
@@ -306,6 +296,10 @@ $(document).ready(function(){
                 alert("主图不允许删除！");
                 return;
             }else{
+			var r=confirm("确认删除？");
+            	if(!r){
+            		return;
+            	}
                 obj.remove();
                 span.remove();
             }
