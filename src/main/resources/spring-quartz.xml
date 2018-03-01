@@ -19,7 +19,7 @@
         <!-- 加入相关的执行类和方法 -->
         <property name="jobDetail" ref="timingScheduleJobDetail"/>
         <!-- 设置时间规则 （为了方便测试，设置成一分钟一次。具体的规则见详情）-->
-        <property name="cronExpression" value="0 0 0 * * ?"/>
+        <property name="cronExpression" value="0 0 2 * * ?"/>
     </bean>
     <!-- 加入调度工厂 ,设置调度触发器即可-->
     <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
