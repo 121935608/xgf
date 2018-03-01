@@ -22,11 +22,11 @@
                        cssClass="select" headerKey="" headerValue="标签">
              </y:select>
        </span>
-        <span class="select-box" style="width: 100px;border: hidden;">
+       <%-- <span class="select-box" style="width: 100px;border: hidden;">
              <y:select id="supply" name="supply" codeGroup="${supply}" selectedValue=""
                        cssClass="select" headerKey="" headerValue="供货地">
              </y:select>
-       </span>
+       </span>--%>
 		<span class="select-box" style="width: 120px;">
            <select name="commodityStatus" id="commodityStatus" class="select" autocomplete="off">
                <option value="">上下架</option>
@@ -54,7 +54,7 @@
 				<th width="5%">价格规格</th>
 				<th width="5%">商品描述</th>
 				<th width="5%">进价(元)</th>
-				<th width="3%">费率</th>
+				<th width="5%">费率</th>
 				<th width="5%">售价(元)</th>
 				<th width="4%">库存</th>
 				<th width="5%">存储方式</th>
@@ -255,7 +255,7 @@ $(document).ready(function(){
             "bSearchable": false,
             "mRender": function(data, type, row) {
                 if (row.taxRate !=null) {
-                    return row.taxRate;
+                    return row.taxRate+'%';
                 }else {
                     return "";
                 }
