@@ -124,7 +124,18 @@ $(document).ready(function(){
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>等级：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="text" class="input-text" autocomplete="off" disabled="disabled" maxlength="20"  placeholder="" id="grade" name="grade" value="${product.grade}">
+				<c:if test="${product.grade==1}">
+				<input type="text" class="input-text" autocomplete="off" disabled="disabled" maxlength="20"  placeholder="" id="grade" name="grade" value="一等品">
+				</c:if>
+				<c:if test="${product.grade==0}">
+					<input type="text" class="input-text" autocomplete="off" disabled="disabled" maxlength="20"  placeholder="" id="grade" name="grade" value="不良品">
+				</c:if>
+				<c:if test="${product.grade==2}">
+					<input type="text" class="input-text" autocomplete="off" disabled="disabled" maxlength="20"  placeholder="" id="grade" name="grade" value="二等品">
+				</c:if>
+				<c:if test="${product.grade==null}">
+					<input type="text" class="input-text" autocomplete="off" disabled="disabled" maxlength="20"  placeholder="" id="grade" name="grade" value="${product.grade}">
+				</c:if>
 			</div>
 		</div>
 		<div class="row cl">

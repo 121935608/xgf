@@ -185,11 +185,15 @@ $(document).ready(function(){
             "sClass": "text-c",
             "bSearchable": false,
             "mRender": function(data, type, row) {
-                if (row.grade !=null) {
-                    return row.grade;
+                if (row.grade ==1) {
+                    return "一等品";
+                }else if(row.grade ==2){
+                    return "二等品";
+                }else if(row.grade ==0){
+                    return "不良品";
                 }else {
                     return "";
-                }
+				}
             }
         },
         {
