@@ -13,9 +13,10 @@
 		<span class="select-box" style="width: 120px;">
            <select name="statusSelect" id="statusSelect" class="select" autocomplete="off">
                <option value="">支付方式</option>
-               <option value="1">支付宝支付</option>
-               <option value="2" >微信支付</option>
-               <option value="3" >银联支付</option>
+               <option value="0">现金</option>
+               <option value="1">支付宝</option>
+               <option value="2" >微信</option>
+               <option value="3" >银联</option>
                <option value="4" >京东白条</option>
            </select>
        </span>
@@ -98,12 +99,14 @@ $(document).ready(function(){
         "sClass": "td-status text-c",
         "bSearchable": false,
         "mRender": function(data, type, row) {
-            if (row.payType == 1) {
-                return "支付宝支付";
+        	if (row.payType == 0) {
+                return "现金";
+            }else if (row.payType == 1) {
+                return "支付宝";
             } else if(row.payType == 2) {
-                return "微信支付";
+                return "微信";
 			}else if(row.payType == 3){
-                return "银联支付";
+                return "银联";
 			}else if(row.payType == 4){
                 return "京东白条";
             }else {

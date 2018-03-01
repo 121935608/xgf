@@ -68,7 +68,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getByNum" parameterType="string" resultType="Financial">
 		SELECT a.amountId,a.amountNum,s.storeName,a.addTime,a.totalMoney/100 totalMoney,a.xzfRate,
 		a.amountMoney/100 amountMoney,a.status,a.amountStatus,a.closeMoney/100 closeMoney,
-		a.amountMoney/100-a.closeMoney/100 openMoney
+		round(a.amountMoney/100-IFNULL(a.closeMoney/100,0),2) openMoney
 		 FROM m_amount a LEFT JOIN t_store s ON a.userId=s.userId
 		 WHERE a.amountId=#{0}
 	</select>
