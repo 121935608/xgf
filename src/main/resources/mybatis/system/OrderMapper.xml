@@ -103,7 +103,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="findOrderDetailInfo" parameterType="String" resultMap="OrderDetailResult">
-		SELECT d.commodityName,c.commodityNo,d.unit,d.commodityNum,d.inPrice/100 inPrice
+		SELECT d.commodityName,c.commodityNo,d.unit,d.commodityNum,d.salePrice/100 inPrice
 		FROM t_order_detail d LEFT JOIN t_commodity c ON d.commodityId=c.commodityId
 		WHERE d.orderNumber=#{orderNumber}
 	</select>

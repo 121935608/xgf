@@ -10,15 +10,9 @@
  */
 package com.xingrongjinfu.system.order.controller;
 
-import com.xingrongjinfu.system.SystemConstant;
-import com.xingrongjinfu.system.financial.model.Financial;
-import com.xingrongjinfu.system.financial.service.IFinancialService;
-import com.xingrongjinfu.system.order.common.OrderConstant;
-import com.xingrongjinfu.system.order.model.Order;
-import com.xingrongjinfu.system.order.model.OrderDetail;
-import com.xingrongjinfu.system.order.service.IOrderService;
-import com.xingrongjinfu.system.order.service.OrderService;
-import com.xingrongjinfu.system.user.model.User;
+import java.text.SimpleDateFormat;
+import java.util.List;
+
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.framework.core.controller.BaseController;
@@ -29,8 +23,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.text.SimpleDateFormat;
-import java.util.List;
+import com.xingrongjinfu.system.SystemConstant;
+import com.xingrongjinfu.system.financial.model.Financial;
+import com.xingrongjinfu.system.financial.service.IFinancialService;
+import com.xingrongjinfu.system.order.common.OrderConstant;
+import com.xingrongjinfu.system.order.model.Order;
+import com.xingrongjinfu.system.order.model.OrderDetail;
+import com.xingrongjinfu.system.order.service.IOrderService;
+import com.xingrongjinfu.system.user.model.User;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -74,7 +74,7 @@ public class OrderController extends BaseController {
     public ModelAndView lookOrderInfo(String orderNumber)
     {
         ModelAndView modelAndView=this.getModelAndView(OrderConstant.ORDER_LOOK_PAGE);
-        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Order orders=orderService.findOrderInfo(orderNumber);
         orders.setOrderPrice(orders.getOrderPrice()==null ? 0:orders.getOrderPrice());
         orders.setOrderTimes(orders.getOrderTime()==null ? "" :sdf.format(orders.getOrderTime()));

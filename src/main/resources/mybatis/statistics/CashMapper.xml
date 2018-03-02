@@ -205,7 +205,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			WHERE DATE_SUB(CURDATE(), INTERVAL 7 DAY) &lt;= DATE(f.addTime)
 			AND f.storeId = #{0}
 			AND f.`status` = 1 and f.type='1'
-			GROUP BY DATE_FORMAT(f.addTime, '%Y-%m-%d'),f.number,f.money
+			GROUP BY DATE_FORMAT(f.addTime, '%Y-%m-%d'),f.number,f.money,f.cashId
 			ORDER BY DATE_FORMAT(f.addTime, '%Y-%m-%d')) AS a GROUP BY cashId
 	</select>
 	
@@ -220,10 +220,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		LEFT JOIN m_cashFlow f ON t.cashId=f.cashId
 		WHERE 1=1 AND f.type='1'
 		<if test="beginTime != null and beginTime != ''">
-			AND DATE_FORMAT(addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{beginTime},'%Y%m%d')
+			AND DATE_FORMAT(f.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{beginTime},'%Y%m%d')
 		</if>
 		<if test="endTime != null and endTime != ''">
-			AND DATE_FORMAT(addTime,'%Y%m%d') &lt;= DATE_FORMAT(#{endTime},'%Y%m%d')
+			AND DATE_FORMAT(f.addTime,'%Y%m%d') &lt;= DATE_FORMAT(#{endTime},'%Y%m%d')
 		</if>
 		) d
 		on d.commodityId=co.commodityId
