@@ -68,12 +68,12 @@ public class CertificationDao extends DynamicObjectBaseDao implements ICertifica
      * 获取商户信息
      */
 	@Override
-    public  Store getStoreInfo(String storeid) 
+    public  Store getStoreInfo(String storeId)
     {  
     	Store storeInfo = null;
 		try
         {
-			storeInfo = (Store) this.findForObject("StoreAffairMapper.getStoreInfo", storeid);
+			storeInfo = (Store) this.findForObject("StoreAffairMapper.getStoreInfo",storeId);
         }
         catch (Exception e)
         {

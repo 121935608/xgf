@@ -63,6 +63,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<set>
  			<if test="supervisorId != null and supervisorId != ''">supervisorId = #{supervisorId},</if>
  			<if test="process != null and process != ''">process = #{process},</if>
+			<if test="updateTime != null">updateTime = #{updateTime},</if>
  			remark = #{remark}
  		</set>
  		where  storeId= #{storeId} 

@@ -2,10 +2,12 @@ package com.xingrongjinfu.system.storeaffairs.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
+import com.xingrongjinfu.commodity.classification.model.Category;
+import com.xingrongjinfu.system.supervisor.service.ISupervisorService;
+import com.xingrongjinfu.utils.HttpClientUtil;
+import com.xingrongjinfu.utils.HttpUtils;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.framework.core.controller.BaseController;
@@ -18,20 +20,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xingrongjinfu.system.SystemConstant;
+import com.xingrongjinfu.system.permission.common.PermissionConstant;
+import com.xingrongjinfu.system.permission.model.Permission;
+import com.xingrongjinfu.system.role.common.RoleConstant;
+import com.xingrongjinfu.system.role.model.Role;
 import com.xingrongjinfu.system.storeaffairs.commom.StoreaffairConstant;
 import com.xingrongjinfu.system.storeaffairs.model.BankAccount;
 import com.xingrongjinfu.system.storeaffairs.model.Store;
 import com.xingrongjinfu.system.storeaffairs.service.ICertificationService;
 import com.xingrongjinfu.system.supervisor.model.Supervisor;
-import com.xingrongjinfu.system.supervisor.service.ISupervisorService;
 import com.xingrongjinfu.system.syscode.model.SysCode;
-import com.xingrongjinfu.utils.HttpClientUtil;
-import com.xingrongjinfu.utils.StringUtil; 
+import net.sf.json.JSONObject;
 
 
 /**
  * 认证申请  处理
- * 
+ *
  * @author cj
  */
 @Controller
@@ -63,7 +67,7 @@ class CertificationController extends BaseController {
      */
     @RequestMapping(StoreaffairConstant.CERTIFICATION_URL)
     public ModelAndView certificationPage()
-    { 
+    {
         ModelAndView modelAndView = this.getModelAndView(StoreaffairConstant.CERTIFICATION_PAGE);
 
         List<SysCode> sysCodeList = new ArrayList<SysCode>();
@@ -73,37 +77,37 @@ class CertificationController extends BaseController {
             sysCode.setCodeid(supervisor.getSupervisorId()+"");
             sysCode.setCodevalue(supervisor.getName());
             sysCodeList.add(sysCode);
-        } 
+        }
         modelAndView.addObject("supervisorList", sysCodeList);
-        
-        
+
+
         //'未认证:WRZ 审核中:APRING 审核不通过:APRNO 审核通过:APRYES'
-        List<SysCode> sysCodeList1 = new ArrayList<SysCode>(); 
+        List<SysCode> sysCodeList1 = new ArrayList<SysCode>();
             SysCode sysCode1 = new SysCode();
-            sysCode1.setCodeid("WRZ"); 
+            sysCode1.setCodeid("WRZ");
             sysCode1.setCodevalue("未认证");
             sysCodeList1.add(sysCode1);
-             
+
             SysCode sysCode2 = new SysCode();
             sysCode2.setCodeid("APRING");
             sysCode2.setCodevalue("审核中");
             sysCodeList1.add(sysCode2);
-            
+
             SysCode sysCode3 = new SysCode();
             sysCode3.setCodeid("APRNO");
             sysCode3.setCodevalue("审核不通过");
             sysCodeList1.add(sysCode3);
-            
+
             SysCode sysCode4 = new SysCode();
             sysCode4.setCodeid("APRYES");
-            sysCode4.setCodevalue("审核通过"); 
-            sysCodeList1.add(sysCode4); 
+            sysCode4.setCodevalue("审核通过");
+            sysCodeList1.add(sysCode4);
         modelAndView.addObject("repaymentStatusList", sysCodeList1);
-        
+
         return modelAndView;
     }
 
-   
+
 	 /**
      * 查询认证申请列表
      */
@@ -112,10 +116,10 @@ class CertificationController extends BaseController {
     {
         PageUtilEntity pageUtilEntity = this.getPageUtilEntity();
         String accountName=pageUtilEntity.getRelationMap().get("accountName");
-        if(accountName!=null&&!accountName.equals("")){ 
+        if(accountName!=null&&!accountName.equals("")){
         	try {
 				pageUtilEntity.getRelationMap().put("accountName", URLDecoder.decode(accountName, "utf-8"));
-        	} catch (UnsupportedEncodingException e) { 
+        	} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			}
         }
@@ -123,18 +127,18 @@ class CertificationController extends BaseController {
 
         return buildDataTable(pageUtilEntity.getTotalResult(), tableDataInfo);
     }
-     
-    
+
+
     /**
      * 跳转认证申请审核界面
      */
     @RequestMapping(StoreaffairConstant.CERTIFICATION_CHECK_URL)
     public ModelAndView certificationCheckPage(String storeId)
-    { 
+    {
         ModelAndView modelAndView = this.getModelAndView(StoreaffairConstant.CERTIFICATION_CHECK_PAGE);
         //获取商户信息
         //List<Store> storeList=getStoreInfo(this.getRequest().getParameter("storeId"));
-        Store s=getStoreInfo(storeId); 
+        Store s=getStoreInfo(storeId);
         //licensePic,frontStorePic,innerStorePic,contractPic,transactionPic,utilitiesPic
         s.setLicensePic("http://xrjf.oss-cn-shanghai.aliyuncs.com/"+s.getLicensePic());
         s.setFrontStorePic("http://xrjf.oss-cn-shanghai.aliyuncs.com/"+s.getFrontStorePic());
@@ -144,8 +148,8 @@ class CertificationController extends BaseController {
         s.setUtilitiesPic("http://xrjf.oss-cn-shanghai.aliyuncs.com/"+s.getUtilitiesPic());
         modelAndView.addObject("store",s);
         modelAndView.addObject("bankaccount", getBankAccountInfo(storeId));
-       
-        
+
+
         //获取select框数据
         List<SysCode> sysCodeList = new ArrayList<SysCode>();
         for (Supervisor supervisor : getSupervisorSelection())
@@ -154,45 +158,63 @@ class CertificationController extends BaseController {
             sysCode.setCodeid(supervisor.getSupervisorId()+"");
             sysCode.setCodevalue(supervisor.getName());
             sysCodeList.add(sysCode);
-        } 
+        }
         modelAndView.addObject("supervisorList", sysCodeList);
-        
+
         //审核下拉框      未认证:WRZ  审核中:APRING 审核不通过:APRNO 审核通过:APRYES
-        List<SysCode> sysCodeList1 = new ArrayList<SysCode>(); 
+        List<SysCode> sysCodeList1 = new ArrayList<SysCode>();
         SysCode sysCode1 = new SysCode();
         sysCode1.setCodeid("APRYES");
         sysCode1.setCodevalue("通过");
         sysCodeList1.add(sysCode1);
-        
+
         SysCode sysCode2 = new SysCode();
         sysCode2.setCodeid("APRNO");
         sysCode2.setCodevalue("不通过");
-        sysCodeList1.add(sysCode2);  
+        sysCodeList1.add(sysCode2);
         modelAndView.addObject("ispass", sysCodeList1);
-        
+
         return modelAndView;
     }
-    
-    
+
+
     /**
      * 提交审核内容
      */
-    @RequestMapping(StoreaffairConstant.CERTIFICATION_CHECK_SUBMIT) 
+    @RequestMapping(StoreaffairConstant.CERTIFICATION_CHECK_SUBMIT)
     public @ResponseBody Message saveCertificationCheck(Store store,String process) throws UnsupportedEncodingException {
         int result = 0;
         String id = store.getStoreId();
         Store store2=certificationService.getStoreInfo(id);
+        System.out.println("后台bug888888888"+new Date()+store2.getUserId());
         if("APRYES".equals(process)){
-            if (!StringUtil.nullOrBlank(id))
+            if (id != null&&!id.equals(""))
         {
             Store store1=certificationService.getStoreInfo(id);
+            System.out.println("后台bug"+new Date()+store1.getUserId());
             HashMap map=new HashMap();
             map.put("userId",store1.getUserId());
             //调用app添加客户接口
             String result1= HttpClientUtil.httpPostRequest(addCustomer,map);
+            JSONObject jsonObject1=JSONObject.fromObject(result1);
+            String code1=jsonObject1.getString("code");
+            String msg1=jsonObject1.getString("msg");
+//            String result1= HttpUtils.sendPost(addCustomer,map.toString());
+//            String result2=HttpUtils.sendPost(filePush,map.toString());
             //调用app发送文件接口
             String result2=HttpClientUtil.httpPostRequest(filePush,map);
-            result = certificationService.saveCertificationCheck(store);
+            JSONObject jsonObject2=JSONObject.fromObject(result2);
+            String code2=jsonObject2.getString("code");
+            String msg2=jsonObject2.getString("msg");
+            store1.setUpdateTime(new Date());
+            if("0000".equals(code1)&&"0000".equals(code2)){
+                store1.setProcess("APRYES");
+                result = certificationService.saveCertificationCheck(store1);
+            }else{
+//                store1.setProcess("APRING");
+                store1.setRemark(msg1);
+                result = certificationService.saveCertificationCheck(store1);
+            }
         }
         }
         return new Message(result);
