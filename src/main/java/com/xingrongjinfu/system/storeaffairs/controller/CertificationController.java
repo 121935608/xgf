@@ -2,12 +2,10 @@ package com.xingrongjinfu.system.storeaffairs.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
-import com.xingrongjinfu.commodity.classification.model.Category;
-import com.xingrongjinfu.system.supervisor.service.ISupervisorService;
-import com.xingrongjinfu.utils.HttpClientUtil;
-import com.xingrongjinfu.utils.HttpUtils;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.framework.core.controller.BaseController;
@@ -20,16 +18,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xingrongjinfu.system.SystemConstant;
-import com.xingrongjinfu.system.permission.common.PermissionConstant;
-import com.xingrongjinfu.system.permission.model.Permission;
-import com.xingrongjinfu.system.role.common.RoleConstant;
-import com.xingrongjinfu.system.role.model.Role;
 import com.xingrongjinfu.system.storeaffairs.commom.StoreaffairConstant;
 import com.xingrongjinfu.system.storeaffairs.model.BankAccount;
-import com.xingrongjinfu.system.storeaffairs.model.Store; 
+import com.xingrongjinfu.system.storeaffairs.model.Store;
 import com.xingrongjinfu.system.storeaffairs.service.ICertificationService;
 import com.xingrongjinfu.system.supervisor.model.Supervisor;
-import com.xingrongjinfu.system.syscode.model.SysCode; 
+import com.xingrongjinfu.system.supervisor.service.ISupervisorService;
+import com.xingrongjinfu.system.syscode.model.SysCode;
+import com.xingrongjinfu.utils.HttpClientUtil;
+import com.xingrongjinfu.utils.StringUtil; 
 
 
 /**
@@ -185,18 +182,14 @@ class CertificationController extends BaseController {
         int result = 0;
         String id = store.getStoreId();
         Store store2=certificationService.getStoreInfo(id);
-        System.out.println("后台bug888888888"+new Date()+store2.getUserId());
         if("APRYES".equals(process)){
-            if (id != null&&!id.equals(""))
+            if (!StringUtil.nullOrBlank(id))
         {
             Store store1=certificationService.getStoreInfo(id);
-            System.out.println("后台bug"+new Date()+store1.getUserId());
             HashMap map=new HashMap();
             map.put("userId",store1.getUserId());
             //调用app添加客户接口
             String result1= HttpClientUtil.httpPostRequest(addCustomer,map);
-//            String result1= HttpUtils.sendPost(addCustomer,map.toString());
-//            String result2=HttpUtils.sendPost(filePush,map.toString());
             //调用app发送文件接口
             String result2=HttpClientUtil.httpPostRequest(filePush,map);
             result = certificationService.saveCertificationCheck(store);

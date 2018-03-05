@@ -36,7 +36,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 查询所有监督员对象 -->
 	<select id="getSupervisorList"    resultType="supervisor">
-		select  supervisorId,name from sys_supervisor
+		select  supervisorId,name from sys_supervisor where status=0
 	</select>
 	
 	
