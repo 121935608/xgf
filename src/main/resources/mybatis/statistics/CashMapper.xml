@@ -202,7 +202,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			IFNULL(SUM(d.totalVipPrice/100) - SUM(d.inPrice/100 * d.number),0) lirun
 			FROM m_cashFlow f
 			LEFT JOIN m_cashDetail d ON d.cashId = f.cashId
-			WHERE DATE_SUB(CURDATE(), INTERVAL 7 DAY) &lt;= DATE(f.addTime)
+			WHERE DATE_SUB(CURDATE(), INTERVAL 6 DAY) &lt;= DATE(f.addTime)
 			AND f.storeId = #{0}
 			AND f.`status` = 1 and f.type='1'
 			GROUP BY DATE_FORMAT(f.addTime, '%Y-%m-%d'),f.number,f.money,f.cashId
