@@ -18,6 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="imgMain" column="imgMain" />
 		<result property="totalPrice" column="totalPrice" />
 		<result property="commodityNo" column="commodityNo" />
+		<result property="payTime" column="payTime" />
 
 	</resultMap>
 
@@ -25,7 +26,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="pageInfoQuery" parameterType="PageUtilEntity"
 		resultType="Procurement">
 		select
-		c.commodityName,d.commodityNo,c.orderNumber,c.addTime,c.commodityNum,c.totalPrice/100 totalPrice,c.unit
+		c.commodityName,d.commodityNo,c.orderNumber,b.payTime,c.commodityNum,
+		c.totalPrice/100 totalPrice,c.unit
 		from sys_user a
 		RIGHT JOIN t_order b on a.userId = b.userId
 		LEFT JOIN
@@ -36,26 +38,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="relationMap.userId != null and relationMap.userId != ''">
 			AND a.userId=#{relationMap.userId}
 		</if>
-		<if test="relationMap.dateType=='addTime'">
-			<if test="relationMap.beginTime != null and relationMap.beginTime != ''">
-				AND DATE_FORMAT(a.addTime,'%Y%m%d') &gt;=
-				DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
-			</if>
-			<if test="relationMap.endTime != null and relationMap.endTime != ''">
-				AND DATE_FORMAT(a.addTime,'%Y%m%d') &lt;=
-				DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
-			</if>
+		<if test="relationMap.beginTime != null and relationMap.beginTime != ''">
+			AND DATE_FORMAT(b.payTime,'%Y%m%d') &gt;=
+			DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
 		</if>
-
+		<if test="relationMap.endTime != null and relationMap.endTime != ''">
+			AND DATE_FORMAT(b.payTime,'%Y%m%d') &lt;=
+			DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
+		</if>
 		<if
 			test="relationMap.fuzzyCondition != null and relationMap.fuzzyCondition != ''">
 			AND (
 			c.commodityName LIKE CONCAT(CONCAT('%', #{relationMap.fuzzyCondition}),'%') or
-			d.commodityNo LIKE CONCAT(CONCAT('%',
-			#{relationMap.fuzzyCondition}),'%')
+			d.commodityNo LIKE CONCAT(CONCAT('%',#{relationMap.fuzzyCondition}),'%')
 			)
 		</if>
-		order by b.orderTime desc
+		order by b.payTime desc
 	</select>
 
 

@@ -18,6 +18,7 @@ public class Procurement implements Serializable
 	private int commodityNum;
 	private String commodityName;
 	private Date addTime;
+	private Date payTime;
 	private double inPrice;
 	private double salePrice;
 	private double taxRate;
@@ -25,7 +26,15 @@ public class Procurement implements Serializable
 	private String imgMain;
 	private double totalPrice;
 	private String commodityNo;
-	public String getCommodityNo() {
+	
+	
+	public Date getPayTime() {
+        return payTime;
+    }
+    public void setPayTime(Date payTime) {
+        this.payTime = payTime;
+    }
+    public String getCommodityNo() {
 		return commodityNo;
 	}
 	public void setCommodityNo(String commodityNo) {

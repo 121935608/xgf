@@ -99,8 +99,8 @@ $(document).ready(function(){
 		"sClass" : "text-c",
 		"bSearchable" : false,
 		"mRender" : function(data, type, row) {
-			if (row.addTime != null) {
-				return formatDate(row.addTime, "yyyy-MM-dd hh:mm:ss");
+			if (row.payTime != null) {
+				return formatDate(row.payTime, "yyyy-MM-dd hh:mm:ss");
 			} else {
 				return "";
 			}
@@ -158,12 +158,10 @@ $(document).ready(function(){
 
 function query() {
 	var fuzzyCondition = $("#fuzzyCondition").val();
-	var dateType = $("#dateType").val();
     var beginTime = $("#beginTime").val();
     var endTime = $("#endTime").val();
    
     pageTable.fnSettings().sAjaxSource = "${context_root}/statistics/procurementList.action?fuzzyCondition=" + encodeURIComponent(encodeURIComponent(fuzzyCondition)) +
-					    	"&dateType="+ dateType +
 					    	"&beginTime="+ beginTime +
 					    	"&endTime="+ endTime;
     pageTable.fnClearTable(0);
