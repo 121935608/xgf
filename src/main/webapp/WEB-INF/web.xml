@@ -18,7 +18,7 @@
   </filter-mapping>
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>classpath:spring-config.xml</param-value>
+    <param-value>classpath:spring*.xml</param-value>
   </context-param>
   <filter>
     <filter-name>encodingFilter</filter-name>
