@@ -367,7 +367,7 @@ function query() {
     var supply = $("#supply option:selected").val();
     var commodityStatus = $("#commodityStatus option:selected").val();
 	var commodityName =$("#commodityName").val();
-    pageTable.fnSettings().sAjaxSource = encodeURI("${context_root}/commodity/findProductList.action?tag="+tag+"&origin="+origin+"&categoryId="+categoryId+"&supply="+supply+"&commodityStatus="+commodityStatus+"&commodityName="+commodityName+"&type=${product.type}");
+    pageTable.fnSettings().sAjaxSource = encodeURI("${context_root}/commodity/findProductList.action?tag="+tag+"&origin="+origin+"&categoryId="+categoryId+"&commodityStatus="+commodityStatus+"&commodityName="+commodityName+"&type=${product.type}");
     pageTable.fnClearTable(0);
     pageTable.fnDraw();
 }
