@@ -52,7 +52,6 @@
 				<th width="3%">等级</th>
 				<th width="5%">规格</th>
 				<th width="5%">价格规格</th>
-				<th width="5%">商品描述</th>
 				<th width="5%">进价(元)</th>
 				<th width="5%">费率</th>
 				<th width="5%">售价(元)</th>
@@ -222,7 +221,7 @@ $(document).ready(function(){
                 }
             }
         },
-        {
+        /*{
             "sDefaultContent": "商品描述",
             "bSortable" : false,
             "sClass": "text-c",
@@ -234,7 +233,7 @@ $(document).ready(function(){
                     return "";
                 }
             }
-        },
+        },*/
         {
             "sDefaultContent": "进价(元)",
             "bSortable" : false,
