@@ -115,8 +115,8 @@ $(document).ready(function(){
         "sClass": "text-c",
         "bSearchable": false,
         "mRender": function(data, type, row) {
-            if (row.repayDate != null) {
-            	return formatDate(row.repayDate,"yyyy-MM-dd hh:mm:ss");
+            if (row.planRepayDate != null) {
+            	return formatDate(row.planRepayDate,"yyyy-MM-dd hh:mm:ss");
             } else {
                 return "";
             }

@@ -74,7 +74,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 
 	
 	<select id="repaymentpageInfoQuery"  parameterType="PageUtilEntity"  resultType="Repay">
-		select a.repayId repayId,a.repayNo,a.addTime,c.orderNumber,b.storeName,a.repayDate,
+		select a.repayId repayId,a.repayNo,a.addTime,c.orderNumber,b.storeName,a.planRepayDate,
 		a.planTotal/100 planTotal,a.status,
 		ifnull(a.repayMoney/100,0) repayMoney,ifnull((a.planTotal/100-ifnull(a.repayMoney/100,0)),0) withholdMoney
 			from t_repay a 
@@ -94,10 +94,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</if> 
 			<if test="relationMap.dateType=='repayDate'">
 				<if test="relationMap.beginTime != null and relationMap.beginTime != ''"> 
-					AND DATE_FORMAT(a.repayDate,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
+					AND DATE_FORMAT(a.planRepayDate,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
 				</if>
 				<if test="relationMap.endTime != null and relationMap.endTime != ''"> 
-					AND DATE_FORMAT(a.repayDate,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
+					AND DATE_FORMAT(a.planRepayDate,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
 				</if>  
 			</if> 
 			<if test="relationMap.repaymentStatus != null and relationMap.repaymentStatus != ''">
