@@ -8,12 +8,12 @@
 <script type="text/javascript" src="${context_root}/uiloader/lib/zTree/v3/js/jquery.ztree.all-3.5.min.js"></script>
 <body class="pos-r">
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 商品管理 <span class="c-gray en">&gt;</span> 分类管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
-<div class="pos-a" style="width:150px;left:0;height:100%; border-right:1px solid #e5e5e5; background-color:#f5f5f5">
-	<ul id="classificationTree" class="ztree">
-	</ul>
-</div>
-
 <article class="page-container">
+	<div class="pos-a" style="width:20%;left:0;height:100%; border-right:1px solid #e5e5e5; background-color:#f5f5f5">
+		<ul id="classificationTree" class="ztree">
+		</ul>
+	</div>
+    <div style="width:80%;left:0;height:100%;">
 	<form action="" method="post" class="form form-horizontal" id="form-classification-save" style="margin-left:130px;">
 	    <input type="hidden" value="" id="categoryId" name="categoryId">
 	     <div class="row cl">
@@ -57,6 +57,7 @@
 			</div>
 		</div>
 	</form>
+</div>
 </article>
 <SCRIPT type="text/javascript">
 	  var setting = {
@@ -77,9 +78,9 @@
 			beforeRemove: beforeRemove,
 			onClick: onClick
 		}
-		
-	}; 
-	  
+
+	};
+
 		//删除菜单
 		function showRemoveBtn(treeId, treeNode) {
 			return true;
@@ -88,7 +89,7 @@
 		function showRenameBtn(treeId, treeNode) {
 			return false;
 		}
-	
+
 		//删除菜单
 		function beforeRemove(treeId, treeNode) {
 			parent.layer.confirm("确认删除菜单【 " + treeNode.name + "】吗？",function(index){
@@ -112,9 +113,10 @@
 			});
 			return false;
 		}
-	
+
 	//单击菜单触发
 	 function onClick(e,treeId, treeNode) {
+		    alert(treeNode.name);
 		var zTree = $.fn.zTree.getZTreeObj("classificationTree");
 		zTree.expandNode(treeNode);
 		$.post("${context_root}/commodity/getMenu.action?categoryId=" + treeNode.id , function(data){
@@ -124,14 +126,14 @@
 			$("#img").val(data.img);
 			$("#status").val(data.status);
 			$("#sort").val(data.sort);
-			
+
 			$("input[name=available][value='"+data.available+"']").iCheck('check');
 			$("#parentId option").removeAttr("selected");
 			checkOption(data.parentId);
-			$("select option[value='"+data.parentId+"']").attr("selected", "selected"); 
+			$("select option[value='"+data.parentId+"']").attr("selected", "selected");
 		})
 	}
-	
+
 	 $(document).ready(function(){
 			var t = $("#classificationTree");
 			$.post("${context_root}/commodity/classificationList.action", function(data){
@@ -171,12 +173,12 @@
 			status:{
 				isSpace:true,
 				required:true
-			}, 
+			},
 			sort:{
 				isSpace:true,
 				required:true
-			}, 
-			
+			},
+
 		},
 		onkeyup:false,
 		focusCleanup:true,
@@ -185,13 +187,13 @@
 			var index = parent.layer.load();
 			var formData = new FormData($('#form-classification-save')[0]);
 			$.ajax({
-				url:"${context_root}/commodity/saveClassification.action", 
+				url:"${context_root}/commodity/saveClassification.action",
 				type:'post',
 				data:formData,
 				mimeType: "multipart/form-data",
 				contentType: false,
 				cache:false,
-				processData: false,			
+				processData: false,
 				success:function(data){
 					var data = JSON.parse(data);
 					parent.layer.close(index);
@@ -206,7 +208,7 @@
 				},
 			});
 		}
-	}); 
+	});
 
 	var selectOption = $("#parentId").html();
 	function checkOption(parentId)
@@ -223,8 +225,8 @@
 			$("#parentId").append(selectOption);
 			$("select option[value='0']").remove();
 		}
-	} 
-	
+	}
+
 	var selectOption2 = $("#status").html();
 	function checkOption2(status)
 	{
@@ -240,8 +242,8 @@
 			$("#status").append(selectOption);
 			$("select option[value='0']").remove();
 		}
-	} 
-	 
-</SCRIPT> 
+	}
+
+</SCRIPT>
 </body>
 </html>

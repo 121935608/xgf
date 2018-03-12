@@ -43,8 +43,11 @@ public class RepaymentService implements IRepaymentService
         
         return repaymentDao.getByRepayId(id);
     }
+    @Override
+    public String getOrderNumber(String id) {
 
-
+        return repaymentDao.getOrderNumber(id);
+    }
 
     @Override
     public int updateRepay(Repay repay,RepayDetail repayDetail) {

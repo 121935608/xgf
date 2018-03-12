@@ -114,11 +114,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	 
 	 <select id="getByRepayId" parameterType="string" resultType="Repay">
-	 	SELECT repayId,repayNo,planTotal/100 planTotal,IFNULL(repayMoney/100,0) repayMoney,remark,
-	 	ROUND(IFNULL((planTotal/100-IFNULL(repayMoney/100,0)),0),2) withholdMoney
+	 	SELECT userId,repayId,repayNo,round(planTotal/100,2) planTotal,round(repayMoney/100,2) repayMoney,remark,
+	 	round((planTotal/100-repayMoney/100),2) withholdMoney
 		FROM t_repay WHERE repayId=#{0}
 	 </select>
-	 
+
+	<select id="getOrderNumber" parameterType="string" resultType="String">
+	select o.orderNumber from t_order o inner join t_repay r on o.orderId=r.orderId where r.repayId=#{0}
+    </select>
+
 	 <update id="updateRepay" parameterType="Repay">
 		UPDATE t_repay
 		<set>

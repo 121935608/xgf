@@ -47,6 +47,17 @@ public class Message
         this.m = m;
     }
 
+    public Message(String code,String msg){
+        if("0000".equals(code)){
+            s = true;
+            this.m = "操作成功!";
+        }else
+        {
+            s = false;
+            this.m=msg;
+        }
+    }
+
     /**
      * 
      * @param s 消息成功标识

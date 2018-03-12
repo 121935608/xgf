@@ -27,6 +27,8 @@ public interface IRepaymentService
     Repay getByRepayId(String id);
     
     int updateRepay(Repay repay,RepayDetail repayDetail);
-    
+
+    String getOrderNumber(String id);
+
     List<RepayDetail> getRepayDetail(String id);
 }

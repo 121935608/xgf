@@ -28,6 +28,8 @@ public interface IRepaymentDao
     int updateRepay(Repay repay);
     
     int addRepayDetail(RepayDetail repayDetail);
-    
+
+    String getOrderNumber(String id);
+
     List<RepayDetail> getRepayDetail(String id);
 }

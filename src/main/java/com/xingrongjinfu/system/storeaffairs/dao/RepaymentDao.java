@@ -49,6 +49,12 @@ public class RepaymentDao extends DynamicObjectBaseDao implements IRepaymentDao
     }
 
     @Override
+    public String getOrderNumber(String id) {
+
+        return (String) this.findForObject("StoreAffairMapper.getOrderNumber", id);
+    }
+
+    @Override
     public int updateRepay(Repay repay) {
         
         return this.update("StoreAffairMapper.updateRepay", repay);

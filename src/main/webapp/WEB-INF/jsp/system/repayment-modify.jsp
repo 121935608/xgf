@@ -16,6 +16,7 @@
 		<input type="hidden" class="input-text" id="repayMoney" name="repayMoney" value="${repay.repayMoney }">
 		<input type="hidden" class="input-text" id="planTotal" name="planTotal" value="${repay.planTotal }">
 		<div id="table">
+			<input type="hidden" name="userId" id="userId" value=${repay.userId}>
 			<table>
 				<tr>
 					<td>还款单号</td>
