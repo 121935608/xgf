@@ -208,7 +208,7 @@ class CertificationController extends BaseController {
             String msg2=jsonObject2.getString("msg");
             store1.setUpdateTime(new Date());
             if("0000".equals(code1)&&"0000".equals(code2)){
-                store1.setProcess("APRYES");
+                store1.setProcess("APRING");
                 result = certificationService.saveCertificationCheck(store1);
             }else{
 //                store1.setProcess("APRING");

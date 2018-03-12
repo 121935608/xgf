@@ -15,6 +15,7 @@ import org.framework.base.util.TableDataInfo;
 import org.framework.core.controller.BaseController;
 import org.framework.core.model.Message;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -44,6 +45,13 @@ import net.sf.json.JSONObject;
 class RepaymentController extends BaseController {
 	@Autowired
     private IRepaymentService repaymentService;
+
+	public String repayUrl;
+
+    @Value("${repayUrl}")
+    public void setRepayUrl(String repayUrl) {
+        this.repayUrl = repayUrl;
+    }
 	
 
     /**
@@ -169,7 +177,7 @@ class RepaymentController extends BaseController {
         jsonObject.put("repayMoney",repay.getPlanTotal());
         jsonObject.put("restMoney",surplusMoney);
         map.put("params",jsonObject);
-        String result1= HttpClientUtil.httpPostRequest("http://lelouch.free.ngrok.cc/xgf/third/payBack",map);
+        String result1= HttpClientUtil.httpPostRequest(repayUrl,map);
         JSONObject jsonObject1= net.sf.json.JSONObject.fromObject(result1);
         String code=jsonObject1.getString("code");
         String msg=jsonObject1.getString("msg");
