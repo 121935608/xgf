@@ -54,6 +54,7 @@ $("#form-supply-modify").validate({
 			supplierName: {
 	            required: true,
 	            isSpace: true,
+	            maxlength:100,
 	           remote: {
 	                url: "${context_root}/commodity/checkSupplyName.action",
 	                type: "post",
@@ -75,6 +76,7 @@ $("#form-supply-modify").validate({
 		contactName:{
 			required:true,
 			isSpace:true,
+			maxlength:20
 		},
 		phone:{
 			required:true,

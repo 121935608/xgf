@@ -60,9 +60,15 @@ $("#form-advertisement-add").validate({
             }
         }, */
 		
+        advertisementName: {
+            required: true,
+            isSpace: true,
+            maxlength:20
+        },
 		advertisementUrl: {
             required: true,
             isSpace: true,
+            maxlength:250
         },
 		status:{
 			required:true,

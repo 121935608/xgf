@@ -73,6 +73,7 @@
 								categoryName : {
 									required : true,
 									isSpace : true,
+									maxlength:20
 								},
 							},
 							onkeyup : false,

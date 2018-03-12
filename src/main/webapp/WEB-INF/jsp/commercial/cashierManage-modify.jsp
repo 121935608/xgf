@@ -56,6 +56,7 @@ $("#form-cashierManage-modify").validate({
 		cashierName: {
 	            required: true,
 	            isSpace: true,
+	            maxlength:20,
 	           remote: {
 	                url: "${context_root}/commercial/checkCashierManageNameUnique.action",
 	                type: "post",
@@ -76,7 +77,9 @@ $("#form-cashierManage-modify").validate({
 	        }, 
 	        password:{
 				required:true,
-				isSpace:true
+				isSpace:true,
+				minlength: 6,
+				maxlength:100
 			},
 			name:{
 				required:true,
@@ -86,6 +89,8 @@ $("#form-cashierManage-modify").validate({
 			confirmPassword: {
 	            required: true,
 	            isSpace: true,
+	            minlength: 6,
+				maxlength:100
 	            equalTo: password
 	        },
 		status:{

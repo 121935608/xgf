@@ -204,6 +204,9 @@ $("#form-certification-check").validate({
 			required:true,
 			isSpace:true,
 		},
+		remark:{
+			maxlength:250
+		},
 	},
 	onkeyup:false,
 	focusCleanup:true,

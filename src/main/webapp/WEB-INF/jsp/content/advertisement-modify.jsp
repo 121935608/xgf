@@ -65,10 +65,12 @@ $("#form-advertisement-modify").validate({
 		advertisementUrl: {
             required: true,
             isSpace: true,
+            maxlength:250
         },
         advertisementName: {
             required: true,
             isSpace: true,
+            maxlength:20
         },
 		status:{
 			required:true,

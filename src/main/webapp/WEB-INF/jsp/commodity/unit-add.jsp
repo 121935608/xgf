@@ -26,6 +26,7 @@ $("#form-unit-add").validate({
 		unitName: {
             required: true,
             isSpace: true,
+            maxlength:20,
            remote: {
                 url: "${context_root}/commodity/checkUnitName.action",
                 type: "post",

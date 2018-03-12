@@ -94,6 +94,7 @@ $("#form-exhibition-add").validate({
 		categoryName:{
 			required:true,
 			isSpace:true,
+			maxlength:20
 		},
 		
         status:{
@@ -103,6 +104,7 @@ $("#form-exhibition-add").validate({
         url:{
 			required:true,
 			isSpace:true,
+			maxlength:250
 		},
 		
 		/* messages: {

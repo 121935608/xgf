@@ -88,6 +88,7 @@ $("#form-member-edit").validate({
 		memberNo: {
             required: true,
             isSpace: true,
+            maxlength:50,
             isPhone:true,
            remote: {
                 url: "${context_root}/member/checkNameUnique.action",
@@ -110,9 +111,17 @@ $("#form-member-edit").validate({
         name:{
 			required:true,
 			isSpace:true,
+			maxlength:50,
 		},
-        addTime:{
+		qq:{
 			required:true,
+			isSpace:true,
+			maxlength:50,
+		},
+		email:{
+			required:true,
+			isSpace:true,
+			maxlength:50,
 		},
         timeLimi:{
 			required:true,
@@ -123,10 +132,14 @@ $("#form-member-edit").validate({
 		},
         address:{
 			required:true,
+			maxlength:250
 		},
         level:{
-            required:true,
+            required:true
         },
+        remark:{
+        	maxlength:250
+        }
 	},
 	onkeyup:false,
 	focusCleanup:true,

@@ -79,6 +79,7 @@ $("#form-carousel-modify").validate({
 		url: {
             required: true,
             isSpace: true,
+            maxlength:250
         },
 		status:{
 			required:true,
@@ -87,6 +88,7 @@ $("#form-carousel-modify").validate({
 		carouselName:{
 			required:true,
 			isSpace:true,
+			maxlength:20
 		},
 		
 	},

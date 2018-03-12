@@ -65,7 +65,7 @@ $("#form-label-add").validate({
 		categoryName: {
             required: true,
             isSpace: true,
-            maxlength:8,
+            maxlength:20,
            remote: {
                 url: "${context_root}/commodity/checkNamesUnique.action",
                 type: "post",

@@ -49,7 +49,7 @@
                 <label class="form-label col-xs-4 col-sm-3">回复：</label>
                 <div class="formControls col-xs-8 col-sm-6">
                     <textarea name="reply" id="reply" cols="" rows="" class="textarea"  placeholder="请输入回复内容"  datatype="*10-100" dragonfly="true" onKeyUp="textarealength(this,200)">${unHelpInfo.reply}</textarea>
-                    <p class="textarea-numberbar"><em class="textarea-length">0</em>/200</p>
+                    <p class="textarea-numberbar"><em class="textarea-length">0</em>/250</p>
                 </div>
             </div>
             <div class="row cl">
@@ -79,6 +79,7 @@
         rules:{
             reply:{
                 required:true,
+                maxlength:250
             }
         },
         onkeyup:false,

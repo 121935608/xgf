@@ -81,10 +81,12 @@ $("#form-exhibition-modify").validate({
 		url:{
 			required:true,
 			isSpace:true,
+			maxlength:250
 		},
 		categoryName:{
 			required:true,
 			isSpace:true,
+			maxlength:20
 		},
 		
 	},

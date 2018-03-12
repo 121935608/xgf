@@ -71,7 +71,7 @@ $("#form-label-modify").validate({
 		 categoryName: {
             required: true,
             isSpace: true,
-		    maxlength:8,
+		    maxlength:20,
             remote: {
                  url: "${context_root}/commodity/isExistByName.action?categoryId=${category.categoryId }",
                  type: "post",

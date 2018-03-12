@@ -89,6 +89,10 @@ $("#form-carousel-add").validate({
             }
         }, */
 		
+        carouselName:{
+			required:true,
+			maxlength:20
+		},
 		picture:{
 			required:true,
 			isSpace:true,
@@ -96,6 +100,7 @@ $("#form-carousel-add").validate({
 		url: {
             required: true,
             isSpace: true,
+            maxlength:250
         },
 		status:{
 			required:true,

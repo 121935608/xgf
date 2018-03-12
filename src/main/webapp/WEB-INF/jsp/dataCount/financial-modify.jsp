@@ -30,7 +30,8 @@
 				</tr>
 				<tr>
 					<td>备注</td>
-					<td><textarea id="remark" name="remark"></textarea></td>
+					<td><textarea style="width:50%;" name="remark" id="remark" cols="" rows="" class="textarea" datatype="*10-100" dragonfly="true" onKeyUp="textarealength(this,250)">${unHelpInfo.reply}</textarea>
+                    </td>
 				</tr>
 			</table>
 		</div>
@@ -45,6 +46,9 @@
 <script type="text/javascript">
 $("#form-financial-modify").validate({
 	rules:{
+		remark:{
+			maxlength:250
+		},
 		fee:{
 			required:true,
 		}

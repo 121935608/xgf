@@ -182,6 +182,7 @@ $("#form-register-modify").validate({
 		commodityName: {
             required: true,
             isSpace: false,
+            maxlength:20,
            remote: {
                 url: "${context_root}/commodity/checkCategoryName.action",
                 type: "post",
@@ -203,6 +204,7 @@ $("#form-register-modify").validate({
         commodityNo: {
             required: true,
             isSpace: false,
+            maxlength:250,
            remote: {
                 url: "${context_root}/commodity/checkCategoryName.action",
                 type: "post",

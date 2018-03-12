@@ -155,6 +155,7 @@ $("#form-advertisement-modify").validate({
 		commodityAdName: {
             required: true,
             isSpace: true,
+            maxlength:20
         },
 		commodityId:{
 			required:true,

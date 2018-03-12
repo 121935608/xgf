@@ -165,7 +165,8 @@
 			},
 			categoryName:{
 				isSpace:true,
-				required:true
+				required:true,
+				maxlength:20
 			},
 			status:{
 				isSpace:true,
