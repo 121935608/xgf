@@ -16,7 +16,7 @@
 		<input type="hidden" class="input-text" id="repayMoney" name="repayMoney" value="${repay.repayMoney }">
 		<input type="hidden" class="input-text" id="planTotal" name="planTotal" value="${repay.planTotal }">
 		<div id="table">
-			<input type="hidden" name="userId" id="userId" value=${repay.userId}>
+		<input type="hidden" name="userId" id="userId" value=${repay.userId}>
 			<table>
 				<tr>
 					<td>还款单号</td>
@@ -28,7 +28,7 @@
 				</tr>
 				<tr>
 					<td>还款金额</td>
-					<td><input type="number" name="dueFee" id="dueFee"/>&nbsp;元</td>
+					<td>${repay.withholdMoney }&nbsp;元</td>
 				</tr>
 				<tr>
 					<td>备注</td>
@@ -49,9 +49,6 @@
 <script type="text/javascript">
 $("#form-repay-modify").validate({
 	rules:{
-		dueFee:{
-			required:true,
-		},
 		remark:{
 			maxlength:250
 		}
@@ -60,17 +57,9 @@ $("#form-repay-modify").validate({
 	focusCleanup:true,
 	success:"valid",
 	submitHandler:function(form){
-		var dueFee = $("#dueFee").val();
-		var type = 0;
-		if(parseFloat(dueFee) > parseFloat('${repay.withholdMoney }')){
-			alert("还款金额过大！");
-			return;
-		}else if(dueFee == '${repay.withholdMoney }'){
-			type = 1;
-		}
 		var index = parent.layer.load();
 		$.ajax({
-			url:"${context_root}/merchant/modifyRepay.action?type="+type, 
+			url:"${context_root}/merchant/modifyRepay.action",
 			type:'post',
 			async:true ,
 			cache:false ,

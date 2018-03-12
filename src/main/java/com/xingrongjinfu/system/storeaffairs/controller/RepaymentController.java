@@ -9,8 +9,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import net.sf.json.JSONObject;
-import com.xingrongjinfu.utils.HttpClientUtil;
 import org.apache.shiro.common.utils.SessionUtils;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
@@ -29,7 +27,10 @@ import com.xingrongjinfu.system.storeaffairs.model.RepayDetail;
 import com.xingrongjinfu.system.storeaffairs.service.IRepaymentService;
 import com.xingrongjinfu.system.syscode.model.SysCode;
 import com.xingrongjinfu.system.user.model.User;
-import com.xingrongjinfu.utils.UuidUtil; 
+import com.xingrongjinfu.utils.HttpClientUtil;
+import com.xingrongjinfu.utils.UuidUtil;
+
+import net.sf.json.JSONObject; 
 
 
 /**
@@ -159,13 +160,13 @@ class RepaymentController extends BaseController {
         String orderNumber=repaymentService.getOrderNumber(repay.getRepayId());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String payTime=sdf.format(new Date());
-        BigDecimal surplusMoney=repay.getDueFee().multiply(new BigDecimal(100)).add(repay1.getWithholdMoney().multiply(new BigDecimal(100)));
+        BigDecimal surplusMoney=repay.getPlanTotal().multiply(new BigDecimal(100));
         HashMap map=new HashMap();
         JSONObject jsonObject=new JSONObject();
         jsonObject.put("userId",userId);
         jsonObject.put("orderNumber",orderNumber);
         jsonObject.put("payTime",payTime);
-        jsonObject.put("repayMoney",repay.getDueFee());
+        jsonObject.put("repayMoney",repay.getPlanTotal());
         jsonObject.put("restMoney",surplusMoney);
         map.put("params",jsonObject);
         String result1= HttpClientUtil.httpPostRequest("http://lelouch.free.ngrok.cc/xgf/third/payBack",map);
@@ -174,24 +175,19 @@ class RepaymentController extends BaseController {
         String msg=jsonObject1.getString("msg");
         if("0000".equals(code)){
         System.out.println(result1);
-        repay.setRepayMoney(repay.getDueFee().multiply(new BigDecimal(100)).add(repay.getRepayMoney().multiply(new BigDecimal(100))));
+        repay.setRepayMoney(repay.getPlanTotal().multiply(new BigDecimal(100)));
         repay.setWithholdMoney(surplusMoney);
         repay.setRepayDate(new Date());
         repay.setUpdateTime(new Date());
-        if(type == 1){
-            repay.setStatus(1);
-            repay.setRepayType(2);
-        }else if(type == 0){
-            repay.setStatus(0);
-            repay.setRepayType(2);
-        }
+        repay.setStatus(1);
+        repay.setRepayType(2);
 
         RepayDetail repayDetail = new RepayDetail();
         repayDetail.setRepayDetailId(UuidUtil.get32UUID());
         repayDetail.setRepayId(repay.getRepayId());
         if(null != repay.getRemark())
             repayDetail.setRemark(repay.getRemark());
-        repayDetail.setRepayMoney(repay.getDueFee().multiply(new BigDecimal(100)));
+        repayDetail.setRepayMoney(repay.getPlanTotal().multiply(new BigDecimal(100)));
         repayDetail.setUserId(user.getUserId());
         repayDetail.setRepayType(2);
         repayDetail.setRepayTime(new Date());
