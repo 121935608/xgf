@@ -80,7 +80,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			from t_repay a 
 			LEFT join  t_store b on a.userId=b.userId 
 			LEFT join  t_order c on a.orderId=c.orderId
-		where 1=1 and a.status=0 or a.status=1
+		where 1=1 and (a.status=0 or a.status=1)
 		<if test="relationMap.type != null and relationMap.type=='B'.toString()">
 			AND b.storeId=#{relationMap.storeId}
 		</if>
