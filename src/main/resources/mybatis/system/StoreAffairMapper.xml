@@ -127,6 +127,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		UPDATE t_repay
 		<set>
 			repayMoney = #{repayMoney},
+			withholdMoney=#{withholdMoney},
 			repayDate = #{repayDate},
 			status = #{status},
 			repayType = #{repayType},
