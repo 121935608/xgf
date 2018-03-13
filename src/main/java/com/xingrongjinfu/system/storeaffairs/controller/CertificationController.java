@@ -211,7 +211,7 @@ class CertificationController extends BaseController {
                 store.setProcess("APRING");
                 result = certificationService.saveCertificationCheck(store);
             }else{
-//                store1.setProcess("APRING");
+                store.setProcess("APRNO");
                 store.setRemark(msg1);
                 result = certificationService.saveCertificationCheck(store);
             }
