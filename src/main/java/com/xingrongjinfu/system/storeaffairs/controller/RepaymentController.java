@@ -174,7 +174,7 @@ class RepaymentController extends BaseController {
         jsonObject.put("userId",userId);
         jsonObject.put("orderNumber",orderNumber);
         jsonObject.put("payTime",payTime);
-        jsonObject.put("repayMoney",repay.getPlanTotal());
+        jsonObject.put("repayMoney",repay.getPlanTotal().multiply(new BigDecimal(100)));
         jsonObject.put("restMoney",surplusMoney);
         map.put("params",jsonObject);
         String result1= HttpClientUtil.httpPostRequest(repayUrl,map);
