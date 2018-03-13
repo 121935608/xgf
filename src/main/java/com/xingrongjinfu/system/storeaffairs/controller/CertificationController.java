@@ -186,12 +186,12 @@ class CertificationController extends BaseController {
         int result = 0;
         String id = store.getStoreId();
         Store store2=certificationService.getStoreInfo(id);
-        System.out.println("后台bug888888888"+new Date()+store2.getUserId());
+//        System.out.println("后台bug888888888"+new Date()+store2.getUserId());
         if("APRYES".equals(process)){
             if (id != null&&!id.equals(""))
         {
             Store store1=certificationService.getStoreInfo(id);
-            System.out.println("后台bug"+new Date()+store1.getUserId());
+//            System.out.println("后台bug"+new Date()+store1.getUserId());
             HashMap map=new HashMap();
             map.put("userId",store1.getUserId());
             //调用app添加客户接口
@@ -212,7 +212,13 @@ class CertificationController extends BaseController {
                 result = certificationService.saveCertificationCheck(store);
             }else{
                 store.setProcess("APRNO");
+                if("0000".equals(code1)){
+                store.setRemark(msg2);
+                }else if("0000".equals(code2)){
                 store.setRemark(msg1);
+                }else{
+                store.setRemark(msg1+msg2);
+                }
                 result = certificationService.saveCertificationCheck(store);
             }
         }
