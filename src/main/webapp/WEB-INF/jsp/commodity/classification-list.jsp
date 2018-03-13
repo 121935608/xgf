@@ -116,7 +116,6 @@
 
 	//单击菜单触发
 	 function onClick(e,treeId, treeNode) {
-		    alert(treeNode.name);
 		var zTree = $.fn.zTree.getZTreeObj("classificationTree");
 		zTree.expandNode(treeNode);
 		$.post("${context_root}/commodity/getMenu.action?categoryId=" + treeNode.id , function(data){
