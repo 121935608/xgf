@@ -206,14 +206,14 @@ class CertificationController extends BaseController {
             JSONObject jsonObject2=JSONObject.fromObject(result2);
             String code2=jsonObject2.getString("code");
             String msg2=jsonObject2.getString("msg");
-            store1.setUpdateTime(new Date());
+            store.setUpdateTime(new Date());
             if("0000".equals(code1)&&"0000".equals(code2)){
-                store1.setProcess("APRING");
-                result = certificationService.saveCertificationCheck(store1);
+                store.setProcess("APRING");
+                result = certificationService.saveCertificationCheck(store);
             }else{
 //                store1.setProcess("APRING");
-                store1.setRemark(msg1);
-                result = certificationService.saveCertificationCheck(store1);
+                store.setRemark(msg1);
+                result = certificationService.saveCertificationCheck(store);
             }
         }
         }
