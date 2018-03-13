@@ -16,6 +16,13 @@ import com.xingrongjinfu.statistics.paysWater.common.CashConstant;
 import com.xingrongjinfu.statistics.paysWater.model.CashFlow;
 import com.xingrongjinfu.statistics.paysWater.service.ICashService;
 
+/**
+ * Description: 收银流水（收银端）
+ * date: 2018年3月12日 下午6:05:05 <br/>
+ *
+ * @author huYL
+ * @version 
+ */
 @Controller
 @RequestMapping(StatisticsConstant.STATISTICS_URL)
 public class CashController extends BaseController{

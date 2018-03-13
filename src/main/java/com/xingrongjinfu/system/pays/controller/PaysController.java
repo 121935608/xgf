@@ -10,9 +10,8 @@
  */
 package com.xingrongjinfu.system.pays.controller;
 
-import com.xingrongjinfu.system.SystemConstant;
-import com.xingrongjinfu.system.pays.common.PaysConstant;
-import com.xingrongjinfu.system.pays.service.IPaysService;
+import java.util.List;
+
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.framework.core.controller.BaseController;
@@ -21,10 +20,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
+import com.xingrongjinfu.system.SystemConstant;
+import com.xingrongjinfu.system.pays.common.PaysConstant;
+import com.xingrongjinfu.system.pays.service.IPaysService;
 
 /**
- * 〈一句话功能简述〉<br> 
+ * 收银支付流水（平台端）
  * 〈〉
  *
  * @author zxuser

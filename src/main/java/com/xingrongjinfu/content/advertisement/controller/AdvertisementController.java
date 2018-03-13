@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.aspectj.lang.annotation.ActionControllerLog;
 import org.framework.base.util.PageUtilEntity;
-import org.framework.base.util.TableDataInfo;
 import org.framework.core.controller.BaseController;
 import org.framework.core.model.Message;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,24 +14,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.aliyun.oss.OSSException;
 import com.xingrongjinfu.content.ContentConstant;
 import com.xingrongjinfu.content.advertisement.common.AdvertisementConstant;
 import com.xingrongjinfu.content.advertisement.model.Advertisement;
 import com.xingrongjinfu.content.advertisement.service.IAdvertisementService;
-import com.xingrongjinfu.content.carousel.common.CarouselConstant;
-import com.xingrongjinfu.content.carousel.model.Carousel;
-import com.xingrongjinfu.content.exhibition.model.Exhibition;
-import com.xingrongjinfu.system.role.common.RoleConstant;
-import com.xingrongjinfu.system.role.model.Role;
 import com.xingrongjinfu.system.syscode.model.SysCode;
-import com.xingrongjinfu.utils.AliyunOSSClientUtil;
 
 /**
- * 业务处理
+ * 业务处理  广告通知（平台端）
  * 
  * @author
  */

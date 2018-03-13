@@ -10,12 +10,10 @@
  */
 package com.xingrongjinfu.system.help.controller;
 
-import com.xingrongjinfu.system.SystemConstant;
-import com.xingrongjinfu.system.help.common.HelpConstant;
-import com.xingrongjinfu.system.help.model.Help;
-import com.xingrongjinfu.system.help.service.HelpService;
-import com.xingrongjinfu.system.help.service.IHelpService;
-import com.xingrongjinfu.system.user.model.User;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 import org.framework.base.util.PageUtilEntity;
 import org.framework.core.controller.BaseController;
 import org.framework.core.model.Message;
@@ -25,12 +23,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+import com.xingrongjinfu.system.SystemConstant;
+import com.xingrongjinfu.system.help.common.HelpConstant;
+import com.xingrongjinfu.system.help.model.Help;
+import com.xingrongjinfu.system.help.service.IHelpService;
+import com.xingrongjinfu.system.user.model.User;
 
 /**
- * 〈一句话功能简述〉<br> 
+ * 帮助反馈（平台端）
  * 〈帮助与反馈的控制层〉
  *
  * @author zxuser

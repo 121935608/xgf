@@ -19,6 +19,13 @@ import com.xingrongjinfu.statistics.paysWater.model.CashDetail;
 import com.xingrongjinfu.statistics.paysWater.model.CashFlow;
 import com.xingrongjinfu.statistics.paysWater.service.ICashService;
 
+/**
+ * Description: 该controller包含收银端三个图形统计页面（销售分析、销售饼状图、今日客流分析）
+ * date: 2018年3月12日 下午5:59:07 <br/>
+ *
+ * @author huYL
+ * @version 
+ */
 @Controller
 @RequestMapping(StatisticsConstant.STATISTICS_URL)
 public class GraphController {
@@ -91,6 +98,7 @@ public class GraphController {
         if(null != endTime)
             m.put("endTime", endTime);
         List<CashDetail> list = cashService.saleGraphPie(m);
+        //计算销售饼图中各分类的占比
         double count = 0;
         List<Map<String,Object>> data = new ArrayList<Map<String,Object>>();
         if(null != list){

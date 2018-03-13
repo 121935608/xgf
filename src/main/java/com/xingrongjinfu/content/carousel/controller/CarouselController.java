@@ -26,7 +26,7 @@ import com.xingrongjinfu.system.syscode.model.SysCode;
 import com.xingrongjinfu.utils.AliyunOSSClientUtil;
 
 /**
- * 业务处理
+ * 业务处理   轮播管理（平台端）
  * 
  * @author
  */

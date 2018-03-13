@@ -19,7 +19,7 @@ import com.xingrongjinfu.statistics.financial.service.IFinancialsService;
 import com.xingrongjinfu.system.syscode.model.SysCode;
 
 /**
- * 业务处理
+ * 业务处理   该模块目前没用
  * 
  * @author
  */

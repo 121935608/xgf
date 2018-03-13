@@ -10,9 +10,8 @@
  */
 package com.xingrongjinfu.system.sale.controller;
 
-import com.xingrongjinfu.system.SystemConstant;
-import com.xingrongjinfu.system.sale.common.SaleConstant;
-import com.xingrongjinfu.system.sale.service.ISaleService;
+import java.util.List;
+
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.framework.core.controller.BaseController;
@@ -21,11 +20,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
+import com.xingrongjinfu.system.SystemConstant;
+import com.xingrongjinfu.system.sale.common.SaleConstant;
+import com.xingrongjinfu.system.sale.service.ISaleService;
 
 /**
- * 〈一句话功能简述〉<br> 
- * 〈〉
+ * 商品销售登记（平台端）
  *
  * @author zxuser
  * @create 2018/1/3

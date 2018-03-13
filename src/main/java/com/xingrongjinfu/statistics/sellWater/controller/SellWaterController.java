@@ -15,6 +15,13 @@ import com.xingrongjinfu.statistics.StatisticsConstant;
 import com.xingrongjinfu.statistics.paysWater.service.ICashService;
 import com.xingrongjinfu.statistics.sellWater.common.SellWaterConstant;
 
+/**
+ * Description:商品销售流水（收银端）
+ * date: 2018年3月12日 下午6:07:03 <br/>
+ *
+ * @author huYL
+ * @version 
+ */
 @Controller
 @RequestMapping(StatisticsConstant.STATISTICS_URL)
 public class SellWaterController extends BaseController{

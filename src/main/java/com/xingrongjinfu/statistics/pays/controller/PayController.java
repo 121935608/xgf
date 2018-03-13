@@ -20,7 +20,7 @@ import com.xingrongjinfu.statistics.pays.service.IPayService;
 import com.xingrongjinfu.system.syscode.model.SysCode;
 
 /**
- * 业务处理
+ * 业务处理   收银支付流水（平台端）
  * 
  * @author
  */

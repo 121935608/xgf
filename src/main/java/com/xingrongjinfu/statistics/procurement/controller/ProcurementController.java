@@ -5,7 +5,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.List;
 
-import org.apache.shiro.common.utils.SessionUtils;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.framework.core.controller.BaseController;
@@ -14,16 +13,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.xingrongjinfu.commercial.repayment.common.RepaymentedConstant;
-import com.xingrongjinfu.commercial.repayment.model.Repayment;
-import com.xingrongjinfu.commercial.repayment.service.IRepaymentedService;
 import com.xingrongjinfu.statistics.StatisticsConstant;
 import com.xingrongjinfu.statistics.procurement.common.ProcurementConstant;
 import com.xingrongjinfu.statistics.procurement.service.IProcurementService;
 import com.xingrongjinfu.system.user.model.User;
 
 /**
- *  业务处理
+ *  业务处理   采购登记表（收银端）
  * 
  * @author 
  */

@@ -117,7 +117,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="sellWaterpageInfoQuery" parameterType="PageUtilEntity" resultType="CashDetail">
 		SELECT c.commodityCode commodityCode,d.commodityName commodityName,c.commodityNo commodityNo,
 		d.addTime `addTime`,d.unitName unitName,
-		d.number number,d.totalVipPrice/100 totalVipPrice,d.inPrice/100*d.number inPrice
+		round(d.number,2) number,round(d.totalVipPrice/100,2) totalVipPrice,
+		round(d.inPrice/100*d.number,2) inPrice
 		FROM m_cashDetail d LEFT JOIN m_cashFlow f ON d.cashId=f.cashId 
 		LEFT JOIN m_commodity c ON d.commodityId=c.commodityId
 		WHERE f.storeId=#{relationMap.storeId} AND f.status=1 and f.type = '1'

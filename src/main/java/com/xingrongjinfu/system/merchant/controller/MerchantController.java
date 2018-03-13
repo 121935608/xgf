@@ -30,7 +30,7 @@ import com.xingrongjinfu.system.merchant.service.IMerchantService;
 import com.xingrongjinfu.system.user.model.User;
 
 /**
- * 〈一句话功能简述〉<br> 
+ * 商户管理列表（平台端）
  * 〈商品管理控制层〉
  *
  * @author zhaoyunfei
