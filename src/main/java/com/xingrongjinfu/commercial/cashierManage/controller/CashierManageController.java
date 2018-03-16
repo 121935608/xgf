@@ -114,9 +114,9 @@ public class CashierManageController extends BaseController {
 	public @ResponseBody Message saveCashierManage(CashierManage cashierManage) {
 		int result = 0;
 		String cashierId = cashierManage.getCashierId();
-		//验证账号格式（只能有数字和字母，并且至少一位）
+		//验证账号格式（只能有数字，并且至少一位）
 		String name = cashierManage.getCashierName();
-		String regex = "^[0-9a-zA_Z]+$";
+		String regex = "^[0-9]{6}$";  //^[0-9]+$
 		Pattern p = Pattern.compile(regex);
 		Matcher m = p.matcher(name);
 		if(!m.matches()){
@@ -126,6 +126,10 @@ public class CashierManageController extends BaseController {
 		if(cashierManage.getPassword().equals("......")){
 		    cashierManage.setPassword("");
 		}else{
+	        Matcher m2 = p.matcher(cashierManage.getPassword());
+	        if(!m2.matches()){
+	            return new Message(false, "密码格式不正确！");
+	        }
 		    cashierManage.setPassword(Md5Utils.hash(name+cashierManage.getPassword()));
 		}
 		if (cashierId == null) {
