@@ -93,6 +93,10 @@ public class ClassificationController extends BaseController {
         int result = 0;
         String categoryId = category.getCategoryId();
         String parentId = category.getParentId();
+        //一级菜单不能删除
+        if(classificationService.isParentId(categoryId) == 1){
+            return new Message(false, "一级菜单不能被删除！");
+        }
         //如果有商品分类是该分类 则不能删除
         int n = classificationService.queryCom(categoryId);
         if(n != 0){

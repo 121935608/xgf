@@ -52,5 +52,7 @@ public interface IClassificationService
 
 
 	public int queryCom(String id);
+	
+	public int isParentId(String id);
 
 }

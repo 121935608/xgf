@@ -76,6 +76,12 @@ public class ClassificationDao extends DynamicObjectBaseDao implements IClassifi
         return (int) this.findForObject("CommodityClassificationMapper.queryCom", id);
     }
 
+    @Override
+    public int isParentId(String id) {
+        
+        return (int) this.findForObject("CommodityClassificationMapper.isParentId", id);
+    }
+
 	
 
 }

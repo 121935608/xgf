@@ -78,4 +78,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		SELECT COUNT(*) FROM t_category c RIGHT JOIN t_commodity m ON c.categoryId=m.categoryId 
  		WHERE c.categoryId =#{0}
  	</select>
+ 	
+ 	<select id="isParentId" parameterType="string" resultType="int">
+ 		SELECT COUNT(*) FROM t_category 
+		WHERE categoryId =#{0} AND parentId='0'
+ 	</select>
 </mapper> 
