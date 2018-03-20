@@ -36,7 +36,7 @@ import com.xingrongjinfu.utils.AliyunOSSClientUtil;
 import com.xingrongjinfu.utils.StringUtil;
 
 /**
- * 〈一句话功能简述〉<br> 
+ * 商品列表+新增商品列表（平台端）
  * 〈〉
  *
  * @author zxuser

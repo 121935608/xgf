@@ -10,11 +10,8 @@
  */
 package com.xingrongjinfu.system.supervisor.controller;
 
-import com.xingrongjinfu.system.SystemConstant;
-import com.xingrongjinfu.system.supervisor.common.SupervisorConstant;
-import com.xingrongjinfu.system.supervisor.model.Supervisor;
-import com.xingrongjinfu.system.supervisor.service.ISupervisorService;
-import com.xingrongjinfu.utils.AccessCodeUtil;
+import java.util.List;
+
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.framework.core.controller.BaseController;
@@ -25,11 +22,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
+import com.xingrongjinfu.system.SystemConstant;
+import com.xingrongjinfu.system.supervisor.common.SupervisorConstant;
+import com.xingrongjinfu.system.supervisor.model.Supervisor;
+import com.xingrongjinfu.system.supervisor.service.ISupervisorService;
+import com.xingrongjinfu.utils.AccessCodeUtil;
 
 /**
  * 〈一句话功能简述〉<br> 
- * 〈督导员的控制层〉
+ * 督导员管理（平台端）
  *
  * @author zxuser
  * @create 2017/12/29

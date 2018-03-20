@@ -82,7 +82,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	
  	<select id="queryCom" parameterType="map" resultType="int">
  		SELECT COUNT(*) FROM m_category c RIGHT JOIN m_commodity m ON c.categoryId=m.categoryId 
- 		WHERE c.categoryId =#{categoryId} and m.storeId=#{storeId}
+ 		WHERE c.categoryId = #{categoryId} and m.storeId=#{storeId} OR c.categoryId IN 
+ 		(SELECT categoryId FROM m_category WHERE parentId =#{categoryId} and m.storeId=#{storeId})
  	</select>
  	
  	<select id="getCategorys" parameterType="map" resultType="Fenlei">

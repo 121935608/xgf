@@ -33,7 +33,7 @@ import com.xingrongjinfu.system.order.service.IOrderService;
 import com.xingrongjinfu.system.user.model.User;
 
 /**
- * 〈一句话功能简述〉<br> 
+ * 订单管理（平台端）
  * 〈〉
  *
  * @author zxuser

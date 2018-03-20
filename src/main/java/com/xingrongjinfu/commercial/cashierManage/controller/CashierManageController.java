@@ -30,7 +30,7 @@ import com.xingrongjinfu.system.syscode.model.SysCode;
 import com.xingrongjinfu.utils.UuidUtil;
 
 /**
- * 业务处理
+ * 业务处理——收银员管理（收银端）
  * 
  * @author
  */
@@ -114,24 +114,32 @@ public class CashierManageController extends BaseController {
 	public @ResponseBody Message saveCashierManage(CashierManage cashierManage) {
 		int result = 0;
 		String cashierId = cashierManage.getCashierId();
+		//验证账号格式（只能有数字，并且至少一位）
 		String name = cashierManage.getCashierName();
-		String regex = "^[0-9a-zA_Z]+$";
+		String regex = "^[0-9]{6}$";  //^[0-9]+$
 		Pattern p = Pattern.compile(regex);
 		Matcher m = p.matcher(name);
 		if(!m.matches()){
 		    return new Message(false, "账号格式不正确！");
 		}
+		//密码回显时无改动是......
 		if(cashierManage.getPassword().equals("......")){
 		    cashierManage.setPassword("");
 		}else{
+	        Matcher m2 = p.matcher(cashierManage.getPassword());
+	        if(!m2.matches()){
+	            return new Message(false, "密码格式不正确！");
+	        }
 		    cashierManage.setPassword(Md5Utils.hash(name+cashierManage.getPassword()));
 		}
 		if (cashierId == null) {
+		    //新增收银员
 		    String storeId = (String) SessionUtils.getSession().getAttribute("storeId");
 		    cashierManage.setCashierId(UuidUtil.get32UUID());
 			cashierManage.setStoreId(storeId);
 			result = cashierManageService.addCashierManageInfo(cashierManage);
 		}else{
+		    //修改收银员
 		    result = cashierManageService.updateCashierManageInfo(cashierManage);
 		}
 
@@ -139,11 +147,10 @@ public class CashierManageController extends BaseController {
 	}
 	
 	/**
-     * 校验名称
+     * 校验名称  收银员账号所有商铺不能重复
      */
     @RequestMapping(CashierManageConstant.CHECK_NAME_UNIQUE_URL)
-    public @ResponseBody
-    int checkNamesUnique(String cashierName,String cashierId) {
+    public @ResponseBody int checkNamesUnique(String cashierName,String cashierId) {
         String storeId = (String) SessionUtils.getSession().getAttribute("storeId");
         Map map = new HashMap();
         map.put("cashierName", cashierName);

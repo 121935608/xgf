@@ -40,8 +40,8 @@ import com.xingrongjinfu.utils.IdUtil;
 import com.xingrongjinfu.utils.StringUtil;
 
 /**
- * 〈一句话功能简述〉<br> 
- * 〈会员/用户管理〉
+ * 
+ * 〈会员/用户管理〉——会员资料（收银端）
  *
  * @author zxuser
  * @create 2018/1/25
@@ -142,6 +142,7 @@ public class MemberController extends BaseController{
     Message updateMember(Membership membership,String timeLimi) throws ParseException{
         int result=0;
         String memberId=membership.getMemberId();
+        //验证会员手机号格式
         membership.setTimeLimit(timeLimi);
         String phone = membership.getMemberNo();
         if(!StringUtil.checkPhone(phone)){

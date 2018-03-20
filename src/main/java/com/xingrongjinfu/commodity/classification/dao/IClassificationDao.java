@@ -48,4 +48,6 @@ public interface IClassificationDao
     public int deleteCategory(Category category);
 	
     public int queryCom(String id);
+    
+    public int isParentId(String id);
 }

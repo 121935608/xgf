@@ -33,7 +33,7 @@ import com.xingrongjinfu.utils.AliyunOSSClientUtil;
 import com.xingrongjinfu.utils.IdUtil;
 
 /**
- * 业务处理
+ * 业务处理  首页商品广告(平台端)
  * 
  * @author
  */

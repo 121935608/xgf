@@ -7,7 +7,7 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>账号：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="text" class="input-text" value="" placeholder="" id="cashierName" name="cashierName">
+				<input type="text" class="input-text" value="" placeholder="6位纯数字" id="cashierName" name="cashierName">
 			</div>
 		</div>
 		<div class="row cl">
@@ -20,7 +20,7 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>密码：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="password" class="input-text" value="" placeholder="" id="password" name="password">
+				<input type="password" class="input-text" value="" placeholder="6位纯数字" id="password" name="password">
 			</div>
 		</div>
 		
@@ -56,7 +56,8 @@ $("#form-cashierManage-add").validate({
         cashierName: {
             required: true,
             isSpace: true,
-            maxlength:20,
+            maxlength:6,
+            minlength:6,
            remote: {
                 url: "${context_root}/commercial/checkCashierManageNameUnique.action",
                 type: "post",
@@ -77,7 +78,7 @@ $("#form-cashierManage-add").validate({
 			required:true,
 			isSpace:true,
 			minlength: 6,
-			maxlength:100
+			maxlength:6
 		},
 		name:{
 			required:true,
@@ -88,7 +89,7 @@ $("#form-cashierManage-add").validate({
             required: true,
             isSpace: true,
             minlength: 6,
-            maxlength:100,
+            maxlength:6,
             equalTo: password
         },
 		status:{

@@ -186,12 +186,12 @@ class CertificationController extends BaseController {
         int result = 0;
         String id = store.getStoreId();
         Store store2=certificationService.getStoreInfo(id);
-        System.out.println("后台bug888888888"+new Date()+store2.getUserId());
+//        System.out.println("后台bug888888888"+new Date()+store2.getUserId());
         if("APRYES".equals(process)){
             if (id != null&&!id.equals(""))
         {
             Store store1=certificationService.getStoreInfo(id);
-            System.out.println("后台bug"+new Date()+store1.getUserId());
+//            System.out.println("后台bug"+new Date()+store1.getUserId());
             HashMap map=new HashMap();
             map.put("userId",store1.getUserId());
             //调用app添加客户接口
@@ -206,14 +206,20 @@ class CertificationController extends BaseController {
             JSONObject jsonObject2=JSONObject.fromObject(result2);
             String code2=jsonObject2.getString("code");
             String msg2=jsonObject2.getString("msg");
-            store1.setUpdateTime(new Date());
+            store.setUpdateTime(new Date());
             if("0000".equals(code1)&&"0000".equals(code2)){
-                store1.setProcess("APRING");
-                result = certificationService.saveCertificationCheck(store1);
+                store.setProcess("APRING");
+                result = certificationService.saveCertificationCheck(store);
             }else{
-//                store1.setProcess("APRING");
-                store1.setRemark(msg1);
-                result = certificationService.saveCertificationCheck(store1);
+                store.setProcess("APRNO");
+                if("0000".equals(code1)){
+                store.setRemark(msg2);
+                }else if("0000".equals(code2)){
+                store.setRemark(msg1);
+                }else{
+                store.setRemark(msg1+msg2);
+                }
+                result = certificationService.saveCertificationCheck(store);
             }
         }
         }

@@ -4,7 +4,6 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -26,7 +25,6 @@ import com.xingrongjinfu.system.storeaffairs.commom.StoreaffairConstant;
 import com.xingrongjinfu.system.storeaffairs.model.Repay;
 import com.xingrongjinfu.system.storeaffairs.model.RepayDetail;
 import com.xingrongjinfu.system.storeaffairs.service.IRepaymentService;
-import com.xingrongjinfu.system.syscode.model.SysCode;
 import com.xingrongjinfu.system.user.model.User;
 import com.xingrongjinfu.utils.HttpClientUtil;
 import com.xingrongjinfu.utils.UuidUtil;
@@ -61,33 +59,6 @@ class RepaymentController extends BaseController {
     public ModelAndView repaymentPage()
     { 
         ModelAndView modelAndView = this.getModelAndView(StoreaffairConstant.REPAYMENT_PAGE);
-
-      //（1:待支付；2:待发货；3:待收货；4:待还款；5:已还款）
-        List<SysCode> sysCodeList1 = new ArrayList<SysCode>(); 
-            SysCode sysCode1 = new SysCode();
-            sysCode1.setCodeid("0"); 
-            sysCode1.setCodevalue("待还款");
-            sysCodeList1.add(sysCode1);
-             
-            SysCode sysCode2 = new SysCode();
-            sysCode2.setCodeid("1");
-            sysCode2.setCodevalue("已还款");
-            sysCodeList1.add(sysCode2); 
-             
-        modelAndView.addObject("repaymentStatusList", sysCodeList1);
-        
-        List<SysCode> dateTypeList = new ArrayList<SysCode>(); 
-            SysCode sysCode3 = new SysCode();
-            sysCode3.setCodeid("addTime"); 
-            sysCode3.setCodevalue("创建时间");
-            dateTypeList.add(sysCode3);
-             
-            SysCode sysCode4 = new SysCode();
-            sysCode4.setCodeid("repayDate");
-            sysCode4.setCodevalue("还款日期");
-            dateTypeList.add(sysCode4); 
-             
-        modelAndView.addObject("dateTypeList", dateTypeList);
         String type = (String) SessionUtils.getSession().getAttribute("type");
         modelAndView.addObject("type", type);
         return modelAndView;
@@ -174,7 +145,7 @@ class RepaymentController extends BaseController {
         jsonObject.put("userId",userId);
         jsonObject.put("orderNumber",orderNumber);
         jsonObject.put("payTime",payTime);
-        jsonObject.put("repayMoney",repay.getPlanTotal());
+        jsonObject.put("repayMoney",repay.getPlanTotal().multiply(new BigDecimal(100)));
         jsonObject.put("restMoney",surplusMoney);
         map.put("params",jsonObject);
         String result1= HttpClientUtil.httpPostRequest(repayUrl,map);

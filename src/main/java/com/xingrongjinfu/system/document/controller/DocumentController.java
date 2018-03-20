@@ -10,14 +10,8 @@
  */
 package com.xingrongjinfu.system.document.controller;
 
-import com.aliyun.oss.OSSException;
-import com.xingrongjinfu.system.SystemConstant;
-import com.xingrongjinfu.system.document.common.DocumentConstant;
-import com.xingrongjinfu.system.document.model.Document;
-import com.xingrongjinfu.system.document.service.IDocumentService;
-import com.xingrongjinfu.system.user.model.User;
-import com.xingrongjinfu.utils.AliyunOSSClientUtil;
-import org.springframework.web.multipart.MultipartFile;
+import java.util.List;
+
 import org.framework.base.util.PageUtilEntity;
 import org.framework.core.controller.BaseController;
 import org.framework.core.model.Message;
@@ -25,13 +19,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.io.File;
-import java.util.List;
+import com.aliyun.oss.OSSException;
+import com.xingrongjinfu.system.SystemConstant;
+import com.xingrongjinfu.system.document.common.DocumentConstant;
+import com.xingrongjinfu.system.document.model.Document;
+import com.xingrongjinfu.system.document.service.IDocumentService;
+import com.xingrongjinfu.system.user.model.User;
+import com.xingrongjinfu.utils.AliyunOSSClientUtil;
 
 /**
- * 〈一句话功能简述〉<br> 
+ * 公文管理（平台端）
  * 〈文件管理的控制层〉
  *
  * @author zxuser

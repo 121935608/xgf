@@ -18,7 +18,7 @@ import com.xingrongjinfu.statistics.purchase.service.IPurchaseService;
 import com.xingrongjinfu.system.user.model.User;
 
 /**
- *  业务处理
+ *  业务处理   采购统计表（收银端）
  * 
  * @author 
  */

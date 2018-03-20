@@ -21,6 +21,13 @@ import com.xingrongjinfu.system.SystemConstant;
 import com.xingrongjinfu.system.syscode.model.SysCode;
 import com.xingrongjinfu.utils.UuidUtil;
 
+/**
+ * Description: 会员等级（收银端）
+ * date: 2018年3月12日 下午5:49:35 <br/>
+ *
+ * @author huYL
+ * @version 
+ */
 @Controller
 @RequestMapping(SystemConstant.MEMBER_URL)
 public class LevelController extends BaseController{
@@ -113,11 +120,13 @@ public class LevelController extends BaseController{
             boolean flag = false;
             for (Level level:levelList){
                 if(level.getLevelNo().equals(string)){
+                    //该等级存在
                     flag = true;
                     break;
                 }
             }
             if(!flag){
+              //该等级不存在
                 SysCode sysCode = new SysCode();
                 sysCode.setCodeid(string);
                 sysCode.setCodevalue(string);
@@ -125,6 +134,7 @@ public class LevelController extends BaseController{
             }
         }
         if(null != levelNo){
+            //修改时的会员等级列表包含自身等级
             SysCode sysCode = new SysCode();
             sysCode.setCodeid(levelNo);
             sysCode.setCodevalue(levelNo);

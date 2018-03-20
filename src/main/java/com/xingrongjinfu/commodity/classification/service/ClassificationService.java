@@ -77,4 +77,9 @@ public class ClassificationService implements IClassificationService {
         return classificationDao.queryCom(id);
     }
 
+    @Override
+    public int isParentId(String id) {
+        return classificationDao.isParentId(id);
+    }
+
 }

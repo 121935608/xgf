@@ -16,6 +16,13 @@ import com.xingrongjinfu.statistics.paysWater.model.CashDetail;
 import com.xingrongjinfu.statistics.paysWater.service.ICashService;
 import com.xingrongjinfu.statistics.saleCount.common.SaleCountConstant;
 
+/**
+ * Description: 销售统计表（收银端）
+ * date: 2018年3月12日 下午6:06:46 <br/>
+ *
+ * @author huYL
+ * @version 
+ */
 @Controller
 @RequestMapping(StatisticsConstant.STATISTICS_URL)
 public class SaleCountController extends BaseController {

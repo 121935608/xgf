@@ -32,7 +32,7 @@ import com.xingrongjinfu.system.financial.service.IFinancialService;
 import com.xingrongjinfu.utils.UuidUtil;
 
 /**
- * 〈一句话功能简述〉<br> 
+ * 财务结算（平台端）   收银日结（收银端）
  * 〈〉
  *
  * @author zxuser

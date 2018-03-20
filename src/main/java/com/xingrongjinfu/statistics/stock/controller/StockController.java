@@ -16,6 +16,13 @@ import com.xingrongjinfu.statistics.stock.common.StockConstant;
 import com.xingrongjinfu.statistics.stock.service.IStockService;
 import com.xingrongjinfu.system.syscode.model.SysCode;
 
+/**
+ * Description: 库存查询（收银端）
+ * date: 2018年3月12日 下午6:07:17 <br/>
+ *
+ * @author huYL
+ * @version 
+ */
 @Controller
 @RequestMapping(StatisticsConstant.STATISTICS_URL)
 public class StockController {
