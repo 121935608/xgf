@@ -8,36 +8,30 @@
 </style>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 商户相关 <span class="c-gray en">&gt;</span> 还款计划表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container"> 
-	<div style="min-height: 30px;">
-		<form role="form" class="text-c">
-		   <div class="row" >
-		   		<div class="row col-xs-6 col-sm-4 .col-md-4" > 
-					<div class="col-xs-4 col-sm-4 .col-md-4" >
-						<y:select id="dateType" name="dateType" codeGroup="${dateTypeList}" selectedValue=""
-								cssClass="select" headerKey="" headerValue="日期类型">
-						</y:select>
-					</div>
-					<div class="col-xs-8 col-sm-8 .col-md-8" >
-						<input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')||\'%y-%M-%d\'}'})" id="beginTime" class="input-text Wdate" style="width:120px;">
-						-
-						<input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'beginTime\')}',maxDate:'%y-%M-%d'})" id="endTime" class="input-text Wdate" style="width:120px;">
-					</div>
-				</div>
-		        <div class="row  col-xs-3 col-sm-2 .col-md-2" >  
-						<y:select id="repaymentStatus" name="repaymentStatus" codeGroup="${repaymentStatusList}" selectedValue=""
-								cssClass="select" headerKey="" headerValue="状态">
-						</y:select> 
-				</div> 
-				<div class="col-xs-3 col-sm-2 .col-md-2" > 
-					<input type="text" class="input-text" style="width:250px" placeholder="还款单号|订单号|店铺名称" id="fuzzyCondition" name="fuzzyCondition">
-				</div> 
-				<div class="col-xs-3 col-sm-2 .col-md-2" > 
-					<button type="button" class="btn btn-success radius" onclick="query()"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
-				</div> 
-		  	</div>
-		</form>
+	<div class="text-c">
+		<span class="select-box" style="width: 120px;">
+           <select name="dateType" id="dateType" class="select" autocomplete="off">
+               <option value="">日期类型</option>
+               <option value="addTime">创建时间</option>
+               <option value="repayDate">还款日期</option>
+           </select>
+       </span>
+		<input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')||\'%y-%M-%d\'}'})" id="beginTime"
+			   class="input-text Wdate" style="width:120px;" placeholder="开始时间">
+		<input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'beginTime\')}',maxDate:'%y-%M-%d'})" id="endTime"
+			   class="input-text Wdate" style="width:120px;" placeholder="结束时间">
+       <span class="select-box" style="width: 120px;">
+           <select name="status" id="status" class="select" autocomplete="off">
+               <option value="">状态</option>
+               <option value=0>待还款</option>
+               <option value=1 >已还款</option>
+               <option value=4 >待处理</option>
+               <option value=2 >处理中</option>
+           </select>
+       </span>
+		<input type="text" class="input-text" style="width:250px" placeholder="还款单号|订单号|店铺名称" id="fuzzyCondition" name="fuzzyCondition">
+		<button type="button" class="btn btn-success radius" onclick="query()"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
 	</div>
-	
 	<div class="mt-20">
 	<table class="table table-border table-bordered table-hover table-bg table-sort">
 		<thead>
@@ -50,6 +44,7 @@
 				<th width="6%">应还金额（元）</th>
 				<th width="6%">已还金额（元）</th>
 				<th width="6%">结余金额（元）</th>
+				<th width="6%">状态</th>
 				<th width="6%" id="do">操作</th>
 			</tr>
 		</thead>
@@ -159,6 +154,24 @@ $(document).ready(function(){
         }
     },
     {
+        "mData": "status",
+        "bSortable" : false,
+        "sClass": "text-c",
+        "mRender": function(data, type, row) {
+            if ((row.status == 0) || (row.status == 3)) {
+                return "待还款";
+            } else if(row.status == 1){
+            	return "已还款";
+            }else if(row.status == 2){
+            	return "处理中";
+            }else if(row.status == 4){
+            	return "待处理";
+            }else {
+                return "";
+            }
+        }
+    },
+    {
         "sDefaultContent": "",
         "bSortable" : false,
         "sClass": "td-manage text-c",
@@ -169,9 +182,8 @@ $(document).ready(function(){
         		$("thead").children("tr").children("th:last").css("display","none");
         		$('tr').find('td:last').css("display","none");
         		return;
-        		/* $(".td-manage").css("display","none"); */
         	}
-        	if(row.withholdMoney == "0" || row.withholdMoney == null){
+        	if((row.status == 1) || (row.status == 2) || (row.status == 4)){
         		return "";
         	}
             //对账
@@ -188,12 +200,12 @@ $(document).ready(function(){
 function query() {
 	var fuzzyCondition = $("#fuzzyCondition").val();
 	var dateType = $("#dateType").val();
-    var repaymentStatus = $("#repaymentStatus").val();
+    var status = $("#status").val();
     var beginTime = $("#beginTime").val();
     var endTime = $("#endTime").val();
     pageTable.fnSettings().sAjaxSource = "${context_root}/merchant/repaymentList.action?fuzzyCondition=" + encodeURIComponent(encodeURIComponent(fuzzyCondition)) +
 					    	"&dateType="+ dateType +
-					    	"&repaymentStatus="+ repaymentStatus +
+					    	"&status="+ status +
 					    	"&beginTime="+ beginTime +
 					    	"&endTime="+ endTime;
     pageTable.fnClearTable(0);

@@ -76,11 +76,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="repaymentpageInfoQuery"  parameterType="PageUtilEntity"  resultType="Repay">
 		select a.repayId repayId,a.repayNo,a.addTime,c.orderNumber,b.storeName,a.planRepayDate,
 		a.planTotal/100 planTotal,a.status,
-		ifnull(a.repayMoney/100,0) repayMoney,ifnull((a.planTotal/100-ifnull(a.repayMoney/100,0)),0) withholdMoney
+		ifnull(a.repayMoney/100,0) repayMoney,
+		ifnull((a.planTotal/100-ifnull(a.repayMoney/100,0)),0) withholdMoney
 			from t_repay a 
 			LEFT join  t_store b on a.userId=b.userId 
 			LEFT join  t_order c on a.orderId=c.orderId
-		where 1=1 and (a.status=0 or a.status=1)
+		where 1=1 and a.status!=-1
 		<if test="relationMap.type != null and relationMap.type=='B'.toString()">
 			AND b.storeId=#{relationMap.storeId}
 		</if>
@@ -100,9 +101,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					AND DATE_FORMAT(a.planRepayDate,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
 				</if>  
 			</if> 
-			<if test="relationMap.repaymentStatus != null and relationMap.repaymentStatus != ''">
-				AND a.status = #{relationMap.repaymentStatus}
-			</if> 
+			<if test="relationMap.status != null and relationMap.status == 0">
+				AND (a.status = 0 or a.status = 3)
+			</if>
+			<if test="relationMap.status != null and relationMap.status != 0">
+				AND a.status = #{relationMap.status}
+			</if>
 			<if test="relationMap.fuzzyCondition != null and relationMap.fuzzyCondition != ''">
 				AND (
 						a.repayNo LIKE CONCAT(CONCAT('%', #{relationMap.fuzzyCondition}),'%') or 
