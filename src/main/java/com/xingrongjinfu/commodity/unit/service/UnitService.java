@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.xingrongjinfu.commodity.unit.dao.IUnitDao;
 import com.xingrongjinfu.commodity.unit.model.Unit;
+import com.xingrongjinfu.system.syscode.model.SysCode;
 @Service
 public class UnitService implements IUnitService {
     @Autowired
@@ -40,6 +41,10 @@ public class UnitService implements IUnitService {
     @Override
     public int updateUnit(Unit unit) {
         return unitDao.updateUnit(unit);
+    }
+    @Override
+    public List<SysCode> getUnitList(String storeId) {
+        return unitDao.getUnitList(storeId);
     }
 
 }

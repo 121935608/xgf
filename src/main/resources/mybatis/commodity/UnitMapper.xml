@@ -51,4 +51,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</set>
 		where unitCode = #{unitCode}
 	</update>
+	
+	<select id="getUnitList" parameterType="string" resultType="SysCode" useCache="false">
+		SELECT unitId as codeid,unitName as codevalue 
+		FROM m_unit WHERE `status`=1 AND storeId=#{0} ORDER BY `addTime` DESC
+	</select>
 </mapper>

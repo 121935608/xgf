@@ -7,6 +7,7 @@ import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 
 import com.xingrongjinfu.commodity.unit.model.Unit;
+import com.xingrongjinfu.system.syscode.model.SysCode;
 
 public interface IUnitService {
     List<Unit> getAll(String storeId) throws Exception;
@@ -20,4 +21,6 @@ public interface IUnitService {
     Unit getByCode(String code);
     
     int updateUnit(Unit unit);
+    
+    List<SysCode> getUnitList(String storeId);
 }

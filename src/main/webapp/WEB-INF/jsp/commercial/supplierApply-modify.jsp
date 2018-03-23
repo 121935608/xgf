@@ -53,6 +53,7 @@
 $("#form-supplierApply-modify").validate({
 	rules:{
 		remark:{
+			required: true,
 			maxlength:250
 		}
 	},

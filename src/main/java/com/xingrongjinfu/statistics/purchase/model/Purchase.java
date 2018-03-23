@@ -25,8 +25,16 @@ public class Purchase implements Serializable
 	private String imgMain;
 	private double totalPrice;
 	private String commodityNo;
+	private Integer storageStatus;
 	
-	public String getCommodityNo() {
+	
+    public Integer getStorageStatus() {
+        return storageStatus;
+    }
+    public void setStorageStatus(Integer storageStatus) {
+        this.storageStatus = storageStatus;
+    }
+    public String getCommodityNo() {
 		return commodityNo;
 	}
 	public void setCommodityNo(String commodityNo) {

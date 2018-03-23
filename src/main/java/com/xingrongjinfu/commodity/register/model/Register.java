@@ -256,5 +256,11 @@ public class Register {
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
     }
+    @Override
+    public String toString() {
+        return "Register [commodityName=" + commodityName + ", commodityNo=" + commodityNo + ", categoryCode="
+                + categoryCode + ", stockNum=" + stockNum + ", unitName=" + unitName + ", commodityId=" + commodityId
+                + "]";
+    }
     
 }

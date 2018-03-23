@@ -18,13 +18,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="imgMain" column="imgMain" />
 		<result property="totalPrice" column="totalPrice" />
 		<result property="commodityNo" column="commodityNo" />
+		<result property="storageStatus" column="storageStatus" />
 	</resultMap>
-
 	
-	<select id="pageInfoQuery" parameterType="PageUtilEntity"
-		resultType="Purchase">
+	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultType="Purchase">
 		select
-		c.commodityName,d.commodityNo,sum(c.commodityNum) commodityNum,sum(c.totalPrice/100) totalPrice,c.unit
+		c.commodityName,d.commodityNo,sum(c.commodityNum) commodityNum,
+		sum(c.totalPrice/100) totalPrice,c.unit
 		FROM sys_user a
 		LEFT JOIN t_order b on a.userId = b.userId
 		LEFT JOIN t_order_detail c on c.orderNumber = b.orderNumber
@@ -41,18 +41,88 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			AND DATE_FORMAT(c.addTime,'%Y%m%d') &lt;=
 			DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
 		</if>
-		<if
-			test="relationMap.fuzzyCondition != null and relationMap.fuzzyCondition != ''">
+		<if test="relationMap.fuzzyCondition != null and relationMap.fuzzyCondition != ''">
 			AND (
 			c.commodityName LIKE CONCAT(CONCAT('%',
 			#{relationMap.fuzzyCondition}),'%') or
 			d.commodityNo LIKE
-			CONCAT(CONCAT('%',
-			#{relationMap.fuzzyCondition}),'%')
+			CONCAT(CONCAT('%',#{relationMap.fuzzyCondition}),'%')
 			)
 		</if>
 		GROUP BY c.commodityName,d.commodityNo,c.unit
 	</select>
-
-
+	<select id="toStockpageInfoQuery" parameterType="PageUtilEntity" resultType="Purchase">
+		select
+		c.commodityName,d.commodityNo,sum(c.commodityNum) commodityNum,
+		sum(c.totalPrice/100) totalPrice,c.unit,c.storageStatus,d.commodityId
+		FROM sys_user a
+		LEFT JOIN t_order b on a.userId = b.userId
+		LEFT JOIN t_order_detail c on c.orderNumber = b.orderNumber
+		RIGHT JOIN t_commodity d ON c.commodityId = d.commodityId
+		where 1=1 AND b.orderStatus!=1 AND b.status=1 and c.storageStatus=0
+		 <if test="relationMap.userId != null and relationMap.userId != ''">
+			AND a.userId=#{relationMap.userId}
+		</if> 
+		<if test="relationMap.beginTime != null and relationMap.beginTime != ''">
+			AND DATE_FORMAT(c.addTime,'%Y%m%d') &gt;=
+			DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
+		</if>
+		<if test="relationMap.endTime != null and relationMap.endTime != ''">
+			AND DATE_FORMAT(c.addTime,'%Y%m%d') &lt;=
+			DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
+		</if>
+		<if test="relationMap.fuzzyCondition != null and relationMap.fuzzyCondition != ''">
+			AND (
+			c.commodityName LIKE CONCAT(CONCAT('%',
+			#{relationMap.fuzzyCondition}),'%') or
+			d.commodityNo LIKE CONCAT(CONCAT('%',#{relationMap.fuzzyCondition}),'%')
+			)
+		</if>
+		GROUP BY c.commodityName,d.commodityNo,c.unit,d.commodityId
+	</select>
+	
+	<select id="getCommodityById" parameterType="map" resultType="Purchase">
+		SELECT c.commodityId,c.commodityName,c.commodityNo,
+		c.unit,SUM(c.commodityNum) commodityNum
+		FROM sys_user a LEFT JOIN t_order b ON a.userId = b.userId
+		LEFT JOIN t_order_detail c ON c.orderNumber = b.orderNumber
+		WHERE 1=1 AND a.userId=#{userId} AND commodityId=#{commodityId}
+		GROUP BY c.commodityId,c.commodityName,c.commodityNo,c.unit
+	</select>
+	
+	<select id="loadCommodity" parameterType="map" resultType="Register">
+		SELECT ifnull(commodityName,'') commodityName,ifnull(commodityNo,'') commodityNo,
+		ifnull(commodityId,'') commodityId,
+		ifnull(stockNum,0) stockNum,ifnull(u.unitId,'') unitId,ifnull(u.unitName,'') unitName
+		FROM m_commodity c LEFT JOIN m_unit u ON c.unitId=u.unitId
+		WHERE c.commodityName = #{commodityName}
+		AND c.storeId = #{storeId}
+		ORDER BY c.addTime limit 1
+	</select>
+	
+	<select id="getAllCommodity" parameterType="string" resultType="string">
+		SELECT commodityName FROM m_commodity WHERE `status`=1 AND storeId=#{0}
+		order by addTime desc
+	</select>
+	
+	<select id="getCommodityByName" parameterType="map" resultType="int">
+		SELECT count(*) FROM m_commodity WHERE `status`=1 AND storeId=#{storeId}
+		and commodityName =#{commodityName} and commodityNo=#{commodityNo}
+	</select>
+	
+	<update id="updateCommodity" parameterType="map">
+		UPDATE m_commodity
+		<set>
+			<if test="stockNum != null and stockNum != ''">stockNum = #{stockNum},</if>
+			updateTime = sysdate()
+		</set>
+		where commodityName = #{commodityName} and commodityNo=#{commodityNo} 
+		and storeId=#{storeId} and `status`=1
+	</update>
+	
+	<update id="updateCommodityStatus" parameterType="map">
+		UPDATE t_order_detail d RIGHT JOIN t_order o ON o.orderNumber=d.orderNumber 
+		SET d.storageStatus = 1
+		WHERE d.commodityNo = #{no} AND o.userId=#{userId}
+	</update>
 </mapper> 

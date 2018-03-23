@@ -114,7 +114,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 						b.storeName LIKE CONCAT(CONCAT('%', #{relationMap.fuzzyCondition}),'%') 
 						)
 			</if>
-		ORDER BY a.addTime ASC
+		ORDER BY a.addTime desc
 	</select>
 	 
 	 <select id="getByRepayId" parameterType="string" resultType="Repay">

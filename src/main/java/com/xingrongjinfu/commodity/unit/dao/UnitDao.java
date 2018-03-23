@@ -9,6 +9,7 @@ import org.framework.core.dao.DynamicObjectBaseDao;
 import org.springframework.stereotype.Repository;
 
 import com.xingrongjinfu.commodity.unit.model.Unit;
+import com.xingrongjinfu.system.syscode.model.SysCode;
 @Repository
 public class UnitDao extends DynamicObjectBaseDao implements IUnitDao {
 
@@ -47,6 +48,19 @@ public class UnitDao extends DynamicObjectBaseDao implements IUnitDao {
     public int updateUnit(Unit unit) {
         
         return this.update("UnitMapper.updateUnit", unit);
+    }
+    @Override
+    public List<SysCode> getUnitList(String storeId) {
+        List<SysCode> optionsList = null;
+        try
+        {
+            optionsList= (List<SysCode>) this.findForList("UnitMapper.getUnitList",storeId);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return optionsList;
     }
 
 }

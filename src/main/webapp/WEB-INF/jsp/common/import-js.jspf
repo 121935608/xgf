@@ -16,3 +16,4 @@
 <script type="text/javascript" src="${context_url}/uiloader/static/highCharts/highcharts.js"></script>
 <script type="text/javascript" src="${context_url}/uiloader/static/highCharts/exporting.js"></script>
 <script type="text/javascript" src="${context_url}/uiloader/static/highCharts/series-label.js"></script>
+<script type="text/javascript" src="${context_url}/uiloader/static/y/js/auto.js"></script>
