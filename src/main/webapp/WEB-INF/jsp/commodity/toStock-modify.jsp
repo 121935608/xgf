@@ -68,6 +68,8 @@
 	var tabIndex=0;
 	var unitdata=eval('${unitList}');
 	var pageTable;
+	var id2="";
+	var id6="";
 	var setting = {
 			view: {
 				selectedMulti: false
@@ -88,11 +90,11 @@
 		$("#addRow").click(function(){
 			tabIndex++;
 			var id1='no'+tabIndex;
-			var id2='commodityName'+tabIndex;
+			id2='commodityName'+tabIndex;
 			var id3='commodityNo'+tabIndex;
 			var id4='unitId'+tabIndex;
 			var id5='stockNum'+tabIndex;
-			var id6='auto'+tabIndex;
+			id6='auto'+tabIndex;
 			
 			var tr=document.createElement('tr');
 			tr.id=tabIndex;
@@ -131,7 +133,23 @@
 			var index = layer.open({
 				type:2,
 				title:titleName,
-				content:href
+				content:href,
+				end:function(){
+					$.ajax({
+						url:"${context_root}/commodity/getCommodityList.action", 
+						type:'post',
+						async:true ,
+						cache:false ,
+						dataType:"json",
+						success:function(data){
+							//自动补全
+							var autoComplete = new AutoComplete(id2,id6,data);
+							document.getElementById(id2).onkeyup = function(event){
+								autoComplete.start(event);
+							}
+						},
+					});
+				}
 			});
 			layer.full(index);
 		}
