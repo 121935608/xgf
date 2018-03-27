@@ -22,6 +22,10 @@ public class ToStockConstant {
      */
     public final static String ADD_COMMODITY_URL = "addCommodityToStock";
     /**
+     * 请求地址：商品列表
+     */
+    public final static String GET_COMMODITY_LIST = "getCommodityList";
+    /**
      * 逻辑视图名：入库页面
      */
     public final static String TOSTOCK_PAGE = "commodity/toStock-list";

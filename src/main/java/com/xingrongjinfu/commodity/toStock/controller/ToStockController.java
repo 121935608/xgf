@@ -119,4 +119,12 @@ public class ToStockController extends BaseController{
         map.put("no",no);
         return toStockService.updateCommodity(map,orders);
     }
+    @RequestMapping(ToStockConstant.GET_COMMODITY_LIST)
+    public @ResponseBody JSONArray getCommodityList(){
+        String storeId = (String) SessionUtils.getSession().getAttribute("storeId");
+        //获取商品名称列表
+        List<String> commodityList = toStockService.getAllCommodity(storeId);
+        JSONArray jaProCommodity=JSONArray.fromObject(commodityList);
+        return jaProCommodity;
+    }
 }

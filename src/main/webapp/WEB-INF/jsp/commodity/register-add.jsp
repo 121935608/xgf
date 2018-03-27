@@ -112,6 +112,7 @@
 
 
 <script type="text/javascript">
+var type = '${type}';
 //校验上传文件是否为图片格式
 function pic(e) {
 	for (var i = 0; i < e.target.files.length; i++) {  
@@ -278,8 +279,12 @@ $("#form-register-add").validate({
 				if(data.s == true){
 					index = parent.layer.getFrameIndex(window.name);
 					parent.layer.msg("保存成功,正在刷新数据请稍后……",{icon:1,time: 1000,shade: [0.1,'#fff']},function(){
+					if(type == 0){
 						window.parent.location.reload();
-					}) ;
+					}else if(type == 1){
+						parent.layer.close(index);
+					}
+				}) ;
 				}else{
 					parent.layer.alert(data.m , {icon: 2,title:"系统提示"});
 				}

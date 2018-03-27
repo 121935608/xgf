@@ -59,7 +59,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		LEFT JOIN t_order b on a.userId = b.userId
 		LEFT JOIN t_order_detail c on c.orderNumber = b.orderNumber
 		RIGHT JOIN t_commodity d ON c.commodityId = d.commodityId
-		where 1=1 AND b.orderStatus!=1 AND b.status=1 and c.storageStatus=0
+		where 1=1 AND (b.orderStatus=4 or b.orderStatus=5) AND b.status=1 and c.storageStatus=0
 		 <if test="relationMap.userId != null and relationMap.userId != ''">
 			AND a.userId=#{relationMap.userId}
 		</if> 
@@ -87,6 +87,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM sys_user a LEFT JOIN t_order b ON a.userId = b.userId
 		LEFT JOIN t_order_detail c ON c.orderNumber = b.orderNumber
 		WHERE 1=1 AND a.userId=#{userId} AND commodityId=#{commodityId}
+		and (b.orderStatus=4 or b.orderStatus=5) AND b.status=1 and c.storageStatus=0
 		GROUP BY c.commodityId,c.commodityName,c.commodityNo,c.unit
 	</select>
 	

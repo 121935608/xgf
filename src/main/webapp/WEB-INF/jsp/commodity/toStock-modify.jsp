@@ -92,13 +92,14 @@
 			var id3='commodityNo'+tabIndex;
 			var id4='unitId'+tabIndex;
 			var id5='stockNum'+tabIndex;
+			var id6='auto'+tabIndex;
 			
 			var tr=document.createElement('tr');
 			tr.id=tabIndex;
 			tr.innerHTML = " <tr id='"+tabIndex+"'>"+
 								"<td><input class='input-text' type='text' id="+id1+" name="+id1+" disabled='disabled' value='"+tabIndex+"'></td>"+
-								"<td><div class='wrap'><input style='width:85%;margin-left: 5px;position:relative;bottom: 4px;' class='input-text auto-inp' type='text' id="+id2+" name="+id2+"/>"+
-									"<div class='auto hidden' id='auto'><div class='auto_out'>1</div><div class='auto_out'>2</div></div></div>&nbsp;"+
+								"<td><div class='wrap'><input style='width:85%;margin-left: 5px;position:relative;bottom: 4px;' class='input-text auto-inp' autocomplete=\"off\" type='text' id="+id2+" name="+id2+"/>"+
+									"<div class='auto hidden' id="+id6+"><div class='auto_out'>1</div><div class='auto_out'>2</div></div></div>&nbsp;"+
 									"<span style='color:blue;cursor:pointer;left:30%;line-height:150%;position: absolute;' onclick='addIframe()'>添加</span></td>"+
 								"<td><input class='input-text' style='border: 0px;text-align:center;' type='text' id="+id3+" name="+id3+" readonly></td>"+ 
 								"<td><input class='input-text' style='border: 0px;text-align:center;' type='text' id="+id4+" name="+id4+" readonly></td>"+ 
@@ -108,15 +109,24 @@
 			$("#orderTab").children("tbody")[0].appendChild(tr);
 			
 			//自动补全
-			var commodityList=eval('${commodityList}');
-			var autoComplete = new AutoComplete(id2,"auto",commodityList);
-			document.getElementById(id2).onkeyup = function(event){
-				autoComplete.start(event);
-			}
+			$.ajax({
+						url:"${context_root}/commodity/getCommodityList.action", 
+						type:'post',
+						async:true ,
+						cache:false ,
+						dataType:"json",
+						success:function(data){
+							//自动补全
+							var autoComplete = new AutoComplete(id2,id6,data);
+							document.getElementById(id2).onkeyup = function(event){
+								autoComplete.start(event);
+							}
+						},
+					});
 		});
  
 		function addIframe(){
-			var href = '${context_root}/commodity/toRegisterAdd.action';
+			var href = '${context_root}/commodity/toRegisterAdd.action?type='+1;
 			var titleName = '添加商品'
 			var index = layer.open({
 				type:2,

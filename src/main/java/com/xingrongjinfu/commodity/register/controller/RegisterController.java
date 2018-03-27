@@ -73,12 +73,16 @@ public class RegisterController extends BaseController{
      * @throws Exception
      */
     @RequestMapping(RegisterConstant.TO_REGISTER_ADD)
-    public ModelAndView toRegisterAdd() throws Exception{
+    public ModelAndView toRegisterAdd(Integer type) throws Exception{
         String storeId = (String) SessionUtils.getSession().getAttribute("storeId");
         ModelAndView modelAndView = new ModelAndView(RegisterConstant.REGISTER_ADD_PAGE);
         modelAndView.addObject("fenlei", getFL(storeId));
         modelAndView.addObject("supply", getSupply(storeId));
         modelAndView.addObject("unit", getUnit(storeId));
+        if(null == type){
+            type = 0;
+        }
+        modelAndView.addObject("type", type);
         return modelAndView;
     }
     /**
