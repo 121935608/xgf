@@ -30,7 +30,7 @@
                <option value="1">待支付</option>
                <option value="2" >待发货</option>
                <option value="3" >待收货</option>
-               <option value="4" >待还款</option>
+               <%--<option value="4" >待还款</option>--%>
                <option value="5" >完成</option>
            </select>
        </span>
@@ -178,10 +178,10 @@ $(document).ready(function(){
                     return "待发货";
                 }else if(row.orderStatus == 3) {
                     return "待收货";
-                }else if(row.orderStatus == 4) {
-                    return "待还款";
-                }else if(row.orderStatus == 5) {
-                    return "已还款";
+                }else if(row.orderStatus == 4||row.orderStatus == 5) {
+                    return "已完成";
+//                }else if(row.orderStatus == 5) {
+//                    return "已还款";
                 }else {
                     return "";
                 }

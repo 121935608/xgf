@@ -188,8 +188,7 @@ class CertificationController extends BaseController {
         Store store2=certificationService.getStoreInfo(id);
 //        System.out.println("后台bug888888888"+new Date()+store2.getUserId());
         if("APRYES".equals(process)){
-            if (id != null&&!id.equals(""))
-        {
+            if (id != null&&!id.equals("")) {
             Store store1=certificationService.getStoreInfo(id);
 //            System.out.println("后台bug"+new Date()+store1.getUserId());
             HashMap map=new HashMap();
@@ -209,6 +208,7 @@ class CertificationController extends BaseController {
             store.setUpdateTime(new Date());
             if("0000".equals(code1)&&"0000".equals(code2)){
                 store.setProcess("APRING");
+                store.setRemark(store.getRemark());
                 result = certificationService.saveCertificationCheck(store);
             }else{
                 store.setProcess("APRNO");
@@ -222,6 +222,10 @@ class CertificationController extends BaseController {
                 result = certificationService.saveCertificationCheck(store);
             }
         }
+        }else{
+            store2.setProcess(process);
+            store2.setRemark(store.getRemark());
+            result = certificationService.saveCertificationCheck(store2);
         }
         return new Message(result);
     }

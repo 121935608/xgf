@@ -81,7 +81,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			AND o.platform=#{relationMap.platform}
 		</if>
 		<if test="relationMap.orderStatus != null and relationMap.orderStatus != ''">
-			AND o.orderStatus=#{relationMap.orderStatus}
+			<choose>
+				<when test="relationMap.orderStatus == '5'.toString()">
+					AND o.orderStatus in(4,5)
+				</when>
+				<otherwise>
+					AND o.orderStatus=#{relationMap.orderStatus}
+				</otherwise>
+			</choose>
 		</if>
 		<if test="relationMap.orderNumber !=null and relationMap.orderNumber !=''">
 			AND (
