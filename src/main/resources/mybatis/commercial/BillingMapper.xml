@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BillingMapper">
+
+    <resultMap type="Billing" id="BillingResult">
+        <result property="banId" column="banId" />
+        <result property="storeId" column="storeId" />
+        <result property="userId" column="userId" />
+        <result property="remain" column="remain" />
+        <result property="updateTime" column="updateTime" />
+        <result property="addTime" column="addTime" />
+        <result property="status" column="status" />
+    </resultMap>
+
+    <select id="getAllBilling"  resultType="Billing">
+        select * from m_billing where status=1
+    </select>
+
+
+
+</mapper>
