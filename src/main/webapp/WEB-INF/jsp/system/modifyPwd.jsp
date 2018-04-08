@@ -89,8 +89,10 @@
     <form >
         <div class="row cl">
             <div id="con2" style="display:none;" class="formControls col-xs-8 col-xs-offset-3">
-                <input type="text" name="phone" id="phone" class="input-text size-L">
-                <input type="button" id="btn" value="免费获取验证码" />
+                <div style="width:656.66px; height:40px;float:left">
+                <input type="text" name="phone" id="phone" style="width:500px;height:40px;float:left" class="input-text size-L">
+                <button  id="btn" value="免费获取验证码" style="width:156.66px;height:40px;">免费获取验证码</button>
+                </div>
                 <input type="text" name="verify" id="verify" placeholder="填写手机验证码"
                        class="input-text size-L validate[required,ajax[ajaxJcaptchaCall]]">
             </div>

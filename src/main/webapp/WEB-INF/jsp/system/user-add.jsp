@@ -7,27 +7,27 @@
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>账号：</label>
             <div class="formControls col-xs-8 col-sm-4">
-                <input type="text" class="input-text" value="" placeholder="" id="userName" name="userName">
+                <input type="text" class="input-text" maxlength="20"  value="" placeholder="" id="userName" name="userName">
             </div>
         </div>
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>初始密码：</label>
             <div class="formControls col-xs-8 col-sm-4">
-                <input type="password" class="input-text" autocomplete="off" value="" placeholder="密码" id="password"
+                <input type="password" class="input-text" maxlength="20"  autocomplete="off" value="" placeholder="密码" id="password"
                        name="password">
             </div>
         </div>
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>确认密码：</label>
             <div class="formControls col-xs-8 col-sm-4">
-                <input type="password" class="input-text" autocomplete="off" placeholder="确认新密码" id="repeatPassword"
+                <input type="password" class="input-text" maxlength="20"  autocomplete="off" placeholder="确认新密码" id="repeatPassword"
                        name="repeatPassword">
             </div>
         </div>
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>用户名：</label>
             <div class="formControls col-xs-8 col-sm-4">
-                <input type="text" class="input-text" value="" placeholder="" id="accountName" name="accountName">
+                <input type="text" class="input-text" maxlength="20" value="" placeholder="" id="accountName" name="accountName">
             </div>
         </div>
         <%--<div class="row cl">
@@ -85,7 +85,7 @@
         rules: {
             userName: {
                 required: true,
-                minlength: 5,
+                minlength: 6,
                 isSpace: true,
                 english: true,
                 remote: {

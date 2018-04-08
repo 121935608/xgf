@@ -8,7 +8,7 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>账号：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="text" class="input-text" placeholder="" id="userName" name="userName" value="${user.userName }">
+				<input type="text" class="input-text" disabled="disabled" placeholder="" id="userName" name="userName" value="${user.userName }">
 			</div>
 		</div>
 		<div class="row cl">
