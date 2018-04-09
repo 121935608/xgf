@@ -2,15 +2,15 @@
 <%@include file="/WEB-INF/jsp/common/taglibs.jspf" %>
 <ys:contentHeader title="商户管理列表"/>
 <style>
-	img{
+	img{                                                                                                                      
 	cursor: pointer;
 	transition: all 0.6s;
-	z-index:0;
+	z-index:-9;
 }
-img:hover{
+ img:hover{
 	transform: scale(3.6);
 	z-index:9999999;
-}
+} 
 </style>
 <body>
 <div class="page-container">
