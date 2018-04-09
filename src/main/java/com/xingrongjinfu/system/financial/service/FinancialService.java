@@ -13,10 +13,10 @@ package com.xingrongjinfu.system.financial.service;
 import java.util.List;
 
 import org.framework.base.util.PageUtilEntity;
-import org.framework.base.util.TableDataInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.xingrongjinfu.statistics.cashCount.model.Billing;
 import com.xingrongjinfu.system.financial.dao.IFinancialDao;
 import com.xingrongjinfu.system.financial.model.Financial;
 import com.xingrongjinfu.system.financial.model.FinancialDetail;
@@ -35,7 +35,7 @@ public class FinancialService implements IFinancialService {
     @Autowired
     private IFinancialDao financialDao;
     @Override
-    public List<TableDataInfo> pageInfoQuery(PageUtilEntity pageUtilEntity) {
+    public List<Financial> pageInfoQuery(PageUtilEntity pageUtilEntity) {
         return financialDao.pageInfoQuery(pageUtilEntity);
     }
 
@@ -56,10 +56,9 @@ public class FinancialService implements IFinancialService {
     }
 
     @Override
-    public int updateAmount(Financial financial,FinancialDetail financialDetail) {
-        int n = financialDao.addAmountDetail(financialDetail);
-        if(n > 0)
-         n = financialDao.updateAmount(financial);
+    public int addAmount(Financial financial,Billing billing) {
+        int n = financialDao.addAmount(financial);
+        financialDao.updateBilling(billing);
         return n;
     }
 }

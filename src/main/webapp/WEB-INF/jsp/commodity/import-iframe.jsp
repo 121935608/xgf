@@ -36,6 +36,7 @@ var molUrl=GetQueryString("molUrl");
 $("#download").attr("href", '${context_root}'+molUrl);
  $("input[type=button]").click(function(){
 	 var impUrl=GetQueryString("impUrl");
+	 /* 条件和文件必选 */
 	 var type = $("input[type=radio]:checked").val();
 	 if(type == null){
 		 alert("请选择导入条件！");

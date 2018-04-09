@@ -11,47 +11,21 @@
 			class="Hui-iconfont">&#xe68f;</i></a>
 	</nav>
 	<div class="page-container">
-	
-		<div style="min-height: 30px;">
-			<form role="form" class="text-c">
-				<div class="row">
-					<div class="row col-xs-6 col-sm-4 .col-md-4">
-						
-						<div class="col-xs-8 col-sm-8 .col-md-8">
-							<input type="text" placeholder="开始时间"
-								onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')||\'%y-%M-%d\'}'})"
-								id="beginTime" class="input-text Wdate" style="width: 120px;">
-							- <input type="text" placeholder="结束时间"
-								onfocus="WdatePicker({minDate:'#F{$dp.$D(\'beginTime\')}',maxDate:'%y-%M-%d'})"
-								id="endTime" class="input-text Wdate" style="width: 120px;">
-						</div>
-					</div>
-					<%-- <div class="row  col-xs-3 col-sm-2 .col-md-2">
-						<y:select id="type" name="type"
-							codeGroup="${typeList}" selectedValue=""
-							cssClass="select" headerKey="" headerValue="类型">
-						</y:select>
-					</div> --%>
-					<div class="row  col-xs-3 col-sm-2 .col-md-2">
-						<y:select id="status" name="status"
-							codeGroup="${statusList}" selectedValue=""
-							cssClass="select" headerKey="" headerValue="状态">
-						</y:select>
-					</div>
-					<div class="col-xs-3 col-sm-2 .col-md-2">
-						<input type="text" class="input-text" style="width: 250px"
-							placeholder="标题" id="fuzzyCondition" name="fuzzyCondition">
-					</div>
-					<div class="col-xs-3 col-sm-2 .col-md-2">
-						<button type="button" class="btn btn-success radius"
-							onclick="query()">
-							<i class="Hui-iconfont">&#xe665;</i> 搜索
-						</button>
-					</div>
-				</div>
-			</form>
-		</div>
-		
+	<div class="text-c">
+		<input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')||\'%y-%M-%d\'}'})" id="beginTime"
+			   class="input-text Wdate" style="width:120px;" placeholder="开始时间">
+		<input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'beginTime\')}',maxDate:'%y-%M-%d'})" id="endTime"
+			   class="input-text Wdate" style="width:120px;" placeholder="结束时间">
+			   <span class="select-box" style="width: 120px;border:0px;">
+					<y:select id="status" name="status"
+						codeGroup="${statusList}" selectedValue=""
+						cssClass="select" headerKey="" headerValue="状态">
+					</y:select>
+				</span>
+				
+		<input type="text" class="input-text" style="width:250px" placeholder="标题" id="fuzzyCondition" name="fuzzyCondition">
+		<button type="button" class="btn btn-success radius" onclick="query()"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+	</div>
 		<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="commodityAd_add('添加','${context_root}/content/toCommodityAdAdd.action','','610')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加</a></span></div>
 	
 

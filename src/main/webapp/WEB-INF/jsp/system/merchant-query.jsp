@@ -5,6 +5,7 @@
 	img{
 	cursor: pointer;
 	transition: all 0.6s;
+	z-index:0;
 }
 img:hover{
 	transform: scale(3.6);
@@ -151,75 +152,6 @@ img:hover{
 	</div>
 </div>
 <script type="text/javascript">
-  /*  var pageTable;
-    $(document).ready(function () {
-        var aoColumns = [
-            {
-                "mData": "mobilePhone",
-                "bSortable" : false,
-                "sClass": "text-c",
-                "defaultContent": ""
-            },
-            {
-                "mData": "storeName",
-                "bSortable" : false,
-                "sClass": "text-c",
-                "defaultContent": ""
-            },
-
-            {
-                "mData": "userName",
-                "bSortable" : false,
-                "sClass": "text-c",
-                "defaultContent": ""
-            },
-            {
-                "mData": "phone",
-                "bSortable" : false,
-                "sClass": "text-c",
-                "defaultContent": ""
-            },
-            {
-                "mData": "status",
-                "bSortable" : false,
-                "sClass": "text-c",
-                "defaultContent": ""
-            },
-            /!*  {
-                  "sDefaultContent": "首推时间",
-                  "bSortable": false,
-                  "sClass": "text-c",
-                  "bSearchable": false,
-                  "mRender": function (data, type, row) {
-                      if (row.createTime == null){
-                          return "";
-                      }
-                      return formatDate(row.createTime * 1000, "yyyy-MM-dd hh:mm:ss")
-                  }
-              },*!/
-            {
-                "sDefaultContent": "操作",
-                "bSortable" : false,
-                "sClass": "td-manage text-c",
-                "bSearchable": false,
-                "mRender": function(data, type, row) {
-                    //查看
-                    var toQuery = "<a title=\"查看\" href=\"javascript:;\" onclick=\"user_query('查看','${context_root}/system/toMerchantQuery.action?userId=" + row.userId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\">查看</a>";
-                    //禁用
-                    var toForbidden = "<a title=\"禁用\" href=\"javascript:;\" onclick=\"user_forbidden(this,\'" + row.userId + "\')\" class=\"ml-5\" style=\"text-decoration:none\"><i class=\"Hui-iconfont\">&#xe6e2;</i></a>";
-                    //账户余额
-                    var toBalance = "<a title=\"账户余额\" href=\"javascript:;\" onclick=\"user_balance('账户余额','${context_root}/system/toRoleAuthorize.action?roleId=" + row.roleId + "','230','406')\" class=\"ml-5\" style=\"text-decoration:none\"><i class=\"Hui-iconfont\">&#xe6e1;</i></a>";
-                    return toBalance  + "&nbsp;&nbsp;" + toQuery + "&nbsp;&nbsp;" + toForbidden;
-                }
-            },
-        ];
-        var url = "${context_root}/system/merchantList.action";
-        pageTable = _Datatable_Init(pageTable, aoColumns, url);
-    });*/
-
-
-
-
     function statusTools(row) {
         if (row.locked == '0') {
             return "<a style=\"text-decoration:none\" onClick=\"user_stop(this,\'" + row.userId + "\')\" href=\"javascript:;\" title=\"停用\"><i class=\"Hui-iconfont\">&#xe631;</i></a>";

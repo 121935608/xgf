@@ -13,30 +13,19 @@
 			   class="input-text Wdate" style="width:120px;" placeholder="开始时间">
 		<input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'beginTime\')}',maxDate:'%y-%M-%d'})" id="endTime"
 			   class="input-text Wdate" style="width:120px;" placeholder="结束时间">
-		<%--<span class="select-box" style="width: 120px;">
-           <select name="payType" id="payType" class="select" autocomplete="off">
-               <option value="">支付方式</option>
-               <option value="1">支付宝支付</option>
-               <option value="2" >微信支付</option>
-               <option value="3" >银联支付</option>
-               <option value="4" >京东白条</option>
-           </select>
-       </span>--%>
-		<input type="text" class="input-text" style="width:250px" placeholder="结算单号|商铺名称" id="storeName" name="storeName">
+		<input type="text" class="input-text" style="width:250px" placeholder="商铺名称" id="storeName" name="storeName">
 		<button type="button" class="btn btn-success radius" onclick="query()"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
 	</div>
 	<div class="mt-20">
 	<table class="table table-border table-bordered table-hover table-bg table-sort">
 		<thead>
 			<tr class="text-c">
-				<th width="12%">结算单号</th>
-				<th width="10%">创建日期</th>
+				<th width="10%">商铺编号</th>
 				<th width="15%">商铺名称</th>
-				<th width="8%">合计金额(元) </th>
-				<th width="8%">手续费</th>
-				<th width="8%">应结金额(元)</th>
-				<th width="8%">已结金额(元)</th>
-				<th width="8%">未结金额(元)</th>
+				<th width="8%">收银余额(元) </th>
+				<th width="8%">支付费率</th>
+				<th width="8%">待还款金额(元)</th>
+				<th width="8%">可结算金额(元)</th>
 				<th width="10%">操作</th>
 
 			</tr>
@@ -49,26 +38,13 @@ var pageTable;
 $(document).ready(function(){ 
     var aoColumns = [
         {
-            "sDefaultContent": "结算单号",
+            "sDefaultContent": "商铺编号",
             "bSortable" : false,
             "sClass": "text-c",
             "bSearchable": false,
             "mRender": function(data, type, row) {
-                if (row.amountNum != null) {
-                    return "<span style=\"color:blue;\" id=\"show\" onClick=\"getDetail(this,\'" + row.amountId + "\')\">+</span><span id=\"hide\" style=\"display:none;color:blue;\" onClick=\"hideRows(this,\'" + row.amountId + "\')\">-</span>&nbsp;&nbsp;<span>"+row.amountNum+"</span>";
-                } else {
-                    return "";
-                }
-            }
-        },
-        {
-            "sDefaultContent": "创建日期",
-            "bSortable" : false,
-            "sClass": "text-c",
-            "bSearchable": false,
-            "mRender": function(data, type, row) {
-                if (row.addTime != null) {
-                    return formatDate(row.addTime, "yyyy-MM-dd hh:mm:ss");
+                if (row.mobilePhone != null) {
+                    return row.mobilePhone;
                 } else {
                     return "";
                 }
@@ -88,20 +64,20 @@ $(document).ready(function(){
             }
         },
         {
-            "sDefaultContent": "合计金额",
+            "sDefaultContent": "收银余额",
             "bSortable" : false,
             "sClass": "text-c",
             "bSearchable": false,
             "mRender": function(data, type, row) {
-                if (row.totalMoney != null) {
-                    return row.totalMoney;
+                if (row.closeMoney != null) {
+                    return row.closeMoney;
                 } else {
                     return "";
                 }
             }
         },
     {
-        "sDefaultContent": "手续费",
+        "sDefaultContent": "支付费率",
         "bSortable" : false,
         "sClass": "text-c",
         "bSearchable": false,
@@ -114,41 +90,28 @@ $(document).ready(function(){
         }
     },
         {
-            "sDefaultContent": "应结金额",
+            "sDefaultContent": "待还款金额",
             "bSortable" : false,
             "sClass": "text-c",
             "bSearchable": false,
             "mRender": function(data, type, row) {
-                if (row.amountMoney !=null) {
-                    return row.amountMoney;
+                if (row.totalMoney !=null) {
+                    return row.totalMoney;
                 }else {
                     return "";
                 }
             }
         },
         {
-            "sDefaultContent": "已结金额",
+            "sDefaultContent": "可结算金额",
             "bSortable" : false,
             "sClass": "text-c",
             "bSearchable": false,
             "mRender": function(data, type, row) {
-            	if (row.closeMoney !=null) {
-                    return row.closeMoney;
-                }else {
-                    return "";
-                }
-            }
-        },
-        {
-            "sDefaultContent": "未结金额",
-            "bSortable" : false,
-            "sClass": "text-c",
-            "bSearchable": false,
-            "mRender": function(data, type, row) {
-            	if (row.openMoney !=null) {
+            	if (row.openMoney >= 0) {
                     return row.openMoney;
-                }else {
-                    return "";
+                }else if(row.openMoney < 0){
+                    return 0;
                 }
             }
         },
@@ -163,13 +126,12 @@ $(document).ready(function(){
             		$("thead").children("tr").children("th:last").css("display","none");
             		$('tr').find('td:last').css("display","none");
             		return;
-            		/* $(".td-manage").css("display","none"); */
             	}
-            	if(row.openMoney == "0"){
+            	if(row.closeMoney <=0){
             		return "";
             	}
                 //对账
-                var toEdit = "<a title=\"对账\" href=\"javascript:;\" onclick=\"financial_edit('对账','${context_root}/dataCount/toFinancialModify.action?amountId=" + row.amountId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>对账</span></a>";
+                var toEdit = "<a title=\"对账\" href=\"javascript:;\" onclick=\"financial_edit('对账','${context_root}/dataCount/toFinancialModify.action?storeId=" + row.storeId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>对账</span></a>";
             	return  toEdit ;
             }
         }
@@ -181,6 +143,7 @@ $(document).ready(function(){
 		$("#cons").text("商家收银结算");
 	}else if (type=='B'){
         $("#cons").text("收银日结");
+        $("#storeName").css("display","none");
 	}
 });
 

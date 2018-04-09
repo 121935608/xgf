@@ -101,11 +101,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					AND DATE_FORMAT(a.planRepayDate,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
 				</if>  
 			</if> 
-			<if test="relationMap.status != null and relationMap.status == 0">
-				AND (a.status = 0 or a.status = 3)
-			</if>
-			<if test="relationMap.status != null and relationMap.status != 0">
-				AND a.status = #{relationMap.status}
+			<if test="relationMap.status != null and relationMap.status != ''">
+				<if test="relationMap.status == '0'">
+					AND (a.status = 0 or a.status = 3)
+				</if>
+				<if test="relationMap.status != '0'">
+					AND a.status = #{relationMap.status}
+				</if>
 			</if>
 			<if test="relationMap.fuzzyCondition != null and relationMap.fuzzyCondition != ''">
 				AND (

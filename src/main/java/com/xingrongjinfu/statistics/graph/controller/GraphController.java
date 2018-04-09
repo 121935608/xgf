@@ -98,7 +98,7 @@ public class GraphController {
         if(null != endTime)
             m.put("endTime", endTime);
         List<CashDetail> list = cashService.saleGraphPie(m);
-        //计算销售饼图中各分类的占比
+        //计算销售饼图中各分类的占比   将数据封装好传前端
         double count = 0;
         List<Map<String,Object>> data = new ArrayList<Map<String,Object>>();
         if(null != list){

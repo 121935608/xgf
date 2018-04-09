@@ -14,7 +14,7 @@
 /* 设置日期，当前日期的前七天 */
 var myDate = new Date();
 myDate.setDate(myDate.getDate() - 6);
-var dateArray = []; 
+var dateArray = []; //最近7天日期数组
 var dateTemp; 
 var flag = 1; 
 var data1 = new Array();
@@ -41,6 +41,7 @@ var n = 0;
 			}
 		}else{
 			var addTime = formatDateTime(data[n].cashId);
+			/* 近七天日期数组 与 数据库近七天日期  对比 */
 			if(Date.parse(addTime)==Date.parse(dateArray[i])){
 				data1.push(parseFloat(data[n].money));
 				data2.push(parseFloat(data[n].number));

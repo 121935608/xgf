@@ -13,8 +13,8 @@ package com.xingrongjinfu.system.financial.service;
 import java.util.List;
 
 import org.framework.base.util.PageUtilEntity;
-import org.framework.base.util.TableDataInfo;
 
+import com.xingrongjinfu.statistics.cashCount.model.Billing;
 import com.xingrongjinfu.system.financial.model.Financial;
 import com.xingrongjinfu.system.financial.model.FinancialDetail;
 
@@ -33,7 +33,7 @@ public interface IFinancialService {
      * @param pageUtilEntity
      * @return
      */
-    List<TableDataInfo> pageInfoQuery(PageUtilEntity pageUtilEntity);
+    List<Financial> pageInfoQuery(PageUtilEntity pageUtilEntity);
 
     /**
      * 更新财务信息
@@ -44,5 +44,6 @@ public interface IFinancialService {
     
     List<FinancialDetail> getDetail(String id);
     
-    int updateAmount(Financial financial,FinancialDetail financialDetail);
+    int addAmount(Financial financial,Billing billing);
+    
 }

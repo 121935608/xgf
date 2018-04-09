@@ -153,7 +153,7 @@ function changImg(e) {
         }
     }
 }
-//商品分类
+//商品分类  若大类未选择，弹窗
 $("#categoryId").click(function (){
 		var parentCategoryId = $("#parentCategoryId option:selected").val();
 		if(parentCategoryId == ""){
@@ -161,6 +161,7 @@ $("#categoryId").click(function (){
 			return;
 		}
 })
+	/* 点击大类后，通过该大类获取小类数据列表 */
 	$("#parentCategoryId").click(function (){
 		var parentCategoryId = $("#parentCategoryId option:selected").val();
 		$.ajax({

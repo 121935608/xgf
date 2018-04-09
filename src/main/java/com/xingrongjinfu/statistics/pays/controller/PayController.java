@@ -39,7 +39,7 @@ public class PayController extends BaseController {
 	{
 		ModelAndView modelAndView = this.getModelAndView(PaysConstant.PAYS_PAGE);
 
-		// 支付类型1支付宝2微信支付3银联4京东白条
+		// 支付类型下拉框
 		List<SysCode> sysCodeList = new ArrayList<SysCode>();
 		SysCode sysCode0 = new SysCode();
 		sysCode0.setCodeid("0");

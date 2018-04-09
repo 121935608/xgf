@@ -11,17 +11,20 @@
 <center>
 <article class="page-container">
 	<form action="" method="post" class="form form-horizontal" id="form-financial-modify">
-		<input type="hidden" class="input-text" id="amountMoney" name="amountMoney" value="${financial.amountMoney }">
+	<!-- 收银余额 -->
 		<input type="hidden" class="input-text" id="closeMoney" name="closeMoney" value="${financial.closeMoney }">
-		<input type="hidden" class="input-text" id="amountId" name="amountId" value="${financial.amountId }">
+	<!-- 费率 -->
+		<input type="hidden" class="input-text" id="xzfRate" name="xzfRate" value="${financial.xzfRate }">
+	<!-- 待还款金额 -->
+		<input type="hidden" class="input-text" id="totalMoney" name="totalMoney" value="${financial.totalMoney }">
+	<!-- 商铺ID -->
+		<input type="hidden" class="input-text" id="storeId" name="storeId" value="${financial.storeId }">
+	<!-- 用户ID -->
+		<input type="hidden" class="input-text" id="userId" name="userId" value="${financial.userId }">
 		<div id="table">
 			<table>
 				<tr>
-					<td>结算单号</td>
-					<td>${financial.amountNum }</td>
-				</tr>
-				<tr>
-					<td>应结金额</td>
+					<td>可结算金额</td>
 					<td>${financial.openMoney }&nbsp;元</td>
 				</tr>
 				<tr>
@@ -58,12 +61,12 @@ $("#form-financial-modify").validate({
 	success:"valid",
 	submitHandler:function(form){
 		var fee = $("#fee").val();
-		var type = 0;
+		var type = 1;
 		if(parseFloat(fee) > parseFloat('${financial.openMoney }')){
 			alert("结算金额过大！");
 			return;
 		}else if(fee == '${financial.openMoney }'){
-			type = 1;
+			type = 0;
 		}
 		var index = parent.layer.load();
 		$.ajax({

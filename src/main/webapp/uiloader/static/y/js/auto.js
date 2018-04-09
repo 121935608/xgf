@@ -72,6 +72,7 @@ AutoComplete.prototype = {
 			This.obj.value = this.seq;//This.obj.value ：选中的值    This.obj：input元素
 			var input = This.obj;
 			setClass.addClass(This.autoObj,"hidden");
+			//选中值后，获取该商品数据填入表格
 			 $.ajax({
 					url:"/xgf_admin/commodity/loadCommodity.action", 
 					type:'post',

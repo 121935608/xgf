@@ -60,7 +60,7 @@ public class ToStockService implements IToStockService {
             if(n == 0){
                 return new Message(0);
             }
-            //入库
+            //入库  更改商户端商品入库状态
             toStockDao.updateCommodityStatus(map);
         }
         return new Message(1);

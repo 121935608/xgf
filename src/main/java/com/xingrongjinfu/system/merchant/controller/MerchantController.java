@@ -78,6 +78,10 @@ public class MerchantController extends BaseController {
             accountInfo.setLicensePic(accountInfo.getLicensePic() == null ? "" : (MerchantConstant.ALIYUN_URL + accountInfo.getLicensePic()));
             accountInfo.setFrontStorePic(accountInfo.getFrontStorePic() == null ? "" : (MerchantConstant.ALIYUN_URL + accountInfo.getFrontStorePic()));
             accountInfo.setInnerStorePic(accountInfo.getInnerStorePic() == null ? "" : (MerchantConstant.ALIYUN_URL + accountInfo.getInnerStorePic()));
+            if(accountInfo.getBankType()!= null){
+                String type = accountInfo.getBankType();
+                accountInfo.setBankType(type.equals("0") ? "默认银行卡" :(type.equals("1")? "非默认银行卡": "天机认证银行卡"));
+            }        
             modelAndView.addObject("accountInfo", accountInfo);
         }
         return modelAndView;

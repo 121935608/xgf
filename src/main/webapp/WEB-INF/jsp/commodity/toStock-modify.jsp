@@ -86,7 +86,7 @@
 				onClick: onClick
 			}
 		};
-	
+		/* 添加行 */
 		$("#addRow").click(function(){
 			tabIndex++;
 			var id1='no'+tabIndex;
@@ -126,7 +126,7 @@
 						},
 					});
 		});
- 
+ 		/* 跳转添加页面 */
 		function addIframe(){
 			var href = '${context_root}/commodity/toRegisterAdd.action?type='+1;
 			var titleName = '添加商品'
@@ -153,15 +153,7 @@
 			});
 			layer.full(index);
 		}
-function getSelStr(id,data){
-		var Str="<select id='"+id+"' name='"+id+"' class='input-text' disabled='true'>"
-		for(var a=0;a<data.length;a++){
-			Str+="<option value ='"+data[a].codeid+"'>"+data[a].codevalue+"</option>";
-		} 
-		Str+="</select>"
-		return Str;
-	}
- 
+ /* 删除行 */
 function deleteRow(a){ 
 	a.parentNode.parentNode.remove(); 
 }
@@ -173,6 +165,7 @@ function submitData(){
 		parent.layer.alert("请添加行！" , {icon: 2,title:"系统提示"});
 		return false;
 	}
+	/* 表格数据拼接字符串 */
 	for(i=0;i<trs.length;i++){ 
 		orderStr+='{';
 		orderStr+='"index":"'+trs[i].id+'",';

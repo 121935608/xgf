@@ -44,8 +44,4 @@ public class CashCountController extends BaseController {
 
         return buildDataTable(pageUtilEntity.getTotalResult(), tableDataInfo);
     }
-
-
-
-    
 }

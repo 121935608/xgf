@@ -32,8 +32,6 @@ $.get("${context_root}/statistics/passengerAnalysisGraph.action",function(data){
 				oChart.addSeries(oSeries);
 			}
 		}else{
-			console.log(data[n]);
-			console.log(data[n].hour);
 			if(data[n].hour==dateArray[i]){
 				data1.push(dateArray[i]);
 				var oSeries = {

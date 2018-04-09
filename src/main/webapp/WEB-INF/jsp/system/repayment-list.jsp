@@ -21,12 +21,12 @@
 		<input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'beginTime\')}',maxDate:'%y-%M-%d'})" id="endTime"
 			   class="input-text Wdate" style="width:120px;" placeholder="结束时间">
        <span class="select-box" style="width: 120px;">
-           <select name="status" id="status" class="select" autocomplete="off">
+           <select name="status" id="status" class="select">
                <option value="">状态</option>
-               <option value=0>待还款</option>
-               <option value=1 >已还款</option>
-               <option value=4 >待处理</option>
-               <option value=2 >处理中</option>
+               <option value="0">待还款</option>
+               <option value="1">已还款</option>
+               <option value="4" >待处理</option>
+               <option value="2" >处理中</option>
            </select>
        </span>
 		<input type="text" class="input-text" style="width:250px" placeholder="还款单号|订单号|店铺名称" id="fuzzyCondition" name="fuzzyCondition">
@@ -203,6 +203,10 @@ function query() {
     var status = $("#status").val();
     var beginTime = $("#beginTime").val();
     var endTime = $("#endTime").val();
+    if(((beginTime != "") || (endTime != "")) && (dateType == "")){
+    	alert("请选择日期类型！");
+    	return;
+    }
     pageTable.fnSettings().sAjaxSource = "${context_root}/merchant/repaymentList.action?fuzzyCondition=" + encodeURIComponent(encodeURIComponent(fuzzyCondition)) +
 					    	"&dateType="+ dateType +
 					    	"&status="+ status +
@@ -262,8 +266,11 @@ function query() {
 					+"<td style=\"border-left:0px;border-bottom:0px;text-align:center;\"></td>"
 					+"<td style=\"border-bottom:0px;border-left:0px;\"></td></tr>";
 				}
+				/* 追加行 */
 				$(obj).parent("td").parent("tr").after(tr);
+				/* 隐藏所有行的+ */
 				$(obj).parent("td").children("span").first().css("display","none");
+				/* 该行的+变- */
 				$(obj).parent("td").children("span").eq(1).css("display","inline");
 				
 			},

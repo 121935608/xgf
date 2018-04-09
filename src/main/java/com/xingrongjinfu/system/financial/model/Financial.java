@@ -40,7 +40,25 @@ public class Financial implements Serializable
     private String storeName;
     private String amountNum;
     private String remark;
+    private String storeId;
+    private String mobilePhone;
 
+
+    public String getMobilePhone() {
+        return mobilePhone;
+    }
+
+    public void setMobilePhone(String mobilePhone) {
+        this.mobilePhone = mobilePhone;
+    }
+
+    public String getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(String storeId) {
+        this.storeId = storeId;
+    }
 
     public String getRemark() {
         return remark;

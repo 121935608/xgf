@@ -13,10 +13,10 @@ package com.xingrongjinfu.system.financial.dao;
 import java.util.List;
 
 import org.framework.base.util.PageUtilEntity;
-import org.framework.base.util.TableDataInfo;
 import org.framework.core.dao.DynamicObjectBaseDao;
 import org.springframework.stereotype.Repository;
 
+import com.xingrongjinfu.statistics.cashCount.model.Billing;
 import com.xingrongjinfu.system.financial.model.Financial;
 import com.xingrongjinfu.system.financial.model.FinancialDetail;
 
@@ -32,10 +32,10 @@ import com.xingrongjinfu.system.financial.model.FinancialDetail;
 public class FinancialDao extends DynamicObjectBaseDao implements IFinancialDao {
 
     @Override
-    public List<TableDataInfo> pageInfoQuery(PageUtilEntity pageUtilEntity) {
-        List<TableDataInfo> tableDataInfo=null;
+    public List<Financial> pageInfoQuery(PageUtilEntity pageUtilEntity) {
+        List<Financial> tableDataInfo=null;
         try {
-            tableDataInfo=(List<TableDataInfo>)this.findForList("FinancialMapper.pageInfoQuery",pageUtilEntity);
+            tableDataInfo=(List<Financial>)this.findForList("FinancialMapper.pageInfoQuery",pageUtilEntity);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -64,13 +64,13 @@ public class FinancialDao extends DynamicObjectBaseDao implements IFinancialDao 
     }
 
     @Override
-    public int updateAmount(Financial financial) {
+    public int updateBilling(Billing billing) {
         
-        return this.update("FinancialMapper.updateAmount", financial);
+        return this.update("FinancialMapper.updateBilling", billing);
     }
 
     @Override
-    public int addAmountDetail(FinancialDetail financialDetail) {
-        return this.save("FinancialMapper.addAmountDetail", financialDetail);
+    public int addAmount(Financial financial) {
+        return this.save("FinancialMapper.addAmount", financial);
     }
 }
