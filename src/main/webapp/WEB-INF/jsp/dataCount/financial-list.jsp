@@ -123,12 +123,13 @@ $(document).ready(function(){
             		$('tr').find('td:last').css("display","none");
             		return;
             	}
-            	if(row.closeMoney <=0){
+            	if(row.openMoney <=0){
             		return "";
+            	}else{
+	                //对账
+	                var toEdit = "<a title=\"对账\" href=\"javascript:;\" onclick=\"financial_edit('对账','${context_root}/dataCount/toFinancialModify.action?storeId=" + row.storeId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>对账</span></a>";
+	            	return  toEdit ;
             	}
-                //对账
-                var toEdit = "<a title=\"对账\" href=\"javascript:;\" onclick=\"financial_edit('对账','${context_root}/dataCount/toFinancialModify.action?storeId=" + row.storeId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>对账</span></a>";
-            	return  toEdit ;
             }
         }
     ];
