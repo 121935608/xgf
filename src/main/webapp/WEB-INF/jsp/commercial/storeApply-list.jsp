@@ -60,10 +60,10 @@ $(document).ready(function(){
 		"sClass" : "text-c",
 		"bSearchable" : false,
 		"mRender" : function(data, type, row) {
-			if ((row.storeAdrr != null)&&(row.detailAdrr != null)) {
-				return row.storeAdrr+row.detailAdrr;
-			} else if((row.storeAdrr != null)&&(row.detailAdrr == null)){
-				return row.storeAdrr
+			if ((row.storeAddr != null)&&(row.detailAddr != null)) {
+				return row.storeAddr+row.detailAddr;
+			} else if((row.storeAddr != null)&&(row.detailAddr == null)){
+				return row.storeAddr
 			}else {
 				return "";
 			}

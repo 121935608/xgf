@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultType="StoreApply" useCache="false">
 		SELECT (@i:=@i+1) num,applyId,applyName,phone,storeName,dealStatus,
-		storeAdrr,detailAdrr,dealTime,dealResult,dealUser,`addTime`
+		storeAddr,detailAddr,dealTime,dealResult,dealUser,`addTime`
  		FROM t_store_apply ,(SELECT @i:=0) AS it WHERE `status`!=-1 
 		<if test="relationMap.applyName != null and relationMap.applyName != ''">
 			AND (

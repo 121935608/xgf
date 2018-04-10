@@ -8,8 +8,8 @@ public class StoreApply {
     private String applyName;
     private String phone;
     private String storeName;
-    private String storeAdrr;
-    private String detailAdrr;
+    private String storeAddr;
+    private String detailAddr;
     private Date dealTime;
     private String dealResult;
     private String dealUser;
@@ -18,6 +18,18 @@ public class StoreApply {
     private Integer dealStatus;
     
     
+    public String getStoreAddr() {
+        return storeAddr;
+    }
+    public void setStoreAddr(String storeAddr) {
+        this.storeAddr = storeAddr;
+    }
+    public String getDetailAddr() {
+        return detailAddr;
+    }
+    public void setDetailAddr(String detailAddr) {
+        this.detailAddr = detailAddr;
+    }
     public Integer getDealStatus() {
         return dealStatus;
     }
@@ -53,18 +65,6 @@ public class StoreApply {
     }
     public void setStoreName(String storeName) {
         this.storeName = storeName;
-    }
-    public String getStoreAdrr() {
-        return storeAdrr;
-    }
-    public void setStoreAdrr(String storeAdrr) {
-        this.storeAdrr = storeAdrr;
-    }
-    public String getDetailAdrr() {
-        return detailAdrr;
-    }
-    public void setDetailAdrr(String detailAdrr) {
-        this.detailAdrr = detailAdrr;
     }
     public Date getDealTime() {
         return dealTime;
