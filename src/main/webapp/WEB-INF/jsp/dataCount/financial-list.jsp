@@ -9,10 +9,6 @@
 	#hide:hover{cursor:pointer;color:blue;}
 </style>
 	<div class="text-c">
-		<input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')||\'%y-%M-%d\'}'})" id="beginTime"
-			   class="input-text Wdate" style="width:120px;" placeholder="开始时间">
-		<input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'beginTime\')}',maxDate:'%y-%M-%d'})" id="endTime"
-			   class="input-text Wdate" style="width:120px;" placeholder="结束时间">
 		<input type="text" class="input-text" style="width:250px" placeholder="商铺名称" id="storeName" name="storeName">
 		<button type="button" class="btn btn-success radius" onclick="query()"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
 	</div>
@@ -144,15 +140,14 @@ $(document).ready(function(){
 	}else if (type=='B'){
         $("#cons").text("收银日结");
         $("#storeName").css("display","none");
+        $("button").css("display","none");
 	}
 });
 
 
 function query() {
-    var beginTime = $("#beginTime").val();
-    var endTime = $("#endTime").val();
 	var storeName =$("#storeName").val();
-    pageTable.fnSettings().sAjaxSource = encodeURI("${context_root}/dataCount/findFinancialList.action?beginTime="+beginTime+"&endTime="+endTime+"&status="+status+"&storeName="+storeName);
+    pageTable.fnSettings().sAjaxSource = encodeURI("${context_root}/dataCount/findFinancialList.action?status="+status+"&storeName="+storeName);
     pageTable.fnClearTable(0);
     pageTable.fnDraw();
 }

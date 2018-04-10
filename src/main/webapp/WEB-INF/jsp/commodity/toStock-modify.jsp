@@ -70,22 +70,6 @@
 	var pageTable;
 	var id2="";
 	var id6="";
-	var setting = {
-			view: {
-				selectedMulti: false
-			},
-			edit: {
-				enable: false
-			},
-			data: {
-				simpleData: {
-					enable: true
-				}
-			},
-			callback: { 
-				onClick: onClick
-			}
-		};
 		/* 添加行 */
 		$("#addRow").click(function(){
 			tabIndex++;

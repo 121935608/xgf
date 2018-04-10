@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="StoreApplyMapper">
+
+	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultType="StoreApply" useCache="false">
+		SELECT (@i:=@i+1) num,applyId,applyName,phone,storeName,dealStatus,
+		storeAdrr,detailAdrr,dealTime,dealResult,dealUser,`addTime`
+ 		FROM t_store_apply ,(SELECT @i:=0) AS it WHERE `status`!=-1 
+		<if test="relationMap.applyName != null and relationMap.applyName != ''">
+			AND (
+					applyName LIKE CONCAT(CONCAT('%', #{relationMap.applyName}),'%') or 
+					phone LIKE CONCAT(CONCAT('%', #{relationMap.applyName}),'%') or 
+					storeName LIKE CONCAT(CONCAT('%', #{relationMap.applyName}),'%')
+				)
+		</if>
+ 		 ORDER BY `addTime` DESC
+	</select>
+	
+	<update id="updateStoreApply" parameterType="StoreApply">
+		UPDATE t_store_apply
+		<set>
+			<if test="dealUser != null and dealUser != ''">dealUser = #{dealUser},</if>
+			dealStatus = #{dealStatus},dealResult = #{dealResult},dealTime = #{dealTime}
+		</set>
+		where applyId = #{applyId}
+	</update>
+</mapper>
