@@ -19,8 +19,27 @@
         <!-- 加入相关的执行类和方法 -->
         <property name="jobDetail" ref="timingScheduleJobDetail"/>
         <!-- 设置时间规则 （为了方便测试，设置成一分钟一次。具体的规则见详情）-->
-        <property name="cronExpression" value="0 0 2 * * ?"/>
+        <property name="cronExpression" value="0/10 * * * * ?"/>
     </bean>
+
+
+
+
+
+    <bean id="timingScheduleJobDetail1" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <!-- 定时执行的类 -->
+        <property name="targetObject" ref="timingSchedule"/>
+        <!-- 具体的方法 -->
+        <property name="targetMethod" value="getAllBilling"/>
+    </bean>
+    <!-- 调度触发器，设置自己想要的时间规则 -->
+    <bean id="timingScheduleTrigger1" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <!-- 加入相关的执行类和方法 -->
+        <property name="jobDetail" ref="timingScheduleJobDetail1"/>
+        <!-- 设置时间规则 （为了方便测试，设置成一分钟一次。具体的规则见详情）-->
+        <property name="cronExpression" value="0/10 * * * * ?"/>
+    </bean>
+
     <!-- 加入调度工厂 ,设置调度触发器即可-->
     <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
         <property name="jobFactory">
@@ -28,7 +47,8 @@
         </property>
         <property name="triggers">
             <list>
-                <ref bean="timingScheduleTrigger"/>
+                <!--<ref bean="timingScheduleTrigger"/>-->
+                <!--<ref bean="timingScheduleTrigger1"/>-->
             </list>
         </property>
 
