@@ -91,7 +91,7 @@ $(document).ready(function(){
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>商品描述：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="text" class="input-text" autocomplete="off" id="commodityDes" name="commodityDes" value="${product.commodityDes}">
+				<input type="text" class="input-text" autocomplete="off" id="commodityDes" maxlength="4"  placeholder="输入四字词语（如：香甜软糯）" name="commodityDes" value="${product.commodityDes}">
 			</div>
 		</div>
 
