@@ -1,56 +1,56 @@
-<?xml version="1.0" encoding="UTF-8"?>
-        <beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xmlns:aop="http://www.springframework.org/schema/aop"
-            xsi:schemaLocation="http://www.springframework.org/schema/beans
-                http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context
-                http://www.springframework.org/schema/context/spring-context.xsd
-                http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
-    <!-- 加入需要执行的类 -->
-    <bean id="timingSchedule" class="com.xingrongjinfu.statistics.cashCount.controller.CashQuarzt"/>
-    <!-- 加入定时执行的方法 -->
-    <bean id="timingScheduleJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-        <!-- 定时执行的类 -->
-        <property name="targetObject" ref="timingSchedule"/>
-        <!-- 具体的方法 -->
-        <property name="targetMethod" value="cashCountForDay"/>
-    </bean>
-    <!-- 调度触发器，设置自己想要的时间规则 -->
-    <bean id="timingScheduleTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-        <!-- 加入相关的执行类和方法 -->
-        <property name="jobDetail" ref="timingScheduleJobDetail"/>
-        <!-- 设置时间规则 （为了方便测试，设置成一分钟一次。具体的规则见详情）-->
-        <property name="cronExpression" value="0/10 * * * * ?"/>
-    </bean>
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+        <!--<beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+             <!--xmlns:aop="http://www.springframework.org/schema/aop"-->
+            <!--xsi:schemaLocation="http://www.springframework.org/schema/beans-->
+                <!--http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context-->
+                <!--http://www.springframework.org/schema/context/spring-context.xsd-->
+                <!--http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">-->
+    <!--&lt;!&ndash; 加入需要执行的类 &ndash;&gt;-->
+    <!--<bean id="timingSchedule" class="com.xingrongjinfu.statistics.cashCount.controller.CashQuarzt"/>-->
+    <!--&lt;!&ndash; 加入定时执行的方法 &ndash;&gt;-->
+    <!--<bean id="timingScheduleJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+        <!--&lt;!&ndash; 定时执行的类 &ndash;&gt;-->
+        <!--<property name="targetObject" ref="timingSchedule"/>-->
+        <!--&lt;!&ndash; 具体的方法 &ndash;&gt;-->
+        <!--<property name="targetMethod" value="cashCountForDay"/>-->
+    <!--</bean>-->
+    <!--&lt;!&ndash; 调度触发器，设置自己想要的时间规则 &ndash;&gt;-->
+    <!--<bean id="timingScheduleTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
+        <!--&lt;!&ndash; 加入相关的执行类和方法 &ndash;&gt;-->
+        <!--<property name="jobDetail" ref="timingScheduleJobDetail"/>-->
+        <!--&lt;!&ndash; 设置时间规则 （为了方便测试，设置成一分钟一次。具体的规则见详情）&ndash;&gt;-->
+        <!--<property name="cronExpression" value="0/10 * * * * ?"/>-->
+    <!--</bean>-->
 
 
 
 
 
-    <bean id="timingScheduleJobDetail1" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-        <!-- 定时执行的类 -->
-        <property name="targetObject" ref="timingSchedule"/>
-        <!-- 具体的方法 -->
-        <property name="targetMethod" value="getAllBilling"/>
-    </bean>
-    <!-- 调度触发器，设置自己想要的时间规则 -->
-    <bean id="timingScheduleTrigger1" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-        <!-- 加入相关的执行类和方法 -->
-        <property name="jobDetail" ref="timingScheduleJobDetail1"/>
-        <!-- 设置时间规则 （为了方便测试，设置成一分钟一次。具体的规则见详情）-->
-        <property name="cronExpression" value="0/10 * * * * ?"/>
-    </bean>
+    <!--<bean id="timingScheduleJobDetail1" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+        <!--&lt;!&ndash; 定时执行的类 &ndash;&gt;-->
+        <!--<property name="targetObject" ref="timingSchedule"/>-->
+        <!--&lt;!&ndash; 具体的方法 &ndash;&gt;-->
+        <!--<property name="targetMethod" value="getAllBilling"/>-->
+    <!--</bean>-->
+    <!--&lt;!&ndash; 调度触发器，设置自己想要的时间规则 &ndash;&gt;-->
+    <!--<bean id="timingScheduleTrigger1" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
+        <!--&lt;!&ndash; 加入相关的执行类和方法 &ndash;&gt;-->
+        <!--<property name="jobDetail" ref="timingScheduleJobDetail1"/>-->
+        <!--&lt;!&ndash; 设置时间规则 （为了方便测试，设置成一分钟一次。具体的规则见详情）&ndash;&gt;-->
+        <!--<property name="cronExpression" value="0/10 * * * * ?"/>-->
+    <!--</bean>-->
 
-    <!-- 加入调度工厂 ,设置调度触发器即可-->
-    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-        <property name="jobFactory">
-            <bean class="com.xingrongjinfu.utils.JobFactory" />
-        </property>
-        <property name="triggers">
-            <list>
-                <!--<ref bean="timingScheduleTrigger"/>-->
-                <!--<ref bean="timingScheduleTrigger1"/>-->
-            </list>
-        </property>
+    <!--&lt;!&ndash; 加入调度工厂 ,设置调度触发器即可&ndash;&gt;-->
+    <!--<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">-->
+        <!--<property name="jobFactory">-->
+            <!--<bean class="com.xingrongjinfu.utils.JobFactory" />-->
+        <!--</property>-->
+        <!--<property name="triggers">-->
+            <!--<list>-->
+                <!--&lt;!&ndash;<ref bean="timingScheduleTrigger"/>&ndash;&gt;-->
+                <!--&lt;!&ndash;<ref bean="timingScheduleTrigger1"/>&ndash;&gt;-->
+            <!--</list>-->
+        <!--</property>-->
 
-    </bean>
-</beans>
+    <!--</bean>-->
+<!--</beans>-->
