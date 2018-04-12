@@ -153,7 +153,7 @@ $(document).ready(function(){
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>重量：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input style="width: 100px;" type="text" class="input-text" autocomplete="off" disabled="disabled" maxlength="20"  placeholder="" id="weight" name="weight" value="${product.weight}">kg
+				<input style="width: 100px;" type="text" class="input-text" autocomplete="off"  maxlength="20"  placeholder="" id="weight" name="weight" value="${product.weight}">kg
 			</div>
 		</div>
 		<div class="row cl">
