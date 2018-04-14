@@ -13,6 +13,7 @@ package com.xingrongjinfu.system.pays.dao;
 import com.xingrongjinfu.system.pays.model.Pays;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -24,6 +25,7 @@ import java.util.List;
  * @create 2018/1/3
  * @since 1.0.0
  */
+
 public interface IPaysDao {
 
     /**

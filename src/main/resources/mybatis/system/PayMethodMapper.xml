@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PayMethodMapper">
+
+	<select id="getPayMethodList" resultType="PayMethod">
+		SELECT p.payId,p.payName,p.payCode,p.createTime,p.updateTime,p.status,u.accountName creator FROM t_pay_way p
+		inner join sys_user u
+		on p.creator=u.userId
+	</select>
+
+
+	<insert id="addPayMethod" parameterType="PayMethod">
+		INSERT INTO t_pay_way(
+		<if test="payId !=null and payId!=''">payId,</if>
+		<if test="payCode !=null and payCode!=''">payCode,</if>
+		<if test="payName !=null and payName!=''">payName,</if>
+		<if test="status !=null and status!=''">status,</if>
+		<if test="creator !=null and creator!=''">creator,</if>
+		createTime
+		)VALUES (
+		<if test="payId !=null and payId!=''">#{payId},</if>
+		<if test="payCode !=null and payCode!=''">#{payCode},</if>
+		<if test="payName !=null and payName!=''">#{payName},</if>
+		<if test="status !=null and status!=''">#{status},</if>
+		<if test="creator !=null and creator!=''">#{creator},</if>
+		sysdate()
+		)
+	</insert>
+
+
+	<update id="updatePayMethod" parameterType="PayMethod">
+		UPDATE t_pay_way
+		<set>
+			<if test="status !=null">status =#{status},</if>
+			updateTime=sysdate()
+		</set>
+		WHERE 1=1
+		<if test="payId !=null">
+			AND payId=#{payId}
+		</if>
+	</update>
+
+</mapper> 

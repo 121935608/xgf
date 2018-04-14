@@ -153,7 +153,7 @@ class RepaymentController extends BaseController {
         String code=jsonObject1.getString("code");
         String msg=jsonObject1.getString("msg");
         if("0000".equals(code)){
-        System.out.println(result1);
+//        System.out.println(result1);
         repay.setRepayMoney(repay.getPlanTotal().multiply(new BigDecimal(100)));
         repay.setWithholdMoney(surplusMoney);
         repay.setRepayDate(new Date());
@@ -165,7 +165,7 @@ class RepaymentController extends BaseController {
         repayDetail.setRepayDetailId(UuidUtil.get32UUID());
         repayDetail.setRepayId(repay.getRepayId());
         if(null != repay.getRemark())
-            repayDetail.setRemark(repay.getRemark());
+        repayDetail.setRemark(repay.getRemark());
         repayDetail.setRepayMoney(repay.getPlanTotal().multiply(new BigDecimal(100)));
         repayDetail.setUserId(user.getUserId());
         repayDetail.setRepayType(2);

@@ -27,9 +27,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</if>
 			<if test="relationMap.commodityName !=null and relationMap.commodityName !=''">
 				AND (
-				c.commodityName LIKE CONCAT(CONCAT('%', #{relationMap.commodityName}),'%')
+				t.commodityName LIKE CONCAT(CONCAT('%', #{relationMap.commodityName}),'%')
 				OR
-				c.commodityNo LIKE CONCAT(CONCAT('%', #{relationMap.commodityName}),'%')
+				t.commodityNo LIKE CONCAT(CONCAT('%', #{relationMap.commodityName}),'%')
 				OR
 				t.orderNumber LIKE CONCAT(CONCAT('%', #{relationMap.commodityName}),'%')
 				)

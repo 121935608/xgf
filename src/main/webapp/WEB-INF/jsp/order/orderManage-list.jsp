@@ -31,7 +31,7 @@
                <option value="2" >待发货</option>
                <option value="3" >待收货</option>
                <%--<option value="4" >待还款</option>--%>
-               <option value="5" >完成</option>
+               <option value="4" >完成</option>
            </select>
        </span>
 		<input type="text" class="input-text" style="width:250px" placeholder="订单号|会员" id="orderNumber" name="orderNumber">
