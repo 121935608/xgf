@@ -244,7 +244,7 @@ function pay_edit(obj,id){
                 if(data.s == true){
                     $(obj).parents("tr").remove();
                     parent.layer.msg('已收款!',{icon:1,time:1000});
-                    loadData() ;
+                    window.location.reload();
                 }else{
                     parent.layer.msg("操作失败" , {icon: 2,title:"系统提示"});
                 }
