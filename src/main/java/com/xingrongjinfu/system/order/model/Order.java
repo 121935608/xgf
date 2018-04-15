@@ -47,6 +47,15 @@ public class Order {
     private String phone;
     private String area;
     private String address;
+    private String payCode;
+
+    public String getPayCode() {
+        return payCode;
+    }
+
+    public void setPayCode(String payCode) {
+        this.payCode = payCode;
+    }
 
     public String getOrderId() {
         return orderId;

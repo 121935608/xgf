@@ -30,7 +30,7 @@
                <option value="1">待支付</option>
                <option value="2" >待发货</option>
                <option value="3" >待收货</option>
-               <option value="4" >完成</option>
+               <option value="4" >已完成</option>
                <option value="5" >已收款</option>
            </select>
        </span>
@@ -49,7 +49,8 @@
 				<th width="8%">订单金额</th>
 				<th width="8%">订单来源</th>
 				<th width="8%">订单状态</th>
-				<th width="15%">操作</th>
+				<th width="8%">支付方式</th>
+				<th width="8%">操作</th>
 			</tr>
 		</thead>
 	</table>
@@ -178,13 +179,33 @@ $(document).ready(function(){
                     return "待发货";
                 }else if(row.orderStatus == 3) {
                     return "待收货";
-                }else if(row.orderStatus == 4||row.orderStatus == 5) {
+                }else if(row.orderStatus == 4) {
                     return "已完成";
                 }else if(row.orderStatus == 5) {
                     return "已收款";
                 }else {
                     return "";
                 }
+            }
+        },
+        {
+            "sDefaultContent": "支付方式",
+            "bSortable" : false,
+            "sClass": "td-status text-c",
+            "bSearchable": false,
+            "mRender": function(data, type, row) {
+                console.log(row.payCode);
+                if(row.payCode =="WX") {
+                    return "微信";
+                }else if (row.payCode =="CL"){
+                    return "额度支付";
+                }else if (row.payCode =="ZFB"){
+                    return "支付宝";
+                }else if (row.payCode =="HDFK"){
+                    return "货到付款";
+                }else{
+                    return "";
+				}
             }
         },
         {
@@ -198,8 +219,8 @@ $(document).ready(function(){
                 //打印配送单
                 var toPrint = "<a title=\"打印配送单\" href=\"javascript:;\" onclick=\"order_print('打印配送单','${context_root}/order/toPrintOrder.action?orderNumber=" + row.orderNumber + "','230','406')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>打印配送单</span></a>";
                 var toEdit=""
-                if(row.payCode="HDFK"&&row.orderStatus==4){
-					toEdit = "<a title=\"已收款\" href=\"javascript:;\" onclick=\"pay_edit(this,\'" + row.orderNumber + "\')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>已收款</span></a>";
+                if(row.payCode=="HDFK"&&row.orderStatus==4){
+					toEdit = "<a title=\"确认收款\" href=\"javascript:;\" onclick=\"pay_edit(this,\'" + row.orderNumber + "\')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>确认收款</span></a>";
                 }
                 //对账
                 <%--var toEdit = "<a title=\"对账\" href=\"javascript:;\" onclick=\"repay_edit('对账','${context_root}/merchant/toRepayModify.action?repayId=" + row.repayId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>对账</span></a>";--%>
