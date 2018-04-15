@@ -55,7 +55,7 @@ public class PayMethodController extends BaseController{
     public ModelAndView payList(){
         PageUtilEntity pageUtilEntity=this.getPageUtilEntity();
         List<TableDataInfo> tableDataInfoList=iPayMethodService.payList(pageUtilEntity);
-        return buildDataTable(pageUtilEntity.getTotalResult(),tableDataInfoList);
+        return buildDataTable(tableDataInfoList.size(),tableDataInfoList);
     }
 
 
@@ -89,7 +89,7 @@ public class PayMethodController extends BaseController{
     }
 
     /**
-     * 督导员的启用停用
+     * 支付方式的启用停用
      */
     @RequestMapping(PayMethodConstant.PAYMETHOD_STATUS_CHANGE)
     public @ResponseBody Message changeStatus(PayMethod payMethod)

@@ -1,8 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@include file="/WEB-INF/jsp/common/taglibs.jspf"%>
-<ys:contentHeader title="督导员管理"/>
+<ys:contentHeader title="支付方式管理"/>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 系统管理 <span class="c-gray en">&gt;</span> 督导员管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 系统管理 <span class="c-gray en">&gt;</span> 支付方式管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
 
     <%--<div class="text-c">--%>
@@ -16,7 +16,9 @@
         <%--<input type="text" class="input-text" style="width:250px" placeholder="姓名|督导员编号|电话" id="userName" name="userName">--%>
         <%--<button type="button" class="btn btn-success radius" onclick="query()"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>--%>
     <%--</div>--%>
-    <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="payMethod_add('添加支付方式','${context_root}/system/toPayMethodAdd.action','','410')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加支付方式</a></span></div>
+    <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l">
+        <%--<a href="javascript:;" onclick="payMethod_add('添加支付方式','${context_root}/system/toPayMethodAdd.action','','410')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加支付方式</a></span>--%>
+    </div>
     <div class="mt-20">
         <table class="table table-border table-bordered table-hover table-bg table-sort">
             <thead>
@@ -94,8 +96,8 @@
                 "bSearchable": false,
                 "mRender": function(data, type, row) {
                     //编辑
-                    var toEdit = "<a title=\"编辑\" href=\"javascript:;\" onclick=\"role_edit('编辑督导员','${context_root}/system/toSupervisorModify.action?supervisorId=" + row.supervisorId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>编辑</span></a>";
-                    return statusTools(row) +"&nbsp;&nbsp;" + toEdit;
+                    <%--var toEdit = "<a title=\"编辑\" href=\"javascript:;\" onclick=\"role_edit('编辑督导员','${context_root}/system/toSupervisorModify.action?supervisorId=" + row.supervisorId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>编辑</span></a>";--%>
+                    return statusTools(row);
                 }
             },
         ];
