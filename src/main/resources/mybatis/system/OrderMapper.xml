@@ -57,7 +57,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultMap="OrderResult">
-		SELECT o.orderNumber,o.orderTime,o.payTime,s.userName,o.orderPrice/100 orderPrice,o.platform,o.orderStatus
+		SELECT o.orderNumber,o.orderTime,o.payTime,s.userName,o.orderPrice/100 orderPrice,o.platform,o.orderStatus,o.payCode
 		FROM t_order o
 		LEFT JOIN sys_user s ON o.userId=s.userId
 		WHERE 1=1 and `status`=1
@@ -137,4 +137,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findAllOrders" resultType="Integer">
 		SELECT count(orderNumber) FROM t_order WHERE status=1 AND orderStatus !='1'
 	</select>
+
+	<update id="updatePayOrder" parameterType="string">
+		update t_order set orderStatus=5 where orderNumber=#{0}
+	</update>
 </mapper> 

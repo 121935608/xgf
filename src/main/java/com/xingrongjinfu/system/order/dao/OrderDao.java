@@ -62,6 +62,12 @@ public class OrderDao extends DynamicObjectBaseDao implements IOrderDao {
         return this.update("OrderMapper.updateOrderInfo",order);
     }
 
+
+    @Override
+    public int updatePayOrder(String orderNumber) {
+        return this.update("OrderMapper.updatePayOrder",orderNumber);
+    }
+
     @Override
     public List<TableDataInfo> expressPageInfoQuery(PageUtilEntity pageUtilEntity) {
         List<TableDataInfo> expressPageInfoQuery=null;

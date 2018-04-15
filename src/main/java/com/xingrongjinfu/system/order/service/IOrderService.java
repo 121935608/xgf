@@ -50,6 +50,11 @@ public interface IOrderService {
     int updateOrderInfo(Order order);
 
     /**
+     * 收货后更新订单信息
+     */
+    int updatePayOrder(String orderNumber);
+
+    /**
      * 查询订单快递信息
      */
     List<TableDataInfo>expressPageInfoQuery(PageUtilEntity pageUtilEntity);

@@ -191,4 +191,15 @@ public class OrderController extends BaseController {
         }
         return new Message(result);
     }
+
+
+    /**
+     * 确认收款
+     */
+    @RequestMapping(OrderConstant.PAY_ORDER_URL)
+    public @ResponseBody Message payOrder(String orderNumber){
+        int result=0;
+        result=orderService.updatePayOrder(orderNumber);
+        return new Message(result);
+    }
 }

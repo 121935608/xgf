@@ -54,6 +54,12 @@ public class OrderService implements IOrderService {
         return orderDao.updateOrderInfo(order);
     }
 
+
+    @Override
+    public int updatePayOrder(String orderNumber) {
+        return orderDao.updatePayOrder(orderNumber);
+    }
+
     @Override
     public List<TableDataInfo> expressPageInfoQuery(PageUtilEntity pageUtilEntity) {
         return orderDao.expressPageInfoQuery(pageUtilEntity);

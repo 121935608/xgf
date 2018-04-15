@@ -30,8 +30,8 @@
                <option value="1">待支付</option>
                <option value="2" >待发货</option>
                <option value="3" >待收货</option>
-               <%--<option value="4" >待还款</option>--%>
                <option value="4" >完成</option>
+               <option value="5" >已收款</option>
            </select>
        </span>
 		<input type="text" class="input-text" style="width:250px" placeholder="订单号|会员" id="orderNumber" name="orderNumber">
@@ -180,8 +180,8 @@ $(document).ready(function(){
                     return "待收货";
                 }else if(row.orderStatus == 4||row.orderStatus == 5) {
                     return "已完成";
-//                }else if(row.orderStatus == 5) {
-//                    return "已还款";
+                }else if(row.orderStatus == 5) {
+                    return "已收款";
                 }else {
                     return "";
                 }
@@ -197,13 +197,41 @@ $(document).ready(function(){
                 var tolook = "<a title=\"查看\" href=\"javascript:;\" onclick=\"order_look('查看','${context_root}/order/toLookOrderInfo.action?orderNumber=" + row.orderNumber + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>查看</span></a>";
                 //打印配送单
                 var toPrint = "<a title=\"打印配送单\" href=\"javascript:;\" onclick=\"order_print('打印配送单','${context_root}/order/toPrintOrder.action?orderNumber=" + row.orderNumber + "','230','406')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>打印配送单</span></a>";
-                return tolook;
+                var toEdit=""
+                if(row.payCode="HDFK"&&row.orderStatus==4){
+					toEdit = "<a title=\"已收款\" href=\"javascript:;\" onclick=\"pay_edit(this,\'" + row.orderNumber + "\')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>已收款</span></a>";
+                }
+                //对账
+                <%--var toEdit = "<a title=\"对账\" href=\"javascript:;\" onclick=\"repay_edit('对账','${context_root}/merchant/toRepayModify.action?repayId=" + row.repayId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>对账</span></a>";--%>
+                return tolook+toEdit;
             }
         },
     ];
     var url = "${context_root}/order/findOrderManageList.action";
     pageTable = _Datatable_Init(pageTable, aoColumns, url);
 });
+
+function pay_edit(obj,id){
+    parent.layer.confirm('确认已收款吗？',{icon: 3, title:'提示'},function(index){
+        $.ajax({
+            url:"${context_root}/order/payOrder.action?orderNumber=" + id,
+            type:'post',
+            async:true ,
+            cache:false ,
+            dataType:"json",
+            success:function(data){
+                if(data.s == true){
+                    $(obj).parents("tr").remove();
+                    parent.layer.msg('已收款!',{icon:1,time:1000});
+                    loadData() ;
+                }else{
+                    parent.layer.msg("操作失败" , {icon: 2,title:"系统提示"});
+                }
+            },
+
+        }) ;
+    });
+}
 
 //发货
 function sendTools(row) {
@@ -220,6 +248,10 @@ function statusTools(row) {
     } else {
         return "<a style=\"cursor: default;\" title=\"确认收货\">确认收货</a>";
     }
+}
+
+function repay_edit(title,url,w,h){
+    layer_show(title,url,w,h);
 }
 
 //打印配送单

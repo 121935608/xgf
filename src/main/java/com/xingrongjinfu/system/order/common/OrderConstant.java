@@ -109,4 +109,10 @@ public class OrderConstant {
      * 请求地址:确认结账
      */
     public final static String ORDER_TOCHECK_URL="checkOrder";
+
+
+    /**
+     * 请求地址:确认收款
+     */
+    public final static String PAY_ORDER_URL="payOrder";
 }
