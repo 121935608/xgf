@@ -45,7 +45,7 @@
 				<th width="6%">已还金额（元）</th>
 				<th width="6%">结余金额（元）</th>
 				<th width="6%">状态</th>
-				<th width="6%" id="do">操作</th>
+				<%--<th width="6%" id="do">操作</th>--%>
 			</tr>
 		</thead>
 	</table>
@@ -171,26 +171,26 @@ $(document).ready(function(){
             }
         }
     },
-    {
-        "sDefaultContent": "",
-        "bSortable" : false,
-        "sClass": "td-manage text-c",
-        "bSearchable": false,
-        "mRender": function(data, type, row) {
-        	var type = '${type}';
-        	if(type == 'B'){
-        		$("thead").children("tr").children("th:last").css("display","none");
-        		$('tr').find('td:last').css("display","none");
-        		return;
-        	}
-        	if((row.status == 1) || (row.status == 2) || (row.status == 4)){
-        		return "";
-        	}
-            //对账
-            var toEdit = "<a title=\"对账\" href=\"javascript:;\" onclick=\"repay_edit('对账','${context_root}/merchant/toRepayModify.action?repayId=" + row.repayId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>对账</span></a>";
-        	return  toEdit ;
-        }
-    }
+    <%--{--%>
+        <%--"sDefaultContent": "",--%>
+        <%--"bSortable" : false,--%>
+        <%--"sClass": "td-manage text-c",--%>
+        <%--"bSearchable": false,--%>
+        <%--"mRender": function(data, type, row) {--%>
+        	<%--var type = '${type}';--%>
+        	<%--if(type == 'B'){--%>
+        		<%--$("thead").children("tr").children("th:last").css("display","none");--%>
+        		<%--$('tr').find('td:last').css("display","none");--%>
+        		<%--return;--%>
+        	<%--}--%>
+        	<%--if((row.status == 1) || (row.status == 2) || (row.status == 4)){--%>
+        		<%--return "";--%>
+        	<%--}--%>
+            <%--//对账--%>
+            <%--var toEdit = "<a title=\"对账\" href=\"javascript:;\" onclick=\"repay_edit('对账','${context_root}/merchant/toRepayModify.action?repayId=" + row.repayId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>对账</span></a>";--%>
+        	<%--return  toEdit ;--%>
+        <%--}--%>
+    <%--}--%>
     ];
     var url = "${context_root}/merchant/repaymentList.action";
     pageTable = _Datatable_Init(pageTable, aoColumns, url); 
