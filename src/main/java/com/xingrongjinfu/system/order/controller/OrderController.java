@@ -10,6 +10,7 @@
  */
 package com.xingrongjinfu.system.order.controller;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -88,6 +89,8 @@ public class OrderController extends BaseController {
             //总金额=数量*进价
             orderDetail.setInPrice(orderDetail.getInPrice());
             Double all=orderDetail.getInPrice()*orderDetail.getCommodityNum();
+            BigDecimal   b   =   new BigDecimal(all);
+            all   =   b.setScale(2,   BigDecimal.ROUND_HALF_UP).doubleValue();
             orderDetail.setTotalMoney(all);
         }
         modelAndView.addObject("orders",orders);

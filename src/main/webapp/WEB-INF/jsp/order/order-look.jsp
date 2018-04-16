@@ -50,8 +50,19 @@
 						<c:if  test="${orders.orderStatus eq 1}">待支付</c:if>
 						<c:if  test="${orders.orderStatus eq 2}">待发货</c:if>
 						<c:if  test="${orders.orderStatus eq 3}">待收货</c:if>
-						<c:if  test="${orders.orderStatus eq 4}">待还款</c:if>
-						<c:if  test="${orders.orderStatus eq 5}">已还款</c:if>
+						<c:if  test="${orders.orderStatus eq 4}">已完成</c:if>
+						<c:if  test="${orders.orderStatus eq 5}">已收款</c:if>
+					</span>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">支付方式:</label>
+				<div class="formControls col-xs-8 col-sm-4">
+					<span>
+						<c:if  test="${orders.payCode eq 'ZFB'}">支付宝</c:if>
+						<c:if  test="${orders.payCode eq 'WX'}">微信</c:if>
+						<c:if  test="${orders.payCode eq 'HDFK'}">货到付款</c:if>
+						<c:if  test="${orders.payCode eq 'CL'}">额度支付</c:if>
 					</span>
 				</div>
 			</div>
@@ -130,12 +141,14 @@
 					<span>¥${orders.freight}</span>
 				</div>
 			</div>
+			<c:if test="${orders.payCode=='CL'}">
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-3">账期金额:</label>
 				<div class="formControls col-xs-8 col-sm-4">
 					<span>¥${orders.payment}</span>
 				</div>
 			</div>
+			</c:if>
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-3">付款金额:</label>
 				<div class="formControls col-xs-8 col-sm-4">
