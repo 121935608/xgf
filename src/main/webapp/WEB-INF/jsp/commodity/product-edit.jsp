@@ -87,6 +87,12 @@ $(document).ready(function(){
 				<input type="text" class="input-text" autocomplete="off" disabled="disabled" maxlength="20"  placeholder="" id="commodityNo" name="commodityNo" value="${product.commodityNo}">
 			</div>
 		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>商品标语：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input type="text" class="input-text" autocomplete="off"  maxlength="10"  placeholder="最多输入10个汉字" id="commodityBanner" name="commodityBanner" value="${product.commodityBanner}">
+			</div>
+		</div>
 
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>商品描述：</label>
@@ -381,9 +387,9 @@ $(document).ready(function(){
             required:true,
             maxlength:200
         },
-        /*grade:{
+        commodityBanner:{
 			required:true,
-		},*/
+		},
         origin:{
 			required:true,
 		},

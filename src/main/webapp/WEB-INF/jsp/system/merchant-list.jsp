@@ -28,6 +28,7 @@
                 <th width="6%">账号</th>
                 <th width="10%">店铺名称</th>
                 <th width="8%">营业执照号码</th>
+                <th width="8%">督导员</th>
                 <th width="8%">联系人</th>
                 <th width="8%">联系方式</th>
                 <th width="8%">状态</th>
@@ -65,6 +66,12 @@
                         return "";
                     }
                 }
+            },
+            {
+                "mData": "supervisorName",
+                "bSortable" : false,
+                "sClass": "text-c",
+                "defaultContent": ""
             },
             {
                 "mData": "userName",

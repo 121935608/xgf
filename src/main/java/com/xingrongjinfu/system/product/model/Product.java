@@ -51,6 +51,15 @@ public class Product {
     private String storage;
     private String commodityDes;
     private String priceSpecification;
+    private String commodityBanner;
+
+    public String getCommodityBanner() {
+        return commodityBanner;
+    }
+
+    public void setCommodityBanner(String commodityBanner) {
+        this.commodityBanner = commodityBanner;
+    }
 
     public String getPriceSpecification() {
         return priceSpecification;

@@ -56,7 +56,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultMap="ProductResult">
 		SELECT c.commodityId,c.commodityDes,c.priceSpecification,c.commodityName,c.commodityNo,c.imgMain,c.imgOther,c.specification,c.inPrice/100 inPrice,
 		c.salePrice/100 salePrice,c.tag,c.categoryId,c.info,c.weight,c.commodityStatus,c.unit,c.stockNum,c.taxRate,
-		c.status,c.addTime,c.updateTime,c.origin,c.supply,c.hint,c.grade,c.country,c.type,c.storage,t.categoryName
+		c.status,c.addTime,c.updateTime,c.commodityBanner,c.origin,c.supply,c.hint,c.grade,c.country,c.type,c.storage,t.categoryName
 		FROM t_commodity c LEFT JOIN t_category t ON c.categoryId=t.categoryId
 		WHERE 1=1
 		<if test="relationMap.type !=null and relationMap.type!=''">
@@ -134,7 +134,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findProductById" parameterType="Product" resultType="Product">
 		SELECT c.commodityId,c.priceSpecification,c.commodityDes,c.commodityName,c.commodityNo,c.imgMain,c.imgOther,c.specification,c.inPrice/100 inPrice,
 		c.salePrice/100 salePrice,c.tag,c.categoryId,c.info,c.weight,c.commodityStatus,c.unit,c.stockNum,c.taxRate,
-		c.status,c.addTime,c.updateTime,c.origin,c.supply,c.hint,c.grade,c.country,c.type,c.storage,t.categoryName FROM t_commodity c LEFT JOIN t_category t ON c.categoryId=t.categoryId
+		c.status,c.addTime,c.updateTime,c.commodityBanner,c.origin,c.supply,c.hint,c.grade,c.country,c.type,c.storage,t.categoryName FROM t_commodity c LEFT JOIN t_category t ON c.categoryId=t.categoryId
 		WHERE 1=1
 		<if test="commodityId !=null and commodityId !=''">
 			AND commodityId =#{commodityId}
@@ -160,6 +160,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="stockNum!=null ">stockNum=#{stockNum},</if>
 			<if test="taxRate!=null">taxRate=#{taxRate},</if>
 			<if test="status!=null ">status=#{status},</if>
+			<if test="commodityBanner!=null ">commodityBanner=#{commodityBanner},</if>
 			<if test="origin!=null and origin !=''">origin=#{origin},</if>
 			<if test="supply!=null and supply !=''">supply=#{supply},</if>
 			<if test="hint!=null and hint !=''">hint=#{hint},</if>

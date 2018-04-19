@@ -31,6 +31,15 @@ public class Merchant implements Serializable
     private String locked;
     private String storeId;
     private String licenseId;
+    private String supervisorName;
+
+    public String getSupervisorName() {
+        return supervisorName;
+    }
+
+    public void setSupervisorName(String supervisorName) {
+        this.supervisorName = supervisorName;
+    }
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
