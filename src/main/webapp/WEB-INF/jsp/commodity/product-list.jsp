@@ -42,7 +42,7 @@
 		<thead>
 			<tr class="text-c">
 				<th width="8%">编号</th>
-				<th width="8%">商品名称</th>
+				<th width="10%">商品名称</th>
 				<th width="8%">商品条码</th>
 				<th width="5%">分类 </th>
 				<th width="5%">产地</th>
@@ -53,7 +53,7 @@
 				<th width="5%">规格</th>
 				<th width="5%">价格规格</th>
 				<th width="5%">进价(元)</th>
-				<th width="5%">费率</th>
+				<%--<th width="5%">费率</th>--%>
 				<th width="5%">售价(元)</th>
 				<th width="4%">库存</th>
 				<th width="5%">存储方式</th>
@@ -77,8 +77,8 @@ $(document).ready(function(){
             "sClass": "text-c",
             "bSearchable": false,
             "mRender": function(data, type, row) {
-                if (row.commodityId != null) {
-                    return row.commodityId;
+                if (row.commodityNo!= null) {
+                    return row.commodityNo;
                 } else {
                     return "";
                 }
@@ -104,8 +104,8 @@ $(document).ready(function(){
             "sClass": "text-c",
             "bSearchable": false,
             "mRender": function(data, type, row) {
-                if (row.commodityNo != null) {
-                    return row.commodityNo;
+                if (row.barCode != null) {
+                    return row.barCode;
                 } else {
                     return "";
                 }
@@ -247,19 +247,19 @@ $(document).ready(function(){
                 }
             }
         },
-        {
-            "sDefaultContent": "费率",
-            "bSortable" : false,
-            "sClass": "text-c",
-            "bSearchable": false,
-            "mRender": function(data, type, row) {
-                if (row.taxRate !=null) {
-                    return row.taxRate+'%';
-                }else {
-                    return "";
-                }
-            }
-        },
+//        {
+//            "sDefaultContent": "费率",
+//            "bSortable" : false,
+//            "sClass": "text-c",
+//            "bSearchable": false,
+//            "mRender": function(data, type, row) {
+//                if (row.taxRate !=null) {
+//                    return row.taxRate+'%';
+//                }else {
+//                    return "";
+//                }
+//            }
+//        },
         {
             "sDefaultContent": "售价(元)",
             "bSortable" : false,

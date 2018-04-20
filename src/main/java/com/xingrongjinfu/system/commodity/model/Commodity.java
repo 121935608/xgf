@@ -32,7 +32,7 @@ public class Commodity {
     private Double totalPrice;
     private String unit;
 
-    
+
     public String getCommodityId() {
         return commodityId;
     }

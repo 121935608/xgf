@@ -52,6 +52,16 @@ public class Product {
     private String commodityDes;
     private String priceSpecification;
     private String commodityBanner;
+    private String barCode;
+
+
+    public String getBarCode() {
+        return barCode;
+    }
+
+    public void setBarCode(String barCode) {
+        this.barCode = barCode;
+    }
 
     public String getCommodityBanner() {
         return commodityBanner;
