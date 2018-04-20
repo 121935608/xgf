@@ -29,7 +29,7 @@
         SELECT s.userId,t.storeId,s.mobilePhone,sv.name name,t.storeName,t.userName,t.phone,s.locked,t.licenseId
         FROM sys_user s
         LEFT JOIN t_store t ON s.userId=t.userId
-        INNER JOIN sys_supervisor sv on sv.supervisorNum=t.supervisorId
+        LEFT JOIN sys_supervisor sv on sv.supervisorNum=t.supervisorId
         WHERE 1=1 AND s.type='B'
         <if test="relationMap.status!= null and relationMap.status!=''">
             AND s.locked = #{relationMap.status}
