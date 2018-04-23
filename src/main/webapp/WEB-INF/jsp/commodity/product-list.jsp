@@ -77,8 +77,8 @@ $(document).ready(function(){
             "sClass": "text-c",
             "bSearchable": false,
             "mRender": function(data, type, row) {
-                if (row.commodityNo!= null) {
-                    return row.commodityNo;
+                if (row.barCode!= null) {
+                    return row.barCode;
                 } else {
                     return "";
                 }
@@ -104,8 +104,8 @@ $(document).ready(function(){
             "sClass": "text-c",
             "bSearchable": false,
             "mRender": function(data, type, row) {
-                if (row.barCode != null) {
-                    return row.barCode;
+                if (row.commodityNo != null) {
+                    return row.commodityNo;
                 } else {
                     return "";
                 }
