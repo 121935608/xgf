@@ -13,10 +13,12 @@ package com.xingrongjinfu.system.commodity.service;
 import com.xingrongjinfu.system.commodity.dao.ICommodityDao;
 import com.xingrongjinfu.system.commodity.model.Commodity;
 import org.framework.base.util.PageUtilEntity;
+import org.framework.base.util.TableDataInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -35,5 +37,10 @@ public class CommodityService implements ICommodityService {
     @Override
     public List<Commodity> pageInfoQuery(PageUtilEntity pageUtilEntity) {
         return commodityDao.pageInfoQuery(pageUtilEntity);
+    }
+
+    @Override
+    public List<Commodity> infoQuery(Map<String, String> param) {
+        return commodityDao.infoQuery(param);
     }
 }

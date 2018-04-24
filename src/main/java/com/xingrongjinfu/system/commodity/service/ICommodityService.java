@@ -12,8 +12,10 @@ package com.xingrongjinfu.system.commodity.service;
 
 import com.xingrongjinfu.system.commodity.model.Commodity;
 import org.framework.base.util.PageUtilEntity;
+import org.framework.base.util.TableDataInfo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -25,5 +27,7 @@ import java.util.List;
  */
 public interface ICommodityService {
 
-    List<Commodity>pageInfoQuery(PageUtilEntity pageUtilEntity);
+    List<Commodity> pageInfoQuery(PageUtilEntity pageUtilEntity);
+
+    List<Commodity> infoQuery(Map<String, String> param);
 }

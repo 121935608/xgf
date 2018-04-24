@@ -145,10 +145,6 @@ function excel_out() {
     var endTime = $("#endTime").val();
     var payType = $("#statusSelect option:selected").val();
     var storeName =$("#storeName").val();
-    <%--$.ajax({--%>
-		<%--url:"${context_root}/dataCount/downloadData.action",--%>
-		<%--data:"--%>
-	<%--});--%>
     var elemIF = document.createElement("iframe");
     elemIF.src = "${context_root}/dataCount/downloadData.action?beginTime="+beginTime+"&endTime="+endTime+"&payType="+payType+"&storeName="+storeName
     elemIF.style.display = "none";
