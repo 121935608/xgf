@@ -14,7 +14,7 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>图片：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="file" onchange="pic(event)" id="picture" name="picture" accept="image/*">
+				<input type="file" onchange="pic(event)" id="picture" name="picture" accept="image/*">750*318
 				<img alt="" id="myImg" src="" height="100px",width="100px">
 			</div>
 		</div>

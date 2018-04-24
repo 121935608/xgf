@@ -8,6 +8,10 @@
         class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
    <div class="text-c">
+       <input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')||\'%y-%M-%d\'}'})" id="beginTime"
+              class="input-text Wdate" style="width:120px;" placeholder="开始时间">
+       <input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'beginTime\')}',maxDate:'%y-%M-%d'})" id="endTime"
+              class="input-text Wdate" style="width:120px;" placeholder="结束时间">
        <span class="select-box" style="width: 120px;">
            <select name="statusSelect" id="statusSelect" class="select" autocomplete="off">
                <option value="">状态</option>
@@ -31,6 +35,7 @@
                 <th width="8%">督导员</th>
                 <th width="8%">联系人</th>
                 <th width="8%">联系方式</th>
+                <th width="8%">注册时间</th>
                 <th width="8%">状态</th>
                 <th width="10%">操作</th>
             </tr>
@@ -85,12 +90,12 @@
                 "sClass": "text-c",
                 "defaultContent": ""
             },
-           /* {
-                "mData": "status",
+            {
+                "mData": "addTime",
                 "bSortable" : false,
                 "sClass": "text-c",
                 "defaultContent": ""
-            },*/
+            },
             {
                 "sDefaultContent": "状态",
                 "bSortable": false,
@@ -135,11 +140,12 @@
 
     function query() {
         var status = $("#statusSelect option:selected").val();
-
+        var beginTime = $("#beginTime").val();
+        var endTime = $("#endTime").val();
         var name=$("#search").val();
 
         //var jsonObject = '{\"beginTime\":\"' + beginTime + '\",\"endTime\":\"' + endTime + '\",\"source\":\"' + source + '\",\"type\":\"' + type + '\",\"status\":\"' + status + '\",\"phone\":\"' + phone + '\"}';
-        pageTable.fnSettings().sAjaxSource =encodeURI("${context_root}/system/merchantList.action?status=" + status+"&name="+name);
+        pageTable.fnSettings().sAjaxSource =encodeURI("${context_root}/system/merchantList.action?status=" + status+"&name="+name+"&beginTime="+beginTime+"&endTime="+endTime);
         pageTable.fnClearTable(0);
         pageTable.fnDraw();
 

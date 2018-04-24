@@ -13,6 +13,7 @@ package com.xingrongjinfu.system.product.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.xingrongjinfu.common.constants.Constants;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.core.controller.BaseController;
 import org.framework.core.model.Message;
@@ -204,6 +205,38 @@ public class ProductController extends BaseController{
         }
 
     }
+
+
+    /**
+     * 富文本上传图片
+     */
+    @RequestMapping(ProductConstant.PRODUCT_IMFFILE_URLS)
+    public @ResponseBody Object imgFiles(MultipartFile file){
+        AliyunOSSClientUtil aliyunOSSClientUtil=new AliyunOSSClientUtil();
+        JSONObject jsonObject = new JSONObject();
+        try {
+            String key = aliyunOSSClientUtil.uploadImgs(file);
+
+            String filePath = Constants.PATH+ aliyunOSSClientUtil.BACKET_NAME + "." + aliyunOSSClientUtil.ENDPOINT+ "/" +aliyunOSSClientUtil.FOLDER2 + AliyunOSSClientUtil.filePath;
+            // 返回地址
+            jsonObject.put("error",0);
+            jsonObject.put("url",filePath);
+            return jsonObject;
+//            return new Message(true,filePath);
+        }
+        catch (OSSException e)
+        {
+            e.printStackTrace();
+//            return new Message(false,"对不起图片上传失败!");
+            jsonObject.put("msg","对不起图片上传失败!");
+            jsonObject.put("error",1);
+            return jsonObject;
+        }
+
+    }
+
+
+
     /**
      * 获取所有的分类
      * @return

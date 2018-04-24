@@ -65,4 +65,11 @@ public class ProductConstant {
      * 请求地址:富文本上传图片
      */
     public final static String PRODUCT_IMFFILE_URL="imgFile";
+
+
+
+    /**
+     * 请求地址:富文本上传图片
+     */
+    public final static String PRODUCT_IMFFILE_URLS="imgFiles";
 }

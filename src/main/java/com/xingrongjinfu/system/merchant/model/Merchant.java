@@ -10,7 +10,10 @@
  */
 package com.xingrongjinfu.system.merchant.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -32,6 +35,16 @@ public class Merchant implements Serializable
     private String storeId;
     private String licenseId;
     private String supervisorName;
+    private String addTime;
+
+
+    public String getAddTime() {
+        return addTime;
+    }
+
+    public void setAddTime(String addTime) {
+        this.addTime = addTime;
+    }
 
     public String getSupervisorName() {
         return supervisorName;
