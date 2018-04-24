@@ -1,4 +1,4 @@
-package com.xingrongjinfu.crm.common;
+package com.xingrongjinfu.crm.department.common;
 
 /**
  * 角色管理 常量信息
@@ -33,23 +33,23 @@ public class DeptConstant
     public final static String DEL_URL = "deleteDeptById";
     
     /**
-     * 请求地址：保存部门信息
+     * 请求地址：保存&修改 部门信息
      */
     public final static String SAVE_DEPT_URL = "saveDept";
 
     /**
-     * 逻辑视图名：跳转至角色列表界面
+     * 逻辑视图名：跳转至部门列表界面
      */
     public final static String DEPT_PAGE = "xfsxCRM/dept-list";
 
     /**
-     * 逻辑视图名：角色添加界面
+     * 逻辑视图名：部门添加界面
      */
     public final static String ADD_PAGE = "xfsxCRM/dept-add";
     
     /**
-     * 逻辑视图名：角色修改界面
+     * 逻辑视图名：部门修改界面
      */
-    public final static String UPDATE_PAGE = "xfsxCRM/dept-update";
+    public final static String UPDATE_PAGE = "xfsxCRM/dept-modify";
     
 }

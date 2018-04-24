@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DeptMapper">
+	<resultMap type="Dept" id="DeptResult">
+		<result property="deptId" column="deptId" />
+		<result property="deptName" column="deptName" />
+		<result property="describe" column="describe" />
+		<result property="createTime" column="createTime" />
+		<result property="updateTime" column="updateTime" />
+	</resultMap>
+
+    <!-- 查询部门信息列表，分页 -->
+ 	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultMap="DeptResult" useCache="false">
+		SELECT * FROM c_dept
+	</select>
+	
+	<!-- 根据部门ID查询部门信息 -->
+	<select id="findByDeptId" parameterType="Dept" resultType="Dept">
+		SELECT * FROM c_dept where 1=1
+		<if test="deptId != null ">
+			AND deptId = #{deptId}
+		</if>
+	</select>
+	
+	
+	<!-- 修改部门信息 -->
+	<update id="updateDeptInfo" parameterType="Dept">
+ 		update c_dept
+ 		<set>
+ 			<if test="deptName != null and deptName != ''">deptName = #{deptName},</if>
+ 			describe = #{describe},
+ 			upadte = sysdate()
+ 		</set>
+ 		where 1=1
+ 		<if test="deptId != null and deptId  != ''">and deptId = #{deptId}</if>
+ 	</update>
+ 	
+ 	<!-- 插入部门信息 -->
+ 	<insert id="addDeptInfo" parameterType="Dept">
+ 		insert into c_dept(
+ 			<if test="deptName != null and deptName != ''">deptName,</if>
+ 			<if test="describe != null and describe != ''">describe,</if>
+ 			createTime
+ 		)values(
+ 			<if test="deptName != null and deptName != ''">#{deptName},</if>
+ 			<if test="describe != null and describe != ''">#{describe},</if>
+ 			sysdate()
+ 		)
+ 	</insert>
+ 	
+ 	<!-- 删除部门信息 -->
+ 	<delete id="deleteDeptById" parameterType="Dept">
+ 		delete from c_dept where deptId = #{deptId}
+ 	</delete>
+
+</mapper> 
