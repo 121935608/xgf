@@ -34,4 +34,9 @@ public class PaysConstant {
      * 请求地址:查询收银支付信息
      */
     public final static String PAYS_LIST_URL="findALLPays";
+
+    /**
+     * 请求地址:下载Excel数据
+     */
+    public final static String DOWNLOAD_DATA="downloadData";
 }
