@@ -1,0 +1,82 @@
+idea 有用的插件
+activate-power-mode
+BashSupport
+SQL Query Plugin
+GsonFormat
+FindBugs-IDEA
+CheckStyle-IDEA
+
+
+
+
+Alibaba Java Coding Guidelines
+iBATIS/MyBatis plugin
+Stack Overflow
+Lombok
+CodeGlance
+Background Image Plus
+@Setter @Getter @Data
+<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+<dependency>
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+    <version>1.16.18</version>
+    <scope>provided</scope>
+</dependency>
+
+<repositories>
+    <repository>
+        <id>projectlombok.org</id>
+        <url>http://projectlombok.org/mavenrepo</url>
+    </repository>
+</repositories>
+
+快捷键======
+
+ctrl+alt+<回退
+ctrl+E 历史记录
+ctrl+shift+E
+ctrl+N ctrl+shift+N ctrl+shift+alt+N shift+shift
+Ctrl+shift+V 历史剪切板
+shift+F7 debug选择方法
+alt + insert
+ctrl+shift+.折叠
+ctrl+alt+= 展开
+Ctrl+shift+R(F) 收搜字符串
+Ctrl+alt+点击进接口实现
+
+soutm soutp serr打印
+dep pl geti it
+
+
+
+<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+<dependency>
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+    <version>1.16.18</version>
+    <scope>provided</scope>
+</dependency>
+
+protected 子类继承  default同包中用
+
+
+JRebel 6激活
+http://idea.lanyus.com/ilanyu
+lanyu19950316@gmail.com
+
+ObjectMapper mapper = new ObjectMapper();
+mapper.enable(SerializationFeature.INDENT_OUTPUT);
+User u = new User(25,"feng");
+final String s = mapper.writeValueAsString(u);
+System.out.println(s);
+User user = mapper.readValue(s, User.class);
+
+
+Windows 10 Pro(win10专业版激活密钥)
+TPYNC-4J6KF-4B4GP-2HD89-7XMP6
+2BXNW-6CGWX-9BXPV-YJ996-GMT6T
+NRTT2-86GJM-T969G-8BCBH-BDWXG
+XC88X-9N9QX-CDRVP-4XV22-RVV26
+TNM78-FJKXR-P26YV-GP8MB-JK8XG
+TR8NX-K7KPD-YTRW3-XTHKX-KQBP6
