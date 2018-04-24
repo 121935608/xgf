@@ -1,11 +1,11 @@
-package com.xingrongjinfu.crm.department.controller;
+package com.xingrongjinfu.crm.controller;
 
 import org.framework.core.controller.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.xingrongjinfu.crm.department.common.DeptConstant;
+import com.xingrongjinfu.crm.common.DeptConstant;
 import com.xingrongjinfu.system.SystemConstant;
 
 /**

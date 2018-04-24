@@ -1,4 +1,4 @@
-package com.xingrongjinfu.crm.department.common;
+package com.xingrongjinfu.crm.common;
 
 /**
  * 角色管理 常量信息
