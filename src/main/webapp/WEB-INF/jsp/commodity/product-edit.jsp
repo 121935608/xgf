@@ -112,7 +112,7 @@ $(document).ready(function(){
 			</div>
 		</div>
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>商品标签：</label>
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>商品标签：</label>
 			<div class="formControls col-xs-8 col-sm-4">
 			<span class="select-box" style="width: 100px;border: hidden;">
              <y:select id="tag" name="tag" codeGroup="${category}" selectedValue="${product.tag}"
@@ -168,12 +168,12 @@ $(document).ready(function(){
 				<input style="width: 100px;" type="text" class="input-text" autocomplete="off" disabled="disabled" maxlength="20"  placeholder="" id="inPrice" name="inPrice" value="${product.inPrice}">元
 			</div>
 		</div>
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>费率：</label>
-			<div class="formControls col-xs-8 col-sm-4">
-				<input style="width: 100px;" type="text" class="input-text" autocomplete="off" maxlength="20"  placeholder="" id="taxRate" name="taxRate" value="${product.taxRate}">%
-			</div>
-		</div>
+		<%--<div class="row cl">--%>
+			<%--<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>费率：</label>--%>
+			<%--<div class="formControls col-xs-8 col-sm-4">--%>
+				<%--<input style="width: 100px;" type="text" class="input-text" autocomplete="off" maxlength="20"  placeholder="" id="taxRate" name="taxRate" value="${product.taxRate}">%--%>
+			<%--</div>--%>
+		<%--</div>--%>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>售价：</label>
 			<div class="formControls col-xs-8 col-sm-4">
@@ -236,7 +236,7 @@ $(document).ready(function(){
 			<div class="row cl">
 				<div class="formControls col-xs-8 col-sm-4">
 				上传图片：
-					<input type='button' class='btn' value='浏览...'onclick="toChoose()" />
+					<input type='button' class='btn' value='浏览...'onclick="toChoose()" />700*700
 					<input  type="file" id="picture" class="file" size="28" onchange="pic(event)"  name="picture" accept="image/*"/>
 				</div>
 			<div style="clear:both;margin-right:70%;font-size:12px;">温馨提示：双击图片删除</div>
@@ -272,7 +272,8 @@ $(document).ready(function(){
                  allowPreviewEmoticons : false,
                  allowImageUpload : true,
                  allowFileManager : true,
-                 uploadJson : "${context_root}/commodity/imgFile.action",
+				 filePostName:"file",
+                 uploadJson : "${context_root}/commodity/imgFiles.action",
                  afterUpload : function () {
                      this.sync();
                  },
@@ -368,9 +369,9 @@ $(document).ready(function(){
         commodityName:{
 			required:true,
 		},
-        tag:{
+        /*tag:{
             required:true,
-		},
+        },*/
 		categoryId:{
             required:true,
 		},

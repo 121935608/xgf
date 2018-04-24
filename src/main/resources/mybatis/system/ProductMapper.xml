@@ -152,7 +152,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="specification!=null and specification !=''">specification=#{specification},</if>
 			<if test="inPrice!=null">inPrice=#{inPrice}*100,</if>
 			<if test="salePrice!=null">salePrice=#{salePrice}*100,</if>
-			<if test="tag!=null and tag !=''">tag=#{tag},</if>
+			<if test="tag!=null">tag=#{tag},</if>
 			<if test="categoryId!=null and categoryId !=''">categoryId=#{categoryId},</if>
 			<if test="info!=null and info !=''">info=#{info},</if>
 			<if test="weight!=null ">weight=#{weight},</if>
