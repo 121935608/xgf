@@ -111,13 +111,7 @@ public class DeptController extends BaseController
         int result = 0;
         if (dept.getDeptId() != null)
         {
-            //删除角色前先查询部门是否还有业务员
-            result= deptService.findUserById(dept);
-            if (result==0) {
-                result = deptService.deleteDeptById(dept);
-            }else {
-               result=0;
-            }
+            result = deptService.deleteDeptById(dept);
         }
         return new Message(result);
     }

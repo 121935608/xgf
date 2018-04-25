@@ -18,10 +18,10 @@ import com.xingrongjinfu.crm.department.model.Dept;
 public class DeptDao extends DynamicObjectBaseDao implements IDeptDao
 {
     /**
-     * 根据条件分页查询角色对象
+     * 根据条件分页查询部门对象
      * 
      * @param page 分页对象
-     * @return 角色信息集合信息
+     * @return 部门信息列表
      */
     @SuppressWarnings("unchecked")
     public List<TableDataInfo> pageInfoQuery(PageUtilEntity pageUtilEntity) {
@@ -68,16 +68,6 @@ public class DeptDao extends DynamicObjectBaseDao implements IDeptDao
 	 */
 	public int addDeptInfo(Dept dept) {
 		return (int) this.save("DeptMapper.addDeptInfo", dept);
-	}
-
-	/**
-	 * 根据部门ID查询业务员信息，判断业务员是否属于该部门
-	 * 
-	 * @param: dept
-	 * @return: int      
-	 */
-	public int findUserById(Dept dept) {
-		 return (int)this.findForObject("DeptMapper.findUserById",dept);
 	}
 
 

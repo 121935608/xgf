@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="VisitMapper">
+	<resultMap type="Visit" id="VisitResult">
+		<result property="visitId" column="visitId" />
+		<result property="storeId" column="storeId" />
+		<result property="userId" column="userId" />
+		<result property="visitTime" column="visitTime" />
+		<result property="visitManner" column="visitManner" />
+		<result property="visitGoal" column="visitGoal" />
+		<result property="visitWith" column="visitWith" />
+		<result property="visitResultStatus" column="visitResultStatus" />
+		<result property="visitResult" column="visitResult" />
+	    <result property="createTime" column="createTime" />
+		<result property="status" column="status" />
+	</resultMap>
+
+    <!-- 查询部门信息列表，分页 -->
+ 	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultType="HashMap" useCache="false">
+		SELECT v.*,s.`name` as supervisorName,t.storeName as storeName FROM
+			c_visit_record v
+		LEFT JOIN sys_supervisor s ON v.supervisorId = s.supervisorId
+		LEFT JOIN t_store t ON v.storeId = t.storeId
+		WHERE v.`status` = '0'
+	</select>
+</mapper> 

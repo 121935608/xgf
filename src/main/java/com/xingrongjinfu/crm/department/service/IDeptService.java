@@ -15,10 +15,10 @@ import com.xingrongjinfu.crm.department.model.Dept;
 public interface IDeptService
 {
     /**
-     * 根据条件分页查询角色对象
+     * 根据条件分页查询部门对象
      * 
      * @param page 分页对象
-     * @return 角色信息集合信息
+     * @return 部门信息集合信息
      */
     public List<TableDataInfo> pageInfoQuery(PageUtilEntity pageUtilEntity);
 
@@ -48,15 +48,6 @@ public interface IDeptService
 	 * @return: int      
 	 */
 	public int addDeptInfo(Dept dept);
-
-
-	/**
-	 * 根据部门ID查询业务员信息，判断业务员是否属于该部门
-	 * 
-	 * @param: dept
-	 * @return: int      
-	 */
-	public int findUserById(Dept dept);
 
 
 	/**
