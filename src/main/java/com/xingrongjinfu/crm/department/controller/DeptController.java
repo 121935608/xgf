@@ -56,7 +56,7 @@ public class DeptController extends BaseController
      * 跳转部门修改界面
      */
     @RequestMapping(DeptConstant.TO_UPDATE_URL)
-    public ModelAndView toRoleModify(@RequestParam(required = true) String deptId)
+    public ModelAndView toDeptModify(@RequestParam(required = true) String deptId)
     {
         ModelAndView modelAndView = this.getModelAndView(DeptConstant.UPDATE_PAGE);
         if (deptId != null)
@@ -71,7 +71,7 @@ public class DeptController extends BaseController
      * 查询部门列表
      */
     @RequestMapping(DeptConstant.DEPT_LIST_URL)
-    public ModelAndView roleList()
+    public ModelAndView deptList()
     {
         PageUtilEntity pageUtilEntity = this.getPageUtilEntity();
 

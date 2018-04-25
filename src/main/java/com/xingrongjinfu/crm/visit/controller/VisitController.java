@@ -32,7 +32,7 @@ public class VisitController extends BaseController
      * 跳转访问记录列表界面
      */
     @RequestMapping(VisitConstant.VISIT_URL)
-    public ModelAndView loadCrmDept()
+    public ModelAndView loadCrmVisit()
     {
         return this.getModelAndView(VisitConstant.VISIT_PAGE);
     }
@@ -42,7 +42,7 @@ public class VisitController extends BaseController
      * 查询访问记录列表
      */
     @RequestMapping(VisitConstant.VISIT_LIST_URL)
-    public ModelAndView roleList()
+    public ModelAndView visitList()
     {
         PageUtilEntity pageUtilEntity = this.getPageUtilEntity();
 
