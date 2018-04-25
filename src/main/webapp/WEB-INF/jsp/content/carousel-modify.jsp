@@ -48,7 +48,7 @@
 				<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>URL：</label>
 				<div class="radio-box">
 					<input type="radio" id="url" name="radio" value="1" onchange="fun1()">
-					<input type="url" class="input-text" value="" placeholder="" name="url" disabled="disabled">
+					<input type="url" id="urla" class="input-text" value="" placeholder="" name="url" disabled="disabled">
 				</div>
 			</div>
 			<div class="row cl">
@@ -69,7 +69,7 @@
 					<input type="radio" id="category" name="radio" value="3" onchange="fun1()">
 					<div>
 						<input type="text" showfors="commodityHiddenTree" class="input-text" value="" placeholder="" name="category" disabled="disabled" readonly onclick="showMenus(this)">
-						<input type="hidden" showValues="categoryHiddenTree" value="" name="category1">
+						<input type="hidden" id="category1" showValues="categoryHiddenTree" value="" name="category1">
 						<ul id="commodityHiddenTree" forInput="" class="ztree" style="display:none;background-color: white; border: solid 1px rgb(150,150,150);"></ul>
 					</div>
 				</div>
@@ -223,6 +223,11 @@ $(document).ready(function(){
         ht = $.fn.zTree.init(ht,settings,datas);
         ht.expandAll(false);
     });
+    loadData();
+
+})
+
+function loadData(){
     var valve = document.getElementsByName("radio");
     var type=${carousel.type}
     for(var i=0;i<valve.length;i++){
@@ -231,16 +236,15 @@ $(document).ready(function(){
                 valve[i].checked=true;
                 document.getElementsByName("url")[0].value="${name}";
                 document.getElementsByName("url")[0].disabled=false;//这里赋值
-			}else{
-            document.getElementsByName(valve[i].getAttribute("id"))[0].value="${name}";
-            document.getElementsByName(valve[i].getAttribute("id")+"1")[0].value="${id}";
-            document.getElementsByName(valve[i].getAttribute("id"))[0].disabled = false;
-            valve[i].checked=true;
+            }else{
+                document.getElementsByName(valve[i].getAttribute("id"))[0].value="${name}";
+                document.getElementsByName(valve[i].getAttribute("id")+"1")[0].value="${id}";
+                document.getElementsByName(valve[i].getAttribute("id"))[0].disabled = false;
+                valve[i].checked=true;
             }
         }
     }
-
-})
+}
 
 function onBodyDown(ultreeId)
 {
@@ -284,14 +288,14 @@ function onClick(e,treeId, treeNode) {
     }
     var zTree = $.fn.zTree.getZTreeObj(treeId);
     nodes = zTree.getSelectedNodes(),
-        v = nodes[0].name;
+    v = nodes[0].name;
     w = nodes[0].id;
-    alert(w);
     var ultree=$("#categoryHiddenTree");
     var inputid=ultree.attr("forInput");
     $("#"+inputid).attr("value", w);
     $("[showfor='"+inputid+"']").val(v);
     $("[showValue='"+inputid+"']").val(w);//选取树状节点反显到文本框
+	$("#commodity1").val(w);
     hideMenu(treeId);
 }
 function onClicks(e,treeId, treeNode) {
@@ -303,12 +307,12 @@ function onClicks(e,treeId, treeNode) {
     nodes = zTree.getSelectedNodes(),
         v = nodes[0].name;
     w = nodes[0].id;
-    alert(w);
     var ultree=$("#commodityHiddenTree");
     var inputid=ultree.attr("forInput");
     $("#"+inputid).attr("value", w);
     $("[showfors='"+inputid+"']").val(v);
     $("[showValues='"+inputid+"']").val(w);
+    $("#category1").val(w);
     hideMenu(treeId);
 }
 </script> 

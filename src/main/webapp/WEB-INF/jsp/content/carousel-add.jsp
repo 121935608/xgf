@@ -59,7 +59,7 @@
 				<input type="radio" id="category" name="radio" value="3" onchange="fun1()">
 				<div>
 				<input type="text" showfors="commodityHiddenTree" class="input-text" value="" placeholder="" name="category" disabled="disabled" readonly onclick="showMenus(this)">
-					<input type="hidden" showValues="categoryHiddenTree" value="" name="category1">
+					<input type="hidden" showValues="commodityHiddenTree" value="" name="category1">
 					<ul id="commodityHiddenTree" forInput="" class="ztree" style="display:none;background-color: white; border: solid 1px rgb(150,150,150);"></ul>
 				</div>
 				</div>
@@ -206,8 +206,8 @@ $(document).ready(function(){
         var ultree=$("#categoryHiddenTree");
         var inputid=ultree.attr("forInput");
         $("#"+inputid).attr("value", w);
-        $("[showfor='"+inputid+"']").attr("value", v);
-        $("[showValue='"+inputid+"']").attr("value", w);
+        $("[showfor='"+inputid+"']").val(v);
+        $("[showValue='"+inputid+"']").val(w);
         hideMenu(treeId);
     }
     function onClicks(e,treeId, treeNode) {
@@ -223,8 +223,8 @@ $(document).ready(function(){
         var ultree=$("#commodityHiddenTree");
         var inputid=ultree.attr("forInput");
         $("#"+inputid).attr("value", w);
-        $("[showfors='"+inputid+"']").attr("value", v);
-        $("[showValues='"+inputid+"']").attr("value", w);
+        $("[showfors='"+inputid+"']").val(v);
+        $("[showValues='"+inputid+"']").val(w);
         hideMenu(treeId);
     }
     function InitialZtree() {
