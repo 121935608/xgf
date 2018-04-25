@@ -1,6 +1,10 @@
 package com.xingrongjinfu.statistics.purchase.service;
 
 import java.util.List;
+import java.util.Map;
+
+import com.xingrongjinfu.statistics.purchase.model.Purchase;
+import com.xingrongjinfu.statistics.purchase.model.SPurchaseDto;
 import org.apache.shiro.common.UserConstants;
 import org.apache.shiro.service.PasswordService;
 import org.framework.base.util.PageUtilEntity;
@@ -26,7 +30,12 @@ public class PurchaseService implements IPurchaseService
 {
 	@Autowired
     private IPurchaseDao purchaseDao;
-  
+
+    @Override
+    public List<SPurchaseDto> infoQuery(Map<String, String> param) {
+        return purchaseDao.infoQuery(param);
+    }
+
     /**
      * 根据条件分页查询
      */

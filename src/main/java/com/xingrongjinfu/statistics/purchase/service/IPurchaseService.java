@@ -1,11 +1,11 @@
 package com.xingrongjinfu.statistics.purchase.service;
 
-import java.util.List;
+import com.xingrongjinfu.statistics.purchase.model.SPurchaseDto;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
-import com.xingrongjinfu.system.permission.model.Permission;
-import com.xingrongjinfu.system.role.model.Role;
-import com.xingrongjinfu.system.user.model.User;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  *  业务层
@@ -21,4 +21,5 @@ public interface IPurchaseService
      */
     public List<TableDataInfo> pageInfoQuery(PageUtilEntity pageUtilEntity);
 
+    List<SPurchaseDto> infoQuery(Map<String, String> param);
 }
