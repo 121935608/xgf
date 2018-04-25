@@ -236,7 +236,7 @@ $(document).ready(function(){
 			<div class="row cl">
 				<div class="formControls col-xs-8 col-sm-4">
 				上传图片：
-					<input type='button' class='btn' value='浏览...'onclick="toChoose()" />700*700
+					<input type='button' class='btn' value='浏览...'onclick="toChoose()" /><P class="c-red">(700*700)</P>
 					<input  type="file" id="picture" class="file" size="28" onchange="pic(event)"  name="picture" accept="image/*"/>
 				</div>
 			<div style="clear:both;margin-right:70%;font-size:12px;">温馨提示：双击图片删除</div>
