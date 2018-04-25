@@ -1,5 +1,6 @@
 package com.xingrongjinfu.system.storeaffairs.dao;
 
+import com.xingrongjinfu.system.storeaffairs.model.PurchaseDto;
 import com.xingrongjinfu.system.storeaffairs.model.Store;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
@@ -11,5 +12,5 @@ public interface IStoreSaleCountDao {
 
     public List<TableDataInfo> storeSaleCountPageInfoQuery(PageUtilEntity pageUtilEntity);
 
-    List<Store> infoQuery(Map<String, String> param);
+    List<PurchaseDto> infoQuery(Map<String, String> param);
 }

@@ -1,6 +1,7 @@
 package com.xingrongjinfu.system.storeaffairs.service;
 
 import com.xingrongjinfu.system.storeaffairs.dao.IStoreSaleCountDao;
+import com.xingrongjinfu.system.storeaffairs.model.PurchaseDto;
 import com.xingrongjinfu.system.storeaffairs.model.Store;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
@@ -18,7 +19,7 @@ public class StoreSaleCountService implements IStoreSaleCountService{
     private IStoreSaleCountDao  storeSaleCountDao;
 
     @Override
-    public List<Store> infoQuery(Map<String, String> param) {
+    public List<PurchaseDto> infoQuery(Map<String, String> param) {
         return storeSaleCountDao.infoQuery(param);
     }
 

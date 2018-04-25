@@ -188,7 +188,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 </select>
 
 	<select id="infoQuery"  parameterType="map"  resultType="PurchaseDto">
-		select t.storeName storeName,s.`name` name,IFNULL(SUM(o.orderPrice),0) orderPrice,count(o.orderId) orderNum   from t_store t
+		select t.storeName storeName,s.`name` name,cast((IFNULL(SUM(o.orderPrice), 0)/100) as decimal(13,1)) orderPrice,
+		count(o.orderId) orderNum   from t_store t
 		left join sys_supervisor s on s.supervisorNum=t.supervisorId
 		left join t_order o on o.userId=t.userId  and o.orderStatus !=1
 

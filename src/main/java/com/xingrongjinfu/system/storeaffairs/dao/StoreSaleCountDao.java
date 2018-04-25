@@ -1,5 +1,6 @@
 package com.xingrongjinfu.system.storeaffairs.dao;
 
+import com.xingrongjinfu.system.storeaffairs.model.PurchaseDto;
 import com.xingrongjinfu.system.storeaffairs.model.Store;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
@@ -14,11 +15,11 @@ public class StoreSaleCountDao extends DynamicObjectBaseDao implements IStoreSal
 
 
     @Override
-    public List<Store> infoQuery(Map<String, String> param) {
-        List<Store> data = null;
+    public List<PurchaseDto> infoQuery(Map<String, String> param) {
+        List<PurchaseDto> data = null;
         try
         {
-            data = (List<Store>) this.findForList("StoreAffairMapper.infoQuery", param);
+            data = (List<PurchaseDto>) this.findForList("StoreAffairMapper.infoQuery", param);
         }
         catch (Exception e)
         {

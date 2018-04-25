@@ -2,6 +2,7 @@ package com.xingrongjinfu.system.storeaffairs.controller;
 
 import com.xingrongjinfu.system.SystemConstant;
 import com.xingrongjinfu.system.storeaffairs.commom.StoreaffairConstant;
+import com.xingrongjinfu.system.storeaffairs.model.PurchaseDto;
 import com.xingrongjinfu.system.storeaffairs.model.Store;
 import com.xingrongjinfu.system.storeaffairs.service.IStoreSaleCountService;
 import com.xingrongjinfu.utils.ExportExcel;
@@ -60,15 +61,15 @@ public class StoreSaleCount extends BaseController {
         param.put("endTime", request.getParameter("endTime"));
         param.put("storeName", request.getParameter("storeName"));
 
-        List<Store> data = storeSaleCountService.infoQuery(param);
+        List<PurchaseDto> data = storeSaleCountService.infoQuery(param);
         //data.stream().filter(s->s.getSalePrice())
         try {
-            ExportExcel<Store> ee = new ExportExcel<>();
+            ExportExcel<PurchaseDto> ee = new ExportExcel<>();
             String[] headers = new String[]{"商品名称", "督导员", "销售总金额", "交易单数量"};
             response.setContentType("application/force-download");// 设置强制下载不打开
             response.addHeader("Content-Disposition", "attachment;fileName=export.xls");// 设置文件名
             OutputStream output = response.getOutputStream();
-            ee.exportExcelUsePartField("商户采购统计表", headers, data, output,"yyyy-MM-dd");
+            ee.exportExcel("商户采购统计表", headers, data, output);
             output.flush();
             output.close();
         } catch (Exception e) {
