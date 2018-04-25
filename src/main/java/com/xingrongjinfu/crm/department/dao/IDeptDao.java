@@ -48,4 +48,20 @@ public interface IDeptDao
 	 * @return: int      
 	 */
 	public int addDeptInfo(Dept dept);
+
+	/**
+	 * 根据部门ID查询业务员信息，判断业务员是否属于该部门
+	 * 
+	 * @param: dept
+	 * @return: int      
+	 */
+	public int findUserById(Dept dept);
+
+	/**
+	 * 根据部门ID删除部门信息
+	 * 
+	 * @param: dept
+	 * @return: int      
+	 */
+	public int deleteDeptById(Dept dept);
 }

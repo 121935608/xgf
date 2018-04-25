@@ -99,4 +99,26 @@ public class DeptController extends BaseController
         }
         return new Message(result);
     }
+    
+    
+    /**
+     * 根据ID删除部门
+     */
+    @ActionControllerLog(title = "谢鲜CRM管理", action = "谢鲜CRM管理-删除部门", isSaveRequestData = true)
+    @RequestMapping(DeptConstant.DEL_URL)
+    public @ResponseBody Message deleteDeptById(Dept dept)
+    {
+        int result = 0;
+        if (dept.getDeptId() != null)
+        {
+            //删除角色前先查询部门是否还有业务员
+            result= deptService.findUserById(dept);
+            if (result==0) {
+                result = deptService.deleteDeptById(dept);
+            }else {
+               result=0;
+            }
+        }
+        return new Message(result);
+    }
 }

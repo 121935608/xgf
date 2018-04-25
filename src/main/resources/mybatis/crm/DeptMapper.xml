@@ -13,7 +13,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <!-- 查询部门信息列表，分页 -->
  	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultMap="DeptResult" useCache="false">
-		SELECT * FROM c_dept
+		SELECT * FROM c_dept WHERE 1=1
+		<if test="relationMap.deptName != null and relationMap.deptName != ''"><!-- 关键词检索 -->
+			AND
+				(
+					 deptName LIKE CONCAT(CONCAT('%', #{relationMap.deptName}),'%')
+				)
+		</if>
 	</select>
 	
 	<!-- 根据部门ID查询部门信息 -->
@@ -30,23 +36,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		update c_dept
  		<set>
  			<if test="deptName != null and deptName != ''">deptName = #{deptName},</if>
- 			describe = #{describe},
- 			upadte = sysdate()
+ 			`describe` = #{describe},
+ 			updateTime = SYSDATE()
  		</set>
  		where 1=1
  		<if test="deptId != null and deptId  != ''">and deptId = #{deptId}</if>
  	</update>
  	
  	<!-- 插入部门信息 -->
- 	<insert id="addDeptInfo" parameterType="Dept">
+ 	<insert id="addDeptInfo" parameterType="Dept" keyProperty="deptId">
+ 		<selectKey keyProperty="deptId" resultType="java.lang.String" order="BEFORE">
+ 			select uuid()
+ 		</selectKey>
  		insert into c_dept(
+ 		    deptId,
  			<if test="deptName != null and deptName != ''">deptName,</if>
- 			<if test="describe != null and describe != ''">describe,</if>
+ 			<if test="describe != null and describe != ''">`describe`,</if>
  			createTime
  		)values(
+ 		    #{deptId},
  			<if test="deptName != null and deptName != ''">#{deptName},</if>
  			<if test="describe != null and describe != ''">#{describe},</if>
- 			sysdate()
+ 			SYSDATE()
  		)
  	</insert>
  	
@@ -55,4 +66,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		delete from c_dept where deptId = #{deptId}
  	</delete>
 
+    <!-- 根据部门ID查询业务员信息表中有多少业务员属于该部门-->
+    <select id="findUserById" parameterType="Dept" resultType="Integer">
+		SELECT count(*) FROM sys_user WHERE deptId = #{deptId}
+	</select>
 </mapper> 

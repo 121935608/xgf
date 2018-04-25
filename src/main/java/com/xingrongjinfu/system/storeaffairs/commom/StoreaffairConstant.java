@@ -81,5 +81,14 @@ public class StoreaffairConstant {
 	     * 请求地址：企业认证申请查询
 	     */
 	    public final static String REPAYMENT_LIST = "repaymentList";
+
+	/**
+	 * 请求地址：商铺采购统计
+	 */
+	public final static String STORE_SALE_LIST = "storeSaleList";
+
+	public final static String STORE_SALE_VIEW = "storeSaleView";
+
+	public final static String STORE_SALE_PAGE="system/storeSaleCount-list";
 	    
 }

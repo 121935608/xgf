@@ -153,9 +153,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<select id="getRepayDetail" parameterType="string" resultType="RepayDetail">
-SELECT  repayDetailId,repayId,repayMoney/100 repayMoney,repayTime,repayType,operator,remark 
+        SELECT  repayDetailId,repayId,repayMoney/100 repayMoney,repayTime,repayType,operator,remark
 		FROM t_repay_detail WHERE repayId=#{0} ORDER BY repayTime DESC
 	</select>
 	 
-	 
+	 <select id="storeSalepageInfoQuery"  parameterType="PageUtilEntity"  resultType="Store">
+		 select t.storeId storeId,t.storeName storeName,s.`name` name,IFNULL(SUM(o.orderPrice),0) orderPrice,count(o.orderId) orderNum   from t_store t
+		 left join sys_supervisor s on s.supervisorNum=t.supervisorId
+		 left join t_order o on o.userId=t.userId  and o.orderStatus !=1
+
+		 <if test="relationMap.beginTime != null and relationMap.beginTime != ''">
+			 AND DATE_FORMAT(o.orderTime,'%Y%m%d') &gt;=
+			 DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
+		 </if>
+		 <if test="relationMap.endTime != null and relationMap.endTime != ''">
+			 AND DATE_FORMAT(o.orderTime,'%Y%m%d') &lt;=
+			 DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
+		 </if>
+
+		 GROUP BY t.storeId,t.storeName,s.`name`  having 1=1
+
+		 <if test="relationMap.storeName != null and relationMap.storeName != ''">
+			 AND  t.storeName LIKE CONCAT(#{relationMap.storeName},'%') or
+			 s.name LIKE CONCAT(#{relationMap.storeName},'%')
+		 </if>
+
+	 </select>
+
+
 </mapper> 

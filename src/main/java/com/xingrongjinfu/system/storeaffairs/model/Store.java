@@ -46,6 +46,12 @@ public class Store {
 		//默认银行卡号
 		private String cardNumber;
 
+		private Integer orderPrice;
+
+		private Integer orderNum;
+
+		private Date orderTime;
+
 		public String getCardNumber() {
 			return cardNumber;
 		}
@@ -262,6 +268,30 @@ public class Store {
 
 		public void setName(String name) {
 			this.name = name;
+		}
+
+		public Integer getOrderPrice() {
+			return orderPrice;
+		}
+
+		public void setOrderPrice(Integer orderPrice) {
+			this.orderPrice = orderPrice;
+		}
+
+		public Integer getOrderNum() {
+			return orderNum;
+		}
+
+		public void setOrderNum(Integer orderNum) {
+			this.orderNum = orderNum;
+		}
+
+		public Date getOrderTime() {
+			return orderTime;
+		}
+
+		public void setOrderTime(Date orderTime) {
+			this.orderTime = orderTime;
 		}
 
 		public String toString()
