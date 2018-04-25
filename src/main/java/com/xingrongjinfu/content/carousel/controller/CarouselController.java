@@ -225,6 +225,7 @@ public class CarouselController extends BaseController {
         if(StringUtil.nullOrBlank(commodity1)&&StringUtil.nullOrBlank(category1)&&StringUtil.nullOrBlank(carousel.getUrl())){
         	return new Message(false,"请完善所有信息");
 		}
+		
         carousel.setType(radio);
         if(radio.equals("2")){
 			if(!StringUtil.nullOrBlank(commodity1)){
