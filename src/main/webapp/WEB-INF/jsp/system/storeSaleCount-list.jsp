@@ -20,6 +20,7 @@
 				</div> 
 				<div class="col-xs-3 col-sm-2 .col-md-2" > 
 					<button type="button" class="btn btn-success radius" onclick="query()"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+					<button type="button" class="btn btn-success radius" onclick="excel_out()"><i class="Hui-iconfont">&#xe665;</i> 下载</button>
 				</div> 
 		  	</div>
 		</form>
@@ -116,6 +117,15 @@
         pageTable.fnDraw();
     }
 
+    function excel_out() {
+        var beginTime = $("#beginTime").val();
+        var endTime = $("#endTime").val();
+        var storeName =$("#storeName").val();
+        var elemIF = document.createElement("iframe");
+        elemIF.src = "${context_root}/dataCount/downloadPurchaseData.action?beginTime="+beginTime+"&endTime="+endTime+"&storeName="+storeName;
+        elemIF.style.display = "none";
+        document.body.appendChild(elemIF);
+    }
 </script> 
 </body>
 </html>

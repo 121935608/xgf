@@ -155,7 +155,6 @@ function excel_out() {
     elemIF.src = "${context_root}/dataCount/downloadSaleData.action?beginTime="+beginTime+"&endTime="+endTime+"&commodityName="+commodityName;
     elemIF.style.display = "none";
     document.body.appendChild(elemIF);
-
 }
 
 

@@ -180,5 +180,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	 </select>
 
+	<select id="infoQuery"  parameterType="map"  resultType="PurchaseDto">
+		select t.storeName storeName,s.`name` name,IFNULL(SUM(o.orderPrice),0) orderPrice,count(o.orderId) orderNum   from t_store t
+		left join sys_supervisor s on s.supervisorNum=t.supervisorId
+		left join t_order o on o.userId=t.userId  and o.orderStatus !=1
+
+		<if test="beginTime != null and beginTime != ''">
+			AND DATE_FORMAT(o.orderTime,'%Y%m%d') &gt;=
+			DATE_FORMAT(#{beginTime},'%Y%m%d')
+		</if>
+		<if test="endTime != null and endTime != ''">
+			AND DATE_FORMAT(o.orderTime,'%Y%m%d') &lt;=
+			DATE_FORMAT(#{endTime},'%Y%m%d')
+		</if>
+
+		GROUP BY t.storeId,t.storeName,s.`name`  having 1=1
+
+		<if test="storeName != null and storeName != ''">
+			AND  t.storeName LIKE CONCAT(#{storeName},'%') or
+			s.name LIKE CONCAT(#{storeName},'%')
+		</if>
+
+	</select>
+
 
 </mapper> 

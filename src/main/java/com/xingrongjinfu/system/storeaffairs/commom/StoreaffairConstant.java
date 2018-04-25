@@ -86,6 +86,7 @@ public class StoreaffairConstant {
 	 * 请求地址：商铺采购统计
 	 */
 	public final static String STORE_SALE_LIST = "storeSaleList";
+	public final static String DOWNLOAD_PURCHASE_DATA = "downloadPurchaseData";
 
 	public final static String STORE_SALE_VIEW = "storeSaleView";
 

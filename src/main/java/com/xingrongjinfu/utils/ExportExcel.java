@@ -348,6 +348,10 @@ public class ExportExcel<T> {
                     // long longValue = (Long) value;
                     // cell.setCellValue(longValue);
                     // }
+                    if(value==null){
+                        continue;
+                    }
+
                     if (value instanceof Boolean) {
                         boolean bValue = (Boolean) value;
                         textValue = "男";
@@ -378,9 +382,7 @@ public class ExportExcel<T> {
                             textValue="";
                         }
                     }
-                    if(StringUtil.isEmpty(textValue)){
-                        continue;
-                    }
+
                     HSSFCell cell = row.createCell(j++);
                     cell.setCellStyle(style2);
 
