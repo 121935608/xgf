@@ -6,9 +6,10 @@ import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 
 /**
- * 部门管理 数据层
- * 
- * @author y
+* @author chenmengzhen    
+* @version V1.0  
+* @Description: 访问记录管理  数据层
+* @date 2018年4月25日
  */
 public interface IVisitDao
 {

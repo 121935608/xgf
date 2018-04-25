@@ -8,9 +8,10 @@ import org.framework.base.util.TableDataInfo;
 import com.xingrongjinfu.crm.department.model.Dept;
 
 /**
- * 角色管理 业务层
- * 
- * @author y
+* @author chenmengzhen    
+* @version V1.0  
+* @Description: 部门管理  业务层  
+* @date 2018年4月25日
  */
 public interface IDeptService
 {

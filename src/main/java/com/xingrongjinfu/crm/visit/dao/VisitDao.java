@@ -8,9 +8,10 @@ import org.framework.core.dao.DynamicObjectBaseDao;
 import org.springframework.stereotype.Repository;
 
 /**
- * 部门管理 数据层处理
- * 
- * @author y
+* @author chenmengzhen    
+* @version V1.0  
+* @Description: 访问记录管理 数据层处理 
+* @date 2018年4月25日
  */
 @Repository("visitDao")
 public class VisitDao extends DynamicObjectBaseDao implements IVisitDao

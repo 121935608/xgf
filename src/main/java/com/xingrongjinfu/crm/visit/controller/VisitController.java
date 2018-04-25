@@ -15,12 +15,13 @@ import com.xingrongjinfu.crm.visit.common.VisitConstant;
 import com.xingrongjinfu.crm.visit.service.IVisitService;
 
 /**
- * 部门管理  处理
- * 
- * @author y
+* @author chenmengzhen    
+* @version V1.0  
+* @Description: 访问记录管理   处理 
+* @date 2018年4月25日
  */
 @Controller
-@RequestMapping(CrmConstant.CRM_URL_DEPT)
+@RequestMapping(CrmConstant.CRM_URL)
 public class VisitController extends BaseController
 {
 	

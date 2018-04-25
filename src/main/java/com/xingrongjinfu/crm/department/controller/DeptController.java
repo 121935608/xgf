@@ -20,12 +20,13 @@ import com.xingrongjinfu.crm.department.model.Dept;
 import com.xingrongjinfu.crm.department.service.IDeptService;
 
 /**
- * 部门管理  处理
- * 
- * @author y
+* @author chenmengzhen    
+* @version V1.0  
+* @Description: 部门管理   处理 
+* @date 2018年4月25日
  */
 @Controller
-@RequestMapping(CrmConstant.CRM_URL_DEPT)
+@RequestMapping(CrmConstant.CRM_URL)
 public class DeptController extends BaseController
 {
 	@Autowired

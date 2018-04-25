@@ -10,9 +10,10 @@ import org.springframework.stereotype.Service;
 import com.xingrongjinfu.crm.visit.dao.IVisitDao;
 
 /**
- * 部门管理 业务层处理
- * 
- * @author y
+* @author chenmengzhen    
+* @version V1.0  
+* @Description: 访问记录管理  业务层处理 
+* @date 2018年4月25日
  */
 @Service("visitService")
 public class VisitService implements IVisitService

@@ -10,9 +10,10 @@ import org.springframework.stereotype.Repository;
 import com.xingrongjinfu.crm.department.model.Dept;
 
 /**
- * 部门管理 数据层处理
- * 
- * @author y
+* @author chenmengzhen    
+* @version V1.0  
+* @Description: 部门管理  数据层处理 
+* @date 2018年4月25日
  */
 @Repository("deptDao")
 public class DeptDao extends DynamicObjectBaseDao implements IDeptDao

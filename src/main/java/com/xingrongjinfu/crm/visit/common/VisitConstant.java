@@ -1,9 +1,11 @@
 package com.xingrongjinfu.crm.visit.common;
 
 /**
- * 角色管理 常量信息
  * 
- * @author y
+* @author chenmengzhen    
+* @version V1.0  
+* @Description: 访问记录管理 常量信息
+* @date 2018年4月25日
  */
 public class VisitConstant
 {

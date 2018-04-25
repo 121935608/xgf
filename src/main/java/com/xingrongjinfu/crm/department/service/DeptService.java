@@ -11,9 +11,10 @@ import com.xingrongjinfu.crm.department.dao.IDeptDao;
 import com.xingrongjinfu.crm.department.model.Dept;
 
 /**
- * 部门管理 业务层处理
- * 
- * @author y
+* @author chenmengzhen    
+* @version V1.0  
+* @Description: 部门管理   业务层处理 
+* @date 2018年4月25日
  */
 @Service("deptService")
 public class DeptService implements IDeptService
