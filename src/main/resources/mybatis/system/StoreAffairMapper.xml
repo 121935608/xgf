@@ -2,7 +2,14 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="StoreAffairMapper"> 
+<mapper namespace="StoreAffairMapper">
+	<resultMap id="BaseResultMap" type="com.xingrongjinfu.system.storeaffairs.model.PurchaseDto" >
+		<result column="storeName" property="storeName"/>
+		<result column="name" property="name"/>
+		<result column="orderPrice" property="orderPrice"/>
+		<result column="orderNum" property="orderNum"/>
+	</resultMap>
+
 
 	<select id="CertificationpageInfoQuery"  parameterType="PageUtilEntity"  resultType="Store">
 		select a.storeId,a.storeNo,a.addTime,b.accountName,s.`name`,a.process,a.remark,bc.cardNumber

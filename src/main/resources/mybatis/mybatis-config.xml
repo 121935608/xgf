@@ -69,6 +69,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.xingrongjinfu.system.PayMethod.model.PayMethod" alias="PayMethod" />
 		<typeAlias type="com.xingrongjinfu.crm.department.model.Dept" alias="Dept"/>
 		<typeAlias type="com.xingrongjinfu.crm.visit.model.Visit" alias="Visit"/>
+		<typeAlias type="com.xingrongjinfu.system.storeaffairs.model.PurchaseDto" alias="PurchaseDto"/>
+
 
 		<!-- 分页 -->
 		<typeAlias type="org.framework.base.util.TableDataInfo" alias="TableDataInfo"/>

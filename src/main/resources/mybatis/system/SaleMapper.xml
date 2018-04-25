@@ -40,7 +40,7 @@
         ORDER BY t.addTime DESC
     </select>
 
-    <select id="infoQuery" parameterType="map" resultMap="PurchaseDto">
+    <select id="infoQuery" parameterType="map" resultMap="SaleResult">
         SELECT t.commodityId,t.orderNumber,t.commodityNo,t.commodityName,
         t.unit,cast((IFNULL(SUM(o.orderPrice), 0)/100) as decimal(13,1)) orderPrice, t.addTime,t.commodityNum
         FROM t_order_detail t RIGHT JOIN t_order o ON t.orderNumber=o.orderNumber
