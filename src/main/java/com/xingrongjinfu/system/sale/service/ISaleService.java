@@ -10,10 +10,13 @@
  */
 package com.xingrongjinfu.system.sale.service;
 
+import com.xingrongjinfu.system.commodity.model.Commodity;
+import com.xingrongjinfu.system.sale.model.Sale;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -29,4 +32,6 @@ public interface ISaleService {
      * 查询商品销售信息
      */
     List<TableDataInfo>pageInfoQuery(PageUtilEntity pageUtilEntity);
+
+    List<Sale> infoQuery(Map<String, String> param);
 }

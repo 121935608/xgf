@@ -20,16 +20,16 @@ import java.util.Date;
  * @create 2018/1/3
  * @since 1.0.0
  */
-public class Sale {
-    /**  字段顺序不要改变 不然导出Excel字段对应不上  */
+public class SaleDto {
+
     private String commodityName;
     private String commodityNo;
     private String orderNumber;
     private Date addTime;
-    private String unit;
     private Integer commodityNum;
-    private Double salePrice;
+
     private Double totalPrice;
+    private String unit;
 
 
     public Double getTotalPrice() {
@@ -88,11 +88,4 @@ public class Sale {
         this.commodityNum = commodityNum;
     }
 
-    public Double getSalePrice() {
-        return salePrice;
-    }
-
-    public void setSalePrice(Double salePrice) {
-        this.salePrice = salePrice;
-    }
 }
