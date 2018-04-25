@@ -220,7 +220,7 @@ public class CarouselController extends BaseController {
 	 */
 	@ActionControllerLog(title = "轮播管理", action = "轮播管理-保存", isSaveRequestData = true)
 	@RequestMapping(CarouselConstant.SAVE_CAROUSEL_URL)
-	public @ResponseBody Message saveCarousel(Carousel carousel,String carouselId,MultipartFile picture,String radio,String category1,String commodity1) {
+	public @ResponseBody Message saveCarousel(Carousel carousel,String carouselId,MultipartFile picture,String radio,String category1,String commodity1,String url) {
 		int result = 0;		
         if(StringUtil.nullOrBlank(commodity1)&&StringUtil.nullOrBlank(category1)&&StringUtil.nullOrBlank(carousel.getUrl())){
         	return new Message(false,"请完善所有信息");
