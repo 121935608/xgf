@@ -3,8 +3,16 @@ package com.xingrongjinfu.content.carousel.controller;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import com.xingrongjinfu.commodity.classification.model.Category;
+import com.xingrongjinfu.system.commodity.model.Commodity;
+import com.xingrongjinfu.system.commodity.service.ICommodityService;
+import com.xingrongjinfu.system.product.model.Product;
+import com.xingrongjinfu.system.product.service.IProductService;
+import com.xingrongjinfu.utils.StringUtil;
 import org.aspectj.lang.annotation.ActionControllerLog;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.core.controller.BaseController;
@@ -36,6 +44,9 @@ public class CarouselController extends BaseController {
 
 	@Autowired
 	private ICarouselService carouselService;
+	@Autowired
+	private IProductService productService;
+
 
 	/**
 	 * 跳转列表界面
@@ -66,7 +77,7 @@ public class CarouselController extends BaseController {
 	@RequestMapping(CarouselConstant.TO_ADD_URL)
 	public ModelAndView toCarouselAdd(String carouselId) {
 		ModelAndView modelAndView = this.getModelAndView(CarouselConstant.ADD_PAGE);
-		
+
 		List<SysCode> sysCodeList1 = new ArrayList<SysCode>();
 		SysCode sysCode1 = new SysCode();
 		sysCode1.setCodeid("1");
@@ -82,7 +93,59 @@ public class CarouselController extends BaseController {
 
 		return modelAndView;
 	}
-	
+
+	@RequestMapping(CarouselConstant.PRODUCTTREE_URL)
+	public @ResponseBody List<Map<String, Object>> productTree(){
+		List<Map<String, Object>> resMapTrees = new ArrayList<Map<String, Object>>();
+//		PageUtilEntity pageUtilEntity=new PageUtilEntity();
+		List<Category> categoryList=productService.findAllClass();
+		List<Product> productList=productService.getProductList();
+		for(Category category:categoryList){
+			Map<String,Object> map=new HashMap<>();
+			map.put("id", category.getCategoryId());
+			map.put("pId", category.getParentId());
+			map.put("name", category.getCategoryName());
+			map.put("isCategory", true);
+			resMapTrees.add(map);
+		}
+		for(Product product:productList){
+			Map<String,Object> map=new HashMap<>();
+			map.put("id", product.getCommodityId());
+			map.put("pId", product.getCategoryId());
+			map.put("name", product.getCommodityName());
+			map.put("isCategory", false);
+			map.put("icon", "/uiloader/lib/zTree/v3/css/zTreeStyle/img/diy/5.png");
+			resMapTrees.add(map);
+		}
+		return resMapTrees;
+	}
+
+	@RequestMapping(CarouselConstant.COMMODITY_URL)
+	public @ResponseBody List<Map<String, Object>> commodityTree(){
+		List<Map<String, Object>> resMapTrees = new ArrayList<Map<String, Object>>();
+//		PageUtilEntity pageUtilEntity=new PageUtilEntity();
+		List<Category> categoryList=productService.findAllClass();
+		List<Category> productList=productService.findFirstCategory();
+		for(Category category:productList){
+			Map<String,Object> map=new HashMap<>();
+			map.put("id", category.getCategoryId());
+			map.put("name", category.getCategoryName());
+			map.put("pId", category.getParentId());
+			map.put("isCategory", true);
+			resMapTrees.add(map);
+		}
+		for(Category category:categoryList){
+			Map<String,Object> map=new HashMap<>();
+			map.put("id", category.getCategoryId());
+			map.put("pId", category.getParentId());
+			map.put("name", category.getCategoryName());
+			map.put("isCategory", false);
+			map.put("icon", "/uiloader/lib/zTree/v3/css/zTreeStyle/img/diy/5.png");
+			resMapTrees.add(map);
+		}
+		return resMapTrees;
+	}
+
 	/**
 	 * 跳转修改界面
 	 */
@@ -102,10 +165,26 @@ public class CarouselController extends BaseController {
 		sysCodeList1.add(sysCode2);
 
 		modelAndView.addObject("statusList", sysCodeList1);
-		
+		String name=null;
+		String id=null;
 		if (carouselId != null) {
 			Carousel carousel=carouselService.findByCarouselId(carouselId);
+			if(carousel.getType().equals("1")){
+				name=carousel.getUrl();
+			}else if(carousel.getType().equals("2")){
+				Product product=new Product();
+				product.setCommodityId(carousel.getUrl());
+				Product products=productService.findProductById(product);
+				name=products.getCommodityName();
+				id=carousel.getUrl();
+			}else if(carousel.getType().equals("3")){
+                 Category category=productService.getCategoryById(carousel.getUrl());
+                 name=category.getCategoryName();
+                 id=carousel.getUrl();
+			}
 			modelAndView.addObject("carousel",carousel);
+			modelAndView.addObject("name",name);
+			modelAndView.addObject("id",id);
 		}
 
 		return modelAndView;
@@ -141,9 +220,23 @@ public class CarouselController extends BaseController {
 	 */
 	@ActionControllerLog(title = "轮播管理", action = "轮播管理-保存", isSaveRequestData = true)
 	@RequestMapping(CarouselConstant.SAVE_CAROUSEL_URL)
-	public @ResponseBody Message saveCarousel(Carousel carousel,String carouselId,MultipartFile picture) {
+	public @ResponseBody Message saveCarousel(Carousel carousel,String carouselId,MultipartFile picture,String radio,String category1,String commodity1) {
 		int result = 0;		
-		
+        if(StringUtil.nullOrBlank(commodity1)&&StringUtil.nullOrBlank(category1)&&StringUtil.nullOrBlank(carousel.getUrl())){
+        	return new Message(false,"请完善所有信息");
+		}
+        carousel.setType(radio);
+        if(radio.equals("2")){
+			if(!StringUtil.nullOrBlank(commodity1)){
+				carousel.setUrl(commodity1);
+			}
+		}
+		if(radio.equals("3")){
+        	if(!StringUtil.nullOrBlank(category1)){
+        		carousel.setUrl(category1);
+			}
+        }
+
 		try {
 		    if(picture.getSize()!=0){
     		    AliyunOSSClientUtil aliyunOSSClientUtil = new AliyunOSSClientUtil();

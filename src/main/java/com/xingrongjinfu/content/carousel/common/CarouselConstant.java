@@ -17,6 +17,16 @@ public class CarouselConstant
      * 请求地址：跳转至添加界面
      */
     public final static String TO_ADD_URL = "toCarouselAdd";
+
+    /**
+     * 请求地址：商品树
+     */
+    public final static String PRODUCTTREE_URL="getProductTree";
+
+    /**
+     * 请求地址：商品树
+     */
+    public final static String COMMODITY_URL="getCommodityTree";
     
     /**
      * 请求地址：跳转至修改界面

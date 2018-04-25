@@ -90,8 +90,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by c.addTime desc
 	</select>
 
+
+	<select id="getProductList"  resultMap="ProductResult">
+		SELECT c.commodityId,c.barCode,c.commodityDes,c.priceSpecification,c.commodityName,c.commodityNo,c.imgMain,c.imgOther,c.specification,c.inPrice/100 inPrice,
+		c.salePrice/100 salePrice,c.tag,c.categoryId,c.info,c.weight,c.commodityStatus,c.unit,c.stockNum,c.taxRate,
+		c.status,c.addTime,c.updateTime,c.commodityBanner,c.origin,c.supply,c.hint,c.grade,c.country,c.type,c.storage,t.categoryName
+		FROM t_commodity c LEFT JOIN t_category t ON c.categoryId=t.categoryId order by c.addTime desc
+	</select>
+
 	<select id="findAllClass" resultMap="CategoryResult">
-		SELECT categoryId,categoryName FROM t_category WHERE type='FL' AND parentId !='0' and status=1
+		SELECT categoryId,categoryName,parentId FROM t_category WHERE type='FL' AND parentId !='0' and status=1
+	</select>
+
+	<select id="findFirstCategory" resultMap="CategoryResult">
+		SELECT categoryId,categoryName,parentId FROM t_category WHERE type='FL' AND parentId ='0' and status=1
+	</select>
+
+	<select id="findCategoryById" resultMap="CategoryResult" parameterType="String">
+		SELECT categoryId,categoryName,parentId FROM t_category WHERE categoryId=#{0}
 	</select>
 
 	<select id="findAllCategory" resultMap="CategoryResult">

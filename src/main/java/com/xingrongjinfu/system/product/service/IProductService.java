@@ -35,6 +35,12 @@ public interface IProductService {
     List<Product>pageInfoQuery(PageUtilEntity pageUtilEntity);
 
     /**
+     * 查询商品信息
+     * @return
+     */
+    List<Product>getProductList();
+
+    /**
      * 查询所有分类
      */
     List<Category> findAllClass();
@@ -43,6 +49,11 @@ public interface IProductService {
      * 查询所有的标签
      */
     List<Category> findAllCategory();
+
+    /**
+     * 查询主分类
+     */
+    List<Category> findFirstCategory();
 
     /**
      * 查询所有的供货地
@@ -69,4 +80,7 @@ public interface IProductService {
      * 更新商品信息
      */
     int updateProduct(Product product);
+
+
+    Category getCategoryById(String categoryId);
 }
