@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.xingrongjinfu.crm.CrmConstant;
 import com.xingrongjinfu.crm.department.common.DeptConstant;
 import com.xingrongjinfu.crm.department.model.Dept;
 import com.xingrongjinfu.crm.department.service.IDeptService;
-import com.xingrongjinfu.system.SystemConstant;
 
 /**
  * 部门管理  处理
@@ -25,7 +25,7 @@ import com.xingrongjinfu.system.SystemConstant;
  * @author y
  */
 @Controller
-@RequestMapping(SystemConstant.CRM_URL)
+@RequestMapping(CrmConstant.CRM_URL_DEPT)
 public class DeptController extends BaseController
 {
 	@Autowired

@@ -5,7 +5,7 @@ package com.xingrongjinfu.crm.crmUser.common;
  * 
  * @author y
  */
-public class DeptConstant
+public class CrmUserConstant
 {
     /**
      * 请求地址：跳转至部门查询列表

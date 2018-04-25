@@ -32,5 +32,4 @@ public interface SystemConstant
      * 模块请求地址:会员/用户管理
      */
     public final static String MEMBER_URL="/member";
-
 }

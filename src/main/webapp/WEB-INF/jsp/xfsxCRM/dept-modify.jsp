@@ -4,18 +4,18 @@
 <body>
 <article class="page-container">
 	<form action="" method="post" class="form form-horizontal" id="form-dept-modify">
-	    <input type="hidden" class="input-text" id="deptId" name="deptId" value="${dept.deptId }">
+		<input type="hidden" class="input-text" id="deptId" name="deptId" value="${dept.deptId }">
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>部门名称：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="text" class="input-text" value="" placeholder="" id="deptName" name="deptName">
+				<input type="text" class="input-text" placeholder="角色名字" id="deptName" name="deptName" value="${dept.deptName }">
 			</div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3">部门描述：</label>
 			<div class="formControls col-xs-8 col-sm-6">
-				<textarea name="description" cols="" rows="" class="textarea"  placeholder="" datatype="*0-100" dragonfly="true" onKeyUp="textarealength(this,200)"></textarea>
-				<p class="textarea-numberbar"><em class="textarea-length">0</em>/200</p>
+				<textarea name="describe" cols="" rows="" class="textarea" placeholder="" datatype="*10-100" dragonfly="true" onKeyUp="textarealength(this,200)">${dept.describe }</textarea>
+				<p class="textarea-numberbar"><em class="textarea-length">${fn:length(dept.describe)}</em>/200</p>
 			</div>
 		</div>
 		<div class="row cl">
@@ -26,32 +26,38 @@
 	</form>
 </article>
 
-
 <script type="text/javascript">
     jQuery.validator.addMethod("checkDeptName", function (value, element) {
         var chrnum =/[`~!@#$%^&*()_\-=<>?:"{}|,.\/;'\\[\]·~！@#￥%……&*（）——\-={}|《》？：“”【】、；‘’，。、]/;
         return this.optional(element) || (!chrnum.test(value));
-    }, "部门名不能为数字、特殊符号");
+    }, "角色名不能为数字、特殊符号");
 $("#form-dept-modify").validate({
 	/* rules:{
-		deptName:{
+		roleName:{
 			required:true,
 			isSpace:true,
-            checkDeptName:true,
+            checkRoleName:true,
+            checkNumber:true,
             remote: {
-                url: "${context_root}/system/checkRoleUnique.action",
+                url: "${context_root}/system/checkRoleUnique.action?roleId=${role.roleId }",
                 type: "post",
                 dataType: "text",
                 data: {
                     name: function () {
-                        return $.trim($("#deptName").val());
+                        return $.trim($("#roleName").val());
                     }
                 },
                 dataFilter: function (data, type) {
                     if (data == "0") return true;
-                    else return "该部门已存在";
+                    else return "该角色已存在";
                 }
             }
+		},
+		roleKey:{
+			required:true,
+			isSpace:true,
+            checkRoleKey:true,
+            checkRoleNumber:true,
 		},
 	}, */
 	onkeyup:false,
@@ -60,7 +66,7 @@ $("#form-dept-modify").validate({
 	submitHandler:function(form){
 		var index = parent.layer.load();
 		$.ajax({
-			url:"${context_root}/crm/saveDept.action", 
+			url:"${context_url}/crm/saveDept.action", 
 			type:'post',
 			async:true ,
 			cache:false ,

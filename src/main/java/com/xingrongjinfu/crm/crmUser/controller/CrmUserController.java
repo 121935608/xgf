@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.xingrongjinfu.crm.crmUser.common.DeptConstant;
+import com.xingrongjinfu.crm.crmUser.common.CrmUserConstant;
 
 /**
  * 部门管理  处理
@@ -14,25 +14,25 @@ import com.xingrongjinfu.crm.crmUser.common.DeptConstant;
  * @author y
  */
 @Controller
-@RequestMapping(CrmConstant.CRM_URL)
-public class DeptController extends BaseController
+@RequestMapping(CrmConstant.CRM_URL_USER)
+public class CrmUserController extends BaseController
 {
     /**
      * 跳转角色列表界面
      */
-    @RequestMapping(DeptConstant.DEPT_URL)
+    @RequestMapping(CrmUserConstant.DEPT_URL)
     public ModelAndView loadCrmDept()
     {
-        return this.getModelAndView(DeptConstant.DEPT_PAGE);
+        return this.getModelAndView(CrmUserConstant.DEPT_PAGE);
     }
 
     /**
      * 跳转用户列表界面
      */
-    @RequestMapping(DeptConstant.USER_URL)
+    @RequestMapping(CrmUserConstant.USER_URL)
     public ModelAndView userCrmDept()
     {
-        return this.getModelAndView(DeptConstant.USER_PAGE);
+        return this.getModelAndView(CrmUserConstant.USER_PAGE);
     }
 
 }
