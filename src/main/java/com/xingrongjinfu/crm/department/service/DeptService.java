@@ -11,9 +11,10 @@ import com.xingrongjinfu.crm.department.dao.IDeptDao;
 import com.xingrongjinfu.crm.department.model.Dept;
 
 /**
- * 部门管理 业务层处理
- * 
- * @author y
+* @author chenmengzhen    
+* @version V1.0  
+* @Description: 部门管理   业务层处理 
+* @date 2018年4月25日
  */
 @Service("deptService")
 public class DeptService implements IDeptService
@@ -23,10 +24,10 @@ public class DeptService implements IDeptService
     private IDeptDao deptDao;
 
     /**
-     * 根据条件分页查询角色对象
+     * 根据条件分页查询部门对象
      * 
      * @param page 分页对象
-     * @return 角色信息集合信息
+     * @return 部门信息集合信息
      */
     public List<TableDataInfo> pageInfoQuery(PageUtilEntity pageUtilEntity)
     {
@@ -68,18 +69,6 @@ public class DeptService implements IDeptService
 	public int addDeptInfo(Dept dept) {
 		return deptDao.addDeptInfo(dept);
 	}
-
-
-	/**
-	 * 根据部门ID查询业务员信息，判断业务员是否属于该部门
-	 * 
-	 * @param: dept
-	 * @return: int      
-	 */
-	public int findUserById(Dept dept) {
-		return deptDao.findUserById(dept);
-	}
-
 
 	/**
 	 * 根据部门ID删除部门信息

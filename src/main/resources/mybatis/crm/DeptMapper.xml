@@ -66,8 +66,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		delete from c_dept where deptId = #{deptId}
  	</delete>
 
-    <!-- 根据部门ID查询业务员信息表中有多少业务员属于该部门-->
-    <select id="findUserById" parameterType="Dept" resultType="Integer">
-		SELECT count(*) FROM sys_user WHERE deptId = #{deptId}
-	</select>
 </mapper> 

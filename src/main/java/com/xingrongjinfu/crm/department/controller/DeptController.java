@@ -20,12 +20,13 @@ import com.xingrongjinfu.crm.department.model.Dept;
 import com.xingrongjinfu.crm.department.service.IDeptService;
 
 /**
- * 部门管理  处理
- * 
- * @author y
+* @author chenmengzhen    
+* @version V1.0  
+* @Description: 部门管理   处理 
+* @date 2018年4月25日
  */
 @Controller
-@RequestMapping(CrmConstant.CRM_URL_DEPT)
+@RequestMapping(CrmConstant.CRM_URL)
 public class DeptController extends BaseController
 {
 	@Autowired
@@ -55,7 +56,7 @@ public class DeptController extends BaseController
      * 跳转部门修改界面
      */
     @RequestMapping(DeptConstant.TO_UPDATE_URL)
-    public ModelAndView toRoleModify(@RequestParam(required = true) String deptId)
+    public ModelAndView toDeptModify(@RequestParam(required = true) String deptId)
     {
         ModelAndView modelAndView = this.getModelAndView(DeptConstant.UPDATE_PAGE);
         if (deptId != null)
@@ -70,7 +71,7 @@ public class DeptController extends BaseController
      * 查询部门列表
      */
     @RequestMapping(DeptConstant.DEPT_LIST_URL)
-    public ModelAndView roleList()
+    public ModelAndView deptList()
     {
         PageUtilEntity pageUtilEntity = this.getPageUtilEntity();
 
@@ -111,13 +112,7 @@ public class DeptController extends BaseController
         int result = 0;
         if (dept.getDeptId() != null)
         {
-            //删除角色前先查询部门是否还有业务员
-            result= deptService.findUserById(dept);
-            if (result==0) {
-                result = deptService.deleteDeptById(dept);
-            }else {
-               result=0;
-            }
+            result = deptService.deleteDeptById(dept);
         }
         return new Message(result);
     }

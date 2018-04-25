@@ -8,9 +8,10 @@ import org.framework.base.util.TableDataInfo;
 import com.xingrongjinfu.crm.department.model.Dept;
 
 /**
- * 部门管理 数据层
- * 
- * @author y
+* @author chenmengzhen    
+* @version V1.0  
+* @Description: 部门管理  数据层 
+* @date 2018年4月25日
  */
 public interface IDeptDao
 {
@@ -49,13 +50,6 @@ public interface IDeptDao
 	 */
 	public int addDeptInfo(Dept dept);
 
-	/**
-	 * 根据部门ID查询业务员信息，判断业务员是否属于该部门
-	 * 
-	 * @param: dept
-	 * @return: int      
-	 */
-	public int findUserById(Dept dept);
 
 	/**
 	 * 根据部门ID删除部门信息

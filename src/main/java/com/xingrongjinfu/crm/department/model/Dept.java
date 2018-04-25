@@ -3,9 +3,10 @@ package com.xingrongjinfu.crm.department.model;
 import java.util.Date;
 
 /**
- * 部门管理对象 crm_dept
- * 
- * @author y
+* @author chenmengzhen    
+* @version V1.0  
+* @Description: 部门管理对象  
+* @date 2018年4月25日
  */
 public class Dept
 {

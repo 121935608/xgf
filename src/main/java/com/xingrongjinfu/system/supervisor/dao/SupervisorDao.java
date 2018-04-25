@@ -58,6 +58,20 @@ public class SupervisorDao extends DynamicObjectBaseDao implements ISupervisorDa
         }
         return supervisorPageInfo;
     }
+    /*查询CRM督导员*/
+    @Override
+    public List<TableDataInfo> SupervisorCRMPageInfoQuery(PageUtilEntity pageUtilEntity) {
+        List<TableDataInfo> supervisorCRMPageInfo = null;
+        try
+        {
+            supervisorCRMPageInfo = (List<TableDataInfo>) this.findForList("SupervisorMapper.SupervisorCRMPageInfoQuery", pageUtilEntity);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return supervisorCRMPageInfo;
+    }
 
 
     @Override

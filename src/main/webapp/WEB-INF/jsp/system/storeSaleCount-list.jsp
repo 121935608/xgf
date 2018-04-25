@@ -78,7 +78,7 @@
                     if (row.orderPrice == null) {
                         return "0";
                     } else {
-                        return row.orderPrice;
+                        return row.orderPrice/100;
                     }
                 }
             },
