@@ -22,6 +22,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	</resultMap>
 
+	<resultMap type="com.xingrongjinfu.statistics.procurement.model.ProcurementDto" id="ProcurementDto">
+		<result property="commodityName" column="commodityName" />
+		<result property="commodityNo" column="commodityNo" />
+		<result property="orderNumber" column="orderNumber" />
+		<result property="payTime" column="payTime" />
+		<result property="commodityNum" column="commodityNum" />
+		<result property="totalPrice" column="totalPrice" />
+		<result property="unit" column="unit" />
+	</resultMap>
+
 
 	<select id="pageInfoQuery" parameterType="PageUtilEntity"
 		resultType="Procurement">
@@ -51,6 +61,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			AND (
 			c.commodityName LIKE CONCAT(CONCAT('%', #{relationMap.fuzzyCondition}),'%') or
 			d.commodityNo LIKE CONCAT(CONCAT('%',#{relationMap.fuzzyCondition}),'%')
+			)
+		</if>
+		order by b.payTime desc
+	</select>
+
+
+	<select id="infoQuery" parameterType="map"
+			resultMap="ProcurementDto">
+		select
+		c.commodityName,d.commodityNo,c.orderNumber,b.payTime,c.commodityNum,
+		cast(c.totalPrice/100 as decimal(13,1)) totalPrice,c.unit
+		from sys_user a
+		RIGHT JOIN t_order b on a.userId = b.userId
+		LEFT JOIN
+		t_order_detail c on c.orderNumber = b.orderNumber
+		RIGHT JOIN t_commodity
+		d ON c.commodityId = d.commodityId
+		where 1=1 AND b.orderStatus!=1 AND b.status=1
+		<if test="userId != null and userId != ''">
+			AND a.userId=#{userId}
+		</if>
+		<if test="beginTime != null and beginTime != ''">
+			AND DATE_FORMAT(b.payTime,'%Y%m%d') &gt;=
+			DATE_FORMAT(#{beginTime},'%Y%m%d')
+		</if>
+		<if test="endTime != null and endTime != ''">
+			AND DATE_FORMAT(b.payTime,'%Y%m%d') &lt;=
+			DATE_FORMAT(#{endTime},'%Y%m%d')
+		</if>
+		<if test="fuzzyCondition != null and fuzzyCondition != ''">
+			AND (
+			c.commodityName LIKE CONCAT(CONCAT('%', #{fuzzyCondition}),'%') or
+			d.commodityNo LIKE CONCAT(CONCAT('%',#{fuzzyCondition}),'%')
 			)
 		</if>
 		order by b.payTime desc

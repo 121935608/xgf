@@ -1,6 +1,9 @@
 package com.xingrongjinfu.statistics.procurement.service;
 
 import java.util.List;
+import java.util.Map;
+
+import com.xingrongjinfu.statistics.procurement.model.ProcurementDto;
 import org.apache.shiro.common.UserConstants;
 import org.apache.shiro.service.PasswordService;
 import org.framework.base.util.PageUtilEntity;
@@ -27,7 +30,12 @@ public class ProcurementService implements IProcurementService
 
 	@Autowired
     private IProcurementDao procurementDao;
-  
+
+    @Override
+    public List<ProcurementDto> infoQuery(Map<String, String> param) {
+        return procurementDao.infoQuery(param);
+    }
+
     /**
      * 根据条件分页查询
      */
