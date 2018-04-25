@@ -51,6 +51,12 @@ public class SupervisorService implements ISupervisorService {
     public List<TableDataInfo> SupervisorPageInfoQuery(PageUtilEntity pageUtilEntity) {
         return supervisorDao.SupervisorPageInfoQuery(pageUtilEntity);
     }
+
+    @Override
+    public List<TableDataInfo> SupervisorCRMPageInfoQuery(PageUtilEntity pageUtilEntity) {
+        return supervisorDao.SupervisorCRMPageInfoQuery(pageUtilEntity);
+    }
+
     @Override
     public Supervisor getSupervisor(Integer supervisorId) {
         return supervisorDao.getSupervisor(supervisorId);

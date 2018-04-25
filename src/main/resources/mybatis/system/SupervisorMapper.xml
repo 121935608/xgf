@@ -32,7 +32,14 @@
             )
         </if>
     </select>
-
+    <!--查询CRM督导员角色-->
+    <select id="SupervisorCRMPageInfoQuery" parameterType="PageUtilEntity" resultType="HashMap">
+        SELECT
+            ss.*, cd.*
+        FROM
+            sys_supervisor ss
+        LEFT JOIN c_dept cd ON ss.deptId = cd.deptId;
+    </select>
     <update id="updateSupervisor" parameterType="Supervisor">
         UPDATE sys_supervisor
         <set>

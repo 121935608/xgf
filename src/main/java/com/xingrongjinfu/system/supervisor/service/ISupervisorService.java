@@ -34,6 +34,12 @@ public interface ISupervisorService {
     List<TableDataInfo>SupervisorPageInfoQuery(PageUtilEntity pageUtilEntity);
 
     /**
+     * crm督导员列表查询
+     * @param pageUtilEntity
+     * @return
+     */
+    List<TableDataInfo> SupervisorCRMPageInfoQuery(PageUtilEntity pageUtilEntity);
+    /**
      * 根据督导员的id修改督导员信息
      */
     int updateSupervisorById(Supervisor supervisor);

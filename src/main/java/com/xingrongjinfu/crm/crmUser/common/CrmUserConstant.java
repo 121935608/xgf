@@ -8,20 +8,14 @@ package com.xingrongjinfu.crm.crmUser.common;
 public class CrmUserConstant
 {
     /**
-     * 请求地址：跳转至部门查询列表
-     */
-    public final static String DEPT_URL = "deptView";
-
-    /**
      * 请求地址：跳转至用户查询列表
      */
     public final static String USER_URL = "userView";
 
     /**
-     * 逻辑视图名：跳转至角色列表界面
+     * 请求地址：跳转至用户查询列表
      */
-    public final static String DEPT_PAGE = "xfsxCRM/dept-list";
-
+    public final static String USER_CRM_URL = "userCRMView";
     /**
      * 逻辑视图名：跳转至用户列表界面
      */
