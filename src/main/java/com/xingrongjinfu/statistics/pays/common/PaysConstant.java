@@ -27,6 +27,8 @@ public class PaysConstant
      * 请求地址：列表查询
      */
     public final static String PAYS_LIST_URL = "paysList";
+    /**  下载支付数据  */
+    public final static String DOWNLOAD_PAY_DATA = "downloadPayData";
 
     /**
      * 逻辑视图名：列表界面

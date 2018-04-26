@@ -19,6 +19,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="cashName" column="cashName" />
 	</resultMap>
 
+	<resultMap type="com.xingrongjinfu.statistics.pays.model.PaysDto" id="PaysDto">
+		<result property="tradeCode" column="tradeCode" />
+		<result property="cashNo" column="cashNo" />
+		<result property="addTime" column="addTime" />
+		<result property="money" column="money" />
+		<result property="payType" column="payType" />
+		<result property="cashName" column="cashName" />
+	</resultMap>
+
 	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultType="Pay">
 		select m.tradeCode,m.cashNo,m.addTime,m.money/100 money,m.payType,c.`name` cashName from m_cashFlow m
 		LEFT JOIN t_cashier c on c.cashierId=m.cashierId where  
@@ -47,6 +56,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			)
 		</if>
 			order by m.addTime desc
+	</select>
+
+	<select id="infoQuery" parameterType="map" resultMap="PaysDto">
+		select m.tradeCode,m.cashNo,m.addTime,m.money/100 money,m.payType,c.`name` cashName from m_cashFlow m
+		LEFT JOIN t_cashier c on c.cashierId=m.cashierId where
+		m.storeId= #{storeId} and m.`status`=1 and m.type='1'
+		<if test="userId != null and userId != ''">
+			AND m.userId=#{userId}
+		</if>
+
+		<if test="beginTime != null and beginTime != ''">
+			AND DATE_FORMAT(m.addTime,'%Y%m%d') &gt;=
+			DATE_FORMAT(#{beginTime},'%Y%m%d')
+		</if>
+		<if test="endTime != null and endTime != ''">
+			AND DATE_FORMAT(m.addTime,'%Y%m%d') &lt;=
+			DATE_FORMAT(#{endTime},'%Y%m%d')
+		</if>
+
+		<if test="payType != null and payType != ''">
+			AND m.payType = #{payType}
+		</if>
+
+		<if test="fuzzyCondition != null and fuzzyCondition != ''">
+			AND (
+			m.cashNo LIKE CONCAT(CONCAT('%',#{fuzzyCondition}),'%')
+			)
+		</if>
+		order by m.addTime desc
 	</select>
 
 
