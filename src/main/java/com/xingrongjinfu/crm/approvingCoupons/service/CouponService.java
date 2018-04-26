@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.xingrongjinfu.crm.approvingCoupons.dao.ICouponDao;
+import com.xingrongjinfu.crm.approvingCoupons.model.Coupon;
 
 /**
 * @author chenmengzhen    
@@ -32,5 +33,25 @@ public class CouponService implements ICouponService
     {
         return couponDao.pageInfoQuery(pageUtilEntity);
     }
+
+    
+    /**
+     * 根据优惠券ID查询优惠券详细信息
+     * 
+     * @param: @param couponId
+     * @return: Coupon      
+     */
+	public Coupon getCouponDetails(String couponId) {
+		return couponDao.getCouponDetails(couponId);
+	}
+
+	/**
+	 * @Description: 审核优惠券
+	 * @param: coupons
+	 * @return: int      
+	 */
+	public int updateCouponAudit(Coupon coupon) {
+		return couponDao.updateCouponAudit(coupon);
+	}
 
 }

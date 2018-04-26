@@ -21,7 +21,14 @@ public class Visit
     private String visitResult;
 	private Date createTime;
 	private Integer status;
+	private Date updateTime;
 	
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
 	public String getVisitId() {
 		return visitId;
 	}

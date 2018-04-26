@@ -14,9 +14,9 @@ public class Coupon
 	private String couponId;
     private String storeName;
     private String contacts;
-	private Date phoneNum;
-    private Integer address;
-    private Integer orderNum;
+	private String phoneNum;
+    private String address;
+    private String orderNum;
     private String logisticsSingleNum;
     private String damagedFruit;
     private Integer inspectionScene;
@@ -31,6 +31,14 @@ public class Coupon
 	private List<CouponImg> couponImgList;
 	
 	
+	public String getPhoneNum() {
+		return phoneNum;
+	}
+
+	public void setPhoneNum(String phoneNum) {
+		this.phoneNum = phoneNum;
+	}
+
 	public String getDamagedFruit() {
 		return damagedFruit;
 	}
@@ -71,27 +79,19 @@ public class Coupon
 		this.contacts = contacts;
 	}
 
-	public Date getPhoneNum() {
-		return phoneNum;
-	}
-
-	public void setPhoneNum(Date phoneNum) {
-		this.phoneNum = phoneNum;
-	}
-
-	public Integer getAddress() {
+	public String getAddress() {
 		return address;
 	}
 
-	public void setAddress(Integer address) {
+	public void setAddress(String address) {
 		this.address = address;
 	}
 
-	public Integer getOrderNum() {
+	public String getOrderNum() {
 		return orderNum;
 	}
 
-	public void setOrderNum(Integer orderNum) {
+	public void setOrderNum(String orderNum) {
 		this.orderNum = orderNum;
 	}
 
