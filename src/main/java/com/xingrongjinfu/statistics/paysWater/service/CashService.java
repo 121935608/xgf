@@ -60,6 +60,7 @@ public class CashService implements ICashService {
         return cashDao.sellWaterpageInfoQuery(pageUtilEntity);
     }
 
+
     @Override
     public List<Map> sellWaterInfoQuery(Map<String, String> param) {
         return cashDao.sellWaterInfoQuery(param);
@@ -69,6 +70,10 @@ public class CashService implements ICashService {
     public List<CashDetail> saleCountpageInfoQuery(PageUtilEntity pageUtilEntity) {
         List<CashDetail> list =  cashDao.saleCountpageInfoQuery(pageUtilEntity);
         return list;
+    }
+    @Override
+    public List<Map> saleCountInfoQuery(Map<String, String> param) {
+        return cashDao.saleCountInfoQuery(param);
     }
     @Override
     public List<CashFlow> saleGraphCombo(String storeId) {
@@ -90,5 +95,10 @@ public class CashService implements ICashService {
     public double getTotal(PageUtilEntity pageUtilEntity) {
         
         return cashDao.getTotal(pageUtilEntity);
+    }
+
+    @Override
+    public double getTotal(Map<String, String> param) {
+        return cashDao.getTotal(param);
     }
 }

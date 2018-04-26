@@ -35,4 +35,8 @@ public interface ICashDao {
     List<Map> cashCountInfoQuery(Map<String, String> param);
 
     List<Map> sellWaterInfoQuery(Map<String, String> param);
+
+    List<Map> saleCountInfoQuery(Map<String, String> param);
+
+    double getTotal(Map<String, String> param);
 }

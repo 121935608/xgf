@@ -74,6 +74,8 @@ public class CashDao extends DynamicObjectBaseDao implements ICashDao {
         return userPageInfo;
     }
 
+
+
     @Override
     public List<Map> cashCountInfoQuery(Map<String, String> param) {
         List<Map> data = null;
@@ -131,6 +133,20 @@ public class CashDao extends DynamicObjectBaseDao implements ICashDao {
     }
 
     @Override
+    public List<Map> saleCountInfoQuery(Map<String, String> param) {
+        List<Map> data = null;
+        try
+        {
+            data = (List<Map>) this.findForList("CashMapper.saleCountInfoQuery", param);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+    @Override
     public List<CashFlow> saleGraphCombo(String storeId) {
         List<CashFlow> cashFlowList = null;
         try
@@ -172,9 +188,14 @@ public class CashDao extends DynamicObjectBaseDao implements ICashDao {
         return cashFlowList;
     }
 
+
     @Override
     public double getTotal(PageUtilEntity pageUtilEntity) {
         return (double) this.findForObject("CashMapper.getTotal", pageUtilEntity);
     }
 
+    @Override
+    public double getTotal(Map<String, String> param) {
+        return (double) this.findForObject("CashMapper.getTotalNoPage", param);
+    }
 }
