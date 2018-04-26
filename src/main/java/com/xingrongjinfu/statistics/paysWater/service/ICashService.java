@@ -31,4 +31,6 @@ public interface ICashService {
     List<CashFlowDto> infoQuery(Map<String, String> param);
 
     List<Map> cashCountInfoQuery(Map<String, String> param);
+
+    List<Map> sellWaterInfoQuery(Map<String, String> param);
 }

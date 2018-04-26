@@ -65,12 +65,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="money" column="money" />
 	</resultMap>
 
-	<resultMap type="java.util.LinkedHashMap" id="CashFlowCount">
+	<resultMap type="java.util.HashMap" id="CashFlowCount">
 		<result property="cashName" column="cashName" javaType="string"/>
 		<result property="zhifubao" column="zhifubao" javaType="string" />
 		<result property="weixin" column="weixin" javaType="string" />
 		<result property="yinlian" column="yinlian" javaType="string"/>
 		<result property="xianjin" column="xianjin" javaType="string" />
+	</resultMap>
+
+	<resultMap type="java.util.HashMap" id="saleWaterMap">
+		<result property="commodityCode" column="commodityCode" javaType="string"/>
+		<result property="commodityName" column="commodityName" javaType="string" />
+		<result property="commodityNo" column="commodityNo" javaType="string" />
+		<result property="addTime" column="addTime" javaType="string"/>
+		<result property="unitName" column="unitName" javaType="string" />
+		<result property="number" column="number" javaType="string" />
+		<result property="totalVipPrice" column="totalVipPrice" javaType="string" />
+		<result property="inPrice" column="inPrice" javaType="string" />
 	</resultMap>
 
 	<!-- 收银流水 -->
@@ -200,6 +211,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			d.commodityName LIKE CONCAT(CONCAT('%', #{relationMap.commodityNo}),'%') or
 			c.commodityCode LIKE CONCAT(CONCAT('%',#{relationMap.commodityNo}),'%') or
 			c.commodityNo LIKE CONCAT(CONCAT('%',#{relationMap.commodityNo}),'%') 
+			)
+		</if>
+		ORDER BY d.addTime DESC
+	</select>
+
+	<!-- 导出商品销售流水数据 -->
+	<select id="sellWaterInfoQuery" parameterType="map" resultMap="saleWaterMap">
+		SELECT c.commodityCode commodityCode,d.commodityName commodityName,c.commodityNo commodityNo,
+		d.addTime `addTime`,d.unitName unitName,
+		round(d.number,2) number,round(d.totalVipPrice/100,2) totalVipPrice,
+		round(d.inPrice/100*d.number,2) inPrice
+		FROM m_cashDetail d LEFT JOIN m_cashFlow f ON d.cashId=f.cashId
+		LEFT JOIN m_commodity c ON d.commodityId=c.commodityId
+		WHERE f.storeId=#{storeId} AND f.status=1 and f.type = '1'
+		<if test="beginTime != null and beginTime != ''">
+			AND DATE_FORMAT(d.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{beginTime},'%Y%m%d')
+		</if>
+		<if test="endTime != null and endTime != ''">
+			AND DATE_FORMAT(d.addTime,'%Y%m%d') &lt;= DATE_FORMAT(#{endTime},'%Y%m%d')
+		</if>
+		<if test="commodityNo != null and commodityNo != ''">
+			AND (
+			d.commodityName LIKE CONCAT(CONCAT('%', #{commodityNo}),'%') or
+			c.commodityCode LIKE CONCAT(CONCAT('%',#{commodityNo}),'%') or
+			c.commodityNo LIKE CONCAT(CONCAT('%',#{commodityNo}),'%')
 			)
 		</if>
 		ORDER BY d.addTime DESC

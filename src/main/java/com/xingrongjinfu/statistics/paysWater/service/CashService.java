@@ -59,6 +59,12 @@ public class CashService implements ICashService {
     public List<TableDataInfo> sellWaterpageInfoQuery(PageUtilEntity pageUtilEntity) {
         return cashDao.sellWaterpageInfoQuery(pageUtilEntity);
     }
+
+    @Override
+    public List<Map> sellWaterInfoQuery(Map<String, String> param) {
+        return cashDao.sellWaterInfoQuery(param);
+    }
+
     @Override
     public List<CashDetail> saleCountpageInfoQuery(PageUtilEntity pageUtilEntity) {
         List<CashDetail> list =  cashDao.saleCountpageInfoQuery(pageUtilEntity);
