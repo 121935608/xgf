@@ -12,6 +12,9 @@
         <result property="status" column="status" />
         <result property="creatTime" column="creatTime" />
         <result property="supervisorNum" column="supervisorNum" />
+        <result property="deptId" column="deptId" />
+        <result property="crmLogin" column="crmLogin" />
+        <result property="crmPwd" column="crmPwd" />
     </resultMap>
 
 
@@ -32,7 +35,7 @@
             )
         </if>
     </select>
-    <!--查询CRM督导员角色-->
+    <!--查询CRM督导员角色和部门信息-->
     <select id="SupervisorCRMPageInfoQuery" parameterType="PageUtilEntity" resultType="HashMap">
         SELECT
             ss.*, cd.*
@@ -74,6 +77,30 @@
         <if test="area !=null and area!=''">#{area},</if>
         <if test="status !=null and status!=''">#{status},</if>
         <if test="supervisorNum !=null and supervisorNum!=''">#{supervisorNum},</if>
+        sysdate()
+        )
+    </insert>
+    <!--添加CRM的督导员-->
+    <insert id="addCRMSupervisor" parameterType="Supervisor">
+        INSERT INTO sys_supervisor(
+        <if test="name !=null and name!=''">name,</if>
+        <if test="phone !=null and phone!=''">phone,</if>
+        <if test="area !=null and area!=''">area,</if>
+        <if test="status !=null and status!=''">status,</if>
+        <if test="supervisorNum !=null and supervisorNum!=''">supervisorNum,</if>
+        deptId,
+        <if test="crmLogin !=null and crmLogin!=''">crmLogin,</if>
+        <if test="crmPwd !=null and crmPwd!=''">crmPwd,</if>
+        creatTime
+        )VALUES (
+        <if test="name !=null and name!=''">#{name},</if>
+        <if test="phone !=null and phone!=''">#{phone},</if>
+        <if test="area !=null and area!=''">#{area},</if>
+        <if test="status !=null and status!=''">#{status},</if>
+        <if test="supervisorNum !=null and supervisorNum!=''">#{supervisorNum},</if>
+        #{deptId},
+        <if test="crmLogin !=null and crmLogin!=''">#{crmLogin},</if>
+        <if test="crmPwd !=null and crmPwd!=''">#{crmPwd},</if>
         sysdate()
         )
     </insert>

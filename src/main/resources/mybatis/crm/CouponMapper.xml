@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CouponMapper">
+	<resultMap type="Coupon" id="CouponResult">
+		<result property="couponId" column="couponId" />
+		<result property="storeName" column="storeName" />
+		<result property="contacts" column="contacts" />
+		<result property="phoneNum" column="phoneNum" />
+		<result property="address" column="address" />
+		<result property="orderNum" column="orderNum" />
+		<result property="logisticsSingleNum" column="logisticsSingleNum" />
+		<result property="damagedFruit" column="damagedFruit" />
+		<result property="inspectionScene" column="inspectionScene" />
+	    <result property="damageDescription" column="damageDescription" />
+		<result property="amount" column="amount" />
+		<result property="remarks" column="remarks" />
+		<result property="auditStatus" column="auditStatus" />
+		<result property="auditTime" column="auditTime" />
+		<result property="auditRemarks" column="auditRemarks" />
+		<result property="createTime" column="createTime" />
+		
+		 <!-- 进行 多表关联插叙 -->
+        <!--<collection property="couponImgList" column="imgId" ofType="CouponImg">
+            <id property="imgId" column="imgId"/>    
+		    <result property="imgUrl" column="imgUrl"/> 
+        </collection> -->
+	</resultMap>
+
+    <!-- 查询部门信息列表，分页 -->
+ 	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultMap="CouponResult" useCache="false">
+		SELECT * FROM c_coupon 
+	</select>
+</mapper> 

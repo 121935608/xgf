@@ -39,6 +39,7 @@ public interface ISupervisorDao {
      * @return
      */
     List<TableDataInfo> SupervisorCRMPageInfoQuery(PageUtilEntity pageUtilEntity);
+
     /**
      * 根据督导员的id修改信息
      */
@@ -54,6 +55,8 @@ public interface ISupervisorDao {
      */
     int addSupervisor(Supervisor supervisor);
 
+    /*添加CRM的督导员*/
+    int addCRMSupervisor(Supervisor supervisor);
     /**
      * 校验手机号
      */

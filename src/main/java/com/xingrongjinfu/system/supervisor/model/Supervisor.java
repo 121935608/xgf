@@ -34,6 +34,33 @@ public class Supervisor implements Serializable
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH-mm-ss")
     private Date creatTime;
     private String supervisorNum;
+    private String deptId;
+    private String crmLogin;
+    private String crmPwd;
+
+    public String getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
+    }
+
+    public String getCrmLogin() {
+        return crmLogin;
+    }
+
+    public void setCrmLogin(String crmLogin) {
+        this.crmLogin = crmLogin;
+    }
+
+    public String getCrmPwd() {
+        return crmPwd;
+    }
+
+    public void setCrmPwd(String crmPwd) {
+        this.crmPwd = crmPwd;
+    }
 
     public Integer getSupervisorId() {
         return supervisorId;

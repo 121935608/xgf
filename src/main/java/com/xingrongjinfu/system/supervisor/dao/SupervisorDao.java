@@ -33,6 +33,11 @@ public class SupervisorDao extends DynamicObjectBaseDao implements ISupervisorDa
     public int addSupervisor(Supervisor supervisor) {
         return this.save("SupervisorMapper.addSupervisor",supervisor);
     }
+    /*添加CRM的督导员*/
+    @Override
+    public int addCRMSupervisor(Supervisor supervisor) {
+        return this.save("SupervisorMapper.addCRMSupervisor",supervisor);
+    }
 
     @Override
     public Supervisor getSupervisor(Integer supervisorId) {
@@ -72,7 +77,6 @@ public class SupervisorDao extends DynamicObjectBaseDao implements ISupervisorDa
         }
         return supervisorCRMPageInfo;
     }
-
 
     @Override
     public Supervisor findPhone(Supervisor supervisor) {
