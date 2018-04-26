@@ -32,7 +32,6 @@ public interface ISupervisorService {
      * @return
      */
     List<TableDataInfo>SupervisorPageInfoQuery(PageUtilEntity pageUtilEntity);
-
     /**
      * crm督导员列表查询
      * @param pageUtilEntity
@@ -53,6 +52,9 @@ public interface ISupervisorService {
      * 添加督导员
      */
     int addSupervisor(Supervisor supervisor);
+
+    /*添加CRM的督导员*/
+    int addCRMSupervisor(Supervisor supervisor);
 
     /**
      * 校验手机号
