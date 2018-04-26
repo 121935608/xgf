@@ -23,6 +23,14 @@
             </div>
         </div>
         <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>上级菜单：</label>
+            <div class="formControls col-xs-8 col-sm-4">
+                <select id="parentId" name="parentId">
+                    <option>菜单管理</option>
+                </select>
+            </div>
+        </div>
+        <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>联系电话：</label>
             <div class="formControls col-xs-8 col-sm-4">
                 <input type="text" class="input-text " placeholder="联系电话" id="phone" name="phone" >
@@ -31,9 +39,9 @@
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>所在区域:</label>
             <div data-toggle="distpicker">
-                <select data-province="---- 选择省 ----" id="province"></select>
-                <select data-city="---- 选择市 ----" id="city"></select>
-                <select data-district="---- 选择区 ----" id="district"></select>
+                <select data-province="---- 选择省 ----" id="province" name="province"></select>
+                <select data-city="---- 选择市 ----" id="city" name="city"></select>
+                <select data-district="---- 选择区 ----" id="district" name="county"></select>
             </div>
         </div>
         <div class="row cl">
@@ -52,6 +60,17 @@
 </article>
 
 <script type="text/javascript">
+    $(function(){
+       $.ajax({
+           url:"${context_root}/crmUser/selectDeptInfoView.action",
+           async:true ,
+           cache:false ,
+           dataType:"json",
+           success:function(){
+               alert("000");
+           }
+       })
+    });
     jQuery.validator.addMethod("chineseName", function (value, element) {
         var chrnum =/^[\u4E00-\u9FA5]{2,4}$/;
         return this.optional(element) || (chrnum.test(value));
@@ -64,16 +83,15 @@
         rules:{
             name:{
                 required:true,
-                isSpace:true,
-                chineseName:true,
+                isSpace:true
             },
             crmLogin: {
                 required: true,
-                isSpace: true,
+                isSpace: true
             },
             crmPwd: {
                 required: true,
-                isSpace: true,
+                isSpace: true
             },
             phone:{
                 required:true,

@@ -48,6 +48,11 @@ public class SupervisorDao extends DynamicObjectBaseDao implements ISupervisorDa
     public int updateSupervisorById(Supervisor supervisor) {
         return this.update("SupervisorMapper.updateSupervisor",supervisor);
     }
+    /*根据CRM督导员的ID修改督导员的信息*/
+    @Override
+    public int updateCRMSupervisor(Supervisor supervisor) {
+        return this.update("SupervisorMapper.updateCRMSupervisor",supervisor);
+    }
 
     @Override
     public List<TableDataInfo> SupervisorPageInfoQuery(PageUtilEntity pageUtilEntity) {

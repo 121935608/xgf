@@ -21,17 +21,27 @@ public class CrmUserConstant
      */
     public final static String USER_CRM_UPDATE_STATUS = "updateSupervistorStatusView";
     /**
-     * 请求地址：修改督导员信息
+     * 请求地址：根据ID查询督导员信息
      */
-    public final static String USER_CRM_UPDATE_URL = "updateSpervistorInfoView";
-
+    public final static String USER_CRM_SELECT_URL = "updateSpervistorInfoView";
+    /**
+     * 请求地址：根据督导员ID修改督导员信息
+     */
+    public final static String USER_CRM_UPDATE_URL = "updateSpervistorIDView";
     /**
      * 请求地址：增加督导员信息
      */
     public final static String USER_CRM_ADD_URL = "addSpervistorInfoView";
+
+    /**
+     * 请求地址：查询所有部门接口
+     */
+    public final static String USER_CRM_SELECT_DEPT = "selectDeptInfoView";
+
     /**
      * 请求地址：增加督导员信息接口
      */
+
     public final static String USER_CRM_ADD_URL_TWO = "toAddSpervistorInfoView";
 
     /**

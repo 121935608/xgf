@@ -44,6 +44,11 @@ public interface ISupervisorService {
     int updateSupervisorById(Supervisor supervisor);
 
     /**
+     * 根据CRM督导员的id修改信息
+     */
+    int updateCRMSupervisor(Supervisor supervisor);
+
+    /**
      * 根据督导员的id查询督导员的信息
      */
     Supervisor getSupervisor(Integer supervisorId);

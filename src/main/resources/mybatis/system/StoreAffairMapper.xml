@@ -210,6 +210,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 
 	</select>
-
+	<!--查询店铺和督导员关联的详情信息-->
+	<select id="selectStoreSup" parameterType="PageUtilEntity" resultType="HashMap" useCache="false">
+		SELECT ts.*,ss.* FROM t_store ts LEFT JOIN sys_supervisor ss  ON ts.supervisorId = ss.supervisorId;
+	</select>
 
 </mapper> 

@@ -1,6 +1,8 @@
 package com.xingrongjinfu.crm.crmUser.controller;
 
 import com.xingrongjinfu.crm.CrmConstant;
+import com.xingrongjinfu.crm.crmUser.service.CrmUserService;
+import com.xingrongjinfu.crm.department.model.Dept;
 import com.xingrongjinfu.system.supervisor.common.SupervisorConstant;
 import com.xingrongjinfu.system.supervisor.model.Supervisor;
 import com.xingrongjinfu.system.supervisor.service.ISupervisorService;
@@ -30,6 +32,9 @@ public class CrmUserController extends BaseController
 {
     @Autowired
     private ISupervisorService supervisorService;
+
+    @Autowired
+    private CrmUserService crmUserService;
     /**
      * 跳转用户列表界面
      */
@@ -63,13 +68,23 @@ public class CrmUserController extends BaseController
         }
         return new Message(result);
     }
-    /*修改督导员信息*/
-    @RequestMapping(CrmUserConstant.USER_CRM_UPDATE_URL)
+    /*根据督导员ID查询督导员信息*/
+    @RequestMapping(CrmUserConstant.USER_CRM_SELECT_URL)
     public ModelAndView suoervistorAddUpdate(Integer supervisorId){
         ModelAndView modelAndView =this.getModelAndView(CrmUserConstant.USER_CRM_UPDATE_PAGE);
         Supervisor supervisor=supervisorService.getSupervisor(supervisorId);
         modelAndView.addObject("Supervisor",supervisor);
         return modelAndView;
+    }
+    /*根据督导员ID修改督导员信息*/
+    @RequestMapping(CrmUserConstant.USER_CRM_UPDATE_URL)
+    public @ResponseBody Message updateCRMSupervisor(Supervisor supervisor){
+        int result = 0;
+        Integer supervistorID = supervisor.getSupervisorId();
+        if(supervistorID !=null){
+            result = supervisorService.updateCRMSupervisor(supervisor);
+        }
+        return new Message(result);
     }
 
     /*跳转增加督导员信息界面*/
@@ -83,8 +98,16 @@ public class CrmUserController extends BaseController
     public @ResponseBody Message addCRMSupervistor(Supervisor supervisor){
         int result = 0;
         supervisor.setSupervisorNum(AccessCodeUtil.accessCode());
-        System.out.println("登录名是"+supervisor.getCrmLogin());
         result = supervisorService.addCRMSupervisor(supervisor);
         return new Message(result);
+    }
+
+    /*查询所有部门信息*/
+    @RequestMapping(CrmUserConstant.USER_CRM_SELECT_DEPT)
+    public List<Dept> selectAllDept(){
+        List<Dept> deptList = null;
+        deptList = crmUserService.selectAllDept();
+        System.out.println("查询的数据是"+deptList.toString());
+        return deptList;
     }
 }

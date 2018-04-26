@@ -2,32 +2,24 @@
 <%@include file="/WEB-INF/jsp/common/taglibs.jspf"%>
 <ys:contentHeader title="成员列表"/>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 谢鲜CRM管理 <span class="c-gray en">&gt;</span> 成员列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 谢鲜CRM管理 <span class="c-gray en">&gt;</span> 门店列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
     <div class="text-c">
-		<span class="select-box" style="width: 120px;">
-		   <select name="statusSelect" id="statusSelect" class="select" autocomplete="off">
-			   <option value="">状态</option>
-			   <option value="0">启用</option>
-			   <option value="1">禁用</option>
-		   </select>
-		</span>
-        <input type="text" class="input-text" style="width:250px" placeholder="姓名|督导员编号|电话" id="userName" name="userName">
+        <input type="text" class="input-text" style="width:250px" placeholder="姓名|联系方式|店铺名称" id="applyName" name="applyName">
         <button type="button" class="btn btn-success radius" onclick="query()"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
     </div>
-    <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="role_add('添加督导员','${context_root}/crmUser/addSpervistorInfoView.action','','410')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加督导员</a></span></div>
     <div class="mt-20">
         <table class="table table-border table-bordered table-hover table-bg table-sort">
             <thead>
             <tr class="text-c">
-                <th width="5%">姓名</th>
-                <th width="5%">登录名</th>
-                <th width="15%">所在区域</th>
-                <th width="15%">督导员编号</th>
-                <th width="15%">督导员部门</th>
-                <th width="15%">电话 </th>
-                <th width="10%">状态</th>
-                <th width="10%">操作</th>
+                <th width="10%">门店名称</th>
+                <th width="5%">联系人</th>
+                <th width="15%">手机号</th>
+                <th width="15%">地址</th>
+                <th width="15%">组类</th>
+                <th width="15%">销售员 </th>
+                <th width="15%">状态 </th>
+                <th width="15%">操作 </th>
             </tr>
             </thead>
         </table>
@@ -38,33 +30,46 @@
     $(document).ready(function(){
         var aoColumns = [
             {
-                "sDefaultContent": "姓名",
+                "sDefaultContent": "门店名称",
                 "bSortable" : false,
                 "sClass": "text-c",
                 "bSearchable": false,
                 "mRender": function(data, type, row) {
-                    if (row.name != null) {
-                        return row.name;
+                    if (row.storeName != null) {
+                        return row.storeName;
                     } else {
                         return "";
                     }
                 }
             },
             {
-                "sDefaultContent": "登录名",
+                "sDefaultContent": "联系人",
                 "bSortable" : false,
                 "sClass": "text-c",
                 "bSearchable": false,
                 "mRender": function(data, type, row) {
-                    if (row.name != null) {
-                        return row.crmLogin;
+                    if (row.userName != null) {
+                        return row.userName;
                     } else {
                         return "";
                     }
                 }
             },
             {
-                "sDefaultContent": "所在区域",
+                "sDefaultContent": "手机号",
+                "bSortable" : false,
+                "sClass": "text-c",
+                "bSearchable": false,
+                "mRender": function(data, type, row) {
+                    if (row.phone != null) {
+                        return row.phone;
+                    } else {
+                        return "";
+                    }
+                }
+            },
+            {
+                "sDefaultContent": "地址",
                 "bSortable" : false,
                 "sClass": "text-c",
                 "bSearchable": false,
@@ -75,21 +80,8 @@
                         return "";
                     }
                 }
-            },
-            {
-                "sDefaultContent": "督导编号",
-                "bSortable" : false,
-                "sClass": "text-c",
-                "bSearchable": false,
-                "mRender": function(data, type, row) {
-                    if (row.supervisorNum != null) {
-                        return row.supervisorNum;
-                    } else {
-                        return "";
-                    }
-                }
             },{
-                "sDefaultContent": "督导部门",
+                "sDefaultContent": "组类",
                 "bSortable" : false,
                 "sClass": "text-c",
                 "bSearchable": false,
@@ -102,7 +94,7 @@
                 }
             },
             {
-                "sDefaultContent": "电话",
+                "sDefaultContent": "销售员",
                 "bSortable" : false,
                 "sClass": "text-c",
                 "bSearchable": false,
@@ -120,10 +112,12 @@
                 "sClass": "td-status text-c",
                 "bSearchable": false,
                 "mRender": function(data, type, row) {
-                    if (row.status == '0') {
-                        return "<span class=\"label label-success radius\">已启用</span>";
+                    if (row.auditStatus == '0') {
+                        return "<span class=\"label label-success radius\">待审核</span>";
+                    } else if(row.auditStatus == '1'){
+                        return "<span class=\"label label-success radius\">审核通过</span>";
                     } else {
-                        return "<span class=\"label label-defaunt radius\">已停用</span>";
+                        return "<span class=\"label label-defaunt radius\">审核不通过</span>";
                     }
                 }
             },
@@ -134,22 +128,20 @@
                 "bSearchable": false,
                 "mRender": function(data, type, row) {
                     //编辑
-                    var toEdit = "<a title=\"编辑\" href=\"javascript:;\" onclick=\"role_edit('编辑督导员','${context_root}/crmUser/updateSpervistorInfoView.action?supervisorId=" + row.supervisorId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>编辑</span></a>";
-                    return statusTools(row) +"&nbsp;&nbsp;" + toEdit;
+                    var toEdit = "<a title=\"查看详情\" href=\"javascript:;\" onclick=\"certification_check('认证申请审核','${context_root}/merchant/checkCertification.action?storeId=" + row.storeId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>审核</span></a>";
+                    return toEdit;
                 }
             },
         ];
-        var url = "${context_root}/crmUser/userCRMView.action";
+        var url = "${context_root}/crmStore/crmStoreSelect.action";
         pageTable = _Datatable_Init(pageTable, aoColumns, url);
     });
 
-    function statusTools(row) {
-        if (row.status == '0') {
-            return "<a style=\"text-decoration:none\" onClick=\"supervisor_stop(this,\'" + row.supervisorId + "\')\" href=\"javascript:;\" title=\"停用\"><span style='color: #0e90d2 '>停用</span></a>";
-        } else {
-            return "<a style=\"text-decoration:none\" onClick=\"supervisor_start(this,\'" + row.supervisorId + "\')\" href=\"javascript:;\" title=\"启用\"><span style='color: #0e90d2 '>启用</span></a>";
-        }
+    /*审核申请*/
+    function certification_check(title,url,w,h){
+        layer_show(title,url,w,h);
     }
+
     /*角色-添加*/
     function role_add(title,url,w,h){
         layer_show(title,url,w,h);

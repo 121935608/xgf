@@ -116,7 +116,7 @@
             }
             var index = parent.layer.load();
             $.ajax({
-                url:"${context_url}/system/supervisorModify.action?area="+area,
+                url:"${context_url}/crmUser/updateSpervistorIDView.action?area="+area,
                 type:'post',
                 async:true ,
                 cache:false ,

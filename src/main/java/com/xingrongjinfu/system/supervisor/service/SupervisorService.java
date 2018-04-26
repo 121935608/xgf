@@ -52,6 +52,12 @@ public class SupervisorService implements ISupervisorService {
         return supervisorDao.updateSupervisorById(supervisor);
     }
 
+    /*根据CRM督导员的ID修改督导员的相关信息*/
+    @Override
+    public int updateCRMSupervisor(Supervisor supervisor) {
+        return supervisorDao.updateCRMSupervisor(supervisor);
+    }
+
     @Override
     public List<TableDataInfo> SupervisorPageInfoQuery(PageUtilEntity pageUtilEntity) {
         return supervisorDao.SupervisorPageInfoQuery(pageUtilEntity);
