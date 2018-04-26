@@ -1,14 +1,11 @@
 package com.xingrongjinfu.utils;
 
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Iterator;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -34,7 +31,7 @@ import org.apache.poi.hssf.util.HSSFColor;
  * @version v1.0
  */
 public class ExportExcel<T> {
-    public void exportExcel(String title, Collection<T> dataset, OutputStream out) {
+    public  void exportExcel(String title, Collection<T> dataset, OutputStream out) {
         exportExcel(title, null, dataset, out, "yyyy-MM-dd");
     }
 
@@ -226,6 +223,71 @@ public class ExportExcel<T> {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void exportExcel2(String title, String[][] headers, List<Map> dataset, OutputStream out) throws IOException {
+
+        // 声明一个工作薄
+        HSSFWorkbook workbook = new HSSFWorkbook();
+        // 生成一个表格
+        HSSFSheet sheet = workbook.createSheet(title);
+        // 设置表格默认列宽度为15个字节
+        sheet.setDefaultColumnWidth(15);
+        // 生成一个样式
+        HSSFCellStyle style = workbook.createCellStyle();
+        // 设置这些样式
+        style.setFillForegroundColor(HSSFColor.WHITE.index);
+        style.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
+        style.setBorderBottom(HSSFCellStyle.BORDER_THIN);
+        style.setBorderLeft(HSSFCellStyle.BORDER_THIN);
+        style.setBorderRight(HSSFCellStyle.BORDER_THIN);
+        style.setBorderTop(HSSFCellStyle.BORDER_THIN);
+        style.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+        // 生成一个字体
+        HSSFFont font = workbook.createFont();
+        font.setColor(HSSFColor.BLACK.index);
+        font.setFontHeightInPoints((short) 12);
+        font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
+        // 把字体应用到当前的样式
+        style.setFont(font);
+        HSSFRow row = sheet.createRow(0);
+        for (int i = 0; i < headers[0].length; i++) {
+            HSSFCell cell = row.createCell(i);
+
+            cell.setCellStyle(style);
+            HSSFRichTextString text = new HSSFRichTextString(headers[0][i]);
+            cell.setCellValue(text);
+        }
+        int i=1;
+        for(Map map: dataset){
+            row = sheet.createRow(i++);
+            int j=0;
+            for(String key:  headers[1]){
+                HSSFCell cell = row.createCell(j++);
+                cell.setCellStyle(style);
+                HSSFRichTextString richString = new HSSFRichTextString((String)map.get(key));
+                HSSFFont font3 = workbook.createFont();
+                font3.setColor(HSSFColor.BLACK.index);
+                richString.applyFont(font3);
+                cell.setCellValue(richString);
+            }
+        }
+        workbook.write(out);
+
+    }
+
+    public static void main(String[] args) throws Exception {
+//        List<String> list1 = Arrays.asList("11","22");
+//        List<String> list2 = Arrays.asList("aa","bb");
+//        List<List<String>> data = new ArrayList<>();
+//        data.add(list2);
+//        data.add(list1);
+//        OutputStream os = new FileOutputStream(new File("test.xls"));
+//        String[] h = new String[][]{"1","1",{"a"}};
+//        ExportExcel.exportExcel2("hello",h,data,os);
+//        os.flush();
+//        os.flush();
+//        os.close();
     }
 
     /**

@@ -9,6 +9,8 @@ public class CashCountConstant {
      * 请求地址：收银统计表列表查询
      */
     public final static String CASHCOUNT_LIST = "cashCountList";
+    /**  导出收银统计数据Excel  */
+    public final static String DOWNLOAD_CASHCOUNT_DATA = "downloadCashCountData";
     /**
      * 逻辑视图名：收银统计列表页面
      */

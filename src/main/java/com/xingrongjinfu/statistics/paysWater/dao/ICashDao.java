@@ -31,4 +31,6 @@ public interface ICashDao {
     public double getTotal(PageUtilEntity pageUtilEntity);
 
     List<CashFlowDto> infoQuery(Map<String, String> param);
+
+    List<Map> cashCountInfoQuery(Map<String, String> param);
 }

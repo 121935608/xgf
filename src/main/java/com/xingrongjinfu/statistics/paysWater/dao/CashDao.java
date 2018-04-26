@@ -75,6 +75,20 @@ public class CashDao extends DynamicObjectBaseDao implements ICashDao {
     }
 
     @Override
+    public List<Map> cashCountInfoQuery(Map<String, String> param) {
+        List<Map> data = null;
+        try
+        {
+            data = (List<Map>) this.findForList("CashMapper.cashCountinfoQuery", param);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+    @Override
     public List<TableDataInfo> sellWaterpageInfoQuery(PageUtilEntity pageUtilEntity) {
         List<TableDataInfo> userPageInfo = null;
         try

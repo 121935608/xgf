@@ -21,6 +21,9 @@ public class CashService implements ICashService {
     public List<TableDataInfo> pageInfoQuery(PageUtilEntity pageUtilEntity) {
         return cashDao.pageInfoQuery(pageUtilEntity);
     }
+
+
+
     @Override
     public List<CashFlowDto> infoQuery(Map<String, String> param) {
         return cashDao.infoQuery(param);
@@ -47,6 +50,11 @@ public class CashService implements ICashService {
     public List<TableDataInfo> cashCountpageInfoQuery(PageUtilEntity pageUtilEntity) {
         return cashDao.cashCountpageInfoQuery(pageUtilEntity);
     }
+    @Override
+    public List<Map> cashCountInfoQuery(Map<String, String> param) {
+        return cashDao.cashCountInfoQuery(param);
+    }
+
     @Override
     public List<TableDataInfo> sellWaterpageInfoQuery(PageUtilEntity pageUtilEntity) {
         return cashDao.sellWaterpageInfoQuery(pageUtilEntity);

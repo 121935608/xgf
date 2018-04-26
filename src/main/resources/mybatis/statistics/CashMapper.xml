@@ -65,6 +65,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="money" column="money" />
 	</resultMap>
 
+	<resultMap type="java.util.LinkedHashMap" id="CashFlowCount">
+		<result property="cashName" column="cashName" javaType="string"/>
+		<result property="zhifubao" column="zhifubao" javaType="string" />
+		<result property="weixin" column="weixin" javaType="string" />
+		<result property="yinlian" column="yinlian" javaType="string"/>
+		<result property="xianjin" column="xianjin" javaType="string" />
+	</resultMap>
+
 	<!-- 收银流水 -->
 	<select id="pageInfoQuery" parameterType="PageUtilEntity"
 		resultType="CashFlow">
@@ -144,6 +152,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		<if test="relationMap.cashName != null and relationMap.cashName != ''">
 			AND m.name LIKE CONCAT(CONCAT('%', #{relationMap.cashName}),'%')
+		</if>
+		GROUP BY f.cashierId,m.addTime
+		ORDER BY m.addTime DESC
+	</select>
+
+	<!-- 收银统计不分页 导出Excel -->
+	<select id="cashCountinfoQuery" parameterType="map" resultMap="CashFlowCount">
+		SELECT f.cashierId cashierId,m.name cashName,m.addTime,
+		cast((SUM(IF(payType=0,money/100,0))) as DECIMAL(13,1)) xianjin,
+		cast((SUM(IF(payType=1,money/100,0))) as DECIMAL(13,1)) zhifubao,
+		cast((SUM(IF(payType=2,money/100,0))) as DECIMAL(13,1)) weixin,
+		cast((SUM(IF(payType=3,money/100,0))) as DECIMAL(13,1)) yinlian,
+		cast((SUM(IF(payType=4,money/100,0))) as DECIMAL(13,1)) baitiao
+		FROM m_cashFlow f LEFT JOIN t_cashier m ON f.cashierId=m.cashierId
+		WHERE f.storeId=#{storeId} AND f.status=1 and f.type = '1'
+		<if test="beginTime != null and beginTime != ''">
+			AND DATE_FORMAT(f.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{beginTime},'%Y%m%d')
+		</if>
+		<if test="endTime != null and endTime != ''">
+			AND DATE_FORMAT(f.addTime,'%Y%m%d') &lt;= DATE_FORMAT(#{endTime},'%Y%m%d')
+		</if>
+		<if test="cashName != null and cashName != ''">
+			AND m.name LIKE CONCAT(CONCAT('%', #{cashName}),'%')
 		</if>
 		GROUP BY f.cashierId,m.addTime
 		ORDER BY m.addTime DESC

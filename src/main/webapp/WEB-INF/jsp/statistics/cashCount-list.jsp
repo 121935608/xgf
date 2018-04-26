@@ -11,6 +11,7 @@
 			   class="input-text Wdate" style="width:120px;" placeholder="结束时间">
 		<input type="text" class="input-text" style="width:250px" placeholder="收银员" id="cashName" name="cashName">
 		<button type="button" class="btn btn-success radius" onclick="query()"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+		<button type="button" class="btn btn-success radius" onclick="excel_out()"><i class="Hui-iconfont">&#xe665;</i> 导出</button>
 	</div>
 	<div class="mt-20">
 	<table class="table table-border table-bordered table-hover table-bg table-sort">
@@ -77,6 +78,21 @@ function query() {
     pageTable.fnSettings().sAjaxSource =encodeURI("${context_root}/statistics/cashCountList.action?beginTime=" + beginTime+"&endTime="+endTime+"&cashName="+cashName);
     pageTable.fnClearTable(0);
     pageTable.fnDraw();
+}
+
+function excel_out() {
+    var beginTime = $("#beginTime").val();
+    var endTime = $("#endTime").val();
+    var cashName = $("#cashName").val();
+    var reg =/[`~!@#$%^&*()_\-=<>?:"{}|,.\/;'\\[\]·~！@#￥%……&*（）——\-={}|《》？：“”【】、；‘’，。、]/;
+    if (reg.test(cashName)){
+        alert("含有非法字符");
+        return;
+    }
+    var elemIF = document.createElement("iframe");
+    elemIF.src = "${context_root}/statistics/downloadCashCountData.action?beginTime="+beginTime+"&endTime="+endTime+"&cashName="+cashName
+    elemIF.style.display = "none";
+    document.body.appendChild(elemIF);
 }
 
 </script> 

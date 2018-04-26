@@ -1,12 +1,10 @@
 package com.xingrongjinfu.statistics.paysWater.model;
 
-import com.xingrongjinfu.commodity.register.model.Register;
-
-import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 
 public class CashFlowDto {
+
+
      /**  流水号  */
      private String tradeCode;
      /**  收银机  */
