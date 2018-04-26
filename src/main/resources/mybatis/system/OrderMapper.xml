@@ -57,10 +57,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultMap="OrderResult">
-		SELECT o.orderNumber,o.orderTime,o.payTime,s.userName,o.orderPrice/100 orderPrice,o.platform,o.orderStatus,o.payCode
-		FROM t_order o
+		SELECT o.orderNumber,o.orderTime,o.payTime,s.userName,o.orderPrice/100 orderPrice,o.platform,o.orderStatus,o.payCode,ad.address address
+		 FROM t_order o
 		LEFT JOIN sys_user s ON o.userId=s.userId
-		WHERE 1=1 and `status`=1
+		LEFT JOIN t_address ad ON ad.`addrId`=o.`addressId`
+		WHERE 1=1 and o.`status`=1
 		<if test="relationMap.beginTime != null and relationMap.beginTime != ''"><!-- 开始时间检索 -->
 			AND DATE_FORMAT(o.orderTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
 		</if>
@@ -90,6 +91,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			s.userName LIKE CONCAT(CONCAT('%', #{relationMap.orderNumber}),'%')
 			)
 		</if>
+		<if test="relationMap.address !=null and relationMap.address !=''">
+			AND ad.address LIKE CONCAT(CONCAT('%', #{relationMap.address}),'%')
+
+		</if>
+
 		<!--关键词查询-->
 	     order by o.orderTime DESC
 	</select>

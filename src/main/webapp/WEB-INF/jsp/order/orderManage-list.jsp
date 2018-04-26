@@ -35,6 +35,7 @@
            </select>
        </span>
 		<input type="text" class="input-text" style="width:250px" placeholder="订单号|会员" id="orderNumber" name="orderNumber">
+		<input type="text" class="input-text" style="width:250px" placeholder="收货地址" id="address" name="address">
 		<button type="button" class="btn btn-success radius" onclick="query()"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
 	</div>
 	<div class="mt-20">
@@ -50,6 +51,7 @@
 				<th width="8%">订单来源</th>
 				<th width="8%">订单状态</th>
 				<th width="8%">支付方式</th>
+				<th width="8%">收货地址</th>
 				<th width="8%">操作</th>
 			</tr>
 		</thead>
@@ -209,6 +211,19 @@ $(document).ready(function(){
             }
         },
         {
+            "sDefaultContent": "订货地址",
+            "bSortable" : false,
+            "sClass": "td-status text-c",
+            "bSearchable": false,
+            "mRender": function(data, type, row) {
+                if (row.address !=null) {
+                    return row.address;
+                }else {
+                    return "";
+                }
+            }
+        },
+        {
             "sDefaultContent": "操作",
             "bSortable" : false,
             "sClass": "td-manage text-c",
@@ -290,7 +305,8 @@ function query() {
     var platform = $("#platform option:selected").val();
     var orderStatus = $("#orderStatus option:selected").val();
 	var orderNumber =$("#orderNumber").val();
-    pageTable.fnSettings().sAjaxSource = encodeURI("${context_root}/order/findOrderManageList.action?beginTime="+beginTime+"&endTime="+endTime+"&payType="+payType+"&platform="+platform+"&orderStatus="+orderStatus+"&orderNumber="+orderNumber);
+    var address =$("#address").val();
+    pageTable.fnSettings().sAjaxSource = encodeURI("${context_root}/order/findOrderManageList.action?beginTime="+beginTime+"&endTime="+endTime+"&payType="+payType+"&platform="+platform+"&orderStatus="+orderStatus+"&orderNumber="+orderNumber+"&address="+address);
     pageTable.fnClearTable(0);
     pageTable.fnDraw();
 }
