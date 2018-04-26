@@ -71,6 +71,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.xingrongjinfu.crm.visit.model.Visit" alias="Visit"/>
 		<typeAlias type="com.xingrongjinfu.crm.approvingCoupons.model.Coupon" alias="Coupon"/>
 		<typeAlias type="com.xingrongjinfu.crm.approvingCoupons.model.CouponImg" alias="CouponImg"/>
+		<typeAlias type="com.xingrongjinfu.system.storeaffairs.model.PurchaseDto" alias="PurchaseDto"/>
+
 
 		<!-- 分页 -->
 		<typeAlias type="org.framework.base.util.TableDataInfo" alias="TableDataInfo"/>
