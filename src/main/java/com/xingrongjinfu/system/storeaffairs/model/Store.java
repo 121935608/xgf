@@ -51,6 +51,115 @@ public class Store {
 		private Integer orderNum;
 
 		private Date orderTime;
+		private String longtitude;//经度
+		private String latitude;//纬度
+		private String storeArea;//门店面积
+		private String chain;//是否连锁
+		private String equipment;//门店设备
+		private String storeType;//门店类型
+		private String partners;//合作方
+		private String startHours;//开始营业时间
+		private String endHours;//结束营业时间
+		private String startCollect;//开始收货时间
+		private String endCollect;//结束收货时间
+		private String building;//周边建筑
+
+
+		public String getLongtitude() {
+			return longtitude;
+		}
+
+		public void setLongtitude(String longtitude) {
+			this.longtitude = longtitude;
+		}
+
+		public String getLatitude() {
+			return latitude;
+		}
+
+		public void setLatitude(String latitude) {
+			this.latitude = latitude;
+		}
+
+		public String getStoreArea() {
+			return storeArea;
+		}
+
+		public void setStoreArea(String storeArea) {
+			this.storeArea = storeArea;
+		}
+
+		public String getChain() {
+			return chain;
+		}
+
+		public void setChain(String chain) {
+			this.chain = chain;
+		}
+
+		public String getEquipment() {
+			return equipment;
+		}
+
+		public void setEquipment(String equipment) {
+			this.equipment = equipment;
+		}
+
+		public String getStoreType() {
+			return storeType;
+		}
+
+		public void setStoreType(String storeType) {
+			this.storeType = storeType;
+		}
+
+		public String getPartners() {
+			return partners;
+		}
+
+		public void setPartners(String partners) {
+			this.partners = partners;
+		}
+
+		public String getStartHours() {
+			return startHours;
+		}
+
+		public void setStartHours(String startHours) {
+			this.startHours = startHours;
+		}
+
+		public String getEndHours() {
+			return endHours;
+		}
+
+		public void setEndHours(String endHours) {
+			this.endHours = endHours;
+		}
+
+		public String getStartCollect() {
+			return startCollect;
+		}
+
+		public void setStartCollect(String startCollect) {
+			this.startCollect = startCollect;
+		}
+
+		public String getEndCollect() {
+			return endCollect;
+		}
+
+		public void setEndCollect(String endCollect) {
+			this.endCollect = endCollect;
+		}
+
+		public String getBuilding() {
+			return building;
+		}
+
+		public void setBuilding(String building) {
+			this.building = building;
+		}
 
 		public String getCardNumber() {
 			return cardNumber;

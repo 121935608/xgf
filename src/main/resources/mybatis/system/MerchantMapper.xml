@@ -27,7 +27,7 @@
 
 
     <select id="pageInfoQuery" parameterType="PageUtilEntity" resultMap="MerchantResult">
-        SELECT s.userId,t.storeId,s.mobilePhone,sv.name name,t.storeName,t.userName,DATE_FORMAT(t.addTime,"%Y-%m-%d") addTime,t.phone,s.locked,t.licenseId
+        SELECT s.userId,t.storeId,t.storeArea,t.chain,t.equipment,t.storeType,t.partners,t.startHours,t.endHours,t.startCollect,t.endCollect,t.building,s.mobilePhone,sv.name name,t.storeName,t.userName,DATE_FORMAT(t.addTime,"%Y-%m-%d") addTime,t.phone,s.locked,t.licenseId
         FROM sys_user s
         LEFT JOIN t_store t ON s.userId=t.userId
         LEFT JOIN sys_supervisor sv on sv.supervisorNum=t.supervisorId
@@ -40,6 +40,15 @@
         </if>
         <if test="relationMap.status!= null and relationMap.status!=''">
             AND s.locked = #{relationMap.status}
+        </if>
+        <if test="relationMap.storeType!= null and relationMap.storeType!=''">
+            AND t.storeType = #{relationMap.storeType}
+        </if>
+        <if test="relationMap.chain!= null and relationMap.chain!=''">
+            AND t.chain = #{relationMap.chain}
+        </if>
+        <if test="relationMap.equipment!= null and relationMap.equipment!=''">
+            AND t.equipment = #{relationMap.equipment}
         </if>
         <if test="relationMap.name !=null and relationMap.name !=''">
             AND

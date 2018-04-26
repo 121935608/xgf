@@ -13,6 +13,29 @@
        <input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'beginTime\')}',maxDate:'%y-%M-%d'})" id="endTime"
               class="input-text Wdate" style="width:120px;" placeholder="结束时间">
        <span class="select-box" style="width: 120px;">
+           <select name="chainSelect" id="chainSelect" class="select" autocomplete="off">
+               <option value="">是否连锁</option>
+               <option value="否">否</option>
+               <option value="是" >是</option>
+           </select>
+       </span>
+       <span class="select-box" style="width: 120px;">
+           <select name="equipmentSelect" id="equipmentSelect" class="select" autocomplete="off">
+               <option value="">门店设备</option>
+               <option value="无">无</option>
+               <option value="冷库" >冷库</option>
+               <option value="冷柜" >冷柜</option>
+           </select>
+       </span>
+       <span class="select-box" style="width: 120px;">
+           <select name="storeTypeSelect" id="storeTypeSelect" class="select" autocomplete="off">
+               <option value="">门店类型</option>
+               <option value="抵挡">低档</option>
+               <option value="中档" >中档</option>
+               <option value="高档" >高档</option>
+           </select>
+       </span>
+       <span class="select-box" style="width: 120px;">
            <select name="statusSelect" id="statusSelect" class="select" autocomplete="off">
                <option value="">状态</option>
                <option value="0">启用</option>
@@ -30,13 +53,21 @@
             <thead>
             <tr class="text-c">
                 <th width="6%">账号</th>
-                <th width="10%">店铺名称</th>
-                <th width="8%">营业执照号码</th>
-                <th width="8%">督导员</th>
-                <th width="8%">联系人</th>
-                <th width="8%">联系方式</th>
-                <th width="8%">注册时间</th>
-                <th width="8%">状态</th>
+                <th width="5%">店铺名称</th>
+                <th width="5%">营业执照号码</th>
+                <th width="5%">督导员</th>
+                <th width="5%">联系人</th>
+                <th width="5%">联系方式</th>
+                <th width="5%">注册时间</th>
+                <th width="5%">状态</th>
+                <th width="5%">门店面积</th>
+                <th width="5%">是否连锁</th>
+                <th width="5%">门店设备</th>
+                <th width="5%">门店类型</th>
+                <th width="5%">合作方</th>
+                <th width="5%">周边建筑</th>
+                <th width="5%">营业时间</th>
+                <th width="5%">收货时间</th>
                 <th width="10%">操作</th>
             </tr>
             </thead>
@@ -110,6 +141,68 @@
                 }
             },
             {
+                "mData": "storeArea",
+                "bSortable" : false,
+                "sClass": "text-c",
+                "defaultContent": ""
+            },
+            {
+                "mData": "chain",
+                "bSortable" : false,
+                "sClass": "text-c",
+                "defaultContent": ""
+            },
+            {
+                "mData": "equipment",
+                "bSortable" : false,
+                "sClass": "text-c",
+                "defaultContent": ""
+            },
+            {
+                "mData": "storeType",
+                "bSortable" : false,
+                "sClass": "text-c",
+                "defaultContent": ""
+            },
+            {
+                "mData": "partners",
+                "bSortable" : false,
+                "sClass": "text-c",
+                "defaultContent": ""
+            },
+            {
+                "mData": "building",
+                "bSortable" : false,
+                "sClass": "text-c",
+                "defaultContent": ""
+            },
+            {
+                "sDefaultContent": "营业时间",
+                "bSortable": false,
+                "sClass": "td-status text-c",
+                "bSearchable": false,
+                "mRender": function (data, type, row) {
+                    if (row.startHours != null&&row.endHours !=null) {
+                        return row.startHours+"-"+row.endHours;
+                    } else {
+                        return "";
+                    }
+                }
+            },
+            {
+                "sDefaultContent": "收货时间",
+                "bSortable": false,
+                "sClass": "td-status text-c",
+                "bSearchable": false,
+                "mRender": function (data, type, row) {
+                    if (row.startCollect != null&&row.endCollect !=null) {
+                        return row.startCollect+"-"+row.endCollect;
+                    } else {
+                        return "";
+                    }
+                }
+            },
+            {
                 "sDefaultContent": "操作",
                 "bSortable" : false,
                 "sClass": "td-manage text-c",
@@ -140,12 +233,16 @@
 
     function query() {
         var status = $("#statusSelect option:selected").val();
+        var storeType = $("#storeTypeSelect option:selected").val();
+        var chain = $("#chainSelect option:selected").val();
+        var equipment = $("#equipmentSelect option:selected").val();
+
         var beginTime = $("#beginTime").val();
         var endTime = $("#endTime").val();
         var name=$("#search").val();
 
         //var jsonObject = '{\"beginTime\":\"' + beginTime + '\",\"endTime\":\"' + endTime + '\",\"source\":\"' + source + '\",\"type\":\"' + type + '\",\"status\":\"' + status + '\",\"phone\":\"' + phone + '\"}';
-        pageTable.fnSettings().sAjaxSource =encodeURI("${context_root}/system/merchantList.action?status=" + status+"&name="+name+"&beginTime="+beginTime+"&endTime="+endTime);
+        pageTable.fnSettings().sAjaxSource =encodeURI("${context_root}/system/merchantList.action?status=" + status+"&name="+name+"&beginTime="+beginTime+"&endTime="+endTime+"&storeType="+storeType+"&chain="+chain+"&equipment="+equipment);
         pageTable.fnClearTable(0);
         pageTable.fnDraw();
 
