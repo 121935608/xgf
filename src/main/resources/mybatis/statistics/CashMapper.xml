@@ -53,7 +53,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="commodityName" column="commodityName" />
 		<result property="commodityNo" column="commodityNo" />
 	</resultMap>
-	
+	<resultMap type="com.xingrongjinfu.statistics.paysWater.model.CashFlowDto" id="CashFlowDto">
+		<result property="tradeCode" column="tradeCode" />
+		<result property="machineNo" column="machineNo" />
+		<result property="addTime" column="addTime" />
+		<result property="type" column="type" />
+		<result property="cashName" column="cashName" />
+		<result property="memberName" column="memberName" />
+		<result property="number" column="number" />
+		<result property="totalMoney" column="totalMoney" />
+		<result property="money" column="money" />
+	</resultMap>
+
 	<!-- 收银流水 -->
 	<select id="pageInfoQuery" parameterType="PageUtilEntity"
 		resultType="CashFlow">
@@ -75,6 +86,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		<if test="relationMap.endTime != null and relationMap.endTime != ''">
 			AND DATE_FORMAT(c.addTime,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
+		</if>
+		order by c.addTime desc
+	</select>
+
+	<!-- 收银流水 -->
+	<select id="infoQuery" parameterType="map"
+			resultMap="CashFlowDto">
+		SELECT DISTINCT(c.cashId),tradeCode,c.userId,machineNo,c.type type,m.name cashName,c.menberNo memberName,payType,
+		round(c.totalMoney/100,2) totalMoney,round(c.money/100,2) money,c.number,c.addTime
+		FROM m_cashFlow c LEFT JOIN t_cashier m ON c.cashierId=m.cashierId
+		LEFT JOIN m_cashDetail d ON d.cashId=c.cashId
+		LEFT JOIN m_commodity com ON d.commodityId=com.commodityId
+		WHERE c.storeId=#{storeId} AND c.status=1
+		<if test="commodityNo != null and commodityNo != ''">
+			AND (
+			com.commodityName LIKE CONCAT(CONCAT('%', #{commodityNo}),'%') or
+			com.commodityCode LIKE CONCAT(CONCAT('%',#{commodityNo}),'%') or
+			com.commodityNo LIKE CONCAT(CONCAT('%',#{commodityNo}),'%')
+			)
+		</if>
+		<if test="beginTime != null and beginTime != ''">
+			AND DATE_FORMAT(c.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{beginTime},'%Y%m%d')
+		</if>
+		<if test="endTime != null and endTime != ''">
+			AND DATE_FORMAT(c.addTime,'%Y%m%d') &lt;= DATE_FORMAT(#{endTime},'%Y%m%d')
 		</if>
 		order by c.addTime desc
 	</select>

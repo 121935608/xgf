@@ -3,6 +3,7 @@ package com.xingrongjinfu.statistics.paysWater.service;
 import java.util.List;
 import java.util.Map;
 
+import com.xingrongjinfu.statistics.paysWater.model.CashFlowDto;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,10 @@ public class CashService implements ICashService {
     @Override
     public List<TableDataInfo> pageInfoQuery(PageUtilEntity pageUtilEntity) {
         return cashDao.pageInfoQuery(pageUtilEntity);
+    }
+    @Override
+    public List<CashFlowDto> infoQuery(Map<String, String> param) {
+        return cashDao.infoQuery(param);
     }
     @Override
     public CashFlow getById(String id) {
@@ -64,6 +69,9 @@ public class CashService implements ICashService {
        
         return cashDao.passengerAnalysisGraph(storeId);
     }
+
+
+
     @Override
     public double getTotal(PageUtilEntity pageUtilEntity) {
         

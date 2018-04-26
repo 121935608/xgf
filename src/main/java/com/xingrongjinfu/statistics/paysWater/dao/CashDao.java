@@ -3,6 +3,7 @@ package com.xingrongjinfu.statistics.paysWater.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.xingrongjinfu.statistics.paysWater.model.CashFlowDto;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.framework.core.dao.DynamicObjectBaseDao;
@@ -26,6 +27,20 @@ public class CashDao extends DynamicObjectBaseDao implements ICashDao {
             e.printStackTrace();
         }
         return userPageInfo;
+    }
+
+    @Override
+    public List<CashFlowDto> infoQuery(Map<String, String> param) {
+        List<CashFlowDto> data = null;
+        try
+        {
+            data = (List<CashFlowDto>) this.findForList("CashMapper.infoQuery", param);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return data;
     }
 
     @Override

@@ -1,13 +1,13 @@
 package com.xingrongjinfu.statistics.paysWater.dao;
 
-import java.util.List;
-import java.util.Map;
-
+import com.xingrongjinfu.statistics.paysWater.model.CashDetail;
+import com.xingrongjinfu.statistics.paysWater.model.CashFlow;
+import com.xingrongjinfu.statistics.paysWater.model.CashFlowDto;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 
-import com.xingrongjinfu.statistics.paysWater.model.CashDetail;
-import com.xingrongjinfu.statistics.paysWater.model.CashFlow;
+import java.util.List;
+import java.util.Map;
 
 public interface ICashDao {
     public List<TableDataInfo> pageInfoQuery(PageUtilEntity pageUtilEntity);
@@ -29,4 +29,6 @@ public interface ICashDao {
     public List<CashDetail> saleGraphPie(Map map);
     
     public double getTotal(PageUtilEntity pageUtilEntity);
+
+    List<CashFlowDto> infoQuery(Map<String, String> param);
 }

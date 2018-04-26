@@ -13,6 +13,8 @@ public class CashConstant {
      * 请求地址：收银流水列表查询
      */
     public final static String CASH_LIST_URL = "cashList";
+    /**  下载收银流水数据  */
+    public final static String DOWNLOAD_CASH_DATA = "downloadCashData";
     /**
      * 逻辑视图名：收银流水列表页面
      */
