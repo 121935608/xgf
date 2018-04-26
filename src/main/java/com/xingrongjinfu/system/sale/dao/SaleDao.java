@@ -10,12 +10,15 @@
  */
 package com.xingrongjinfu.system.sale.dao;
 
+import com.xingrongjinfu.system.commodity.model.Commodity;
+import com.xingrongjinfu.system.sale.model.Sale;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.framework.core.dao.DynamicObjectBaseDao;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -39,5 +42,17 @@ public class SaleDao extends DynamicObjectBaseDao implements ISaleDao{
             e.printStackTrace();
         }
         return tableDataInfo;
+    }
+
+    @Override
+    public List<Sale> infoQuery(Map<String, String> param) {
+        List<Sale> commodityList=null;
+        try {
+            commodityList=(List<Sale>)this.findForList("SaleMapper.infoQuery",param);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return commodityList;
     }
 }

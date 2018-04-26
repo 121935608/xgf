@@ -10,10 +10,13 @@
  */
 package com.xingrongjinfu.system.sale.dao;
 
+import com.xingrongjinfu.system.commodity.model.Commodity;
+import com.xingrongjinfu.system.sale.model.Sale;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -26,4 +29,6 @@ import java.util.List;
 public interface ISaleDao {
 
     List<TableDataInfo>pageInfoQuery(PageUtilEntity pageUtilEntity);
+
+    List<Sale> infoQuery(Map<String, String> param);
 }

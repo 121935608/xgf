@@ -40,6 +40,14 @@ public interface IProductDao {
      */
     List<Category>findAllClass();
 
+    List<Product> getProductList();
+    /**
+     * 查询主分类
+     */
+    List<Category> findFirstCategory();
+
+    Category getCategoryById(String categoryId);
+
     /**
      * 查询所有的标签
      */

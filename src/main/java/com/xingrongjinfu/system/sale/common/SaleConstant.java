@@ -34,4 +34,6 @@ public class SaleConstant {
      * 请求地址:查询商品销售登记信息
      */
     public final static String SALE_LIST_URL="findSaleInfo";
+
+    public static final String DOWNLOAD_SALE_DATA ="downloadSaleData" ;
 }

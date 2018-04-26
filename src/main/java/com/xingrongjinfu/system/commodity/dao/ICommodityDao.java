@@ -14,6 +14,7 @@ import com.xingrongjinfu.system.commodity.model.Commodity;
 import org.framework.base.util.PageUtilEntity;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -29,4 +30,6 @@ public interface ICommodityDao {
      * 查询商品销售统计的信息
      */
     List<Commodity> pageInfoQuery(PageUtilEntity pageUtilEntity);
+
+    List<Commodity> infoQuery(Map<String, String> param);
 }

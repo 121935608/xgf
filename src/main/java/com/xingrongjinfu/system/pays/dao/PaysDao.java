@@ -18,6 +18,7 @@ import org.framework.core.dao.DynamicObjectBaseDao;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -43,11 +44,24 @@ public class PaysDao extends DynamicObjectBaseDao implements IPaysDao {
         return pageInfoQuery;
     }
 
+
     @Override
     public List<Pays> firstPageInfoQuery(String storeId) {
         List<Pays> pageInfoQuery=null;
         try {
             pageInfoQuery=(List<Pays>)this.findForList("StatisticsPaysMapper.PayPageInfoQuery",storeId);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return pageInfoQuery;
+    }
+
+    @Override
+    public List<TableDataInfo> payInfoQuery(Map<String, String> param) {
+        List<TableDataInfo> pageInfoQuery=null;
+        try {
+            pageInfoQuery=(List<TableDataInfo>)this.findForList("PaysMapper.PayInfoQuery",param);
         }catch (Exception e)
         {
             e.printStackTrace();

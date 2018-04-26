@@ -21,6 +21,17 @@ public class Carousel implements Serializable {
 	private int status;
 	private String url;
 	private String carouselNum;
+	private String type;
+
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
 	public String getCarouselNum() {
 		return carouselNum;
 	}

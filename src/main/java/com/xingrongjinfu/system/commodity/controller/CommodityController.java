@@ -10,11 +10,19 @@
  */
 package com.xingrongjinfu.system.commodity.controller;
 
-import java.util.Iterator;
-import java.util.List;
+import java.io.OutputStream;
+import java.text.DecimalFormat;
+import java.util.*;
 
+import com.xingrongjinfu.system.commodity.model.CommodityDto;
+import com.xingrongjinfu.system.pays.common.PaysConstant;
+import com.xingrongjinfu.system.pays.model.Pays;
+import com.xingrongjinfu.system.pays.model.PaysDto;
+import com.xingrongjinfu.utils.ExportExcel;
 import org.framework.base.util.PageUtilEntity;
+import org.framework.base.util.TableDataInfo;
 import org.framework.core.controller.BaseController;
+import org.framework.core.model.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,8 +34,11 @@ import com.xingrongjinfu.system.commodity.model.Commodity;
 import com.xingrongjinfu.system.commodity.service.ICommodityService;
 import com.xingrongjinfu.utils.StringUtil;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 /**
- * 〈一句话功能简述〉<br> 
+ * 〈一句话功能简述〉<br>
  * 〈〉
  *
  * @author zxuser
@@ -36,27 +47,29 @@ import com.xingrongjinfu.utils.StringUtil;
  */
 @Controller
 @RequestMapping(SystemConstant.DATACOUNT_URL)
-public class CommodityController extends BaseController{
+public class CommodityController extends BaseController {
 
     @Autowired
     private ICommodityService commodityService;
 
     /**
      * 跳转到商品销售统计
+     *
      * @return
      */
     @RequestMapping(CommodityConstant.COMMODITY_URL)
-    public ModelAndView loadView(){return this.getModelAndView(CommodityConstant.COMMODITY_PAGE);}
+    public ModelAndView loadView() {
+        return this.getModelAndView(CommodityConstant.COMMODITY_PAGE);
+    }
 
 
     /**
      * 查询商品销售信息
      */
     @RequestMapping(CommodityConstant.COMMODITY_LIST_URL)
-    public ModelAndView findCommodityInfo()
-    {
-        PageUtilEntity pageUtilEntity=this.getPageUtilEntity();
-        List<Commodity> tableDataInfo=commodityService.pageInfoQuery(pageUtilEntity);
+    public ModelAndView findCommodityInfo() {
+        PageUtilEntity pageUtilEntity = this.getPageUtilEntity();
+        List<Commodity> tableDataInfo = commodityService.pageInfoQuery(pageUtilEntity);
 //        for (Commodity commodity :tableDataInfo){
 //            //纳税 数量*进价*17%
 //            if (commodity.getSaleNum()==null) {commodity.setSaleNum(0);}
@@ -74,11 +87,11 @@ public class CommodityController extends BaseController{
 //            commodity.setProfit(profits);
 //        }
 //        int count=0;
-        Iterator<Commodity> it=tableDataInfo.iterator();
-        while(it.hasNext()){
-            Commodity commodity=it.next();
-            if(StringUtil.nullOrBlank(commodity.getCommodityId())){
-               it.remove();
+        Iterator<Commodity> it = tableDataInfo.iterator();
+        while (it.hasNext()) {
+            Commodity commodity = it.next();
+            if (StringUtil.nullOrBlank(commodity.getCommodityId())) {
+                it.remove();
             }
         }
 //        int index = 0;
@@ -88,6 +101,52 @@ public class CommodityController extends BaseController{
 //                tableDataInfo.remove(index);
 //            }
 //        }
-        return buildDatasTable(pageUtilEntity.getTotalResult(),tableDataInfo);
+        return buildDatasTable(pageUtilEntity.getTotalResult(), tableDataInfo);
+    }
+
+    @RequestMapping(CommodityConstant.DOWNLOAD_COMMODITY_DATA)
+    public Message downloadCommodityData(HttpServletRequest request, HttpServletResponse response) {
+
+
+        Map<String, String> param = new HashMap();
+        param.put("beginTime", request.getParameter("beginTime"));
+        param.put("endTime", request.getParameter("endTime"));
+        param.put("commodityName", request.getParameter("commodityName"));
+
+        List<Commodity> tableDataInfo = commodityService.infoQuery(param);
+        List<CommodityDto> data = new ArrayList<CommodityDto>(tableDataInfo.size());
+        for (Commodity o : tableDataInfo) {
+            CommodityDto c = new CommodityDto();
+            c.setUnit(o.getUnit());
+            c.setCommodityName(o.getCommodityName());
+            c.setCommodityNo(o.getCommodityNo());
+            c.setSaleNum(o.getSaleNum() / 100);
+
+            DecimalFormat df = new DecimalFormat("######0.00");
+            Double in = Double.parseDouble(df.format(o.getTotalPrice()/100));
+
+            Double out = Double.parseDouble(df.format(o.getTotalInPrice()/100));
+            Double profit = Double.parseDouble(df.format(o.getTotalPrice()/100-o.getTotalInPrice()/100));
+
+            c.setTotalInPrice(in);
+            c.setProfit(profit);
+            c.setTotalPrice(out);
+
+
+            data.add(c);
+        }
+        try {
+            ExportExcel<CommodityDto> ee = new ExportExcel<CommodityDto>();
+            String[] headers = new String[]{"商品名称", "商品编号", "单位", "销售数量", "销售金额（元）", "进价（元）", "利润（元）"};
+            response.setContentType("application/force-download");// 设置强制下载不打开
+            response.addHeader("Content-Disposition", "attachment;fileName=export.xls");// 设置文件名
+            OutputStream output = response.getOutputStream();
+            ee.exportExcel("商品销售表", headers, data, output);
+            output.flush();
+            output.close();
+        } catch (Exception e) {
+            return new Message(0);
+        }
+        return new Message(1);
     }
 }

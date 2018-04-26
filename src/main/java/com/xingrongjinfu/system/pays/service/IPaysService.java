@@ -15,6 +15,7 @@ import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -37,4 +38,8 @@ public interface IPaysService {
      * 首页查询
      */
     List<Pays> firstPageInfoQuery(String storeId);
+
+
+
+    List<TableDataInfo> payInfoQuery(Map<String, String> param);
 }

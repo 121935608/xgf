@@ -21,7 +21,8 @@
            </select>
        </span>
 		<input type="text" class="input-text" style="width:250px" placeholder="交易号|商铺名称" id="storeName" name="storeName">
-		<button type="button" class="btn btn-success radius" onclick="query()"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+		<button type="button" class="btn btn-success radius" onclick="query()"><i class="Hui-icon<%----%>font">&#xe665;</i> 搜索</button>
+		<button type="button" class="btn btn-success radius" onclick="excel_out()"><i class="Hui-iconfont">&#xe665;</i>下载</button>
 	</div>
 	<div class="mt-20">
 	<table class="table table-border table-bordered table-hover table-bg table-sort">
@@ -136,6 +137,21 @@ function query() {
     pageTable.fnClearTable(0);
     pageTable.fnDraw();
 }
+
+
+
+function excel_out() {
+    var beginTime = $("#beginTime").val();
+    var endTime = $("#endTime").val();
+    var payType = $("#statusSelect option:selected").val();
+    var storeName =$("#storeName").val();
+    var elemIF = document.createElement("iframe");
+    elemIF.src = "${context_root}/dataCount/downloadData.action?beginTime="+beginTime+"&endTime="+endTime+"&payType="+payType+"&storeName="+storeName
+    elemIF.style.display = "none";
+    document.body.appendChild(elemIF);
+
+}
+
 
 
 /*角色-添加*/

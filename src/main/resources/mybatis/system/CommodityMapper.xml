@@ -38,4 +38,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		GROUP BY t.commodityId,t.commodityNo,t.commodityName,t.unit
 
 	</select>
+
+	<select id="infoQuery" parameterType="map" resultMap="CommodityResult">
+		SELECT IFNULL(t.commodityId,'')commodityId,IFNULL(t.commodityNo,'')commodityNo,
+		IFNULL(t.commodityName,'')commodityName,IFNULL(t.unit,'')unit,
+		IFNULL(SUM(t.commodityNum),'') saleNum, IFNULL(SUM(t.totalPrice),'') totalPrice,
+		IFNULL(SUM(t.inPrice * t.commodityNum),'') totalInPrice
+		FROM t_order_detail t inner JOIN t_order o ON t.orderNumber=o.orderNumber
+		where 1=1 AND o.orderStatus!=1 AND o.status=1
+		<if test="beginTime != null and beginTime != ''"><!-- 开始时间检索 -->
+			AND DATE_FORMAT(t.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{beginTime},'%Y%m%d')
+		</if>
+		<if test="endTime != null and endTime != ''"><!-- 结束时间检索 -->
+			AND DATE_FORMAT(t.addTime,'%Y%m%d') &lt;= DATE_FORMAT(#{endTime},'%Y%m%d')
+		</if>
+		<if test="commodityName !=null and commodityName !=''">
+			AND (
+			t.commodityName LIKE CONCAT(CONCAT('%', #{commodityName}),'%')
+			OR
+			t.commodityNo LIKE CONCAT(CONCAT('%', #{commodityName}),'%')
+			)
+		</if><!--关键词查询-->
+		GROUP BY t.commodityId,t.commodityNo,t.commodityName,t.unit
+
+	</select>
 </mapper> 

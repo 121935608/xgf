@@ -74,6 +74,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.xingrongjinfu.system.storeaffairs.model.PurchaseDto" alias="PurchaseDto"/>
 
 
+
 		<!-- 分页 -->
 		<typeAlias type="org.framework.base.util.TableDataInfo" alias="TableDataInfo"/>
 		<typeAlias type="org.framework.base.util.PageUtilEntity" alias="PageUtilEntity"/>

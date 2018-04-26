@@ -1,6 +1,9 @@
 package com.xingrongjinfu.statistics.procurement.dao;
 
 import java.util.List;
+import java.util.Map;
+
+import com.xingrongjinfu.statistics.procurement.model.ProcurementDto;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.framework.core.dao.DynamicObjectBaseDao;
@@ -18,7 +21,21 @@ import com.xingrongjinfu.system.user.model.User;
 public class ProcurementDao extends DynamicObjectBaseDao implements IProcurementDao
 {
 
-	/**
+    @Override
+    public List<ProcurementDto> infoQuery(Map<String, String> param) {
+        List<ProcurementDto> procurementPageInfo = null;
+        try
+        {
+            procurementPageInfo = (List<ProcurementDto>) this.findForList("StatisticsProcurementMapper.infoQuery", param);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return procurementPageInfo;
+    }
+
+    /**
      * 根据条件分页查询
      * 
      */

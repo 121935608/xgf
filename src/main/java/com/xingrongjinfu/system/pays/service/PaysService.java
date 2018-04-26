@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -37,8 +38,16 @@ public class PaysService implements IPaysService {
         return paysDao.pageInfoQuery(pageUtilEntity);
     }
 
+
     @Override
     public List<Pays> firstPageInfoQuery(String storeId) {
         return paysDao.firstPageInfoQuery(storeId);
     }
+
+    @Override
+    public List<TableDataInfo> payInfoQuery(Map<String, String> param) {
+        return paysDao.payInfoQuery(param);
+    }
+
+
 }

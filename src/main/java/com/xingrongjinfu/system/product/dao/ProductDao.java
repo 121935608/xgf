@@ -31,6 +31,31 @@ import java.util.List;
 @Repository("productDao")
 public class ProductDao extends DynamicObjectBaseDao implements IProductDao {
 
+    @Override
+    public List<Product> getProductList() {
+        List<Product> pageInfoQuery=null;
+        try {
+            pageInfoQuery=(List<Product>)this.findForList("ProductMapper.getProductList");
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return pageInfoQuery;
+    }
+
+
+    @Override
+    public List<Category> findFirstCategory() {
+        List<Category> findAllClass=null;
+        try {
+            findAllClass=(List<Category>)this.findForList("ProductMapper.findFirstCategory");
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return findAllClass;
+    }
 
     @Override
     public List<Product> pageInfoQuery(PageUtilEntity pageUtilEntity) {
@@ -107,5 +132,11 @@ public class ProductDao extends DynamicObjectBaseDao implements IProductDao {
     @Override
     public int updateProduct(Product product) {
         return this.update("ProductMapper.updateProduct",product);
+    }
+
+
+    @Override
+    public Category getCategoryById(String categoryId) {
+        return (Category) this.findForObject("ProductMapper.findCategoryById",categoryId);
     }
 }

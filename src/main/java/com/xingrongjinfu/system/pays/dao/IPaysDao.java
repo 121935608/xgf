@@ -16,6 +16,7 @@ import org.framework.base.util.TableDataInfo;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -35,4 +36,7 @@ public interface IPaysDao {
 
 
     List<Pays> firstPageInfoQuery(String storeId);
+
+
+    List<TableDataInfo> payInfoQuery(Map<String, String> param);
 }

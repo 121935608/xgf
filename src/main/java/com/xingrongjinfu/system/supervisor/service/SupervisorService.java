@@ -43,6 +43,11 @@ public class SupervisorService implements ISupervisorService {
     }
 
     @Override
+    public int addCRMSupervisor(Supervisor supervisor) {
+        return supervisorDao.addCRMSupervisor(supervisor);
+    }
+
+    @Override
     public int updateSupervisorById(Supervisor supervisor) {
         return supervisorDao.updateSupervisorById(supervisor);
     }

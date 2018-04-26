@@ -167,15 +167,15 @@
 					</y:select>
 				</div>
 			</div>
-			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>督导员</label>
-				
-				<div class="formControls col-xs-8 col-sm-4">
-						<y:select id="supervisorId" name="supervisorId" codeGroup="${supervisorList}" selectedValue="${store.supervisorId}"
-								cssClass="select" headerKey="" headerValue="请选择">
-						</y:select>
-				</div> 
-			</div> 
+			<%--<div class="row cl">--%>
+				<%--<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>督导员</label>--%>
+				<%----%>
+				<%--<div class="formControls col-xs-8 col-sm-4">--%>
+						<%--<y:select id="supervisorId" name="supervisorId" codeGroup="${supervisorList}" selectedValue="${store.supervisorId}"--%>
+								<%--cssClass="select" headerKey="" headerValue="请选择">--%>
+						<%--</y:select>--%>
+				<%--</div> --%>
+			<%--</div> --%>
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-3">审核说明</label>
 				<div class="formControls col-xs-8 col-sm-6">

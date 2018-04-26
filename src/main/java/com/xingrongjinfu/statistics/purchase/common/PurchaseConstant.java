@@ -27,6 +27,8 @@ public class PurchaseConstant
      * 请求地址：列表查询
      */
     public final static String PURCHASE_LIST_URL = "purchaseList";
+    /**  导出excel  */
+    public final static String PURCHASE_PUR_DATA = "downloadPurData";
 
     /**
      * 逻辑视图名：列表界面

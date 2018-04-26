@@ -83,8 +83,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			url = #{url},
  			</if>
  			<if test="carouselNum != null and carouselNum != ''">
- 			carouselNum = #{carouselNum}
+ 			carouselNum = #{carouselNum},
  			</if>
+			<if test="type != null and type != ''">
+				type = #{type}
+			</if>
  			
  		</set>
  		where 1=1
@@ -106,7 +109,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="visitNum != null and visitNum != ''">visitNum,</if>
  			createTime,
  			<if test="status != null and status != ''">status,</if>
- 			<if test="url != null and url != ''">url</if>
+ 			<if test="url != null and url != ''">url,</if>
+		    <if test="type != null and type != ''">type</if>
  			<!-- <if test="carouselNum != null and carouselNum != ''">carouselNum</if>	 -->		
  		)values(#{carouselId},
  			<if test="carouselName != null and carouselName != ''">#{carouselName},</if>
@@ -115,9 +119,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="visitNum != null and visitNum != ''">#{visitNum},</if>
  			sysdate(),
  			<if test="status != null and status != ''">#{status},</if>
- 			<if test="url != null and url != ''">#{url}</if>
+ 			<if test="url != null and url != ''">#{url},</if>
  			<!-- <if test="carouselNum != null and carouselNum != ''">#{carouselNum}</if> -->
- 			
+		   <if test="type != null and type != ''">#{type}</if>
  		)
  	</insert>
 	

@@ -1,40 +1,65 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="SaleMapper">
 
-	<resultMap id="SaleResult" type="Sale">
-		<result column="commodityName" property="commodityName" />
-		<result column="commodityNo" property="commodityNo" />
-		<result column="orderNumber" property="orderNumber" />
-		<result column="addTime" property="addTime" />
-		<result column="commodityNum" property="commodityNum" />
-		<result column="unit" property="unit" />
-		<result column="totalPrice" property="totalPrice" />
-		<result column="salePrice" property="salePrice" />
-	</resultMap>
-		<select id="pageInfoQuery" parameterType="PageUtilEntity" resultMap="SaleResult">
-			SELECT t.commodityId,t.orderNumber,t.commodityNo,t.commodityName,
-			t.unit,t.totalPrice totalPrice,t.addTime,t.commodityNum  
-			FROM t_order_detail t RIGHT JOIN t_order o ON t.orderNumber=o.orderNumber
-			where 1=1 AND o.orderStatus!=1 AND o.status=1
-			<if test="relationMap.beginTime != null and relationMap.beginTime != ''"><!-- 开始时间检索 -->
-				AND DATE_FORMAT(t.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
-			</if>
-			<if test="relationMap.endTime != null and relationMap.endTime != ''"><!-- 结束时间检索 -->
-				AND DATE_FORMAT(t.addTime,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
-			</if>
-			<if test="relationMap.commodityName !=null and relationMap.commodityName !=''">
-				AND (
-				t.commodityName LIKE CONCAT(CONCAT('%', #{relationMap.commodityName}),'%')
-				OR
-				t.commodityNo LIKE CONCAT(CONCAT('%', #{relationMap.commodityName}),'%')
-				OR
-				t.orderNumber LIKE CONCAT(CONCAT('%', #{relationMap.commodityName}),'%')
-				)
-			</if><!--关键词查询-->
-			ORDER BY t.addTime DESC
-		</select>
+    <resultMap id="SaleResult" type="Sale">
+        <result column="commodityName" property="commodityName"/>
+        <result column="commodityNo" property="commodityNo"/>
+        <result column="orderNumber" property="orderNumber"/>
+        <result column="addTime" property="addTime"/>
+        <result column="commodityNum" property="commodityNum"/>
+        <result column="unit" property="unit"/>
+        <result column="totalPrice" property="totalPrice"/>
+        <result column="salePrice" property="salePrice"/>
+    </resultMap>
 
+
+
+    <select id="pageInfoQuery" parameterType="PageUtilEntity" resultMap="SaleResult">
+        SELECT t.commodityId,t.orderNumber,t.commodityNo,t.commodityName,
+        t.unit,t.totalPrice totalPrice,t.addTime,t.commodityNum
+        FROM t_order_detail t RIGHT JOIN t_order o ON t.orderNumber=o.orderNumber
+        where 1=1 AND o.orderStatus!=1 AND o.status=1
+        <if test="relationMap.beginTime != null and relationMap.beginTime != ''"><!-- 开始时间检索 -->
+            AND DATE_FORMAT(t.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
+        </if>
+        <if test="relationMap.endTime != null and relationMap.endTime != ''"><!-- 结束时间检索 -->
+            AND DATE_FORMAT(t.addTime,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
+        </if>
+        <if test="relationMap.commodityName !=null and relationMap.commodityName !=''">
+            AND (
+            t.commodityName LIKE CONCAT(CONCAT('%', #{relationMap.commodityName}),'%')
+            OR
+            t.commodityNo LIKE CONCAT(CONCAT('%', #{relationMap.commodityName}),'%')
+            OR
+            t.orderNumber LIKE CONCAT(CONCAT('%', #{relationMap.commodityName}),'%')
+            )
+        </if><!--关键词查询-->
+        ORDER BY t.addTime DESC
+    </select>
+
+    <select id="infoQuery" parameterType="map" resultMap="SaleResult">
+        SELECT t.commodityId,t.orderNumber,t.commodityNo,t.commodityName,
+        t.unit,cast((IFNULL(SUM(o.orderPrice), 0)/100) as decimal(13,1)) orderPrice, t.addTime,t.commodityNum
+        FROM t_order_detail t RIGHT JOIN t_order o ON t.orderNumber=o.orderNumber
+        where 1=1 AND o.orderStatus!=1 AND o.status=1
+        <if test="beginTime != null and beginTime != ''"><!-- 开始时间检索 -->
+            AND DATE_FORMAT(t.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{beginTime},'%Y%m%d')
+        </if>
+        <if test="endTime != null and endTime != ''"><!-- 结束时间检索 -->
+            AND DATE_FORMAT(t.addTime,'%Y%m%d') &lt;= DATE_FORMAT(#{endTime},'%Y%m%d')
+        </if>
+        <if test="commodityName !=null and commodityName !=''">
+            AND (
+            t.commodityName LIKE CONCAT(CONCAT('%', #{commodityName}),'%')
+            OR
+            t.commodityNo LIKE CONCAT(CONCAT('%', #{commodityName}),'%')
+            OR
+            t.orderNumber LIKE CONCAT(CONCAT('%', #{commodityName}),'%')
+            )
+        </if><!--关键词查询-->
+        ORDER BY t.addTime DESC
+    </select>
 </mapper> 

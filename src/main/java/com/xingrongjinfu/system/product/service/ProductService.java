@@ -75,5 +75,18 @@ public class ProductService implements IProductService {
         return productDao.updateProduct(product);
     }
 
+    @Override
+    public List<Product> getProductList() {
+        return productDao.getProductList();
+    }
 
+    @Override
+    public List<Category> findFirstCategory() {
+        return productDao.findFirstCategory();
+    }
+
+    @Override
+    public Category getCategoryById(String categoryId) {
+        return productDao.getCategoryById(categoryId);
+    }
 }

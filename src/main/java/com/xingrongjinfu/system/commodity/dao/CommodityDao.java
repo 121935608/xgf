@@ -18,6 +18,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -35,6 +36,18 @@ public class CommodityDao extends DynamicObjectBaseDao implements ICommodityDao 
         List<Commodity> pageInfoQuery=null;
         try {
             pageInfoQuery=(List<Commodity>)this.findForList("CommodityMapper.pageInfoQuery",pageUtilEntity);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return pageInfoQuery;
+    }
+
+    @Override
+    public List<Commodity> infoQuery(Map<String, String> param) {
+        List<Commodity> pageInfoQuery=null;
+        try {
+            pageInfoQuery=(List<Commodity>)this.findForList("CommodityMapper.infoQuery",param);
         }catch (Exception e)
         {
             e.printStackTrace();

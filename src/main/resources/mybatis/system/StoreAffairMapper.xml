@@ -2,7 +2,14 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="StoreAffairMapper"> 
+<mapper namespace="StoreAffairMapper">
+	<resultMap id="BaseResultMap" type="com.xingrongjinfu.system.storeaffairs.model.PurchaseDto" >
+		<result column="storeName" property="storeName"/>
+		<result column="name" property="name"/>
+		<result column="orderPrice" property="orderPrice"/>
+		<result column="orderNum" property="orderNum"/>
+	</resultMap>
+
 
 	<select id="CertificationpageInfoQuery"  parameterType="PageUtilEntity"  resultType="Store">
 		select a.storeId,a.storeNo,a.addTime,b.accountName,s.`name`,a.process,a.remark,bc.cardNumber
@@ -179,6 +186,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 </if>
 
 	 </select>
+
+	<select id="infoQuery"  parameterType="map"  resultType="PurchaseDto">
+		select t.storeName storeName,s.`name` name,cast((IFNULL(SUM(o.orderPrice), 0)/100) as decimal(13,1)) orderPrice,
+		count(o.orderId) orderNum   from t_store t
+		left join sys_supervisor s on s.supervisorNum=t.supervisorId
+		left join t_order o on o.userId=t.userId  and o.orderStatus !=1
+
+		<if test="beginTime != null and beginTime != ''">
+			AND DATE_FORMAT(o.orderTime,'%Y%m%d') &gt;=
+			DATE_FORMAT(#{beginTime},'%Y%m%d')
+		</if>
+		<if test="endTime != null and endTime != ''">
+			AND DATE_FORMAT(o.orderTime,'%Y%m%d') &lt;=
+			DATE_FORMAT(#{endTime},'%Y%m%d')
+		</if>
+
+		GROUP BY t.storeId,t.storeName,s.`name`  having 1=1
+
+		<if test="storeName != null and storeName != ''">
+			AND  t.storeName LIKE CONCAT(#{storeName},'%') or
+			s.name LIKE CONCAT(#{storeName},'%')
+		</if>
+
+	</select>
 
 
 </mapper> 

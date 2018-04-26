@@ -28,6 +28,8 @@ public class ProcurementConstant
      */
     public final static String PROCUREMENT_LIST_URL = "procurementList";
 
+    public final static String DOWNLOAD_PROCUREMENT_DATA = "downloadProcurementData";
+
     /**
      * 逻辑视图名：列表界面
      */

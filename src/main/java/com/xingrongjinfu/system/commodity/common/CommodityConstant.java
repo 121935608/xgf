@@ -34,4 +34,6 @@ public class CommodityConstant {
      * 请求地址:查询商品销售统计信息
      */
     public final static String COMMODITY_LIST_URL="findCommodityInfo";
+
+    public final static String DOWNLOAD_COMMODITY_DATA="downloadCommodityData";
 }
