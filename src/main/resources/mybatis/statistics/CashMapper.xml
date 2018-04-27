@@ -53,7 +53,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="commodityName" column="commodityName" />
 		<result property="commodityNo" column="commodityNo" />
 	</resultMap>
-	<resultMap type="com.xingrongjinfu.statistics.paysWater.model.CashFlowDto" id="CashFlowDto">
+	<resultMap type="map" id="CashFlowMap">
 		<result property="tradeCode" column="tradeCode" />
 		<result property="machineNo" column="machineNo" />
 		<result property="addTime" column="addTime" />
@@ -111,7 +111,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 收银流水 -->
 	<select id="infoQuery" parameterType="map"
-			resultMap="CashFlowDto">
+			resultMap="CashFlowMap">
 		SELECT DISTINCT(c.cashId),tradeCode,c.userId,machineNo,c.type type,m.name cashName,c.menberNo memberName,payType,
 		round(c.totalMoney/100,2) totalMoney,round(c.money/100,2) money,c.number,c.addTime
 		FROM m_cashFlow c LEFT JOIN t_cashier m ON c.cashierId=m.cashierId

@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="cashName" column="cashName" />
 	</resultMap>
 
-	<resultMap type="com.xingrongjinfu.statistics.pays.model.PaysDto" id="PaysDto">
+	<resultMap type="map" id="PaysMap">
 		<result property="tradeCode" column="tradeCode" />
 		<result property="cashNo" column="cashNo" />
 		<result property="addTime" column="addTime" />
@@ -58,8 +58,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			order by m.addTime desc
 	</select>
 
-	<select id="infoQuery" parameterType="map" resultMap="PaysDto">
-		select m.tradeCode,m.cashNo,m.addTime,m.money/100 money,m.payType,c.`name` cashName from m_cashFlow m
+	<select id="infoQuery" parameterType="map" resultMap="PaysMap">
+		select m.tradeCode,m.cashNo,m.addTime,
+		cast((m.money/100) as DECIMAL(13,1)) money,
+		CASE m.payType WHEN 1 THEN '支付宝支付' WHEN 2 THEN '微信支付' ELSE '现金' END payType ,
+		c.`name` cashName from m_cashFlow m
 		LEFT JOIN t_cashier c on c.cashierId=m.cashierId where
 		m.storeId= #{storeId} and m.`status`=1 and m.type='1'
 		<if test="userId != null and userId != ''">

@@ -25,7 +25,7 @@ public class CashService implements ICashService {
 
 
     @Override
-    public List<CashFlowDto> infoQuery(Map<String, String> param) {
+    public List<Map> infoQuery(Map<String, String> param) {
         return cashDao.infoQuery(param);
     }
     @Override

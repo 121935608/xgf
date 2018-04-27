@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.xingrongjinfu.statistics.pays.dao.IPayDao;
-import com.xingrongjinfu.statistics.pays.model.Pays;
-import com.xingrongjinfu.statistics.pays.model.PaysDto;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +23,7 @@ public class PayService implements IPayService
 
 
     @Override
-    public List<PaysDto> infoQuery(Map<String, String> param) {
+    public List<Map> infoQuery(Map<String, String> param) {
         return paysDao.infoQuery(param);
     }
 

@@ -30,11 +30,11 @@ public class CashDao extends DynamicObjectBaseDao implements ICashDao {
     }
 
     @Override
-    public List<CashFlowDto> infoQuery(Map<String, String> param) {
-        List<CashFlowDto> data = null;
+    public List<Map> infoQuery(Map<String, String> param) {
+        List<Map> data = null;
         try
         {
-            data = (List<CashFlowDto>) this.findForList("CashMapper.infoQuery", param);
+            data = (List<Map>) this.findForList("CashMapper.infoQuery", param);
         }
         catch (Exception e)
         {

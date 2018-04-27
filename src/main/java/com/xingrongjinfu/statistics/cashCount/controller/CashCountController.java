@@ -74,9 +74,7 @@ public class CashCountController extends BaseController {
         param.put("cashName", request.getParameter("cashName"));
 
         List<Map> data = cashService.cashCountInfoQuery(param);
-        //data.stream().filter(s->s.getSalePrice())
         try {
-            //ExportExcel<Map> ee = new ExportExcel<>();
             String[][] headers = new String[][]{
                     {"收银员", "支付宝（元）", "微信（元）", "银联（元）","现金（元）"},
                     {"cashName", "zhifubao", "weixin", "yinlian","xianjin"}

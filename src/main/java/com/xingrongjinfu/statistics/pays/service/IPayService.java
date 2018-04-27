@@ -3,13 +3,8 @@ package com.xingrongjinfu.statistics.pays.service;
 import java.util.List;
 import java.util.Map;
 
-import com.xingrongjinfu.statistics.pays.model.Pays;
-import com.xingrongjinfu.statistics.pays.model.PaysDto;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
-import com.xingrongjinfu.system.permission.model.Permission;
-import com.xingrongjinfu.system.role.model.Role;
-import com.xingrongjinfu.system.user.model.User;
 
 /**
  *  业务层
@@ -26,5 +21,5 @@ public interface IPayService
     public List<TableDataInfo> pageInfoQuery(PageUtilEntity pageUtilEntity);
 
 
-    List<PaysDto> infoQuery(Map<String, String> param);
+    List<Map> infoQuery(Map<String, String> param);
 }

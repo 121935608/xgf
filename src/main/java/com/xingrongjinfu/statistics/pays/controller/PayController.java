@@ -8,11 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.xingrongjinfu.statistics.pays.model.Pays;
-import com.xingrongjinfu.statistics.pays.model.PaysDto;
-import com.xingrongjinfu.statistics.procurement.common.ProcurementConstant;
-import com.xingrongjinfu.statistics.procurement.model.ProcurementDto;
-import com.xingrongjinfu.system.user.model.User;
 import com.xingrongjinfu.utils.ExportExcel;
 import org.apache.shiro.common.utils.SessionUtils;
 import org.framework.base.util.PageUtilEntity;
@@ -107,15 +102,16 @@ public class PayController extends BaseController {
 		param.put("payType", request.getParameter("payType"));
 		param.put("fuzzyCondition", request.getParameter("fuzzyCondition"));
 
-		List<PaysDto> data = paysService.infoQuery(param);
+		List<Map> data = paysService.infoQuery(param);
 		//data.stream().filter(s->s.getSalePrice())
 		try {
-			ExportExcel<PaysDto> ee = new ExportExcel<>();
-			String[] headers = new String[]{"交易号", "创建时间", "收款金额", "支付方式", "流水号", "收银员"};
+
+			String[][] headers = new String[][]{{"交易号", "创建时间", "收款金额", "支付方式", "流水号", "收银员"},
+					{"cashNo", "addTime", "money", "payType", "tradeCode", "cashName"}};
 			response.setContentType("application/force-download");// 设置强制下载不打开
 			response.addHeader("Content-Disposition", "attachment;fileName=export.xls");// 设置文件名
 			OutputStream output = response.getOutputStream();
-			ee.exportExcel("银行支付流水表", headers, data, output,"yyyy-MM-dd");
+			ExportExcel.exportExcel2("银行支付流水表", headers, data, output);
 			output.flush();
 			output.close();
 		} catch (Exception e) {

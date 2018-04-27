@@ -42,13 +42,13 @@ public class PayDao extends DynamicObjectBaseDao implements IPayDao
 
     }
 
-    public List<Pays> infoQuery(Map param)
+    public List<Map> infoQuery(Map param)
     {
 
-        List<Pays> paysPageInfo = null;
+        List<Map> paysPageInfo = null;
         try
         {
-            paysPageInfo = (List<Pays>) this.findForList("StatisticsPaysMapper.infoQuery", param);
+            paysPageInfo = (List<Map>) this.findForList("StatisticsPaysMapper.infoQuery", param);
         }
         catch (Exception e)
         {

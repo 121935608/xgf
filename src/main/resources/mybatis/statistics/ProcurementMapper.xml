@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	</resultMap>
 
-	<resultMap type="com.xingrongjinfu.statistics.procurement.model.ProcurementDto" id="ProcurementDto">
+	<resultMap type="map" id="ProcurementMap">
 		<result property="commodityName" column="commodityName" />
 		<result property="commodityNo" column="commodityNo" />
 		<result property="orderNumber" column="orderNumber" />
@@ -68,7 +68,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 	<select id="infoQuery" parameterType="map"
-			resultMap="ProcurementDto">
+			resultMap="ProcurementMap">
 		select
 		c.commodityName,d.commodityNo,c.orderNumber,b.payTime,c.commodityNum,
 		cast(c.totalPrice/100 as decimal(13,1)) totalPrice,c.unit

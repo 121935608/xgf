@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.xingrongjinfu.statistics.procurement.model.ProcurementDto;
 import com.xingrongjinfu.utils.ExportExcel;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
@@ -85,15 +84,15 @@ public class ProcurementController extends BaseController
 		param.put("endTime", request.getParameter("endTime"));
 		param.put("fuzzyCondition", request.getParameter("fuzzyCondition"));
 
-		List<ProcurementDto> data = procurementService.infoQuery(param);
+		List<Map> data = procurementService.infoQuery(param);
 		//data.stream().filter(s->s.getSalePrice())
 		try {
-			ExportExcel<ProcurementDto> ee = new ExportExcel<>();
-			String[] headers = new String[]{"商品名称", "商品条码", "订单号", "创建时间", "单位", "采购数量", "采购金额"};
+			String[][] headers = new String[][]{{"商品名称", "商品条码", "订单号", "创建时间", "单位", "采购数量", "采购金额"},
+												{"commodityName", "commodityNo", "orderNumber", "payTime", "unit", "commodityNum", "totalPrice"}};
 			response.setContentType("application/force-download");// 设置强制下载不打开
 			response.addHeader("Content-Disposition", "attachment;fileName=export.xls");// 设置文件名
 			OutputStream output = response.getOutputStream();
-			ee.exportExcel("采购统计表", headers, data, output,"yyyy-MM-dd");
+			ExportExcel.exportExcel2("采购统计表", headers, data, output);
 			output.flush();
 			output.close();
 		} catch (Exception e) {
