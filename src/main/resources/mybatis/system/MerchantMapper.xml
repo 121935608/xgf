@@ -69,7 +69,7 @@
     </select>
 
    <select id="userAccountQuery" resultType="AccountInfo" parameterType="string">
-        SELECT s.userId,s.storeName,s.userName,s.idCard,s.phone,s.area,s.address,s.licenseId,
+        SELECT s.userId,s.storeName,s.userName,s.idCard,s.phone,s.area,s.address,s.licenseId,s.storeArea,s.chain,s.equipment,s.storeType,s.partners,s.startHours,s.endHours,s.startCollect,s.endCollect,s.building,
         c.frontPic frontPic,c.backPic backPic,s.licensePic,s.frontStorePic,s.innerStorePic,
         b.bankType,b.accountType,b.userName bankUserName,b.cardNumber,
         b.idType,b.idCard cIdCard,b.remark
