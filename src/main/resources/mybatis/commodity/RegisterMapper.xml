@@ -93,6 +93,49 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by addTime desc
 	</select>
 
+	<select id="infoQuery" parameterType="map" resultType="map" >
+		SELECT commodityId,commodityCode,m.storeId,commodityName,commodityNo,imgMain,specification,inPrice/100 inPrice,
+		salePrice/100 salePrice,vipPrice/100 vipPrice,tag,m.categoryId,info,
+		weight,commodityStatus,unitName,stockNum,upperLimit,lowerLimit,discount,m.status status,productionDate,
+		guaranteeDay,m.addTime `addTime`,m.updateTime updateTime,supplierName,grade,storage,
+		(SELECT categoryName FROM m_category WHERE categoryId =(SELECT parentId FROM m_category WHERE categoryId= m.categoryId)) categoryName
+		FROM m_commodity m left join m_category c on m.categoryId=c.categoryId
+		LEFT JOIN m_unit u ON u.unitId=m.unitId
+		LEFT JOIN m_supplier s ON s.supplierId=m.supplierId
+		where 1=1
+		and m.storeId=#{storeId}
+		and m.status=1
+		<if test="categoryId != null and categoryId  != ''">
+			AND c.categoryId IN (SELECT categoryId FROM m_category WHERE parentId=#{categoryId})
+		</if>
+		<if test="status != null and status  != ''">
+			and m.commodityStatus=#{status}
+		</if>
+		<if test="discount != null and discount  != ''">
+			and m.discount=#{discount}
+		</if>
+		<if test="commodityNo != null and commodityNo  != ''">
+			AND
+			(
+			m.commodityNo LIKE CONCAT(CONCAT('%', #{commodityNo}),'%')
+			OR
+			m.commodityName LIKE CONCAT(CONCAT('%', #{commodityNo}),'%')
+			OR
+			m.commodityCode LIKE CONCAT(CONCAT('%', #{commodityNo}),'%')
+			)
+		</if>
+		<if test="condition != null and condition  == 0">
+			and m.stockNum between m.lowerLimit and m.upperLimit
+		</if>
+		<if test="condition != null and condition  == -1">
+			and m.stockNum &lt; m.lowerLimit
+		</if>
+		<if test="condition != null and condition  == 1">
+			and m.stockNum &gt; m.upperLimit
+		</if>
+		order by addTime desc
+	</select>
+
 	<insert id="addRegister" parameterType="Register">
 		INSERT INTO m_commodity(
 		<if test="commodityId != null and commodityId != ''">commodityId,</if>

@@ -265,7 +265,14 @@ public class ExportExcel<T> {
             for(String key:  headers[1]){
                 HSSFCell cell = row.createCell(j++);
                 cell.setCellStyle(style);
-                HSSFRichTextString richString = new HSSFRichTextString(map.get(key).toString());
+                Object value = map.get(key);
+                HSSFRichTextString richString;
+                if(value==null){
+                    richString= new HSSFRichTextString("");
+                }else{
+                    richString = new HSSFRichTextString(value.toString());
+                }
+
                 HSSFFont font3 = workbook.createFont();
                 font3.setColor(HSSFColor.BLACK.index);
                 richString.applyFont(font3);

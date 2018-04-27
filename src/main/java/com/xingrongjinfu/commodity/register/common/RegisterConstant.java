@@ -13,6 +13,8 @@ public class RegisterConstant {
      * 请求地址：商品登记列表查询
      */
     public final static String COMMODITY_REGISTER_LIST = "registerList";
+    /**  下载  */
+    public final static String DOWNLOAD_STOCK_DATA = "downloadStockData";
     /**
      * 请求地址：登记保存
      */

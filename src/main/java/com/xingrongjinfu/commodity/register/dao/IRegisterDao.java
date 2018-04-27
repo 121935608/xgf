@@ -14,10 +14,12 @@ public interface IRegisterDao {
     /**
      * 根据条件分页查询用户对象
      * 
-     * @param page 分页对象
+     * @param pageUtilEntity 分页对象
      * @return 用户信息集合信息
      */
     public List<TableDataInfo> pageInfoQuery(PageUtilEntity pageUtilEntity);
+
+    List<Map> infoQuery(Map<String, String> param);
     
     public int addRegister(Register register);
     
@@ -42,5 +44,6 @@ public interface IRegisterDao {
     public List<Fenlei> getCategoryByCommodity(Map map) throws Exception;
     
     int checkCategoryName(Map map);
-    
+
+
 }

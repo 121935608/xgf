@@ -21,6 +21,12 @@ public class RegisterService implements IRegisterService {
         
         return registerDao.pageInfoQuery(pageUtilEntity);
     }
+
+    @Override
+    public List<Map> infoQuery(Map<String, String> param) {
+        return registerDao.infoQuery(param);
+    }
+
     @Override
     public int addRegister(Register register) {
         

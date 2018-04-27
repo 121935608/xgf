@@ -9,8 +9,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.xingrongjinfu.statistics.cashCount.common.CashCountConstant;
 import org.apache.shiro.common.utils.SessionUtils;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
@@ -128,6 +130,89 @@ public class RegisterController extends BaseController{
 
         return buildDataTable(pageUtilEntity.getTotalResult(), tableDataInfo);
     }
+
+    /**
+     *  导出收银统计数据Excel
+     *
+     * @author fengqian
+     * @date 2018/4/26 11:18
+     * @param request
+     * @param response
+     * @return org.framework.core.model.Message
+     */
+    @RequestMapping(RegisterConstant.DOWNLOAD_STOCK_DATA)
+    public Message downloadStockData(HttpServletRequest request, HttpServletResponse response) {
+
+        Map<String, String> param = new HashMap();
+        String storeId = (String) SessionUtils.getSession().getAttribute("storeId");
+        param.put("storeId", storeId);
+        param.put("categoryId", request.getParameter("categoryId"));
+        param.put("condition", request.getParameter("condition"));
+        param.put("commodityNo", request.getParameter("commodityNo"));
+
+        List<Map> data = registerService.infoQuery(param);
+        //data.stream().filter(s->s.getSalePrice())
+        try {
+            //ExportExcel<Map> ee = new ExportExcel<>();
+            String[][] headers = {{"编码",          "商品名称",         "商品条码",     "供应商",     "分类",        "单位",      "库存上限",     "库存下限",  "库存"},
+                    {"commodityCode","commodityName","commodityNo","supplierName","categoryName","unitName","upperLimit","lowerLimit", "stockNum"}};
+            response.setContentType("application/force-download");// 设置强制下载不打开
+            response.addHeader("Content-Disposition", "attachment;fileName=export.xls");// 设置文件名
+            OutputStream output = response.getOutputStream();
+            ExportExcel.exportExcel2("库存查询表", headers, data, output);
+            output.flush();
+            output.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Message(0);
+        }
+        return new Message(1);
+    }
+
+
+    /**
+     *  导出收银统计数据Excel
+     *
+     * @author fengqian
+     * @date 2018/4/26 11:18
+     * @param request
+     * @param response
+     * @return org.framework.core.model.Message
+     */
+    @RequestMapping(CashCountConstant.DOWNLOAD_CASHCOUNT_DATA)
+    public Message downloadCashCountData(HttpServletRequest request, HttpServletResponse response) {
+
+        Map<String, String> param = new HashMap();
+        String storeId = (String) SessionUtils.getSession().getAttribute("storeId");
+        param.put("storeId", storeId);
+        param.put("categoryId", request.getParameter("categoryId"));
+        param.put("condition", request.getParameter("condition"));
+        param.put("commodityNo", request.getParameter("commodityNo"));
+
+        List<Map> data = registerService.infoQuery(param);
+        //data.stream().filter(s->s.getSalePrice())
+        try {
+            //ExportExcel<Map> ee = new ExportExcel<>();
+            String[][] headers = {{"编码",          "商品名称",         "商品条码",     "供应商",     "分类",        "单位",      "库存上限",     "库存下限",  "库存"},
+                                  {"commodityCode","commodityName","commodityNo","supplierName","categoryName","unitName","upperLimit","lowerLimit", "stockNum"}};
+            response.setContentType("application/force-download");// 设置强制下载不打开
+            response.addHeader("Content-Disposition", "attachment;fileName=export.xls");// 设置文件名
+            OutputStream output = response.getOutputStream();
+            ExportExcel.exportExcel2("收银统计表", headers, data, output);
+            output.flush();
+            output.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Message(0);
+        }
+        return new Message(1);
+    }
+
+
+
+
+
+
     /**
      * 登记保存
      */

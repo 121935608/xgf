@@ -27,6 +27,21 @@ public class RegisterDao extends DynamicObjectBaseDao implements IRegisterDao {
         }
         return userPageInfo;
     }
+
+    @Override
+    public List<Map> infoQuery(Map<String, String> param) {
+        List<Map> data = null;
+        try
+        {
+            data = (List<Map>) this.findForList("RegisterMapper.infoQuery", param);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
     @Override
     public int addRegister(Register register) {
         return (int)this.save("RegisterMapper.addRegister", register);
