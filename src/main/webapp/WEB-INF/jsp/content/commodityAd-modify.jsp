@@ -39,6 +39,7 @@
 				<img src="${imgPath}${CommodityAd.commodityAdImg}" width="80px" height="80px" class="image" id="image">
 	        	<input type="file" class="picture" id="picture" accept="image/*" name="picture" onchange="changImg(event)">
 			</div>
+			<span class="c-red">(140*140)</span>
 		</div>
 		<div class="row cl" style="margin-top:70px;">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>商品：</label>

@@ -23,7 +23,9 @@
 			<div class="formControls col-xs-8 col-sm-4">
 				<img src="${imgPath}${exhibition.exhibitionImg}" width="80px" height="80px" class="image" id="image">
 	        	<input type="file" class="picture" id="picture" accept="image/*" name="picture" onchange="changImg(event)">
+
 			</div>
+			<span class="c-red">(750*198)</span>
 		</div>
 		<div class="row cl"style="margin-top:80px">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>URL：</label>
