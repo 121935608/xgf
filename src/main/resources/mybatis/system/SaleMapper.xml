@@ -42,7 +42,7 @@
 
     <select id="infoQuery" parameterType="map" resultMap="SaleResult">
         SELECT t.commodityId,t.orderNumber,t.commodityNo,t.commodityName,
-        t.unit,cast((IFNULL(SUM(o.orderPrice), 0)/100) as decimal(13,1)) orderPrice, t.addTime,t.commodityNum
+        t.unit,t.totalPrice totalPrice,t.addTime,t.commodityNum
         FROM t_order_detail t RIGHT JOIN t_order o ON t.orderNumber=o.orderNumber
         where 1=1 AND o.orderStatus!=1 AND o.status=1
         <if test="beginTime != null and beginTime != ''"><!-- 开始时间检索 -->

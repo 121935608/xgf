@@ -16,7 +16,18 @@
         <result column="addIP" property="addIP"/>
         <result column="storeName" property="storeName"/>
     </resultMap>
-
+    <resultMap id="PaysMap" type="map">
+        <result column="cashId" property="cashId"/>
+        <result column="userId" property="userId"/>
+        <result column="tradeCode" property="tradeCode"/>
+        <result column="money" property="money"/>
+        <result column="payType" property="payType"/>
+        <result column="status" property="status"/>
+        <result column="remark" property="remark"/>
+        <result column="addTime" property="addTime"/>
+        <result column="addIP" property="addIP"/>
+        <result column="storeName" property="storeName"/>
+    </resultMap>
 
 
     <select id="PaypageInfoQuery" parameterType="PageUtilEntity" resultMap="PaysResult">
@@ -42,9 +53,25 @@
         ORDER BY c.addTime DESC
     </select>
 
-    <select id="PayInfoQuery" parameterType="map" resultMap="PaysResult">
-        SELECT c.tradeCode,c.addTime,s.storeName,c.money/100 money,c.payType
-        FROM m_cashFlow c LEFT JOIN t_store s ON c.storeId=s.storeId
+    <select id="PayInfoQuery" parameterType="map" resultMap="PaysMap">
+        SELECT
+        c.tradeCode,c.addTime,s.storeName,
+        cast((c.money / 100) AS DECIMAL (13, 1)) money,
+        CASE c.payType
+        WHEN 0 THEN
+        '现金'
+        WHEN 1 THEN
+        '支付宝'
+        WHEN 2 THEN
+        '微信'
+        WHEN 3 THEN
+        '银联'
+        WHEN 4 THEN
+        '京东白条'
+        ELSE
+        '不支持的支付方式'
+        END payType
+        FROM m_cashFlow c LEFT JOIN t_store s ON c.storeId = s.storeId
         WHERE 1=1 and c.status=1
         <if test="beginTime != null and beginTime != ''"><!-- 开始时间检索 -->
             AND DATE_FORMAT(c.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{beginTime},'%Y%m%d')

@@ -14,6 +14,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="totalPrice" property="totalPrice" />
 		<result column="totalInPrice" property="totalInPrice" />
 	</resultMap>
+	<resultMap id="CommodityMap" type="map">
+		<result column="commodityName" property="commodityName" />
+		<result column="commodityNo" property="commodityNo" />
+		<result column="unit" property="unit" />
+		<result column="saleNum" property="saleNum" javaType="int" />
+		<result column="totalPrice" property="totalPrice" />
+		<result column="totalInPrice" property="totalInPrice" />
+		<result column="profit" property="profit" />
+	</resultMap>
+
+
 	
 	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultMap="CommodityResult">
 		SELECT IFNULL(t.commodityId,'')commodityId,IFNULL(t.commodityNo,'')commodityNo,
@@ -39,12 +50,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	</select>
 
-	<select id="infoQuery" parameterType="map" resultMap="CommodityResult">
-		SELECT IFNULL(t.commodityId,'')commodityId,IFNULL(t.commodityNo,'')commodityNo,
-		IFNULL(t.commodityName,'')commodityName,IFNULL(t.unit,'')unit,
-		IFNULL(SUM(t.commodityNum),'') saleNum, IFNULL(SUM(t.totalPrice),'') totalPrice,
-		IFNULL(SUM(t.inPrice * t.commodityNum),'') totalInPrice
-		FROM t_order_detail t inner JOIN t_order o ON t.orderNumber=o.orderNumber
+	<select id="infoQuery" parameterType="map" resultMap="CommodityMap">
+		SELECT
+		IFNULL(t.commodityId, '') commodityId,
+		IFNULL(t.commodityNo, '') commodityNo,
+		IFNULL(t.commodityName, '') commodityName,
+		IFNULL(t.unit, '') unit,
+		IFNULL(SUM(t.commodityNum), '') saleNum,
+		cast((IFNULL(SUM(t.totalPrice), ''))/100  as DECIMAL(13,1)) totalPrice,
+		cast((IFNULL(SUM(t.inPrice * t.commodityNum),''))/100  as DECIMAL(13,1)) totalInPrice,
+		cast((SUM(t.totalPrice)-SUM(t.inPrice*t.commodityNum))/100 as DECIMAL(13,1)) profit
+		FROM
+		t_order_detail t
+		INNER JOIN t_order o ON t.orderNumber = o.orderNumber
 		where 1=1 AND o.orderStatus!=1 AND o.status=1
 		<if test="beginTime != null and beginTime != ''"><!-- 开始时间检索 -->
 			AND DATE_FORMAT(t.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{beginTime},'%Y%m%d')

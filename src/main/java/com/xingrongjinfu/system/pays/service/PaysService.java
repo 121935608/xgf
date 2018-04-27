@@ -45,7 +45,7 @@ public class PaysService implements IPaysService {
     }
 
     @Override
-    public List<TableDataInfo> payInfoQuery(Map<String, String> param) {
+    public List<Map> payInfoQuery(Map<String, String> param) {
         return paysDao.payInfoQuery(param);
     }
 

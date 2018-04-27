@@ -31,5 +31,5 @@ public interface ICommodityDao {
      */
     List<Commodity> pageInfoQuery(PageUtilEntity pageUtilEntity);
 
-    List<Commodity> infoQuery(Map<String, String> param);
+    List<Map> infoQuery(Map<String, String> param);
 }

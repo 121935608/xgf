@@ -58,10 +58,10 @@ public class PaysDao extends DynamicObjectBaseDao implements IPaysDao {
     }
 
     @Override
-    public List<TableDataInfo> payInfoQuery(Map<String, String> param) {
-        List<TableDataInfo> pageInfoQuery=null;
+    public List<Map> payInfoQuery(Map<String, String> param) {
+        List<Map> pageInfoQuery=null;
         try {
-            pageInfoQuery=(List<TableDataInfo>)this.findForList("PaysMapper.PayInfoQuery",param);
+            pageInfoQuery=(List<Map>)this.findForList("PaysMapper.PayInfoQuery",param);
         }catch (Exception e)
         {
             e.printStackTrace();

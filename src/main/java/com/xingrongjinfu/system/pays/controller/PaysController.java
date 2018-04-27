@@ -28,10 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 收银支付流水（平台端）
@@ -66,41 +63,18 @@ public class PaysController extends BaseController{
         param.put("endTime",request.getParameter("endTime"));
         param.put("payType",request.getParameter("payType"));
         param.put("storeName",request.getParameter("storeName"));
-        List<TableDataInfo> tableDataInfo=paysService.payInfoQuery(param);
-        List<PaysDto> data = new ArrayList<PaysDto>(tableDataInfo.size());
-        for(Object o: tableDataInfo){
-            Pays p = (Pays)o;
-            PaysDto paysDto = new PaysDto();
-
-            if(p.getPayType()==0) {
-                paysDto.setPayType("现金");
-            }else if(p.getPayType()==1){
-                paysDto.setPayType("支付宝");
-            }else if(p.getPayType()==2){
-                paysDto.setPayType("微信");
-            }else if(p.getPayType()==3){
-                paysDto.setPayType("银联");
-            }else if(p.getPayType()==4){
-                paysDto.setPayType("京东白条");
-            }else{
-                paysDto.setPayType("不支持的支付方式");
-            }
-            paysDto.setMoney(p.getMoney());
-            paysDto.setAddTime(p.getAddTime());
-            paysDto.setTradeCode(p.getTradeCode());
-            paysDto.setStoreName(p.getStoreName());
-            data.add(paysDto);
-        }
+        List<Map> data=paysService.payInfoQuery(param);
         try {
-            ExportExcel<PaysDto> ee=new ExportExcel<PaysDto>();
-            String[] headers=new String[]{"交易号","创建时间","商铺名称","收款金额（元）","支付方式"};
+            String[][] headers=new String[][]{{"交易号","创建时间","商铺名称","收款金额（元）","支付方式"},
+                                             {"tradeCode","addTime","storeName","money","payType"}};
             response.setContentType("application/force-download");// 设置强制下载不打开
             response.addHeader("Content-Disposition","attachment;fileName=export.xls");// 设置文件名
             OutputStream output = response.getOutputStream();
-            ee.exportExcel("商品信息", headers, data, output);
+            ExportExcel.exportExcel2("商品信息", headers, data, output);
             output.flush();
             output.close();
         } catch (Exception e) {
+            e.printStackTrace();
             return new Message(0);
         }
         return new Message(1);

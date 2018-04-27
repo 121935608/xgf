@@ -104,6 +104,15 @@ public class CommodityController extends BaseController {
         return buildDatasTable(pageUtilEntity.getTotalResult(), tableDataInfo);
     }
 
+    /**
+     *    导出商品销售统计数据
+     *
+     * @author fengqian
+     * @date 2018/4/27 16:34
+     * @param request
+     * @param response
+     * @return org.framework.core.model.Message
+     */
     @RequestMapping(CommodityConstant.DOWNLOAD_COMMODITY_DATA)
     public Message downloadCommodityData(HttpServletRequest request, HttpServletResponse response) {
 
@@ -113,38 +122,20 @@ public class CommodityController extends BaseController {
         param.put("endTime", request.getParameter("endTime"));
         param.put("commodityName", request.getParameter("commodityName"));
 
-        List<Commodity> tableDataInfo = commodityService.infoQuery(param);
-        List<CommodityDto> data = new ArrayList<CommodityDto>(tableDataInfo.size());
-        for (Commodity o : tableDataInfo) {
-            CommodityDto c = new CommodityDto();
-            c.setUnit(o.getUnit());
-            c.setCommodityName(o.getCommodityName());
-            c.setCommodityNo(o.getCommodityNo());
-            c.setSaleNum(o.getSaleNum() / 100);
+        List<Map> data = commodityService.infoQuery(param);
 
-            DecimalFormat df = new DecimalFormat("######0.00");
-            Double in = Double.parseDouble(df.format(o.getTotalPrice()/100));
-
-            Double out = Double.parseDouble(df.format(o.getTotalInPrice()/100));
-            Double profit = Double.parseDouble(df.format(o.getTotalPrice()/100-o.getTotalInPrice()/100));
-
-            c.setTotalInPrice(in);
-            c.setProfit(profit);
-            c.setTotalPrice(out);
-
-
-            data.add(c);
-        }
         try {
-            ExportExcel<CommodityDto> ee = new ExportExcel<CommodityDto>();
-            String[] headers = new String[]{"商品名称", "商品编号", "单位", "销售数量", "销售金额（元）", "进价（元）", "利润（元）"};
+
+            String[][] headers = new String[][]{{"商品名称", "商品编号", "单位", "销售数量", "销售金额（元）", "进价（元）", "利润（元）"},
+                                        {"commodityName","commodityNo","unit","saleNum","totalPrice","totalInPrice","profit"}};
             response.setContentType("application/force-download");// 设置强制下载不打开
             response.addHeader("Content-Disposition", "attachment;fileName=export.xls");// 设置文件名
             OutputStream output = response.getOutputStream();
-            ee.exportExcel("商品销售表", headers, data, output);
+            ExportExcel.exportExcel2("商品销售表", headers, data, output);
             output.flush();
             output.close();
         } catch (Exception e) {
+            e.printStackTrace();
             return new Message(0);
         }
         return new Message(1);

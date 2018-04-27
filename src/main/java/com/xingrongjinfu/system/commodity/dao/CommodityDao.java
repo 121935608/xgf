@@ -44,10 +44,10 @@ public class CommodityDao extends DynamicObjectBaseDao implements ICommodityDao 
     }
 
     @Override
-    public List<Commodity> infoQuery(Map<String, String> param) {
-        List<Commodity> pageInfoQuery=null;
+    public List<Map> infoQuery(Map<String, String> param) {
+        List<Map> pageInfoQuery=null;
         try {
-            pageInfoQuery=(List<Commodity>)this.findForList("CommodityMapper.infoQuery",param);
+            pageInfoQuery=(List<Map>)this.findForList("CommodityMapper.infoQuery",param);
         }catch (Exception e)
         {
             e.printStackTrace();

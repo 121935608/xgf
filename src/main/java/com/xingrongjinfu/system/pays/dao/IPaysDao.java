@@ -38,5 +38,5 @@ public interface IPaysDao {
     List<Pays> firstPageInfoQuery(String storeId);
 
 
-    List<TableDataInfo> payInfoQuery(Map<String, String> param);
+    List<Map> payInfoQuery(Map<String, String> param);
 }

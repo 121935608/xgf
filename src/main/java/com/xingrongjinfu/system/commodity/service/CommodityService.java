@@ -40,7 +40,7 @@ public class CommodityService implements ICommodityService {
     }
 
     @Override
-    public List<Commodity> infoQuery(Map<String, String> param) {
+    public List<Map> infoQuery(Map<String, String> param) {
         return commodityDao.infoQuery(param);
     }
 }
