@@ -1,6 +1,5 @@
 package com.xingrongjinfu.statistics.purchase.dao;
 
-import com.xingrongjinfu.statistics.purchase.model.SPurchaseDto;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 
@@ -21,5 +20,5 @@ public interface IPurchaseDao
     public List<TableDataInfo> pageInfoQuery(PageUtilEntity pageUtilEntity);
 
 
-    List<SPurchaseDto> infoQuery(Map<String, String> param);
+    List<Map> infoQuery(Map<String, String> param);
 }

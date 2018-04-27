@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.xingrongjinfu.statistics.procurement.model.ProcurementDto;
-import com.xingrongjinfu.statistics.purchase.common.PurchaseConstant;
-import com.xingrongjinfu.statistics.purchase.model.SPurchaseDto;
 import com.xingrongjinfu.utils.ExportExcel;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;

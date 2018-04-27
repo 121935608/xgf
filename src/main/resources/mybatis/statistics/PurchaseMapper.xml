@@ -20,15 +20,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="commodityNo" column="commodityNo" />
 		<result property="storageStatus" column="storageStatus" />
 	</resultMap>
-
-	<resultMap id="SPurchaseDto" type="com.xingrongjinfu.statistics.purchase.model.SPurchaseDto">
+	<resultMap type="map" id="PurchaseMap">
 		<result property="commodityName" column="commodityName" />
 		<result property="commodityNo" column="commodityNo" />
+		<result property="unit" column="unit" />
 		<result property="commodityNum" column="commodityNum" />
 		<result property="totalPrice" column="totalPrice" />
-		<result property="unit" column="storageStatus" />
 	</resultMap>
-	
+
+
+
+
 	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultType="Purchase">
 		select
 		c.commodityName,d.commodityNo,sum(c.commodityNum) commodityNum,
@@ -60,10 +62,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		GROUP BY c.commodityName,d.commodityNo,c.unit
 	</select>
 
-	<select id="infoQuery" parameterType="map" resultMap="SPurchaseDto">
+	<select id="infoQuery" parameterType="map" resultMap="PurchaseMap">
 		select
 		c.commodityName,d.commodityNo,sum(c.commodityNum) commodityNum,
-		sum(c.totalPrice/100) totalPrice,c.unit
+		cast((sum(c.totalPrice/100)) as DECIMAL(13,1)) totalPrice,c.unit
 		FROM sys_user a
 		LEFT JOIN t_order b on a.userId = b.userId
 		LEFT JOIN t_order_detail c on c.orderNumber = b.orderNumber
