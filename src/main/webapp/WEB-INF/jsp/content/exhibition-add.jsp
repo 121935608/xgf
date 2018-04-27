@@ -15,8 +15,10 @@
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>图片：</label>
 			<div class="formControls col-xs-8 col-sm-4">
 				<input type="file" onchange="pic(event)" id="picture" name="picture" accept="image/*">
-				<img alt="" id="myImg" src="" height="100px",width="100px">  
+				<img alt="" id="myImg" src="" height="100px",width="100px">
+
 			</div>
+			<span class="c-red">(750*198)</span>
 		</div>
 		
 		<div class="row cl">

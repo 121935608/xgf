@@ -33,6 +33,7 @@
 			<input type="file" onchange="pic(event)" id="picture" name="picture" accept="image/*">
 				<img alt="" id="myImg" src="" height="100px",width="100px">
 			</div>
+			<span class="c-red">(140*140)</span>
 		</div>
 		
 		<div class="row cl">
