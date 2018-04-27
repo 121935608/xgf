@@ -80,7 +80,6 @@ $(document).ready(function(){
 
 function query() {
     var deptName = $("#deptName").val();
-    debugger;
     pageTable.fnSettings().sAjaxSource = encodeURI("${context_root}/crm/deptList.action?deptName=" + deptName);
     pageTable.fnClearTable(0);
     pageTable.fnDraw();
