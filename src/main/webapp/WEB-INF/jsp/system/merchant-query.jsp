@@ -63,6 +63,54 @@
 					<span>${accountInfo.address}</span>
 				</div>
 			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">门店面积</label>
+				<div class="formControls col-xs-8 col-sm-4">
+					<span>${accountInfo.storeArea}</span>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">是否连锁</label>
+				<div class="formControls col-xs-8 col-sm-4">
+					<span>${accountInfo.chain}</span>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">门店设备</label>
+				<div class="formControls col-xs-8 col-sm-4">
+					<span>${accountInfo.equipment}</span>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">门店类型</label>
+				<div class="formControls col-xs-8 col-sm-4">
+					<span>${accountInfo.storeType}</span>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">合作方</label>
+				<div class="formControls col-xs-8 col-sm-4">
+					<span>${accountInfo.partners}</span>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">营业时间</label>
+				<div class="formControls col-xs-8 col-sm-4">
+					<span>${accountInfo.startHours}--${accountInfo.endHours}</span>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">收货时间</label>
+				<div class="formControls col-xs-8 col-sm-4">
+					<span>${accountInfo.startCollect}--${accountInfo.endCollect}</span>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">周边建筑</label>
+				<div class="formControls col-xs-8 col-sm-4">
+					<span>${accountInfo.building}</span>
+				</div>
+			</div>
 		</div>
 		<div class="info-div">
 			<div class="row cl">
