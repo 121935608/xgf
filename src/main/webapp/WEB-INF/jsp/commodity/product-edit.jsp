@@ -90,7 +90,7 @@ $(document).ready(function(){
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>商品标语：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="text" class="input-text" autocomplete="off"  maxlength="20"  placeholder="最多输入20个汉字" id="commodityBanner" name="commodityBanner" value="${product.commodityBanner}">
+				<input type="text" class="input-text" autocomplete="off"  maxlength="50"  placeholder="最多输入50个汉字" id="commodityBanner" name="commodityBanner" value="${product.commodityBanner}">
 			</div>
 		</div>
 
