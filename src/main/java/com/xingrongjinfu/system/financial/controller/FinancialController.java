@@ -100,13 +100,19 @@ public class FinancialController extends BaseController {
         List<Financial> tableDataInfo=financialService.pageInfoQuery(pageUtilEntity);
         BigDecimal rate = null;
         for (Financial financial : tableDataInfo) {
-            if(null == rate)
-                rate = new BigDecimal(1).subtract(financial.getXzfRate().divide(new BigDecimal(Double.toString(100))));
-            financial.setOpenMoney((financial.getCloseMoney().multiply(rate)).subtract(financial.getTotalMoney()));
+            if(null == rate){
+                if(financial.getXzfRate()!=null){
+                    rate = new BigDecimal(1).subtract(financial.getXzfRate().divide(new BigDecimal("100")));
+                    BigDecimal closeMoney = financial.getCloseMoney();
+                    BigDecimal totalMoney = financial.getTotalMoney();
+                    if(closeMoney!=null&&totalMoney!=null){
+                        financial.setOpenMoney(closeMoney.multiply(rate).subtract(totalMoney));
+                    }
+                }
+            }
         }
         return buildDatasTable(pageUtilEntity.getTotalResult(),tableDataInfo);
     }
-
 
     @RequestMapping(FinancialConstant.DOWNLOAD_FINANCIAL_DATA)
     public Message downloadFinancialData(HttpServletRequest request, HttpServletResponse response) {
@@ -118,15 +124,28 @@ public class FinancialController extends BaseController {
         param.put("storeId", storeId);
         param.put("type", type);
         param.put("storeName", request.getParameter("storeName"));
-
-
         List<Map> data = financialService.infoQuery(param);
-        //data.stream().filter(s->s.getSalePrice())
+        BigDecimal rate = null;
+        for (Map map : data) {
+            if(null == rate){
+                map.get("xzfRate");
+                BigDecimal xzfRate = (BigDecimal)map.get("xzfRate");
+                if(xzfRate!=null)
+                    rate = new BigDecimal(1).subtract(xzfRate.divide(new BigDecimal("100")));
+            }
+            BigDecimal closeMoney = (BigDecimal) map.get("closeMoney");
+            BigDecimal totalMoney = (BigDecimal) map.get("totalMoney");
+            if(closeMoney!=null&&totalMoney!=null){
+                BigDecimal openMoney = closeMoney.multiply(rate).subtract(totalMoney);
+                map.put("openMoney",openMoney);
+            }else{
+                map.put("openMoney","");
+            }
+
+        }
         try {
-            String[][] headers = new String[][]{{"商铺编号", "商铺名称", "收银金额（元）", "支付费率", "待还款金额（元）"},
-                    {"amountNum", "commodityNo", "orderNumber", "payTime", "unit", "commodityNum", "totalPrice"}};
-
-
+            String[][] headers = new String[][]{{"商铺编号", "商铺名称", "收银金额（元）", "支付费率", "待还款金额（元）", "可结算金额（元）"},
+                                         {"mobilePhone", "storeName", "closeMoney", "xzfRate", "totalMoney", "openMoney"}};
             response.setContentType("application/force-download");// 设置强制下载不打开
             response.addHeader("Content-Disposition", "attachment;fileName=export.xls");// 设置文件名
             OutputStream output = response.getOutputStream();

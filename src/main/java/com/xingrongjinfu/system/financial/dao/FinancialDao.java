@@ -36,7 +36,7 @@ public class FinancialDao extends DynamicObjectBaseDao implements IFinancialDao 
     public List<Financial> pageInfoQuery(PageUtilEntity pageUtilEntity) {
         List<Financial> tableDataInfo=null;
         try {
-            tableDataInfo=(List<Financial>)this.findForList("FinancialMapper.pageInfoQuery",pageUtilEntity);
+            tableDataInfo=(List<Financial>)this.findForList("StatisticsFinancialMapper.pageInfoQuery",pageUtilEntity);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -47,7 +47,7 @@ public class FinancialDao extends DynamicObjectBaseDao implements IFinancialDao 
     public List<Map> infoQuery(Map<String, String> param) {
         List<Map> tableDataInfo=null;
         try {
-            tableDataInfo=(List<Map>)this.findForList("FinancialMapper.infoQuery",param);
+            tableDataInfo=(List<Map>)this.findForList("StatisticsFinancialMapper.infoQuery",param);
         } catch (Exception e) {
             e.printStackTrace();
         }

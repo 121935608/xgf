@@ -15,71 +15,46 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="amountNum" column="amountNum" />
 	</resultMap>
 
+    <resultMap type="map" id="FinancialMap">
+        <result property="mobilePhone" column="mobilePhone" />
+        <result property="storeName" column="storeName" />
+        <result property="closeMoney" column="closeMoney" javaType="java.math.BigDecimal"/>
+        <result property="xzfRate" column="xzfRate" javaType="java.math.BigDecimal"/>
+        <result property="totalMoney" column="totalMoney" javaType="java.math.BigDecimal"/>
+        <result property="openMoney" column="openMoney" javaType="java.math.BigDecimal"/>
+    </resultMap>
 
 	<select id="pageInfoQuery" parameterType="PageUtilEntity"
 		resultType="Financial">
-		select amountNum,addTime,totalMoney/100 totalMoney,xzfRate,amountMoney/100 amountMoney,status
-		from
-		m_amount m
-		inner join sys_user s on m.userId = s.userId
-		where 1=1
-		<if test="relationMap.userId != null and relationMap.userId != ''">
-			AND m.userId=#{relationMap.userId}
-		</if>
+        SELECT ROUND(SUM(planTotal/100),2) totalMoney,s.storeId storeId,
+        s.storeName storeName,ROUND(IFNULL(b.remain/100,0),2) closeMoney,
+        (SELECT xzfRate FROM sys_setting LIMIT 1) xzfRate,u.mobilePhone mobilePhone
+        FROM t_store s LEFT JOIN m_billing b ON s.storeId=b.storeId
+        LEFT JOIN t_repay r ON s.userId = r.userId
+        LEFT JOIN sys_user u ON u.userId = s.userId
 
-		<if test="relationMap.beginTime != null and relationMap.beginTime != ''">
-			AND DATE_FORMAT(m.addTime,'%Y%m%d') &gt;=
-			DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
-		</if>
-		<if test="relationMap.endTime != null and relationMap.endTime != ''">
-			AND DATE_FORMAT(m.addTime,'%Y%m%d') &lt;=
-			DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
-		</if>
+        <if test="relationMap.type != null and relationMap.type=='B'.toString()">
+            AND s.storeId=#{relationMap.storeId}
+        </if>
+        <if test="relationMap.storeName !=null and relationMap.storeName !=''">
+            AND s.storeName LIKE CONCAT(CONCAT('%', #{relationMap.storeName}),'%')
+        </if><!--关键词查询-->
+        GROUP BY storeName,closeMoney,mobilePhone,s.addTime,s.storeId
+        ORDER BY s.storeNo desc
 
-
-		<if test="relationMap.status != null and relationMap.status != ''">
-			AND status = #{relationMap.status}
-		</if>
-
-		<if
-			test="relationMap.fuzzyCondition != null and relationMap.fuzzyCondition != ''">
-			AND (
-			amountNum LIKE CONCAT(CONCAT('%',
-			#{relationMap.fuzzyCondition}),'%')
-			)
-		</if>
-		order by m.addTime desc
 	</select>
 
 	<select id="infoQuery" parameterType="map"
-			resultType="Financial">
-		select amountNum,addTime,totalMoney/100 totalMoney,xzfRate,amountMoney/100 amountMoney,status
-		from
-		m_amount m
-		inner join sys_user s on m.userId = s.userId
-		where 1=1
-		<if test="userId != null and userId != ''">
-			AND m.userId=#{userId}
-		</if>
+            resultMap="FinancialMap">
+        SELECT ROUND(SUM(planTotal/100),2) totalMoney,s.storeId storeId,
+        s.storeName storeName,ROUND(IFNULL(b.remain/100,0),2) closeMoney,
+        (SELECT xzfRate FROM sys_setting LIMIT 1) xzfRate,u.mobilePhone mobilePhone
+        FROM t_store s LEFT JOIN m_billing b ON s.storeId=b.storeId
+        LEFT JOIN t_repay r ON s.userId = r.userId
+        LEFT JOIN sys_user u ON u.userId = s.userId
 
-		<if test="beginTime != null and beginTime != ''">
-			AND DATE_FORMAT(m.addTime,'%Y%m%d') &gt;=
-			DATE_FORMAT(#{beginTime},'%Y%m%d')
-		</if>
-		<if test="endTime != null and endTime != ''">
-			AND DATE_FORMAT(m.addTime,'%Y%m%d') &lt;=
-			DATE_FORMAT(#{endTime},'%Y%m%d')
-		</if>
-		<if test="status != null and status != ''">
-			AND status = #{status}
-		</if>
+        GROUP BY storeName,closeMoney,mobilePhone,s.addTime,s.storeId
+        ORDER BY s.storeNo desc
 
-		<if test="fuzzyCondition != null and fuzzyCondition != ''">
-			AND (
-			amountNum LIKE CONCAT(CONCAT('%',
-			#{fuzzyCondition}),'%')
-			)
-		</if>
-		order by m.addTime desc
 	</select>
 </mapper> 
