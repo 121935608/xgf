@@ -11,6 +11,7 @@
 package com.xingrongjinfu.system.financial.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.framework.base.util.PageUtilEntity;
 
@@ -45,5 +46,6 @@ public interface IFinancialService {
     List<FinancialDetail> getDetail(String id);
     
     int addAmount(Financial financial,Billing billing);
-    
+
+    List<Map> infoQuery(Map<String, String> param);
 }

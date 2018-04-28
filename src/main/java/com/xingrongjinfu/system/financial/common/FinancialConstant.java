@@ -38,6 +38,7 @@ public class FinancialConstant {
      * 请求地址:查询财务信息
      */
     public final static String FINANCIAL_LIST_URL="findFinancialList";
+    public final static String DOWNLOAD_FINANCIAL_DATA="downloadFinancialData";
     /**
      * 请求地址:跳转对账页面
      */

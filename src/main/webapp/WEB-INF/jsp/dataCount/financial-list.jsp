@@ -2,7 +2,10 @@
 <%@include file="/WEB-INF/jsp/common/taglibs.jspf"%>
 <ys:contentHeader title="财务结算"/>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>数据统计 <span class="c-gray en">&gt;</span> <span id="cons"> </span> <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>数据统计 <span class="c-gray en">&gt;</span> <span id="cons"> </span>
+	<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ></a>
+	<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:excel_out()" title="导出" ></a>
+	</nav>
 <div class="page-container">
 <style>
 	#show:hover{cursor:pointer;color:blue;}
@@ -11,6 +14,7 @@
 	<div class="text-c">
 		<input type="text" class="input-text" style="width:250px" placeholder="商铺名称" id="storeName" name="storeName">
 		<button type="button" class="btn btn-success radius" onclick="query()"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+		<button type="button" class="btn btn-success radius" onclick="excel_out()"><i class="Hui-iconfont">&#xe665;</i> 导出</button>
 	</div>
 	<div class="mt-20">
 	<table class="table table-border table-bordered table-hover table-bg table-sort">
@@ -152,6 +156,16 @@ function query() {
     pageTable.fnClearTable(0);
     pageTable.fnDraw();
 }
+function excel_out() {
+    var storeName =$("#storeName").val();
+    var elemIF = document.createElement("iframe");
+    elemIF.src = "${context_root}/dataCount/downloadFinancialData.action?&storeName="+storeName
+    elemIF.style.display = "none";
+    document.body.appendChild(elemIF);
+
+}
+
+
 
 function getDetail(obj,amountId){
 	$.ajax({

@@ -10,10 +10,16 @@
  */
 package com.xingrongjinfu.system.financial.controller;
 
+import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import com.xingrongjinfu.statistics.procurement.common.ProcurementConstant;
+import com.xingrongjinfu.system.user.model.User;
+import com.xingrongjinfu.utils.ExportExcel;
 import org.apache.shiro.common.utils.SessionUtils;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.core.controller.BaseController;
@@ -31,6 +37,9 @@ import com.xingrongjinfu.system.financial.model.Financial;
 import com.xingrongjinfu.system.financial.model.FinancialDetail;
 import com.xingrongjinfu.system.financial.service.IFinancialService;
 import com.xingrongjinfu.utils.UuidUtil;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * 财务结算（平台端）   收银日结（收银端）
@@ -96,6 +105,39 @@ public class FinancialController extends BaseController {
             financial.setOpenMoney((financial.getCloseMoney().multiply(rate)).subtract(financial.getTotalMoney()));
         }
         return buildDatasTable(pageUtilEntity.getTotalResult(),tableDataInfo);
+    }
+
+
+    @RequestMapping(FinancialConstant.DOWNLOAD_FINANCIAL_DATA)
+    public Message downloadFinancialData(HttpServletRequest request, HttpServletResponse response) {
+
+        User user=this.getCurrentUser();
+        Map<String, String> param = new HashMap();
+        String storeId = (String) SessionUtils.getSession().getAttribute("storeId");
+        String type = (String) SessionUtils.getSession().getAttribute("type");
+        param.put("storeId", storeId);
+        param.put("type", type);
+        param.put("storeName", request.getParameter("storeName"));
+
+
+        List<Map> data = financialService.infoQuery(param);
+        //data.stream().filter(s->s.getSalePrice())
+        try {
+            String[][] headers = new String[][]{{"商铺编号", "商铺名称", "收银金额（元）", "支付费率", "待还款金额（元）"},
+                    {"amountNum", "commodityNo", "orderNumber", "payTime", "unit", "commodityNum", "totalPrice"}};
+
+
+            response.setContentType("application/force-download");// 设置强制下载不打开
+            response.addHeader("Content-Disposition", "attachment;fileName=export.xls");// 设置文件名
+            OutputStream output = response.getOutputStream();
+            ExportExcel.exportExcel2("采购统计表", headers, data, output);
+            output.flush();
+            output.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Message(0);
+        }
+        return new Message(1);
     }
     /**
      * 结算明细

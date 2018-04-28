@@ -11,6 +11,7 @@
 package com.xingrongjinfu.system.financial.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.framework.base.util.PageUtilEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,11 @@ public class FinancialService implements IFinancialService {
     @Override
     public List<Financial> pageInfoQuery(PageUtilEntity pageUtilEntity) {
         return financialDao.pageInfoQuery(pageUtilEntity);
+    }
+
+    @Override
+    public List<Map> infoQuery(Map<String, String> param) {
+        return financialDao.infoQuery(param);
     }
 
     @Override

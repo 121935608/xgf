@@ -11,6 +11,7 @@
 package com.xingrongjinfu.system.financial.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.framework.base.util.PageUtilEntity;
 import org.framework.core.dao.DynamicObjectBaseDao;
@@ -36,6 +37,17 @@ public class FinancialDao extends DynamicObjectBaseDao implements IFinancialDao 
         List<Financial> tableDataInfo=null;
         try {
             tableDataInfo=(List<Financial>)this.findForList("FinancialMapper.pageInfoQuery",pageUtilEntity);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tableDataInfo;
+    }
+
+    @Override
+    public List<Map> infoQuery(Map<String, String> param) {
+        List<Map> tableDataInfo=null;
+        try {
+            tableDataInfo=(List<Map>)this.findForList("FinancialMapper.infoQuery",param);
         } catch (Exception e) {
             e.printStackTrace();
         }

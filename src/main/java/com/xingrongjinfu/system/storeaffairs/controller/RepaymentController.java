@@ -1,5 +1,6 @@
 package com.xingrongjinfu.system.storeaffairs.controller;
 
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.net.URLDecoder;
@@ -7,7 +8,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import com.xingrongjinfu.system.financial.common.FinancialConstant;
+import com.xingrongjinfu.utils.ExportExcel;
 import org.apache.shiro.common.utils.SessionUtils;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
@@ -29,7 +33,10 @@ import com.xingrongjinfu.system.user.model.User;
 import com.xingrongjinfu.utils.HttpClientUtil;
 import com.xingrongjinfu.utils.UuidUtil;
 
-import net.sf.json.JSONObject; 
+import net.sf.json.JSONObject;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 
 /**
@@ -96,6 +103,40 @@ class RepaymentController extends BaseController {
         List<TableDataInfo> tableDataInfo = repaymentService.repaymentListQuery(pageUtilEntity);
 
         return buildDataTable(pageUtilEntity.getTotalResult(), tableDataInfo);
+    }
+
+    @RequestMapping(FinancialConstant.DOWNLOAD_FINANCIAL_DATA)
+    public Message downloadFinancialData(HttpServletRequest request, HttpServletResponse response) {
+
+
+        User user=this.getCurrentUser();
+        Map<String, String> param = new HashMap();
+        String storeId = (String) SessionUtils.getSession().getAttribute("storeId");
+        String type = (String) SessionUtils.getSession().getAttribute("type");
+        param.put("storeId", storeId);
+        param.put("type", type);
+        param.put("fuzzyCondition", request.getParameter("fuzzyCondition"));
+        param.put("dateType", request.getParameter("dateType"));
+        param.put("status", request.getParameter("status"));
+
+
+        List<Map> data = repaymentService.infoQuery(param);
+        //data.stream().filter(s->s.getSalePrice())
+        try {
+            String[][] headers = new String[][]{{"还款单号", "创建时间", "订单号", "商铺名称", "还款金额（元）", "已还金额（元）", "结余金额（元）"},
+                                        {"repayNo", "addTime", "orderNumber", "storeName", "planTotal", "repayMoney", "withholdMoney"}};
+
+            response.setContentType("application/force-download");// 设置强制下载不打开
+            response.addHeader("Content-Disposition", "attachment;fileName=export.xls");// 设置文件名
+            OutputStream output = response.getOutputStream();
+            ExportExcel.exportExcel2("还款计划表", headers, data, output);
+            output.flush();
+            output.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Message(0);
+        }
+        return new Message(1);
     }
 //    /**
 //     * 对账保存

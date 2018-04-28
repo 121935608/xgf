@@ -1,6 +1,7 @@
 package com.xingrongjinfu.system.storeaffairs.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
@@ -34,6 +35,20 @@ public class RepaymentDao extends DynamicObjectBaseDao implements IRepaymentDao
         try
         {
             userPageInfo = (List<TableDataInfo>) this.findForList("StoreAffairMapper.repaymentpageInfoQuery", pageUtilEntity);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return userPageInfo;
+    }
+
+    @Override
+    public List<Map> infoQuery(Map<String, String> param) {
+        List<Map> userPageInfo = null;
+        try
+        {
+            userPageInfo = (List<Map>) this.findForList("StoreAffairMapper.repaymentInfoQuery", param);
         }
         catch (Exception e)
         {

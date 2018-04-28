@@ -1,6 +1,7 @@
 package com.xingrongjinfu.system.storeaffairs.service;
  
 import java.util.List;
+import java.util.Map;
 
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
@@ -36,7 +37,10 @@ public class RepaymentService implements IRepaymentService
         return repaymentDao.repaymentListQuery(pageUtilEntity);
     }
 
-
+    @Override
+    public List<Map> infoQuery(Map<String, String> param) {
+        return repaymentDao.infoQuery(param);
+    }
 
     @Override
     public Repay getByRepayId(String id) {

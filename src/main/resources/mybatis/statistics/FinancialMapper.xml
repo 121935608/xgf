@@ -13,7 +13,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="amountMoney" column="amountMoney" />
 		<result property="status" column="status" />
 		<result property="amountNum" column="amountNum" />
-
 	</resultMap>
 
 
@@ -47,6 +46,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			AND (
 			amountNum LIKE CONCAT(CONCAT('%',
 			#{relationMap.fuzzyCondition}),'%')
+			)
+		</if>
+		order by m.addTime desc
+	</select>
+
+	<select id="infoQuery" parameterType="map"
+			resultType="Financial">
+		select amountNum,addTime,totalMoney/100 totalMoney,xzfRate,amountMoney/100 amountMoney,status
+		from
+		m_amount m
+		inner join sys_user s on m.userId = s.userId
+		where 1=1
+		<if test="userId != null and userId != ''">
+			AND m.userId=#{userId}
+		</if>
+
+		<if test="beginTime != null and beginTime != ''">
+			AND DATE_FORMAT(m.addTime,'%Y%m%d') &gt;=
+			DATE_FORMAT(#{beginTime},'%Y%m%d')
+		</if>
+		<if test="endTime != null and endTime != ''">
+			AND DATE_FORMAT(m.addTime,'%Y%m%d') &lt;=
+			DATE_FORMAT(#{endTime},'%Y%m%d')
+		</if>
+		<if test="status != null and status != ''">
+			AND status = #{status}
+		</if>
+
+		<if test="fuzzyCondition != null and fuzzyCondition != ''">
+			AND (
+			amountNum LIKE CONCAT(CONCAT('%',
+			#{fuzzyCondition}),'%')
 			)
 		</if>
 		order by m.addTime desc

@@ -11,6 +11,7 @@
 package com.xingrongjinfu.system.financial.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.framework.base.util.PageUtilEntity;
 
@@ -47,4 +48,6 @@ public interface IFinancialDao {
     int updateBilling(Billing billing);
     
     int addAmount(Financial financial);
+
+    List<Map> infoQuery(Map<String, String> param);
 }
