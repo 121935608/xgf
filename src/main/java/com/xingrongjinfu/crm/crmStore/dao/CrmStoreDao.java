@@ -1,5 +1,8 @@
 package com.xingrongjinfu.crm.crmStore.dao;
 
+import com.xingrongjinfu.system.storeaffairs.model.BankAccount;
+import com.xingrongjinfu.system.storeaffairs.model.Store;
+import com.xingrongjinfu.system.supervisor.model.Supervisor;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 
@@ -9,4 +12,24 @@ public interface CrmStoreDao {
 
     /*查询门店和督导员的所有信息*/
     List<TableDataInfo> selectStoreSup(PageUtilEntity pageUtilEntity);
+
+    /**
+     * 获取银行账户信息
+     */
+    public BankAccount getCRMBankAccountInfo(String storeid);
+
+    /**
+     * 获取商户信息
+     */
+    public Store getCRMStoreInfo(String storeid);
+
+    /**
+     * 查询所有监督员对象
+     *
+     * @return 监督员信息集合
+     */
+    public List<Supervisor> getCRMSupervisorList();
+
+    /*门店分配业务员*/
+    int updateStoreSupervistor(Store store);
 }

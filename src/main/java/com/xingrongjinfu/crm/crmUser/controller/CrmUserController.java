@@ -3,9 +3,11 @@ package com.xingrongjinfu.crm.crmUser.controller;
 import com.xingrongjinfu.crm.CrmConstant;
 import com.xingrongjinfu.crm.crmUser.service.CrmUserService;
 import com.xingrongjinfu.crm.department.model.Dept;
+import com.xingrongjinfu.system.role.model.Role;
 import com.xingrongjinfu.system.supervisor.common.SupervisorConstant;
 import com.xingrongjinfu.system.supervisor.model.Supervisor;
 import com.xingrongjinfu.system.supervisor.service.ISupervisorService;
+import com.xingrongjinfu.system.syscode.model.SysCode;
 import com.xingrongjinfu.utils.AccessCodeUtil;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
@@ -19,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.xingrongjinfu.crm.crmUser.common.CrmUserConstant;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -74,6 +77,17 @@ public class CrmUserController extends BaseController
         ModelAndView modelAndView =this.getModelAndView(CrmUserConstant.USER_CRM_UPDATE_PAGE);
         Supervisor supervisor=supervisorService.getSupervisor(supervisorId);
         modelAndView.addObject("Supervisor",supervisor);
+        /*查询所有部门信息*/
+        List<Dept> deptList = crmUserService.selectAllDept();
+        List<SysCode> sysCodeList = new ArrayList<SysCode>();
+        for(int i = 0; i< deptList.size();i++){
+            SysCode sysCode = new SysCode();
+            sysCode.setCodeid(deptList.get(i).getDeptId());
+            sysCode.setCodevalue(deptList.get(i).getDeptName());
+            sysCodeList.add(sysCode);
+        }
+        modelAndView.addObject("roles",getCRMAllRole());
+        modelAndView.addObject("deptList",sysCodeList);
         return modelAndView;
     }
     /*根据督导员ID修改督导员信息*/
@@ -91,6 +105,17 @@ public class CrmUserController extends BaseController
     @RequestMapping(CrmUserConstant.USER_CRM_ADD_URL)
     public ModelAndView suoervistorAddUpdate(){
         ModelAndView modelAndView =this.getModelAndView(CrmUserConstant.USER_CRM_ADD_PAGE);
+        /*查询所有部门信息*/
+        List<Dept> deptList = crmUserService.selectAllDept();
+        List<SysCode> sysCodeList = new ArrayList<SysCode>();
+        for(int i = 0; i< deptList.size();i++){
+            SysCode sysCode = new SysCode();
+            sysCode.setCodeid(deptList.get(i).getDeptId());
+            sysCode.setCodevalue(deptList.get(i).getDeptName());
+            sysCodeList.add(sysCode);
+        }
+        modelAndView.addObject("roles",getCRMAllRole());
+        modelAndView.addObject("deptList",sysCodeList);
         return modelAndView;
     }
     /*添加督导员接口*/
@@ -102,12 +127,17 @@ public class CrmUserController extends BaseController
         return new Message(result);
     }
 
-    /*查询所有部门信息*/
-    @RequestMapping(CrmUserConstant.USER_CRM_SELECT_DEPT)
-    public List<Dept> selectAllDept(){
-        List<Dept> deptList = null;
-        deptList = crmUserService.selectAllDept();
-        System.out.println("查询的数据是"+deptList.toString());
-        return deptList;
+    /*获取所有角色*/
+    public List<SysCode> getCRMAllRole(){
+        List<Role> list = crmUserService.selectRole();
+        List<SysCode> sysRoleList = new ArrayList<SysCode>();
+        for(int r = 0; r< list.size();r++){
+            SysCode sysCodeRole = new SysCode();
+            sysCodeRole.setCodeid(list.get(r).getRoleId().toString());
+            sysCodeRole.setCodevalue(list.get(r).getRoleName());
+            sysRoleList.add(sysCodeRole);
+        }
+        return sysRoleList;
     }
+
 }

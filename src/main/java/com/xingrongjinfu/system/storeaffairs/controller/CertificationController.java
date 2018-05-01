@@ -225,6 +225,7 @@ class CertificationController extends BaseController {
         }else{
             store2.setProcess(process);
             store2.setRemark(store.getRemark());
+            store2.setAuditStatus(store.getAuditStatus());
             result = certificationService.saveCertificationCheck(store2);
         }
         return new Message(result);
@@ -247,7 +248,7 @@ class CertificationController extends BaseController {
      */
     public  Store getStoreInfo(String storeid) 
     {
-    	return certificationService.getStoreInfo(storeid);   
+    	return certificationService.getStoreInfo(storeid);
     }
      
     /**

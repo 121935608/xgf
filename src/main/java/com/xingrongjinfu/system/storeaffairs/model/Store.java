@@ -64,6 +64,15 @@ public class Store {
 		private String endCollect;//结束收货时间
 		private String building;//周边建筑
 
+		private int auditStatus;//'CRM审核门店结果 0:待审核；1:审核通过；2:审核不通过',
+
+		public int getAuditStatus() {
+			return auditStatus;
+		}
+
+		public void setAuditStatus(int auditStatus) {
+			this.auditStatus = auditStatus;
+		}
 
 		public String getLongtitude() {
 			return longtitude;

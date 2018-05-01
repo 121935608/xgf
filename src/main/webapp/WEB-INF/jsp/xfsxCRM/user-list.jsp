@@ -21,10 +21,13 @@
             <thead>
             <tr class="text-c">
                 <th width="5%">姓名</th>
-                <th width="5%">登录名</th>
-                <th width="15%">所在区域</th>
                 <th width="15%">督导员编号</th>
-                <th width="15%">督导员部门</th>
+                <th width="5%">登录名</th>
+                <th width="7%">省</th>
+                <th width="7%">市</th>
+                <th width="7%">区</th>
+                <th width="10%">督导员部门</th>
+                <th width="10%">督导员角色</th>
                 <th width="15%">电话 </th>
                 <th width="10%">状态</th>
                 <th width="10%">操作</th>
@@ -51,6 +54,19 @@
                 }
             },
             {
+                "sDefaultContent": "督导编号",
+                "bSortable" : false,
+                "sClass": "text-c",
+                "bSearchable": false,
+                "mRender": function(data, type, row) {
+                    if (row.supervisorNum != null) {
+                        return row.supervisorNum;
+                    } else {
+                        return "";
+                    }
+                }
+            },
+            {
                 "sDefaultContent": "登录名",
                 "bSortable" : false,
                 "sClass": "text-c",
@@ -64,26 +80,37 @@
                 }
             },
             {
-                "sDefaultContent": "所在区域",
+                "sDefaultContent": "省",
                 "bSortable" : false,
                 "sClass": "text-c",
                 "bSearchable": false,
                 "mRender": function(data, type, row) {
-                    if (row.area != null) {
-                        return row.area;
+                    if (row.province != null) {
+                        return row.province;
                     } else {
                         return "";
                     }
                 }
-            },
-            {
-                "sDefaultContent": "督导编号",
+            },{
+                "sDefaultContent": "市",
                 "bSortable" : false,
                 "sClass": "text-c",
                 "bSearchable": false,
                 "mRender": function(data, type, row) {
-                    if (row.supervisorNum != null) {
-                        return row.supervisorNum;
+                    if (row.city != null) {
+                        return row.city;
+                    } else {
+                        return "";
+                    }
+                }
+            },{
+                "sDefaultContent": "区",
+                "bSortable" : false,
+                "sClass": "text-c",
+                "bSearchable": false,
+                "mRender": function(data, type, row) {
+                    if (row.county != null) {
+                        return row.county;
                     } else {
                         return "";
                     }
@@ -96,6 +123,18 @@
                 "mRender": function(data, type, row) {
                     if (row.deptName != null) {
                         return row.deptName;
+                    } else {
+                        return "";
+                    }
+                }
+            },{
+                "sDefaultContent": "督导员角色",
+                "bSortable" : false,
+                "sClass": "text-c",
+                "bSearchable": false,
+                "mRender": function(data, type, row) {
+                    if (row.roleName != null) {
+                        return row.roleName;
                     } else {
                         return "";
                     }
@@ -142,7 +181,9 @@
         var url = "${context_root}/crmUser/userCRMView.action";
         pageTable = _Datatable_Init(pageTable, aoColumns, url);
     });
-
+    $(function(){
+        query();
+    })
     function statusTools(row) {
         if (row.status == '0') {
             return "<a style=\"text-decoration:none\" onClick=\"supervisor_stop(this,\'" + row.supervisorId + "\')\" href=\"javascript:;\" title=\"停用\"><span style='color: #0e90d2 '>停用</span></a>";
@@ -186,7 +227,7 @@
 
     /*督导员-启用*/
     function supervisor_start(obj, id) {
-        parent.layer.confirm('确认要停用吗？', {icon: 3, title: '提示'}, function (index) {
+        parent.layer.confirm('确认要启用吗？', {icon: 3, title: '提示'}, function (index) {
             $.ajax({
                 url: "${context_root}/crmUser/updateSupervistorStatusView.action?supervisorId=" + id + "&status=0",
                 type: 'post',
@@ -206,6 +247,14 @@
             });
 
         });
+    }
+
+    function query() {
+        var status = $("#statusSelect option:selected").val();
+        var userName =$("#userName").val();
+        pageTable.fnSettings().sAjaxSource = encodeURI("${context_root}/crmUser/userCRMView.action?status="+status+"&userName="+userName);
+        pageTable.fnClearTable(0);
+        pageTable.fnDraw();
     }
 </script>
 </body>

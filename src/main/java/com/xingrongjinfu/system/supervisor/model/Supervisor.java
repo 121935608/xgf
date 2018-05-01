@@ -39,6 +39,16 @@ public class Supervisor implements Serializable
     private String crmPwd;
     private String province;
 
+    private String roleId;/*CRM督导员的角色ID*/
+
+    public String getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(String roleId) {
+        this.roleId = roleId;
+    }
+
     public String getProvince() {
         return province;
     }

@@ -16,7 +16,7 @@ public class StoreaffairConstant {
 	    public final static String CERTIFICATION_URL = "certificationView";
 	    
 	    /**
-	     * 逻辑视图名：跳转至企业认证申请查询列表界面
+	      * 逻辑视图名：跳转至企业认证申请查询列表界面
 	     */
 	    public final static String CERTIFICATION_PAGE = "system/certification-list";
 

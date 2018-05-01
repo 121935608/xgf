@@ -4,21 +4,49 @@
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 谢鲜CRM管理 <span class="c-gray en">&gt;</span> 门店列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
-    <div class="text-c">
-        <input type="text" class="input-text" style="width:250px" placeholder="姓名|联系方式|店铺名称" id="applyName" name="applyName">
-        <button type="button" class="btn btn-success radius" onclick="query()"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+    <div style="min-height: 30px;">
+        <form role="form" class="text-c">
+            <div class="row" >
+                <div class="col-xs-6 col-sm-4 .col-md-4" > 日期范围：
+                    <input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')||\'%y-%M-%d\'}'})" id="beginTime" class="input-text Wdate" style="width:120px;">
+                    -
+                    <input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'beginTime\')}',maxDate:'%y-%M-%d'})" id="endTime" class="input-text Wdate" style="width:120px;">
+                </div>
+                <div class="row  col-xs-6 col-sm-4 .col-md-4" >
+                    <div class="col-xs-6 col-sm-6 .col-md-6" >
+                        <y:select id="supervisor" name="supervisor" codeGroup="${supervisorList}" selectedValue=""
+                                  cssClass="select" headerKey="" headerValue="督导员">
+                        </y:select>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 .col-md-6" >
+                        <y:select id="auditStatus" name="auditStatus" codeGroup="${ispass}" selectedValue=""
+                                  cssClass="select" headerKey="" headerValue="状态">
+                        </y:select>
+                    </div>
+                </div>
+                <div class="col-xs-3 col-sm-2 .col-md-2" >
+                    <button type="button" class="btn btn-success radius" onclick="query()"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+                </div>
+            </div>
+        </form>
     </div>
     <div class="mt-20">
         <table class="table table-border table-bordered table-hover table-bg table-sort">
             <thead>
             <tr class="text-c">
+                <%--<th width="5%">NO.</th>--%>
                 <th width="10%">门店名称</th>
                 <th width="5%">联系人</th>
-                <th width="15%">手机号</th>
+                <th width="7%">手机号</th>
                 <th width="15%">地址</th>
-                <th width="15%">组类</th>
-                <th width="15%">销售员 </th>
-                <th width="15%">状态 </th>
+                <th width="10%">申请时间</th>
+                <th width="5%">督导员</th>
+                <th width="5%">组类</th>
+                <th width="5%">下单总金额</th>
+                <th width="5%">近30天下单总金额</th>
+                <th width="5%">近30天下单次数(次)</th>
+                <th width="5%">本周拜访次数(次) </th>
+                <th width="10%">状态 </th>
                 <th width="15%">操作 </th>
             </tr>
             </thead>
@@ -81,6 +109,31 @@
                     }
                 }
             },{
+                "sDefaultContent": "申请时间",
+                "bSortable" : false,
+                "sClass": "text-c",
+                "bSearchable": false,
+                "mRender": function(data, type, row) {
+                    if (row.addTime != null) {
+                        return formatDate(row.addTime,"yyyy-MM-dd hh:mm:ss");
+                    } else {
+                        return "";
+                    }
+                }
+            },
+            {
+                "sDefaultContent": "督导员",
+                "bSortable" : false,
+                "sClass": "text-c",
+                "bSearchable": false,
+                "mRender": function(data, type, row) {
+                    if (row.name != null) {
+                        return row.name;
+                    } else {
+                        return "";
+                    }
+                }
+            },{
                 "sDefaultContent": "组类",
                 "bSortable" : false,
                 "sClass": "text-c",
@@ -92,15 +145,50 @@
                         return "";
                     }
                 }
-            },
-            {
-                "sDefaultContent": "销售员",
+            },{
+                "sDefaultContent": "下单总金额",
                 "bSortable" : false,
                 "sClass": "text-c",
                 "bSearchable": false,
                 "mRender": function(data, type, row) {
-                    if (row.phone != null) {
-                        return row.phone;
+                    if (row.totalPrice != null) {
+                        return row.totalPrice;
+                    } else {
+                        return "";
+                    }
+                }
+            },{
+                "sDefaultContent": "近30天下单总金额",
+                "bSortable" : false,
+                "sClass": "text-c",
+                "bSearchable": false,
+                "mRender": function(data, type, row) {
+                    if (row.monthPrice != null) {
+                        return row.monthPrice;
+                    } else {
+                        return "";
+                    }
+                }
+            },{
+                "sDefaultContent": "近30天下单次数",
+                "bSortable" : false,
+                "sClass": "text-c",
+                "bSearchable": false,
+                "mRender": function(data, type, row) {
+                    if (row.monthNum != null) {
+                        return row.monthNum;
+                    } else {
+                        return "";
+                    }
+                }
+            },{
+                "sDefaultContent": "本周拜访次数",
+                "bSortable" : false,
+                "sClass": "text-c",
+                "bSearchable": false,
+                "mRender": function(data, type, row) {
+                    if (row.totalVisitNum != null) {
+                        return row.totalVisitNum;
                     } else {
                         return "";
                     }
@@ -128,8 +216,9 @@
                 "bSearchable": false,
                 "mRender": function(data, type, row) {
                     //编辑
-                    var toEdit = "<a title=\"查看详情\" href=\"javascript:;\" onclick=\"certification_check('认证申请审核','${context_root}/merchant/checkCertification.action?storeId=" + row.storeId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>审核</span></a>";
-                    return toEdit;
+                    var toEdit = "<a title=\"查看详情\" href=\"javascript:;\" onclick=\"certification_check('认证申请审核','${context_root}/crmStore/crmCheckStoreSelect.action?storeId=" + row.storeId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>审核</span></a>";
+                    var toEditTwo = "<a title=\"分配业务员\" href=\"javascript:;\" onclick=\"store_supervistor('门店分配业务员','${context_root}/crmStore/crmStoreSupervistorSelect.action?storeId=" + row.storeId + "','','700')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>分配业务员</span></a>";
+                    return toEdit + toEditTwo;
                 }
             },
         ];
@@ -137,67 +226,27 @@
         pageTable = _Datatable_Init(pageTable, aoColumns, url);
     });
 
-    /*审核申请*/
+    /*CRM审核门店*/
     function certification_check(title,url,w,h){
         layer_show(title,url,w,h);
     }
 
-    /*角色-添加*/
-    function role_add(title,url,w,h){
+    /*门店-业务员*/
+    function store_supervistor(title,url,w,h){
         layer_show(title,url,w,h);
     }
 
-    /*角色-编辑*/
-    function role_edit(title,url,w,h){
-        layer_show(title,url,w,h);
-    }
-
-    /*督导员-停用*/
-    function supervisor_stop(obj,id){
-        parent.layer.confirm('确认要停用吗？',{icon: 3, title:'提示'},function(index){
-            $.ajax({
-                url:"${context_root}/crmUser/updateSupervistorStatusView.action?supervisorId=" + id+"&status=1",
-                type:'post',
-                async:true ,
-                cache:false ,
-                dataType:"json",
-                success:function(data){
-                    if(data.s == true){
-                        $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="supervisor_start(this,' + id + ')" href="javascript:;" title="启用"><span style=\'color: #0e90d2 \'>启用</span></a>');
-                        $(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已停用</span>');
-                        $(obj).remove();
-                        parent.layer.msg('已停用!', {icon: 5, time: 1000});
-                    }else{
-                        parent.layer.alert(data.m , {icon: 2,title:"系统提示"});
-                    }
-                },
-
-            }) ;
-        });
-    }
-
-    /*督导员-启用*/
-    function supervisor_start(obj, id) {
-        parent.layer.confirm('确认要停用吗？', {icon: 3, title: '提示'}, function (index) {
-            $.ajax({
-                url: "${context_root}/crmUser/updateSupervistorStatusView.action?supervisorId=" + id + "&status=0",
-                type: 'post',
-                async: true,
-                cache: false,
-                dataType: "json",
-                success: function (data) {
-                    if (data.s == true) {
-                        $(obj).parents("tr").find(".td-manage").prepend('<a onClick="supervisor_stop(this,' + id + ')" href="javascript:;" title="停用" style="text-decoration:none"><span style=\'color: #0e90d2 \'>停用</span></a>');
-                        $(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
-                        $(obj).remove();
-                        parent.layer.msg('已启用!', {icon: 6, time: 1000});
-                    } else {
-                        parent.layer.alert(data.m, {icon: 2, title: "系统提示"});
-                    }
-                },
-            });
-
-        });
+    function query() {
+        var supervisor = $("#supervisor").val();
+        var auditStatus = $("#auditStatus").val();
+        var beginTime = $("#beginTime").val();
+        var endTime = $("#endTime").val();
+        pageTable.fnSettings().sAjaxSource = "${context_root}/crmStore/crmStoreSelect.action?supervisor="+ supervisor +
+            "&auditStatus="+ auditStatus +
+            "&beginTime="+ beginTime +
+            "&endTime="+ endTime;
+        pageTable.fnClearTable(0);
+        pageTable.fnDraw();
     }
 </script>
 </body>

@@ -21,7 +21,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				)
 		</if>
 	</select>
-	
+
+	<!--查询所有部门-->
+	<select id="selectAllCRMDept" resultMap="DeptResult">
+        SELECT * FROM c_dept;
+    </select>
 	<!-- 根据部门ID查询部门信息 -->
 	<select id="findByDeptId" parameterType="Dept" resultType="Dept">
 		SELECT * FROM c_dept where 1=1

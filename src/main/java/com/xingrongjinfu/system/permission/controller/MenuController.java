@@ -44,6 +44,7 @@ public class MenuController extends BaseController
     {
         ModelAndView modelAndView = this.getModelAndView(PermissionConstant.MENU_PAGE);
         modelAndView.addObject("parents", getParentList());
+        System.out.println("菜单列表是"+getParentList().toString());
         return modelAndView;
     }
 

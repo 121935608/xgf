@@ -24,6 +24,14 @@
             </div>
         </div>
         <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">所属部门：</label>
+            <div class="formControls col-xs-8 col-sm-4">
+                <y:select id="deptId" name="deptId" codeGroup="${deptList}" selectedValue="${Supervisor.deptId }"
+                          cssClass="select" headerKey="" headerValue="请选择">
+                </y:select>
+            </div>
+        </div>
+        <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>联系电话：</label>
             <div class="formControls col-xs-8 col-sm-4">
                 <input type="text" class="input-text" placeholder="联系电话" id="phone" name="phone" value="${Supervisor.phone }"
@@ -36,6 +44,14 @@
                 <select id="province"></select>
                 <select id="city"></select>
                 <select id="district"></select>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>角色：</label>
+            <div class="formControls col-xs-8 col-sm-4">
+                <y:select id="roleId" name="roleId" codeGroup="${roles }" selectedValue="${Supervisor.roleId }"
+                          cssClass="select" headerKey="" headerValue="--请选择--">
+                </y:select>
             </div>
         </div>
         <div class="row cl">

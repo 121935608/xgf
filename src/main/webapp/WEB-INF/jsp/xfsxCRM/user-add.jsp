@@ -23,11 +23,11 @@
             </div>
         </div>
         <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>上级菜单：</label>
+            <label class="form-label col-xs-4 col-sm-3">所属部门：</label>
             <div class="formControls col-xs-8 col-sm-4">
-                <select id="parentId" name="parentId">
-                    <option>菜单管理</option>
-                </select>
+                <y:select id="deptId" name="deptId" codeGroup="${deptList}" selectedValue="请选择"
+                          cssClass="select" headerKey="" headerValue="请选择">
+                </y:select>
             </div>
         </div>
         <div class="row cl">
@@ -42,6 +42,15 @@
                 <select data-province="---- 选择省 ----" id="province" name="province"></select>
                 <select data-city="---- 选择市 ----" id="city" name="city"></select>
                 <select data-district="---- 选择区 ----" id="district" name="county"></select>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>角色：</label>
+            <div class="formControls col-xs-8 col-sm-4">
+                <y:select id="roleId" name="roleId" codeGroup="${roles }" selectedValue="1"
+                          cssClass="select" headerKey="" headerValue="--请选择--">
+                </y:select>
             </div>
         </div>
         <div class="row cl">
