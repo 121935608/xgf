@@ -30,7 +30,7 @@
        <span class="select-box" style="width: 120px;">
            <select name="storeTypeSelect" id="storeTypeSelect" class="select" autocomplete="off">
                <option value="">门店类型</option>
-               <option value="抵挡">低档</option>
+               <option value="低档">低档</option>
                <option value="中档" >中档</option>
                <option value="高档" >高档</option>
            </select>
