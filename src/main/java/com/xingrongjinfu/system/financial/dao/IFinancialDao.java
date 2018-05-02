@@ -10,6 +10,7 @@
  */
 package com.xingrongjinfu.system.financial.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -50,4 +51,6 @@ public interface IFinancialDao {
     int addAmount(Financial financial);
 
     List<Map> infoQuery(Map<String, String> param);
+
+    BigDecimal getTotalMoney(String id);
 }

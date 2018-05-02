@@ -10,6 +10,7 @@
  */
 package com.xingrongjinfu.system.financial.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -32,6 +33,12 @@ import com.xingrongjinfu.system.financial.model.FinancialDetail;
  */
 @Service("financialService")
 public class FinancialService implements IFinancialService {
+
+
+    @Override
+    public BigDecimal getTotalMoney(String id) {
+        return financialDao.getTotalMoney(id);
+    }
 
     @Autowired
     private IFinancialDao financialDao;

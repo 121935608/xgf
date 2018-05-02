@@ -10,6 +10,7 @@
  */
 package com.xingrongjinfu.system.financial.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +32,12 @@ import com.xingrongjinfu.system.financial.model.FinancialDetail;
  */
 @Repository
 public class FinancialDao extends DynamicObjectBaseDao implements IFinancialDao {
+
+
+    @Override
+    public BigDecimal getTotalMoney(String id) {
+        return (BigDecimal) this.findForObject("FinancialMapper.getTotalMoney", id);
+    }
 
     @Override
     public List<Financial> pageInfoQuery(PageUtilEntity pageUtilEntity) {

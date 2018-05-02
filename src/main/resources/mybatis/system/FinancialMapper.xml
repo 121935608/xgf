@@ -55,14 +55,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="getByNum" parameterType="string" resultType="Financial">
-		SELECT ROUND(SUM(planTotal/100),2) totalMoney,s.storeId storeId,s.userId,
+		SELECT s.storeId storeId,s.userId,
 		s.storeName storeName,ROUND(IFNULL(b.remain/100,0),2) closeMoney,
 		(SELECT xzfRate FROM sys_setting LIMIT 1) xzfRate,u.mobilePhone mobilePhone
 		FROM t_store s LEFT JOIN (SELECT * FROM m_billing WHERE status =1) b ON s.storeId=b.storeId
-		LEFT JOIN t_repay r ON s.userId = r.userId 
 		LEFT JOIN sys_user u ON u.userId = s.userId
-		WHERE r.status=0 AND s.storeId=#{0}
+		WHERE  s.storeId=#{0}
 		GROUP BY storeName,closeMoney,mobilePhone,s.addTime,s.storeId,userId
+	</select>
+
+
+	<select id="getTotalMoney" parameterType="string" resultType="BigDecimal">
+		SELECT IFNULL(ROUND(SUM(r.planTotal / 100), 2),0.00)totalMoney FROM t_repay r
+        inner join t_store s on r.userId=s.userId where s.storeId=#{0} and r.status in (0,3)
 	</select>
 	
 	<insert id="addAmount" parameterType="Financial">

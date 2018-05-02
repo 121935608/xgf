@@ -4,10 +4,8 @@
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>数据统计 <span
         class="c-gray en">&gt;</span> <span id="cons"> </span>
-    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px"
-       href="javascript:location.replace(location.href);" title="刷新">111</a>
-    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:excel_out()"
-       title="导出"></a>
+    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a>
+    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:excel_out()" title="导出">导出</a>
 </nav>
 <div class="page-container">
     <style>
@@ -25,9 +23,9 @@
         <input type="text" class="input-text" style="width:250px" placeholder="商铺名称" id="storeName" name="storeName">
         <button type="button" class="btn btn-success radius" onclick="query()"><i class="Hui-iconfont">&#xe665;</i> 搜索
         </button>
-        <button type="button" class="btn btn-success radius" onclick="excel_out()"><i class="Hui-iconfont">&#xe665;</i>
-            导出
-        </button>
+        <%--<button type="button" class="btn btn-success radius" onclick="excel_out()"><i class="Hui-iconfont">&#xe665;</i>--%>
+            <%--导出--%>
+        <%--</button>--%>
     </div>
     <div class="mt-20">
         <table class="table table-border table-bordered table-hover table-bg table-sort">
@@ -121,9 +119,9 @@
                 "sClass": "text-c",
                 "bSearchable": false,
                 "mRender": function (data, type, row) {
-                    if (row.openMoney >= 0) {
-                        return row.openMoney;
-                    } else if (row.openMoney < 0) {
+                    if (row.closeMoney >= 0) {
+                        return row.closeMoney;
+                    } else{
                         return 0;
                     }
                 }
@@ -140,12 +138,12 @@
                         $('tr').find('td:last').css("display", "none");
                         return;
                     }
-                    if (row.openMoney <= 0) {
-                        return "";
-                    } else {
+                    if (row.closeMoney > 0&&row.totalMoney>0) {
                         //对账
                         var toEdit = "<a title=\"对账\" href=\"javascript:;\" onclick=\"financial_edit('对账','${context_root}/dataCount/toFinancialModify.action?storeId=" + row.storeId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>对账</span></a>";
                         return toEdit;
+                    } else {
+                        return "";
                     }
                 }
             }

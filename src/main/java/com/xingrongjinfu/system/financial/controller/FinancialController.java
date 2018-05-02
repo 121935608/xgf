@@ -70,7 +70,7 @@ public class FinancialController extends BaseController {
      * Description:跳转对账页面 <br/>
      *
      * @author huYL
-     * @param amountNum
+     * @param storeId
      * @return
      */
     @RequestMapping(FinancialConstant.FINANCIAL_MODIFY_URL)
@@ -78,7 +78,9 @@ public class FinancialController extends BaseController {
         ModelAndView modelAndView = this.getModelAndView(FinancialConstant.FINANCIAL_MODIFY_PAGE);
         Financial financial = financialService.getByNum(storeId);
         BigDecimal rate = new BigDecimal(1).subtract(financial.getXzfRate().divide(new BigDecimal(Double.toString(100))));
-        financial.setOpenMoney((financial.getCloseMoney().multiply(rate)).subtract(financial.getTotalMoney()));
+        BigDecimal totalMoney=financialService.getTotalMoney(storeId);
+        financial.setOpenMoney((financial.getCloseMoney().multiply(rate)).subtract(totalMoney).setScale(2));
+        financial.setTotalMoney(totalMoney);
         modelAndView.addObject("financial", financial);
         return modelAndView;
     }

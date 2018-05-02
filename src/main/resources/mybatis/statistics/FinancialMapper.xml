@@ -26,13 +26,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="pageInfoQuery" parameterType="PageUtilEntity"
 		resultType="Financial">
-        SELECT ROUND(SUM(planTotal/100),2) totalMoney,s.storeId storeId,
+        SELECT IFNULL(ROUND(SUM(planTotal/100),2),0.00) totalMoney,s.storeId storeId,
         s.storeName storeName,ROUND(IFNULL(b.remain/100,0),2) closeMoney,
         (SELECT xzfRate FROM sys_setting LIMIT 1) xzfRate,u.mobilePhone mobilePhone
         FROM t_store s LEFT JOIN m_billing b ON s.storeId=b.storeId
         LEFT JOIN t_repay r ON s.userId = r.userId
         LEFT JOIN sys_user u ON u.userId = s.userId
-
+        where 1=1
         <if test="relationMap.type != null and relationMap.type=='B'.toString()">
             AND s.storeId=#{relationMap.storeId}
         </if>
