@@ -147,4 +147,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updatePayOrder" parameterType="string">
 		update t_order set orderStatus=5 where orderNumber=#{0}
 	</update>
+	
+	<select id="orderAllList" resultType="Orders">
+		SELECT * FROM t_order o WHERE o.orderStatus != 1 
+	</select>
 </mapper> 

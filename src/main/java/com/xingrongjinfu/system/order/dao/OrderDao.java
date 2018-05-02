@@ -83,4 +83,15 @@ public class OrderDao extends DynamicObjectBaseDao implements IOrderDao {
     public int findAllOrders() {
         return (int) this.findForObject("OrderMapper.findAllOrders",null);
     }
+
+	@Override
+	public List<Order> orderAllList() {
+		List<Order> orderList = null;
+		try {
+			orderList = (List<Order>) this.findForList("OrderMapper.orderAllList");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return orderList;
+	}
 }

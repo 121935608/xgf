@@ -62,4 +62,10 @@ public interface IOrderDao {
      *
      */
     int findAllOrders();
+
+    /**
+     * 查询全部待发货订单列表
+     *
+     */
+	List<Order> orderAllList();
 }
