@@ -10,6 +10,7 @@
  */
 package com.xingrongjinfu.system.financial.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -42,6 +43,8 @@ public interface IFinancialService {
     int updateAmountInfo(Financial financial);
     
     Financial getByNum(String id);
+
+    BigDecimal getTotalMoney(String id);
     
     List<FinancialDetail> getDetail(String id);
     

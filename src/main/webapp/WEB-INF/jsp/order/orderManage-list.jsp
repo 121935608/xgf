@@ -10,13 +10,13 @@
 			   class="input-text Wdate" style="width:120px;" placeholder="开始时间">
 		<input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'beginTime\')}',maxDate:'%y-%M-%d'})" id="endTime"
 			   class="input-text Wdate" style="width:120px;" placeholder="结束时间">
-		<span class="select-box" style="width: 120px;">
+		<%--<span class="select-box" style="width: 120px;">
            <select name="payType" id="payType" class="select" autocomplete="off">
                <option value="">支付状态</option>
                <option value="4">已支付</option>
                <option value="1" >未支付</option>
            </select>
-       </span>
+       </span>--%>
 		<span class="select-box" style="width: 120px;">
            <select name="platform" id="platform" class="select" autocomplete="off">
                <option value="">订单来源</option>
@@ -45,7 +45,7 @@
 				<th width="10%">订单号</th>
 				<th width="10%">下单时间</th>
 				<th width="10%">付款时间</th>
-				<th width="8%">支付状态</th>
+				<%--<th width="8%">支付状态</th>--%>
 				<th width="6%">会员</th>
 				<th width="8%">订单金额</th>
 				<th width="8%">订单来源</th>
@@ -101,30 +101,42 @@ $(document).ready(function(){
                 }
             }
         },
-        {
-            "sDefaultContent": "支付状态",
-            "bSortable" : false,
-            "sClass": "text-c",
-            "bSearchable": false,
-            "mRender": function(data, type, row) {
-                if (row.orderStatus !=null) {
-                       if(row.orderStatus==1){
-                           return "未支付";
-					   }else if (row.orderStatus==2){
-                           return "已支付";
-					   }
-					   else if(row.orderStatus==3){
-                           return "已支付";
-					   }else if (row.orderStatus==4){
-                           return "已支付";
-					   }else if(row.orderStatus==5){
-                           return "已支付";
-					   }
-                } else {
-                    return "";
-                }
-            }
-        },
+//        {
+//            "sDefaultContent": "支付状态",
+//            "bSortable" : false,
+//            "sClass": "text-c",
+//            "bSearchable": false,
+//            "mRender": function(data, type, row) {
+//                if (row.orderStatus !=null) {
+//                       if(row.orderStatus==1){
+//                           return "未支付";
+//					   }else if (row.orderStatus==2){
+//                           if(row.payCode =="HDFK"){
+//                               return "未支付";
+//                           }else{
+//                               return "已支付";
+//                           }
+//					   }
+//					   else if(row.orderStatus==3){
+//                           if(row.payCode =="HDFK"){
+//                               return "未支付";
+//                           }else{
+//                               return "已支付";
+//                           }
+//					   }else if (row.orderStatus==4){
+//					       if(row.payCode =="HDFK"){
+//                               return "未支付";
+//						   }else{
+//                               return "已支付";
+//                           }
+//					   }else if(row.orderStatus==5){
+//                           return "已支付";
+//					   }
+//                } else {
+//                    return "";
+//                }
+//            }
+//        },
 		{
 			"sDefaultContent": "会员",
 			"bSortable" : false,

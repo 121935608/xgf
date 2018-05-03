@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.xingrongjinfu.crm.CrmConstant;
 import com.xingrongjinfu.crm.approvingCoupons.common.CouponConstant;
 import com.xingrongjinfu.crm.approvingCoupons.model.Coupon;
+import com.xingrongjinfu.crm.approvingCoupons.model.CouponImg;
 import com.xingrongjinfu.crm.approvingCoupons.service.ICouponService;
 import com.xingrongjinfu.system.merchant.common.MerchantConstant;
 import com.xingrongjinfu.system.merchant.model.AccountInfo;
@@ -70,6 +71,11 @@ public class CouponController extends BaseController
         ModelAndView modelAndView=this.getModelAndView(CouponConstant.COUPON_QUERY_PAGE);
         Coupon coupon= couponService.getCouponDetails(couponId);
         if (coupon !=null) {
+        	if(coupon.getCouponImgList() != null && coupon.getCouponImgList().size()>0){
+        		for(CouponImg couponImg : coupon.getCouponImgList()){
+        			couponImg.setImgUrl("http://xrjf.oss-cn-shanghai.aliyuncs.com/"+couponImg.getImgUrl());
+        		}
+        	}
             modelAndView.addObject("coupon", coupon);
         }
         return modelAndView;
