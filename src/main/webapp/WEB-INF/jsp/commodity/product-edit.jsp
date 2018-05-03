@@ -186,13 +186,19 @@ $(document).ready(function(){
 				<input style="width: 100px;" type="text" class="input-text" autocomplete="off" disabled="disabled" maxlength="20"  placeholder="" id="specification" name="specification" value="${product.specification}">#
 			</div>
 		</div>
-
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>价格规格：</label>
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>主观价：</label>
+			<div class="formControls col-xs-8 col-sm-4">
+				<input style="width: 100px;" type="text" class="input-text" autocomplete="off"  maxlength="20"  placeholder="" id="subPrice" name="subPrice" value="${product.subPrice}">#
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>客观价：</label>
 			<div class="formControls col-xs-8 col-sm-4">
 				<input style="width: 100px;" type="text" class="input-text" autocomplete="off"  maxlength="20"  placeholder="" id="priceSpecification" name="priceSpecification" value="${product.priceSpecification}">#
 			</div>
 		</div>
+
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>库存：</label>
 			<div class="formControls col-xs-8 col-sm-4">
@@ -376,6 +382,9 @@ $(document).ready(function(){
             required:true,
 		},
 		priceSpecification:{
+            required:true,
+        },
+        subPrice:{
             required:true,
         },
         commodityNo:{

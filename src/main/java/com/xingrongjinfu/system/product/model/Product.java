@@ -50,10 +50,19 @@ public class Product {
     private String categoryName;
     private String storage;
     private String commodityDes;
-    private String priceSpecification;
+    private String priceSpecification;//客观价
     private String commodityBanner;
     private String barCode;
+    private String subPrice;//主观价
 
+
+    public String getSubPrice() {
+        return subPrice;
+    }
+
+    public void setSubPrice(String subPrice) {
+        this.subPrice = subPrice;
+    }
 
     public String getBarCode() {
         return barCode;
