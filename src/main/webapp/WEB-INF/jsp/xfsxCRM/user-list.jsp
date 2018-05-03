@@ -21,14 +21,15 @@
             <thead>
             <tr class="text-c">
                 <th width="5%">姓名</th>
-                <th width="15%">督导员编号</th>
+                <th width="10%">图片</th>
+                <th width="5%">督导员编号</th>
                 <th width="5%">登录名</th>
                 <th width="7%">省</th>
                 <th width="7%">市</th>
                 <th width="7%">区</th>
                 <th width="10%">督导员部门</th>
-                <th width="10%">督导员角色</th>
-                <th width="15%">电话 </th>
+                <th width="8%">督导员角色</th>
+                <th width="12%">电话 </th>
                 <th width="10%">状态</th>
                 <th width="10%">操作</th>
             </tr>
@@ -38,6 +39,7 @@
 </div>
 <script type="text/javascript">
     var pageTable;
+    var imgpath="${imgPath}";
     $(document).ready(function(){
         var aoColumns = [
             {
@@ -51,6 +53,14 @@
                     } else {
                         return "";
                     }
+                }
+            },{
+                "sDefaultContent": "图片",
+                "bSortable" : false,
+                "sClass": "text-c",
+                "bSearchable": false,
+                "mRender": function(data, type, row) {
+                    return "<img src=\""+imgpath+row.headPortrait +"\"  style=\"width:50px;height:50px\"/>";
                 }
             },
             {
@@ -243,7 +253,7 @@
                     } else {
                         parent.layer.alert(data.m, {icon: 2, title: "系统提示"});
                     }
-                },
+                }
             });
 
         });

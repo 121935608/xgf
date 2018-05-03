@@ -38,6 +38,15 @@ public class Supervisor implements Serializable
     private String crmLogin;
     private String crmPwd;
     private String province;
+    private String headPortrait;
+
+    public String getHeadPortrait() {
+        return headPortrait;
+    }
+
+    public void setHeadPortrait(String headPortrait) {
+        this.headPortrait = headPortrait;
+    }
 
     private String roleId;/*CRM督导员的角色ID*/
 

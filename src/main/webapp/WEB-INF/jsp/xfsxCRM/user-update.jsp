@@ -24,6 +24,13 @@
             </div>
         </div>
         <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>图片：</label>
+            <div class="formControls col-xs-8 col-sm-4">
+                <img src="${imgPath}${Supervisor.headPortrait}" width="80px" height="80px" class="image" id="image">
+                <input type="file" class="picture" id="picture" accept="image/*" name="picture" onchange="changImg(event)">
+            </div>
+        </div>
+        <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3">所属部门：</label>
             <div class="formControls col-xs-8 col-sm-4">
                 <y:select id="deptId" name="deptId" codeGroup="${deptList}" selectedValue="${Supervisor.deptId }"
@@ -70,6 +77,27 @@
 </article>
 
 <script type="text/javascript">
+    //校验上传文件是否为图片格式
+    function changImg(e){
+        for (var i = 0; i < e.target.files.length; i++) {
+            var file = e.target.files.item(i);
+            if (!(/^image\/.*$/i.test(file.type))) {
+                continue; //不是图片 就跳出这一次循环
+            }
+            var imagSize =  document.getElementById("picture").files[0].size;
+            if(imagSize>1024*1024*3){
+                alert("图片最大为3M！");
+                document.getElementById("picture").value="";
+                return;
+            }
+            //实例化FileReader API
+            var freader = new FileReader();
+            freader.readAsDataURL(file);
+            freader.onload = function(e) {
+                $("#image").attr("src",e.target.result);
+            }
+        }
+    }
     jQuery.validator.addMethod("chineseName", function (value, element) {
         var chrnum =/^[\u4E00-\u9FA5]{2,4}$/;
         return this.optional(element) || (chrnum.test(value));
@@ -131,13 +159,15 @@
                 return;
             }
             var index = parent.layer.load();
+            var formData = new FormData($('#form-supervisor-modify')[0]);
             $.ajax({
                 url:"${context_url}/crmUser/updateSpervistorIDView.action?area="+area,
                 type:'post',
-                async:true ,
-                cache:false ,
-                data:$(form).serialize(),
-                dataType:"json",
+                data:formData,
+                mimeType: "multipart/form-data",
+                contentType: false,
+                cache:false,
+                processData: false,
                 success:function(data){
                     parent.layer.close(index);
                     if(data.s == true){

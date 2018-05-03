@@ -23,6 +23,13 @@
             </div>
         </div>
         <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>图片：</label>
+            <div class="formControls col-xs-8 col-sm-4">
+                <input type="file" onchange="pic(event)" id="picture" name="picture" accept="image/*">
+                <img alt="" id="myImg" src="" height="100px",width="100px">
+            </div>
+        </div>
+        <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3">所属部门：</label>
             <div class="formControls col-xs-8 col-sm-4">
                 <y:select id="deptId" name="deptId" codeGroup="${deptList}" selectedValue="请选择"
@@ -69,6 +76,26 @@
 </article>
 
 <script type="text/javascript">
+    function pic(e) {
+        for (var i = 0; i < e.target.files.length; i++) {
+            var file = e.target.files.item(i);
+            if (!(/^image\/.*$/i.test(file.type))) {
+                continue; //不是图片 就跳出这一次循环
+            }
+            var imagSize =  document.getElementById("picture").files[0].size;
+            if(imagSize>1024*1024*3){
+                alert("图片最大为3M！");
+                document.getElementById("picture").value="";
+                return;
+            }
+            //实例化FileReader API
+            var freader = new FileReader();
+            freader.readAsDataURL(file);
+            freader.onload = function(e) {
+                $("#myImg").attr("src",e.target.result);
+            }
+        }
+    }
     $(function(){
        $.ajax({
            url:"${context_root}/crmUser/selectDeptInfoView.action",
@@ -140,14 +167,17 @@
                 alert("请选择区域");
                 return;
             }
+            alert("改变了");
             var index = parent.layer.load();
+            var formData = new FormData($('#form-supervisor-add')[0]);
             $.ajax({
                 url:"${context_url}/crmUser/toAddSpervistorInfoView.action?area="+area,
                 type:'post',
-                async:true ,
-                cache:false ,
-                data:$(form).serialize(),
-                dataType:"json",
+                data:formData,
+                mimeType: "multipart/form-data",
+                contentType: false,
+                cache:false,
+                processData: false,
                 success:function(data){
                     parent.layer.close(index);
                     if(data.s == true){

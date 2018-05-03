@@ -1,5 +1,6 @@
 package com.xingrongjinfu.crm.crmUser.controller;
 
+import com.aliyun.oss.OSSException;
 import com.xingrongjinfu.crm.CrmConstant;
 import com.xingrongjinfu.crm.crmUser.service.CrmUserService;
 import com.xingrongjinfu.crm.department.model.Dept;
@@ -9,6 +10,7 @@ import com.xingrongjinfu.system.supervisor.model.Supervisor;
 import com.xingrongjinfu.system.supervisor.service.ISupervisorService;
 import com.xingrongjinfu.system.syscode.model.SysCode;
 import com.xingrongjinfu.utils.AccessCodeUtil;
+import com.xingrongjinfu.utils.AliyunOSSClientUtil;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.framework.core.controller.BaseController;
@@ -17,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xingrongjinfu.crm.crmUser.common.CrmUserConstant;
@@ -92,8 +95,22 @@ public class CrmUserController extends BaseController
     }
     /*根据督导员ID修改督导员信息*/
     @RequestMapping(CrmUserConstant.USER_CRM_UPDATE_URL)
-    public @ResponseBody Message updateCRMSupervisor(Supervisor supervisor){
+    public @ResponseBody Message updateCRMSupervisor(Supervisor supervisor,MultipartFile picture){
         int result = 0;
+        try {
+            if(picture.getSize() !=0){
+                AliyunOSSClientUtil aliyunOSSClientUtil = new AliyunOSSClientUtil();
+                String key = aliyunOSSClientUtil.uploadImg(picture);
+                if(key!=null){
+                    String filePath = aliyunOSSClientUtil.FOLDER + aliyunOSSClientUtil.filePath;
+                    supervisor.setHeadPortrait(filePath);
+
+                }
+            }
+        } catch (OSSException e) {
+            e.printStackTrace();
+            return new Message(result);
+        }
         Integer supervistorID = supervisor.getSupervisorId();
         if(supervistorID !=null){
             result = supervisorService.updateCRMSupervisor(supervisor);
@@ -120,8 +137,22 @@ public class CrmUserController extends BaseController
     }
     /*添加督导员接口*/
     @RequestMapping(CrmUserConstant.USER_CRM_ADD_URL_TWO)
-    public @ResponseBody Message addCRMSupervistor(Supervisor supervisor){
+    public @ResponseBody Message addCRMSupervistor(Supervisor supervisor,MultipartFile picture){
         int result = 0;
+        try {
+            if(picture.getSize() !=0){
+                AliyunOSSClientUtil aliyunOSSClientUtil = new AliyunOSSClientUtil();
+                String key = aliyunOSSClientUtil.uploadImg(picture);
+                if(key!=null){
+                    String filePath = aliyunOSSClientUtil.FOLDER + aliyunOSSClientUtil.filePath;
+                    supervisor.setHeadPortrait(filePath);
+
+                }
+            }
+        } catch (OSSException e) {
+            e.printStackTrace();
+            return new Message(result);
+        }
         supervisor.setSupervisorNum(AccessCodeUtil.accessCode());
         result = supervisorService.addCRMSupervisor(supervisor);
         return new Message(result);
