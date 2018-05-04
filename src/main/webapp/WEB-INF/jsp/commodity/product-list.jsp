@@ -51,7 +51,7 @@
 				<th width="5%">国内/国外</th>
 				<th width="3%">等级</th>
 				<th width="5%">规格</th>
-				<th width="5%">价格规格</th>
+				<th width="5%">客观价</th>
 				<th width="5%">进价(元)</th>
 				<%--<th width="5%">费率</th>--%>
 				<th width="5%">售价(元)</th>
@@ -209,7 +209,7 @@ $(document).ready(function(){
             }
         },
         {
-            "sDefaultContent": "价格规格",
+            "sDefaultContent": "客观价",
             "bSortable" : false,
             "sClass": "text-c",
             "bSearchable": false,
