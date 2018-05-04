@@ -11,6 +11,7 @@ import com.xingrongjinfu.system.supervisor.service.ISupervisorService;
 import com.xingrongjinfu.system.syscode.model.SysCode;
 import com.xingrongjinfu.utils.AccessCodeUtil;
 import com.xingrongjinfu.utils.AliyunOSSClientUtil;
+import com.xingrongjinfu.utils.Md5Utils;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.framework.core.controller.BaseController;
@@ -154,6 +155,7 @@ public class CrmUserController extends BaseController
             return new Message(result);
         }
         supervisor.setSupervisorNum(AccessCodeUtil.accessCode());
+        supervisor.setCrmPwd(Md5Utils.hash(supervisor.getCrmPwd()));
         result = supervisorService.addCRMSupervisor(supervisor);
         return new Message(result);
     }
