@@ -18,6 +18,7 @@
         <result property="province" column="province" />
         <result property="city" column="city" />
         <result property="county" column="county" />
+        <result property="roleId" column="roleId" />
         <result property="headPortrait" column="headPortrait" />
     </resultMap>
 
@@ -39,14 +40,54 @@
             )
         </if>
     </select>
-    <!--查询CRM督导员角色和部门信息-->
+    <!--查询CRM督导员,角色和部门信息-->
     <select id="SupervisorCRMPageInfoQuery" parameterType="PageUtilEntity" resultType="HashMap">
         SELECT
-            ss.*, cd.*
+        ss.*, cd.*,sr.*
         FROM
-            sys_supervisor ss
-        LEFT JOIN c_dept cd ON ss.deptId = cd.deptId;
+        sys_supervisor ss
+        LEFT JOIN c_dept cd ON ss.deptId = cd.deptId
+        LEFT JOIN sys_role sr ON ss.roleId = sr.roleId
+        WHERE 1 = 1
+        <if test="relationMap.status!=null and relationMap.status!=''">
+            AND ss.status = #{relationMap.status}
+        </if>
+        <if test="relationMap.userName!=null and relationMap.userName!=''">
+            AND
+            (
+            ss.name LIKE CONCAT(CONCAT('%', #{relationMap.userName}),'%')
+            OR
+            ss.supervisorNum LIKE CONCAT(CONCAT('%', #{relationMap.userName}),'%')
+            OR
+            ss.phone LIKE CONCAT(CONCAT('%', #{relationMap.userName}),'%')
+            )
+        </if>;
+
     </select>
+    <!--根据ID修改督导员信息-->
+    <update id="updateCRMSupervisor" parameterType="Supervisor">
+        UPDATE sys_supervisor
+        <set>
+            <if test="name !=null and name!=''">name =#{name},</if>
+            <if test="phone !=null and phone!=''">phone =#{phone},</if>
+            <if test="area !=null and area!=''">area =#{area},</if>
+            <if test="status !=null">status =#{status},</if>
+            <if test="deptId !=null">deptId =#{deptId},</if>
+            <if test="crmLogin !=null">crmLogin =#{crmLogin},</if>
+            <if test="crmPwd !=null">crmPwd =#{crmPwd},</if>
+            <if test="province !=null">province =#{province},</if>
+            <if test="city !=null">city =#{city},</if>
+            <if test="county !=null">county =#{county},</if>
+            <if test="roleId !=null">roleId =#{roleId},</if>
+            <if test="headPortrait !=null">headPortrait =#{headPortrait},</if>
+            <if test="supervisorNum !=null and supervisorNum!=''">supervisorNum =#{supervisorNum}</if>
+            creatTime=sysdate()
+        </set>
+        WHERE 1=1
+        <if test="supervisorId !=null">
+            AND supervisorId=#{supervisorId}
+        </if>
+    </update>
     <update id="updateSupervisor" parameterType="Supervisor">
         UPDATE sys_supervisor
         <set>
@@ -62,22 +103,7 @@
             AND supervisorId=#{supervisorId}
         </if>
     </update>
-    <!--根据ID修改督导员信息-->
-    <update id="updateCRMSupervisor" parameterType="Supervisor">
-        UPDATE sys_supervisor
-        <set>
-            <if test="name !=null and name!=''">name =#{name},</if>
-            <if test="phone !=null and phone!=''">phone =#{phone},</if>
-            <if test="area !=null and area!=''">area =#{area},</if>
-            <if test="status !=null">status =#{status},</if>
-            <if test="supervisorNum !=null and supervisorNum!=''">supervisorNum =#{supervisorNum}</if>
-            creatTime=sysdate()
-        </set>
-        WHERE 1=1
-        <if test="supervisorId !=null">
-            AND supervisorId=#{supervisorId}
-        </if>
-    </update>
+
     <select id="findSupervisor" resultType="Supervisor">
         SELECT * FROM sys_supervisor WHERE supervisorId=#{supervisorId}
     </select>
@@ -110,17 +136,22 @@
         <if test="city !=null and city!=''">city,</if>
         <if test="county !=null and county!=''">county,</if>
         <if test="supervisorNum !=null and supervisorNum!=''">supervisorNum,</if>
+        <if test="roleId !=null and roleId!=''">roleId,</if>
+        <if test="headPortrait !=null and headPortrait!=''">headPortrait,</if>
         deptId,
         <if test="crmLogin !=null and crmLogin!=''">crmLogin,</if>
         <if test="crmPwd !=null and crmPwd!=''">crmPwd,</if>
-        <if test="headPortrait !=null and headPortrait!=''">headPortrait,</if>
         creatTime
         )VALUES (
         <if test="name !=null and name!=''">#{name},</if>
         <if test="phone !=null and phone!=''">#{phone},</if>
         <if test="area !=null and area!=''">#{area},</if>
         <if test="status !=null and status!=''">#{status},</if>
+        <if test="province !=null and province!=''">#{province},</if>
+        <if test="city !=null and city!=''">#{city},</if>
+        <if test="county !=null and county!=''">#{county},</if>
         <if test="supervisorNum !=null and supervisorNum!=''">#{supervisorNum},</if>
+        <if test="roleId !=null and roleId!=''">#{roleId},</if>
         #{deptId},
         <if test="crmLogin !=null and crmLogin!=''">#{crmLogin},</if>
         <if test="crmPwd !=null and crmPwd!=''">#{crmPwd},</if>
