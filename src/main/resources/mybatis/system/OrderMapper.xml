@@ -68,16 +68,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="relationMap.endTime != null and relationMap.endTime != ''"><!-- 结束时间检索 -->
 			AND DATE_FORMAT(o.orderTime,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
 		</if>
-		<if test="relationMap.payType != null and relationMap.payType != ''">
-			<choose>
-				<when test="relationMap.payType == '1'.toString()">
-					AND o.orderStatus=#{relationMap.payType}
-				</when>
-				<otherwise>
-					AND o.orderStatus !='1'
-				</otherwise>
-			</choose>
-		</if>
 		<if test="relationMap.platform != null and relationMap.platform != ''">
 			AND o.platform=#{relationMap.platform}
 		</if>
