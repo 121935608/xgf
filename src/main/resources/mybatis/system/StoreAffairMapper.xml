@@ -51,7 +51,7 @@
 	</select>
 	<!-- 查询所有监督员对象 -->
 	<select id="getSupervisorList"    resultType="supervisor">
-		select  supervisorId,name from sys_supervisor where status=0
+		select  supervisorId,name,supervisorNum from sys_supervisor where status=0
 	</select>
 
 

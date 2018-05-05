@@ -19,7 +19,7 @@
                         </y:select>
                     </div>
                     <div class="col-xs-6 col-sm-6 .col-md-6" >
-                        <y:select id="auditStatus" name="auditStatus" codeGroup="${ispass}" selectedValue=""
+                        <y:select id="process" name="process" codeGroup="${ispass}" selectedValue=""
                                   cssClass="select" headerKey="" headerValue="状态">
                         </y:select>
                     </div>
@@ -209,7 +209,9 @@
                     }else if (row.process == 'APRNO') {
                         return "<span class=\"label label-defaunt radius\">认证不通过</span>";
                     }else if (row.process == 'APRYES') {
-                        return "<span class=\"label label-defaunt radius\">认证通过</span>";
+                        return "<span class=\"label label-success radius\">认证通过</span>";
+                    }else if(row.process == 'PASS'){
+                        return "<span class=\"label label-defaunt radius\">审核通过未认证</span>";
                     }else{
                         return "<span class=\"label label-defaunt radius\">待审核</span>";
                     }
@@ -244,11 +246,11 @@
 
     function query() {
         var supervisor = $("#supervisor").val();
-        var auditStatus = $("#auditStatus").val();
+        var process = $("#process").val();
         var beginTime = $("#beginTime").val();
         var endTime = $("#endTime").val();
         pageTable.fnSettings().sAjaxSource = "${context_root}/crmStore/crmStoreSelect.action?supervisor="+ supervisor +
-            "&auditStatus="+ auditStatus +
+            "&process="+ process +
             "&beginTime="+ beginTime +
             "&endTime="+ endTime;
         pageTable.fnClearTable(0);

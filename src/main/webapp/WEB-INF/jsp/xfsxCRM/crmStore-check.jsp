@@ -162,7 +162,7 @@
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3">审核结果</label>
                 <div class="formControls col-xs-8 col-sm-4">
-                    <y:select id="auditStatus" name="auditStatus" codeGroup="${ispass}" selectedValue="${store['auditStatus']}"
+                    <y:select id="process" name="process" codeGroup="${ispass}" selectedValue="${store['auditStatus']}"
                               cssClass="select" headerKey="" headerValue="请选择">
                     </y:select>
                 </div>

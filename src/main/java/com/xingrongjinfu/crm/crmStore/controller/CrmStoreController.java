@@ -84,7 +84,17 @@ public class CrmStoreController extends BaseController {
         modelAndView.addObject("supervisorList", sysCodeList);
 
         //审核下拉框      未认证:WRZ  待审核:0 审核不通过:1 审核通过:2
-        modelAndView.addObject("ispass", getCRMStatus());
+        List<SysCode> sysCodeList1 = new ArrayList<SysCode>();
+        SysCode sysCode1 = new SysCode();
+        sysCode1.setCodeid("NOPASS");
+        sysCode1.setCodevalue("审核不通过");
+        sysCodeList1.add(sysCode1);
+
+        SysCode sysCode2 = new SysCode();
+        sysCode2.setCodeid("PASS");
+        sysCode2.setCodevalue("审核通过");
+        sysCodeList1.add(sysCode2);
+        modelAndView.addObject("ispass", sysCodeList1);
 
         return modelAndView;
     }
@@ -117,7 +127,7 @@ public class CrmStoreController extends BaseController {
     @RequestMapping(CrmStoreConstant.CRM_STORE_SUPERVISTOR_URL)
     public ModelAndView crmStoreSupervistor(String storeId){
         ModelAndView modelAndView = this.getModelAndView(CrmStoreConstant.CRM_STORE_SUPERVISTOR_PAGE);
-        Store s=getCrmStoreInfo(storeId);
+        Store s = getCrmStoreInfo(storeId);
         modelAndView.addObject("store",s);
         return  modelAndView;
     }
@@ -137,19 +147,39 @@ public class CrmStoreController extends BaseController {
     public List<SysCode> getCRMStatus(){
         List<SysCode> sysCodeList1 = new ArrayList<SysCode>();
         SysCode sysCode1 = new SysCode();
-        sysCode1.setCodeid("0");
-        sysCode1.setCodevalue("待审核");
+        sysCode1.setCodeid("WRZ");
+        sysCode1.setCodevalue("未认证");
         sysCodeList1.add(sysCode1);
 
         SysCode sysCode2 = new SysCode();
-        sysCode2.setCodeid("1");
-        sysCode2.setCodevalue("审核通过");
+        sysCode2.setCodeid("APRING");
+        sysCode2.setCodevalue("认证审核中");
         sysCodeList1.add(sysCode2);
 
         SysCode sysCode3 = new SysCode();
-        sysCode3.setCodeid("2");
-        sysCode3.setCodevalue("审核不通过");
+        sysCode3.setCodeid("APRNO");
+        sysCode3.setCodevalue("认证不通过");
         sysCodeList1.add(sysCode3);
+
+        SysCode sysCode4 = new SysCode();
+        sysCode4.setCodeid("APRYES");
+        sysCode4.setCodevalue("认证通过");
+        sysCodeList1.add(sysCode4);
+
+        SysCode sysCode5 = new SysCode();
+        sysCode5.setCodeid("WAITPASS");
+        sysCode5.setCodevalue("待审核");
+        sysCodeList1.add(sysCode5);
+
+        SysCode sysCode6 = new SysCode();
+        sysCode6.setCodeid("NOPASS");
+        sysCode6.setCodevalue("审核不通过");
+        sysCodeList1.add(sysCode6);
+
+        SysCode sysCode7 = new SysCode();
+        sysCode7.setCodeid("PASS");
+        sysCode7.setCodevalue("审核通过");
+        sysCodeList1.add(sysCode7);
         return sysCodeList1;
     }
 

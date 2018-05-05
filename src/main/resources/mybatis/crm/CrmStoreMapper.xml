@@ -13,7 +13,7 @@
     <!--查询店铺和督导员关联的详情信息-->
     <select id="pageInfoQuery" parameterType="PageUtilEntity" resultType="HashMap" useCache="false">
         SELECT
-        a.storeNo,a.storeName,a.userName,a.remain,a.phone,a.idCard,a.area,a.process,a.addTime,cds.deptName,s.`name`,s.supervisorId,top.totalPrice,tb.monthPrice,tb.monthNum,ca.totalVisitNum
+        a.storeNo,a.storeId,a.storeName,a.userName,a.remain,a.phone,a.idCard,a.area,a.process,a.addTime,cds.deptName,s.`name`,s.supervisorId,top.totalPrice,tb.monthPrice,tb.monthNum,ca.totalVisitNum
         FROM
         t_store a
         LEFT JOIN sys_supervisor s ON a.supervisorId = s.supervisorNum
@@ -62,12 +62,12 @@
         LEFT JOIN c_dept cd ON
         cd.deptId = sss.deptId
         ) cds ON a.supervisorId = cds.supervisorNum
-        where 1=1
+        WHERE 1=1
         <if test="relationMap.supervisor != null and relationMap.supervisor != ''">
             AND a.supervisorId = #{relationMap.supervisor}
         </if>
-        <if test="relationMap.auditStatus != null and relationMap.auditStatus != ''">
-            AND a.auditStatus = #{relationMap.auditStatus}
+        <if test="relationMap.process != null and relationMap.process != ''">
+            AND a.process = #{relationMap.process}
         </if>
         <if test="relationMap.beginTime != null and relationMap.beginTime != ''">
             AND DATE_FORMAT(a.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
