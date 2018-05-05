@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CrmStoreMapper">
+    <resultMap id="BaseResultMap" type="com.xingrongjinfu.system.storeaffairs.model.PurchaseDto" >
+        <result column="storeName" property="storeName"/>
+        <result column="name" property="name"/>
+        <result column="orderPrice" property="orderPrice"/>
+        <result column="orderNum" property="orderNum"/>
+    </resultMap>
+
+    <!--查询店铺和督导员关联的详情信息-->
+    <select id="pageInfoQuery" parameterType="PageUtilEntity" resultType="HashMap" useCache="false">
+        SELECT
+        a.storeNo,a.storeName,a.userName,a.remain,a.phone,a.idCard,a.area,a.process,a.addTime,cds.deptName,s.`name`,s.supervisorId,top.totalPrice,tb.monthPrice,tb.monthNum,ca.totalVisitNum
+        FROM
+        t_store a
+        LEFT JOIN sys_supervisor s ON a.supervisorId = s.supervisorNum
+        LEFT JOIN (
+        SELECT
+        userId,
+        SUM(t.orderPrice) AS totalPrice
+        FROM
+        t_order t
+        WHERE
+        `status` = 1
+        GROUP BY
+        userId
+        ) top ON a.userId = top.userId
+        LEFT JOIN (
+        SELECT
+        userId,
+        SUM(orderPrice) AS monthPrice,
+        COUNT(1) AS monthNum
+        FROM
+        t_order
+        WHERE
+        DATE_SUB(CURDATE(), INTERVAL 30 DAY) <![CDATA[   <=  ]]> date(orderTime)
+        AND `status` = 1
+        GROUP BY
+        userId
+        ) tb ON a.userId = tb.userId
+        LEFT JOIN (
+        SELECT
+        userId,
+        COUNT(1) AS totalVisitNum
+        FROM
+        c_visit_record
+        WHERE
+        `status` = 0
+        AND visitResultStatus IS NOT NULL
+        GROUP BY
+        userId
+        ) ca ON ca.userId = a.userId
+        LEFT JOIN (
+        SELECT
+        supervisorNum,
+        deptName
+        FROM
+        sys_supervisor sss
+        LEFT JOIN c_dept cd ON
+        cd.deptId = sss.deptId
+        ) cds ON a.supervisorId = cds.supervisorNum
+        where 1=1
+        <if test="relationMap.supervisor != null and relationMap.supervisor != ''">
+            AND a.supervisorId = #{relationMap.supervisor}
+        </if>
+        <if test="relationMap.auditStatus != null and relationMap.auditStatus != ''">
+            AND a.auditStatus = #{relationMap.auditStatus}
+        </if>
+        <if test="relationMap.beginTime != null and relationMap.beginTime != ''">
+            AND DATE_FORMAT(a.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
+        </if>
+        <if test="relationMap.endTime != null and relationMap.endTime != ''">
+            AND DATE_FORMAT(a.addTime,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
+        </if>
+        ORDER BY totalPrice DESC
+    </select>
+
+</mapper>

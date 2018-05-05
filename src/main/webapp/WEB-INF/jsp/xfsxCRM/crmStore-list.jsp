@@ -200,12 +200,18 @@
                 "sClass": "td-status text-c",
                 "bSearchable": false,
                 "mRender": function(data, type, row) {
-                    if (row.auditStatus == '0') {
-                        return "<span class=\"label label-success radius\">待审核</span>";
-                    } else if(row.auditStatus == '1'){
-                        return "<span class=\"label label-success radius\">审核通过</span>";
-                    } else {
+                    if (row.process == 'NOPASS') {
                         return "<span class=\"label label-defaunt radius\">审核不通过</span>";
+                    }else if (row.process == 'WRZ') {
+                        return "<span class=\"label label-defaunt radius\">未认证</span>";
+                    }else if (row.process == 'APRING') {
+                        return "<span class=\"label label-defaunt radius\">认证审核中</span>";
+                    }else if (row.process == 'APRNO') {
+                        return "<span class=\"label label-defaunt radius\">认证不通过</span>";
+                    }else if (row.process == 'APRYES') {
+                        return "<span class=\"label label-defaunt radius\">认证通过</span>";
+                    }else{
+                        return "<span class=\"label label-defaunt radius\">待审核</span>";
                     }
                 }
             },

@@ -15,7 +15,7 @@ public class CrmStoreDaoImpl extends DynamicObjectBaseDao implements CrmStoreDao
     public List<TableDataInfo> selectStoreSup(PageUtilEntity pageUtilEntity) {
         List<TableDataInfo> supervisorPageInfo = null;
         try {
-            supervisorPageInfo = (List<TableDataInfo>)this.findForList("StoreAffairMapper.selectStoreSup",pageUtilEntity);
+            supervisorPageInfo = (List<TableDataInfo>)this.findForList("CrmStoreMapper.pageInfoQuery",pageUtilEntity);
         } catch (Exception e) {
             e.printStackTrace();
         }
