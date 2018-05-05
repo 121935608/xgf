@@ -74,7 +74,8 @@ public class SupervisorDao extends DynamicObjectBaseDao implements ISupervisorDa
         List<TableDataInfo> supervisorCRMPageInfo = null;
         try
         {
-            supervisorCRMPageInfo = (List<TableDataInfo>) this.findForList("SupervisorMapper.SupervisorCRMPageInfoQuery", pageUtilEntity);
+            //supervisorCRMPageInfo = (List<TableDataInfo>) this.findForList("SupervisorMapper.SupervisorCRMPageInfoQuery", pageUtilEntity);
+        	supervisorCRMPageInfo = (List<TableDataInfo>) this.findForList("UsersMapper.pageInfoQuery", pageUtilEntity);
         }
         catch (Exception e)
         {

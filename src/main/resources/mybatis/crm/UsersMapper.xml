@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="UsersMapper">
+
+    <!--查询CRM督导员,角色和部门信息-->
+    <select id="pageInfoQuery" parameterType="PageUtilEntity" resultType="HashMap">
+        SELECT
+        ss.*, cd.deptName,cd.`describe`,sr.roleName,sr.roleKey,sr.`status` as roleStatus
+        FROM
+        sys_supervisor ss
+        LEFT JOIN c_dept cd ON ss.deptId = cd.deptId
+        LEFT JOIN sys_role sr ON ss.roleId = sr.roleId
+        WHERE 1 = 1
+        <if test="relationMap.status!=null and relationMap.status!=''">
+            AND ss.status = #{relationMap.status}
+        </if>
+        <if test="relationMap.userName!=null and relationMap.userName!=''">
+            AND
+            (
+            ss.name LIKE CONCAT(CONCAT('%', #{relationMap.userName}),'%')
+            OR
+            ss.supervisorNum LIKE CONCAT(CONCAT('%', #{relationMap.userName}),'%')
+            OR
+            ss.phone LIKE CONCAT(CONCAT('%', #{relationMap.userName}),'%')
+            )
+        </if>
+
+    </select>
+
+
+</mapper>

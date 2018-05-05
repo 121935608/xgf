@@ -31,4 +31,6 @@ public class CrmUserDaoImpl extends DynamicObjectBaseDao implements CrmUserDao {
         }
         return list;
     }
+    
+    
 }
