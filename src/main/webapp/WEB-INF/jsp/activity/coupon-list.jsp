@@ -87,11 +87,10 @@
                 "mRender": function (data, type, row) {
                     if (row.timeType ==0) {
                         return row.useDays+"天";
-                    } else if(row.timeType==1){
+                    }
+                    if(row.timeType==1){
                         if(row.startTime!=null&&row.endTime!=null)
                             return row.startTime.split(" ")[0]+"一"+row.endTime.split(" ")[0];
-                    }else{
-                        return "undefine";
                     }
                 }
             },

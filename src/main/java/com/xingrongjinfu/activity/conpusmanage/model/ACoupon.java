@@ -35,7 +35,7 @@ public class ACoupon {
         if (startTime != null) {
             this.startTime = startTime.split(" ")[0];
         } else {
-            this.startTime = startTime;
+            this.startTime = null;
         }
 
     }
@@ -45,7 +45,7 @@ public class ACoupon {
         if (endTime != null) {
             this.endTime = endTime.split(" ")[0];
         } else {
-            this.endTime = endTime;
+            this.endTime = null;
         }
     }
 

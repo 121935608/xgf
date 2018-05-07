@@ -22,6 +22,7 @@
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>有效期：</label>
             <div class="formControls col-xs-8 col-sm-4">
+
                 <input id="timeType0" type="radio"  name="timeType" onclick="toggleDiv(this.value);" value="0">按天
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <input id="timeType1" type="radio" name="timeType" onclick="toggleDiv(this.value);" value="1">时段
@@ -38,9 +39,9 @@
         <div class="row cl" style="display: none;" id="dateDiv">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span></label>
             <div class="formControls col-xs-8 col-sm-4">
-                <input type="text" onfocus="WdatePicker()" id="beginTime" name="startTime"
+                <input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')||\'%y-%M-%d\'}'})" id="beginTime" name="startTime"
                        class="input-text Wdate" style="width:100px;" placeholder="开始时间" value="${acoupon.startTime}">一
-                <input type="text" onfocus="WdatePicker()" id="endTime" name="endTime"
+                <input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'beginTime\')}',maxDate:'%y-%M-%d'})" id="endTime" name="endTime"
                        class="input-text Wdate" style="width:100px;" placeholder="结束时间" value="${acoupon.endTime}">
             </div>
         </div>

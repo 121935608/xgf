@@ -31,12 +31,12 @@
 
             </div>
         </div>
-        <div class="row cl" style="display: block;" id="dateDiv">
+        <div class="row cl" style="display: none;" id="dateDiv">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span></label>
             <div class="formControls col-xs-8 col-sm-4">
-                <input type="text" onfocus="WdatePicker()" id="beginTime" name="beginTime"
+                <input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')||\'%y-%M-%d\'}'})" id="beginTime" name="beginTime"
                        class="input-text Wdate" style="width:100px;" placeholder="开始时间">一
-                <input type="text" onfocus="WdatePicker()" id="endTime" name="endTime"
+                <input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'beginTime\')}',maxDate:'%y-%M-%d'})" id="endTime" name="endTime"
                        class="input-text Wdate" style="width:100px;" placeholder="结束时间">
             </div>
         </div>
