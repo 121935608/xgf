@@ -72,6 +72,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.xingrongjinfu.crm.approvingCoupons.model.Coupon" alias="Coupon"/>
 		<typeAlias type="com.xingrongjinfu.crm.approvingCoupons.model.CouponImg" alias="CouponImg"/>
 		<typeAlias type="com.xingrongjinfu.system.storeaffairs.model.PurchaseDto" alias="PurchaseDto"/>
+		<typeAlias type="com.xingrongjinfu.activity.conpusmanage.model.ACoupon" alias="ACoupon"/>
 
 
 

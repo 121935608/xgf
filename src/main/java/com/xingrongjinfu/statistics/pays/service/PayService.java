@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 public class PayService implements IPayService
 {
 
-	@Autowired
+	//@Autowired
     private IPayDao paysDao;
 
 

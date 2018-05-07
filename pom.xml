@@ -7,6 +7,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>xgf_admin Maven Webapp</name>
 	<url>http://maven.apache.org</url>
+
 	<dependencies>
 
 		<!-- web相关jar包 -->
@@ -268,6 +269,12 @@
 			<groupId>org.quartz-scheduler</groupId>
 			<artifactId>quartz-jobs</artifactId>
 			<version>2.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.16.18</version>
+			<scope>provided</scope>
 		</dependency>
 
 	</dependencies>
