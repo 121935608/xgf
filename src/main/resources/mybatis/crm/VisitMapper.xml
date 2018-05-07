@@ -32,5 +32,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				AND visitResultStatus IS NOT NULL
 			</if>
 		</if>
+		<if test="relationMap.storeName != null and relationMap.storeName != ''"><!-- 关键词检索 -->
+				AND t.storeName LIKE CONCAT(CONCAT('%', #{relationMap.storeName}),'%')
+		</if>
+		<if test="relationMap.supervisorName != null and relationMap.supervisorName != ''"><!-- 关键词检索 -->
+				AND s.`name` LIKE CONCAT(CONCAT('%', #{relationMap.supervisorName}),'%')
+		</if>
 	</select>
 </mapper> 

@@ -47,7 +47,7 @@ public class VisitController extends BaseController
     {
         PageUtilEntity pageUtilEntity = this.getPageUtilEntity();
         if(isVisit != null){
-        	HashMap map = new HashMap();
+        	HashMap map = (HashMap) pageUtilEntity.getRelationMap();
         	map.put("isVisit", isVisit);
         	pageUtilEntity.setRelationMap(map);
         }

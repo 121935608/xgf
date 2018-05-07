@@ -50,6 +50,11 @@
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 谢鲜CRM管理 <span class="c-gray en">&gt;</span> 拜访记录列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 
 <div class="page-container">
+    <div class="text-c">
+		<input type="text" class="input-text" style="width:250px" placeholder="门店名称" id="storeName" name="storeName">
+		<input type="text" class="input-text" style="width:250px" placeholder="业务员姓名" id="supervisorName" name="supervisorName">
+		<button type="button" class="btn btn-success radius" onclick="query()"><i class="Hui-iconfont">&#xe665;</i>查询</button>
+	</div>
 
   <div class="tab-wrapper">
   
@@ -249,6 +254,17 @@ $(document).ready(function(){
         var urlOne = "${context_root}/crm/visitList.action?isVisit=false";
         pageTableOne = _Datatable_InitOne(pageTableOne, aoColumns, urlOne);
 });
+
+function query() {
+    var storeName = $("#storeName").val();
+    var supervisorName = $("#supervisorName").val();
+    pageTable.fnSettings().sAjaxSource = encodeURI("${context_root}/crm/visitList.action?storeName=" + storeName+"&supervisorName="+supervisorName+"&isVisit=true");
+    pageTable.fnClearTable(0);
+    pageTable.fnDraw();
+    pageTableOne.fnSettings().sAjaxSource = encodeURI("${context_root}/crm/visitList.action?storeName=" + storeName+"&supervisorName="+supervisorName+"&isVisit=false");
+    pageTableOne.fnClearTable(0);
+    pageTableOne.fnDraw();
+}
 
 </script> 
 </body>
