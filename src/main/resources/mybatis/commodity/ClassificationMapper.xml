@@ -42,6 +42,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="img != null and img != ''">img = #{img},</if>
  			<if test="sort != null and sort != ''">sort = #{sort},</if>
  			<if test="addTime != null and addTime != ''">addTime = #{addTime},</if>
+			<if test="country != null and country != ''">country = #{country},</if>
  			<if test="parentId != null and parentId != ''">parentId = #{parentId}</if>
  		</set>
  		where 1=1
@@ -60,6 +61,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="img != null and img != ''">img,</if>
  			<if test="sort != null and sort != ''">sort,</if>
  			<if test="status != null and status != ''">status,</if>
+		    <if test="country != null and country != ''">country,</if>
  			addTime,
  			<if test="parentId != null and parentId != ''">parentId</if>
  			
@@ -69,6 +71,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="img != null and img != ''">#{img},</if>
  			<if test="sort != null and sort != ''">#{sort},</if>
  			<if test="status != null and status != ''">#{status},</if>
+		    <if test="country != null and country != ''">#{country},</if>
  			sysdate(),
  			<if test="parentId != null and parentId != ''">#{parentId}</if>
  		)

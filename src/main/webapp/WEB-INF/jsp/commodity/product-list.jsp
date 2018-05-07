@@ -51,6 +51,7 @@
 				<th width="5%">国内/国外</th>
 				<th width="3%">等级</th>
 				<th width="5%">规格</th>
+				<th width="5%">主观价</th>
 				<th width="5%">客观价</th>
 				<th width="5%">进价(元)</th>
 				<%--<th width="5%">费率</th>--%>
@@ -203,6 +204,19 @@ $(document).ready(function(){
             "mRender": function(data, type, row) {
                 if (row.specification !=null) {
                     return row.specification;
+                }else {
+                    return "";
+                }
+            }
+        },
+        {
+            "sDefaultContent": "主观价",
+            "bSortable" : false,
+            "sClass": "text-c",
+            "bSearchable": false,
+            "mRender": function(data, type, row) {
+                if (row.subPrice !=null) {
+                    return row.subPrice;
                 }else {
                     return "";
                 }

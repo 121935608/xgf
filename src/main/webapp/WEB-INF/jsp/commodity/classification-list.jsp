@@ -37,11 +37,20 @@
 			</div>
 		</div>
 		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>分类显示:</label>
+			<div class="radio-box">
+				<input type="radio"  name="country" value="0" checked>国内国外显示&nbsp;
+				<input type="radio"  name="country" value="1" >国内显示&nbsp;
+				<input type="radio"  name="country" value="2" >国外显示&nbsp;
+			</div>
+		</div>
+		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>排序：</label>
 			<div class="formControls col-xs-8 col-sm-4">
 				<input type="number" class="input-text" value="" id="sort" name="sort">
 			</div>
 		</div>
+
 		 <%-- <div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>状态：</label>
 			<div class="formControls col-xs-8 col-sm-4">
@@ -129,6 +138,7 @@
 			$("input[name=available][value='"+data.available+"']").iCheck('check');
 			$("#parentId option").removeAttr("selected");
 			checkOption(data.parentId);
+			loadData(data.country);
 			$("select option[value='"+data.parentId+"']").attr("selected", "selected");
 		})
 	}
@@ -176,6 +186,10 @@
 			sort:{
 				isSpace:true,
 				required:true
+			},
+			country:{
+                isSpace:true,
+                required:true
 			},
 
 		},
@@ -241,6 +255,15 @@
 			$("#status").append(selectOption);
 			$("select option[value='0']").remove();
 		}
+	}
+
+      function loadData(type){
+          var valve = document.getElementsByName("country");
+          for(var i=0;i<valve.length;i++){
+              if (type==valve[i].value) {
+                      valve[i].checked=true;
+          }
+      }
 	}
 
 </SCRIPT>

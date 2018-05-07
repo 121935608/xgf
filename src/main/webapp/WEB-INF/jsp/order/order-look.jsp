@@ -47,6 +47,7 @@
 				<label class="form-label col-xs-4 col-sm-3">订单状态:</label>
 				<div class="formControls col-xs-8 col-sm-4">
 					<span>
+						<c:if  test="${orders.orderStatus eq -1}">已取消</c:if>
 						<c:if  test="${orders.orderStatus eq 1}">待支付</c:if>
 						<c:if  test="${orders.orderStatus eq 2}">待发货</c:if>
 						<c:if  test="${orders.orderStatus eq 3}">待收货</c:if>

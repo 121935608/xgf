@@ -22,6 +22,17 @@ public class Category implements Serializable
     private int status;
     private Date addTime;
 	private String parentId;
+	private Integer country;
+
+
+	public Integer getCountry() {
+		return country;
+	}
+
+	public void setCountry(Integer country) {
+		this.country = country;
+	}
+
 	public String getCategoryId() {
 		return categoryId;
 	}

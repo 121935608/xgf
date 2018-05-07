@@ -27,7 +27,8 @@
 		<span class="select-box" style="width: 120px;">
            <select name="orderStatus" id="orderStatus" class="select" autocomplete="off">
                <option value="">订单状态</option>
-               <option value="1">待支付</option>
+               <option value="-1">已取消</option>
+			   <option value="1">待支付</option>
                <option value="2" >待发货</option>
                <option value="3" >待收货</option>
                <option value="4" >已完成</option>
@@ -191,6 +192,8 @@ $(document).ready(function(){
                     return "待支付";
                 } else if(row.orderStatus == 2) {
                     return "待发货";
+                } else if(row.orderStatus == -1) {
+                    return "已取消";
                 }else if(row.orderStatus == 3) {
                     return "待收货";
                 }else if(row.orderStatus == 4) {
