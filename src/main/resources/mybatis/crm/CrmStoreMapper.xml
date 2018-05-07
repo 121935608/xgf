@@ -78,4 +78,9 @@
         ORDER BY totalPrice DESC
     </select>
 
+    <!--将私海门店转入公海门店-->
+    <update id="addPublic" parameterType="Store">
+        UPDATE t_store SET supervisorId = NULL WHERE storeId = #{storeId};
+    </update>
+
 </mapper>

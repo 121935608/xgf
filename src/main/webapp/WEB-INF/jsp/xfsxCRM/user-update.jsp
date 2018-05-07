@@ -170,6 +170,7 @@
                 processData: false,
                 success:function(data){
                     parent.layer.close(index);
+                    data = JSON.parse(data);
                     if(data.s == true){
                         index = parent.layer.getFrameIndex(window.name);
                         parent.layer.msg("保存成功,正在刷新数据请稍后……",{icon:1,time: 1000,shade: [0.1,'#fff']},function(){

@@ -183,4 +183,11 @@ public class CrmStoreController extends BaseController {
         return sysCodeList1;
     }
 
+    /*将私海门店转入公海门店*/
+    @RequestMapping(CrmStoreConstant.CRM_ADD_STORE_PUBLIC_URL)
+    public @ResponseBody Message addPublic(Store store){
+        int res = 0;
+        res = crmStoreService.addPublic(store);
+        return new Message(res);
+    }
 }

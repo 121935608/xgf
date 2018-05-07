@@ -2,6 +2,7 @@ package com.xingrongjinfu.crm.crmUser.dao;
 
 import com.xingrongjinfu.crm.department.model.Dept;
 import com.xingrongjinfu.system.role.model.Role;
+import com.xingrongjinfu.system.supervisor.model.Supervisor;
 import org.framework.core.dao.DynamicObjectBaseDao;
 import org.springframework.stereotype.Repository;
 
@@ -31,6 +32,15 @@ public class CrmUserDaoImpl extends DynamicObjectBaseDao implements CrmUserDao {
         }
         return list;
     }
-    
-    
+
+    @Override
+    public List<Supervisor> checkCrmLogin(String crmLogin) {
+        List<Supervisor> list = null;
+        try {
+            list = (List<Supervisor>) this.findForList("UsersMapper.checkCrmLogin",crmLogin);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 }

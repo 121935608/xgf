@@ -39,4 +39,9 @@ public class CrmStoreServiceImpl implements CrmStoreService {
     public int updateStoreSupervistor(Store store) {
         return crmStoreDao.updateStoreSupervistor(store);
     }
+
+    @Override
+    public int addPublic(Store store) {
+        return crmStoreDao.addPublic(store);
+    }
 }

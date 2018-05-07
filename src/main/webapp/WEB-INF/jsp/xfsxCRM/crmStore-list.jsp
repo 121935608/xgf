@@ -226,7 +226,12 @@
                     //编辑
                     var toEdit = "<a title=\"查看详情\" href=\"javascript:;\" onclick=\"certification_check('认证申请审核','${context_root}/crmStore/crmCheckStoreSelect.action?storeId=" + row.storeId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>审核</span></a>";
                     var toEditTwo = "<a title=\"分配业务员\" href=\"javascript:;\" onclick=\"store_supervistor('门店分配业务员','${context_root}/crmStore/crmStoreSupervistorSelect.action?storeId=" + row.storeId + "','','700')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>分配业务员</span></a>";
-                    return toEdit + toEditTwo;
+                    var toEditThree = "<a style=\"text-decoration:none;margin-left:5px;\" onClick=\"addPublic(this,\'" + row.storeId + "\')\" href=\"javascript:;\" title=\"转如公海\"><span style='color: #0e90d2 '>转入公海</span></a>";
+                    if(row.name != null){
+                        return toEdit + toEditTwo + toEditThree;
+                    }else{
+                        return toEdit + toEditTwo;
+                    }
                 }
             },
         ];
@@ -255,6 +260,27 @@
             "&endTime="+ endTime;
         pageTable.fnClearTable(0);
         pageTable.fnDraw();
+    }
+
+    function addPublic(obj,id){
+        parent.layer.confirm('确认要转入公海吗？',{icon: 3, title:'提示'},function(index){
+            $.ajax({
+                url:"${context_root}/crmStore/addPublicSupervistor.action?storeId=" + id,
+                type:'post',
+                async:true ,
+                cache:false ,
+                dataType:"json",
+                success:function(data){
+                    if(data.s == true){
+                        parent.layer.msg('已转入公海!', {icon: 6, time: 1500});
+                        window.location.reload();
+                    }else{
+                        parent.layer.alert(data.m , {icon: 2,title:"系统提示"});
+                    }
+                },
+
+            }) ;
+        });
     }
 </script>
 </body>

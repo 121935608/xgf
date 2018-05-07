@@ -113,6 +113,7 @@ public class CrmUserController extends BaseController
             return new Message(result);
         }
         Integer supervistorID = supervisor.getSupervisorId();
+        supervisor.setCrmPwd(Md5Utils.hash(supervisor.getCrmPwd()));
         if(supervistorID !=null){
             result = supervisorService.updateCRMSupervisor(supervisor);
         }
@@ -171,6 +172,19 @@ public class CrmUserController extends BaseController
             sysRoleList.add(sysCodeRole);
         }
         return sysRoleList;
+    }
+
+    /*检查用户名是否存在*/
+    @RequestMapping(CrmUserConstant.USER_CRM_CHECK_CRMLOGIN_URL)
+    public @ResponseBody String checkCrm(Supervisor supervisor){
+        String checkCrmLogin = "0";
+            if(supervisor.getCrmLogin() != null){
+                List<Supervisor> list = crmUserService.checkCrmLogin(supervisor.getCrmLogin());
+                if(list.size()>0){
+                    checkCrmLogin = "1";
+                }
+            }
+            return checkCrmLogin;
     }
 
 }

@@ -96,7 +96,7 @@
             }
         }
     }
-    $(function(){
+   /* $(function(){
        $.ajax({
            url:"${context_root}/crmUser/selectDeptInfoView.action",
            async:true ,
@@ -106,7 +106,7 @@
                alert("000");
            }
        })
-    });
+    });*/
     jQuery.validator.addMethod("chineseName", function (value, element) {
         var chrnum =/^[\u4E00-\u9FA5]{2,4}$/;
         return this.optional(element) || (chrnum.test(value));
@@ -123,7 +123,21 @@
             },
             crmLogin: {
                 required: true,
-                isSpace: true
+                isSpace: true,
+                remote: {
+                    url: "${context_root}/crmUser/checkCrmLoginView.action",
+                    type: "post",
+                    dataType: "text",
+                    data: {
+                        name: function () {
+                            return $.trim($("#crmLogin").val());
+                        }
+                    },
+                    dataFilter: function (data, type) {
+                        if (data == "0") return true;
+                        else return "用户名已存在";
+                    }
+                }
             },
             crmPwd: {
                 required: true,
@@ -147,7 +161,7 @@
                         else return "已存在该电话号的督导员";
                     }
                 }
-            },
+            }
         },
         onkeyup:false,
         focusCleanup:true,

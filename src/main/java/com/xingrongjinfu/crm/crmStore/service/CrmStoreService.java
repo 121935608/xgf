@@ -32,4 +32,7 @@ public interface CrmStoreService {
 
     /*门店分配业务员*/
     int updateStoreSupervistor(Store store);
+
+    /*门店分配业务员*/
+    int addPublic(Store store);
 }

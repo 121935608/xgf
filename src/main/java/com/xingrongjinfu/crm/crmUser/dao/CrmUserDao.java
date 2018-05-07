@@ -2,6 +2,7 @@ package com.xingrongjinfu.crm.crmUser.dao;
 
 import com.xingrongjinfu.crm.department.model.Dept;
 import com.xingrongjinfu.system.role.model.Role;
+import com.xingrongjinfu.system.supervisor.model.Supervisor;
 
 import java.util.List;
 
@@ -12,4 +13,7 @@ public interface CrmUserDao {
 
     /*查询所有角色*/
     List<Role> selectRole();
+
+    /*根据用户名查询数据*/
+    List<Supervisor> checkCrmLogin(String crmLogin);
 }

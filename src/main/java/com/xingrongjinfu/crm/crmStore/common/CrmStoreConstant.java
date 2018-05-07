@@ -17,6 +17,9 @@ public class CrmStoreConstant {
     /*跳转到门店分配业务员界面接口*/
     public final static String CRM_UPDATE_STORE_SUPERVISTOR_URL = "crmUpdateStoreSupervistor";
 
+    /*私有门店转入公海门店接口*/
+    public final static String CRM_ADD_STORE_PUBLIC_URL = "addPublicSupervistor";
+
     /*
     * 逻辑视图名：跳转至门店界面
     * */

@@ -69,4 +69,9 @@ public class CrmStoreDaoImpl extends DynamicObjectBaseDao implements CrmStoreDao
     public int updateStoreSupervistor(Store store) {
         return this.update("StoreAffairMapper.updateCheckToStore",store);
     }
+
+    @Override
+    public int addPublic(Store store) {
+        return this.update("CrmStoreMapper.addPublic",store);
+    }
 }

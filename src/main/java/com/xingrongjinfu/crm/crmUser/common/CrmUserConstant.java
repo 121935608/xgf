@@ -28,6 +28,12 @@ public class CrmUserConstant
      * 请求地址：根据督导员ID修改督导员信息
      */
     public final static String USER_CRM_UPDATE_URL = "updateSpervistorIDView";
+
+    /**
+     * 请求地址：根据督导员ID修改督导员信息
+     */
+    public final static String USER_CRM_CHECK_CRMLOGIN_URL = "checkCrmLoginView";
+
     /**
      * 请求地址：增加督导员信息
      */
