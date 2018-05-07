@@ -196,7 +196,6 @@
         rules: {
             name: {
                 required: true,
-                digits: true,
             },
             money: {
                 required: true,
@@ -218,9 +217,6 @@
                 required: true,
             },
             orderSKU: {
-                required: true,
-            },
-            useDescription: {
                 required: true,
             },
         },

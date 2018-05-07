@@ -115,7 +115,9 @@
                 "bSearchable" : false,
                 "mRender" : function(data, type, row) {
                     if (row.receiveType != null) {
-                        return row.receiveType;
+                        if(row.receiveType==0)
+                            return "自动领取";
+                        else return "手动领取";
                     } else {
                         return "";
                     }

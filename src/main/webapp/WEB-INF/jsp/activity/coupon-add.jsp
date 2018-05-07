@@ -60,8 +60,8 @@
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>使用商品：</label>
             <div class="formControls col-xs-8 col-sm-4">
                 <%--<input type="text" class="input-text" maxlength="20" value="" placeholder="" id="accountName" name="accountName">--%>
-                <input type="radio" name="useForAll" value="0" checked="checked" onclick="toggleUseDiv(this.value);" >全部
-                <input type="radio" name="useForAll" value="1" onclick="toggleUseDiv(this.value);">部分
+                <input type="radio" name="useForAll" value="0" checked="checked" >全部
+                <input type="radio" name="useForAll" value="1" >部分
             </div>
         </div>
         <div class="mt-20">
@@ -165,7 +165,6 @@
         rules: {
             name: {
                 required: true,
-                digits:true,
             },
             money: {
                 required: true,
@@ -187,9 +186,6 @@
                 required: true,
             },
             orderSKU: {
-                required: true,
-            },
-            useDescription: {
                 required: true,
             },
         },
