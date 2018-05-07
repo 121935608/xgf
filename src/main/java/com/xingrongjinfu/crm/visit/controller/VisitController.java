@@ -1,5 +1,6 @@
 package com.xingrongjinfu.crm.visit.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.framework.base.util.PageUtilEntity;
@@ -42,9 +43,14 @@ public class VisitController extends BaseController
      * 查询访问记录列表
      */
     @RequestMapping(VisitConstant.VISIT_LIST_URL)
-    public ModelAndView visitList()
+    public ModelAndView visitList(String isVisit)
     {
         PageUtilEntity pageUtilEntity = this.getPageUtilEntity();
+        if(isVisit != null){
+        	HashMap map = new HashMap();
+        	map.put("isVisit", isVisit);
+        	pageUtilEntity.setRelationMap(map);
+        }
 
         List<TableDataInfo> tableDataInfo = visitService.pageInfoQuery(pageUtilEntity);
 

@@ -24,5 +24,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		LEFT JOIN sys_supervisor s ON v.supervisorId = s.supervisorId
 		LEFT JOIN t_store t ON v.storeId = t.storeId
 		WHERE v.`status` = '0'
+		<if test="relationMap.isVisit != null and relationMap.isVisit != ''"><!-- 关键词检索 -->
+			<if test="relationMap.isVisit == 'true'">
+				AND visitResultStatus IS NULL
+			</if>
+			<if test="relationMap.isVisit == 'false'">
+				AND visitResultStatus IS NOT NULL
+			</if>
+		</if>
 	</select>
 </mapper> 
