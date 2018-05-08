@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="activityConpusMapper">
+
+
+	<select id="pageInfoQuery" parameterType="PageUtilEntity"
+			resultType="ACoupon" useCache="false">
+		select * from t_coupon
+		WHERE 1=1
+
+
+		<if test="relationMap.name != null and relationMap.name != ''">
+			and `name` LIKE CONCAT(CONCAT('%', #{relationMap.name}),'%')
+		</if>
+
+		<if test="relationMap.startTime != null and relationMap.startTime != ''">
+			AND DATE_FORMAT(startTime,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.startTime},'%Y%m%d')
+		</if>
+		<if test="relationMap.endTime != null and relationMap.endTime != ''">
+			AND DATE_FORMAT(endTime,'%Y%m%d') >= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
+		</if>
+		order by id desc
+
+	</select>
+
+	<!-- 插入用户信息 -->
+	<insert id="addCoupon" parameterType="ACoupon" >
+		insert into t_coupon
+		(`name`,money,timeType,startTime,endTime,useDays,num,receiveType,createTime,useForAll,useCondition,
+		orderSKU,useDescription,status,remark)
+		values(
+		#{name},#{money},#{timeType},#{startTime},#{endTime},#{useDays},#{num},#{receiveType},#{createTime},#{useForAll},#{useCondition},
+		#{orderSKU},#{useDescription},#{status},#{remark}
+		)
+	</insert>
+
+	<select id="findById" parameterType="int" resultType="ACoupon">
+		select * from t_coupon where id = #{id}
+	</select>
+
+	<update id="updateById" parameterType="ACoupon">
+		UPDATE  t_coupon
+		<set>
+			<if test="name!=null and name!=''">
+				`name`=#{name},
+			</if>
+			<if test="money!=null">
+				money=#{money},
+			</if>
+			<if test="timeType!=null">
+				timeType=#{timeType},
+			</if>
+			<if test="startTime!=null and startTime!=''">
+				startTime=#{startTime},
+			</if>
+			<if test="endTime!=null and endTime!=''">
+				endTime=#{endTime},
+			</if>
+			<if test="useDays!=null">
+				useDays=#{useDays},
+			</if>
+			<if test="num!=null">
+				num=#{num},
+			</if>
+			<if test="receiveType!=null">
+				receiveType=#{receiveType},
+			</if>
+			<if test="createTime!=null  and createTime!=''">
+				createTime=#{createTime},
+			</if>
+			<if test="useForAll!=null">
+				useForAll=#{useForAll},
+			</if>
+			<if test="useCondition!=null  and useCondition!=''">
+				useCondition=#{useCondition},
+			</if>
+			<if test="orderSKU!=null">
+				orderSKU=#{orderSKU},
+			</if>
+			<if test="useDescription!=null and useDescription!=''">
+				useDescription=#{useDescription},
+			</if>
+			<if test="status!=null">
+				status=#{status},
+			</if>
+			<if test="remark!=null and remark!=''">
+				remark=#{remark}
+			</if>
+		</set>
+		where id = #{id}
+
+	</update>
+
+
+
+
+</mapper> 
