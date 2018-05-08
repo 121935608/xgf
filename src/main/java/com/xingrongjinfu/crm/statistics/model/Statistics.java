@@ -9,100 +9,102 @@ package com.xingrongjinfu.crm.statistics.model;
  */
 public class Statistics
 {
-	private String todayAccumulativeAmount = "0";  //今日累计下单额
+	private Double todayAccumulativeAmount = 0.00;  //今日累计下单额
 	
-	private String yesterdayAccumulativeAmount = "0";  //昨日累计下单额
+	private Double yesterdayAccumulativeAmount = 0.00;  //昨日累计下单额
 	
-	private String weeklyAccumulativeAmount = "0";  //周累计下单额
+	private Double weeklyAccumulativeAmount = 0.00;  //周累计下单额
 	
-	private String monthlyAccumulativeAmount = "0";  //月累计下单额
+	private Double monthlyAccumulativeAmount = 0.00;  //月累计下单额
 	
-	private String todayNumberOfTransactions = "0";  //今日累计成交单量
+	private Integer todayNumberOfTransactions = 0;  //今日累计成交单量
 	
-	private String yesterdayNumberOfTransactions = "0"; //昨日累计成交单量
+	private Integer yesterdayNumberOfTransactions = 0; //昨日累计成交单量
 	
-	private String weeklyNumberOfTransactions = "0";  //周累计成交单量
+	private Integer weeklyNumberOfTransactions = 0;  //周累计成交单量
 	
-	private String monthlyNumberOfTransactions = "0";  //月累计成交单量
+	private Integer monthlyNumberOfTransactions = 0;  //月累计成交单量
 	
-	private String todayCustomerConversionRate = "0";  //今日下单客户转化率
+	private String todayCustomerConversionRate;  //今日下单客户转化率
 	
-	private String yesterdayCustomerConversionRate = "0";  //昨日下单客户转化率
+	private String yesterdayCustomerConversionRate;  //昨日下单客户转化率
 	
-	private String weeklyCustomerConversionRate = "0";  //周下单客户转化率
+	private String weeklyCustomerConversionRate;  //周下单客户转化率
 	
-	private String monthlyCustomerConversionRate = "0";  //月下单客户转化率
+	private String monthlyCustomerConversionRate;  //月下单客户转化率
 	
-	private String todayStoreCouponRate = "0";  //今日门店补券率
+	private String todayStoreCouponRate;  //今日门店补券率
 	
-	private String yesterdayStoreCouponRate = "0";  //昨日门店补券
+	private String yesterdayStoreCouponRate;  //昨日门店补券
 	
-	private String weeklyStoreCouponRate = "0";  //周门店补券率
+	private String weeklyStoreCouponRate;  //周门店补券率
 	
-	private String monthlyStoreCouponRate = "0";  //月门店补券率
+	private String monthlyStoreCouponRate;  //月门店补券率
 
-	public String getTodayAccumulativeAmount() {
+	
+
+	public Double getTodayAccumulativeAmount() {
 		return todayAccumulativeAmount;
 	}
 
-	public void setTodayAccumulativeAmount(String todayAccumulativeAmount) {
+	public void setTodayAccumulativeAmount(Double todayAccumulativeAmount) {
 		this.todayAccumulativeAmount = todayAccumulativeAmount;
 	}
 
-	public String getYesterdayAccumulativeAmount() {
+	public Double getYesterdayAccumulativeAmount() {
 		return yesterdayAccumulativeAmount;
 	}
 
-	public void setYesterdayAccumulativeAmount(String yesterdayAccumulativeAmount) {
+	public void setYesterdayAccumulativeAmount(Double yesterdayAccumulativeAmount) {
 		this.yesterdayAccumulativeAmount = yesterdayAccumulativeAmount;
 	}
 
-	public String getWeeklyAccumulativeAmount() {
+	public Double getWeeklyAccumulativeAmount() {
 		return weeklyAccumulativeAmount;
 	}
 
-	public void setWeeklyAccumulativeAmount(String weeklyAccumulativeAmount) {
+	public void setWeeklyAccumulativeAmount(Double weeklyAccumulativeAmount) {
 		this.weeklyAccumulativeAmount = weeklyAccumulativeAmount;
 	}
 
-	public String getMonthlyAccumulativeAmount() {
+	public Double getMonthlyAccumulativeAmount() {
 		return monthlyAccumulativeAmount;
 	}
 
-	public void setMonthlyAccumulativeAmount(String monthlyAccumulativeAmount) {
+	public void setMonthlyAccumulativeAmount(Double monthlyAccumulativeAmount) {
 		this.monthlyAccumulativeAmount = monthlyAccumulativeAmount;
 	}
 
-	public String getTodayNumberOfTransactions() {
+	public Integer getTodayNumberOfTransactions() {
 		return todayNumberOfTransactions;
 	}
 
-	public void setTodayNumberOfTransactions(String todayNumberOfTransactions) {
+	public void setTodayNumberOfTransactions(Integer todayNumberOfTransactions) {
 		this.todayNumberOfTransactions = todayNumberOfTransactions;
 	}
 
-	public String getYesterdayNumberOfTransactions() {
+	public Integer getYesterdayNumberOfTransactions() {
 		return yesterdayNumberOfTransactions;
 	}
 
 	public void setYesterdayNumberOfTransactions(
-			String yesterdayNumberOfTransactions) {
+			Integer yesterdayNumberOfTransactions) {
 		this.yesterdayNumberOfTransactions = yesterdayNumberOfTransactions;
 	}
 
-	public String getWeeklyNumberOfTransactions() {
+	public Integer getWeeklyNumberOfTransactions() {
 		return weeklyNumberOfTransactions;
 	}
 
-	public void setWeeklyNumberOfTransactions(String weeklyNumberOfTransactions) {
+	public void setWeeklyNumberOfTransactions(Integer weeklyNumberOfTransactions) {
 		this.weeklyNumberOfTransactions = weeklyNumberOfTransactions;
 	}
 
-	public String getMonthlyNumberOfTransactions() {
+	public Integer getMonthlyNumberOfTransactions() {
 		return monthlyNumberOfTransactions;
 	}
 
-	public void setMonthlyNumberOfTransactions(String monthlyNumberOfTransactions) {
+	public void setMonthlyNumberOfTransactions(Integer monthlyNumberOfTransactions) {
 		this.monthlyNumberOfTransactions = monthlyNumberOfTransactions;
 	}
 

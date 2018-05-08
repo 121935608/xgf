@@ -1,5 +1,7 @@
 package com.xingrongjinfu.crm.statistics.dao;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.framework.base.util.PageUtilEntity;
@@ -13,5 +15,9 @@ import org.framework.base.util.TableDataInfo;
  */
 public interface IStatisticsDao
 {
+
+	String customerConversionRate(Date timeBegin, Date timeEnd);
+
+	HashMap storeCouponRate(HashMap map);
 	
 }

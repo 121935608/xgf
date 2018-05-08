@@ -138,7 +138,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update t_order set orderStatus=5 where orderNumber=#{0}
 	</update>
 	
+	<!--谢鲜CRM统计查询-->
 	<select id="orderAllList" resultType="Orders">
-		SELECT * FROM t_order o WHERE o.orderStatus != 1 
+		SELECT * FROM t_order o WHERE o.orderStatus NOT IN ('-1','1') AND o.`status` = 1
 	</select>
 </mapper> 
