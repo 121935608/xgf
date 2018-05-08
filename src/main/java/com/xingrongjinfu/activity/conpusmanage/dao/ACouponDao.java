@@ -1,6 +1,7 @@
 package com.xingrongjinfu.activity.conpusmanage.dao;
 
 import com.xingrongjinfu.activity.conpusmanage.model.ACoupon;
+import com.xingrongjinfu.activity.conpusmanage.model.ACouponCommodity;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.framework.core.dao.DynamicObjectBaseDao;
@@ -47,5 +48,10 @@ public class ACouponDao extends DynamicObjectBaseDao implements IACouponDao {
     @Override
     public boolean updateCoupon(ACoupon coupon) {
         return this.update("activityConpusMapper.updateById",coupon)>0;
+    }
+
+    @Override
+    public void addCouponCommodity(ACouponCommodity aCouponCommodity) {
+         this.save("activityConpusMapper.addCouponCommodity", aCouponCommodity);
     }
 }

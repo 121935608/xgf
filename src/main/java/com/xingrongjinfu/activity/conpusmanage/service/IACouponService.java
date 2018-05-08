@@ -16,7 +16,7 @@ public interface IACouponService {
 
     List<TableDataInfo>   pageInfoQuery(PageUtilEntity pageUtilEntity);
 
-    boolean addCoupon(ACoupon coupon);
+    boolean addCoupon(ACoupon coupon,String commodityNos);
 
 
     ACoupon findById(int id);

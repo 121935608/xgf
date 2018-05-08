@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -55,9 +56,10 @@ public class ACouponController extends BaseController {
 
     @RequestMapping("add")
     @ResponseBody
-    public Message add(ACoupon coupon) {
-        coupon.setCreateTime(DateUtil.toSimpleDateString());
-        boolean b = couponService.addCoupon(coupon);
+    public Message add(ACoupon coupon, HttpServletRequest request) {
+        String commodityNos = request.getParameter("commodityNos");
+
+        boolean b = couponService.addCoupon(coupon,commodityNos);
         return true ? new Message(1) : new Message(0);
     }
 

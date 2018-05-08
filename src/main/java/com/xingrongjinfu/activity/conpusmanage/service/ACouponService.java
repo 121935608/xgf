@@ -2,6 +2,8 @@ package com.xingrongjinfu.activity.conpusmanage.service;
 
 import com.xingrongjinfu.activity.conpusmanage.dao.IACouponDao;
 import com.xingrongjinfu.activity.conpusmanage.model.ACoupon;
+import com.xingrongjinfu.activity.conpusmanage.model.ACouponCommodity;
+import com.xingrongjinfu.utils.DateUtil;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +24,30 @@ public class ACouponService implements IACouponService {
 
 
 
+
+
     @Override
     public List<TableDataInfo> pageInfoQuery(PageUtilEntity pageUtilEntity) {
         return couponDao.pageInfoQuery(pageUtilEntity);
     }
 
     @Override
-    public boolean addCoupon(ACoupon coupon) {
-        return couponDao.addCoupon(coupon);
+    public boolean addCoupon(ACoupon coupon,String commodityNos) {
+
+
+        coupon.setCreateTime(DateUtil.toSimpleDateString());
+        couponDao.addCoupon(coupon);
+        String[] Nos = commodityNos.split(",");
+        for(String no:Nos){
+            ACouponCommodity aCouponCommodity = new ACouponCommodity();
+            aCouponCommodity.setCommodityNo(no);
+            aCouponCommodity.setCouponId(coupon.getId());
+            couponDao.addCouponCommodity(aCouponCommodity);
+        }
+
+
+
+        return true;
     }
 
     @Override

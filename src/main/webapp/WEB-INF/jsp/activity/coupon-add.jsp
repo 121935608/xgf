@@ -119,8 +119,8 @@
         trIndex++;
         var id1='no'+trIndex;
         var id2='commodityNo'+trIndex;
-        var id3='commodityName'+trIndex;
-        var id4='barCode'+trIndex;
+//        var id3='commodityName'+trIndex;
+//        var id4='barCode'+trIndex;
         var id5='auto'+trIndex;
         var tr=document.createElement('tr');
         tr.id=trIndex;
@@ -128,18 +128,20 @@
 
         tr.innerHTML = "<tr id='"+id1+"'><td><input class='input-text' id='no1' name='no1' disabled='disabled' value='"+trIndex+"' type='text'></td>"+
         "<td><div onmouseleave='completeField("+trIndex+",this)' class='wrap'>"+
-                 "<input style='width:85%;margin-left: 5px;position:relative;bottom: 4px;' class='input-text auto-inp' autocomplete='off' id='"+id2+"' name='"+id2+"/' type='text'>"+
+                 "<input style='width:85%;margin-left: 5px;position:relative;bottom: 4px;' class='input-text auto-inp' autocomplete='off' id='"+id2+"' name='"+id2+"' type='text'>"+
                  "<div class='auto hidden' id='"+id5+"'>"+
                       "<div class='auto_out'>1</div>"+
                       "<div class='auto_out'>2</div>"+
                  "</div>"+
              "</div>"+
         "</td>"+
-        "<td><input class='input-text' style='border: 0px;text-align:center;' id='"+id3+"' name='"+id3+"' readonly='' type='text'></td>"+
-        "<td><input class='input-text' style='border: 0px;text-align:center;' id='"+id4+"' name='"+id4+"' readonly='' type='text'></td>"+
+        "<td><input class='input-text' style='border: 0px;text-align:center;'  readonly='' type='text'></td>"+
+        "<td><input class='input-text' style='border: 0px;text-align:center;'  readonly='' type='text'></td>"+
         "<td><input class='btn btn-primary radius' value='删除' onclick='trIndex--;deleteRow(this)' type='button'></td></tr>"
 
         $("#orderTab").children("tbody")[0].appendChild(tr);
+
+
 
         //自动补全
         $.ajax({
@@ -186,31 +188,31 @@
 
     $("#form-coupon-add").validate({
         rules: {
-            name: {
-                required: true,
-            },
-            money: {
-                required: true,
-                digits:true,
-            },
-            useDays: {
-                digits:true,
-                min:1,
-            },
-            num: {
-                required: true,
-                digits:true,
-                min:1,
-            },
-            isUseForAll: {
-                required: true,
-            },
-            useCondition: {
-                required: true,
-            },
-            orderSKU: {
-                required: true,
-            },
+//            name: {
+//                required: true,
+//            },
+//            money: {
+//                required: true,
+//                digits:true,
+//            },
+//            useDays: {
+//                digits:true,
+//                min:1,
+//            },
+//            num: {
+//                required: true,
+//                digits:true,
+//                min:1,
+//            },
+//            isUseForAll: {
+//                required: true,
+//            },
+//            useCondition: {
+//                required: true,
+//            },
+//            orderSKU: {
+//                required: true,
+//            },
         },
         messages: {
             "userName": {
@@ -222,12 +224,26 @@
         success: "valid",
         submitHandler: function (form) {
             var index = parent.layer.load();
+            var data = $(form).serialize();
+            var trs = $("tbody tr");
+            if(trs.length>0){
+                var commodityNos = "&commodityNos=";
+                for(var i=0;i<trs.length;i++){
+                    var div = $(trs[i]).find("td").eq(1);
+                    var no = div.find("input").eq(0).val();
+                    commodityNos += no+","
+                }
+                commodityNos = commodityNos.substring(0,commodityNos.length-1);
+                data += commodityNos;
+            }
+
+
             $.ajax({
                 url: "${context_root}/coupon/add.action",
                 type: 'post',
                 async: true,
                 cache: false,
-                data: $(form).serialize(),
+                data: data,
                 dataType: "json",
                 success: function (data) {
                     parent.layer.close(index);

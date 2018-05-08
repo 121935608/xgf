@@ -2,6 +2,7 @@ package com.xingrongjinfu.activity.conpusmanage.dao;
 
 
 import com.xingrongjinfu.activity.conpusmanage.model.ACoupon;
+import com.xingrongjinfu.activity.conpusmanage.model.ACouponCommodity;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 
@@ -22,4 +23,6 @@ public interface IACouponDao {
     ACoupon findById(int id);
 
     boolean updateCoupon(ACoupon coupon);
+
+    void addCouponCommodity(ACouponCommodity aCouponCommodity);
 }
