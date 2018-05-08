@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PerformanceRankMapper">
+    <!-- 查询业绩排名 组类，分页 -->
+    <select id="pageInfoQuery" parameterType="PageUtilEntity" resultType="HashMap" useCache="false">
+        SELECT b.supervisorId,b.totalPrice,b.deptName,b.city,b.area,b.county,(@i:=@i+1) AS deptRank
+        FROM (
+            SELECT ts.supervisorId, SUM(t.orderPrice) AS totalPrice, ss.city,ss.area,ss.county,cd.deptName
+            FROM t_order t
+            LEFT JOIN t_store ts ON t.userId = ts.userId
+            LEFT JOIN sys_supervisor ss ON ss.supervisorId = ts.supervisorId
+            LEFT JOIN c_dept cd ON cd.deptId=ss.deptId
+            WHERE t.`status` = 1
+            AND ts.`status` = 1
+            AND ss.deptId =(SELECT deptId FROM sys_user WHERE userId=#{relationMap.userId})
+            GROUP BY ts.supervisorId
+            ORDER BY totalPrice DESC
+        ) AS b,(select   @i:=0)   as   it
+    </select>
+
+</mapper>
