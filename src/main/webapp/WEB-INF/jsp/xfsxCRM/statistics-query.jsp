@@ -31,22 +31,22 @@
 
 		<div style="float: left;width: 20%;height:140px;margin: 0 10px;text-align: center;background-color:#EABB4F;">
 			<p class="explain">今日累计下单额</p>
-			<p class="data">${statistics.todayAccumulativeAmount}</p>
+			<p class="data">${statistics.todayAccumulativeAmount}元</p>
 		</div>
 
 		<div style="float: left;width: 20%;height:140px;margin: 0 10px;text-align: center;background-color:#4F93F8; ">
 			<p class="explain">昨日累计下单额</p>
-			<p class="data">${statistics.todayAccumulativeAmount}</p>
+			<p class="data">${statistics.yesterdayAccumulativeAmount}元</p>
 		</div>
 
 		<div style="float: left;width: 20%;height:140px;margin: 0 10px;text-align: center; background-color:#FEA853;">
 			<p class="explain">周累计下单额</p>
-			<p class="data">${statistics.weeklyAccumulativeAmount}</p>
+			<p class="data">${statistics.weeklyAccumulativeAmount}元</p>
 		</div>
 		
 		<div style="float: left;width: 20%;height:140px;margin: 0 10px;text-align: center; overflow: hidden;background-color: #35CE5C;">
 			<p class="explain">月累计下单额</p>
-			<p class="data">${statistics.monthlyAccumulativeAmount}</p>
+			<p class="data">${statistics.monthlyAccumulativeAmount}元</p>
 		</div>
 	</div>
 	
@@ -55,22 +55,22 @@
 
 		<div style="float: left;width: 20%;height:140px;margin: 0 10px;text-align: center;background-color:#CCCCCC;">
 			<p class="explain1">今日累计成交单量</p>
-			<p class="data1">${statistics.todayNumberOfTransactions}</p>
+			<p class="data1">${statistics.todayNumberOfTransactions}次</p>
 		</div>
 
 		<div style="float: left;width: 20%;height:140px;margin: 0 10px;text-align: center;background-color:#CCCCCC; ">
 			<p class="explain1">昨日累计成交单量</p>
-			<p class="data1">${statistics.yesterdayNumberOfTransactions}</p>
+			<p class="data1">${statistics.yesterdayNumberOfTransactions}次</p>
 		</div>
 
 		<div style="float: left;width: 20%;height:140px;margin: 0 10px;text-align: center; background-color:#CCCCCC;">
 			<p class="explain1">周累计成交单量</p>
-			<p class="data1">${statistics.weeklyNumberOfTransactions}</p>
+			<p class="data1">${statistics.weeklyNumberOfTransactions}次</p>
 		</div>
 		
 		<div style="float: left;width: 20%;height:140px;margin: 0 10px;text-align: center; overflow: hidden;background-color: #CCCCCC;">
 			<p class="explain1">月累计成交单量</p>
-			<p class="data1">${statistics.monthlyNumberOfTransactions}</p>
+			<p class="data1">${statistics.monthlyNumberOfTransactions}次</p>
 		</div>
 	</div>
 	

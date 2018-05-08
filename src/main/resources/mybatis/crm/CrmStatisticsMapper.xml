@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CrmStatisticsMapper">
+
+	<select id="customerConversionRate" parameterType="HashMap" resultType="String">
+	SELECT
+		IFNULL(CONVERT (
+		COUNT(ta.storeId) / COUNT(s.storeId)*100,
+		DECIMAL (10, 2)), 0) AS num
+		FROM
+			t_store s
+		LEFT JOIN (
+			 SELECT storeId 
+					FROM t_order o
+	WHERE o.orderTime >= #{timeBegin} AND <![CDATA[o.orderTime <= #{timeEnd}]]>
+					GROUP BY storeId
+		) ta ON s.storeId = ta.storeId
+	WHERE s.addTime >= #{timeBegin} AND <![CDATA[s.addTime <= #{timeEnd}]]>
+	</select>
+	
+	<select id="storeCouponRate" parameterType="HashMap" resultType="HashMap">
+	SELECT
+		IFNULL(CONVERT (t1.a / t2.b*100, DECIMAL (10, 2)), 0) AS today,
+		IFNULL(CONVERT (t3.a / t4.b*100, DECIMAL (10, 2)), 0) AS yesterday,
+		IFNULL(CONVERT (t5.a / t6.b*100, DECIMAL (10, 2)), 0) AS weekly,
+		IFNULL(CONVERT (t7.a / t8.b*100, DECIMAL (10, 2)), 0) AS monthly
+	FROM
+		(
+			(
+				SELECT
+					count(1) a
+				FROM
+					c_coupon WHERE createTime >= #{timeBegin} AND <![CDATA[createTime <= #{timeEnd}]]>
+			) t1,
+			(SELECT count(1) b FROM t_order WHERE orderTime >= #{timeBegin} AND <![CDATA[orderTime <= #{timeEnd}]]>) t2,
+			(
+				SELECT
+					count(1) a
+				FROM
+					c_coupon  WHERE createTime >= #{timeBegin1} AND <![CDATA[createTime <= #{timeEnd1}]]>
+			) t3,
+			(SELECT count(1) b FROM t_order WHERE orderTime >= #{timeBegin1} AND <![CDATA[orderTime <= #{timeEnd1}]]>) t4,
+			(
+				SELECT
+					count(1) a
+				FROM
+					c_coupon  WHERE createTime >= #{timeBegin2} AND <![CDATA[createTime <= #{timeEnd2}]]>
+			) t5,
+			(SELECT count(1) b FROM t_order WHERE orderTime >= #{timeBegin2} AND <![CDATA[orderTime <= #{timeEnd2}]]>) t6,
+			(
+				SELECT
+					count(1) a
+				FROM
+					c_coupon  WHERE createTime >= #{timeBegin3} AND <![CDATA[createTime <= #{timeEnd3}]]>
+			) t7,
+			(SELECT count(1) b FROM t_order WHERE orderTime >= #{timeBegin3} AND <![CDATA[orderTime <= #{timeEnd3}]]>) t8
+		)
+	</select>
+</mapper> 
