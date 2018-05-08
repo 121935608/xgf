@@ -48,6 +48,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from t_coupon where id = #{id}
 	</select>
 
+	<select id="getProductByCouponId" parameterType="int" resultType="Product">
+		select a.commodityName,a.commodityNo,a.barCode from t_commodity a where a.commodityNo in (select b.commodityNo from t_coupon_commodity b where couponid = #{id})
+	</select>
+
 	<update id="updateById" parameterType="ACoupon">
 		UPDATE  t_coupon
 		<set>

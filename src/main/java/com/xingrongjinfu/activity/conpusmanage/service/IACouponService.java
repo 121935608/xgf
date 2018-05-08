@@ -1,6 +1,7 @@
 package com.xingrongjinfu.activity.conpusmanage.service;
 
 import com.xingrongjinfu.activity.conpusmanage.model.ACoupon;
+import com.xingrongjinfu.system.product.model.Product;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 
@@ -22,4 +23,6 @@ public interface IACouponService {
     ACoupon findById(int id);
 
     boolean updateCoupon(ACoupon coupon);
+
+    List<Product> getProductByCouponId(Integer id);
 }

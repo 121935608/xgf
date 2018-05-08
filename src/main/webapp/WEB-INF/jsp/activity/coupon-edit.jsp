@@ -141,8 +141,31 @@
         i = "${acoupon.useForAll}";
         $("#useForAll"+i).val(i).attr("checked","checked");
 
+        //addTr(index,data.commodityNo(),data.commodityName(),data.barCode);
+
+
+
+
 
     });
+
+    function addTr(index,no,name,code){
+        var tr=document.createElement('tr');
+        tr.innerHTML = "<tr id='"+id1+"'><td><input class='input-text' id='no1' name='no1' disabled='disabled' value='"+index+"' type='text'></td>"+
+            "<td><div onmouseleave='completeField("+trIndex+",this)' class='wrap'>"+
+            "<input style='width:85%;margin-left: 5px;position:relative;bottom: 4px;' class='input-text auto-inp' autocomplete='off' id='"+id2+"' name='"+id2+"' value='"+no+"' type='text'>"+
+            "<div class='auto hidden' id='"+id5+"'>"+
+            "<div class='auto_out'>1</div>"+
+            "<div class='auto_out'>2</div>"+
+            "</div>"+
+            "</div>"+
+            "</td>"+
+            "<td><input  value='"+name+"' class='input-text' style='border: 0px;text-align:center;'  readonly='' type='text'></td>"+
+            "<td><input  value='"+code+"' class='input-text' style='border: 0px;text-align:center;'  readonly='' type='text'></td>"+
+            "<td><input   class='btn btn-primary radius' value='删除' onclick='trIndex--;deleteRow(this)' type='button'></td></tr>"
+
+        $("#orderTab").children("tbody")[0].appendChild(tr);
+    }
 
     /* 添加行 */
     $("#addRow").click(function () {

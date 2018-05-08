@@ -2,11 +2,13 @@ package com.xingrongjinfu.activity.conpusmanage.dao;
 
 import com.xingrongjinfu.activity.conpusmanage.model.ACoupon;
 import com.xingrongjinfu.activity.conpusmanage.model.ACouponCommodity;
+import com.xingrongjinfu.system.product.model.Product;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.framework.core.dao.DynamicObjectBaseDao;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -53,5 +55,16 @@ public class ACouponDao extends DynamicObjectBaseDao implements IACouponDao {
     @Override
     public void addCouponCommodity(ACouponCommodity aCouponCommodity) {
          this.save("activityConpusMapper.addCouponCommodity", aCouponCommodity);
+    }
+
+    @Override
+    public List<Product> getProductByCouponId(Integer id) {
+        try {
+            return (List<Product>) this.findForList("activityConpusMapper.getProductByCouponId", id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+
     }
 }

@@ -67,7 +67,9 @@ public class ACouponController extends BaseController {
     public ModelAndView editUI(int id) throws Exception {
         ModelAndView modelAndView = new ModelAndView("activity/coupon-edit");
         ACoupon acoupon = couponService.findById(id);
+        List<Product> products = couponService.getProductByCouponId(acoupon.getId());
         modelAndView.addObject("acoupon",acoupon);
+        modelAndView.addObject("products",products);
         return modelAndView;
     }
 

@@ -3,6 +3,7 @@ package com.xingrongjinfu.activity.conpusmanage.service;
 import com.xingrongjinfu.activity.conpusmanage.dao.IACouponDao;
 import com.xingrongjinfu.activity.conpusmanage.model.ACoupon;
 import com.xingrongjinfu.activity.conpusmanage.model.ACouponCommodity;
+import com.xingrongjinfu.system.product.model.Product;
 import com.xingrongjinfu.utils.DateUtil;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
@@ -60,5 +61,8 @@ public class ACouponService implements IACouponService {
         return couponDao.updateCoupon(coupon);
     }
 
-
+    @Override
+    public List<Product> getProductByCouponId(Integer id) {
+        return couponDao.getProductByCouponId(id);
+    }
 }
