@@ -54,7 +54,33 @@ public class Product {
     private String commodityBanner;
     private String barCode;
     private String subPrice;//主观价
+    private Integer yyStock;//犹豫库存
+    private Integer kfStock;//客服库存
+    private Integer kxdStock;//可下单库存
 
+    public Integer getYyStock() {
+        return yyStock;
+    }
+
+    public void setYyStock(Integer yyStock) {
+        this.yyStock = yyStock;
+    }
+
+    public Integer getKfStock() {
+        return kfStock;
+    }
+
+    public void setKfStock(Integer kfStock) {
+        this.kfStock = kfStock;
+    }
+
+    public Integer getKxdStock() {
+        return kxdStock;
+    }
+
+    public void setKxdStock(Integer kxdStock) {
+        this.kxdStock = kxdStock;
+    }
 
     public String getSubPrice() {
         return subPrice;

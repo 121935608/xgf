@@ -31,13 +31,13 @@
 			</div>
 		</div>
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3">图片：</label>
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>图片：</label>
 			<div class="formControls col-xs-8 col-sm-4">
 				<input type="file"  id="picture" accept="image/*" name="picture" onchange="changImg(event)">
 			</div>
 		</div>
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>分类显示:</label>
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>分类显示:</label>
 			<div class="radio-box">
 				<input type="radio"  name="country" value="0" checked>国内国外显示&nbsp;
 				<input type="radio"  name="country" value="1" >国内显示&nbsp;
@@ -179,6 +179,10 @@
 				required:true,
 				maxlength:20
 			},
+            picture:{
+                isSpace:true,
+                required:true
+            },
 			status:{
 				isSpace:true,
 				required:true
