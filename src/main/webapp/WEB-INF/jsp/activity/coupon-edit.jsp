@@ -172,7 +172,7 @@
 
         //自动补全
         $.ajax({
-            url: "${context_root}/commodity/getCommodityList.action",
+            url: "${context_root}/coupon/getCommodityNos.action",
             type: 'post',
             async: true,
             cache: false,

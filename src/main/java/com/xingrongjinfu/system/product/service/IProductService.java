@@ -83,4 +83,8 @@ public interface IProductService {
 
 
     Category getCategoryById(String categoryId);
+
+    List<String> getCommodityNos();
+
+    public Product findProductByNo(String commodityNo);
 }

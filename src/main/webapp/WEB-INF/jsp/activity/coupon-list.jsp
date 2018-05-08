@@ -19,8 +19,8 @@
 		</span>
         <form role="form" class="text-c">
             <div class="row">
-                <input type="text" onfocus="WdatePicker()" id="startTime" class="input-text Wdate" style="width:120px;" placeholder="开始时间">
-                <input type="text" onfocus="WdatePicker()" id="endTime" class="input-text Wdate" style="width:120px;" placeholder="结束时间">
+                <input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}'})" id="startTime" class="input-text Wdate" style="width:120px;" placeholder="开始时间">
+                <input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'startTime\')}'})" id="endTime" class="input-text Wdate" style="width:120px;" placeholder="结束时间">
                 <input type="text" class="input-text" style="width: 250px" placeholder="优惠券名称" id="name" name="name">
                 <button type="button" class="btn btn-success radius" onclick="query()"><i class="Hui-iconfont">&#xe665;</i> 搜索
                 </button>
@@ -35,7 +35,7 @@
         <table
                 class="table table-border table-bordered table-hover table-bg table-sort">
             <thead>
-            <tr class="text-c">
+            <tr  class="text-c">
                 <th width="10%">优惠券名称</th>
                 <th width="10%">优惠券金额（元）</th>
                 <th width="10%">有效期</th>
@@ -80,12 +80,12 @@
                 }
             },
             {
-                "sDefaultContent": "有效期",
+                "sDefaultContent": "",
                 "bSortable": false,
                 "sClass": "td-status text-c",
                 "bSearchable": false,
                 "mRender": function (data, type, row) {
-                    if (row.timeType ==0) {
+                    if (row.timeType ==0&&typeof(row.useDays)!="undefined"){
                         return row.useDays+"天";
                     }
                     if(row.timeType==1){

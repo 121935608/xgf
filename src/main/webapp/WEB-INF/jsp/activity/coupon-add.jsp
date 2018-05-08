@@ -34,9 +34,9 @@
         <div class="row cl" style="display: none;" id="dateDiv">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span></label>
             <div class="formControls col-xs-8 col-sm-4">
-                <input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')||\'%y-%M-%d\'}'})" id="beginTime" name="beginTime"
+                <input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}'})" id="startTime" name="startTime"
                        class="input-text Wdate" style="width:100px;" placeholder="开始时间">一
-                <input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'beginTime\')}',maxDate:'%y-%M-%d'})" id="endTime" name="endTime"
+                <input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'startTime\')}'})" id="endTime" name="endTime"
                        class="input-text Wdate" style="width:100px;" placeholder="结束时间">
             </div>
         </div>
@@ -70,6 +70,7 @@
                 <thead>
                 <tr class="text-c">
                     <th width="3%">序号</th>
+                    <th width="14%">商品编码</th>
                     <th width="14%">商品名称</th>
                     <th width="10%">商品条码</th>
                     <th width="3%">操作</th>
@@ -111,49 +112,71 @@
 
 
 <script type="text/javascript">
+    var trIndex = 0;
 
     /* 添加行 */
     $("#addRow").click(function(){
-//        tabIndex++;
-//        var id1='no'+tabIndex;
-//
-//        var id2='commodityNo'+tabIndex;
-//        var id3='commodityName'+tabIndex;
-//        var id4='unitId'+tabIndex;
-//        var id5='stockNum'+tabIndex;
-//        id6='auto'+tabIndex;
-//
+        trIndex++;
+        var id1='no'+trIndex;
+        var id2='commodityNo'+trIndex;
+        var id3='commodityName'+trIndex;
+        var id4='barCode'+trIndex;
+        var id5='auto'+trIndex;
         var tr=document.createElement('tr');
-//        tr.id=tabIndex;
-//        tr.innerHTML = " <tr id='"+tabIndex+"'>"+
-//            "<td><input class='input-text' type='text' id="+id1+" name="+id1+" disabled='disabled' value='"+tabIndex+"'></td>"+
-//            "<td><div class='wrap'><input style='width:85%;margin-left: 5px;position:relative;bottom: 4px;' class='input-text auto-inp' autocomplete=\"off\" type='text' id="+id2+" name="+id2+"/>"+
-//            "<div class='auto hidden' id="+id6+"><div class='auto_out'>1</div><div class='auto_out'>2</div></div></div>&nbsp;"+
-//            "<span style='color:blue;cursor:pointer;left:30%;line-height:150%;position: absolute;' onclick='addIframe()'>添加</span></td>"+
-//            "<td><input class='input-text' style='border: 0px;text-align:center;' type='text' id="+id3+" name="+id3+" readonly></td>"+
-//            "<td><input class='input-text' style='border: 0px;text-align:center;' type='text' id="+id4+" name="+id4+" readonly></td>"+
-//            "<td><input class='input-text' type='text' id="+id5+" name="+id5+"></td>"+
-//            "<td><input class='btn btn-primary radius' type='button' value='删除' onclick='deleteRow(this)'></td>"+
-//            "</tr>";
-        tr.innerHTML="<tr><td>2</td><td>3</td><td>4</td><td><input class='btn btn-primary radius' type='button' value='删除' onclick='deleteRow(this)'></td></tr>";
+        tr.id=trIndex;
+
+
+        tr.innerHTML = "<tr id='"+id1+"'><td><input class='input-text' id='no1' name='no1' disabled='disabled' value='"+trIndex+"' type='text'></td>"+
+        "<td><div onmouseleave='completeField("+trIndex+",this)' class='wrap'>"+
+                 "<input style='width:85%;margin-left: 5px;position:relative;bottom: 4px;' class='input-text auto-inp' autocomplete='off' id='"+id2+"' name='"+id2+"/' type='text'>"+
+                 "<div class='auto hidden' id='"+id5+"'>"+
+                      "<div class='auto_out'>1</div>"+
+                      "<div class='auto_out'>2</div>"+
+                 "</div>"+
+             "</div>"+
+        "</td>"+
+        "<td><input class='input-text' style='border: 0px;text-align:center;' id='"+id3+"' name='"+id3+"' readonly='' type='text'></td>"+
+        "<td><input class='input-text' style='border: 0px;text-align:center;' id='"+id4+"' name='"+id4+"' readonly='' type='text'></td>"+
+        "<td><input class='btn btn-primary radius' value='删除' onclick='trIndex--;deleteRow(this)' type='button'></td></tr>"
+
         $("#orderTab").children("tbody")[0].appendChild(tr);
 
         //自动补全
         $.ajax({
-            url:"${context_root}/commodity/getCommodityList.action",
+            url:"${context_root}/coupon/getCommodityNos.action",
             type:'post',
             async:true ,
             cache:false ,
             dataType:"json",
             success:function(data){
                 //自动补全
-                var autoComplete = new AutoComplete(id2,id6,data);
+                var autoComplete = new AutoComplete(id2,id5,data);
                 document.getElementById(id2).onkeyup = function(event){
                     autoComplete.start(event);
                 }
             },
         });
     });
+
+    function completeField(trid,div) {
+
+
+        var tr = $("#"+trid);
+
+        var commodityNo = $(div).children().eq(0).val();
+
+        $.ajax({
+            url:"${context_root}/coupon/getCommodityByNo.action?commodityNo="+commodityNo,
+            success:function(data){
+                tr.children().eq(2).children().eq(0).val(data.commodityName);
+                tr.children().eq(3).children().eq(0).val(data.barCode);
+            },
+        });
+
+
+
+
+    }
 
 
     function deleteRow(a){

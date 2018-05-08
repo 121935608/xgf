@@ -18,6 +18,7 @@ import org.framework.base.util.TableDataInfo;
 import org.framework.core.dao.DynamicObjectBaseDao;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -138,5 +139,20 @@ public class ProductDao extends DynamicObjectBaseDao implements IProductDao {
     @Override
     public Category getCategoryById(String categoryId) {
         return (Category) this.findForObject("ProductMapper.findCategoryById",categoryId);
+    }
+
+    @Override
+    public List<String> getCommodityNos() {
+        try {
+            return (List<String>)this.findForList("ProductMapper.getCommodityNos");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+    @Override
+    public Product findProductByNo(String commodityNo) {
+        return (Product) this.findForObject("ProductMapper.findProductByNo",commodityNo);
     }
 }

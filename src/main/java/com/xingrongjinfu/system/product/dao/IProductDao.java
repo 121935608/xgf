@@ -80,4 +80,8 @@ public interface IProductDao {
      * 更新商品信息
      */
     int updateProduct(Product product);
+
+    List<String> getCommodityNos();
+
+    Product findProductByNo(String commodityNo);
 }

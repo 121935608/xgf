@@ -71,6 +71,13 @@ public class ProductService implements IProductService {
     }
 
     @Override
+    public Product findProductByNo(String commodityNo) {
+        return productDao.findProductByNo(commodityNo);
+    }
+
+
+
+    @Override
     public int updateProduct(Product product) {
         return productDao.updateProduct(product);
     }
@@ -88,5 +95,10 @@ public class ProductService implements IProductService {
     @Override
     public Category getCategoryById(String categoryId) {
         return productDao.getCategoryById(categoryId);
+    }
+
+    @Override
+    public List<String> getCommodityNos() {
+        return productDao.getCommodityNos();
     }
 }

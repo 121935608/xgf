@@ -1,7 +1,9 @@
 package com.xingrongjinfu.activity.conpusmanage.controller;
 
 import com.xingrongjinfu.activity.conpusmanage.model.ACoupon;
-import com.xingrongjinfu.activity.conpusmanage.service.ACouponService;
+import com.xingrongjinfu.activity.conpusmanage.service.IACouponService;
+import com.xingrongjinfu.system.product.model.Product;
+import com.xingrongjinfu.system.product.service.IProductService;
 import com.xingrongjinfu.utils.DateUtil;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
@@ -9,10 +11,8 @@ import org.framework.core.controller.BaseController;
 import org.framework.core.model.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -27,7 +27,9 @@ import java.util.List;
 public class ACouponController extends BaseController {
 
     @Autowired
-    private ACouponService couponService;
+    private IACouponService couponService;
+    @Autowired
+    private IProductService productService;
 
     @RequestMapping("list")
     @ResponseBody
@@ -73,6 +75,20 @@ public class ACouponController extends BaseController {
         boolean b = couponService.updateCoupon(coupon);
         return b ? new Message(1) : new Message(0);
     }
+
+
+    @RequestMapping("getCommodityNos")
+    @ResponseBody
+    public List<String> getCommodityNos() throws Exception {
+        return productService.getCommodityNos();
+    }
+
+    @RequestMapping("getCommodityByNo")
+    @ResponseBody
+    public Product getCommodityByNo(String commodityNo) throws Exception {
+        return productService.findProductByNo(commodityNo);
+    }
+
 
 
 }

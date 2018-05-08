@@ -158,6 +158,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 	</select>
 
+	<select id="findProductByNo" parameterType="string" resultType="Product">
+		SELECT commodityName, barCode FROM t_commodity
+		WHERE commodityNo = #{0}
+
+	</select>
+
+
+
+	<select id="getCommodityNos"  resultType="string">
+		SELECT  commodityNo from t_commodity
+	</select>
+
 	<update id="updateProduct" parameterType="Product" >
 		UPDATE t_commodity 
 		<set>
