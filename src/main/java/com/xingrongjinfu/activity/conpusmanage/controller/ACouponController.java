@@ -25,7 +25,7 @@ import java.util.List;
  * @Date: 2018/5/4 09:25
  * @Description:
  */
-@Controller("aCoupon")
+@Controller
 @RequestMapping("coupon")
 public class ACouponController extends BaseController {
     @Autowired

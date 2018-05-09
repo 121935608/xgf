@@ -16,7 +16,7 @@ import java.util.List;
  *
  * @author
  */
-@Repository("aCouponDao")
+@Repository
 public class ACouponDao extends DynamicObjectBaseDao implements IACouponDao {
 
 
