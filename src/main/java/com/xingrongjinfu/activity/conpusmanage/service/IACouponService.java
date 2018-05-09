@@ -17,12 +17,12 @@ public interface IACouponService {
 
     List<TableDataInfo>   pageInfoQuery(PageUtilEntity pageUtilEntity);
 
-    boolean addCoupon(ACoupon coupon,String commodityNos);
+    void addCoupon(ACoupon coupon,String commodityNos);
 
 
     ACoupon findById(int id);
 
-    boolean updateCoupon(ACoupon coupon);
+    boolean updateCoupon(ACoupon coupon,String commodityNos);
 
     List<Product> getProductByCouponId(Integer id);
 }

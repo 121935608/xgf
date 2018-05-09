@@ -52,10 +52,7 @@ public class ACouponDao extends DynamicObjectBaseDao implements IACouponDao {
         return this.update("activityConpusMapper.updateById",coupon)>0;
     }
 
-    @Override
-    public void addCouponCommodity(ACouponCommodity aCouponCommodity) {
-         this.save("activityConpusMapper.addCouponCommodity", aCouponCommodity);
-    }
+
 
     @Override
     public List<Product> getProductByCouponId(Integer id) {
@@ -66,5 +63,16 @@ public class ACouponDao extends DynamicObjectBaseDao implements IACouponDao {
             return new ArrayList<>();
         }
 
+    }
+
+    @Override
+    public void addCouponCommoditys(List<ACouponCommodity> list) {
+        batchSave("activityConpusMapper.addCouponCommoditys",list);
+    }
+
+
+    @Override
+    public void deletCouponCommoditys(Integer couponid) {
+        delete("activityConpusMapper.deletCouponCommoditys",couponid);
     }
 }

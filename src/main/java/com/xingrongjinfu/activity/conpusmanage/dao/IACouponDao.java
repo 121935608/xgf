@@ -25,7 +25,11 @@ public interface IACouponDao {
 
     boolean updateCoupon(ACoupon coupon);
 
-    void addCouponCommodity(ACouponCommodity aCouponCommodity);
+    void addCouponCommoditys(List<ACouponCommodity> aCouponCommodity);
 
     List<Product> getProductByCouponId(Integer id);
+
+
+
+    void deletCouponCommoditys(Integer id);
 }

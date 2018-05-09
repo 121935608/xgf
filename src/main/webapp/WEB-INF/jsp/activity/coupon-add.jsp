@@ -60,11 +60,11 @@
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>使用商品：</label>
             <div class="formControls col-xs-8 col-sm-4">
                 <%--<input type="text" class="input-text" maxlength="20" value="" placeholder="" id="accountName" name="accountName">--%>
-                <input type="radio" name="useForAll" value="0" checked="checked" >全部
-                <input type="radio" name="useForAll" value="1" >部分
+                <input type="radio" name="useForAll" value="0" checked="checked" onclick="$('#tableDiv').css('display','none')">全部
+                <input type="radio" name="useForAll" value="1" onclick="$('#tableDiv').css('display','block')">部分
             </div>
         </div>
-        <div class="mt-20">
+        <div id="tableDiv" style="display: none;" class="mt-20">
             <input type="button" class="btn btn-primary radius" value="添加行" id="addRow"/>
             <table class="table table-border table-bordered table-hover table-bg table-sort" id="orderTab">
                 <thead>
@@ -114,19 +114,19 @@
 <script type="text/javascript">
     var trIndex = 0;
 
+
+
     /* 添加行 */
     $("#addRow").click(function(){
         trIndex++;
         var id1='no'+trIndex;
         var id2='commodityNo'+trIndex;
-//        var id3='commodityName'+trIndex;
-//        var id4='barCode'+trIndex;
         var id5='auto'+trIndex;
         var tr=document.createElement('tr');
         tr.id=trIndex;
 
 
-        tr.innerHTML = "<tr id='"+id1+"'><td><input class='input-text' id='no1' name='no1' disabled='disabled' value='"+trIndex+"' type='text'></td>"+
+        tr.innerHTML = "<tr id='"+id1+"'><td><input class='input-text'   disabled='disabled' value='"+trIndex+"' type='text'></td>"+
         "<td><div onmouseleave='completeField("+trIndex+",this)' class='wrap'>"+
                  "<input style='width:85%;margin-left: 5px;position:relative;bottom: 4px;' class='input-text auto-inp' autocomplete='off' id='"+id2+"' name='"+id2+"' type='text'>"+
                  "<div class='auto hidden' id='"+id5+"'>"+
@@ -161,12 +161,8 @@
     });
 
     function completeField(trid,div) {
-
-
         var tr = $("#"+trid);
-
         var commodityNo = $(div).children().eq(0).val();
-
         $.ajax({
             url:"${context_root}/coupon/getCommodityByNo.action?commodityNo="+commodityNo,
             success:function(data){
@@ -174,45 +170,39 @@
                 tr.children().eq(3).children().eq(0).val(data.barCode);
             },
         });
-
-
-
-
     }
-
 
     function deleteRow(a){
         a.parentNode.parentNode.remove();
     }
 
-
     $("#form-coupon-add").validate({
         rules: {
-//            name: {
-//                required: true,
-//            },
-//            money: {
-//                required: true,
-//                digits:true,
-//            },
-//            useDays: {
-//                digits:true,
-//                min:1,
-//            },
-//            num: {
-//                required: true,
-//                digits:true,
-//                min:1,
-//            },
-//            isUseForAll: {
-//                required: true,
-//            },
-//            useCondition: {
-//                required: true,
-//            },
-//            orderSKU: {
-//                required: true,
-//            },
+            name: {
+                required: true,
+            },
+            money: {
+                required: true,
+                digits:true,
+            },
+            useDays: {
+                digits:true,
+                min:1,
+            },
+            num: {
+                required: true,
+                digits:true,
+                min:1,
+            },
+            isUseForAll: {
+                required: true,
+            },
+            useCondition: {
+                required: true,
+            },
+            orderSKU: {
+                required: true,
+            },
         },
         messages: {
             "userName": {
