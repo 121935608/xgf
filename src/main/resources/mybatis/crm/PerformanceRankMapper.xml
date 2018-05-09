@@ -5,9 +5,9 @@
 <mapper namespace="PerformanceRankMapper">
     <!-- 查询业绩排名 组类，分页 -->
     <select id="pageInfoQuery" parameterType="PageUtilEntity" resultType="HashMap" useCache="false">
-        SELECT b.supervisorId,b.totalPrice,b.deptName,b.city,b.area,b.county,(@i:=@i+1) AS deptRank
+        SELECT b.supervisorId,b.totalPrice,b.deptName,b.name,b.city,b.province,b.county,(@i:=@i+1) AS deptRank
         FROM (
-            SELECT ts.supervisorId, SUM(t.orderPrice) AS totalPrice, ss.city,ss.area,ss.county,cd.deptName
+            SELECT ts.supervisorId, SUM(t.orderPrice) AS totalPrice, ss.city,ss.province,ss.county,cd.deptName,ss.name
             FROM t_order t
             LEFT JOIN t_store ts ON t.userId = ts.userId
             LEFT JOIN sys_supervisor ss ON ss.supervisorId = ts.supervisorId
