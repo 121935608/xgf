@@ -9,7 +9,7 @@
         <table class="table table-border table-bordered table-hover table-bg table-sort">
             <thead>
             <tr class="text-c">
-                <%--<th width="5%">NO.</th>--%>
+                <th width="5%">NO.</th>
                 <th width="5%">销售员</th>
                 <th width="5%">省份</th>
                 <th width="5%">城市</th>
@@ -26,18 +26,22 @@
 <input id="userCrmId" value="${currentUser.userId}" style="display: none;">
 <script type="text/javascript">
     var pageTable;
+    var num=0;
     $(document).ready(function(){
-        var num=0;
+
         var aoColumns = [
-            // {
-            //     "sDefaultContent" : "-",
-            //     "mData": num+=1,
-            //     "bSortable" : false,
-            //     "sClass": "text-c"
-            // },
             {
                 "sDefaultContent" : "-",
-                "mData": "supervisorName",
+                "bSortable" : false,
+                "sClass": "text-c",
+                "mRender": function(data, type, row) {
+                    num+=1;
+                    return  num;
+                }
+            },
+            {
+                "sDefaultContent" : "-",
+                "mData": "name",
                 "bSortable" : false,
                 "sClass": "text-c"
             },
