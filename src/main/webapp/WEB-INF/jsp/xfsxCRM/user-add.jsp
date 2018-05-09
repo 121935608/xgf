@@ -11,6 +11,14 @@
             </div>
         </div>
         <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>姓名：</label>
+            <div class="formControls col-xs-8 col-sm-4">
+                <input type="text" class="input-text" placeholder="市的编号" id="cityCode" name="cityCode">
+                <input type="text" class="input-text" placeholder="省的编号" id="provinceCode" name="provinceCode">
+                <input type="text" class="input-text" placeholder="地址" id="area" name="area">
+            </div>
+        </div>
+        <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>登录账号：</label>
             <div class="formControls col-xs-8 col-sm-4">
                 <input type="text" class="input-text" placeholder="姓名" id="crmLogin" name="crmLogin">
@@ -96,17 +104,22 @@
             }
         }
     }
-   /* $(function(){
-       $.ajax({
-           url:"${context_root}/crmUser/selectDeptInfoView.action",
-           async:true ,
-           cache:false ,
-           dataType:"json",
-           success:function(){
-               alert("000");
-           }
-       })
-    });*/
+    $(function(){
+        $("#city").on("input",function(){
+            var city = $("#city option:selected");
+            $("#cityCode").val(city.attr("data-code"));
+        })
+        $("#city").on("input",function(){
+            var province = $("#province option:selected");
+            $("#provinceCode").val(province.attr("data-code"));
+        })
+        $("#province,#city,#district").on("input",function(){
+            var province=$("#province option:selected").val();
+            var city=$("#city option:selected").val()
+            var district=$("#district option:selected").val();
+            $("#area").val(province+city+district);
+        })
+    });
     jQuery.validator.addMethod("chineseName", function (value, element) {
         var chrnum =/^[\u4E00-\u9FA5]{2,4}$/;
         return this.optional(element) || (chrnum.test(value));
@@ -173,11 +186,7 @@
                 alert("请输入正确的手机号");
                 return;
             }*/
-            var province=$("#province option:selected").val();
-            var city=$("#city option:selected").val()
-            var district=$("#district option:selected").val();
-            var area=province+city+district;
-            if (area ===null ||area===''|| area===undefined ){
+            if ($("#area").val() ===null){
                 alert("请选择区域");
                 return;
             }
@@ -185,7 +194,7 @@
             var index = parent.layer.load();
             var formData = new FormData($('#form-supervisor-add')[0]);
             $.ajax({
-                url:"${context_url}/crmUser/toAddSpervistorInfoView.action?area="+area,
+                url:"${context_url}/crmUser/toAddSpervistorInfoView.action",
                 type:'post',
                 data:formData,
                 mimeType: "multipart/form-data",

@@ -39,7 +39,21 @@ public class Supervisor implements Serializable
     private String crmPwd;
     private String province;
     private String headPortrait;
+    private String cityCode;
+    private String provinceCode;
 
+    public String getCityCode() {
+        return cityCode;
+    }
+    public void setCityCode(String cityCode) {
+        this.cityCode = cityCode;
+    }
+    public String getProvinceCode() {
+        return provinceCode;
+    }
+    public void setProvinceCode(String provinceCode) {
+        this.provinceCode = provinceCode;
+    }
     public String getHeadPortrait() {
         return headPortrait;
     }
