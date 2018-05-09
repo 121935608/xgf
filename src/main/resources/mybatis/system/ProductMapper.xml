@@ -75,9 +75,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="relationMap.supply!=null and relationMap.supply !=''">
 			AND	c.supply=#{relationMap.supply}
 		</if>
-		<if test="relationMap.commodityStatus!=null and relationMap.commodityStatus !=''">
-			AND c.commodityStatus=#{relationMap.commodityStatus}
-		</if>
+		<!--<if test="relationMap.commodityStatus!=null and relationMap.commodityStatus !=''">-->
+			<!--AND c.commodityStatus=#{relationMap.commodityStatus}-->
+		<!--</if>-->
 		<if test="relationMap.commodityName!=null and relationMap.commodityName !=''">
 			AND (
 			c.barCode LIKE CONCAT(CONCAT('%', #{relationMap.commodityName}),'%')
@@ -200,7 +200,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="subPrice!=null and subPrice !=''">subPrice=#{subPrice},</if>
 			<if test="priceSpecification!=null and priceSpecification !=''">priceSpecification=#{priceSpecification},</if>
 			<if test="type!=null and type !=''">type=#{type},</if>
-			updateTime=sysdate()
+			updateTime=#{updateTime}
 		</set>
 		WHERE 1=1
 		<if test="commodityId !=null and commodityId!=''">
