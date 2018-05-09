@@ -9,8 +9,8 @@
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>优惠券名称：</label>
             <div class="formControls col-xs-8 col-sm-4">
                 <input type="hidden" name="id" value="${acoupon.id}">
-                <input type="text" class="input-text" maxlength="20" placeholder="" id="name" name="name"
-                       value="${acoupon.name}">
+                <input type="text" class="input-text" maxlength="20" placeholder="" id="name" name="couponName"
+                       value="${acoupon.couponName}">
             </div>
         </div>
         <div class="row cl">

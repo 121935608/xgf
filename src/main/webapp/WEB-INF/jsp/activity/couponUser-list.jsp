@@ -3,7 +3,7 @@
 <ys:contentHeader title="收银员管理"/>
 <body>
 <nav class="breadcrumb">
-    <i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>
+    <i class="Hui-iconfont">&#xe67f;</i> 首页 <span id="aa" value="123" class="c-gray en">11&gt;</span>
     活动管理 <span class="c-gray en">&gt;</span>优惠券管理 <a
         class="btn btn-success radius r"
         style="line-height: 1.6em; margin-top: 3px"
@@ -14,8 +14,8 @@
     <div class="cl pd-5 bg-1 bk-gray mt-20">
 		<span class="l">
 			<a href="javascript:;"
-               onclick="coupon_add('添加优惠券','${context_root}/coupon/addUI.action','','410')"
-               class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加</a>
+               onclick="couponUser_add('发放优惠券','${context_root}/couponUser/addUI.action','','410')"
+               class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 放款优惠券</a>
 		</span>
         <form role="form" class="text-c">
             <div class="row">
@@ -81,7 +81,7 @@
                 "sClass": "td-status text-c",
                 "bSearchable": false,
                 "mRender": function (data, type, row) {
-                    return row.couponName;
+                    return row.couponUserName;
                 }
             },
             {
@@ -167,7 +167,7 @@
 
 
     /*添加*/
-    function coupon_add(title, url, w, h) {
+    function couponUser_add(title, url, w, h) {
         layer_show(title, url, w, h);
     }
 

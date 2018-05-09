@@ -2,6 +2,7 @@ package com.xingrongjinfu.activity.conpusmanage.dao;
 
 import com.xingrongjinfu.activity.conpusmanage.model.ACoupon;
 import com.xingrongjinfu.activity.conpusmanage.model.ACouponCommodity;
+import com.xingrongjinfu.activity.conpusmanage.model.ACouponUser;
 import com.xingrongjinfu.system.product.model.Product;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 数据层处理
@@ -37,7 +39,27 @@ public class ACouponUserDao extends DynamicObjectBaseDao implements IACouponUser
 
     }
 
-//    @Override
+    @Override
+    public List<ACoupon> getCoupons() {
+        try {
+            return (List<ACoupon>) this.findForList("activityConpusUserMapper.getCoupons");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList();
+        }
+    }
+
+    @Override
+    public void addCouponUser(ACouponUser couponUser) {
+         this.save("activityConpusUserMapper.addCouponUser", couponUser);
+    }
+
+    @Override
+    public Map<String,String> getUser(String storeId) {
+        return (Map<String, String>) this.findForObject("activityConpusUserMapper.getUser",storeId);
+    }
+
+    //    @Override
 //    public boolean addCoupon(ACoupon coupon) {
 //        return this.save("activityConpusMapper.addCoupon", coupon) > 0 ? true : false;
 //    }

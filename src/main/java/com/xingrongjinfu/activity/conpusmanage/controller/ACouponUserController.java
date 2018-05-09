@@ -2,8 +2,10 @@ package com.xingrongjinfu.activity.conpusmanage.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xingrongjinfu.activity.conpusmanage.model.ACoupon;
+import com.xingrongjinfu.activity.conpusmanage.model.ACouponUser;
 import com.xingrongjinfu.activity.conpusmanage.service.IACouponUserService;
 import com.xingrongjinfu.system.product.model.Product;
+import com.xingrongjinfu.utils.DateUtil;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.framework.core.controller.BaseController;
@@ -47,19 +49,22 @@ public class ACouponUserController extends BaseController {
         return modelAndView;
     }
 
-//    @RequestMapping("addUI")
-//    public ModelAndView addUI() throws Exception {
-//        ModelAndView modelAndView = new ModelAndView("activity/couponUser-add");
-//        return modelAndView;
-//    }
+    @RequestMapping("addUI")
+    public ModelAndView addUI() throws Exception {
+        List<ACoupon> aCoupons = couponUserService.getCoupons();
+        ModelAndView modelAndView = new ModelAndView("activity/couponUser-add");
+        modelAndView.addObject("aCoupons",aCoupons);
+        return modelAndView;
+    }
 //
-//    @RequestMapping("add")
-//    @ResponseBody
-//    public Message add(ACoupon coupon, HttpServletRequest request) {
-//        String commodityNos = request.getParameter("commodityNos");
-//        couponUserService.addCoupon(coupon,commodityNos);
-//        return new Message(1);
-//    }
+    @RequestMapping("add")
+    @ResponseBody
+    public Message add(ACouponUser couponUser, HttpServletRequest request) {
+        String storeIds = request.getParameter("storeIds");
+        String receiveType = request.getParameter("receiveType");
+        couponUserService.addCouponUser(couponUser,storeIds,receiveType);
+        return new Message(1);
+    }
 //
 //    @RequestMapping("editUI")
 //    public ModelAndView editUI(int id) throws Exception {

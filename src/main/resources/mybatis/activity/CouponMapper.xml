@@ -11,8 +11,8 @@
         WHERE 1=1
 
 
-        <if test="relationMap.name != null and relationMap.name != ''">
-            and `name` LIKE CONCAT(CONCAT('%', #{relationMap.name}),'%')
+        <if test="relationMap.couponName != null and relationMap.couponName != ''">
+            and couponName LIKE CONCAT(CONCAT('%', #{relationMap.couponName}),'%')
         </if>
 
         <if test="relationMap.startTime != null and relationMap.startTime != ''">
@@ -30,10 +30,10 @@
     <!-- 插入用户信息 -->
     <insert id="addCoupon" parameterType="ACoupon" useGeneratedKeys="true" keyProperty="id">
 		insert into t_coupon
-		(`name`,money,timeType,startTime,endTime,useDays,num,receiveType,createTime,useForAll,useCondition,
+		(couponName,money,timeType,startTime,endTime,useDays,num,receiveType,createTime,useForAll,useCondition,
 		orderSKU,useDescription,status,remark)
 		values(
-		#{name},#{money},#{timeType},#{startTime},#{endTime},#{useDays},#{num},#{receiveType},#{createTime},#{useForAll},#{useCondition},
+		#{couponName},#{money},#{timeType},#{startTime},#{endTime},#{useDays},#{num},#{receiveType},#{createTime},#{useForAll},#{useCondition},
 		#{orderSKU},#{useDescription},#{status},#{remark}
 		)
 	</insert>
@@ -45,7 +45,7 @@
 
     <select id="getProductByCouponId" parameterType="int" resultType="Product">
         SELECT
-            a.commodityName,
+            a.commoditycouponName,
             a.commodityNo,
             a.barCode
         FROM
@@ -63,8 +63,8 @@
     <update id="updateById" parameterType="ACoupon">
         UPDATE t_coupon
         <set>
-            <if test="name!=null and name!=''">
-                `name`=#{name},
+            <if test="couponName!=null and couponName!=''">
+                couponName=#{couponName},
             </if>
             <if test="money!=null">
                 money=#{money},

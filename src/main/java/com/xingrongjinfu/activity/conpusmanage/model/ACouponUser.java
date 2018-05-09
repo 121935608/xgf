@@ -12,8 +12,10 @@ import lombok.Data;
 public class ACouponUser {
     private Integer id;
     private String couponId;
+    private String storeId;
     private String userId;
     private Integer orderId;
+    private Integer num;
     private String giveTime;
     private String reviveTime;
     private String useTime;
@@ -23,7 +25,7 @@ public class ACouponUser {
     //是否领取  1未领取 2领取未使用 3使用 4 过期
     private Integer status;
 
-    private Integer storeName;
+    private String storeName;
     private String couponName;
 
 }

@@ -10,7 +10,7 @@
             <div class="formControls col-xs-8 col-sm-4">
                 <input type="hidden" name="id" value="${acoupon.id}">
                 <input type="text" class="input-text" maxlength="20" placeholder="" id="name" name="name"
-                       value="${acoupon.name}">
+                       value="${acoupon.couponName}">
             </div>
         </div>
         <div class="row cl">

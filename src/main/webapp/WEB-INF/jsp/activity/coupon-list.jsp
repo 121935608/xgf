@@ -21,7 +21,7 @@
             <div class="row">
                 <input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}'})" id="startTime" class="input-text Wdate" style="width:120px;" placeholder="开始时间">
                 <input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'startTime\')}'})" id="endTime" class="input-text Wdate" style="width:120px;" placeholder="结束时间">
-                <input type="text" class="input-text" style="width: 250px" placeholder="优惠券名称" id="name" name="name">
+                <input type="text" class="input-text" style="width: 250px" placeholder="优惠券名称" id="name" name="couponName">
                 <button type="button" class="btn btn-success radius" onclick="query()"><i class="Hui-iconfont">&#xe665;</i> 搜索
                 </button>
             </div>
@@ -59,8 +59,8 @@
                 "sClass": "text-c",
                 "bSearchable": false,
                 "mRender": function (data, type, row) {
-                    if (row.name != null) {
-                        return row.name;
+                    if (row.couponName != null) {
+                        return row.couponName;
                     } else {
                         return "";
                     }
@@ -169,9 +169,9 @@
     function query() {
         var startTime = $("#startTime").val();
         var endTime = $("#endTime").val();
-        var name = $("#name").val();
+        var couponName = $("#couponName").val();
 
-        pageTable.fnSettings().sAjaxSource = "${context_root}/coupon/list.action?startTime="+startTime+"&endTime="+endTime+"&name="+name;
+        pageTable.fnSettings().sAjaxSource = "${context_root}/coupon/list.action?startTime="+startTime+"&endTime="+endTime+"&couponName="+couponName;
 
         pageTable.fnClearTable(0);
         pageTable.fnDraw();

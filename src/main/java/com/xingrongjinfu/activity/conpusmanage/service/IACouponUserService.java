@@ -1,6 +1,7 @@
 package com.xingrongjinfu.activity.conpusmanage.service;
 
 import com.xingrongjinfu.activity.conpusmanage.model.ACoupon;
+import com.xingrongjinfu.activity.conpusmanage.model.ACouponUser;
 import com.xingrongjinfu.system.product.model.Product;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
@@ -16,6 +17,10 @@ public interface IACouponUserService {
 
 
     List<TableDataInfo>   pageInfoQuery(PageUtilEntity pageUtilEntity);
+
+    List<ACoupon> getCoupons();
+
+    void addCouponUser(ACouponUser couponUser, String storeIds,String type);
 
 //    void addCoupon(ACoupon coupon, String commodityNos);
 //
