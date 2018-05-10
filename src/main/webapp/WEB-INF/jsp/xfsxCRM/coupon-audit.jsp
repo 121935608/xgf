@@ -6,6 +6,12 @@
 	<form action="" method="post" class="form form-horizontal" id="form-coupon-audit">
 		<input type="hidden" class="input-text" id="couponId" name="couponId" value="${coupon.couponId }">
 		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>审核结果：</label>
+			<div class="formControls col-xs-7 col-sm-4 skin-minimal">
+				<y:radio codeGroup="crm-audit-status" name="auditStatus" selectedValue="${coupon.auditStatus }"/>
+			</div>
+		</div>
+		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3">审核备注：</label>
 			<div class="formControls col-xs-8 col-sm-6">
 				<textarea name="auditRemarks" cols="" rows="" class="textarea" placeholder="" datatype="*10-100" dragonfly="true" onKeyUp="textarealength(this,200)">${coupon.auditRemarks}</textarea>

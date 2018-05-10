@@ -132,9 +132,13 @@
 		//审核状态 ： 0-已审核 1-未审核
 		var auditStatus = $("#auditStatus").attr("auditStatus");
 		if (auditStatus == 0) {
-			auditStatus = "已审核";
-		} else {
-			auditStatus = "已审核";
+			auditStatus = "未审核";
+		} else if(auditStatus == 1) {
+			auditStatus = "已通过";
+		} else if(auditStatus == 2) {
+			auditStatus = "未通过";
+		} else{
+			auditStatus = "";
 		}
 		$("#auditStatus").text(auditStatus);
 

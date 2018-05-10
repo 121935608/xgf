@@ -181,6 +181,11 @@ insert into sys_code values ('sys-role_status','1','不可用','role_status_1','
 INSERT INTO sys_code VALUES ('sys-login_status','0','成功','login_status_0','JEEYZZ');
 INSERT INTO sys_code VALUES ('sys-login_status','1','失败','login_status_1','JEEYZZ');
 
+-- 初始化优惠券审核状态列表
+-- ----------------------------
+INSERT INTO sys_code VALUES ('crm-audit-status','1','通过','audit-status_1','JEEYZZ');
+INSERT INTO sys_code VALUES ('crm-audit-status','2','不通过','audit-status_2','JEEYZZ');
+
 -- ----------------------------
 -- 8、系统登录日志信息
 -- ----------------------------
