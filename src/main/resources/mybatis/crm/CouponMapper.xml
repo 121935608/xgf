@@ -44,7 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateCouponAudit" parameterType="Coupon">
  		update c_coupon
  		<set>
- 			auditStatus = 0,
+ 			auditStatus = #{auditStatus},
  			auditRemarks = #{auditRemarks},
  			auditTime = SYSDATE()
  		</set>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="activityConpusUserMapper">
+
+
+    <select id="pageInfoQuery" parameterType="PageUtilEntity"
+            resultType="com.xingrongjinfu.activity.conpusmanage.model.ACouponUser" useCache="false">
+        SELECT
+            a.id,
+            b.couponName,
+            a.storeName,
+            a.useStatus,
+            a.expireStatus,
+            a.reviveTime,
+            a.orderId
+            FROM
+            t_coupon_user a
+            left JOIN t_coupon b ON a.couponId = b.id
+        <if test="relationMap.couponName != null and relationMap.couponName != ''">
+            and b.couponName LIKE CONCAT(CONCAT('%', #{relationMap.couponName}),'%')
+        </if>
+
+        <if test="relationMap.startTime != null and relationMap.startTime != ''">
+            AND DATE_FORMAT(startTime,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.startTime},'%Y%m%d')
+            AND DATE_FORMAT(endTime,'%Y%m%d') >= DATE_FORMAT(#{relationMap.startTime},'%Y%m%d')
+        </if>
+        <if test="relationMap.endTime != null and relationMap.endTime != ''">
+            AND DATE_FORMAT(startTime,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
+            AND DATE_FORMAT(endTime,'%Y%m%d') >= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
+        </if>
+        <if test="relationMap.useStatus != null and relationMap.useStatus != ''">
+            AND  a.useStatus = #{relationMap.useStatus}
+        </if>
+        <if test="relationMap.expireStatus != null and relationMap.expireStatus != ''">
+            AND  a.expireStatus = #{relationMap.expireStatus}
+        </if>
+        order by id desc
+
+    </select>
+
+    <select id="getCoupons" resultType="ACoupon">
+        select id,couponName from t_coupon
+    </select>
+
+    <!-- 插入优惠券 信息 -->
+    <insert id="addCouponUser" parameterType="com.xingrongjinfu.activity.conpusmanage.model.ACouponUser">
+        insert into t_coupon_user
+        (couponId,userId,storeId,storeName,orderId,num,giveTime,reviveTime,useTime,expireTime,useStatus,expireStatus,status)
+        values(
+        #{couponId},#{userId},#{storeId},#{storeName},#{orderId},#{num},#{giveTime},#{reviveTime},#{useTime},#{expireTime},#{useStatus},#{expireStatus},#{status}
+        )
+    </insert>
+
+    <resultMap id="couponUserMap" type="map">
+        <result column="userId" property="userId"></result>
+        <result column="storeName" property="storeName"></result>
+    </resultMap>
+
+    <select id="getUser" parameterType="string" resultMap="couponUserMap">
+        select userId,storeName from t_store where storeId = #{0}
+    </select>
+
+
+</mapper> 

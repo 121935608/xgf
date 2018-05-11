@@ -1,111 +1,127 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="activityConpusMapper">
 
 
-	<select id="pageInfoQuery" parameterType="PageUtilEntity"
-			resultType="ACoupon" useCache="false">
-		select * from t_coupon
-		WHERE 1=1
+    <select id="pageInfoQuery" parameterType="PageUtilEntity"
+            resultType="ACoupon" useCache="false">
+        select * from t_coupon
+        WHERE 1=1
 
 
-		<if test="relationMap.name != null and relationMap.name != ''">
-			and `name` LIKE CONCAT(CONCAT('%', #{relationMap.name}),'%')
-		</if>
+        <if test="relationMap.couponName != null and relationMap.couponName != ''">
+            and couponName LIKE CONCAT(CONCAT('%', #{relationMap.couponName}),'%')
+        </if>
 
-		<if test="relationMap.startTime != null and relationMap.startTime != ''">
-			AND DATE_FORMAT(startTime,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.startTime},'%Y%m%d')
-			AND DATE_FORMAT(endTime,'%Y%m%d') >= DATE_FORMAT(#{relationMap.startTime},'%Y%m%d')
-		</if>
-		<if test="relationMap.endTime != null and relationMap.endTime != ''">
-			AND DATE_FORMAT(startTime,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
-			AND DATE_FORMAT(endTime,'%Y%m%d') >= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
-		</if>
-		order by id desc
+        <if test="relationMap.startTime != null and relationMap.startTime != ''">
+            AND DATE_FORMAT(startTime,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.startTime},'%Y%m%d')
+            AND DATE_FORMAT(endTime,'%Y%m%d') >= DATE_FORMAT(#{relationMap.startTime},'%Y%m%d')
+        </if>
+        <if test="relationMap.endTime != null and relationMap.endTime != ''">
+            AND DATE_FORMAT(startTime,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
+            AND DATE_FORMAT(endTime,'%Y%m%d') >= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
+        </if>
+        order by id desc
 
-	</select>
+    </select>
 
-	<!-- 插入用户信息 -->
-	<insert id="addCoupon" parameterType="ACoupon" useGeneratedKeys="true" keyProperty="id">
+    <!-- 插入用户信息 -->
+    <insert id="addCoupon" parameterType="ACoupon" useGeneratedKeys="true" keyProperty="id">
 		insert into t_coupon
-		(`name`,money,timeType,startTime,endTime,useDays,num,receiveType,createTime,useForAll,useCondition,
+		(couponName,money,timeType,startTime,endTime,useDays,num,receiveType,createTime,useForAll,useCondition,
 		orderSKU,useDescription,status,remark)
 		values(
-		#{name},#{money},#{timeType},#{startTime},#{endTime},#{useDays},#{num},#{receiveType},#{createTime},#{useForAll},#{useCondition},
+		#{couponName},#{money},#{timeType},#{startTime},#{endTime},#{useDays},#{num},#{receiveType},#{createTime},#{useForAll},#{useCondition},
 		#{orderSKU},#{useDescription},#{status},#{remark}
 		)
 	</insert>
 
-	<insert id="addCouponCommodity" parameterType="com.xingrongjinfu.activity.conpusmanage.model.ACouponCommodity" >
-		insert into t_coupon_commodity (couponId,commodityNo)
-		values( #{couponId},#{commodityNo} )
-	</insert>
 
-
-	<select id="findById" parameterType="int" resultType="ACoupon">
+    <select id="findById" parameterType="int" resultType="ACoupon">
 		select * from t_coupon where id = #{id}
 	</select>
 
-	<select id="getProductByCouponId" parameterType="int" resultType="Product">
-		select a.commodityName,a.commodityNo,a.barCode from t_commodity a where a.commodityNo in (select b.commodityNo from t_coupon_commodity b where couponid = #{id})
+    <select id="getProductByCouponId" parameterType="int" resultType="Product">
+        SELECT
+            a.commoditycouponName,
+            a.commodityNo,
+            a.barCode
+        FROM
+            t_commodity a
+        WHERE
+            a.commodityNo IN (
+                SELECT
+                    b.commodityNo
+                FROM
+                    t_coupon_commodity b INNER join t_coupon c on b.couponId = c.id
+                WHERE
+                    c.useForAll=1 and  couponid =  #{id})
 	</select>
 
-	<update id="updateById" parameterType="ACoupon">
-		UPDATE  t_coupon
-		<set>
-			<if test="name!=null and name!=''">
-				`name`=#{name},
-			</if>
-			<if test="money!=null">
-				money=#{money},
-			</if>
-			<if test="timeType!=null">
-				timeType=#{timeType},
-			</if>
-			<if test="startTime!=null and startTime!=''">
-				startTime=#{startTime},
-			</if>
-			<if test="endTime!=null and endTime!=''">
-				endTime=#{endTime},
-			</if>
-			<if test="useDays!=null">
-				useDays=#{useDays},
-			</if>
-			<if test="num!=null">
-				num=#{num},
-			</if>
-			<if test="receiveType!=null">
-				receiveType=#{receiveType},
-			</if>
-			<if test="createTime!=null  and createTime!=''">
-				createTime=#{createTime},
-			</if>
-			<if test="useForAll!=null">
-				useForAll=#{useForAll},
-			</if>
-			<if test="useCondition!=null  and useCondition!=''">
-				useCondition=#{useCondition},
-			</if>
-			<if test="orderSKU!=null">
-				orderSKU=#{orderSKU},
-			</if>
-			<if test="useDescription!=null and useDescription!=''">
-				useDescription=#{useDescription},
-			</if>
-			<if test="status!=null">
-				status=#{status},
-			</if>
-			<if test="remark!=null and remark!=''">
-				remark=#{remark}
-			</if>
-		</set>
-		where id = #{id}
+    <update id="updateById" parameterType="ACoupon">
+        UPDATE t_coupon
+        <set>
+            <if test="couponName!=null and couponName!=''">
+                couponName=#{couponName},
+            </if>
+            <if test="money!=null">
+                money=#{money},
+            </if>
+            <if test="timeType!=null">
+                timeType=#{timeType},
+            </if>
+            <if test="startTime!=null and startTime!=''">
+                startTime=#{startTime},
+            </if>
+            <if test="endTime!=null and endTime!=''">
+                endTime=#{endTime},
+            </if>
+            <if test="useDays!=null">
+                useDays=#{useDays},
+            </if>
+            <if test="num!=null">
+                num=#{num},
+            </if>
+            <if test="receiveType!=null">
+                receiveType=#{receiveType},
+            </if>
+            <if test="createTime!=null  and createTime!=''">
+                createTime=#{createTime},
+            </if>
+            <if test="useForAll!=null">
+                useForAll=#{useForAll},
+            </if>
+            <if test="useCondition!=null  and useCondition!=''">
+                useCondition=#{useCondition},
+            </if>
+            <if test="orderSKU!=null">
+                orderSKU=#{orderSKU},
+            </if>
+            <if test="useDescription!=null and useDescription!=''">
+                useDescription=#{useDescription},
+            </if>
+            <if test="status!=null">
+                status=#{status},
+            </if>
+            <if test="remark!=null and remark!=''">
+                remark=#{remark}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
 
-	</update>
+    <delete id="deletCouponCommoditys" parameterType="int">
+		delete FROM t_coupon_commodity where couponId=#{couponId}
+	</delete>
 
-
-
+    <insert id="addCouponCommoditys" parameterType="com.xingrongjinfu.activity.conpusmanage.model.ACouponCommodity">
+        insert into t_coupon_commodity (couponId,commodityNo)
+        values
+        <foreach collection="list" item="tem" separator=",">
+            (#{tem.couponId},#{tem.commodityNo})
+        </foreach>
+    </insert>
 
 </mapper> 

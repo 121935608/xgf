@@ -91,6 +91,7 @@ public class CouponController extends BaseController
     {
         ModelAndView modelAndView=this.getModelAndView(CouponConstant.COUPON_AUDIT_PAGE);
         Coupon coupon= couponService.getCouponDetails(couponId);
+        coupon.setAuditStatus(1);
         if (coupon !=null) {
             modelAndView.addObject("coupon", coupon);
         }

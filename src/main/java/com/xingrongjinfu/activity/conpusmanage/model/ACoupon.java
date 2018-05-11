@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 public class ACoupon {
     private Integer id;
-    private String name;
+    private String couponName;
     private Integer money;
     private Integer timeType;
     private String startTime;
