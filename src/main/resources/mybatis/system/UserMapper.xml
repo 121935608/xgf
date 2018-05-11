@@ -91,9 +91,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultType="User" useCache="false">
-		SELECT u.userId,u.userName,u.accountName,roleName,u.email,u.mobilePhone,u.locked,u.createTime,u.type FROM
+		SELECT u.userId,u.deptId,u.userName,u.accountName,roleName,deptName,u.email,u.mobilePhone,u.locked,u.createTime,u.type FROM
 		sys_user u LEFT JOIN sys_user_role ur ON ur.userId=u.userId
 		LEFT JOIN sys_role r ON r.roleId=ur.roleId
+		LEFT JOIN c_dept cd ON cd.deptId=u.deptId
 		WHERE type='S'
 		<if test="relationMap.userName != null and relationMap.userName != ''"><!-- 关键词检索 -->
 			AND
@@ -109,6 +110,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="relationMap.roleName != null and relationMap.roleName != ''">
 			AND r.roleId=#{relationMap.roleName}
 		</if>
+		ORDER BY createTime
 	</select>
 	
 	<!-- 修改用户信息 -->

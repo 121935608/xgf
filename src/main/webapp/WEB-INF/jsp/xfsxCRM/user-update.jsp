@@ -130,7 +130,6 @@
             name: {
                 required: true,
                 isSpace: true,
-                chineseName:true,
             },
             crmLogin: {
                 required: true,
