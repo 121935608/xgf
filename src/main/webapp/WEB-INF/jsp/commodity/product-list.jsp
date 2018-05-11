@@ -27,13 +27,13 @@
                        cssClass="select" headerKey="" headerValue="供货地">
              </y:select>
        </span>--%>
-		<%--<span class="select-box" style="width: 120px;">
+		<span class="select-box" style="width: 120px;">
            <select name="commodityStatus" id="commodityStatus" class="select" autocomplete="off">
                <option value="">上下架</option>
                <option value="0">上架</option>
                <option value="1" >下架</option>
            </select>
-       </span>--%>
+       </span>
 		<input type="text" class="input-text" style="width:250px" placeholder="编号|商品名称|商品条码" id="commodityName" name="commodityName">
 		<button type="button" class="btn btn-success radius" onclick="query()"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
 	</div>
@@ -60,7 +60,7 @@
 				<th width="5%">犹豫库存</th>
 				<th width="5%">客服库存</th>
 				<th width="5%">可下单库存</th>
-				<th width="5%">状态</th>
+				<th width="5%">上下架</th>
 				<th width="8%">操作</th>
 
 			</tr>
@@ -341,6 +341,19 @@ $(document).ready(function(){
             }
         },
         {
+            "sDefaultContent": "上下架",
+            "bSortable" : false,
+            "sClass": "td-status text-c",
+            "bSearchable": false,
+            "mRender": function(data, type, row) {
+                if (row.commodityStatus == "0") {
+                    return "<span class=\"label label-success radius\">上架</span>";
+                } else if (row.commodityStatus == "1") {
+                    return "<span class=\"label label-defaunt radius\">下架</span>";
+                }
+            }
+        },
+        /*{
             "sDefaultContent": "状态",
             "bSortable" : false,
             "sClass": "td-status text-c",
@@ -352,7 +365,7 @@ $(document).ready(function(){
                     return "<span class=\"label label-defaunt radius\">已停用</span>";
                 }
             }
-        },
+        },*/
         {
             "sDefaultContent": "操作",
             "bSortable" : false,
