@@ -49,6 +49,16 @@ public class Order {
     private String address;
     private String payCode;
 
+    private String supervisorName;
+
+    public String getSupervisorName() {
+        return supervisorName;
+    }
+
+    public void setSupervisorName(String supervisorName) {
+        this.supervisorName = supervisorName;
+    }
+
     public String getPayCode() {
         return payCode;
     }
