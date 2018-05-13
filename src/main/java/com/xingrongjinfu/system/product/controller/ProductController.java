@@ -11,6 +11,7 @@
 package com.xingrongjinfu.system.product.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.xingrongjinfu.common.constants.Constants;
@@ -172,10 +173,12 @@ public class ProductController extends BaseController{
         if (commodityId !=null && commodityId!=""){
                //商品为c就是商品表中的信息
                if (product.getType().equalsIgnoreCase("c")) {
+                    product.setUpdateTime(new Date());
                     result = productService.updateProduct(product);
                }else {
                    //商品为s这里的提交还需将type改为c
                    product.setType("c");
+                   product.setUpdateTime(new Date());
                    result =productService.updateProduct(product);
                }
             }

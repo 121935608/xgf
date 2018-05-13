@@ -10,11 +10,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b71cfb14-e94e-445c-bc94-753a825d87d1" name="Default" comment="添加银行卡号到企业认证表里">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/jcaptcha_2_0_alpha_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/jcaptcha_api_2_0_alpha_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/jcaptcha_integration_simple_servlet_2_0_alpha_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/statistics/cashCount/dao/BillingDao.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/statistics/cashCount/dao/IBillingDao.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__aopalliance_aopalliance_1_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__aopalliance_aopalliance_1_0.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__c3p0_c3p0_0_9_1_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__c3p0_c3p0_0_9_1_1.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_classic_1_0_13.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_classic_1_0_13.xml" />
@@ -77,22 +72,10 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_web_4_1_7_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_web_4_1_7_RELEASE.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_webmvc_4_1_7_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_webmvc_4_1_7_RELEASE.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/statistics/cashCount/Service/AmontService.java" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/statistics/cashCount/Service/AmontService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/statistics/cashCount/controller/CashQuarzt.java" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/statistics/cashCount/controller/CashQuarzt.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/financial/controller/FinancialController.java" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/financial/controller/FinancialController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/financial/dao/FinancialDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/financial/dao/FinancialDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/financial/dao/IFinancialDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/financial/dao/IFinancialDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/financial/service/FinancialService.java" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/financial/service/FinancialService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/financial/service/IFinancialService.java" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/financial/service/IFinancialService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/storeaffairs/controller/CertificationController.java" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/storeaffairs/controller/CertificationController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/user/controller/LoginController.java" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/user/controller/LoginController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/user/controller/UserController.java" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/user/controller/UserController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mybatis/commercial/BillingMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/commercial/BillingMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mybatis/statistics/FinancialMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/statistics/FinancialMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mybatis/system/FinancialMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/system/FinancialMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/vm/mail_register.vm" afterPath="$PROJECT_DIR$/src/main/resources/vm/mail_register.vm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/dataCount/financial-list.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/dataCount/financial-list.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/repayment-list.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/repayment-list.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/product/controller/ProductController.java" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/product/controller/ProductController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mybatis/system/ProductMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/system/ProductMapper.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/uiloader/lib/jQuery-Validation-Engine/js/languages/jquery.validationEngine-zh_CN.js" afterPath="$PROJECT_DIR$/src/main/webapp/uiloader/lib/jQuery-Validation-Engine/js/languages/jquery.validationEngine-zh_CN.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/uiloader/static/h-ui/js/H-ui.js" afterPath="$PROJECT_DIR$/src/main/webapp/uiloader/static/h-ui/js/H-ui.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/xgf_admin.iml" afterPath="$PROJECT_DIR$/xgf_admin.iml" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
@@ -116,174 +99,181 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="repayment-list.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/repayment-list.jsp">
+      <file leaf-file-name="resources.properties" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/resources.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="46">
-              <caret line="8" column="326" lean-forward="true" selection-start-line="8" selection-start-column="146" selection-end-line="8" selection-end-column="326" />
-              <folding>
-                <element signature="n#style#0;n#a#0;n#nav#0;n#body#0;n#!!top" expanded="true" />
-                <marker date="1525226332124" expanded="true" signature="2929:2940" ph="..." />
-                <marker date="1525226332124" expanded="true" signature="3046:3070" ph="..." />
-                <marker date="1525226332124" expanded="true" signature="3132:3138" ph="&amp;nbsp;" />
-                <marker date="1525226332124" expanded="true" signature="3138:3144" ph="&amp;nbsp;" />
-                <marker date="1525226332124" expanded="true" signature="9273:9322" ph="..." />
-                <marker date="1525226332124" expanded="true" signature="9407:9456" ph="..." />
-                <marker date="1525226332124" expanded="true" signature="9508:9557" ph="..." />
-                <marker date="1525226332124" expanded="true" signature="9623:9672" ph="..." />
-                <marker date="1525226332124" expanded="true" signature="9746:9777" ph="..." />
-                <marker date="1525226332124" expanded="true" signature="9807:9838" ph="..." />
-                <marker date="1525226332124" expanded="true" signature="9906:9973" ph="..." />
-                <marker date="1525226332124" expanded="true" signature="10058:10125" ph="..." />
-                <marker date="1525226332124" expanded="true" signature="10177:10244" ph="..." />
-                <marker date="1525226332124" expanded="true" signature="10310:10377" ph="..." />
-                <marker date="1525226332124" expanded="true" signature="10451:10500" ph="..." />
-                <marker date="1525226332124" expanded="true" signature="10530:10579" ph="..." />
-                <marker date="1525226332124" expanded="true" signature="10722:10756" ph="..." />
-                <marker date="1525226332124" expanded="true" signature="10788:10822" ph="..." />
-                <marker date="1525226332124" expanded="true" signature="10870:10904" ph="..." />
-                <marker date="1525226332124" expanded="true" signature="10952:10986" ph="..." />
-                <marker date="1525226332124" expanded="true" signature="11018:11052" ph="..." />
-                <marker date="1525226332124" expanded="true" signature="11082:11098" ph="..." />
-                <marker date="1525226332124" expanded="true" signature="11175:11227" ph="..." />
-                <marker date="1525226332124" expanded="true" signature="11258:11310" ph="..." />
-                <marker date="1525226332124" expanded="true" signature="11357:11409" ph="..." />
-                <marker date="1525226332124" expanded="true" signature="11456:11508" ph="..." />
-                <marker date="1525226332124" expanded="true" signature="11539:11591" ph="..." />
-                <marker date="1525226332124" expanded="true" signature="11620:11654" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="financial-list.jsp" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/dataCount/financial-list.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="215">
-              <caret line="145" column="34" lean-forward="false" selection-start-line="145" selection-start-column="34" selection-end-line="145" selection-end-column="34" />
-              <folding>
-                <element signature="n#style#0;n#a#0;n#nav#0;n#body#0;n#!!top" expanded="true" />
-                <marker date="1525230612476" expanded="true" signature="7686:7735" ph="..." />
-                <marker date="1525230612476" expanded="true" signature="7846:7895" ph="..." />
-                <marker date="1525230612476" expanded="true" signature="7989:8038" ph="..." />
-                <marker date="1525230612476" expanded="true" signature="8129:8178" ph="..." />
-                <marker date="1525230612476" expanded="true" signature="8285:8316" ph="..." />
-                <marker date="1525230612476" expanded="true" signature="8369:8400" ph="..." />
-                <marker date="1525230612476" expanded="true" signature="8481:8548" ph="..." />
-                <marker date="1525230612476" expanded="true" signature="8655:8722" ph="..." />
-                <marker date="1525230612476" expanded="true" signature="8812:8879" ph="..." />
-                <marker date="1525230612476" expanded="true" signature="8966:9033" ph="..." />
-                <marker date="1525230612476" expanded="true" signature="9136:9185" ph="..." />
-                <marker date="1525230612476" expanded="true" signature="9234:9283" ph="..." />
-                <marker date="1525230612476" expanded="true" signature="9481:9515" ph="..." />
-                <marker date="1525230612476" expanded="true" signature="9566:9600" ph="..." />
-                <marker date="1525230612476" expanded="true" signature="9667:9701" ph="..." />
-                <marker date="1525230612476" expanded="true" signature="9767:9801" ph="..." />
-                <marker date="1525230612476" expanded="true" signature="9852:9868" ph="..." />
-                <marker date="1525230612476" expanded="true" signature="9917:9933" ph="..." />
-                <marker date="1525230612476" expanded="true" signature="10034:10086" ph="..." />
-                <marker date="1525230612476" expanded="true" signature="10137:10189" ph="..." />
-                <marker date="1525230612476" expanded="true" signature="10256:10308" ph="..." />
-                <marker date="1525230612476" expanded="true" signature="10374:10426" ph="..." />
-                <marker date="1525230612476" expanded="true" signature="10477:10511" ph="..." />
-                <marker date="1525230612476" expanded="true" signature="10560:10594" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FinancialController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/financial/controller/FinancialController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="185">
-              <caret line="77" column="0" lean-forward="false" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
+            <state relative-caret-position="575">
+              <caret line="25" column="21" lean-forward="false" selection-start-line="25" selection-start-column="21" selection-end-line="25" selection-end-column="21" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Financial.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/financial/model/Financial.java">
+      <file leaf-file-name="ProductController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/product/controller/ProductController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="346">
-              <caret line="33" column="34" lean-forward="false" selection-start-line="33" selection-start-column="23" selection-end-line="33" selection-end-column="34" />
+            <state relative-caret-position="325">
+              <caret line="175" column="54" lean-forward="false" selection-start-line="175" selection-start-column="54" selection-end-line="175" selection-end-column="54" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IFinancialService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/financial/service/IFinancialService.java">
+      <file leaf-file-name="Product.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/product/model/Product.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="139">
-              <caret line="37" column="26" lean-forward="false" selection-start-line="37" selection-start-column="26" selection-end-line="37" selection-end-column="26" />
+            <state relative-caret-position="379">
+              <caret line="42" column="27" lean-forward="false" selection-start-line="42" selection-start-column="17" selection-end-line="42" selection-end-column="27" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FinancialMapper.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/system/FinancialMapper.xml">
+      <file leaf-file-name="ProductService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/product/service/ProductService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
-              <caret line="68" column="59" lean-forward="false" selection-start-line="68" selection-start-column="59" selection-end-line="68" selection-end-column="59" />
-              <folding>
-                <marker date="1525229752610" expanded="true" signature="917:1683" ph="SELECT ROUND... t_store" />
-                <marker date="1525229752610" expanded="true" signature="2047:2179" ph="SELECT d.*,u... m_amount_detail" />
-                <marker date="1525229752610" expanded="true" signature="2265:2680" ph="SELECT s.sto... t_store" />
-                <marker date="1525229752610" expanded="true" signature="2474:2513" ph="SELECT * FRO... m_billing" />
-                <marker date="1525229752610" expanded="true" signature="2772:2942" ph="SELECT IFNUL... t_repay" />
-                <marker date="1525229752610" expanded="true" signature="3009:3998" ph="insert into m_amount... " />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FinancialService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/financial/service/FinancialService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="46" column="36" lean-forward="false" selection-start-line="46" selection-start-column="36" selection-end-line="46" selection-end-column="36" />
-              <folding>
-                <element signature="e#1029#1030#0" expanded="true" />
-                <element signature="e#1082#1083#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FinancialDao.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/financial/dao/FinancialDao.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
-              <caret line="45" column="100" lean-forward="false" selection-start-line="45" selection-start-column="87" selection-end-line="45" selection-end-column="100" />
-              <folding>
-                <element signature="e#1977#1978#0" expanded="true" />
-                <element signature="e#2062#2063#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FinancialMapper.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/statistics/FinancialMapper.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="89">
-              <caret line="28" column="55" lean-forward="false" selection-start-line="28" selection-start-column="55" selection-end-line="28" selection-end-column="55" />
-              <folding>
-                <marker date="1525230381549" expanded="true" signature="1308:2168" ph="SELECT ROUND... t_store" />
-                <marker date="1525230381549" expanded="true" signature="2272:2768" ph="SELECT ROUND... t_store" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IFinancialDao.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/financial/dao/IFinancialDao.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="258">
-              <caret line="54" column="40" lean-forward="false" selection-start-line="54" selection-start-column="40" selection-end-line="54" selection-end-column="40" />
+            <state relative-caret-position="312">
+              <caret line="73" column="15" lean-forward="false" selection-start-line="73" selection-start-column="15" selection-end-line="73" selection-end-column="15" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProductDao.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/product/dao/ProductDao.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="308">
+              <caret line="134" column="0" lean-forward="false" selection-start-line="134" selection-start-column="0" selection-end-line="134" selection-end-column="0" />
+              <folding>
+                <marker date="1525868605015" expanded="true" signature="4286:4294" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProductMapper.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/system/ProductMapper.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="629">
+              <caret line="95" column="89" lean-forward="true" selection-start-line="95" selection-start-column="89" selection-end-line="95" selection-end-column="89" />
+              <folding>
+                <marker date="1525868607825" expanded="true" signature="2495:4113" ph="SELECT c.com... t_commodity" />
+                <marker date="1525868607825" expanded="true" signature="4186:4687" ph="SELECT c.com... t_commodity" />
+                <marker date="1525868607825" expanded="true" signature="4757:4860" ph="SELECT categ... t_category" />
+                <marker date="1525868607825" expanded="true" signature="4935:5037" ph="SELECT categ... t_category" />
+                <marker date="1525868607825" expanded="true" signature="5134:5211" ph="SELECT categ... t_category" />
+                <marker date="1525868607825" expanded="true" signature="5284:5359" ph="SELECT categ... t_category" />
+                <marker date="1525868607825" expanded="true" signature="5429:5568" ph="SELECT suppl... t_commodity" />
+                <marker date="1525868607825" expanded="true" signature="5638:5770" ph="SELECT DISTI... t_commodity" />
+                <marker date="1525868607825" expanded="true" signature="6911:6984" ph="SELECT commo... t_commodity" />
+                <marker date="1525868607825" expanded="true" signature="7054:7090" ph="SELECT commo... t_commodity" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="product-edit.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/commodity/product-edit.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="267">
+              <caret line="441" column="54" lean-forward="false" selection-start-line="441" selection-start-column="43" selection-end-line="441" selection-end-column="54" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProductConstant.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/product/common/ProductConstant.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="242">
+              <caret line="56" column="46" lean-forward="false" selection-start-line="56" selection-start-column="31" selection-end-line="56" selection-end-column="46" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OrderController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/order/controller/OrderController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="176">
+              <caret line="60" column="56" lean-forward="false" selection-start-line="60" selection-start-column="56" selection-end-line="60" selection-end-column="56" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="orderManage-list.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/order/orderManage-list.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="345">
+              <caret line="27" column="36" lean-forward="false" selection-start-line="27" selection-start-column="25" selection-end-line="27" selection-end-column="36" />
+              <folding>
+                <marker date="1525779161022" expanded="true" signature="7187:7207" ph="{...}" />
+                <marker date="1525779161022" expanded="true" signature="7187:7525" ph="{...}" />
+                <marker date="1525779161022" expanded="true" signature="7187:7535" ph="{&quot;sDefaultContent&quot;: &quot;订单状态&quot;...}" />
+                <marker date="1525779161022" expanded="true" signature="7187:10093" ph="[...]" />
+                <marker date="1525779161022" expanded="true" signature="7187:10222" ph="{...}" />
+                <marker date="1525779161022" expanded="true" signature="7187:14766" ph="..." />
+                <marker date="1525779161022" expanded="true" signature="7237:7290" ph="{...}" />
+                <marker date="1525779161022" expanded="true" signature="7320:7373" ph="{...}" />
+                <marker date="1525779161022" expanded="true" signature="7403:7456" ph="{...}" />
+                <marker date="1525779161022" expanded="true" signature="7461:7511" ph="{...}" />
+                <marker date="1525779161022" expanded="true" signature="7545:8193" ph="{&quot;sDefaultContent&quot;: &quot;支付方式&quot;...}" />
+                <marker date="1525779161022" expanded="true" signature="7744:8183" ph="{...}" />
+                <marker date="1525779161022" expanded="true" signature="7827:7879" ph="{...}" />
+                <marker date="1525779161022" expanded="true" signature="7907:7961" ph="{...}" />
+                <marker date="1525779161022" expanded="true" signature="7990:8043" ph="{...}" />
+                <marker date="1525779161022" expanded="true" signature="8073:8127" ph="{...}" />
+                <marker date="1525779161022" expanded="true" signature="8131:8169" ph="{...}" />
+                <marker date="1525779161022" expanded="true" signature="8203:8582" ph="{&quot;sDefaultContent&quot;: &quot;订货地址&quot;...}" />
+                <marker date="1525779161022" expanded="true" signature="8402:8572" ph="{...}" />
+                <marker date="1525779161022" expanded="true" signature="8444:8503" ph="{...}" />
+                <marker date="1525779161022" expanded="true" signature="8508:8558" ph="{...}" />
+                <marker date="1525779161022" expanded="true" signature="8592:10086" ph="{&quot;sDefaultContent&quot;: &quot;操作&quot;...}" />
+                <marker date="1525779161022" expanded="true" signature="8789:10076" ph="{...}" />
+                <marker date="1525779161022" expanded="true" signature="9498:9721" ph="{...}" />
+                <marker date="1525779161022" expanded="true" signature="9633:9653" ph="..." />
+                <marker date="1525779161022" expanded="true" signature="9669:9684" ph="..." />
+                <marker date="1525779161022" expanded="true" signature="10251:10908" ph="{...}" />
+                <marker date="1525779161022" expanded="true" signature="10325:10904" ph="{...}" />
+                <marker date="1525779161022" expanded="true" signature="10342:10895" ph="{&quot;type&quot;: 'post'...}" />
+                <marker date="1525779161022" expanded="true" signature="10558:10883" ph="{...}" />
+                <marker date="1525779161022" expanded="true" signature="10594:10775" ph="{...}" />
+                <marker date="1525779161022" expanded="true" signature="10779:10869" ph="{...}" />
+                <marker date="1525779161022" expanded="true" signature="10939:11311" ph="{...}" />
+                <marker date="1525779161022" expanded="true" signature="10973:11228" ph="{...}" />
+                <marker date="1525779161022" expanded="true" signature="11234:11309" ph="{...}" />
+                <marker date="1525779161022" expanded="true" signature="11263:11279" ph="..." />
+                <marker date="1525779161022" expanded="true" signature="11345:11668" ph="{...}" />
+                <marker date="1525779161022" expanded="true" signature="11379:11581" ph="{...}" />
+                <marker date="1525779161022" expanded="true" signature="11408:11428" ph="..." />
+                <marker date="1525779161022" expanded="true" signature="11541:11556" ph="..." />
+                <marker date="1525779161022" expanded="true" signature="11616:11632" ph="..." />
+                <marker date="1525779161022" expanded="true" signature="11773:12149" ph="{...}" />
+                <marker date="1525779161022" expanded="true" signature="11799:12067" ph="{...}" />
+                <marker date="1525779161022" expanded="true" signature="12072:12147" ph="{...}" />
+                <marker date="1525779161022" expanded="true" signature="12098:12114" ph="..." />
+                <marker date="1525779161022" expanded="true" signature="12167:12826" ph="{...}" />
+                <marker date="1525779161022" expanded="true" signature="12829:12838" ph="/*...*/" />
+                <marker date="1525779161022" expanded="true" signature="12906:12915" ph="/*...*/" />
+                <marker date="1525779161022" expanded="true" signature="12983:12992" ph="/*...*/" />
+                <marker date="1525779161022" expanded="true" signature="13061:13067" ph="/*...*/" />
+                <marker date="1525779161022" expanded="true" signature="13107:13799" ph="{...}" />
+                <marker date="1525779161022" expanded="true" signature="13192:13795" ph="{...}" />
+                <marker date="1525779161022" expanded="true" signature="13209:13785" ph="{&quot;type&quot;: 'post'...}" />
+                <marker date="1525779161022" expanded="true" signature="13456:13774" ph="{...}" />
+                <marker date="1525779161022" expanded="true" signature="13492:13664" ph="{...}" />
+                <marker date="1525779161022" expanded="true" signature="13537:13553" ph="..." />
+                <marker date="1525779161022" expanded="true" signature="13668:13760" ph="{...}" />
+                <marker date="1525779161022" expanded="true" signature="13801:13807" ph="/*...*/" />
+                <marker date="1525779161022" expanded="true" signature="13835:14757" ph="{...}" />
+                <marker date="1525779161022" expanded="true" signature="13909:14753" ph="{...}" />
+                <marker date="1525779161022" expanded="true" signature="13926:14743" ph="{&quot;type&quot;: 'post'...}" />
+                <marker date="1525779161022" expanded="true" signature="14167:14732" ph="{...}" />
+                <marker date="1525779161022" expanded="true" signature="14203:14622" ph="{...}" />
+                <marker date="1525779161022" expanded="true" signature="14348:14368" ph="..." />
+                <marker date="1525779161022" expanded="true" signature="14626:14718" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -302,17 +292,10 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>findOrderManageList</find>
-      <find>findOrderInfo</find>
-      <find>3</find>
-      <find>findProductList</find>
       <find>PRODUCT_LIST_URL</find>
-      <find>PRODUCT_ADD_URL</find>
       <find>findProductById</find>
       <find>jcaptcha-validate</find>
       <find>login</find>
-      <find>saveProduct</find>
-      <find>updateProduct</find>
       <find>tag</find>
       <find>sellWaterpageInfoQuery</find>
       <find>file</find>
@@ -332,6 +315,13 @@
       <find>FinancialMapper</find>
       <find>getByNum</find>
       <find>pageInfoQuery</find>
+      <find>ORDER_MANAGE_LIST_URL</find>
+      <find>toEditProduct</find>
+      <find>PRODUCT_EDIT_URL</find>
+      <find>saveProduct</find>
+      <find>PRODUCT_ADD_URL</find>
+      <find>updateProduct</find>
+      <find>updateTime</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -340,6 +330,7 @@
       <dir>C:\Users\zxuser\Desktop\星果坊\星果坊后台运营\xgf_admin\src\main\java\com\xingrongjinfu\common</dir>
       <dir>E:\IdeaProjects\xgf_admin\src\main\webapp\WEB-INF\jsp\commodity</dir>
       <dir>E:\IdeaProjects\xgf_admin\src\main\java\com\xingrongjinfu\system\merchant</dir>
+      <dir>E:\xgf\xgf_admin\src\main\java</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -375,7 +366,6 @@
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/login.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/product/common/ProductConstant.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/common/constants/Constants.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/product/controller/ProductController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/content/carousel/common/CarouselConstant.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/content/carousel/model/Carousel.java" />
         <option value="$PROJECT_DIR$/src/main/resources/mybatis/content/CarouselMapper.xml" />
@@ -384,7 +374,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/product/service/IProductService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/product/service/ProductService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/product/dao/IProductDao.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/mybatis/system/ProductMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/product/dao/ProductDao.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/content/carousel-add.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/content/carousel-modify.jsp" />
@@ -404,6 +393,8 @@
         <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/financial/controller/FinancialController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/mybatis/statistics/FinancialMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/dataCount/financial-list.jsp" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/product/controller/ProductController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mybatis/system/ProductMapper.xml" />
       </list>
     </option>
   </component>
@@ -477,13 +468,16 @@
       <hideEmptyPackages />
       <abbreviatePackageNames />
       <autoscrollToSource />
-      <autoscrollFromSource />
+      <autoscrollFromSource ProjectPane="true" />
       <sortByType />
       <manualOrder />
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -496,216 +490,10 @@
               <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="xingrongjinfu" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="xingrongjinfu" type="462c0819:PsiDirectoryNode" />
-              <item name="system" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="xingrongjinfu" type="462c0819:PsiDirectoryNode" />
-              <item name="system" type="462c0819:PsiDirectoryNode" />
-              <item name="merchant" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="xingrongjinfu" type="462c0819:PsiDirectoryNode" />
-              <item name="system" type="462c0819:PsiDirectoryNode" />
-              <item name="merchant" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="xingrongjinfu" type="462c0819:PsiDirectoryNode" />
-              <item name="system" type="462c0819:PsiDirectoryNode" />
-              <item name="storeaffairs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="mybatis" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="mybatis" type="462c0819:PsiDirectoryNode" />
-              <item name="commercial" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="mybatis" type="462c0819:PsiDirectoryNode" />
-              <item name="commodity" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="mybatis" type="462c0819:PsiDirectoryNode" />
-              <item name="content" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="mybatis" type="462c0819:PsiDirectoryNode" />
-              <item name="crm" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="mybatis" type="462c0819:PsiDirectoryNode" />
-              <item name="member" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="mybatis" type="462c0819:PsiDirectoryNode" />
-              <item name="statistics" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="mybatis" type="462c0819:PsiDirectoryNode" />
-              <item name="system" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="spring" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
-              <item name="jsp" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
-              <item name="jsp" type="462c0819:PsiDirectoryNode" />
-              <item name="dataCount" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="target" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
-      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -744,114 +532,25 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/commodity/register/common/RegisterConstant.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/commodity/register/controller/RegisterController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/commodity/register/dao/IRegisterDao.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/commodity/register/dao/RegisterDao.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/commodity/register/service/IRegisterService.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/commodity/register/service/RegisterService.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/crm/CrmConstant.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/crm/approvingCoupons/common/CouponConstant.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/crm/approvingCoupons/controller/CouponController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/crm/approvingCoupons/dao/CouponDao.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/crm/approvingCoupons/dao/ICouponDao.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/crm/approvingCoupons/model/Coupon.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/crm/approvingCoupons/service/CouponService.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/crm/approvingCoupons/service/ICouponService.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/crm/crmUser/common/CrmUserConstant.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/crm/crmUser/controller/CrmUserController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/crm/visit/model/Visit.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/statistics/cashCount/common/CashCountConstant.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/statistics/cashCount/controller/CashCountController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/statistics/pays/controller/PayController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/statistics/pays/dao/IPayDao.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/statistics/pays/dao/PayDao.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/statistics/pays/service/IPayService.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/statistics/pays/service/PayService.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/statistics/paysWater/controller/CashController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/statistics/paysWater/dao/CashDao.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/statistics/paysWater/dao/ICashDao.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/statistics/paysWater/model/CashFlowDto.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/statistics/paysWater/service/CashService.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/statistics/paysWater/service/ICashService.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/statistics/procurement/controller/ProcurementController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/statistics/procurement/dao/IProcurementDao.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/statistics/procurement/dao/ProcurementDao.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/statistics/procurement/service/IProcurementService.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/statistics/procurement/service/ProcurementService.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/statistics/purchase/controller/PurchaseController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/statistics/purchase/dao/IPurchaseDao.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/statistics/purchase/dao/PurchaseDao.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/statistics/purchase/service/IPurchaseService.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/statistics/purchase/service/PurchaseService.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/statistics/saleCount/common/SaleCountConstant.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/statistics/saleCount/controller/SaleCountController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/statistics/sellWater/common/SellWaterConstant.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/statistics/sellWater/controller/SellWaterController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/commodity/controller/CommodityController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/commodity/dao/CommodityDao.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/commodity/dao/ICommodityDao.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/commodity/service/CommodityService.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/commodity/service/ICommodityService.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/financial/common/FinancialConstant.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/financial/controller/FinancialController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/financial/dao/FinancialDao.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/financial/dao/IFinancialDao.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/financial/service/FinancialService.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/financial/service/IFinancialService.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/merchant/model/AccountInfo.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/pays/controller/PaysController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/pays/dao/IPaysDao.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/pays/dao/PaysDao.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/pays/service/IPaysService.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/pays/service/PaysService.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/permission/controller/MenuController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/storeaffairs/commom/StoreaffairConstant.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/storeaffairs/controller/CertificationController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/storeaffairs/controller/RepaymentController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/storeaffairs/dao/IRepaymentDao.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/storeaffairs/dao/RepaymentDao.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/storeaffairs/model/Store.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/storeaffairs/service/IRepaymentService.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/storeaffairs/service/RepaymentService.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/supervisor/dao/ISupervisorDao.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/supervisor/dao/SupervisorDao.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/supervisor/model/Supervisor.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/supervisor/service/ISupervisorService.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/supervisor/service/SupervisorService.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/utils/ExportExcel.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/mybatis/commodity/RegisterMapper.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/mybatis/crm/CouponMapper.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/mybatis/crm/DeptMapper.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/mybatis/statistics/CashMapper.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/mybatis/statistics/FinancialMapper.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/mybatis/statistics/PaysMapper.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/mybatis/statistics/ProcurementMapper.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/mybatis/statistics/PurchaseMapper.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/mybatis/system/CommodityMapper.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/mybatis/system/MerchantMapper.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/mybatis/system/PaysMapper.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/mybatis/system/SaleMapper.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/mybatis/system/StoreAffairMapper.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/mybatis/system/SupervisorMapper.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/commodity/product-edit.jsp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/content/commodityAd-add.jsp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/content/commodityAd-modify.jsp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/content/exhibition-add.jsp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/content/exhibition-modify.jsp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/dataCount/financial-list.jsp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/statistics/cashCount-list.jsp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/statistics/saleCount-list.jsp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/statistics/sellWater-list.jsp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/statistics/stock-list.jsp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/certification-check.jsp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/merchant-query.jsp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/repayment-list.jsp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/xfsxCRM/coupon-list.jsp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/xfsxCRM/dept-list.jsp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/xfsxCRM/user-add.jsp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/xfsxCRM/user-list.jsp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/xfsxCRM/user-update.jsp</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/activity/conpusmanage/controller/ACouponController.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/activity/conpusmanage/dao/ACouponDao.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/activity/conpusmanage/dao/IACouponDao.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/activity/conpusmanage/service/ACouponService.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/crm/statistics/dao/IStatisticsDao.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/crm/statistics/dao/StatisticsDao.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/crm/statistics/model/Statistics.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/crm/statistics/service/StatisticsService.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/product/dao/IProductDao.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/product/dao/ProductDao.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/product/service/IProductService.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/product/service/ProductService.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/mybatis/activity/CouponMapper.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/mybatis/system/OrderMapper.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/mybatis/system/ProductMapper.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/activity/coupon-add.jsp</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/activity/coupon-edit.jsp</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/activity/coupon-list.jsp</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/xfsxCRM/statistics-query.jsp</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Created" />
@@ -859,21 +558,18 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="CREATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/crm/crmStore/common/CrmStoreConstant.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/crm/crmStore/controller/CrmStoreController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/crm/crmStore/dao/CrmStoreDao.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/crm/crmStore/dao/CrmStoreDaoImpl.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/crm/crmStore/service/CrmStoreService.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/crm/crmStore/service/CrmStoreServiceImpl.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/crm/crmUser/dao/CrmUserDao.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/crm/crmUser/dao/CrmUserDaoImpl.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/crm/crmUser/service/CrmUserService.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/crm/crmUser/service/CrmUserServiceImpl.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/xfsxCRM/coupon-audit.jsp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/xfsxCRM/coupon-query.jsp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/xfsxCRM/crmStore-check.jsp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/xfsxCRM/crmStore-list.jsp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/xfsxCRM/crmStore-supervistor.jsp</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/activity/conpusmanage/model/ACouponCommodity.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/activity/conpusmanage/service/IACouponService.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/crm/performanceRank/common/PerformanceRankConstant.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/crm/performanceRank/controller/PerformanceRankController.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/crm/performanceRank/dao/IPerformanceRankDao.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/crm/performanceRank/dao/PerformanceRankDao.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/crm/performanceRank/service/IPerformanceRankService.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/crm/performanceRank/service/PerformanceRankService.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/utils/DateUtils.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/mybatis/crm/CrmStatisticsMapper.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/mybatis/crm/PerformanceRankMapper.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/xfsxCRM/performance-rank.jsp</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Deleted" />
@@ -881,10 +577,7 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="true" />
           <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/crm/crmUser/service/package-info.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/statistics/pays/model/PaysDto.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/statistics/procurement/model/ProcurementDto.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/statistics/purchase/model/SPurchaseDto.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/xingrongjinfu/activity/conpusmanage/service/ACouponServiceImpl.java</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Restored" />
@@ -1212,6 +905,7 @@
       <workItem from="1524617940579" duration="27272000" />
       <workItem from="1524712427437" duration="4275000" />
       <workItem from="1525223644665" duration="5806000" />
+      <workItem from="1525429674732" duration="9803000" />
     </task>
     <task id="LOCAL-00025" summary="添加银行卡号到企业认证表里">
       <created>1519637012657</created>
@@ -1560,11 +1254,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="457694000" />
+    <option name="totallyTimeSpent" value="467497000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2559055" sideWeight="0.50375" order="8" side_tool="true" content_ui="tabs" />
@@ -1576,20 +1269,19 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.38451442" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3101197" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32677165" sideWeight="0.4975" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3264418" sideWeight="0.4975" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26771653" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.47244096" sideWeight="0.49625" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15560392" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.236875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15031983" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="BPMNPalette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.328084" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -1598,6 +1290,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="BPMNPalette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1731,13 +1424,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/storeaffairs/controller/CertificationController.java</url>
-          <line>197</line>
+          <line>198</line>
           <properties />
           <option name="timeStamp" value="72" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/storeaffairs/controller/CertificationController.java</url>
-          <line>204</line>
+          <line>205</line>
           <properties />
           <option name="timeStamp" value="73" />
         </line-breakpoint>
@@ -1772,18 +1465,6 @@
           <option name="timeStamp" value="92" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/product/controller/ProductController.java</url>
-          <line>190</line>
-          <properties />
-          <option name="timeStamp" value="100" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/product/controller/ProductController.java</url>
-          <line>215</line>
-          <properties />
-          <option name="timeStamp" value="101" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/content/carousel/controller/CarouselController.java</url>
           <line>153</line>
           <properties />
@@ -1802,74 +1483,15 @@
           <option name="timeStamp" value="114" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="118" />
+      <option name="time" value="119" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/commodity/dao/CommodityDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="42" column="5" lean-forward="true" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/commodity/dao/ICommodityDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="30" column="13" lean-forward="true" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/commodity/model/Commodity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="20" column="13" lean-forward="false" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/product/service/IProductService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1311">
-          <caret line="84" column="47" lean-forward="false" selection-start-line="84" selection-start-column="4" selection-end-line="84" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/product/service/ProductService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="84" column="32" lean-forward="false" selection-start-line="84" selection-start-column="32" selection-end-line="84" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/product/dao/IProductDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="689">
-          <caret line="48" column="48" lean-forward="false" selection-start-line="48" selection-start-column="48" selection-end-line="48" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/system/ProductMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="108" column="82" lean-forward="false" selection-start-line="108" selection-start-column="82" selection-end-line="108" selection-end-column="82" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/content/exhibition-add.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2829">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/product/dao/ProductDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="139" column="90" lean-forward="false" selection-start-line="139" selection-start-column="90" selection-end-line="139" selection-end-column="90" />
         </state>
       </provider>
     </entry>
@@ -1924,19 +1546,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1472">
           <caret line="64" column="51" lean-forward="false" selection-start-line="64" selection-start-column="51" selection-end-line="64" selection-end-column="51" />
-          <folding>
-            <marker date="1524652056719" expanded="true" signature="857:916" ph="select * fro... t_carousel" />
-            <marker date="1524652056719" expanded="true" signature="992:1110" ph="delete from " />
-            <marker date="1524652056719" expanded="true" signature="1209:1264" ph="select * fro... t_carousel" />
-            <marker date="1524652056719" expanded="true" signature="1379:2211" ph="SELECT carou... t_carousel" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/commodity/product-edit.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5543">
-          <caret line="241" column="24" lean-forward="false" selection-start-line="241" selection-start-column="24" selection-end-line="241" selection-end-column="24" />
           <folding />
         </state>
       </provider>
@@ -1945,7 +1554,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="6693">
           <caret line="291" column="20" lean-forward="false" selection-start-line="291" selection-start-column="20" selection-end-line="291" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1983,7 +1591,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-69">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1991,16 +1598,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-345">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1517389542905" expanded="true" signature="5977:5997" ph="..." />
-            <marker date="1517389542905" expanded="true" signature="6112:6120" ph="&amp;##xe631;" />
-            <marker date="1517389542905" expanded="true" signature="6179:6199" ph="..." />
-            <marker date="1517389542905" expanded="true" signature="6315:6323" ph="&amp;##xe615;" />
-            <marker date="1517389542905" expanded="true" signature="8107:8127" ph="..." />
-            <marker date="1517389542905" expanded="true" signature="8222:8230" ph="&amp;##xe6e1;" />
-            <marker date="1517389542905" expanded="true" signature="9276:9296" ph="..." />
-            <marker date="1517389542905" expanded="true" signature="9322:9330" ph="&amp;##xe631;" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2031,16 +1628,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="186">
           <caret line="32" column="32" lean-forward="false" selection-start-line="32" selection-start-column="32" selection-end-line="32" selection-end-column="32" />
-          <folding>
-            <marker date="1525224995020" expanded="true" signature="9126:9146" ph="..." />
-            <marker date="1525224995020" expanded="true" signature="9248:9263" ph="..." />
-            <marker date="1525224995020" expanded="true" signature="9329:9349" ph="..." />
-            <marker date="1525224995020" expanded="true" signature="9452:9467" ph="..." />
-            <marker date="1525224995020" expanded="true" signature="12009:12029" ph="..." />
-            <marker date="1525224995020" expanded="true" signature="12114:12129" ph="..." />
-            <marker date="1525224995020" expanded="true" signature="13187:13207" ph="..." />
-            <marker date="1525224995020" expanded="true" signature="13223:13238" ph="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2064,15 +1652,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="45" column="13" lean-forward="false" selection-start-line="45" selection-start-column="13" selection-end-line="45" selection-end-column="13" />
-          <folding>
-            <marker date="1525224958538" expanded="true" signature="1343:3071" ph="SELECT s.use... sys_user" />
-            <marker date="1525224958538" expanded="true" signature="3176:3365" ph="SELECT s.use... sys_user" />
-            <marker date="1525224958538" expanded="true" signature="3471:4117" ph="SELECT s.use... t_store" />
-            <marker date="1525224958538" expanded="true" signature="3915:3971" ph="SELECT * FRO... t_bankCard" />
-            <marker date="1525224958538" expanded="true" signature="4016:4058" ph="SELECT * FRO... t_user_cert" />
-            <marker date="1525224958538" expanded="true" signature="4199:4409" ph="UPDATE sys_u... " />
-            <marker date="1525224958538" expanded="true" signature="4534:4787" ph="SELECT banId... t_balance" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2080,7 +1660,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="304">
           <caret line="47" column="27" lean-forward="false" selection-start-line="47" selection-start-column="19" selection-end-line="47" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2088,22 +1667,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-14">
           <caret line="28" column="23" lean-forward="true" selection-start-line="28" selection-start-column="23" selection-end-line="28" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/order/common/OrderConstant.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="95" column="37" lean-forward="false" selection-start-line="95" selection-start-column="37" selection-end-line="95" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/order/controller/OrderController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-380">
-          <caret line="160" column="86" lean-forward="false" selection-start-line="160" selection-start-column="86" selection-end-line="160" selection-end-column="86" />
           <folding />
         </state>
       </provider>
@@ -2120,7 +1683,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="40" column="37" lean-forward="false" selection-start-line="40" selection-start-column="37" selection-end-line="40" selection-end-column="37" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2128,9 +1690,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="92">
           <caret line="4" column="140" lean-forward="false" selection-start-line="4" selection-start-column="140" selection-end-line="4" selection-end-column="140" />
-          <folding>
-            <element signature="n#style#0;n#a#0;n#nav#0;n#body#0;n#!!top" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2146,13 +1705,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/financial/model/Financial.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
+        <state relative-caret-position="506">
           <caret line="33" column="34" lean-forward="false" selection-start-line="33" selection-start-column="23" selection-end-line="33" selection-end-column="34" />
           <folding />
         </state>
@@ -2160,38 +1718,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/financial/dao/IFinancialDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
+        <state relative-caret-position="851">
           <caret line="54" column="40" lean-forward="false" selection-start-line="54" selection-start-column="40" selection-end-line="54" selection-end-column="40" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/4.1.7.RELEASE/spring-web-4.1.7.RELEASE-sources.jar!/org/springframework/web/method/support/InvocableHandlerMethod.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="228" column="0" lean-forward="false" selection-start-line="228" selection-start-column="0" selection-end-line="228" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/4.1.7.RELEASE/spring-web-4.1.7.RELEASE-sources.jar!/org/springframework/web/method/support/InvocableHandlerMethod.java" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/system/FinancialMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
+        <state relative-caret-position="1564">
           <caret line="68" column="59" lean-forward="false" selection-start-line="68" selection-start-column="59" selection-end-line="68" selection-end-column="59" />
-          <folding>
-            <marker date="1525229752610" expanded="true" signature="917:1683" ph="SELECT ROUND... t_store" />
-            <marker date="1525229752610" expanded="true" signature="2047:2179" ph="SELECT d.*,u... m_amount_detail" />
-            <marker date="1525229752610" expanded="true" signature="2265:2680" ph="SELECT s.sto... t_store" />
-            <marker date="1525229752610" expanded="true" signature="2474:2513" ph="SELECT * FRO... m_billing" />
-            <marker date="1525229752610" expanded="true" signature="2772:2942" ph="SELECT IFNUL... t_repay" />
-            <marker date="1525229752610" expanded="true" signature="3009:3998" ph="insert into m_amount... " />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/financial/service/IFinancialService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
+        <state relative-caret-position="460">
           <caret line="37" column="26" lean-forward="false" selection-start-line="37" selection-start-column="26" selection-end-line="37" selection-end-column="26" />
           <folding />
         </state>
@@ -2199,29 +1743,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/financial/service/FinancialService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
+        <state relative-caret-position="552">
           <caret line="46" column="36" lean-forward="false" selection-start-line="46" selection-start-column="36" selection-end-line="46" selection-end-column="36" />
           <folding>
-            <element signature="e#1029#1030#0" expanded="true" />
-            <element signature="e#1082#1083#0" expanded="true" />
+            <element signature="e#1029#1030#0" expanded="false" />
+            <element signature="e#1082#1083#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/financial/dao/FinancialDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
+        <state relative-caret-position="598">
           <caret line="45" column="100" lean-forward="false" selection-start-line="45" selection-start-column="87" selection-end-line="45" selection-end-column="100" />
           <folding>
-            <element signature="e#1977#1978#0" expanded="true" />
-            <element signature="e#2062#2063#0" expanded="true" />
+            <element signature="e#1977#1978#0" expanded="false" />
+            <element signature="e#2062#2063#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/financial/controller/FinancialController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
+        <state relative-caret-position="851">
           <caret line="77" column="0" lean-forward="false" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
           <folding />
         </state>
@@ -2229,83 +1773,216 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/repayment-list.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46">
-          <caret line="8" column="326" lean-forward="true" selection-start-line="8" selection-start-column="146" selection-end-line="8" selection-end-column="326" />
-          <folding>
-            <element signature="n#style#0;n#a#0;n#nav#0;n#body#0;n#!!top" expanded="true" />
-            <marker date="1525226332124" expanded="true" signature="2929:2940" ph="..." />
-            <marker date="1525226332124" expanded="true" signature="3046:3070" ph="..." />
-            <marker date="1525226332124" expanded="true" signature="3132:3138" ph="&amp;nbsp;" />
-            <marker date="1525226332124" expanded="true" signature="3138:3144" ph="&amp;nbsp;" />
-            <marker date="1525226332124" expanded="true" signature="9273:9322" ph="..." />
-            <marker date="1525226332124" expanded="true" signature="9407:9456" ph="..." />
-            <marker date="1525226332124" expanded="true" signature="9508:9557" ph="..." />
-            <marker date="1525226332124" expanded="true" signature="9623:9672" ph="..." />
-            <marker date="1525226332124" expanded="true" signature="9746:9777" ph="..." />
-            <marker date="1525226332124" expanded="true" signature="9807:9838" ph="..." />
-            <marker date="1525226332124" expanded="true" signature="9906:9973" ph="..." />
-            <marker date="1525226332124" expanded="true" signature="10058:10125" ph="..." />
-            <marker date="1525226332124" expanded="true" signature="10177:10244" ph="..." />
-            <marker date="1525226332124" expanded="true" signature="10310:10377" ph="..." />
-            <marker date="1525226332124" expanded="true" signature="10451:10500" ph="..." />
-            <marker date="1525226332124" expanded="true" signature="10530:10579" ph="..." />
-            <marker date="1525226332124" expanded="true" signature="10722:10756" ph="..." />
-            <marker date="1525226332124" expanded="true" signature="10788:10822" ph="..." />
-            <marker date="1525226332124" expanded="true" signature="10870:10904" ph="..." />
-            <marker date="1525226332124" expanded="true" signature="10952:10986" ph="..." />
-            <marker date="1525226332124" expanded="true" signature="11018:11052" ph="..." />
-            <marker date="1525226332124" expanded="true" signature="11082:11098" ph="..." />
-            <marker date="1525226332124" expanded="true" signature="11175:11227" ph="..." />
-            <marker date="1525226332124" expanded="true" signature="11258:11310" ph="..." />
-            <marker date="1525226332124" expanded="true" signature="11357:11409" ph="..." />
-            <marker date="1525226332124" expanded="true" signature="11456:11508" ph="..." />
-            <marker date="1525226332124" expanded="true" signature="11539:11591" ph="..." />
-            <marker date="1525226332124" expanded="true" signature="11620:11654" ph="..." />
-          </folding>
+        <state relative-caret-position="184">
+          <caret line="8" column="326" lean-forward="false" selection-start-line="8" selection-start-column="146" selection-end-line="8" selection-end-column="326" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/statistics/FinancialMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="89">
+        <state relative-caret-position="644">
           <caret line="28" column="55" lean-forward="false" selection-start-line="28" selection-start-column="55" selection-end-line="28" selection-end-column="55" />
-          <folding>
-            <marker date="1525230381549" expanded="true" signature="1308:2168" ph="SELECT ROUND... t_store" />
-            <marker date="1525230381549" expanded="true" signature="2272:2768" ph="SELECT ROUND... t_store" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/dataCount/financial-list.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="215">
-          <caret line="145" column="34" lean-forward="false" selection-start-line="145" selection-start-column="34" selection-end-line="145" selection-end-column="34" />
+        <state relative-caret-position="514">
+          <caret line="170" column="26" lean-forward="false" selection-start-line="170" selection-start-column="26" selection-end-line="170" selection-end-column="26" />
           <folding>
-            <element signature="n#style#0;n#a#0;n#nav#0;n#body#0;n#!!top" expanded="true" />
-            <marker date="1525230612476" expanded="true" signature="7686:7735" ph="..." />
-            <marker date="1525230612476" expanded="true" signature="7846:7895" ph="..." />
-            <marker date="1525230612476" expanded="true" signature="7989:8038" ph="..." />
-            <marker date="1525230612476" expanded="true" signature="8129:8178" ph="..." />
-            <marker date="1525230612476" expanded="true" signature="8285:8316" ph="..." />
-            <marker date="1525230612476" expanded="true" signature="8369:8400" ph="..." />
-            <marker date="1525230612476" expanded="true" signature="8481:8548" ph="..." />
-            <marker date="1525230612476" expanded="true" signature="8655:8722" ph="..." />
-            <marker date="1525230612476" expanded="true" signature="8812:8879" ph="..." />
-            <marker date="1525230612476" expanded="true" signature="8966:9033" ph="..." />
-            <marker date="1525230612476" expanded="true" signature="9136:9185" ph="..." />
-            <marker date="1525230612476" expanded="true" signature="9234:9283" ph="..." />
-            <marker date="1525230612476" expanded="true" signature="9481:9515" ph="..." />
-            <marker date="1525230612476" expanded="true" signature="9566:9600" ph="..." />
-            <marker date="1525230612476" expanded="true" signature="9667:9701" ph="..." />
-            <marker date="1525230612476" expanded="true" signature="9767:9801" ph="..." />
-            <marker date="1525230612476" expanded="true" signature="9852:9868" ph="..." />
-            <marker date="1525230612476" expanded="true" signature="9917:9933" ph="..." />
-            <marker date="1525230612476" expanded="true" signature="10034:10086" ph="..." />
-            <marker date="1525230612476" expanded="true" signature="10137:10189" ph="..." />
-            <marker date="1525230612476" expanded="true" signature="10256:10308" ph="..." />
-            <marker date="1525230612476" expanded="true" signature="10374:10426" ph="..." />
-            <marker date="1525230612476" expanded="true" signature="10477:10511" ph="..." />
-            <marker date="1525230612476" expanded="true" signature="10560:10594" ph="..." />
+            <marker date="1525426164595" expanded="true" signature="7686:7735" ph="..." />
+            <marker date="1525426164595" expanded="true" signature="7846:7895" ph="..." />
+            <marker date="1525426164595" expanded="true" signature="7989:8038" ph="..." />
+            <marker date="1525426164595" expanded="true" signature="8129:8178" ph="..." />
+            <marker date="1525426164595" expanded="true" signature="8285:8316" ph="..." />
+            <marker date="1525426164595" expanded="true" signature="8369:8400" ph="..." />
+            <marker date="1525426164595" expanded="true" signature="8481:8548" ph="..." />
+            <marker date="1525426164595" expanded="true" signature="8655:8722" ph="..." />
+            <marker date="1525426164595" expanded="true" signature="8812:8879" ph="..." />
+            <marker date="1525426164595" expanded="true" signature="8966:9033" ph="..." />
+            <marker date="1525426164595" expanded="true" signature="9136:9185" ph="..." />
+            <marker date="1525426164595" expanded="true" signature="9234:9283" ph="..." />
+            <marker date="1525426164595" expanded="true" signature="9481:9515" ph="..." />
+            <marker date="1525426164595" expanded="true" signature="9566:9600" ph="..." />
+            <marker date="1525426164595" expanded="true" signature="9667:9701" ph="..." />
+            <marker date="1525426164595" expanded="true" signature="9767:9801" ph="..." />
+            <marker date="1525426164595" expanded="true" signature="9852:9868" ph="..." />
+            <marker date="1525426164595" expanded="true" signature="9917:9933" ph="..." />
+            <marker date="1525426164595" expanded="true" signature="10034:10086" ph="..." />
+            <marker date="1525426164595" expanded="true" signature="10137:10189" ph="..." />
+            <marker date="1525426164595" expanded="true" signature="10256:10308" ph="..." />
+            <marker date="1525426164595" expanded="true" signature="10374:10426" ph="..." />
+            <marker date="1525426164595" expanded="true" signature="10477:10511" ph="..." />
+            <marker date="1525426164595" expanded="true" signature="10560:10594" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/order/common/OrderConstant.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="35" column="52" lean-forward="false" selection-start-line="35" selection-start-column="31" selection-end-line="35" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/order/orderManage-list.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="27" column="36" lean-forward="false" selection-start-line="27" selection-start-column="25" selection-end-line="27" selection-end-column="36" />
+          <folding>
+            <marker date="1525779161022" expanded="true" signature="7187:7207" ph="{...}" />
+            <marker date="1525779161022" expanded="true" signature="7187:7525" ph="{...}" />
+            <marker date="1525779161022" expanded="true" signature="7187:7535" ph="{&quot;sDefaultContent&quot;: &quot;订单状态&quot;...}" />
+            <marker date="1525779161022" expanded="true" signature="7187:10093" ph="[...]" />
+            <marker date="1525779161022" expanded="true" signature="7187:10222" ph="{...}" />
+            <marker date="1525779161022" expanded="true" signature="7187:14766" ph="..." />
+            <marker date="1525779161022" expanded="true" signature="7237:7290" ph="{...}" />
+            <marker date="1525779161022" expanded="true" signature="7320:7373" ph="{...}" />
+            <marker date="1525779161022" expanded="true" signature="7403:7456" ph="{...}" />
+            <marker date="1525779161022" expanded="true" signature="7461:7511" ph="{...}" />
+            <marker date="1525779161022" expanded="true" signature="7545:8193" ph="{&quot;sDefaultContent&quot;: &quot;支付方式&quot;...}" />
+            <marker date="1525779161022" expanded="true" signature="7744:8183" ph="{...}" />
+            <marker date="1525779161022" expanded="true" signature="7827:7879" ph="{...}" />
+            <marker date="1525779161022" expanded="true" signature="7907:7961" ph="{...}" />
+            <marker date="1525779161022" expanded="true" signature="7990:8043" ph="{...}" />
+            <marker date="1525779161022" expanded="true" signature="8073:8127" ph="{...}" />
+            <marker date="1525779161022" expanded="true" signature="8131:8169" ph="{...}" />
+            <marker date="1525779161022" expanded="true" signature="8203:8582" ph="{&quot;sDefaultContent&quot;: &quot;订货地址&quot;...}" />
+            <marker date="1525779161022" expanded="true" signature="8402:8572" ph="{...}" />
+            <marker date="1525779161022" expanded="true" signature="8444:8503" ph="{...}" />
+            <marker date="1525779161022" expanded="true" signature="8508:8558" ph="{...}" />
+            <marker date="1525779161022" expanded="true" signature="8592:10086" ph="{&quot;sDefaultContent&quot;: &quot;操作&quot;...}" />
+            <marker date="1525779161022" expanded="true" signature="8789:10076" ph="{...}" />
+            <marker date="1525779161022" expanded="true" signature="9498:9721" ph="{...}" />
+            <marker date="1525779161022" expanded="true" signature="9633:9653" ph="..." />
+            <marker date="1525779161022" expanded="true" signature="9669:9684" ph="..." />
+            <marker date="1525779161022" expanded="true" signature="10251:10908" ph="{...}" />
+            <marker date="1525779161022" expanded="true" signature="10325:10904" ph="{...}" />
+            <marker date="1525779161022" expanded="true" signature="10342:10895" ph="{&quot;type&quot;: 'post'...}" />
+            <marker date="1525779161022" expanded="true" signature="10558:10883" ph="{...}" />
+            <marker date="1525779161022" expanded="true" signature="10594:10775" ph="{...}" />
+            <marker date="1525779161022" expanded="true" signature="10779:10869" ph="{...}" />
+            <marker date="1525779161022" expanded="true" signature="10939:11311" ph="{...}" />
+            <marker date="1525779161022" expanded="true" signature="10973:11228" ph="{...}" />
+            <marker date="1525779161022" expanded="true" signature="11234:11309" ph="{...}" />
+            <marker date="1525779161022" expanded="true" signature="11263:11279" ph="..." />
+            <marker date="1525779161022" expanded="true" signature="11345:11668" ph="{...}" />
+            <marker date="1525779161022" expanded="true" signature="11379:11581" ph="{...}" />
+            <marker date="1525779161022" expanded="true" signature="11408:11428" ph="..." />
+            <marker date="1525779161022" expanded="true" signature="11541:11556" ph="..." />
+            <marker date="1525779161022" expanded="true" signature="11616:11632" ph="..." />
+            <marker date="1525779161022" expanded="true" signature="11773:12149" ph="{...}" />
+            <marker date="1525779161022" expanded="true" signature="11799:12067" ph="{...}" />
+            <marker date="1525779161022" expanded="true" signature="12072:12147" ph="{...}" />
+            <marker date="1525779161022" expanded="true" signature="12098:12114" ph="..." />
+            <marker date="1525779161022" expanded="true" signature="12167:12826" ph="{...}" />
+            <marker date="1525779161022" expanded="true" signature="12829:12838" ph="/*...*/" />
+            <marker date="1525779161022" expanded="true" signature="12906:12915" ph="/*...*/" />
+            <marker date="1525779161022" expanded="true" signature="12983:12992" ph="/*...*/" />
+            <marker date="1525779161022" expanded="true" signature="13061:13067" ph="/*...*/" />
+            <marker date="1525779161022" expanded="true" signature="13107:13799" ph="{...}" />
+            <marker date="1525779161022" expanded="true" signature="13192:13795" ph="{...}" />
+            <marker date="1525779161022" expanded="true" signature="13209:13785" ph="{&quot;type&quot;: 'post'...}" />
+            <marker date="1525779161022" expanded="true" signature="13456:13774" ph="{...}" />
+            <marker date="1525779161022" expanded="true" signature="13492:13664" ph="{...}" />
+            <marker date="1525779161022" expanded="true" signature="13537:13553" ph="..." />
+            <marker date="1525779161022" expanded="true" signature="13668:13760" ph="{...}" />
+            <marker date="1525779161022" expanded="true" signature="13801:13807" ph="/*...*/" />
+            <marker date="1525779161022" expanded="true" signature="13835:14757" ph="{...}" />
+            <marker date="1525779161022" expanded="true" signature="13909:14753" ph="{...}" />
+            <marker date="1525779161022" expanded="true" signature="13926:14743" ph="{&quot;type&quot;: 'post'...}" />
+            <marker date="1525779161022" expanded="true" signature="14167:14732" ph="{...}" />
+            <marker date="1525779161022" expanded="true" signature="14203:14622" ph="{...}" />
+            <marker date="1525779161022" expanded="true" signature="14348:14368" ph="..." />
+            <marker date="1525779161022" expanded="true" signature="14626:14718" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/order/controller/OrderController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="60" column="56" lean-forward="false" selection-start-line="60" selection-start-column="56" selection-end-line="60" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/resources.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="575">
+          <caret line="25" column="21" lean-forward="false" selection-start-line="25" selection-start-column="21" selection-end-line="25" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/commodity/product-edit.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="267">
+          <caret line="441" column="54" lean-forward="false" selection-start-line="441" selection-start-column="43" selection-end-line="441" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/product/common/ProductConstant.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="56" column="46" lean-forward="false" selection-start-line="56" selection-start-column="31" selection-end-line="56" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/product/service/ProductService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="73" column="15" lean-forward="false" selection-start-line="73" selection-start-column="15" selection-end-line="73" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/product/dao/ProductDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="134" column="0" lean-forward="false" selection-start-line="134" selection-start-column="0" selection-end-line="134" selection-end-column="0" />
+          <folding>
+            <marker date="1525868605015" expanded="true" signature="4286:4294" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/product/model/Product.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="379">
+          <caret line="42" column="27" lean-forward="false" selection-start-line="42" selection-start-column="17" selection-end-line="42" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/product/controller/ProductController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="175" column="54" lean-forward="false" selection-start-line="175" selection-start-column="54" selection-end-line="175" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/system/ProductMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="629">
+          <caret line="95" column="89" lean-forward="true" selection-start-line="95" selection-start-column="89" selection-end-line="95" selection-end-column="89" />
+          <folding>
+            <marker date="1525868607825" expanded="true" signature="2495:4113" ph="SELECT c.com... t_commodity" />
+            <marker date="1525868607825" expanded="true" signature="4186:4687" ph="SELECT c.com... t_commodity" />
+            <marker date="1525868607825" expanded="true" signature="4757:4860" ph="SELECT categ... t_category" />
+            <marker date="1525868607825" expanded="true" signature="4935:5037" ph="SELECT categ... t_category" />
+            <marker date="1525868607825" expanded="true" signature="5134:5211" ph="SELECT categ... t_category" />
+            <marker date="1525868607825" expanded="true" signature="5284:5359" ph="SELECT categ... t_category" />
+            <marker date="1525868607825" expanded="true" signature="5429:5568" ph="SELECT suppl... t_commodity" />
+            <marker date="1525868607825" expanded="true" signature="5638:5770" ph="SELECT DISTI... t_commodity" />
+            <marker date="1525868607825" expanded="true" signature="6911:6984" ph="SELECT commo... t_commodity" />
+            <marker date="1525868607825" expanded="true" signature="7054:7090" ph="SELECT commo... t_commodity" />
           </folding>
         </state>
       </provider>

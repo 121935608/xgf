@@ -3,11 +3,13 @@ package com.xingrongjinfu.activity.conpusmanage.dao;
 
 import com.xingrongjinfu.activity.conpusmanage.model.ACoupon;
 import com.xingrongjinfu.activity.conpusmanage.model.ACouponCommodity;
+import com.xingrongjinfu.activity.conpusmanage.model.ACouponUser;
 import com.xingrongjinfu.system.product.model.Product;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: fengqian
@@ -15,21 +17,14 @@ import java.util.List;
  * @Description:
  */
 
-public interface IACouponDao {
+public interface IACouponUserDao {
 
     public List<TableDataInfo> pageInfoQuery(PageUtilEntity pageUtilEntity);
 
-    boolean addCoupon(ACoupon coupon);
 
-    ACoupon findById(int id);
+    List<ACoupon> getCoupons();
 
-    boolean updateCoupon(ACoupon coupon);
+    void addCouponUser(ACouponUser couponUser);
 
-    void addCouponCommoditys(List<ACouponCommodity> aCouponCommodity);
-
-    List<Product> getProductByCouponId(Integer id);
-
-
-
-    void deletCouponCommoditys(Integer id);
+    Map<String,String> getUser(String storeId);
 }

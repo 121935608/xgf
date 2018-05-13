@@ -11,16 +11,18 @@
                 <input type="text" class="input-text" placeholder="姓名" id="name" name="name" value="${Supervisor.name }">
             </div>
         </div>
+        <div class="row cl" style="display: none">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>姓名：</label>
+            <div class="formControls col-xs-8 col-sm-4">
+                <input type="text" class="input-text" placeholder="市的编号" id="cityCode" name="cityCode" value="${Supervisor.cityCode }">
+                <input type="text" class="input-text" placeholder="省的编号" id="provinceCode" name="provinceCode" value="${Supervisor.provinceCode }">
+                <input type="text" class="input-text" placeholder="地址" id="area" name="area" value="${Supervisor.area }">
+            </div>
+        </div>
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>登录账号：</label>
             <div class="formControls col-xs-8 col-sm-4">
                 <input type="text" class="input-text" placeholder="姓名" id="crmLogin" name="crmLogin" value="${Supervisor.crmLogin }">
-            </div>
-        </div>
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>登录密码：</label>
-            <div class="formControls col-xs-8 col-sm-4">
-                <input type="text" class="input-text" placeholder="姓名" id="crmPwd" name="crmPwd" value="${Supervisor.crmPwd }">
             </div>
         </div>
         <div class="row cl">
@@ -48,9 +50,9 @@
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3">*<span class="c-red"></span>所在区域:</label>
             <div data-toggle="distpicker">
-                <select id="province"></select>
-                <select id="city"></select>
-                <select id="district"></select>
+                <select data-province="---- 选择省 ----" id="province" name="province"></select>
+                <select data-city="---- 选择市 ----" id="city" name="city"></select>
+                <select data-district="---- 选择区 ----" id="district" name="county"></select>
             </div>
         </div>
         <div class="row cl">
@@ -77,6 +79,22 @@
 </article>
 
 <script type="text/javascript">
+    $(function(){
+        $("#city").on("input",function(){
+            var city = $("#city option:selected");
+            $("#cityCode").val(city.attr("data-code"));
+        });
+        $("#province").on("input",function(){
+            var province = $("#province option:selected");
+            $("#provinceCode").val(province.attr("data-code"));
+        });
+        $("#province,#city,#district").on("input",function(){
+            var province=$("#province option:selected").val();
+            var city=$("#city option:selected").val()
+            var district=$("#district option:selected").val();
+            $("#area").val(province+city+district);
+        })
+    });
     //校验上传文件是否为图片格式
     function changImg(e){
         for (var i = 0; i < e.target.files.length; i++) {
@@ -112,7 +130,6 @@
             name: {
                 required: true,
                 isSpace: true,
-                chineseName:true,
             },
             crmLogin: {
                 required: true,
@@ -150,21 +167,17 @@
         focusCleanup:true,
         success:"valid",
         submitHandler:function(form){
-            var province=$("#province option:selected").val();
-            var city=$("#city option:selected").val()
-            var district=$("#district option:selected").val();
-            var area=province+city+district;
-            if (area ===null ||area===''|| area===undefined ){
+            if ($("#area").val() === null){
                 alert("请选择区域");
                 return;
             }
             var index = parent.layer.load();
             var formData = new FormData($('#form-supervisor-modify')[0]);
             $.ajax({
-                url:"${context_url}/crmUser/updateSpervistorIDView.action?area="+area,
+                url:"${context_url}/crmUser/updateSpervistorIDView.action",
                 type:'post',
                 data:formData,
-                mimeType: "multipart/form-data",
+                mimeType: "multipart/form-data;charset=utf-8",
                 contentType: false,
                 cache:false,
                 processData: false,

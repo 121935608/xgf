@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.xingrongjinfu.crm.crmUser.service.CrmUserService;
+import com.xingrongjinfu.crm.department.model.Dept;
 import com.xingrongjinfu.utils.DesUtils;
 import com.xingrongjinfu.utils.HttpClientUtil;
 import com.xingrongjinfu.utils.IdUtil;
@@ -48,6 +50,9 @@ public class UserController extends BaseController {
     private IRoleService roleService;
 
     @Autowired
+    private CrmUserService crmUserService;
+
+    @Autowired
     private MailSenderService mailSenderService;
 
     /**
@@ -90,6 +95,7 @@ public class UserController extends BaseController {
             modelAndView.addObject("user", this.userService.findByUserId(userId));
             modelAndView.addObject("role", this.roleService.findByUserId(userId));
             modelAndView.addObject("roles", getRoleList());
+            modelAndView.addObject("Depts", getDept());
         }
         return modelAndView;
     }
@@ -261,6 +267,19 @@ public class UserController extends BaseController {
             SysCode sysCode = new SysCode();
             sysCode.setCodeid(role.getRoleId().toString());
             sysCode.setCodevalue(role.getRoleName());
+            sysCodeList.add(sysCode);
+        }
+        return sysCodeList;
+    }
+     //获取所有部门信息
+    public List<SysCode> getDept(){
+        /*查询所有部门信息*/
+        List<Dept> deptList = crmUserService.selectAllDept();
+        List<SysCode> sysCodeList = new ArrayList<SysCode>();
+        for(int i = 0; i< deptList.size();i++){
+            SysCode sysCode = new SysCode();
+            sysCode.setCodeid(deptList.get(i).getDeptId());
+            sysCode.setCodevalue(deptList.get(i).getDeptName());
             sysCodeList.add(sysCode);
         }
         return sysCodeList;

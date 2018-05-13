@@ -184,7 +184,8 @@
                 "mRender": function(data, type, row) {
                     //编辑
                     var toEdit = "<a title=\"编辑\" href=\"javascript:;\" onclick=\"role_edit('编辑督导员','${context_root}/crmUser/updateSpervistorInfoView.action?supervisorId=" + row.supervisorId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>编辑</span></a>";
-                    return statusTools(row) +"&nbsp;&nbsp;" + toEdit;
+                    var toEditTwo = "<a style=\"text-decoration:none\" onClick=\"supervisorUpdatePwd(this,\'" + row.supervisorId + "\')\" href=\"javascript:;\" title=\"重置密码\"><span style='color: #0e90d2 '>重置密码</span></a>";
+                    return statusTools(row) +"&nbsp;&nbsp;" + toEdit +"&nbsp;&nbsp;"+toEditTwo;
                 }
             },
         ];
@@ -265,6 +266,27 @@
         pageTable.fnSettings().sAjaxSource = encodeURI("${context_root}/crmUser/userCRMView.action?status="+status+"&userName="+userName);
         pageTable.fnClearTable(0);
         pageTable.fnDraw();
+    }
+
+    /*重置密码123456*/
+    function supervisorUpdatePwd(obj,id){
+        parent.layer.confirm('确认要将密码重置为“123456”吗？',{icon: 3, title:'提示'},function(index){
+            $.ajax({
+                url:"${context_root}/crmUser/updateSupervistorStatusView.action?supervisorId=" + id+"&crmPwd=123456",
+                type:'post',
+                async:true ,
+                cache:false ,
+                dataType:"json",
+                success:function(data){
+                    if(data.s == true){
+                        parent.layer.msg('密码已重置为“123456!”', {icon: 6, time: 1500});
+                    }else{
+                        parent.layer.alert(data.m , {icon: 2,title:"系统提示"});
+                    }
+                },
+
+            }) ;
+        });
     }
 </script>
 </body>

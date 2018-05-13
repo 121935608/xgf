@@ -1,10 +1,12 @@
 package com.xingrongjinfu.activity.conpusmanage.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xingrongjinfu.activity.conpusmanage.model.ACoupon;
 import com.xingrongjinfu.activity.conpusmanage.service.IACouponService;
 import com.xingrongjinfu.system.product.model.Product;
 import com.xingrongjinfu.system.product.service.IProductService;
 import com.xingrongjinfu.utils.DateUtil;
+import com.xingrongjinfu.utils.JsonUtil;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.framework.core.controller.BaseController;
@@ -23,10 +25,11 @@ import java.util.List;
  * @Date: 2018/5/4 09:25
  * @Description:
  */
-@Controller("aCoupon")
+@Controller
 @RequestMapping("coupon")
 public class ACouponController extends BaseController {
-
+    @Autowired
+    ObjectMapper objectMapper;
     @Autowired
     private IACouponService couponService;
     @Autowired
@@ -58,9 +61,8 @@ public class ACouponController extends BaseController {
     @ResponseBody
     public Message add(ACoupon coupon, HttpServletRequest request) {
         String commodityNos = request.getParameter("commodityNos");
-
-        boolean b = couponService.addCoupon(coupon,commodityNos);
-        return true ? new Message(1) : new Message(0);
+        couponService.addCoupon(coupon,commodityNos);
+        return new Message(1);
     }
 
     @RequestMapping("editUI")
@@ -69,14 +71,16 @@ public class ACouponController extends BaseController {
         ACoupon acoupon = couponService.findById(id);
         List<Product> products = couponService.getProductByCouponId(acoupon.getId());
         modelAndView.addObject("acoupon",acoupon);
-        modelAndView.addObject("products",products);
+        String data = objectMapper.writeValueAsString(products);
+        modelAndView.addObject("data",data);
         return modelAndView;
     }
 
     @RequestMapping("edit")
     @ResponseBody
-    public Message edit(ACoupon coupon) throws Exception {
-        boolean b = couponService.updateCoupon(coupon);
+    public Message edit(ACoupon coupon,HttpServletRequest request) throws Exception {
+        String commodityNos = request.getParameter("commodityNos");
+        boolean b = couponService.updateCoupon(coupon,commodityNos);
         return b ? new Message(1) : new Message(0);
     }
 

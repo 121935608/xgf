@@ -5,5 +5,8 @@
 
     <!-- spring工具类 方便在非spring管理环境中获取bean -->
     <bean id="springUtils" class="com.xingrongjinfu.utils.SpringUtils"/>
+
+    <bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"></bean>
+
     
 </beans>

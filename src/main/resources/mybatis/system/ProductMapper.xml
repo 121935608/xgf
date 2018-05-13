@@ -200,7 +200,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="subPrice!=null and subPrice !=''">subPrice=#{subPrice},</if>
 			<if test="priceSpecification!=null and priceSpecification !=''">priceSpecification=#{priceSpecification},</if>
 			<if test="type!=null and type !=''">type=#{type},</if>
-			updateTime=sysdate()
+			updateTime=#{updateTime}
 		</set>
 		WHERE 1=1
 		<if test="commodityId !=null and commodityId!=''">

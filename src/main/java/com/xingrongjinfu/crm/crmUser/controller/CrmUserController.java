@@ -71,6 +71,9 @@ public class CrmUserController extends BaseController
         int result=0;
         Integer supervisorId=supervisor.getSupervisorId();
         if (supervisorId!=null) {
+            if(supervisor.getCrmPwd() != null){
+                supervisor.setCrmPwd(Md5Utils.hash(supervisor.getCrmPwd()));
+            }
             result = supervisorService.updateSupervisorById(supervisor);
         }
         return new Message(result);

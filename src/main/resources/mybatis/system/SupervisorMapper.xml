@@ -80,6 +80,8 @@
             <if test="county !=null">county =#{county},</if>
             <if test="roleId !=null">roleId =#{roleId},</if>
             <if test="headPortrait !=null">headPortrait =#{headPortrait},</if>
+            <if test="provinceCode !=null">provinceCode =#{provinceCode},</if>
+            <if test="cityCode !=null">cityCode =#{cityCode},</if>
             <if test="supervisorNum !=null and supervisorNum!=''">supervisorNum =#{supervisorNum}</if>
             creatTime=sysdate()
         </set>
@@ -96,7 +98,7 @@
             <if test="area !=null and area!=''">area =#{area},</if>
             <if test="status !=null">status =#{status},</if>
             <if test="supervisorNum !=null and supervisorNum!=''">supervisorNum =#{supervisorNum}</if>
-            creatTime=sysdate()
+            <if test="crmPwd !=null and crmPwd!=''">crmPwd =#{crmPwd}</if>
         </set>
         WHERE 1=1
         <if test="supervisorId !=null">

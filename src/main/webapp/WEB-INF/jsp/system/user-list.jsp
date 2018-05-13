@@ -33,6 +33,7 @@
 				<th width="5%">账号</th>
 				<th width="10%">用户名</th>
 				<th width="10%">角色</th>
+				<th width="10%">部门</th>
 				<th width="10%">状态</th>
 				<th width="10%">操作</th>
 			</tr>
@@ -67,6 +68,11 @@ $(document).ready(function(){
         "mData": "roleName",
         "bSortable" : false,
         "sClass": "text-c"
+    },
+	{
+		"mData": "deptName",
+		"bSortable" : false,
+		"sClass": "text-c"
     },
     {
         "sDefaultContent": "状态",

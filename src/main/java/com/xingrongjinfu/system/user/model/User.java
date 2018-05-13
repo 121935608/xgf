@@ -27,8 +27,18 @@ public class User implements Serializable
     private Integer verifyCode;
     private String oldPassword;
     private String type;
+    private String deptId;
 
     private String roleName; // 角色临时字段
+
+    public String getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
+    }
+
     private Integer roleId;
     private List<Role> roles; // 角色表
 
