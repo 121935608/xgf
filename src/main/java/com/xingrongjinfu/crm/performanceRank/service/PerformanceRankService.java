@@ -2,12 +2,12 @@ package com.xingrongjinfu.crm.performanceRank.service;
 
 
 import com.xingrongjinfu.crm.performanceRank.dao.IPerformanceRankDao;
-import com.xingrongjinfu.crm.visit.dao.IVisitDao;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -24,5 +24,10 @@ public class PerformanceRankService implements IPerformanceRankService {
     @Override
     public List<TableDataInfo> pageInfoQueryBydept(PageUtilEntity pageUtilEntity) {
         return performanceRankDao.pageInfoQueryBydept(pageUtilEntity);
+    }
+
+    @Override
+    public HashMap getPerformanceDetails(HashMap param) {
+        return performanceRankDao.getPerformanceDetails(param);
     }
 }

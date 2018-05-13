@@ -23,7 +23,14 @@ public class PerformanceRankConstant {
      */
     public final static String PERFORMANCE_LIST_URL = "performanceRankList";
 
+    /**
+     * 请求地址：业绩排名信息查询
+     */
+    public final static String PERFORMANCE_QUERY_URL = "toPerformanceRankQuery";
 
-
+    /**
+     * 逻辑视图名：查询优惠券信息界面
+     */
+    public final static String PERFORMANCE_QUERY_PAGE = "xfsxCRM/performance-query";
 
 }
