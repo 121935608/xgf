@@ -142,7 +142,7 @@
         <if test="headPortrait !=null and headPortrait!=''">headPortrait,</if>
         deptId,
         <if test="crmLogin !=null and crmLogin!=''">crmLogin,</if>
-        <if test="crmPwd !=null and crmPwd!=''">crmPwd,</if>
+        <if test="crmPwd !=null and crmPwd!=''">crmPwd</if>
         creatTime
         )VALUES (
         <if test="name !=null and name!=''">#{name},</if>
@@ -154,10 +154,10 @@
         <if test="county !=null and county!=''">#{county},</if>
         <if test="supervisorNum !=null and supervisorNum!=''">#{supervisorNum},</if>
         <if test="roleId !=null and roleId!=''">#{roleId},</if>
+        <if test="headPortrait !=null and headPortrait!=''">#{headPortrait},</if>
         #{deptId},
         <if test="crmLogin !=null and crmLogin!=''">#{crmLogin},</if>
-        <if test="crmPwd !=null and crmPwd!=''">#{crmPwd},</if>
-        <if test="headPortrait !=null and headPortrait!=''">#{headPortrait},</if>
+        <if test="crmPwd !=null and crmPwd!=''">#{crmPwd}</if>
         sysdate()
         )
     </insert>
