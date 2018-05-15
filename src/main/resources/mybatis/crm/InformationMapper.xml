@@ -9,14 +9,16 @@
         <result property="supervisorNum" column="supervisorNum"/>
         <result property="infoContent" column="infoContent"/>
         <result property="infoTime" column="infoTime"/>
+        <result property="infoStatus" column="infoStatus"/>
     </resultMap>
     <insert id="addInformation" parameterType="Information">
-      INSERT INTO `information` (`infoId`, `infoHeadline`, `supervisorId`, `infoContent`, `infoTime`)
+      INSERT INTO `information` (`infoId`, `infoHeadline`, `supervisorNum`, `infoContent`,`infoStatus`,`infoTime`)
       VALUES (
         #{infoId},
         <if test="infoHeadline != null and infoHeadline != ''">#{infoHeadline},</if>
-        <if test="supervisorId != null and supervisorId != ''">#{supervisorId},</if>
+        <if test="supervisorNum != null and supervisorNum != ''">#{supervisorNum},</if>
         <if test="infoContent != null and infoContent != ''">#{infoContent},</if>
+        <if test="infoStatus != null and infoStatus != ''">#{infoStatus},</if>
         SYSDATE()
         )
     </insert>

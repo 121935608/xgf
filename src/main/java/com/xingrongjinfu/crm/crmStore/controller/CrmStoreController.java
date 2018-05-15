@@ -149,8 +149,9 @@ public class CrmStoreController extends BaseController {
         Information information = new Information();
         information.setInfoId(UuidUtil.get32UUID());
         information.setInfoHeadline("门店更新");
-        information.setSupervisorId(store.getSupervisorId());
+        information.setSupervisorNum(store.getSupervisorId());
         information.setInfoContent("新增一条私海门店!");
+        information.setInfoStatus("0");
         int addInfor = informatioinService.addInfor(information);
         if(addInfor > 0){
             System.out.println("消息增加成功");

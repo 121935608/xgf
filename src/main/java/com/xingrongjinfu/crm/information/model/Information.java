@@ -7,9 +7,18 @@ import java.util.Date;
 public class Information {
 
     private String infoId;//消息ID
-    private String supervisorId;//督导员编号
+    private String supervisorNum;//督导员编号
     private String infoHeadline;//消息标题
     private String infoContent;//消息内容
+    private String infoStatus;//消息状态0：未读取；1：已读取
+
+    public String getInfoStatus() {
+        return infoStatus;
+    }
+
+    public void setInfoStatus(String infoStatus) {
+        this.infoStatus = infoStatus;
+    }
 
     public String getInfoId() {
         return infoId;
@@ -19,12 +28,12 @@ public class Information {
         this.infoId = infoId;
     }
 
-    public String getSupervisorId() {
-        return supervisorId;
+    public String getSupervisorNum() {
+        return supervisorNum;
     }
 
-    public void setSupervisorId(String supervisorNum) {
-        this.supervisorId = supervisorNum;
+    public void setSupervisorNum(String supervisorNum) {
+        this.supervisorNum = supervisorNum;
     }
 
     public String getInfoHeadline() {
