@@ -83,7 +83,6 @@
             <if test="provinceCode !=null">provinceCode =#{provinceCode},</if>
             <if test="cityCode !=null">cityCode =#{cityCode},</if>
             <if test="supervisorNum !=null and supervisorNum!=''">supervisorNum =#{supervisorNum}</if>
-            creatTime=sysdate()
         </set>
         WHERE 1=1
         <if test="supervisorId !=null">
