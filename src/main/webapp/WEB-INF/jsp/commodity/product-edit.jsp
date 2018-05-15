@@ -189,13 +189,23 @@ $(document).ready(function(){
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>主观价：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input style="width: 100px;" type="text" class="input-text" autocomplete="off"  maxlength="20"  placeholder="" id="subPrice" name="subPrice" value="${product.subPrice}">#
+				￥<input style="width: 50px;" type="text" class="input-text" autocomplete="off"  maxlength="20"  placeholder="" id="subPrice" name="subPrice" value="${product.subPrice}">元 &nbsp;
+				单位	<span class="select-box" style="width: 70px;border: hidden;">
+             <y:select id="subPriceUnit" name="subPriceUnit" codeGroup="${unit}" selectedValue="${product.subPriceUnit}"
+					   cssClass="select" headerKey="" headerValue="单位">
+			 </y:select>
+       		</span>
 			</div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>客观价：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input style="width: 100px;" type="text" class="input-text" autocomplete="off"  maxlength="20"  placeholder="" id="priceSpecification" name="priceSpecification" value="${product.priceSpecification}">#
+				约￥<input style="width: 40px;" type="text" class="input-text" autocomplete="off"  maxlength="20"  placeholder="" id="priceSpecification" name="priceSpecification" value="${product.priceSpecification}">元
+				单位	<span class="select-box" style="width: 70px;border: hidden;">
+             <y:select id="priceSpecificationUnit" name="priceSpecificationUnit" codeGroup="${unit}" selectedValue="${product.priceSpecificationUnit}"
+					   cssClass="select" headerKey="" headerValue="单位">
+			 </y:select>
+       		</span>
 			</div>
 		</div>
 
@@ -384,7 +394,13 @@ $(document).ready(function(){
 		priceSpecification:{
             required:true,
         },
+        priceSpecificationUnit:{
+            required:true,
+        },
         subPrice:{
+            required:true,
+        },
+        subPriceUnit:{
             required:true,
         },
         commodityNo:{

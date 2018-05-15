@@ -76,6 +76,8 @@ public interface IProductService {
      */
     Product findProductById(Product product);
 
+    List<String> getUnitList();
+
     /**
      * 更新商品信息
      */

@@ -122,6 +122,8 @@ public class ProductController extends BaseController{
             modelAndView.addObject("category",getCategoryList());
             //规格
             modelAndView.addObject("specification",getSpecificationList());
+            //单位
+            modelAndView.addObject("unit",getUnitList());
         }
         return modelAndView;
     }
@@ -326,6 +328,18 @@ public class ProductController extends BaseController{
         sysCode1.setCodeid("80");
         sysCode1.setCodevalue("80");
         sysCodeList.add(sysCode1);
+        return sysCodeList;
+    }
+
+    public List<SysCode> getUnitList(){
+        List<String> unitList=productService.getUnitList();
+        List<SysCode> sysCodeList = new ArrayList<SysCode>();
+        for(String str:unitList){
+            SysCode sysCode = new SysCode();
+            sysCode.setCodeid(str);
+            sysCode.setCodevalue(str);
+            sysCodeList.add(sysCode);
+        }
         return sysCodeList;
     }
 }

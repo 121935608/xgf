@@ -71,6 +71,11 @@ public class ProductService implements IProductService {
     }
 
     @Override
+    public List<String> getUnitList() {
+        return productDao.getUnitList();
+    }
+
+    @Override
     public Product findProductByNo(String commodityNo) {
         return productDao.findProductByNo(commodityNo);
     }

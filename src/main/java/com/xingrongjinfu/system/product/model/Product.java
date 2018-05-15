@@ -57,6 +57,24 @@ public class Product {
     private Integer yyStock;//犹豫库存
     private Integer kfStock;//客服库存
     private Integer kxdStock;//可下单库存
+    private String priceSpecificationUnit;
+    private String subPriceUnit;
+
+    public String getPriceSpecificationUnit() {
+        return priceSpecificationUnit;
+    }
+
+    public void setPriceSpecificationUnit(String priceSpecificationUnit) {
+        this.priceSpecificationUnit = priceSpecificationUnit;
+    }
+
+    public String getSubPriceUnit() {
+        return subPriceUnit;
+    }
+
+    public void setSubPriceUnit(String subPriceUnit) {
+        this.subPriceUnit = subPriceUnit;
+    }
 
     public Integer getYyStock() {
         return yyStock;

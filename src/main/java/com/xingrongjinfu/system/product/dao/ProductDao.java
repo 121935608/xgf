@@ -152,6 +152,16 @@ public class ProductDao extends DynamicObjectBaseDao implements IProductDao {
     }
 
     @Override
+    public List<String> getUnitList() {
+        try {
+            return (List<String>)this.findForList("ProductMapper.getUnitList");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+    @Override
     public Product findProductByNo(String commodityNo) {
         return (Product) this.findForObject("ProductMapper.findProductByNo",commodityNo);
     }
