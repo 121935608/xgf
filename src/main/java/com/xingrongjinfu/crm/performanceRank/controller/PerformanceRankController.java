@@ -72,13 +72,18 @@ public class PerformanceRankController extends BaseController {
      * @return
      */
     @RequestMapping(PerformanceRankConstant.PERFORMANCE_QUERY_URL)
-    public ModelAndView performanceQuery(String supervisorId,String userId,String queryType,String deptId)
+    public ModelAndView performanceQuery(String supervisorId,String userId,String queryType,String deptId,String deptName,String deptRank,String area,String name,String totalPrice)
     {
         HashMap param=new HashMap();
         param.put("supervisorId",supervisorId);
-        param.put("userId",userId);
-        param.put("queryType",queryType);
-        param.put("deptId",deptId);
+//        param.put("userId",userId);
+//        param.put("queryType",queryType);
+//        param.put("deptId",deptId);
+        param.put("deptName",deptName);
+        param.put("deptRank",deptRank);
+        param.put("area",area);
+        param.put("name",name);
+        param.put("totalPrice",totalPrice);
         ModelAndView modelAndView=this.getModelAndView(PerformanceRankConstant.PERFORMANCE_QUERY_PAGE);
         HashMap result= performanceRankService.getPerformanceDetails(param);
         if (result !=null) {

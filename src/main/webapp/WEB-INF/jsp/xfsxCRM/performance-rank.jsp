@@ -180,11 +180,10 @@
                 "bSearchable": false,
                 "mRender": function(data, type, row) {
                     //查看详情
-                    var details = "<a title=\"查看\" href=\"javascript:;\" onclick=\"performance_query('查看详情','${context_root}/crm/toPerformanceRankQuery.action?supervisorId=" + row.supervisorNum + "&userId="+userCrmId+"&queryType="+queryType+"&deptId="+row.deptId+"','','570')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>查看</span></a>";
+                    var details = "<a title=\"查看\" href=\"javascript:;\" onclick=\"performance_query('查看详情','${context_root}/crm/toPerformanceRankQuery.action?supervisorId=" + row.supervisorNum + "&name="+row.name+"&area="+row.area+"&totalPrice="+row.totalPrice+"&deptRank="+row.deptRank+"&deptName="+row.deptName+"','','570')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>查看</span></a>";
                     return  details;
                 }
             },
-
         ];
 
         var url = "${context_root}/crm/performanceRankList.action?userId="+userCrmId;

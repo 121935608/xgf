@@ -39,15 +39,15 @@ public class PerformanceRankDao extends DynamicObjectBaseDao implements IPerform
     @Override
     public HashMap getPerformanceDetails(HashMap param) {
         HashMap result=new HashMap();
-        HashMap map = new HashMap();
+//        HashMap map = new HashMap();
         HashMap map1,map2,map3 = new HashMap();
         HashMap hashMap = new HashMap();
         hashMap.put("supervisorId",param.get("supervisorId").toString());
         try
         {
-            map=(HashMap) this.findForObject("PerformanceRankMapper.performanceDetails",param);
+//            map=(HashMap) this.findForObject("PerformanceRankMapper.performanceDetails",param);
 
-            String queryType=param.get("queryType").toString();
+//            String queryType=param.get("queryType").toString();
             //类型为日业绩时参数为    今天开始时间、结束时间，昨天开始时间、结束时间
                 hashMap.put("timeBegin", DateUtils.firstMomentOfDay(new Date()));
                 hashMap.put("timeEnd", DateUtils.lastMomentOfDay(new Date()));
@@ -69,7 +69,7 @@ public class PerformanceRankDao extends DynamicObjectBaseDao implements IPerform
                 hashMap.put("timeEnd1", DateUtils.getLastDayOfLastMonth(new Date()));
                 map3=(HashMap) this.findForObject("PerformanceRankMapper.rankingInfo",hashMap);
 
-            result.put("map",map);
+            result.put("map",param);
             result.put("map1",map1);
             result.put("map2",map2);
             result.put("map3",map3);
