@@ -41,23 +41,24 @@
 
     <!-- 查询业绩排名详情supervisorId -->
     <select id="performanceDetails" parameterType="HashMap" resultType="HashMap" useCache="false">
-        SELECT 		c.deptName,c.deptRank,c.area,c.name,c.totalPrice,c.supervisorId
+        SELECT 		c.deptName,c.deptRank,c.area,c.name,c.totalPrice,c.supervisorId FROM(
+        SELECT b.supervisorId,b.supervisorNum,b.deptName,b.deptId,b.`name`,b.province,b.city,b.county,b.area,b.totalPrice,(@i :=@i + 1) AS deptRank
         FROM(
-				SELECT b.supervisorId,b.totalPrice,b.deptName,b.name,b.area,b.city,b.province,b.county,(@j:=@j+1) AS deptRank
-                FROM (
-                    SELECT ts.supervisorId, SUM(t.orderPrice) AS totalPrice, ss.city,ss.province,ss.county,cd.deptName,ss.name,ss.area
-                    FROM t_order t
-                    LEFT JOIN t_store ts ON t.userId = ts.userId
-                    LEFT JOIN sys_supervisor ss ON ss.supervisorNum = ts.supervisorId
-                    LEFT JOIN c_dept cd ON cd.deptId=ss.deptId
-                    WHERE t.`status` = 1
-                    AND t.orderStatus != '-1'
-                    AND ts.`status` = 1
-            AND ss.deptId =#{deptId}
-            GROUP BY ts.supervisorId, ss.city,ss.province,ss.county,cd.deptName,ss.name,ss.area
-            ORDER BY totalPrice DESC
-        ) AS b,(select   @j:=0)   as   it
-        ) as c WHERE c.supervisorId=#{supervisorId}
+        SELECT ss.supervisorId,ss.supervisorNum,ss.deptId,ss.`name`,cd.deptName,ss.province,ss.city,ss.county,ss.area,IFNULL(tt.allPrice, 0) AS totalPrice
+        FROM sys_supervisor ss
+        INNER JOIN c_dept cd ON ss.deptId = cd.deptId
+        LEFT JOIN (
+        SELECT SUM(ta.orderPrice) AS allPrice,ts.supervisorId
+        FROM t_order ta
+        LEFT JOIN t_store ts ON ta.userId = ts.userId
+        WHERE ta.`status` = 1 AND ta.orderStatus != '-1' GROUP BY ts.supervisorId
+        ) tt ON ss.supervisorNum = tt.supervisorId
+        WHERE 1=1
+        AND ss.deptId=#{deptId}
+        ORDER BY totalPrice DESC
+        ) AS b ,(SELECT @i := 0) AS it
+
+        ) as c WHERE c.supervisorNum=#{supervisorId}
 </select>
 
 
