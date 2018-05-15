@@ -10,7 +10,7 @@
                 <input type="text" class="input-text" placeholder="姓名" id="name" name="name">
             </div>
         </div>
-        <div class="row cl">
+        <div class="row cl" style="display:none;">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>姓名：</label>
             <div class="formControls col-xs-8 col-sm-4">
                 <input type="text" class="input-text" placeholder="市的编号" id="cityCode" name="cityCode">

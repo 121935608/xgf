@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="InformationMapper">
+    <resultMap type="Information" id="InformationResult">
+        <result property="infoId" column="infoId"/>
+        <result property="infoHeadline" column="infoHeadline"/>
+        <result property="supervisorNum" column="supervisorNum"/>
+        <result property="infoContent" column="infoContent"/>
+        <result property="infoTime" column="infoTime"/>
+    </resultMap>
+    <insert id="addInformation" parameterType="Information">
+      INSERT INTO `information` (`infoId`, `infoHeadline`, `supervisorId`, `infoContent`, `infoTime`)
+      VALUES (
+        #{infoId},
+        <if test="infoHeadline != null and infoHeadline != ''">#{infoHeadline},</if>
+        <if test="supervisorId != null and supervisorId != ''">#{supervisorId},</if>
+        <if test="infoContent != null and infoContent != ''">#{infoContent},</if>
+        SYSDATE()
+        )
+    </insert>
+</mapper>

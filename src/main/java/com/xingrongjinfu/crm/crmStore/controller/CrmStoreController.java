@@ -3,10 +3,14 @@ package com.xingrongjinfu.crm.crmStore.controller;
 import com.xingrongjinfu.crm.CrmConstant;
 import com.xingrongjinfu.crm.crmStore.common.CrmStoreConstant;
 import com.xingrongjinfu.crm.crmStore.service.CrmStoreService;
+import com.xingrongjinfu.crm.information.dao.InformationDao;
+import com.xingrongjinfu.crm.information.model.Information;
+import com.xingrongjinfu.crm.information.service.InformatioinService;
 import com.xingrongjinfu.system.storeaffairs.model.BankAccount;
 import com.xingrongjinfu.system.storeaffairs.model.Store;
 import com.xingrongjinfu.system.supervisor.model.Supervisor;
 import com.xingrongjinfu.system.syscode.model.SysCode;
+import com.xingrongjinfu.utils.UuidUtil;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.framework.core.controller.BaseController;
@@ -24,6 +28,8 @@ import java.util.List;
 @RequestMapping(CrmConstant.CRM_URL_STORE)
 public class CrmStoreController extends BaseController {
 
+    @Autowired
+    private InformatioinService informatioinService;
     @Autowired
     private CrmStoreService crmStoreService;
     /*跳转查询门店界面，并且查询门店信息*/
@@ -139,6 +145,17 @@ public class CrmStoreController extends BaseController {
         System.out.println(store.getStoreId()+"和"+store.getSupervisorId());
         if(store.getStoreId() != null){
             result = crmStoreService.updateStoreSupervistor(store);
+        }
+        Information information = new Information();
+        information.setInfoId(UuidUtil.get32UUID());
+        information.setInfoHeadline("门店更新");
+        information.setSupervisorId(store.getSupervisorId());
+        information.setInfoContent("新增一条私海门店!");
+        int addInfor = informatioinService.addInfor(information);
+        if(addInfor > 0){
+            System.out.println("消息增加成功");
+        }else{
+            System.out.println("消息增加失败");
         }
         return new Message(result);
     }
