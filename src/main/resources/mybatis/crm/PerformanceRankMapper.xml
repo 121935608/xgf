@@ -5,9 +5,9 @@
 <mapper namespace="PerformanceRankMapper">
     <!-- 查询业绩排名 组类，分页 -->
     <select id="pageInfoQuery" parameterType="PageUtilEntity" resultType="HashMap" useCache="false">
-        SELECT b.supervisorId,b.deptName,b.`name`,b.province,b.city,b.county,b.area,b.totalPrice,(@i :=@i + 1) AS deptRank
+        SELECT b.supervisorId,b.supervisorNum,b.deptName,b.deptId,b.`name`,b.province,b.city,b.county,b.area,b.totalPrice,(@i :=@i + 1) AS deptRank
         FROM(
-            SELECT ss.supervisorId,ss.`name`,cd.deptName,ss.province,ss.city,ss.county,ss.area,IFNULL(tt.allPrice, 0) AS totalPrice
+            SELECT ss.supervisorId,ss.supervisorNum,ss.deptId,ss.`name`,cd.deptName,ss.province,ss.city,ss.county,ss.area,IFNULL(tt.allPrice, 0) AS totalPrice
             FROM sys_supervisor ss
             INNER JOIN c_dept cd ON ss.deptId = cd.deptId
             LEFT JOIN (
@@ -15,7 +15,7 @@
                 FROM t_order ta
                 LEFT JOIN t_store ts ON ta.userId = ts.userId
                 WHERE ta.`status` = 1 AND ta.orderStatus != '-1' GROUP BY ts.supervisorId
-            ) tt ON ss.supervisorId = tt.supervisorId
+            ) tt ON ss.supervisorNum = tt.supervisorId
             WHERE 1=1
 
             <if test="relationMap.userId != null and relationMap.userId != ''">
@@ -43,24 +43,25 @@
     <select id="performanceDetails" parameterType="HashMap" resultType="HashMap" useCache="false">
         SELECT 		c.deptName,c.deptRank,c.area,c.name,c.totalPrice,c.supervisorId
         FROM(
-				SELECT b.supervisorId,b.totalPrice,b.deptName,b.name,b.area,b.city,b.province,b.county,(@i:=@i+1) AS deptRank
+				SELECT b.supervisorId,b.totalPrice,b.deptName,b.name,b.area,b.city,b.province,b.county,(@j:=@j+1) AS deptRank
                 FROM (
-                SELECT ts.supervisorId, SUM(t.orderPrice) AS totalPrice, ss.city,ss.province,ss.county,cd.deptName,ss.name,ss.area
-                FROM t_order t
-                LEFT JOIN t_store ts ON t.userId = ts.userId
-                LEFT JOIN sys_supervisor ss ON ss.supervisorId = ts.supervisorId
-                LEFT JOIN c_dept cd ON cd.deptId=ss.deptId
-                WHERE t.`status` = 1
-                AND ts.`status` = 1
-                AND ss.deptId =(SELECT deptId FROM sys_user WHERE userId=#{userId})
-                GROUP BY ts.supervisorId
-                ORDER BY totalPrice DESC
-                ) AS b,(select   @i:=0)   as   it
+                    SELECT ts.supervisorId, SUM(t.orderPrice) AS totalPrice, ss.city,ss.province,ss.county,cd.deptName,ss.name,ss.area
+                    FROM t_order t
+                    LEFT JOIN t_store ts ON t.userId = ts.userId
+                    LEFT JOIN sys_supervisor ss ON ss.supervisorNum = ts.supervisorId
+                    LEFT JOIN c_dept cd ON cd.deptId=ss.deptId
+                    WHERE t.`status` = 1
+                    AND t.orderStatus != '-1'
+                    AND ts.`status` = 1
+            AND ss.deptId =#{deptId}
+            GROUP BY ts.supervisorId, ss.city,ss.province,ss.county,cd.deptName,ss.name,ss.area
+            ORDER BY totalPrice DESC
+        ) AS b,(select   @j:=0)   as   it
         ) as c WHERE c.supervisorId=#{supervisorId}
-    </select>
+</select>
 
 
-    <!--业绩信息查询supervisorId-->
+<!--业绩信息查询supervisorId-->
     <select id="rankingInfo" resultType="HashMap" parameterType="HashMap">
         SELECT
         IFNULL(SUM(ta.amount), 0) AS amount,
@@ -73,54 +74,54 @@
         IFNULL(SUM(<![CDATA[th.firstStore1<2]]>), 0) AS firstStore1
         FROM t_store ts
         LEFT JOIN (
-        SELECT storeId, SUM(orderPrice) AS amount
-        FROM t_order
-        WHERE `status` = 1 AND orderTime >= #{timeBegin} AND <![CDATA[orderTime <= #{timeEnd}]]>
-        GROUP BY storeId
+            SELECT storeId, SUM(orderPrice) AS amount
+            FROM t_order
+            WHERE `status` = 1 AND orderTime >= #{timeBegin} AND <![CDATA[orderTime <= #{timeEnd}]]>
+            GROUP BY storeId
         ) ta ON ts.storeId = ta.storeId
         LEFT JOIN (
-        SELECT storeId, COUNT(DISTINCT storeId) AS storeIdNum
-        FROM t_order
-        WHERE `status` = 1 AND orderTime >= #{timeBegin} AND <![CDATA[orderTime <= #{timeEnd}]]>
-        GROUP BY storeId
+            SELECT storeId, COUNT(DISTINCT storeId) AS storeIdNum
+            FROM t_order
+            WHERE `status` = 1 AND orderTime >= #{timeBegin} AND <![CDATA[orderTime <= #{timeEnd}]]>
+            GROUP BY storeId
         ) tb ON ts.storeId = tb.storeId
         LEFT JOIN (
-        SELECT storeId, COUNT(DISTINCT storeId) AS visitStoreNum
-        FROM c_visit_record
-        WHERE `status` = 0 AND createTime >= #{timeBegin} AND <![CDATA[createTime <= #{timeEnd}]]>
-        AND visitResultStatus IS NOT NULL
-        GROUP BY storeId
+            SELECT storeId, COUNT(DISTINCT storeId) AS visitStoreNum
+            FROM c_visit_record
+            WHERE `status` = 0 AND createTime >= #{timeBegin} AND <![CDATA[createTime <= #{timeEnd}]]>
+            AND visitResultStatus IS NOT NULL
+            GROUP BY storeId
         ) tc ON tc.storeId = ts.storeId
         LEFT JOIN (
-        SELECT storeId, COUNT(storeId) AS firstStore
-        FROM t_order
-        WHERE `status` = 1 AND orderTime >= #{timeBegin} AND <![CDATA[orderTime <= #{timeEnd}]]>
-        GROUP BY storeId
+            SELECT storeId, COUNT(storeId) AS firstStore
+            FROM t_order
+            WHERE `status` = 1 AND orderTime >= #{timeBegin} AND <![CDATA[orderTime <= #{timeEnd}]]>
+            GROUP BY storeId
         ) td ON td.storeId = ts.storeId
         LEFT JOIN (
-        SELECT storeId, SUM(orderPrice) AS amount1
-        FROM t_order
-        WHERE `status` = 1 AND orderTime >= #{timeBegin1} AND <![CDATA[orderTime <= #{timeEnd1}]]>
-        GROUP BY storeId
+            SELECT storeId, SUM(orderPrice) AS amount1
+            FROM t_order
+            WHERE `status` = 1 AND orderTime >= #{timeBegin1} AND <![CDATA[orderTime <= #{timeEnd1}]]>
+            GROUP BY storeId
         ) te ON ts.storeId = te.storeId
         LEFT JOIN (
-        SELECT storeId, COUNT(DISTINCT storeId) AS storeIdNum1
-        FROM t_order
-        WHERE `status` = 1 AND orderTime >= #{timeBegin1} AND <![CDATA[orderTime <= #{timeEnd1}]]>
-        GROUP BY storeId
+            SELECT storeId, COUNT(DISTINCT storeId) AS storeIdNum1
+            FROM t_order
+            WHERE `status` = 1 AND orderTime >= #{timeBegin1} AND <![CDATA[orderTime <= #{timeEnd1}]]>
+            GROUP BY storeId
         ) tf ON ts.storeId = tf.storeId
         LEFT JOIN (
-        SELECT storeId, COUNT(DISTINCT storeId) AS visitStoreNum1
-        FROM c_visit_record
-        WHERE `status` = 0 AND createTime >= #{timeBegin1} AND <![CDATA[createTime <= #{timeEnd1}]]>
-        AND visitResultStatus IS NOT NULL
-        GROUP BY storeId
+            SELECT storeId, COUNT(DISTINCT storeId) AS visitStoreNum1
+            FROM c_visit_record
+            WHERE `status` = 0 AND createTime >= #{timeBegin1} AND <![CDATA[createTime <= #{timeEnd1}]]>
+            AND visitResultStatus IS NOT NULL
+            GROUP BY storeId
         ) tg ON tg.storeId = ts.storeId
         LEFT JOIN (
-        SELECT storeId, COUNT(storeId) AS firstStore1
-        FROM t_order
-        WHERE `status` = 1 AND orderTime >= #{timeBegin1} AND <![CDATA[orderTime <= #{timeEnd1}]]>
-        GROUP BY storeId
+            SELECT storeId, COUNT(storeId) AS firstStore1
+            FROM t_order
+            WHERE `status` = 1 AND orderTime >= #{timeBegin1} AND <![CDATA[orderTime <= #{timeEnd1}]]>
+            GROUP BY storeId
         ) th ON th.storeId = ts.storeId
         WHERE ts.supervisorId = #{supervisorId}
     </select>

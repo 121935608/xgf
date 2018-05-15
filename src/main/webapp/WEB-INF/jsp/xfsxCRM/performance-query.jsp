@@ -76,7 +76,7 @@
                                 <td class="right" id="totalPrice"></td>
                             </tr>
                             <tr>
-                                <td class="left"><div>组内排名</td>
+                                <td class="left"><div>组内排名</div></td>
                                 <td class="right" id="rank"></td>
                             </tr>
                         </table>
