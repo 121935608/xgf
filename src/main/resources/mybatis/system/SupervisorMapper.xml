@@ -141,7 +141,7 @@
         <if test="headPortrait !=null and headPortrait!=''">headPortrait,</if>
         deptId,
         <if test="crmLogin !=null and crmLogin!=''">crmLogin,</if>
-        <if test="crmPwd !=null and crmPwd!=''">crmPwd</if>
+        <if test="crmPwd !=null and crmPwd!=''">crmPwd,</if>
         creatTime
         )VALUES (
         <if test="name !=null and name!=''">#{name},</if>
@@ -156,8 +156,8 @@
         <if test="headPortrait !=null and headPortrait!=''">#{headPortrait},</if>
         #{deptId},
         <if test="crmLogin !=null and crmLogin!=''">#{crmLogin},</if>
-        <if test="crmPwd !=null and crmPwd!=''">#{crmPwd}</if>
-        sysdate()
+        <if test="crmPwd !=null and crmPwd!=''">#{crmPwd},</if>
+        SYSDATE()
         )
     </insert>
 
