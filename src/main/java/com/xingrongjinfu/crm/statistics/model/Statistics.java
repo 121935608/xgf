@@ -9,13 +9,13 @@ package com.xingrongjinfu.crm.statistics.model;
  */
 public class Statistics
 {
-	private Double todayAccumulativeAmount = 0.00;  //今日累计下单额
+	private String todayAccumulativeAmount ;  //今日累计下单额
 	
-	private Double yesterdayAccumulativeAmount = 0.00;  //昨日累计下单额
+	private String yesterdayAccumulativeAmount ;  //昨日累计下单额
 	
-	private Double weeklyAccumulativeAmount = 0.00;  //周累计下单额
+	private String weeklyAccumulativeAmount ;  //周累计下单额
 	
-	private Double monthlyAccumulativeAmount = 0.00;  //月累计下单额
+	private String monthlyAccumulativeAmount ;  //月累计下单额
 	
 	private Integer todayNumberOfTransactions = 0;  //今日累计成交单量
 	
@@ -41,37 +41,36 @@ public class Statistics
 	
 	private String monthlyStoreCouponRate;  //月门店补券率
 
-	
 
-	public Double getTodayAccumulativeAmount() {
+	public String getTodayAccumulativeAmount() {
 		return todayAccumulativeAmount;
 	}
 
-	public void setTodayAccumulativeAmount(Double todayAccumulativeAmount) {
+	public void setTodayAccumulativeAmount(String todayAccumulativeAmount) {
 		this.todayAccumulativeAmount = todayAccumulativeAmount;
 	}
 
-	public Double getYesterdayAccumulativeAmount() {
+	public String getYesterdayAccumulativeAmount() {
 		return yesterdayAccumulativeAmount;
 	}
 
-	public void setYesterdayAccumulativeAmount(Double yesterdayAccumulativeAmount) {
+	public void setYesterdayAccumulativeAmount(String yesterdayAccumulativeAmount) {
 		this.yesterdayAccumulativeAmount = yesterdayAccumulativeAmount;
 	}
 
-	public Double getWeeklyAccumulativeAmount() {
+	public String getWeeklyAccumulativeAmount() {
 		return weeklyAccumulativeAmount;
 	}
 
-	public void setWeeklyAccumulativeAmount(Double weeklyAccumulativeAmount) {
+	public void setWeeklyAccumulativeAmount(String weeklyAccumulativeAmount) {
 		this.weeklyAccumulativeAmount = weeklyAccumulativeAmount;
 	}
 
-	public Double getMonthlyAccumulativeAmount() {
+	public String getMonthlyAccumulativeAmount() {
 		return monthlyAccumulativeAmount;
 	}
 
-	public void setMonthlyAccumulativeAmount(Double monthlyAccumulativeAmount) {
+	public void setMonthlyAccumulativeAmount(String monthlyAccumulativeAmount) {
 		this.monthlyAccumulativeAmount = monthlyAccumulativeAmount;
 	}
 

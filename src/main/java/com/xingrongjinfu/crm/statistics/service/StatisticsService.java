@@ -1,5 +1,6 @@
 package com.xingrongjinfu.crm.statistics.service;
 
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -47,41 +48,51 @@ public class StatisticsService implements IStatisticsService
 		Date monthlyBegin = DateUtils.getTimesMonthmorning(new Date());
 		Date monthlyEnd = DateUtils.getTimesMonthnight(new Date());
 		
-		
 		//查出所有的订单信息列表
 		List<Order> orderList = orderDao.orderAllList();
+		Double todayAccumulativeAmount = 0.00; 
+		Double yesterdayAccumulativeAmount = 0.00;
+		Double weeklyAccumulativeAmount = 0.00;
+		Double monthlyAccumulativeAmount = 0.00;
 		if(orderList != null && orderList.size() > 0){
 			//判断符合该时间段的统计
 			for (Order order : orderList) {
 				if(order.getOrderTime().after(todayBegin) && order.getOrderTime().before(todayEnd) ) {
 					//今日累计下单额
-					statistics.setTodayAccumulativeAmount(order.getTotalPrice() + statistics.getTodayAccumulativeAmount());
+					todayAccumulativeAmount = order.getTotalPrice() + todayAccumulativeAmount;
 					//今日累计成交单量
 					statistics.setTodayNumberOfTransactions(statistics.getTodayNumberOfTransactions() + 1);
 				}
 				
 				if(order.getOrderTime().after(yesterdayBegin) && order.getOrderTime().before(yesterdayEnd) ) {
 					//昨日累计下单额
-					statistics.setYesterdayAccumulativeAmount(order.getTotalPrice() + statistics.getYesterdayAccumulativeAmount());
+					yesterdayAccumulativeAmount = order.getTotalPrice() + yesterdayAccumulativeAmount;
 					//昨日累计成交单量
 					statistics.setYesterdayNumberOfTransactions(statistics.getYesterdayNumberOfTransactions() + 1);
 				}
 				
 				if(order.getOrderTime().after(weeklyBegin) && order.getOrderTime().before(weeklyEnd) ) {
 					//周累计下单额
-					statistics.setWeeklyAccumulativeAmount(order.getTotalPrice() + statistics.getWeeklyAccumulativeAmount());
+					weeklyAccumulativeAmount = order.getTotalPrice() + weeklyAccumulativeAmount;
 					//周累计成交单量
 					statistics.setWeeklyNumberOfTransactions(statistics.getWeeklyNumberOfTransactions() + 1);
 				}
 				
 				if(order.getOrderTime().after(monthlyBegin) && order.getOrderTime().before(monthlyEnd) ){
 					//月累计下单额
-					statistics.setMonthlyAccumulativeAmount(order.getTotalPrice() + statistics.getMonthlyAccumulativeAmount());
+					monthlyAccumulativeAmount = order.getTotalPrice() + monthlyAccumulativeAmount;
 					//月累计成交单量
 					statistics.setMonthlyNumberOfTransactions(statistics.getMonthlyNumberOfTransactions() + 1);
 				}
 			}
 		}
+		
+		DecimalFormat myformat = new DecimalFormat();
+		myformat.applyPattern("0.00");
+		statistics.setTodayAccumulativeAmount(myformat.format(todayAccumulativeAmount));
+		statistics.setYesterdayAccumulativeAmount(myformat.format(yesterdayAccumulativeAmount));
+		statistics.setWeeklyAccumulativeAmount(myformat.format(weeklyAccumulativeAmount));
+		statistics.setMonthlyAccumulativeAmount(myformat.format(monthlyAccumulativeAmount));
 		
 		
 		//今日下单客户转化率
