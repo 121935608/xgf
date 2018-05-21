@@ -21,13 +21,13 @@
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>登录账号：</label>
             <div class="formControls col-xs-8 col-sm-4">
-                <input type="text" class="input-text" placeholder="姓名" id="crmLogin" name="crmLogin">
+                <input type="text" class="input-text" placeholder="登录账号" id="crmLogin" name="crmLogin">
             </div>
         </div>
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>登录密码：</label>
             <div class="formControls col-xs-8 col-sm-4">
-                <input type="text" class="input-text" placeholder="姓名" id="crmPwd" name="crmPwd">
+                <input type="text" class="input-text" placeholder="登录密码" id="crmPwd" name="crmPwd">
             </div>
         </div>
         <div class="row cl">
