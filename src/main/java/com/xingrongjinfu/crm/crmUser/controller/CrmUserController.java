@@ -223,7 +223,7 @@ public class CrmUserController extends BaseController
         int result = 0;
         System.out.println("原业务员"+supervisorIdOne+"和新分配业务员"+supervisorId);
         List<Store> storeList = crmStoreService.findBySupervisorNum(supervisorIdOne);
-        if(storeList == null || storeList.size() < 0){
+        if(storeList == null || storeList.size() == 0){
         	return new Message(false,"该业务员名下没有门店信息!");
         }
         result = crmStoreService.batchUpdateStoreSupervistor(supervisorIdOne, supervisorId);
