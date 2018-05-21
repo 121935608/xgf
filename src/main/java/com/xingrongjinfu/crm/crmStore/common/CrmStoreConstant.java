@@ -14,6 +14,9 @@ public class CrmStoreConstant {
     /*跳转到门店分配业务员界面接口*/
     public final static String CRM_STORE_SUPERVISTOR_URL = "crmStoreSupervistorSelect";
 
+    /*打印excelURL*/
+    public final static String CRM_STORE_Table_URL = "crmStoreTableSelect";
+
     /*跳转到门店分配业务员界面接口*/
     public final static String CRM_UPDATE_STORE_SUPERVISTOR_URL = "crmUpdateStoreSupervistor";
 

@@ -69,19 +69,19 @@ $(document).ready(function(){
         "bSortable" : false,
         "sClass": "text-c"
     },
-    {
-        "sDefaultContent": "部门",
-        "bSortable" : false,
-        "sClass": "text-c",
-        "bSearchable": false,
-        "mRender": function(data, type, row) {
-            if (row.deptName != null) {
-                return row.deptName;
-            } else {
-                return "";
-            }
-        }
-    },
+	{
+		"sDefaultContent": "部门",
+		"bSortable" : false,
+		"sClass": "td-status text-c",
+		"bSearchable": false,
+		"mRender": function(data, type, row) {
+			if (row.deptName != null) {
+				return row.deptName;
+			} else {
+				return "";
+			}
+		}
+	},
     {
         "sDefaultContent": "状态",
         "bSortable" : false,

@@ -55,4 +55,9 @@ public class CrmStoreServiceImpl implements CrmStoreService {
 	public int batchUpdateStoreSupervistor(String supervisorIdOne, String supervisorId) {
 		return crmStoreDao.batchUpdateStoreSupervistor(supervisorIdOne, supervisorId);
 	}
+
+    @Override
+    public List<Object[]> queryReport() {
+        return crmStoreDao.queryReport();
+    }
 }

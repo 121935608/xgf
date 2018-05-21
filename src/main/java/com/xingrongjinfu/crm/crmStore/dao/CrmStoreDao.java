@@ -46,4 +46,6 @@ public interface CrmStoreDao {
 	 * 根据督导员编号批量更新门店信息
 	 */
 	int batchUpdateStoreSupervistor(String supervisorIdOne, String supervisorId);
+
+    List<Object[]> queryReport();
 }

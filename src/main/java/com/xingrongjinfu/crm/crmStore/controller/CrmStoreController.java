@@ -10,6 +10,8 @@ import com.xingrongjinfu.system.storeaffairs.model.BankAccount;
 import com.xingrongjinfu.system.storeaffairs.model.Store;
 import com.xingrongjinfu.system.supervisor.model.Supervisor;
 import com.xingrongjinfu.system.syscode.model.SysCode;
+import com.xingrongjinfu.utils.ExportExcelSeedBack;
+import com.xingrongjinfu.utils.TimeUtils;
 import com.xingrongjinfu.utils.UuidUtil;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
@@ -21,6 +23,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -202,5 +207,36 @@ public class CrmStoreController extends BaseController {
         int res = 0;
         res = crmStoreService.addPublic(store);
         return new Message(res);
+    }
+
+    /*门店到处excel*/
+    @RequestMapping(CrmStoreConstant.CRM_STORE_Table_URL)
+    public void export(HttpServletRequest request,HttpServletResponse response){
+        //导出文件的标题
+        String title = null;
+        //设置表格标题行
+        String[] headers = null;
+
+        List<Object[]> dataList = null;
+        title = "门店信息" + TimeUtils.getNowDayStr() + ".xls";
+        headers = new String[]{"序号", "门店名称", "联系人", "手机号",
+                "地址", "申请时间", "督导员", "组类", "下单总金额", "近30天下单总金额", "近30天下单次数(次)", "本周拜访次数(次)", "状态"};
+
+        dataList = crmStoreService.queryReport();
+        //使用流将数据导出
+        OutputStream out = null;
+        try {
+            //防止中文乱码
+            String headStr = "attachment; filename=\"" + new String(title.getBytes("gb2312"), "ISO8859-1") + "\"";
+            response.setContentType("octets/stream");
+            response.setContentType("APPLICATION/OCTET-STREAM");
+            response.setHeader("Content-Disposition", headStr);
+            out = response.getOutputStream();
+            //ExportExcel ex = new ExportExcel(title, headers, dataList);//有标题
+            ExportExcelSeedBack ex = new ExportExcelSeedBack(title, headers, dataList);//没有标题
+            ex.export(out);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

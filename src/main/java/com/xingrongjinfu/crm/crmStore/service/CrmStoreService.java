@@ -46,4 +46,6 @@ public interface CrmStoreService {
 	 * 根据督导员编号批量更新
 	 */
 	int batchUpdateStoreSupervistor(String supervisorIdOne, String supervisorId);
+
+    List<Object[]> queryReport();
 }

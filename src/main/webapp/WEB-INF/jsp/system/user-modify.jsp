@@ -32,7 +32,7 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>角色：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				 <y:select id="roleId" name="roleId" codeGroup="${roles }" selectedValue="${role.roleId }"
+				 <y:select id="roleId" name="roleId" codeGroup="${roles }" selectedValue="${user.roleId }"
 					cssClass="select" headerKey="" headerValue="--请选择--">
 				</y:select>
 			</div>
@@ -69,9 +69,6 @@
 </article>
 
 <script type="text/javascript">
-	$(function(){
-	    alert(${user.deptId});
-	})
     // 只能输入英文
     jQuery.validator.addMethod("english", function (value, element) {
         var chrnum = /^([a-zA-Z]+)$/;
