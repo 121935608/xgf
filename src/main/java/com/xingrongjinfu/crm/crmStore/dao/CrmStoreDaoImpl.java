@@ -3,11 +3,13 @@ package com.xingrongjinfu.crm.crmStore.dao;
 import com.xingrongjinfu.system.storeaffairs.model.BankAccount;
 import com.xingrongjinfu.system.storeaffairs.model.Store;
 import com.xingrongjinfu.system.supervisor.model.Supervisor;
+
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.framework.core.dao.DynamicObjectBaseDao;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
 @Repository
 public class CrmStoreDaoImpl extends DynamicObjectBaseDao implements CrmStoreDao {
@@ -74,4 +76,23 @@ public class CrmStoreDaoImpl extends DynamicObjectBaseDao implements CrmStoreDao
     public int addPublic(Store store) {
         return this.update("CrmStoreMapper.addPublic",store);
     }
+
+	@Override
+	public List<Store> findBySupervisorNum(String supervisorIdOne) {
+		List<Store> storeList = null;
+		try {
+			storeList = (List<Store>) this.findForList("CrmStoreMapper.findBySupervisorNum",supervisorIdOne);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return  storeList;
+	}
+
+	@Override
+	public int batchUpdateStoreSupervistor(String supervisorIdOne, String supervisorId) {
+		HashMap hashMap = new HashMap();
+		hashMap.put("supervisorIdOne", supervisorIdOne);
+		hashMap.put("supervisorId", supervisorId);
+		return this.update("CrmStoreMapper.batchUpdateStoreSupervistor",hashMap);
+	}
 }

@@ -3,6 +3,7 @@ package com.xingrongjinfu.crm.crmStore.service;
 import com.xingrongjinfu.system.storeaffairs.model.BankAccount;
 import com.xingrongjinfu.system.storeaffairs.model.Store;
 import com.xingrongjinfu.system.supervisor.model.Supervisor;
+
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 
@@ -35,4 +36,14 @@ public interface CrmStoreService {
 
     /*门店分配业务员*/
     int addPublic(Store store);
+
+    /**
+     * 根据督导员编号查询该督导员名下的所有门店信息
+     */
+	List<Store> findBySupervisorNum(String supervisorIdOne);
+
+	/**
+	 * 根据督导员编号批量更新
+	 */
+	int batchUpdateStoreSupervistor(String supervisorIdOne, String supervisorId);
 }

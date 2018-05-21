@@ -49,6 +49,16 @@ public class CrmUserConstant
      */
 
     public final static String USER_CRM_ADD_URL_TWO = "toAddSpervistorInfoView";
+    
+    /**
+     * 跳转到业务转交界面接口
+     */
+    public final static String CRM_USER_STORE_URL = "crmUserStoreUrl";
+    
+    /**
+     * 跳转到业务员业务转交界面接口
+     */
+    public final static String CRM_UPDATE_STORE_SUPERVISTOR_URL = "crmUpdateStoreSupervistor";
 
     /**
      * 逻辑视图名：跳转至增加督导员界面
@@ -63,4 +73,9 @@ public class CrmUserConstant
      * 逻辑视图名：跳转至用户列表界面
      */
     public final static String USER_PAGE = "xfsxCRM/user-list";
+    
+    /**
+     * 逻辑视图名：跳转至业务转交界面
+     * */
+    public final static String CRM_USER_STORE_PAGE= "xfsxCRM/user-store";
 }

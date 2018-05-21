@@ -2,9 +2,14 @@ package com.xingrongjinfu.crm.crmUser.controller;
 
 import com.aliyun.oss.OSSException;
 import com.xingrongjinfu.crm.CrmConstant;
+import com.xingrongjinfu.crm.crmStore.common.CrmStoreConstant;
+import com.xingrongjinfu.crm.crmStore.service.CrmStoreService;
 import com.xingrongjinfu.crm.crmUser.service.CrmUserService;
 import com.xingrongjinfu.crm.department.model.Dept;
+import com.xingrongjinfu.crm.information.model.Information;
+import com.xingrongjinfu.crm.information.service.InformatioinService;
 import com.xingrongjinfu.system.role.model.Role;
+import com.xingrongjinfu.system.storeaffairs.model.Store;
 import com.xingrongjinfu.system.supervisor.common.SupervisorConstant;
 import com.xingrongjinfu.system.supervisor.model.Supervisor;
 import com.xingrongjinfu.system.supervisor.service.ISupervisorService;
@@ -12,6 +17,8 @@ import com.xingrongjinfu.system.syscode.model.SysCode;
 import com.xingrongjinfu.utils.AccessCodeUtil;
 import com.xingrongjinfu.utils.AliyunOSSClientUtil;
 import com.xingrongjinfu.utils.Md5Utils;
+import com.xingrongjinfu.utils.UuidUtil;
+
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.framework.core.controller.BaseController;
@@ -19,6 +26,7 @@ import org.framework.core.model.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -42,6 +50,13 @@ public class CrmUserController extends BaseController
 
     @Autowired
     private CrmUserService crmUserService;
+    
+    @Autowired
+    private InformatioinService informatioinService;
+    
+    @Autowired
+    private CrmStoreService crmStoreService;
+    
     /**
      * 跳转用户列表界面
      */
@@ -188,6 +203,38 @@ public class CrmUserController extends BaseController
                 }
             }
             return checkCrmLogin;
+    }
+    
+    
+    /*跳转至业务转交界面*/
+    @RequestMapping(CrmUserConstant.CRM_USER_STORE_URL)
+    public ModelAndView crmStoreSupervistor(String supervisorIdOne){
+        ModelAndView modelAndView = this.getModelAndView(CrmUserConstant.CRM_USER_STORE_PAGE);
+        Supervisor supervisor = new Supervisor();
+        supervisor.setSupervisorNum(supervisorIdOne);
+        modelAndView.addObject("supervisor",supervisor);
+        return  modelAndView;
+    }
+    
+    
+    /*业务分配业务员接口*/
+    @RequestMapping(CrmUserConstant.CRM_UPDATE_STORE_SUPERVISTOR_URL)
+    public @ResponseBody Message updateStoreSupervisor(@RequestParam(required = true) String supervisorIdOne, @RequestParam(required = true) String supervisorId){
+        int result = 0;
+        System.out.println("原业务员"+supervisorIdOne+"和新分配业务员"+supervisorId);
+        List<Store> storeList = crmStoreService.findBySupervisorNum(supervisorIdOne);
+        if(storeList == null || storeList.size() < 0){
+        	return new Message(false,"该业务员名下没有门店信息!");
+        }
+        result = crmStoreService.batchUpdateStoreSupervistor(supervisorIdOne, supervisorId);
+        Information information = new Information();
+        information.setInfoId(UuidUtil.get32UUID());
+        information.setInfoHeadline("业务转交");
+        information.setSupervisorNum(supervisorId);
+        information.setInfoContent("已将编号为"+supervisorIdOne+"的业务员所有的门店全部转交给您，请注意查看！");
+        information.setInfoStatus("0");
+        int addInfor = informatioinService.addInfor(information);
+        return new Message(result);
     }
 
 }

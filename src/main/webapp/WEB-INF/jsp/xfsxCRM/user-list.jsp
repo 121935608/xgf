@@ -185,7 +185,8 @@
                     //编辑
                     var toEdit = "<a title=\"编辑\" href=\"javascript:;\" onclick=\"role_edit('编辑督导员','${context_root}/crmUser/updateSpervistorInfoView.action?supervisorId=" + row.supervisorId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>编辑</span></a>";
                     var toEditTwo = "<a style=\"text-decoration:none\" onClick=\"supervisorUpdatePwd(this,\'" + row.supervisorId + "\')\" href=\"javascript:;\" title=\"重置密码\"><span style='color: #0e90d2 '>重置密码</span></a>";
-                    return statusTools(row) +"&nbsp;&nbsp;" + toEdit +"&nbsp;&nbsp;"+toEditTwo;
+                    var toEditThree= "<a title=\"业务转交\" href=\"javascript:;\" onclick=\"store_supervistor('业务转交','${context_root}/crmUser/crmUserStoreUrl.action?supervisorIdOne=" + row.supervisorNum + "','','700')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>业务转交</span></a>";
+                    return statusTools(row) +"&nbsp;&nbsp;" + toEdit +"&nbsp;&nbsp;"+toEditTwo+"&nbsp;&nbsp;"+toEditThree;
                 }
             },
         ];
@@ -287,6 +288,11 @@
 
             }) ;
         });
+    }
+    
+    /*门店-业务员*/
+    function store_supervistor(title,url,w,h){
+        layer_show(title,url,w,h);
     }
 </script>
 </body>

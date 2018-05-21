@@ -83,4 +83,13 @@
         UPDATE t_store SET supervisorId = NULL WHERE storeId = #{storeId};
     </update>
 
+
+	<select id="findBySupervisorNum" resultType="Store" parameterType="HashMap">
+		SELECT * FROM t_store s WHERE s.supervisorId = #{supervisorIdOne};
+	</select>
+	
+	<update id="batchUpdateStoreSupervistor" parameterType="HashMap">
+        UPDATE t_store SET supervisorId = #{supervisorId} WHERE supervisorId = #{supervisorIdOne};
+    </update>
+
 </mapper>

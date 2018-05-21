@@ -4,6 +4,7 @@ import com.xingrongjinfu.crm.crmStore.dao.CrmStoreDao;
 import com.xingrongjinfu.system.storeaffairs.model.BankAccount;
 import com.xingrongjinfu.system.storeaffairs.model.Store;
 import com.xingrongjinfu.system.supervisor.model.Supervisor;
+
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,4 +45,14 @@ public class CrmStoreServiceImpl implements CrmStoreService {
     public int addPublic(Store store) {
         return crmStoreDao.addPublic(store);
     }
+
+	@Override
+	public List<Store> findBySupervisorNum(String supervisorIdOne) {
+		return crmStoreDao.findBySupervisorNum(supervisorIdOne);
+	}
+
+	@Override
+	public int batchUpdateStoreSupervistor(String supervisorIdOne, String supervisorId) {
+		return crmStoreDao.batchUpdateStoreSupervistor(supervisorIdOne, supervisorId);
+	}
 }
