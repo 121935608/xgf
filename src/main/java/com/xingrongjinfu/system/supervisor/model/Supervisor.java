@@ -41,6 +41,7 @@ public class Supervisor implements Serializable
     private String headPortrait;
     private String cityCode;
     private String provinceCode;
+    private String address;
 
     public String getCityCode() {
         return cityCode;
@@ -56,6 +57,12 @@ public class Supervisor implements Serializable
     }
     public String getHeadPortrait() {
         return headPortrait;
+    }
+    public String getAddress() {
+        return address;
+    }
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public void setHeadPortrait(String headPortrait) {

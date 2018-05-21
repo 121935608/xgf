@@ -82,7 +82,8 @@
             <if test="headPortrait !=null">headPortrait =#{headPortrait},</if>
             <if test="provinceCode !=null">provinceCode =#{provinceCode},</if>
             <if test="cityCode !=null">cityCode =#{cityCode},</if>
-            <if test="supervisorNum !=null and supervisorNum!=''">supervisorNum =#{supervisorNum}</if>
+            <if test="supervisorNum !=null and supervisorNum!=''">supervisorNum =#{supervisorNum},</if>
+            <if test="address !=null and address!=''">address =#{address}</if>
         </set>
         WHERE 1=1
         <if test="supervisorId !=null">
@@ -142,6 +143,7 @@
         deptId,
         <if test="crmLogin !=null and crmLogin!=''">crmLogin,</if>
         <if test="crmPwd !=null and crmPwd!=''">crmPwd,</if>
+        <if test="address !=null and address!=''">address,</if>
         creatTime
         )VALUES (
         <if test="name !=null and name!=''">#{name},</if>
@@ -157,6 +159,7 @@
         #{deptId},
         <if test="crmLogin !=null and crmLogin!=''">#{crmLogin},</if>
         <if test="crmPwd !=null and crmPwd!=''">#{crmPwd},</if>
+        <if test="address !=null and address!=''">#{address},</if>
         SYSDATE()
         )
     </insert>

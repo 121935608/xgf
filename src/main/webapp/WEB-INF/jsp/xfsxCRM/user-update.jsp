@@ -19,6 +19,7 @@
                 <input type="text" class="input-text" placeholder="地址" id="area" name="area" value="${Supervisor.area }">
             </div>
         </div>
+
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>登录账号：</label>
             <div class="formControls col-xs-8 col-sm-4">
@@ -53,6 +54,12 @@
                 <select data-province="---- 选择省 ----" id="province" name="province"></select>
                 <select data-city="---- 选择市 ----" id="city" name="city"></select>
                 <select data-district="---- 选择区 ----" id="district" name="county"></select>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">住所具体位置：</label>
+            <div class="formControls col-xs-8 col-sm-4">
+                <input type="text" class="input-text " placeholder="具体位置" id="address" name="address" value="${Supervisor.address }">
             </div>
         </div>
         <div class="row cl">

@@ -59,7 +59,12 @@
                 <select data-district="---- 选择区 ----" id="district" name="county"></select>
             </div>
         </div>
-
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">住所具体位置：</label>
+            <div class="formControls col-xs-8 col-sm-4">
+                <input type="text" class="input-text " placeholder="具体位置" id="address" name="address" >
+            </div>
+        </div>
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>角色：</label>
             <div class="formControls col-xs-8 col-sm-4">
