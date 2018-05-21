@@ -153,11 +153,6 @@ public class CrmStoreController extends BaseController {
         information.setInfoContent("新增一条私海门店!");
         information.setInfoStatus("0");
         int addInfor = informatioinService.addInfor(information);
-        if(addInfor > 0){
-            System.out.println("消息增加成功");
-        }else{
-            System.out.println("消息增加失败");
-        }
         return new Message(result);
     }
 
