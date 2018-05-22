@@ -16,14 +16,14 @@
 		<td>账号:</td>
 		<td>${currentUser.accountName }</td>
 	</tr>
-	<tr>
+	<%-- <tr>
 		<td>电子邮箱:</td>
 		<td>${currentUser.email }</td>
 	</tr>
 	<tr>
 		<td>手机号码:</td>
 		<td>${currentUser.mobilePhone }</td>
-	</tr>
+	</tr> --%>
 	<tr>
 		<td>是否启用</td>
 		<td>
