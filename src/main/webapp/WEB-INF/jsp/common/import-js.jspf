@@ -5,6 +5,7 @@
 <script type="text/javascript" src="${context_url}/uiloader/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="${context_url}/uiloader/lib/page.js"></script>
 <script type="text/javascript" src="${context_url}/uiloader/lib/pageOne.js"></script>
+<script type="text/javascript" src="${context_url}/uiloader/lib/pageTwo.js"></script>
 <script type="text/javascript" src="${context_url}/uiloader/static/h-ui/js/H-ui.js"></script> 
 <script type="text/javascript" src="${context_url}/uiloader/static/h-ui.admin/js/H-ui.admin.js"></script>
 <script type="text/javascript" src="${context_url}/uiloader/lib/jquery.validation/1.14.0/jquery.validate.min.js"></script> 

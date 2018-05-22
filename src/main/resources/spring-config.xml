@@ -109,7 +109,7 @@
 			<tx:method name="delete*" propagation="REQUIRED" />
 			<tx:method name="change*" propagation="REQUIRED" />
 			<tx:method name="batch*" propagation="REQUIRED" />
-			<tx:method name="pageInfoQuery" propagation="REQUIRED" read-only="true" />
+			<tx:method name="pageInfoQuery*" propagation="REQUIRED" read-only="true" />
 			<tx:method name="get*" propagation="REQUIRED" read-only="true" />
 			<tx:method name="find*" propagation="REQUIRED" read-only="true" />
 			<tx:method name="load*" propagation="REQUIRED" read-only="true" />
