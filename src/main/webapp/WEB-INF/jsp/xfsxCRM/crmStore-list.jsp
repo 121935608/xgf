@@ -228,10 +228,11 @@
                     var toEdit = "<a title=\"查看详情\" href=\"javascript:;\" onclick=\"certification_check('认证申请审核','${context_root}/crmStore/crmCheckStoreSelect.action?storeId=" + row.storeId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>审核</span></a>";
                     var toEditTwo = "<a title=\"分配业务员\" href=\"javascript:;\" onclick=\"store_supervistor('门店分配业务员','${context_root}/crmStore/crmStoreSupervistorSelect.action?storeId=" + row.storeId + "','','700')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>分配业务员</span></a>";
                     var toEditThree = "<a style=\"text-decoration:none;margin-left:5px;\" onClick=\"addPublic(this,\'" + row.storeId + "\')\" href=\"javascript:;\" title=\"转如公海\"><span style='color: #0e90d2 '>转入公海</span></a>";
+                    var toDetails = "<a title=\"查看详情\" href=\"javascript:;\" onclick=\"store_details('门店详情','${context_root}/crmStore/crmStoreDetails.action?storeId=" + row.storeId + "','','750')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>审核</span></a>";
                     if(row.name != null){
-                        return toEdit + toEditTwo + toEditThree;
+                        return toEdit + toEditTwo + toEditThree + toDetails;
                     }else{
-                        return toEdit + toEditTwo;
+                        return toEdit + toEditTwo + toDetails;
                     }
                 }
             },
@@ -250,6 +251,9 @@
         layer_show(title,url,w,h);
     }
 
+    function store_details(title,url,w,h){
+        layer_show(title,url,w,h);
+    }
     function query() {
         var supervisor = $("#supervisor").val();
         var process = $("#process").val();

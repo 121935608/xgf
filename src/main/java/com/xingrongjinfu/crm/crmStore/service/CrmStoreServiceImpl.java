@@ -1,6 +1,8 @@
 package com.xingrongjinfu.crm.crmStore.service;
 
 import com.xingrongjinfu.crm.crmStore.dao.CrmStoreDao;
+import com.xingrongjinfu.crm.crmStore.model.Order;
+import com.xingrongjinfu.crm.visit.model.Visit;
 import com.xingrongjinfu.system.storeaffairs.model.BankAccount;
 import com.xingrongjinfu.system.storeaffairs.model.Store;
 import com.xingrongjinfu.system.supervisor.model.Supervisor;
@@ -10,6 +12,7 @@ import org.framework.base.util.TableDataInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -59,5 +62,38 @@ public class CrmStoreServiceImpl implements CrmStoreService {
     @Override
     public List<Object[]> queryReport() {
         return crmStoreDao.queryReport();
+    }
+
+
+    //门店详情信息
+    @Override
+    public HashMap findStoreDetails(String storeId) {
+        return crmStoreDao.findStoreDetails(storeId);
+    }
+
+    @Override
+    public List<TableDataInfo> findStoreDetailsOrder(PageUtilEntity pageUtilEntity) {
+        return crmStoreDao.findStoreDetailsOrder(pageUtilEntity);
+    }
+
+    @Override
+    public Order recentOrder(HashMap param) {
+        return crmStoreDao.recentOrder(param);
+    }
+
+
+    @Override
+    public List<TableDataInfo> findStoreDetailsCoupon(PageUtilEntity pageUtilEntity) {
+        return crmStoreDao.findStoreDetailsCoupon(pageUtilEntity);
+    }
+
+    @Override
+    public Visit recentVisitRecord(String storeId) {
+        return crmStoreDao.recentVisitRecord(storeId);
+    }
+
+    @Override
+    public List<TableDataInfo> storeVisitRecord(PageUtilEntity pageUtilEntity) {
+        return crmStoreDao.findStoreDetailsOrder(pageUtilEntity);
     }
 }

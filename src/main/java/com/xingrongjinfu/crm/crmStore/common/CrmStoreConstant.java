@@ -23,6 +23,18 @@ public class CrmStoreConstant {
     /*私有门店转入公海门店接口*/
     public final static String CRM_ADD_STORE_PUBLIC_URL = "addPublicSupervistor";
 
+    /*门店详情接口*/
+    public final static String CRM_STORE_DETAILS_URL = "crmStoreDetails";
+
+    /*门店订单接口*/
+    public final static String CRM_STORE_ORDER_DETAILS_URL = "crmStoreDetailsOrder";
+
+    /*门店拜访记录接口*/
+    public final static String CRM_STORE_VISIT_DETAILS_URL = "crmStoreDetailsVisit";
+
+    /*门店补券接口*/
+    public final static String CRM_STORE_COUPON_DETAILS_URL = "crmStoreDetailsCoupon";
+
     /*
     * 逻辑视图名：跳转至门店界面
     * */
@@ -37,5 +49,10 @@ public class CrmStoreConstant {
      * 逻辑视图名：跳转至门店分配业务员界面
      * */
     public final static String CRM_STORE_SUPERVISTOR_PAGE= "xfsxCRM/crmStore-supervistor";
+
+    /*
+     * 逻辑视图名：跳转至门店详情界面
+     * */
+    public final static String CRM_STORE_DETAILS_PAGE= "xfsxCRM/crmStore-details";
 
 }

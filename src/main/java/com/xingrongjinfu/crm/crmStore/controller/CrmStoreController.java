@@ -2,10 +2,12 @@ package com.xingrongjinfu.crm.crmStore.controller;
 
 import com.xingrongjinfu.crm.CrmConstant;
 import com.xingrongjinfu.crm.crmStore.common.CrmStoreConstant;
+import com.xingrongjinfu.crm.crmStore.model.Order;
 import com.xingrongjinfu.crm.crmStore.service.CrmStoreService;
 import com.xingrongjinfu.crm.information.dao.InformationDao;
 import com.xingrongjinfu.crm.information.model.Information;
 import com.xingrongjinfu.crm.information.service.InformatioinService;
+import com.xingrongjinfu.crm.visit.model.Visit;
 import com.xingrongjinfu.system.storeaffairs.model.BankAccount;
 import com.xingrongjinfu.system.storeaffairs.model.Store;
 import com.xingrongjinfu.system.supervisor.model.Supervisor;
@@ -26,7 +28,13 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.OutputStream;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -238,5 +246,80 @@ public class CrmStoreController extends BaseController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /*跳转到门店详情*/
+    @RequestMapping(CrmStoreConstant.CRM_STORE_DETAILS_URL)
+    public ModelAndView crmStoreDetails(String storeId) throws  ParseException {
+        HashMap param=new HashMap();
+        HashMap param1=new HashMap();
+        ModelAndView modelAndView = this.getModelAndView(CrmStoreConstant.CRM_STORE_DETAILS_PAGE);
+        HashMap store= crmStoreService.findStoreDetails(storeId);
+        SimpleDateFormat dateformat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //门店详情
+        if (store !=null) {
+            store.put("addTime",dateformat.format(store.get("addTime")));
+
+
+            param.put("userId",store.get("userId"));
+            Order order=crmStoreService.recentOrder(param);
+
+            //最近一次下单时间
+            if (order==null ){
+                store.put("recentOrderTime","--");
+                store.put("returnRate","--");
+                store.put("consumptionFrequency","--");
+            }else {
+                store.put("recentOrderTime",dateformat.format(order.getOrderTime()));
+                //补券率
+                Integer coupon =Integer.parseInt(store.get("couponNum").toString());
+                Integer orderNum=Integer.parseInt(store.get("totalNum").toString());
+                store.put("returnRate",((coupon/orderNum)*100)+"%");
+                //消费频次
+                java.text.SimpleDateFormat   FormatDate = new   java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                java.util.Date  add  =  FormatDate.parse(String.valueOf(store.get("addTime")));//转成Date
+                Date now=new Date();
+                Integer days =(int) (( now.getTime() - add.getTime()) / (24 * 60 * 60 * 1000));
+                BigDecimal bg = new BigDecimal((double)days/orderNum).setScale(2, RoundingMode.UP);
+                store.put("consumptionFrequency",bg.doubleValue()+"");
+            }
+            //门店详情
+            modelAndView.addObject("store", store);
+
+            Visit visit =crmStoreService.recentVisitRecord(storeId);
+            //门店最近拜访记录
+            modelAndView.addObject("visit", visit);
+        }
+        return  modelAndView;
+    }
+
+    /**
+     * 查询订单列表
+     */
+    @RequestMapping(CrmStoreConstant.CRM_STORE_ORDER_DETAILS_URL)
+    public ModelAndView findStoreDetailsOrder() {
+        PageUtilEntity pageUtilEntity = this.getPageUtilEntity();
+        List<TableDataInfo> tableDataInfo = crmStoreService.findStoreDetailsOrder(pageUtilEntity);
+        return buildDataTable(pageUtilEntity.getTotalResult(), tableDataInfo);
+    }
+
+    /**
+     * 查询拜访列表
+     */
+    @RequestMapping(CrmStoreConstant.CRM_STORE_VISIT_DETAILS_URL)
+    public ModelAndView storeVisitRecord() {
+        PageUtilEntity pageUtilEntity = this.getPageUtilEntity();
+        List<TableDataInfo> tableDataInfo = crmStoreService.storeVisitRecord(pageUtilEntity);
+        return buildDataTable(pageUtilEntity.getTotalResult(), tableDataInfo);
+    }
+
+    /**
+     * 查询补券列表
+     */
+    @RequestMapping(CrmStoreConstant.CRM_STORE_COUPON_DETAILS_URL)
+    public ModelAndView findStoreDetailsCoupon() {
+        PageUtilEntity pageUtilEntity = this.getPageUtilEntity();
+        List<TableDataInfo> tableDataInfo = crmStoreService.findStoreDetailsCoupon(pageUtilEntity);
+        return buildDataTable(pageUtilEntity.getTotalResult(), tableDataInfo);
     }
 }
