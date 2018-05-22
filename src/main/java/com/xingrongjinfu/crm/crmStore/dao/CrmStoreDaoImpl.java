@@ -1,5 +1,7 @@
 package com.xingrongjinfu.crm.crmStore.dao;
 
+import com.xingrongjinfu.crm.crmStore.model.Order;
+import com.xingrongjinfu.crm.visit.model.Visit;
 import com.xingrongjinfu.system.storeaffairs.model.BankAccount;
 import com.xingrongjinfu.system.storeaffairs.model.Store;
 import com.xingrongjinfu.system.supervisor.model.Supervisor;
@@ -126,5 +128,80 @@ public class CrmStoreDaoImpl extends DynamicObjectBaseDao implements CrmStoreDao
             e.printStackTrace();
         }
         return dataList;
+    }
+
+
+    @Override
+    public HashMap findStoreDetails(String storeId) {
+        HashMap store = null;
+        try
+        {
+            store = (HashMap) this.findForObject("CrmStoreMapper.findStoreDetails",storeId);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return store;
+    }
+
+    @Override
+    public List<TableDataInfo> findStoreDetailsOrder(PageUtilEntity pageUtilEntity) {
+        List<TableDataInfo> storeOrderPageInfo = null;
+        try {
+            storeOrderPageInfo = (List<TableDataInfo>)this.findForList("CrmStoreMapper.pageInfoQueryFindStoreDetailsOrder",pageUtilEntity);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return storeOrderPageInfo;
+    }
+
+    @Override
+    public Order recentOrder(HashMap param) {
+        Order order = null;
+        try
+        {
+            order = (Order) this.findForObject("CrmStoreMapper.recentOrder",param);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return order;
+    }
+
+    public List<TableDataInfo> findStoreDetailsCoupon(PageUtilEntity pageUtilEntity) {
+        List<TableDataInfo> storeCouponPageInfo = null;
+        try {
+            storeCouponPageInfo = (List<TableDataInfo>)this.findForList("CrmStoreMapper.pageInfoQueryFindStoreDetailsCoupon",pageUtilEntity);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return storeCouponPageInfo;
+    }
+
+    @Override
+    public Visit recentVisitRecord(String storeId) {
+        Visit visit = null;
+        try
+        {
+            visit = (Visit) this.findForObject("CrmStoreMapper.recentVisitRecord",storeId);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return visit;
+    }
+
+    @Override
+    public List<TableDataInfo> storeVisitRecord(PageUtilEntity pageUtilEntity) {
+        List<TableDataInfo> storeVisitPageInfo = null;
+        try {
+            storeVisitPageInfo = (List<TableDataInfo>)this.findForList("CrmStoreMapper.pageInfoQueryStoreVisitRecord",pageUtilEntity);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return storeVisitPageInfo;
     }
 }

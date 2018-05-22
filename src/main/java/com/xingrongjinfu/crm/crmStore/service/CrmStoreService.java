@@ -1,5 +1,7 @@
 package com.xingrongjinfu.crm.crmStore.service;
 
+import com.xingrongjinfu.crm.crmStore.model.Order;
+import com.xingrongjinfu.crm.visit.model.Visit;
 import com.xingrongjinfu.system.storeaffairs.model.BankAccount;
 import com.xingrongjinfu.system.storeaffairs.model.Store;
 import com.xingrongjinfu.system.supervisor.model.Supervisor;
@@ -7,6 +9,7 @@ import com.xingrongjinfu.system.supervisor.model.Supervisor;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface CrmStoreService {
@@ -48,4 +51,22 @@ public interface CrmStoreService {
 	int batchUpdateStoreSupervistor(String supervisorIdOne, String supervisorId);
 
     List<Object[]> queryReport();
+
+
+    //门店详情信息
+    HashMap findStoreDetails(String storeId);
+
+    //门店订单列表
+    public List<TableDataInfo> findStoreDetailsOrder(PageUtilEntity pageUtilEntity);
+    //门店最近订单时间
+    Order recentOrder(HashMap param);
+
+    //门店补券列表
+    public List<TableDataInfo> findStoreDetailsCoupon(PageUtilEntity pageUtilEntity);
+
+
+    //门店最近拜访记录
+    Visit recentVisitRecord(String storeId);
+    //门店所有拜访记录
+    public List<TableDataInfo> storeVisitRecord(PageUtilEntity pageUtilEntity);
 }
