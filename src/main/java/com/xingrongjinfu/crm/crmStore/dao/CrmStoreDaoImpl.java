@@ -120,7 +120,34 @@ public class CrmStoreDaoImpl extends DynamicObjectBaseDao implements CrmStoreDao
                 objs[9] = detail.get("monthPrice") == null ? "" : detail.get("monthPrice");//近30天下单总金额
                 objs[10] = detail.get("monthNum") == null ? "" : detail.get("monthNum");//近30天下单次数(次)
                 objs[11] = detail.get("totalVisitNum") == null ? "" : detail.get("totalVisitNum");//本周拜访次数(次)
-                objs[12] = detail.get("storeName") == null ? "" : detail.get("storeName");//状态
+                String process = (String) detail.get("process");
+                switch (process){
+                    case "WRZ":
+                        process = "未认证";
+                        break;
+                    case "APRING":
+                        process = "认证审核中";
+                        break;
+                    case "APRNO":
+                        process = "认证不通过";
+                        break;
+                    case "APRYES":
+                        process = "认证通过";
+                        break;
+                    case "WAITPASS":
+                        process = "待审核";
+                        break;
+                    case "NOPASS":
+                        process = "审核不通过";
+                        break;
+                    case "PASS":
+                        process = "审核通过";
+                        break;
+                    case "":
+                        process = "";
+                        break;
+                }
+                objs[12] = process == null ? "" : process;//状态
                 // 数据添加到excel表格
                 dataList.add(objs);
             }
