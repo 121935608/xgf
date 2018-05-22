@@ -30,8 +30,17 @@ public class User implements Serializable
     private String deptId;
 
     private String roleName; // 角色临时字段
+    private String deptName; // 部门临时字段
 
-    public String getDeptId() {
+    public String getDeptName() {
+		return deptName;
+	}
+
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
+	}
+
+	public String getDeptId() {
         return deptId;
     }
 
