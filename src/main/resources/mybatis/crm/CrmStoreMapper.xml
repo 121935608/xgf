@@ -227,31 +227,12 @@
     </select>
 
     <!--门店详情补券列表-->
-    <resultMap id="CouponResult" type="com.xingrongjinfu.crm.approvingCoupons.model.Coupon">
-        <id property="couponId" column="couponId"/>
-        <result property="auditStatus" column="auditStatus"/>
-        <result property="orderNum" column="orderNum"/>
-        <result property="logisticsSingleNum" column="logisticsSingleNum"/>
-        <result property="damagedFruit" column="damagedFruit"/>
-        <result property="inspectionScene" column="inspectionScene"/>
-        <result property="damageDescription" column="damageDescription"/>
-        <result property="amount" column="amount"/>
-        <result property="storeName" column="storeName"/>
-        <result property="storeId" column="storeId"/>
-        <result property="createTime" column="createTime"/>
-
-        <collection property="couponImgLists" ofType="com.xingrongjinfu.crm.approvingCoupons.model.CouponImg">
-            <id property="imgId" column="imgId"/>
-            <result property="imgUrl" column="imgUrl"/>
-            <result property="couponId" column="couponId"/>
-        </collection>
-    </resultMap>
-    <select id="pageInfoQueryFindStoreDetailsCoupon" parameterType="PageUtilEntity" resultMap="CouponResult" useCache="false">
+    <select id="pageInfoQueryFindStoreDetailsCoupon" parameterType="PageUtilEntity" resultType="HashMap" useCache="false">
         SELECT c.createTime,c.storeId,c.storeName,c.auditStatus,c.orderNum,c.logisticsSingleNum,c.damagedFruit,c.inspectionScene,c.damageDescription,c.amount,i.*
         FROM c_coupon c
         LEFT JOIN c_coupon_img i
         ON c.couponId=i.couponId
-        /*WHERE c.storeId = #{relationMap.storeId}*/
+        WHERE c.storeId = #{relationMap.storeId}
     </select>
 
 
@@ -264,6 +245,6 @@
     <!--门店拜访记录列表-->
     <select id="pageInfoQueryStoreVisitRecord" resultType="HashMap" parameterType="PageUtilEntity">
         SELECT visitTime,visitManner,visitGoal,visitWith,visitResultStatus,visitResult,updateTime
-        FROM c_visit_record WHERE storeId=#{relationMap.storeId} AND `status`=0 AND visitResultStatus IS NOT NULL
+        FROM c_visit_record WHERE storeId=#{relationMap.storeId } AND `status`=0 AND visitResultStatus IS NOT NULL
     </select>
 </mapper>

@@ -94,6 +94,6 @@ public class CrmStoreServiceImpl implements CrmStoreService {
 
     @Override
     public List<TableDataInfo> storeVisitRecord(PageUtilEntity pageUtilEntity) {
-        return crmStoreDao.findStoreDetailsOrder(pageUtilEntity);
+        return crmStoreDao.storeVisitRecord(pageUtilEntity);
     }
 }

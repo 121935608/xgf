@@ -151,7 +151,6 @@
                             <th width="5%">物流单号</th>
                             <th width="5%">损坏果品(kg)</th>
                             <th width="5%">现场验货</th>
-                            <th width="5%">损坏描述</th>
                             <th width="5%">补券结果</th>
                             <th width="5%">操作</th>
                         </tr>
@@ -234,10 +233,12 @@
         /*拜访信息*/
         var aoColumns1 = [
             {
-                "sDefaultContent" : "-",
-                "mData": "visitTime",
                 "bSortable" : false,
-                "sClass": "text-c"
+                "sClass": "text-c",
+                "bSearchable": false,
+                "mRender": function(data, type, row) {
+                    return formatDate(row.visitTime,"yyyy-MM-dd hh:mm:ss");
+                }
             },
             {
                 "bSortable" : false,
@@ -336,11 +337,13 @@
 
         /*补券信息*/
         var aoColumns2 = [
-            {
-                "sDefaultContent" : "-",
-                "mData": "createTime",
+           {
                 "bSortable" : false,
-                "sClass": "text-c"
+                "sClass": "text-c",
+                "bSearchable": false,
+                "mRender": function(data, type, row) {
+                    return formatDate(row.createTime,"yyyy-MM-dd hh:mm:ss");
+                }
             },
             {
                 "sDefaultContent" : "-",
@@ -374,12 +377,6 @@
                         return "";
                     }
                 }
-            },
-            {
-                "sDefaultContent" : "-",
-                "mData": "damageDescription",
-                "bSortable" : false,
-                "sClass": "text-c"
             },
             {
                 "bSortable" : false,
