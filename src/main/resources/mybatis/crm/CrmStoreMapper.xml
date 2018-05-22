@@ -163,4 +163,107 @@
         ORDER BY
         totalPrice DESC
     </select>
+
+    <!--门店详情信息-->
+    <select id="findStoreDetails" resultType="HashMap" parameterType="String">
+        SELECT
+        sup.`name`,ts.userId,ts.storeId,ts.storeName,ts.area,ts.supervisorId,ts.phone,ts.address,ts.userName,ts.addTime,ts.process,ts.`status`,
+        ts.storeNo,ts.frontStorePic,ts.longtitude,ts.latitude,ts.storeArea,ts.chain,ts.equipment,ts.storeType,ts.partners,ts.building,
+        IFNULL(ta.totalNum, 0) AS totalNum,IFNULL(ta.totalPrice,0) AS totalPrice,IFNULL(tb.monthPrice,0) AS monthPrice,IFNULL(tb.monthNum,0) AS monthNum,IFNULL(cc.couponNum,0) AS couponNum
+        FROM t_store ts
+        LEFT JOIN (
+        SELECT userId,SUM(orderPrice) AS totalPrice,COUNT(1) AS totalNum FROM t_order WHERE `status` = 1 AND orderStatus !='-1' GROUP BY userId
+        ) ta ON ts.userId = ta.userId
+        LEFT JOIN (
+        SELECT userId,SUM(orderPrice) AS monthPrice,COUNT(1) AS monthNum FROM t_order WHERE <![CDATA[DATE_SUB(CURDATE(), INTERVAL 30 DAY) <= date(orderTime)]]> AND `status` = 1 AND orderStatus !='-1' GROUP BY userId
+        ) tb ON ts.userId = tb.userId
+        LEFT JOIN (
+        SELECT COUNT(1) AS couponNum , storeId FROM c_coupon GROUP BY storeId
+        )AS cc ON cc.storeId=ts.storeId
+        LEFT JOIN sys_supervisor sup ON sup.supervisorNum=ts.supervisorId
+        WHERE ts.`status` = 1
+        AND ts.storeId =#{0}
+    </select>
+
+    <!--门店订单列表-->
+    <resultMap id="OrderResult" type="com.xingrongjinfu.crm.crmStore.model.Order">
+        <id property="orderId" column="orderId"/>
+        <result property="orderNumber" column="orderNumber"/>
+        <result property="orderTime" column="orderTime"/>
+        <result property="number" column="number"/>
+        <result property="orderPrice" column="orderPrice"/>
+        <result property="orderStatus" column="orderStatus"/>
+
+        <collection property="orderDetailsLists" ofType="com.xingrongjinfu.crm.crmStore.model.OrderDetails" >
+            <id property="orderDetailId" column="orderDetailId"/>
+            <result property="orderNumber" column="orderNumber"/>
+            <result property="commodityName" column="commodityName"/>
+            <result property="commodityNum" column="commodityNum"/>
+            <result property="commodityId" column="commodityId"/>
+            <result property="inPrice" column="inPrice"/>
+            <result property="salePrice" column="salePrice"/>
+            <result property="unit" column="unit"/>
+            <result property="imgMain" column="imgMain"/>
+        </collection>
+    </resultMap>
+    <select id="pageInfoQueryFindStoreDetailsOrder" resultMap="OrderResult" parameterType="PageUtilEntity"  useCache="false">
+        SELECT t.orderId,t.orderNumber,t.orderTime,t.number,t.orderPrice,t.orderStatus,td.orderDetailId,td.commodityName,td.commodityNum,td.commodityId,td.inPrice,td.salePrice,td.unit,td.imgMain
+        FROM t_order t
+        LEFT JOIN t_order_detail td
+        ON t.orderNumber=td.orderNumber
+        WHERE t.userId= #{relationMap.userId}
+        AND t.`status`=1
+        AND t.orderStatus != '-1'
+        <!--订单审核状态1:待支付；2:待发货；3:待收货；4:已完成,5:已收款-->
+        <if test="relationMap.orderStatus != null and relationMap.orderStatus != ''">
+            AND t.orderStatus =#{relationMap.orderStatus}
+        </if>
+        ORDER BY t.orderTime DESC
+    </select>
+
+    <!--门店最近拜访时间-->
+    <select id="recentOrder" resultType="com.xingrongjinfu.crm.crmStore.model.Order" parameterType="HashMap"  useCache="false">
+        SELECT orderId,orderNumber,orderTime,`number`,orderPrice,orderStatus FROM t_order WHERE userId= #{userId} AND `status`=1 AND orderStatus != '-1' ORDER BY orderTime DESC LIMIT 1
+    </select>
+
+    <!--门店详情补券列表-->
+    <resultMap id="CouponResult" type="com.xingrongjinfu.crm.approvingCoupons.model.Coupon">
+        <id property="couponId" column="couponId"/>
+        <result property="auditStatus" column="auditStatus"/>
+        <result property="orderNum" column="orderNum"/>
+        <result property="logisticsSingleNum" column="logisticsSingleNum"/>
+        <result property="damagedFruit" column="damagedFruit"/>
+        <result property="inspectionScene" column="inspectionScene"/>
+        <result property="damageDescription" column="damageDescription"/>
+        <result property="amount" column="amount"/>
+        <result property="storeName" column="storeName"/>
+        <result property="storeId" column="storeId"/>
+        <result property="createTime" column="createTime"/>
+
+        <collection property="couponImgLists" ofType="com.xingrongjinfu.crm.approvingCoupons.model.CouponImg">
+            <id property="imgId" column="imgId"/>
+            <result property="imgUrl" column="imgUrl"/>
+            <result property="couponId" column="couponId"/>
+        </collection>
+    </resultMap>
+    <select id="pageInfoQueryFindStoreDetailsCoupon" parameterType="PageUtilEntity" resultMap="CouponResult" useCache="false">
+        SELECT c.createTime,c.storeId,c.storeName,c.auditStatus,c.orderNum,c.logisticsSingleNum,c.damagedFruit,c.inspectionScene,c.damageDescription,c.amount,i.*
+        FROM c_coupon c
+        LEFT JOIN c_coupon_img i
+        ON c.couponId=i.couponId
+        /*WHERE c.storeId = #{relationMap.storeId}*/
+    </select>
+
+
+    <!--门店最近拜访记录-->
+    <select id="recentVisitRecord" resultType="com.xingrongjinfu.crm.visit.model.Visit" parameterType="HashMap">
+        SELECT storeId,visitTime,visitManner,visitGoal,visitWith,visitResultStatus,visitResult,updateTime
+        FROM c_visit_record WHERE storeId=#{storeId} AND `status`=0 AND visitResultStatus IS NOT NULL ORDER BY visitTime DESC LIMIT 1
+    </select>
+
+    <!--门店拜访记录列表-->
+    <select id="pageInfoQueryStoreVisitRecord" resultType="HashMap" parameterType="PageUtilEntity">
+        SELECT visitTime,visitManner,visitGoal,visitWith,visitResultStatus,visitResult,updateTime
+        FROM c_visit_record WHERE storeId=#{relationMap.storeId} AND `status`=0 AND visitResultStatus IS NOT NULL
+    </select>
 </mapper>
