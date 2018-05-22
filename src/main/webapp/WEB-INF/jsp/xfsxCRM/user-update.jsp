@@ -27,7 +27,7 @@
             </div>
         </div>
         <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>图片：</label>
+            <label class="form-label col-xs-4 col-sm-3">图片：</label>
             <div class="formControls col-xs-8 col-sm-4">
                 <img src="${imgPath}${Supervisor.headPortrait}" width="80px" height="80px" class="image" id="image">
                 <input type="file" class="picture" id="picture" accept="image/*" name="picture" onchange="changImg(event)">
@@ -49,7 +49,7 @@
             </div>
         </div>
         <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-3">*<span class="c-red"></span>所在区域:</label>
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>所在区域:</label>
             <div data-toggle="distpicker">
                 <select data-province="---- 选择省 ----" id="province" name="province"></select>
                 <select data-city="---- 选择市 ----" id="city" name="city"></select>
