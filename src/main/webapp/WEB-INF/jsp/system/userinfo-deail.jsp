@@ -13,7 +13,7 @@
 		<td>${currentUser.userName }</td>
 	</tr>
 	<tr>
-		<td>账户名:</td>
+		<td>账号:</td>
 		<td>${currentUser.accountName }</td>
 	</tr>
 	<tr>
