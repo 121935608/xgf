@@ -86,7 +86,7 @@
                 <th width="5%">区域</th>
                 <th width="5%">组类</th>
                 <th width="5%">客户下单总额(元)</th>
-                <th width="5%">组类排序(升序/降序)</th>
+                <th width="5%">组类排序</th>
                 <th width="5%">操作</th>
             </tr>
             </thead>
@@ -104,7 +104,7 @@
                 <th width="5%">区域</th>
                 <th width="5%">组类</th>
                 <th width="5%">客户下单总额(元)</th>
-                <th width="5%">组类排序(升序/降序)</th>
+                <th width="5%">组类排序</th>
                 <th width="5%">操作</th>
             </tr>
             </thead>
