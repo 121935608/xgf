@@ -30,7 +30,17 @@ public class Coupon
 	
 	private List<CouponImg> couponImgList;
 	
+	private List<CouponGoods> couponGoodsList;
 	
+	
+	public List<CouponGoods> getCouponGoodsList() {
+		return couponGoodsList;
+	}
+
+	public void setCouponGoodsList(List<CouponGoods> couponGoodsList) {
+		this.couponGoodsList = couponGoodsList;
+	}
+
 	public String getPhoneNum() {
 		return phoneNum;
 	}

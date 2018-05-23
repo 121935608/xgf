@@ -6,6 +6,36 @@
 	<form action="" method="post" class="form form-horizontal" id="form-coupon-audit">
 		<input type="hidden" class="input-text" id="couponId" name="couponId" value="${coupon.couponId }">
 		<div class="row cl">
+			 <label class="form-label col-xs-4 col-sm-3">补券商品信息</label>
+	    </div>
+	    <div class="row cl">
+	        <div class="form-label col-xs-1 col-sm-1">
+	        </div>
+	        <div class="form-label col-xs-6 col-sm-10">
+		        <table border="1"> 
+				     <tr>
+				      <td align="center">商品名称</td>
+				      <td align="center">主观价</td>
+				      <td align="center">重量(斤)</td>
+				      <td align="center">补券总额</td>
+				    </tr> 
+					<c:forEach items="${coupon.couponGoodsList}" var="couponGoods" varStatus="vs">
+					<tr>
+						<s:property value="#vs.index+1" />
+						<td align="center">${couponGoods.goodsName}</td>
+						<td align="center">${couponGoods.subjectivePrice}</td>
+						<td align="center">${couponGoods.weight}</td>
+						<td align="center">${couponGoods.couponTotal}</td>
+					</tr>
+					</c:forEach>
+				</table>
+	        </div>
+		   </div>
+		<div class="row cl">
+		   <label class="form-label col-xs-4 col-sm-3"></label>
+		</div>
+		   
+		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>审核结果：</label>
 			<div class="formControls col-xs-7 col-sm-4 skin-minimal">
 				<y:radio codeGroup="crm-audit-status" name="auditStatus" selectedValue="${coupon.auditStatus }"/>

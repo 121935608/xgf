@@ -26,6 +26,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <id property="imgId" column="imgId"/>    
 		    <result property="imgUrl" column="imgUrl"/> 
         </collection>
+        
+        <!-- 进行 多表关联插叙 -->
+        <collection property="couponGoodsList" column="couponGoodsId" ofType="CouponGoods">
+            <id property="couponGoodsId" column="couponGoodsId"/>    
+		    <result property="goodsName" column="goodsName"/> 
+		    <result property="subjectivePrice" column="subjectivePrice"/> 
+		    <result property="weight" column="weight"/> 
+		    <result property="couponTotal" column="couponTotal"/> 
+        </collection>
 	</resultMap>
 
     <!-- 查询优惠券信息列表，分页 -->
@@ -35,7 +44,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 根据ID查询优惠券信息 -->
 	<select id="couponQuery" resultMap="CouponResult" parameterType="string" >
-        SELECT c.*, i.imgId,i.imgUrl FROM c_coupon c LEFT JOIN c_coupon_img i ON c.couponId = i.couponId
+        SELECT
+			c.*, i.imgId,
+			i.imgUrl, g.goodsName,g.subjectivePrice,g.weight,g.couponTotal
+		FROM
+			c_coupon c
+		LEFT JOIN c_coupon_img i ON c.couponId = i.couponId
+		LEFT JOIN c_coupon_goods g ON c.couponId = g.couponId
         WHERE c.couponId = #{couponId}
     </select>
     
