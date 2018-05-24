@@ -27,6 +27,7 @@
                 <div class="col-xs-3 col-sm-2 .col-md-2" >
                     <button type="button" class="btn btn-success radius" onclick="query()"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
                 </div>
+                <div class="btn excel"  style="margin-left: 10px" onclick="Excel()">导出Excel</div>
             </div>
         </form>
     </div>
@@ -287,6 +288,22 @@
 
             }) ;
         });
+    }
+    function Excel() {
+        var url="${context_root}/crmStore/crmStoreTableSelect.action";
+        downloadFile(url);
+    }
+
+    function downloadFile(url) {
+        /* try{
+             var elemIF = document.createElement("iframe");
+             elemIF.src = url;
+             elemIF.style.display = "none";
+             document.body.appendChild(elemIF);
+         }catch(e){
+
+         }*/
+        window.open(url ,'_self');//进行访问
     }
 </script>
 </body>
