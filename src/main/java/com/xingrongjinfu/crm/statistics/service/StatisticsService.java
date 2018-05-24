@@ -89,10 +89,10 @@ public class StatisticsService implements IStatisticsService
 		
 		DecimalFormat myformat = new DecimalFormat();
 		myformat.applyPattern("0.00");
-		statistics.setTodayAccumulativeAmount(myformat.format(todayAccumulativeAmount));
-		statistics.setYesterdayAccumulativeAmount(myformat.format(yesterdayAccumulativeAmount));
-		statistics.setWeeklyAccumulativeAmount(myformat.format(weeklyAccumulativeAmount));
-		statistics.setMonthlyAccumulativeAmount(myformat.format(monthlyAccumulativeAmount));
+		statistics.setTodayAccumulativeAmount(myformat.format(todayAccumulativeAmount*0.01));
+		statistics.setYesterdayAccumulativeAmount(myformat.format(yesterdayAccumulativeAmount*0.01));
+		statistics.setWeeklyAccumulativeAmount(myformat.format(weeklyAccumulativeAmount*0.01));
+		statistics.setMonthlyAccumulativeAmount(myformat.format(monthlyAccumulativeAmount*0.01));
 		
 		
 		//今日下单客户转化率
