@@ -259,11 +259,8 @@ public class CrmStoreController extends BaseController {
         //门店详情
         if (store !=null) {
             store.put("addTime",dateformat.format(store.get("addTime")));
-
-
             param.put("userId",store.get("userId"));
             Order order=crmStoreService.recentOrder(param);
-
             //最近一次下单时间
             if (order==null ){
                 store.put("recentOrderTime","--");
@@ -285,7 +282,6 @@ public class CrmStoreController extends BaseController {
             }
             //门店详情
             modelAndView.addObject("store", store);
-
             Visit visit =crmStoreService.recentVisitRecord(storeId);
             //门店最近拜访记录
             modelAndView.addObject("visit", visit);

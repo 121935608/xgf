@@ -20,7 +20,7 @@
         LEFT JOIN (
         SELECT
         userId,
-        SUM(t.orderPrice) AS totalPrice
+        SUM(t.orderPrice)*0.01 AS totalPrice
         FROM
         t_order t
         WHERE
@@ -31,7 +31,7 @@
         LEFT JOIN (
         SELECT
         userId,
-        SUM(orderPrice) AS monthPrice,
+        SUM(orderPrice)*0.01 AS monthPrice,
         COUNT(1) AS monthNum
         FROM
         t_order
@@ -117,7 +117,7 @@
         LEFT JOIN (
         SELECT
         userId,
-        SUM(t.orderPrice) AS totalPrice
+        SUM(t.orderPrice)*0.01 AS totalPrice
         FROM
         t_order t
         WHERE
@@ -128,7 +128,7 @@
         LEFT JOIN (
         SELECT
         userId,
-        SUM(orderPrice) AS monthPrice,
+        SUM(orderPrice)*0.01 AS monthPrice,
         COUNT(1) AS monthNum
         FROM
         t_order
@@ -172,10 +172,10 @@
         IFNULL(ta.totalNum, 0) AS totalNum,IFNULL(ta.totalPrice,0) AS totalPrice,IFNULL(tb.monthPrice,0) AS monthPrice,IFNULL(tb.monthNum,0) AS monthNum,IFNULL(cc.couponNum,0) AS couponNum
         FROM t_store ts
         LEFT JOIN (
-        SELECT userId,SUM(orderPrice) AS totalPrice,COUNT(1) AS totalNum FROM t_order WHERE `status` = 1 AND orderStatus !='-1' GROUP BY userId
+        SELECT userId,SUM(orderPrice)*0.01 AS totalPrice,COUNT(1) AS totalNum FROM t_order WHERE `status` = 1 AND orderStatus !='-1' GROUP BY userId
         ) ta ON ts.userId = ta.userId
         LEFT JOIN (
-        SELECT userId,SUM(orderPrice) AS monthPrice,COUNT(1) AS monthNum FROM t_order WHERE <![CDATA[DATE_SUB(CURDATE(), INTERVAL 30 DAY) <= date(orderTime)]]> AND `status` = 1 AND orderStatus !='-1' GROUP BY userId
+        SELECT userId,SUM(orderPrice)*0.01 AS monthPrice,COUNT(1) AS monthNum FROM t_order WHERE <![CDATA[DATE_SUB(CURDATE(), INTERVAL 30 DAY) <= date(orderTime)]]> AND `status` = 1 AND orderStatus !='-1' GROUP BY userId
         ) tb ON ts.userId = tb.userId
         LEFT JOIN (
         SELECT COUNT(1) AS couponNum , storeId FROM c_coupon GROUP BY storeId
@@ -207,7 +207,7 @@
         </collection>
     </resultMap>
     <select id="pageInfoQueryFindStoreDetailsOrder" resultMap="OrderResult" parameterType="PageUtilEntity"  useCache="false">
-        SELECT t.orderId,t.orderNumber,t.orderTime,t.number,t.orderPrice,t.orderStatus,td.orderDetailId,td.commodityName,td.commodityNum,td.commodityId,td.inPrice,td.salePrice,td.unit,td.imgMain
+        SELECT t.orderId,t.orderNumber,t.orderTime,t.number,t.orderPrice*0.01 AS orderPrice,t.orderStatus,td.orderDetailId,td.commodityName,td.commodityNum,td.commodityId,td.inPrice*0.01 AS inPrice,td.salePrice*0.01 AS salePrice,td.unit,td.imgMain
         FROM t_order t
         LEFT JOIN t_order_detail td
         ON t.orderNumber=td.orderNumber
@@ -223,7 +223,7 @@
 
     <!--门店最近拜访时间-->
     <select id="recentOrder" resultType="com.xingrongjinfu.crm.crmStore.model.Order" parameterType="HashMap"  useCache="false">
-        SELECT orderId,orderNumber,orderTime,`number`,orderPrice,orderStatus FROM t_order WHERE userId= #{userId} AND `status`=1 AND orderStatus != '-1' ORDER BY orderTime DESC LIMIT 1
+        SELECT orderId,orderNumber,orderTime,`number`,orderPrice*0.01 AS orderPrice,orderStatus FROM t_order WHERE userId= #{userId} AND `status`=1 AND orderStatus != '-1' ORDER BY orderTime DESC LIMIT 1
     </select>
 
     <!--门店详情补券列表-->

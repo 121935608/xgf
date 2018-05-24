@@ -114,7 +114,7 @@
                             <th width="5%">商品数量</th>
                             <th width="5%">订单金额</th>
                             <th width="5%">订单状态</th>
-                            <th width="5%">操作</th>
+                            <%--<th width="5%">操作</th>--%>
                         </tr>
                         </thead>
                     </table>
@@ -133,7 +133,7 @@
                             <th width="5%">陪访对象</th>
                             <th width="5%">拜访结果</th>
                             <th width="5%">拜访内容</th>
-                            <th width="5%">操作</th>
+                            <%--<th width="5%">操作</th>--%>
                         </tr>
                         </thead>
                     </table>
@@ -152,7 +152,7 @@
                             <th width="5%">损坏果品(kg)</th>
                             <th width="5%">现场验货</th>
                             <th width="5%">补券结果</th>
-                            <th width="5%">操作</th>
+                            <%--<th width="5%">操作</th>--%>
                         </tr>
                         </thead>
                     </table>
@@ -215,17 +215,17 @@
                     }
                 }
             },
-            {
-                "sDefaultContent": "操作",
-                "bSortable" : false,
-                "sClass": "td-manage text-c",
-                "bSearchable": false,
-                "mRender": function(data, type, row) {
-                    //查看详情
-                    var details = "<a title=\"查看\" href=\"javascript:;\" onclick=\"performance_query('查看详情','${context_root}/crm/toPerformanceRankQuery.action?supervisorId=" + row.supervisorNum + "&name="+row.name+"&area="+row.area+"&totalPrice="+row.totalPrice+"&deptRank="+row.deptRank+"&deptName="+row.deptName+"','','570')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>查看</span></a>";
-                    return  details;
-                }
-            },
+            <%--{--%>
+                <%--"sDefaultContent": "操作",--%>
+                <%--"bSortable" : false,--%>
+                <%--"sClass": "td-manage text-c",--%>
+                <%--"bSearchable": false,--%>
+                <%--"mRender": function(data, type, row) {--%>
+                    <%--//查看详情--%>
+                    <%--var details = "<a title=\"查看\" href=\"javascript:;\" onclick=\"performance_query('查看详情','${context_root}/crm/toPerformanceRankQuery.action?supervisorId=" + row.supervisorNum + "&name="+row.name+"&area="+row.area+"&totalPrice="+row.totalPrice+"&deptRank="+row.deptRank+"&deptName="+row.deptName+"','','570')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>查看</span></a>";--%>
+                    <%--return  details;--%>
+                <%--}--%>
+            <%--},--%>
         ];
         var url = "${context_root}/crmStore/crmStoreDetailsOrder.action?userId="+userId;
         pageTable = _Datatable_Init(pageTable, aoColumns, url);
@@ -320,17 +320,17 @@
                 "bSortable" : false,
                 "sClass": "text-c"
             },
-            {
-                "sDefaultContent": "操作",
-                "bSortable" : false,
-                "sClass": "td-manage text-c",
-                "bSearchable": false,
-                "mRender": function(data, type, row) {
-                    //查看详情
-                    var details = "<a title=\"查看\" href=\"javascript:;\" onclick=\"performance_query('查看详情','${context_root}/crm/toPerformanceRankQuery.action?supervisorId=" + row.supervisorNum + "&name="+row.name+"&area="+row.area+"&totalPrice="+row.totalPrice+"&deptRank="+row.deptRank+"&deptName="+row.deptName+"','','570')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>查看</span></a>";
-                    return  details;
-                }
-            },
+            <%--{--%>
+                <%--"sDefaultContent": "操作",--%>
+                <%--"bSortable" : false,--%>
+                <%--"sClass": "td-manage text-c",--%>
+                <%--"bSearchable": false,--%>
+                <%--"mRender": function(data, type, row) {--%>
+                    <%--//查看详情--%>
+                    <%--var details = "<a title=\"查看\" href=\"javascript:;\" onclick=\"performance_query('查看详情','${context_root}/crm/toPerformanceRankQuery.action?supervisorId=" + row.supervisorNum + "&name="+row.name+"&area="+row.area+"&totalPrice="+row.totalPrice+"&deptRank="+row.deptRank+"&deptName="+row.deptName+"','','570')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>查看</span></a>";--%>
+                    <%--return  details;--%>
+                <%--}--%>
+            <%--},--%>
         ];
         var urlOne = "${context_root}/crmStore/crmStoreDetailsVisit.action?storeId="+storeId;
         pageTableOne = _Datatable_InitOne(pageTableOne, aoColumns1, urlOne);
@@ -395,17 +395,17 @@
                     }
                 }
             },
-            {
-                "sDefaultContent": "操作",
-                "bSortable" : false,
-                "sClass": "td-manage text-c",
-                "bSearchable": false,
-                "mRender": function(data, type, row) {
-                    //查看详情
-                    var details = "<a title=\"查看\" href=\"javascript:;\" onclick=\"performance_query('查看详情','${context_root}/crm/toPerformanceRankQuery.action?supervisorId=" + row.supervisorNum + "&name="+row.name+"&area="+row.area+"&totalPrice="+row.totalPrice+"&deptRank="+row.deptRank+"&deptName="+row.deptName+"','','570')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>查看</span></a>";
-                    return  details;
-                }
-            },
+            <%--{--%>
+                <%--"sDefaultContent": "操作",--%>
+                <%--"bSortable" : false,--%>
+                <%--"sClass": "td-manage text-c",--%>
+                <%--"bSearchable": false,--%>
+                <%--"mRender": function(data, type, row) {--%>
+                    <%--//查看详情--%>
+                    <%--var details = "<a title=\"查看\" href=\"javascript:;\" onclick=\"performance_query('查看详情','${context_root}/crm/toPerformanceRankQuery.action?supervisorId=" + row.supervisorNum + "&name="+row.name+"&area="+row.area+"&totalPrice="+row.totalPrice+"&deptRank="+row.deptRank+"&deptName="+row.deptName+"','','570')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>查看</span></a>";--%>
+                    <%--return  details;--%>
+                <%--}--%>
+            <%--},--%>
         ];
         var urlTwo = "${context_root}/crmStore/crmStoreDetailsCoupon.action?storeId="+storeId;
         pageTableTwo = _Datatable_InitTwo(pageTableTwo, aoColumns2, urlTwo);

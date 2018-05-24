@@ -11,7 +11,7 @@
             FROM sys_supervisor ss
             INNER JOIN c_dept cd ON ss.deptId = cd.deptId
             LEFT JOIN (
-                SELECT SUM(ta.orderPrice) AS allPrice,ts.supervisorId
+                SELECT SUM(ta.orderPrice)*0.01 AS allPrice,ts.supervisorId
                 FROM t_order ta
                 LEFT JOIN t_store ts ON ta.userId = ts.userId
                 WHERE ta.`status` = 1 AND ta.orderStatus != '-1' GROUP BY ts.supervisorId
@@ -48,7 +48,7 @@
         FROM sys_supervisor ss
         INNER JOIN c_dept cd ON ss.deptId = cd.deptId
         LEFT JOIN (
-        SELECT SUM(ta.orderPrice) AS allPrice,ts.supervisorId
+        SELECT SUM(ta.orderPrice)*0.01 AS allPrice,ts.supervisorId
         FROM t_order ta
         LEFT JOIN t_store ts ON ta.userId = ts.userId
         WHERE ta.`status` = 1 AND ta.orderStatus != '-1' GROUP BY ts.supervisorId
@@ -75,7 +75,7 @@
         IFNULL(SUM(<![CDATA[th.firstStore1<2]]>), 0) AS firstStore1
         FROM t_store ts
         LEFT JOIN (
-            SELECT storeId, SUM(orderPrice) AS amount
+            SELECT storeId, SUM(orderPrice)*0.01 AS amount
             FROM t_order
             WHERE `status` = 1 AND orderTime >= #{timeBegin} AND <![CDATA[orderTime <= #{timeEnd}]]>
             GROUP BY storeId
@@ -100,7 +100,7 @@
             GROUP BY storeId
         ) td ON td.storeId = ts.storeId
         LEFT JOIN (
-            SELECT storeId, SUM(orderPrice) AS amount1
+            SELECT storeId, SUM(orderPrice)*0.01 AS amount1
             FROM t_order
             WHERE `status` = 1 AND orderTime >= #{timeBegin1} AND <![CDATA[orderTime <= #{timeEnd1}]]>
             GROUP BY storeId
