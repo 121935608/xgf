@@ -18,49 +18,16 @@
         t_store a
         LEFT JOIN sys_supervisor s ON a.supervisorId = s.supervisorNum
         LEFT JOIN (
-        SELECT
-        userId,
-        SUM(t.orderPrice)*0.01 AS totalPrice
-        FROM
-        t_order t
-        WHERE
-        `status` = 1
-        GROUP BY
-        userId
+            SELECT userId,SUM(t.orderPrice)*0.01 AS totalPrice FROM t_order t WHERE `status` = 1 AND orderStatus !='-1' GROUP BY userId
         ) top ON a.userId = top.userId
         LEFT JOIN (
-        SELECT
-        userId,
-        SUM(orderPrice)*0.01 AS monthPrice,
-        COUNT(1) AS monthNum
-        FROM
-        t_order
-        WHERE
-        DATE_SUB(CURDATE(), INTERVAL 30 DAY) <![CDATA[   <=  ]]> date(orderTime)
-        AND `status` = 1
-        GROUP BY
-        userId
+            SELECT userId,SUM(orderPrice)*0.01 AS monthPrice,COUNT(1) AS monthNum FROM t_order WHERE <![CDATA[  DATE_SUB(CURDATE(), INTERVAL 30 DAY) <= date(orderTime)  ]]> AND `status` = 1 AND orderStatus !='-1' GROUP BY userId
         ) tb ON a.userId = tb.userId
         LEFT JOIN (
-        SELECT
-        userId,
-        COUNT(1) AS totalVisitNum
-        FROM
-        c_visit_record
-        WHERE
-        `status` = 0
-        AND visitResultStatus IS NOT NULL
-        GROUP BY
-        userId
+            SELECT userId,COUNT(1) AS totalVisitNum FROM c_visit_record WHERE `status` = 0 AND visitResultStatus IS NOT NULL GROUP BY userId
         ) ca ON ca.userId = a.userId
         LEFT JOIN (
-        SELECT
-        supervisorNum,
-        deptName
-        FROM
-        sys_supervisor sss
-        LEFT JOIN c_dept cd ON
-        cd.deptId = sss.deptId
+            SELECT supervisorNum,deptName FROM sys_supervisor sss LEFT JOIN c_dept cd ON cd.deptId = sss.deptId
         ) cds ON a.supervisorId = cds.supervisorNum
         WHERE 1=1
         <if test="relationMap.supervisor != null and relationMap.supervisor != ''">
@@ -94,69 +61,21 @@
 
     <select id="excelTable" resultType="HashMap">
         SELECT
-        a.storeNo,
-        a.storeId,
-        a.storeName,
-        a.userName,
-        a.remain,
-        a.phone,
-        a.idCard,
-        a.area,
-        a.process,
-        a.addTime,
-        cds.deptName,
-        s.`name`,
-        s.supervisorId,
-        top.totalPrice,
-        tb.monthPrice,
-        tb.monthNum,
-        ca.totalVisitNum
+        a.storeNo,a.storeId,a.storeName,a.userName,a.remain,a.phone,a.idCard,a.area,a.process,a.addTime,cds.deptName,s.`name`,s.supervisorId,top.totalPrice,tb.monthPrice,tb.monthNum,ca.totalVisitNum
         FROM
         t_store a
         LEFT JOIN sys_supervisor s ON a.supervisorId = s.supervisorNum
         LEFT JOIN (
-        SELECT
-        userId,
-        SUM(t.orderPrice)*0.01 AS totalPrice
-        FROM
-        t_order t
-        WHERE
-        `status` = 1
-        GROUP BY
-        userId
+            SELECT userId,SUM(t.orderPrice)*0.01 AS totalPrice FROM t_order t WHERE `status` = 1 AND orderStatus !='-1' GROUP BY userId
         ) top ON a.userId = top.userId
         LEFT JOIN (
-        SELECT
-        userId,
-        SUM(orderPrice)*0.01 AS monthPrice,
-        COUNT(1) AS monthNum
-        FROM
-        t_order
-        WHERE
-        DATE_SUB(CURDATE(), INTERVAL 30 DAY) <![CDATA[   <=  ]]> date(orderTime)
-        AND `status` = 1
-        GROUP BY
-        userId
+            SELECT userId,SUM(orderPrice)*0.01 AS monthPrice, COUNT(1) AS monthNum FROM t_order WHERE  <![CDATA[ DATE_SUB(CURDATE(), INTERVAL 30 DAY)  <= date(orderTime) ]]>  AND `status` = 1 AND orderStatus !='-1' GROUP BY userId
         ) tb ON a.userId = tb.userId
         LEFT JOIN (
-        SELECT
-        userId,
-        COUNT(1) AS totalVisitNum
-        FROM
-        c_visit_record
-        WHERE
-        `status` = 0
-        AND visitResultStatus IS NOT NULL
-        GROUP BY
-        userId
+            SELECT userId,COUNT(1) AS totalVisitNum FROM c_visit_record WHERE `status` = 0 AND visitResultStatus IS NOT NULL GROUP BY userId
         ) ca ON ca.userId = a.userId
         LEFT JOIN (
-        SELECT
-        supervisorNum,
-        deptName
-        FROM
-        sys_supervisor sss
-        LEFT JOIN c_dept cd ON cd.deptId = sss.deptId
+            SELECT supervisorNum,deptName FROM sys_supervisor sss LEFT JOIN c_dept cd ON cd.deptId = sss.deptId
         ) cds ON a.supervisorId = cds.supervisorNum
         WHERE
         1 = 1
@@ -172,13 +91,13 @@
         IFNULL(ta.totalNum, 0) AS totalNum,IFNULL(ta.totalPrice,0) AS totalPrice,IFNULL(tb.monthPrice,0) AS monthPrice,IFNULL(tb.monthNum,0) AS monthNum,IFNULL(cc.couponNum,0) AS couponNum
         FROM t_store ts
         LEFT JOIN (
-        SELECT userId,SUM(orderPrice)*0.01 AS totalPrice,COUNT(1) AS totalNum FROM t_order WHERE `status` = 1 AND orderStatus !='-1' GROUP BY userId
+            SELECT userId,SUM(orderPrice)*0.01 AS totalPrice,COUNT(1) AS totalNum FROM t_order WHERE `status` = 1 AND orderStatus !='-1' GROUP BY userId
         ) ta ON ts.userId = ta.userId
         LEFT JOIN (
-        SELECT userId,SUM(orderPrice)*0.01 AS monthPrice,COUNT(1) AS monthNum FROM t_order WHERE <![CDATA[DATE_SUB(CURDATE(), INTERVAL 30 DAY) <= date(orderTime)]]> AND `status` = 1 AND orderStatus !='-1' GROUP BY userId
+            SELECT userId,SUM(orderPrice)*0.01 AS monthPrice,COUNT(1) AS monthNum FROM t_order WHERE <![CDATA[DATE_SUB(CURDATE(), INTERVAL 30 DAY) <= date(orderTime)]]> AND `status` = 1 AND orderStatus !='-1' GROUP BY userId
         ) tb ON ts.userId = tb.userId
         LEFT JOIN (
-        SELECT COUNT(1) AS couponNum , storeId FROM c_coupon GROUP BY storeId
+            SELECT COUNT(1) AS couponNum , storeId FROM c_coupon GROUP BY storeId
         )AS cc ON cc.storeId=ts.storeId
         LEFT JOIN sys_supervisor sup ON sup.supervisorNum=ts.supervisorId
         WHERE ts.`status` = 1
