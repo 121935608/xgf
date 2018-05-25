@@ -47,7 +47,7 @@
 
     <!--将私海门店转入公海门店-->
     <update id="addPublic" parameterType="Store">
-        UPDATE t_store SET supervisorId = NULL WHERE storeId = #{storeId};
+        UPDATE t_store SET supervisorId = NULL,transferMode = '0' WHERE storeId = #{storeId};
     </update>
 
 
