@@ -224,12 +224,14 @@ public class CrmStoreController extends BaseController {
         String process= request.getParameter("process");
         String beginTime= request.getParameter("beginTime");
         String endTime= request.getParameter("endTime");
+        String storeName= request.getParameter("storeName");
 
         HashMap hashMap = new HashMap();
         hashMap.put("supervisorId",supervisorId);
         hashMap.put("process",process);
         hashMap.put("beginTime",beginTime);
         hashMap.put("endTime",endTime);
+        hashMap.put("storeName",storeName);
         //导出文件的标题
         String title = null;
         //设置表格标题行
