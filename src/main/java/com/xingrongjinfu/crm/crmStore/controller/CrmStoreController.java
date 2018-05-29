@@ -220,6 +220,16 @@ public class CrmStoreController extends BaseController {
     /*门店到处excel*/
     @RequestMapping(CrmStoreConstant.CRM_STORE_Table_URL)
     public void export(HttpServletRequest request,HttpServletResponse response){
+        String supervisorId= request.getParameter("supervisorId");
+        String process= request.getParameter("process");
+        String beginTime= request.getParameter("beginTime");
+        String endTime= request.getParameter("endTime");
+
+        HashMap hashMap = new HashMap();
+        hashMap.put("supervisorId",supervisorId);
+        hashMap.put("process",process);
+        hashMap.put("beginTime",beginTime);
+        hashMap.put("endTime",endTime);
         //导出文件的标题
         String title = null;
         //设置表格标题行
@@ -230,7 +240,7 @@ public class CrmStoreController extends BaseController {
         headers = new String[]{"序号", "门店名称", "联系人", "手机号",
                 "地址", "申请时间", "督导员", "组类", "下单总金额", "近30天下单总金额", "近30天下单次数(次)", "本周拜访次数(次)", "状态"};
 
-        dataList = crmStoreService.queryReport();
+        dataList = crmStoreService.queryReport(hashMap);
         //使用流将数据导出
         OutputStream out = null;
         try {

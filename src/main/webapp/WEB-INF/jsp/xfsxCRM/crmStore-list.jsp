@@ -290,7 +290,14 @@
         });
     }
     function Excel() {
-        var url="${context_root}/crmStore/crmStoreTableSelect.action";
+        var supervisorId = $("#supervisor").val();
+        var process = $("#process").val();
+        var beginTime = $("#beginTime").val();
+        var endTime = $("#endTime").val();
+        var url="${context_root}/crmStore/crmStoreTableSelect.action?supervisorId="+ supervisorId +
+            "&process="+ process +
+            "&beginTime="+ beginTime +
+            "&endTime="+ endTime;
         downloadFile(url);
     }
 

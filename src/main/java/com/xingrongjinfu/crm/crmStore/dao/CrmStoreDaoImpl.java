@@ -14,6 +14,8 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 @Repository
 public class CrmStoreDaoImpl extends DynamicObjectBaseDao implements CrmStoreDao {
     @Override
@@ -99,11 +101,11 @@ public class CrmStoreDaoImpl extends DynamicObjectBaseDao implements CrmStoreDao
 		return this.update("CrmStoreMapper.batchUpdateStoreSupervistor",hashMap);
 	}
     @Override
-    public List<Object[]> queryReport() {
+    public List<Object[]> queryReport(HashMap hashMap) {
         List<Object[]> dataList = new ArrayList<Object[]>();
         List<HashMap> supervisorPageInfo = null;
         try {
-            supervisorPageInfo = (List<HashMap>)this.findForList("CrmStoreMapper.excelTable",null);
+            supervisorPageInfo = (List<HashMap>)this.findForList("CrmStoreMapper.excelTable",hashMap);
             Object[] objs = null;
             for (int i = 0; i < supervisorPageInfo.size(); i++) {// 循环每一条数据
                 HashMap detail = supervisorPageInfo.get(i);

@@ -50,7 +50,7 @@ public interface CrmStoreService {
 	 */
 	int batchUpdateStoreSupervistor(String supervisorIdOne, String supervisorId);
 
-    List<Object[]> queryReport();
+    List<Object[]> queryReport(HashMap hashMap);
 
 
     //门店详情信息

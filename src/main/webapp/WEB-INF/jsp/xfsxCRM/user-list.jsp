@@ -30,8 +30,8 @@
                 <th width="10%">督导员部门</th>
                 <th width="8%">督导员角色</th>
                 <th width="12%">电话 </th>
-                <th width="10%">状态</th>
-                <th width="10%">操作</th>
+                <th width="5%">状态</th>
+                <th width="15%">操作</th>
             </tr>
             </thead>
         </table>

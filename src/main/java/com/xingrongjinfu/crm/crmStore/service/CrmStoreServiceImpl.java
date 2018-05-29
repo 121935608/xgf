@@ -60,8 +60,8 @@ public class CrmStoreServiceImpl implements CrmStoreService {
 	}
 
     @Override
-    public List<Object[]> queryReport() {
-        return crmStoreDao.queryReport();
+    public List<Object[]> queryReport(HashMap hashMap) {
+        return crmStoreDao.queryReport(hashMap);
     }
 
 
