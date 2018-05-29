@@ -217,7 +217,7 @@ public class CrmStoreController extends BaseController {
         return new Message(res);
     }
 
-    /*门店到处excel*/
+    /*门店导出excel*/
     @RequestMapping(CrmStoreConstant.CRM_STORE_Table_URL)
     public void export(HttpServletRequest request,HttpServletResponse response){
         String supervisorId= request.getParameter("supervisorId");
