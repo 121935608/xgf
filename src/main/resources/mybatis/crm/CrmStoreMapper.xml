@@ -13,7 +13,7 @@
     <!--查询店铺和督导员关联的详情信息-->
     <select id="pageInfoQuery" parameterType="PageUtilEntity" resultType="HashMap" useCache="false">
         SELECT
-        a.storeNo,a.storeId,a.storeName,a.userName,a.remain,a.phone,a.idCard,a.area,a.process,a.addTime,cds.deptName,s.`name`,s.supervisorId,top.totalPrice,tb.monthPrice,tb.monthNum,ca.totalVisitNum
+        a.storeNo,a.storeId,a.storeName,a.userName,a.remain,a.phone,a.idCard,a.area,a.address,a.process,a.addTime,cds.deptName,s.`name`,s.supervisorId,top.totalPrice,tb.monthPrice,tb.monthNum,ca.totalVisitNum
         FROM
         t_store a
         LEFT JOIN sys_supervisor s ON a.supervisorId = s.supervisorNum
@@ -35,6 +35,9 @@
         </if>
         <if test="relationMap.process != null and relationMap.process != ''">
             AND a.process = #{relationMap.process}
+        </if>
+        <if test="relationMap.storeName != null and relationMap.storeName != ''">
+            AND a.storeName = #{relationMap.storeName}
         </if>
         <if test="relationMap.beginTime != null and relationMap.beginTime != ''">
             AND DATE_FORMAT(a.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
@@ -61,7 +64,7 @@
 
     <select id="excelTable" resultType="HashMap">
         SELECT
-        a.storeNo,a.storeId,a.storeName,a.userName,a.remain,a.phone,a.idCard,a.area,a.process,a.addTime,cds.deptName,s.`name`,s.supervisorId,top.totalPrice,tb.monthPrice,tb.monthNum,ca.totalVisitNum
+        a.storeNo,a.storeId,a.storeName,a.userName,a.remain,a.phone,a.idCard,a.area,a.address,a.process,a.addTime,cds.deptName,s.`name`,s.supervisorId,top.totalPrice,tb.monthPrice,tb.monthNum,ca.totalVisitNum
         FROM
         t_store a
         LEFT JOIN sys_supervisor s ON a.supervisorId = s.supervisorNum
@@ -83,7 +86,10 @@
             AND a.supervisorId = #{supervisorId}
         </if>
         <if test="process != null and process != ''">
-            AND a.process = #{relationMap.process}
+            AND a.process = #{process}
+        </if>
+        <if test="storeName != null and storeName != ''">
+            AND a.storeName = #{storeName}
         </if>
         <if test="beginTime != null and beginTime != ''">
             AND DATE_FORMAT(a.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{beginTime},'%Y%m%d')

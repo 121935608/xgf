@@ -7,12 +7,15 @@
     <div style="min-height: 30px;">
         <form role="form" class="text-c">
             <div class="row" >
-                <div class="col-xs-6 col-sm-4 .col-md-4" > 日期范围：
+                <div class="col-xs-3 col-sm-4 .col-md-4" style="width: 400px;"> 日期范围：
                     <input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')||\'%y-%M-%d\'}'})" id="beginTime" class="input-text Wdate" style="width:120px;">
                     -
                     <input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'beginTime\')}',maxDate:'%y-%M-%d'})" id="endTime" class="input-text Wdate" style="width:120px;">
                 </div>
-                <div class="row  col-xs-6 col-sm-4 .col-md-4" >
+                <div class="row  col-xs-5 col-sm-4 .col-md-4" style="width: 300px;">商铺名称:
+                    <input type="text" class="input-text" style="width: 200px;" placeholder="商铺名称" id="storeName" name="storeName">
+                </div>
+                <div class="row  col-xs-5 col-sm-4 .col-md-4" >
                     <div class="col-xs-6 col-sm-6 .col-md-6" >
                         <y:select id="supervisor" name="supervisor" codeGroup="${supervisorList}" selectedValue=""
                                   cssClass="select" headerKey="" headerValue="督导员">
@@ -24,7 +27,7 @@
                         </y:select>
                     </div>
                 </div>
-                <div class="col-xs-3 col-sm-2 .col-md-2" >
+                <div class="col-xs-3 col-sm-2 .col-md-2" style="width: 50px;">
                     <button type="button" class="btn btn-success radius" onclick="query()"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
                 </div>
                 <div class="btn excel"  style="margin-left: 10px" onclick="Excel()">导出Excel</div>
@@ -104,7 +107,8 @@
                 "bSearchable": false,
                 "mRender": function(data, type, row) {
                     if (row.area != null) {
-                        return row.area;
+                        var address = row.address == null ? "" : row.address;
+                        return row.area + address;
                     } else {
                         return "";
                     }
@@ -261,9 +265,11 @@
         var process = $("#process").val();
         var beginTime = $("#beginTime").val();
         var endTime = $("#endTime").val();
+        var storeName = $("#storeName").val();
         pageTable.fnSettings().sAjaxSource = "${context_root}/crmStore/crmStoreSelect.action?supervisor="+ supervisor +
             "&process="+ process +
             "&beginTime="+ beginTime +
+            "&storeName="+ storeName +
             "&endTime="+ endTime;
         pageTable.fnClearTable(0);
         pageTable.fnDraw();
@@ -293,10 +299,12 @@
         var supervisorId = $("#supervisor").val();
         var process = $("#process").val();
         var beginTime = $("#beginTime").val();
+        var storeName = $("#storeName").val();
         var endTime = $("#endTime").val();
         var url="${context_root}/crmStore/crmStoreTableSelect.action?supervisorId="+ supervisorId +
             "&process="+ process +
             "&beginTime="+ beginTime +
+            "&storeName="+ storeName +
             "&endTime="+ endTime;
         downloadFile(url);
     }
