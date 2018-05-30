@@ -79,7 +79,7 @@
         <table class="table table-border table-bordered table-hover table-bg table-sort">
             <thead>
             <tr class="text-c">
-                <th width="5%">NO.</th>
+                <%--<th width="5%">NO.</th>--%>
                 <th width="5%">销售员</th>
                 <th width="5%">省份</th>
                 <th width="5%">城市</th>
@@ -97,7 +97,7 @@
         <table class="table table-border table-bordered table-hover table-bg table-sort-One">
             <thead>
             <tr class="text-c">
-                <th width="5%">NO.</th>
+                <%--<th width="5%">NO.</th>--%>
                 <th width="5%">销售员</th>
                 <th width="5%">省份</th>
                 <th width="5%">城市</th>
@@ -121,15 +121,15 @@
     $(document).ready(function(){
 
         var aoColumns = [
-            {
-                "sDefaultContent" : "-",
-                "bSortable" : false,
-                "sClass": "text-c",
-                "mRender": function(data, type, row) {
-                    num+=1;
-                    return  num;
-                }
-            },
+            // {
+            //     "sDefaultContent" : "-",
+            //     "bSortable" : false,
+            //     "sClass": "text-c",
+            //     "mRender": function(data, type, row) {
+            //         num+=1;
+            //         return  num;
+            //     }
+            // },
             {
                 "sDefaultContent" : "-",
                 "mData": "name",
