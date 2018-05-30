@@ -32,17 +32,17 @@
         return this.optional(element) || (!chrnum.test(value));
     }, "部门名不能为数字、特殊符号");
 $("#form-dept-add").validate({
-	/* rules:{
+	rules:{
 		deptName:{
 			required:true,
 			isSpace:true,
             checkDeptName:true,
             remote: {
-                url: "${context_root}/system/checkRoleUnique.action",
+                url: "${context_root}/crm/checkDeptUnique.action",
                 type: "post",
                 dataType: "text",
                 data: {
-                    name: function () {
+                	deptName: function () {
                         return $.trim($("#deptName").val());
                     }
                 },
@@ -52,7 +52,7 @@ $("#form-dept-add").validate({
                 }
             }
 		},
-	}, */
+	}, 
 	onkeyup:false,
 	focusCleanup:true,
 	success:"valid",

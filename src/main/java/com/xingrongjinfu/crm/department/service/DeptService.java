@@ -79,4 +79,15 @@ public class DeptService implements IDeptService
 	public int deleteDeptById(Dept dept) {
 		return deptDao.deleteDeptById(dept);
 	}
+
+
+	/**
+	 * 根据部门名称查询部门信息 
+	 *    
+	 * @param deptName
+	 * @return   
+	 */
+	public List<Dept> checkDeptUnique(String deptName) {
+		return deptDao.checkDeptUnique(deptName);
+	}
 }

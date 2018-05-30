@@ -58,4 +58,12 @@ public interface IDeptDao
 	 * @return: int      
 	 */
 	public int deleteDeptById(Dept dept);
+
+	/**
+	 * 根据部门名称查询部门信息 
+	 *    
+	 * @param deptName
+	 * @return   
+	 */
+	public List<Dept> checkDeptUnique(String deptName);
 }

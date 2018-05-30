@@ -38,6 +38,11 @@ public class DeptConstant
      * 请求地址：保存&修改 部门信息
      */
     public final static String SAVE_DEPT_URL = "saveDept";
+    
+    /**
+     * 请求地址：根据部门名称查询部门是否存在
+     */
+    public final static String CHECK_DEPT_UNIQUE = "checkDeptUnique";
 
     /**
      * 逻辑视图名：跳转至部门列表界面

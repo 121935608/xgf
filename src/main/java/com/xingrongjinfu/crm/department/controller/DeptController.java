@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xingrongjinfu.crm.CrmConstant;
+import com.xingrongjinfu.crm.crmUser.common.CrmUserConstant;
 import com.xingrongjinfu.crm.department.common.DeptConstant;
 import com.xingrongjinfu.crm.department.model.Dept;
 import com.xingrongjinfu.crm.department.service.IDeptService;
+import com.xingrongjinfu.system.supervisor.model.Supervisor;
 
 /**
 * @author chenmengzhen    
@@ -115,5 +117,21 @@ public class DeptController extends BaseController
             result = deptService.deleteDeptById(dept);
         }
         return new Message(result);
+    }
+    
+    
+    /**
+     * 检查部门名称是否存在
+     * */
+    @RequestMapping(DeptConstant.CHECK_DEPT_UNIQUE)
+    public @ResponseBody String checkDeptUnique(Dept dept){
+		String checkDeptUnique = "0";
+		if (dept != null && dept.getDeptName() != null) {
+			List<Dept> list = deptService.checkDeptUnique(dept.getDeptName());
+			if (list.size() > 0) {
+				checkDeptUnique = "1";
+			}
+		}
+		return checkDeptUnique;
     }
 }

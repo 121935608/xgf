@@ -69,5 +69,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	<delete id="deleteDeptById" parameterType="Dept">
  		delete from c_dept where deptId = #{deptId}
  	</delete>
+ 	
+ 	
+ 	 <select id="checkDeptUnique" resultType="Dept">
+        SELECT * FROM c_dept WHERE deptName = #{deptName};
+    </select>
 
 </mapper> 

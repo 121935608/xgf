@@ -81,4 +81,21 @@ public class DeptDao extends DynamicObjectBaseDao implements IDeptDao
 	public int deleteDeptById(Dept dept) {
 		  return this.update("DeptMapper.deleteDeptById", dept);
 	}
+
+
+	/**
+	 * 根据部门名称查询部门信息 
+	 *    
+	 * @param deptName
+	 * @return   
+	 */
+	public List<Dept> checkDeptUnique(String deptName) {
+		List<Dept> list = null;
+		try {
+			list = (List<Dept>) this.findForList("DeptMapper.checkDeptUnique", deptName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 }

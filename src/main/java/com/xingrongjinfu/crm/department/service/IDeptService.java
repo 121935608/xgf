@@ -58,4 +58,15 @@ public interface IDeptService
 	 * @return: int      
 	 */
 	public int deleteDeptById(Dept dept);
+
+
+	/**
+	 * @Title: checkDeptUnique   
+	 * @Description:根据部门名称查询部门信息
+	 * @param: @param deptName
+	 * @param: @return      
+	 * @return: List<Dept>      
+	 * @throws
+	 */
+	public List<Dept> checkDeptUnique(String deptName);
 }
