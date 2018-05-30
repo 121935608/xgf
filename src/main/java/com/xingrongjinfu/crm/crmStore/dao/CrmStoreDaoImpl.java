@@ -11,6 +11,7 @@ import org.framework.base.util.TableDataInfo;
 import org.framework.core.dao.DynamicObjectBaseDao;
 import org.springframework.stereotype.Repository;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -104,18 +105,21 @@ public class CrmStoreDaoImpl extends DynamicObjectBaseDao implements CrmStoreDao
     public List<Object[]> queryReport(HashMap hashMap) {
         List<Object[]> dataList = new ArrayList<Object[]>();
         List<HashMap> supervisorPageInfo = null;
+        SimpleDateFormat dateformat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
             supervisorPageInfo = (List<HashMap>)this.findForList("CrmStoreMapper.excelTable",hashMap);
             Object[] objs = null;
+
             for (int i = 0; i < supervisorPageInfo.size(); i++) {// 循环每一条数据
                 HashMap detail = supervisorPageInfo.get(i);
                 objs = new Object[13];
+                String address=String.valueOf(detail.get("area")) + String.valueOf(detail.get("address"));
                 objs[0] = (i + 1);// 序号
                 objs[1] = detail.get("storeName") == null ? "" : detail.get("storeName");// 门店名称
                 objs[2] = detail.get("userName") == null ? "" : detail.get("userName");//联系人
                 objs[3] = detail.get("phone") == null ? "" : detail.get("phone");// 手机号
-                objs[4] = detail.get("area") == null ? "" : detail.get("area");// 地址
-                objs[5] = detail.get("addTime") == null ? "" : detail.get("addTime");// 申请时间
+                objs[4] = address == null ? "" : address ;// 地址
+                objs[5] = detail.get("addTime") == null ? "" : dateformat.format(detail.get("addTime"));// 申请时间
                 objs[6] = detail.get("name") == null ? "" : detail.get("name");//督导员
                 objs[7] = detail.get("deptName") == null ? "" : detail.get("deptName");//组类
                 objs[8] = detail.get("totalPrice") == null ? "" : detail.get("totalPrice");//下单总金额
@@ -143,7 +147,7 @@ public class CrmStoreDaoImpl extends DynamicObjectBaseDao implements CrmStoreDao
                         process = "审核不通过";
                         break;
                     case "PASS":
-                        process = "审核通过";
+                        process = "审核通过未认证";
                         break;
                     case "":
                         process = "";
