@@ -59,28 +59,28 @@ public class StatisticsService implements IStatisticsService
 			for (Order order : orderList) {
 				if(order.getOrderTime().after(todayBegin) && order.getOrderTime().before(todayEnd) ) {
 					//今日累计下单额
-					todayAccumulativeAmount = order.getTotalPrice() + todayAccumulativeAmount;
+					todayAccumulativeAmount = order.getOrderPrice() + todayAccumulativeAmount;
 					//今日累计成交单量
 					statistics.setTodayNumberOfTransactions(statistics.getTodayNumberOfTransactions() + 1);
 				}
 				
 				if(order.getOrderTime().after(yesterdayBegin) && order.getOrderTime().before(yesterdayEnd) ) {
 					//昨日累计下单额
-					yesterdayAccumulativeAmount = order.getTotalPrice() + yesterdayAccumulativeAmount;
+					yesterdayAccumulativeAmount = order.getOrderPrice() + yesterdayAccumulativeAmount;
 					//昨日累计成交单量
 					statistics.setYesterdayNumberOfTransactions(statistics.getYesterdayNumberOfTransactions() + 1);
 				}
 				
 				if(order.getOrderTime().after(weeklyBegin) && order.getOrderTime().before(weeklyEnd) ) {
 					//周累计下单额
-					weeklyAccumulativeAmount = order.getTotalPrice() + weeklyAccumulativeAmount;
+					weeklyAccumulativeAmount = order.getOrderPrice() + weeklyAccumulativeAmount;
 					//周累计成交单量
 					statistics.setWeeklyNumberOfTransactions(statistics.getWeeklyNumberOfTransactions() + 1);
 				}
 				
 				if(order.getOrderTime().after(monthlyBegin) && order.getOrderTime().before(monthlyEnd) ){
 					//月累计下单额
-					monthlyAccumulativeAmount = order.getTotalPrice() + monthlyAccumulativeAmount;
+					monthlyAccumulativeAmount = order.getOrderPrice() + monthlyAccumulativeAmount;
 					//月累计成交单量
 					statistics.setMonthlyNumberOfTransactions(statistics.getMonthlyNumberOfTransactions() + 1);
 				}
