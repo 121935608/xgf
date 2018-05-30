@@ -11,7 +11,7 @@ public class CouponGoods
 {
 	private Integer couponGoodsId;
     private String couponId;
-    private String goodsName;
+    private String commodityName;
     private String subjectivePrice;
     private String weight;
     private String couponTotal;
@@ -27,11 +27,11 @@ public class CouponGoods
 	public void setCouponId(String couponId) {
 		this.couponId = couponId;
 	}
-	public String getGoodsName() {
-		return goodsName;
+	public String getCommodityName() {
+		return commodityName;
 	}
-	public void setGoodsName(String goodsName) {
-		this.goodsName = goodsName;
+	public void setCommodityName(String commodityName) {
+		this.commodityName = commodityName;
 	}
 	public String getSubjectivePrice() {
 		return subjectivePrice;

@@ -30,7 +30,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <!-- 进行 多表关联插叙 -->
         <collection property="couponGoodsList" column="couponGoodsId" ofType="CouponGoods">
             <id property="couponGoodsId" column="couponGoodsId"/>    
-		    <result property="goodsName" column="goodsName"/> 
+		    <result property="commodityName" column="commodityName"/> 
 		    <result property="subjectivePrice" column="subjectivePrice"/> 
 		    <result property="weight" column="weight"/> 
 		    <result property="couponTotal" column="couponTotal"/> 
@@ -46,7 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="couponQuery" resultMap="CouponResult" parameterType="string" >
         SELECT
 			c.*, i.imgId,
-			i.imgUrl, g.goodsName,g.subjectivePrice,g.weight,g.couponTotal
+			i.imgUrl, g.commodityName,g.subjectivePrice,g.weight,g.couponTotal
 		FROM
 			c_coupon c
 		LEFT JOIN c_coupon_img i ON c.couponId = i.couponId

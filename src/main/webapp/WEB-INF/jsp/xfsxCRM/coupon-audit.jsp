@@ -22,7 +22,7 @@
 					<c:forEach items="${coupon.couponGoodsList}" var="couponGoods" varStatus="vs">
 					<tr>
 						<s:property value="#vs.index+1" />
-						<td align="center">${couponGoods.goodsName}</td>
+						<td align="center">${couponGoods.commodityName}</td>
 						<td align="center">${couponGoods.subjectivePrice}</td>
 						<td align="center">${couponGoods.weight}</td>
 						<td align="center">${couponGoods.couponTotal}</td>
