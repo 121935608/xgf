@@ -105,10 +105,11 @@ public class CrmStoreDaoImpl extends DynamicObjectBaseDao implements CrmStoreDao
     public List<Object[]> queryReport(HashMap hashMap) {
         List<Object[]> dataList = new ArrayList<Object[]>();
         List<HashMap> supervisorPageInfo = null;
+        SimpleDateFormat dateformat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
             supervisorPageInfo = (List<HashMap>)this.findForList("CrmStoreMapper.excelTable",hashMap);
             Object[] objs = null;
-            SimpleDateFormat dateformat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
             for (int i = 0; i < supervisorPageInfo.size(); i++) {// 循环每一条数据
                 HashMap detail = supervisorPageInfo.get(i);
                 objs = new Object[13];
@@ -118,7 +119,7 @@ public class CrmStoreDaoImpl extends DynamicObjectBaseDao implements CrmStoreDao
                 objs[2] = detail.get("userName") == null ? "" : detail.get("userName");//联系人
                 objs[3] = detail.get("phone") == null ? "" : detail.get("phone");// 手机号
                 objs[4] = address == null ? "" : address ;// 地址
-                objs[5] = detail.get("addTime") == null ? "" : dateformat.format(String.valueOf(detail.get("addTime")));// 申请时间
+                objs[5] = detail.get("addTime") == null ? "" : dateformat.format(detail.get("addTime"));// 申请时间
                 objs[6] = detail.get("name") == null ? "" : detail.get("name");//督导员
                 objs[7] = detail.get("deptName") == null ? "" : detail.get("deptName");//组类
                 objs[8] = detail.get("totalPrice") == null ? "" : detail.get("totalPrice");//下单总金额
