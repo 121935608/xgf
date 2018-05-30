@@ -10,11 +10,11 @@
  */
 package com.xingrongjinfu.system.product.controller;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.io.UnsupportedEncodingException;
+import java.util.*;
 
 import com.xingrongjinfu.common.constants.Constants;
+import com.xingrongjinfu.utils.HttpClientUtil;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.core.controller.BaseController;
 import org.framework.core.model.Message;
@@ -183,6 +183,21 @@ public class ProductController extends BaseController{
                    product.setUpdateTime(new Date());
                    result =productService.updateProduct(product);
                }
+
+            //将商品上下架信息推给库存
+
+            JSONObject json = new JSONObject();
+            json.put("barCode",product.getCommodityNo());
+            json.put("currentState",product.getCommodityStatus());
+            Map map = new HashMap();
+            map.put("params", json);
+
+            try {
+                String s= HttpClientUtil.httpPostRequest(productService.getStockUrl()+"/app/currentState.action", map);//
+                System.out.println("s:"+s);
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
             }
 
         return new Message(result);

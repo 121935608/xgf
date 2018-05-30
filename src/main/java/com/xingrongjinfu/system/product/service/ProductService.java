@@ -17,6 +17,7 @@ import com.xingrongjinfu.system.product.model.Product;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,7 +35,8 @@ public class ProductService implements IProductService {
 
     @Autowired
     private IProductDao productDao;
-
+    @Value("${stockUrl}")
+    private String stockUrl;
     @Override
     public List<Product> pageInfoQuery(PageUtilEntity pageUtilEntity) {
         return productDao.pageInfoQuery(pageUtilEntity);
@@ -106,4 +108,10 @@ public class ProductService implements IProductService {
     public List<String> getCommodityNos() {
         return productDao.getCommodityNos();
     }
+
+    @Override
+    public String getStockUrl() {
+        return stockUrl;
+    }
+
 }

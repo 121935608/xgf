@@ -89,4 +89,6 @@ public interface IProductService {
     List<String> getCommodityNos();
 
     public Product findProductByNo(String commodityNo);
+
+    public String getStockUrl();
 }

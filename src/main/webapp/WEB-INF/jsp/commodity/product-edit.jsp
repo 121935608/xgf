@@ -84,7 +84,7 @@ $(document).ready(function(){
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>商品条码：</label>
 			<div class="formControls col-xs-8 col-sm-4">
-				<input type="text" class="input-text" autocomplete="off" disabled="disabled" maxlength="20"  placeholder="" id="commodityNo" name="commodityNo" value="${product.commodityNo}">
+				<input type="text" class="input-text" style="background-color:#eaebe4" autocomplete="off" readonly="readonly" maxlength="20"  placeholder="" id="commodityNo" name="commodityNo" value="${product.commodityNo}">
 			</div>
 		</div>
 		<div class="row cl">
@@ -385,6 +385,9 @@ $(document).ready(function(){
         commodityName:{
 			required:true,
 		},
+        commodityNo:{
+            required:true,
+        },
         /*tag:{
             required:true,
         },*/
