@@ -154,6 +154,12 @@
     function updateSupervisor(storId){
         alert(storId);
     }
+    function query() {
+        var userName = $("#userName").val();
+        pageTable.fnSettings().sAjaxSource = encodeURI("${context_root}/crmUser/userCRMView.action?userName=" + userName);
+        pageTable.fnClearTable(0);
+        pageTable.fnDraw();
+    }
     $(function(){
         $("#save").click(function(){
             var storeId = $(this).attr("state");
@@ -176,6 +182,9 @@
                         }
                     }
                 })
+            }
+            else{
+            	parent.layer.alert("您还未勾选督导员！" , {icon: 2,title:"系统提示"});
             }
         })
     })

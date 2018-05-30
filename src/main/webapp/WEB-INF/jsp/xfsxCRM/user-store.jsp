@@ -153,11 +153,18 @@
     function updateSupervisor(supervisorIdOne){
         alert(supervisorIdOne);
     }
+    
+    function query() {
+        var userName = $("#userName").val();
+        pageTable.fnSettings().sAjaxSource = encodeURI("${context_root}/crmUser/userCRMView.action?userName=" + userName);
+        pageTable.fnClearTable(0);
+        pageTable.fnDraw();
+    }
+    
     $(function(){
         $("#save").click(function(){
             var supervisorIdOne = $(this).attr("state");;
             var supervisorId = $('input[name="checkName"]:checked ').val();
-            debugger;
             if(supervisorId != undefined && supervisorId != null){
                 $.ajax({
                     url:"${context_url}/crmUser/crmUpdateStoreSupervistor.action?supervisorIdOne=" + supervisorIdOne +"&supervisorId=" + supervisorId,
@@ -175,6 +182,8 @@
                         }
                     }
                 })
+            }else{
+            	parent.layer.alert("您还未勾选督导员！" , {icon: 2,title:"系统提示"});
             }
         })
     })
