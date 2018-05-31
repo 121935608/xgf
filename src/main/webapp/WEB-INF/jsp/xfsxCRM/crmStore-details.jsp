@@ -199,7 +199,7 @@
                 "sClass" : "text-c",
                 "bSearchable" : false,
                 "mRender" : function(data, type, row) {
-                    //1:待支付；2:待发货；3:待收货；4:已完成,5:已收款
+                    //1:待支付；2:待发货；3:待收货；4:已完成,5:已收款,6：客服审核，7：库存审核，8：退货中，9：交易关闭
                     if (row.orderStatus == '1') {
                         return "待支付";
                     }else if (row.orderStatus == '2') {
@@ -210,6 +210,14 @@
                         return "已完成";
                     }else if (row.orderStatus == '5') {
                         return "已收款";
+                    }else if (row.orderStatus == '6') {
+                        return "客服审核";
+                    }else if (row.orderStatus == '7') {
+                        return "库存审核";
+                    }else if (row.orderStatus == '8') {
+                        return "退货中";
+                    }else if (row.orderStatus == '9') {
+                        return "交易关闭";
                     }else {
                         return "";
                     }

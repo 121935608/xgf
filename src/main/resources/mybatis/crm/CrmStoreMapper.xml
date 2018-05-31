@@ -37,7 +37,7 @@
             AND a.process = #{relationMap.process}
         </if>
         <if test="relationMap.storeName != null and relationMap.storeName != ''">
-            AND a.storeName = #{relationMap.storeName}
+            AND a.storeName  LIKE CONCAT(CONCAT('%', #{relationMap.storeName}),'%')
         </if>
         <if test="relationMap.beginTime != null and relationMap.beginTime != ''">
             AND DATE_FORMAT(a.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
@@ -89,7 +89,7 @@
             AND a.process = #{process}
         </if>
         <if test="storeName != null and storeName != ''">
-            AND a.storeName = #{storeName}
+            AND a.storeName  LIKE CONCAT(CONCAT('%', #{storeName}),'%')
         </if>
         <if test="beginTime != null and beginTime != ''">
             AND DATE_FORMAT(a.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{beginTime},'%Y%m%d')
@@ -130,27 +130,25 @@
         <result property="orderPrice" column="orderPrice"/>
         <result property="orderStatus" column="orderStatus"/>
 
-        <collection property="orderDetailsLists" ofType="com.xingrongjinfu.crm.crmStore.model.OrderDetails" >
-            <id property="orderDetailId" column="orderDetailId"/>
-            <result property="orderNumber" column="orderNumber"/>
-            <result property="commodityName" column="commodityName"/>
-            <result property="commodityNum" column="commodityNum"/>
-            <result property="commodityId" column="commodityId"/>
-            <result property="inPrice" column="inPrice"/>
-            <result property="salePrice" column="salePrice"/>
-            <result property="unit" column="unit"/>
-            <result property="imgMain" column="imgMain"/>
-        </collection>
+        <!--<collection property="orderDetailsLists" ofType="com.xingrongjinfu.crm.crmStore.model.OrderDetails" >-->
+            <!--<id property="orderDetailId" column="orderDetailId"/>-->
+            <!--<result property="orderNumber" column="orderNumber"/>-->
+            <!--<result property="commodityName" column="commodityName"/>-->
+            <!--<result property="commodityNum" column="commodityNum"/>-->
+            <!--<result property="commodityId" column="commodityId"/>-->
+            <!--<result property="inPrice" column="inPrice"/>-->
+            <!--<result property="salePrice" column="salePrice"/>-->
+            <!--<result property="unit" column="unit"/>-->
+            <!--<result property="imgMain" column="imgMain"/>-->
+        <!--</collection>-->
     </resultMap>
     <select id="pageInfoQueryFindStoreDetailsOrder" resultMap="OrderResult" parameterType="PageUtilEntity"  useCache="false">
-        SELECT t.orderId,t.orderNumber,t.orderTime,t.number,t.orderPrice*0.01 AS orderPrice,t.orderStatus,td.orderDetailId,td.commodityName,td.commodityNum,td.commodityId,td.inPrice*0.01 AS inPrice,td.salePrice*0.01 AS salePrice,td.unit,td.imgMain
+        SELECT t.orderId,t.orderNumber,t.orderTime,t.number,t.orderPrice*0.01 AS orderPrice,t.orderStatus
         FROM t_order t
-        LEFT JOIN t_order_detail td
-        ON t.orderNumber=td.orderNumber
         WHERE t.userId= #{relationMap.userId}
         AND t.`status`=1
         AND t.orderStatus != '-1'
-        <!--订单审核状态1:待支付；2:待发货；3:待收货；4:已完成,5:已收款-->
+        <!--订单审核状态1:待支付；2:待发货；3:待收货；4:已完成,5:已收款 6：客服审核，7：库存审核，8：退货中，9：交易关闭-->
         <if test="relationMap.orderStatus != null and relationMap.orderStatus != ''">
             AND t.orderStatus =#{relationMap.orderStatus}
         </if>
