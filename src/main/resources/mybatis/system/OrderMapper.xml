@@ -111,6 +111,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE d.orderNumber=#{orderNumber}
 	</select>
 
+
+	<select id="findOrderDetailInfoByNo" parameterType="String" resultMap="OrderDetailResult">
+		SELECT d.orderDetailId,d.commodityName,c.commodityNo,d.unit,d.commodityNum,d.salePrice inPrice,d.salePrice,d.totalPrice,  d.orderNumber,c.commodityId,c.unit
+		FROM t_order_detail d LEFT JOIN t_commodity c ON d.commodityId=c.commodityId
+		WHERE d.orderNumber=#{orderNumber}
+	</select>
+
 	<update id="updateOrderInfo" parameterType="Orders">
 		UPDATE t_order
 		<set>

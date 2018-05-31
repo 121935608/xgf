@@ -60,6 +60,17 @@ public class OrderDao extends DynamicObjectBaseDao implements IOrderDao {
     }
 
     @Override
+    public List<OrderDetail> findOrderDetailInfoByNo(String orderNumber) {
+        List<OrderDetail> findOrderDetailInfo=null;
+        try {
+            findOrderDetailInfo=(List<OrderDetail>)this.findForList("OrderMapper.findOrderDetailInfoByNo",orderNumber);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return findOrderDetailInfo;
+    }
+
+    @Override
     public int updateOrderInfo(Order order) {
         return this.update("OrderMapper.updateOrderInfo",order);
     }

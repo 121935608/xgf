@@ -85,4 +85,5 @@ public interface IOrderService {
 
     /** 更新订单状态*/
     int updateOrderStatus(Order order);
+    List<OrderDetail> findOrderDetailInfoByNo(String orderNumber);
 }

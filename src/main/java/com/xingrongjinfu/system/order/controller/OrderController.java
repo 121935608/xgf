@@ -19,8 +19,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.xingrongjinfu.system.commodity.common.CommodityConstant;
 import com.xingrongjinfu.system.commodity.model.Commodity;
 import com.xingrongjinfu.system.commodity.service.ICommodityService;
-import com.xingrongjinfu.system.order.model.OrderAuditing;
-import com.xingrongjinfu.system.order.model.OrderCommodityDetail;
+import com.xingrongjinfu.system.order.model.*;
 import com.xingrongjinfu.system.product.model.Product;
 import com.xingrongjinfu.system.product.service.IProductService;
 import com.xingrongjinfu.system.storeaffairs.model.Store;
@@ -39,6 +38,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -47,8 +47,6 @@ import com.xingrongjinfu.system.SystemConstant;
 import com.xingrongjinfu.system.financial.model.Financial;
 import com.xingrongjinfu.system.financial.service.IFinancialService;
 import com.xingrongjinfu.system.order.common.OrderConstant;
-import com.xingrongjinfu.system.order.model.Order;
-import com.xingrongjinfu.system.order.model.OrderDetail;
 import com.xingrongjinfu.system.order.service.IOrderService;
 import com.xingrongjinfu.system.user.model.User;
 
@@ -508,24 +506,25 @@ public class OrderController extends BaseController {
      * @return
      * @throws UnsupportedEncodingException
      */
-    private boolean pushStock(String orderId) throws UnsupportedEncodingException {
+    @Transactional  //事务管理
+    public boolean pushStock(String orderId) throws UnsupportedEncodingException {
         logger.info("==========开始推送订单,订单orderId:{}", orderId);
         Order order = orderService.findOrder(orderId);   // 获取订单
         String userId = order.getUserId();  // 获取到userId
-        Store store = certificationService.getStoreByUserId(userId); // 查询商铺
+        Store store = certificationService.getStoreInfoByUserId(userId); // 查询商铺
         JSONObject jsonObject = new JSONObject(); // 用于封装推送参数
 
         // 根据订单明细查询商品信息
         JSONArray jsonArray = new JSONArray();
         String orderNumber = order.getOrderNumber();
-        List<OrderDetail> orderDetailInfos = orderService.findOrderDetailInfo(orderNumber);
+        List<OrderDetail> orderDetailInfos = orderService.findOrderDetailInfoByNo(orderNumber);
         for (OrderDetail orderDetail : orderDetailInfos) {
             // 封装products
             JSONObject object = new JSONObject();
             object.put("barCode", orderDetail.getCommodityNo());
             object.put("number", orderDetail.getCommodityNum());
-            object.put("salePrice", orderDetail.getSalePrice());
-            object.put("totalPrice", orderDetail.getTotalPrice());
+            object.put("salePrice", (int)Math.ceil(orderDetail.getSalePrice()));
+            object.put("totalPrice", (int)Math.ceil(orderDetail.getTotalPrice()));
 
             // 查询商品
             Commodity commodity = commodityService.queryByCommodityNo(orderDetail.getCommodityNo()).get(0);
@@ -563,8 +562,14 @@ public class OrderController extends BaseController {
         jsonObject.put("phone", order.getReceivePhone());
         jsonObject.put("address", order.getReceiveArea() + order.getReceiveAdd());
         jsonObject.put("orderNumber", order.getOrderNumber());
-        jsonObject.put("orderPrice", order.getOrderPrice());
-        jsonObject.put("payWay", order.getPayCode());
+        jsonObject.put("orderPrice", (int)Math.ceil(order.getOrderPrice()));
+        int payWay =2;
+        if (order.getPayCode().equalsIgnoreCase("HDFK")){
+            payWay=2;
+        }else{
+            payWay=1;
+        }
+        jsonObject.put("payWay", payWay);
         jsonObject.put("cusremark", order.getRemark());
         // 添加产品信息
         jsonObject.put("products", jsonArray);

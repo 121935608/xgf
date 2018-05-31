@@ -98,4 +98,9 @@ public class OrderService implements IOrderService {
   public int updateOrderStatus(Order order) {
     return orderDao.updateOrderStatus(order);
   }
+
+  @Override
+  public List<OrderDetail> findOrderDetailInfoByNo(String orderNumber){
+    return orderDao.findOrderDetailInfoByNo(orderNumber);
+  }
 }
