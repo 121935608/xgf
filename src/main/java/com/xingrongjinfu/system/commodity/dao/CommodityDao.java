@@ -54,4 +54,37 @@ public class CommodityDao extends DynamicObjectBaseDao implements ICommodityDao 
         }
         return pageInfoQuery;
     }
+
+    @Override
+    public List<Commodity> queryByCommodityNo(String commodityNo) {
+        List<Commodity> query = null;
+        try {
+            query = (List<Commodity>) this.findForList("CommodityMapper.queryByCommodityNo", commodityNo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return query;
+    }
+
+    @Override
+    public List<Commodity> queryByCommodityName(String commodityName) {
+        List<Commodity> query = null;
+        try {
+            query = (List<Commodity>) this.findForList("CommodityMapper.queryByCommodityName", commodityName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return query;
+    }
+
+    @Override
+    public List<Commodity> queryAllcommodity() {
+        List<Commodity> query = null;
+        try {
+            query = (List<Commodity>) this.findForList("CommodityMapper.queryAllCommodity");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return query;
+    }
 }

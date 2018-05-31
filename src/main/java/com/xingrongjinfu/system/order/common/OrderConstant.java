@@ -115,4 +115,39 @@ public class OrderConstant {
      * 请求地址:确认收款
      */
     public final static String PAY_ORDER_URL="payOrder";
+
+    /**
+     * 请求地址:跳转到审核界面
+     */
+    public static final String ORDER_AUDITING_URL = "toAuditingInfo";
+
+    /**
+     * 逻辑视图:审核订单界面
+     */
+    public static final String ORDER_AUDITING_PAGE = "order/order-auditing";
+
+    /**
+     * 请求地址:保存客服修改的订单
+     */
+    public static final String ORDER_SAVE_MODIFY_OPS = "orderModifySave";
+
+    /**
+     * 请求地址:取消全部订单
+     */
+    public static final String ORDER_CANCELL_ALL_OPS = "cancelAllOrder";
+
+    /**
+     * 请求地址:库存审核返回结果
+     */
+    public static final String ORDER_STOREAUDITING_RESULT = "storeAuditingResult";
+
+    /**
+     * 请求地址:异步修改商品数量
+     */
+    public static final String ORDER_CHANGE_COMMODITY_NUM = "changeCommodityNum";
+
+    /**
+     * 请求地址:请求库存的地址
+     */
+    public static final String STORAGE_URL = "http://wuhanxingrong.vicp.io:3080/stock2.0/app/order.action";
 }

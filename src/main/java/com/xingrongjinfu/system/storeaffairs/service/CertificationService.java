@@ -78,4 +78,9 @@ public class CertificationService implements ICertificationService
     public int findAllCount() {
         return certificationDao.findAllCount();
     }
+
+    @Override
+    public Store getStoreByUserId(String userId) {
+        return certificationDao.getStoreInfo(userId);
+    }
 }

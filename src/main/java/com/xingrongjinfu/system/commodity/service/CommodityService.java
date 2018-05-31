@@ -43,4 +43,19 @@ public class CommodityService implements ICommodityService {
     public List<Map> infoQuery(Map<String, String> param) {
         return commodityDao.infoQuery(param);
     }
+
+    @Override
+    public List<Commodity> queryByCommodityNo(String commodityNo) {
+        return commodityDao.queryByCommodityNo(commodityNo);
+    }
+
+    @Override
+    public List<Commodity> queryByCommodityName(String commodityName) {
+        return commodityDao.queryByCommodityName(commodityName);
+    }
+
+    @Override
+    public List<Commodity> querAllCommodity() {
+        return commodityDao.queryAllcommodity();
+    }
 }

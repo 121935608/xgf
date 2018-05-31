@@ -32,6 +32,33 @@ public class Commodity {
     private Double totalPrice;
     private String unit;
 
+    private Double weight; // 重量
+    private String subPrice; // 主观价
+    private String subPriceUnit; // 主观价单位
+
+    public Double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Double weight) {
+        this.weight = weight;
+    }
+
+    public String getSubPrice() {
+        return subPrice;
+    }
+
+    public void setSubPrice(String subPrice) {
+        this.subPrice = subPrice;
+    }
+
+    public String getSubPriceUnit() {
+        return subPriceUnit;
+    }
+
+    public void setSubPriceUnit(String subPriceUnit) {
+        this.subPriceUnit = subPriceUnit;
+    }
 
     public String getCommodityId() {
         return commodityId;

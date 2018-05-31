@@ -97,7 +97,7 @@ $(document).ready(function(){
             "sClass": "text-c",
             "bSearchable": false,
             "mRender": function(data, type, row) {
-                debugger
+                //debugger
                 if (row.payTime != null) {
                     return formatDate(row.payTime,"yyyy-MM-dd hh:mm:ss");
                 } else {
@@ -268,9 +268,14 @@ $(document).ready(function(){
                 if(row.payCode=="HDFK"&&row.orderStatus==4){
 					toEdit = "<a title=\"确认收款\" href=\"javascript:;\" onclick=\"pay_edit(this,\'" + row.orderNumber + "\')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>确认收款</span></a>";
                 }
+                // 审核
+                var toAuditing = ""
+				if(row.orderStatus==6){
+                toAuditing = "<a title=\"审核\" href=\"javascript:;\" onclick=\"order_auditing('审核','${context_root}/order/toAuditingInfo.action?orderNumber=" + row.orderNumber + "','1000','700')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>审核</span></a>";
+				}
                 //对账
                 <%--var toEdit = "<a title=\"对账\" href=\"javascript:;\" onclick=\"repay_edit('对账','${context_root}/merchant/toRepayModify.action?repayId=" + row.repayId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>对账</span></a>";--%>
-                return tolook+toEdit;
+                return tolook+toAuditing+toEdit;
             }
         },
     ];
@@ -357,6 +362,11 @@ function order_send(title,url,w,h){
 /*订单-打印*/
 function order_print(title,url,w,h){
 	layer_show(title,url,w,h);
+}
+
+/*订单-审核*/
+function order_auditing(title,url,w,h){
+    layer_show(title,url,w,h);
 }
 
 /*停用*/

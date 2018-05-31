@@ -61,4 +61,7 @@ public interface ICertificationService
      * 查询所有认证申请的数量
      */
     int findAllCount();
+
+    /** 查询订单详细信息*/
+    Store getStoreByUserId(String userId);
 }

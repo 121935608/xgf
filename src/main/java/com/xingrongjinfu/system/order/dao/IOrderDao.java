@@ -11,14 +11,16 @@
 package com.xingrongjinfu.system.order.dao;
 
 import com.xingrongjinfu.system.order.model.Order;
+import com.xingrongjinfu.system.order.model.OrderAuditing;
 import com.xingrongjinfu.system.order.model.OrderDetail;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
- * 〈一句话功能简述〉<br> 
+ * 〈一句话功能简述〉<br>
  * 〈〉
  *
  * @author zxuser
@@ -68,4 +70,44 @@ public interface IOrderDao {
      *
      */
 	List<Order> orderAllList();
+
+    /**
+     * 更新审核后订单的信息
+     *
+     * @param order
+     * @return
+     */
+    int updateModifyOrder(Order order);
+
+    /**
+     * 根据订单号和商品条码查询对应的订单
+     */
+    List<OrderDetail> findOrderDetail(Map params);
+
+    /**
+     * 插入订单审核表
+     */
+    Integer insertOrderAuditing(OrderAuditing orderAuditing);
+
+    /**
+     * 插入订单明细
+     *
+     * @param orderDetail
+     * @return
+     */
+    Integer insertOrderDetail(OrderDetail orderDetail);
+
+    /**
+     * 查询order
+     *
+     * @param orderId
+     * @return
+     */
+    Order findOrder(String orderId);
+
+    /** 填充订单的库存号*/
+    int pushToStorage(Order order);
+
+    /** 更新订单状态 */
+    int updateOrderStatus(Order order);
 }

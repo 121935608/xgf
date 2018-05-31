@@ -91,4 +91,6 @@ public interface IProductService {
     public Product findProductByNo(String commodityNo);
 
     public String getStockUrl();
+
+    Product findProductInfoByNo(String commodityNo);
 }

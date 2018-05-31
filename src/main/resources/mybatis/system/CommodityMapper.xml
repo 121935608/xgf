@@ -80,4 +80,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		GROUP BY t.commodityId,t.commodityNo,t.commodityName,t.unit
 		ORDER BY commodityNo
 	</select>
+
+	<select id="queryByCommodityNo" parameterType="string" resultType="Commodity">
+		SELECT *
+		FROM
+		t_commodity t
+		WHERE t.commodityNo = #{commodityNo}
+	</select>
+
+	<select id="queryByCommodityName" parameterType="string" resultType="Commodity">
+		SELECT *
+		FROM
+		t_commodity t
+		WHERE t.commodityName LIKE CONCAT(CONCAT('%', #{commodityName}),'%')
+	</select>
+
+	<select id="queryAllCommodity" resultType="Commodity">
+		SELECT *
+		FROM
+		t_commodity
+	</select>
 </mapper> 

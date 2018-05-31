@@ -90,4 +90,7 @@ public interface IProductDao {
     List<String> getUnitList();
 
     Product findProductByNo(String commodityNo);
+
+    /** 查询商品详情 */
+    Product findProductInfoByNo(String commodityNo);
 }

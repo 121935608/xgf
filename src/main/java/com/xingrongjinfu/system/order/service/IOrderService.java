@@ -11,11 +11,13 @@
 package com.xingrongjinfu.system.order.service;
 
 import com.xingrongjinfu.system.order.model.Order;
+import com.xingrongjinfu.system.order.model.OrderAuditing;
 import com.xingrongjinfu.system.order.model.OrderDetail;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -63,4 +65,24 @@ public interface IOrderService {
      * 查询所有订单的数量
      */
     int findAllOrders();
+
+    /** 更新审核后的订单信息 */
+    int updateModifyOrder(Order order);
+
+    /** 根据orderNumber,commodityNo查询订单明细 */
+    List<OrderDetail> findOrderDetail(Map params);
+
+    /** 插入订单审核表 */
+    Integer insertOrderAuditing(OrderAuditing orderAuditing);
+
+    Integer insertOrderDetail(OrderDetail orderDetail);
+
+    /** 根据订单id查询订单*/
+    Order findOrder(String orderId);
+
+    /** 填充订单的库存*/
+    int pushToStorage(Order order);
+
+    /** 更新订单状态*/
+    int updateOrderStatus(Order order);
 }

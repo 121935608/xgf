@@ -64,6 +64,12 @@
 		select storeId,userId,storeName,userName,idCard,phone,area,address,process,remark,supervisorId,licensePic,frontStorePic,innerStorePic,contractPic,transactionPic,utilitiesPic,auditStatus from t_store where userId = #{userId}
 	</select>
 
+	<!-- 查询店铺详细信息 -->
+	<select id="getStoreByUserId" parameterType="java.lang.String" resultType="Store">
+		select
+		storeId,userId,storeName,userName,idCard,phone,area,address,process,remark,supervisorId,licensePic,frontStorePic,innerStorePic,contractPic,transactionPic,utilitiesPic,auditStatus,startCollect,endCollect
+		from t_store where userId = #{userId}
+	</select>
 
 	<!-- 查询银行账户详细信息 -->
 	<select id="getBankAccountInfo"  parameterType="java.lang.String"   resultType="BankAccount">

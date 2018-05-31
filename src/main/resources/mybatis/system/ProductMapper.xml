@@ -164,7 +164,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	</select>
 
-
+	<!-- 查询详细的商品信息 -->
+	<select id="findProductInfoByNo" parameterType="string" resultType="Product">
+		SELECT * FROM t_commodity
+		WHERE commodityNo = #{0}
+	</select>
 
 	<select id="getCommodityNos"  resultType="string">
 		SELECT  commodityNo from t_commodity

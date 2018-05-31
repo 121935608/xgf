@@ -11,6 +11,7 @@
 package com.xingrongjinfu.system.order.dao;
 
 import com.xingrongjinfu.system.order.model.Order;
+import com.xingrongjinfu.system.order.model.OrderAuditing;
 import com.xingrongjinfu.system.order.model.OrderDetail;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
@@ -18,6 +19,7 @@ import org.framework.core.dao.DynamicObjectBaseDao;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -94,4 +96,45 @@ public class OrderDao extends DynamicObjectBaseDao implements IOrderDao {
 		}
 		return orderList;
 	}
+
+    @Override
+    public int updateModifyOrder(Order order) {
+        return this.update("OrderMapper.updateModifyOrder", order);
+    }
+
+    @Override
+    public List<OrderDetail> findOrderDetail(Map params) {
+        List<OrderDetail> orderDetails = null;
+        try {
+            orderDetails = (List<OrderDetail>) this.findForList("OrderMapper.findOrderDetail", params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return orderDetails;
+    }
+
+    @Override
+    public Integer insertOrderAuditing(OrderAuditing orderAuditing) {
+        return this.save("OrderMapper.insertOrderAuditing", orderAuditing);
+    }
+
+    @Override
+    public Integer insertOrderDetail(OrderDetail orderDetail) {
+        return this.save("OrderMapper.insertOrderDetail", orderDetail);
+    }
+
+    @Override
+    public Order findOrder(String orderId) {
+        return (Order) this.findForObject("OrderMapper.findOrder", orderId);
+    }
+
+    @Override
+    public int pushToStorage(Order order) {
+        return this.update("OrderMapper.updateOrderStorageNoAndStatus", order);
+    }
+
+    @Override
+    public int updateOrderStatus(Order order) {
+        return this.update("OrderMapper.updateOrderStatus", order);
+    }
 }

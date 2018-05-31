@@ -57,4 +57,7 @@ public interface ICertificationDao
      * 查询所有的认证申请数量
      */
     int findAllCount();
+
+    /** 查询商铺详细信息*/
+    Store getStoreByUserId(String userId);
 }

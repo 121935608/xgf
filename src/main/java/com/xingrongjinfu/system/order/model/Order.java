@@ -51,6 +51,80 @@ public class Order {
 
     private String supervisorName;
 
+    private String   serviceRemark; // 客服备注
+    private String   remark; // 订单备注
+    private String   storageNo;// 库存号
+
+    public String getServiceRemark() {
+        return serviceRemark;
+    }
+
+    public void setServiceRemark(String serviceRemark) {
+        this.serviceRemark = serviceRemark;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public String getStorageNo() {
+        return storageNo;
+    }
+
+    public void setStorageNo(String storageNo) {
+        this.storageNo = storageNo;
+    }
+
+    public String getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(String receiver) {
+        this.receiver = receiver;
+    }
+
+    public String getReceiveArea() {
+        return receiveArea;
+    }
+
+    public void setReceiveArea(String receiveArea) {
+        this.receiveArea = receiveArea;
+    }
+
+    public String getReceiveAdd() {
+        return receiveAdd;
+    }
+
+    public void setReceiveAdd(String receiveAdd) {
+        this.receiveAdd = receiveAdd;
+    }
+
+    public String getReceivePhone() {
+        return receivePhone;
+    }
+
+    public void setReceivePhone(String receivePhone) {
+        this.receivePhone = receivePhone;
+    }
+
+    public Integer getStockTotalMoney() {
+        return stockTotalMoney;
+    }
+
+    public void setStockTotalMoney(Integer stockTotalMoney) {
+        this.stockTotalMoney = stockTotalMoney;
+    }
+
+    private String  receiver; // 收货人
+    private String  receiveArea; // 收货地区
+    private String  receiveAdd; // 收货地址
+    private String  receivePhone; // 收货人电话
+    private Integer stockTotalMoney; // 实际出库总金额
+
     public String getSupervisorName() {
         return supervisorName;
     }

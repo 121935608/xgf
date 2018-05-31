@@ -30,4 +30,10 @@ public interface ICommodityService {
     List<Commodity> pageInfoQuery(PageUtilEntity pageUtilEntity);
 
     List<Map> infoQuery(Map<String, String> param);
+
+    List<Commodity> queryByCommodityNo(String commodityNo);
+
+    List<Commodity> queryByCommodityName(String commodityName);
+
+    List<Commodity> querAllCommodity();
 }

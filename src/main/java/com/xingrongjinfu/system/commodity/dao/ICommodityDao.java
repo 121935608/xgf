@@ -32,4 +32,13 @@ public interface ICommodityDao {
     List<Commodity> pageInfoQuery(PageUtilEntity pageUtilEntity);
 
     List<Map> infoQuery(Map<String, String> param);
+
+    /**
+     * 根据商品条形码查询商品
+     */
+    List<Commodity> queryByCommodityNo(String commodityNo);
+
+    List<Commodity> queryByCommodityName(String commodityName);
+
+    List<Commodity> queryAllcommodity();
 }

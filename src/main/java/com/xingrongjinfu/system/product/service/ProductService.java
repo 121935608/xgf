@@ -114,4 +114,9 @@ public class ProductService implements IProductService {
         return stockUrl;
     }
 
+    @Override
+    public Product findProductInfoByNo(String commodityNo) {
+        return productDao.findProductInfoByNo(commodityNo);
+    }
+
 }

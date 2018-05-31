@@ -141,4 +141,16 @@ public class CertificationDao extends DynamicObjectBaseDao implements ICertifica
     public int findAllCount() {
         return (int) this.findForObject("StoreAffairMapper.findAllCount",null);
     }
+
+    /** 查询店铺详细信息*/
+    @Override
+    public Store getStoreByUserId(String userId) {
+        Store storeInfo = null;
+        try {
+            storeInfo = (Store) this.findForObject("StoreAffairMapper.getStoreByUserId", userId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return storeInfo;
+    }
 }

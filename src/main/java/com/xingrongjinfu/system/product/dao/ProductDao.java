@@ -165,4 +165,12 @@ public class ProductDao extends DynamicObjectBaseDao implements IProductDao {
     public Product findProductByNo(String commodityNo) {
         return (Product) this.findForObject("ProductMapper.findProductByNo",commodityNo);
     }
+
+    /**
+     * 查询产品的详细信息
+     */
+    @Override
+    public Product findProductInfoByNo(String commodityNo) {
+        return (Product) this.findForObject("ProductMapper.findProductInfoByNo", commodityNo);
+    }
 }

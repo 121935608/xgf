@@ -36,4 +36,13 @@ public class CommodityConstant {
     public final static String COMMODITY_LIST_URL="findCommodityInfo";
 
     public final static String DOWNLOAD_COMMODITY_DATA="downloadCommodityData";
+
+    /** 请求地址: 根据商品条形码查询商品 */
+    public static final String COMMODITY_ONE_NO = "findCommodityByNo";
+
+    /** 请求地址: 根据商品名称查询商品 */
+    public static final String COMMODITY_ALL_NAME = "findCommodityByName";
+
+    /** 请求地址: 查询所有商品 */
+    public static final String COMMODITY_ALL = "findAllCommodity";
 }

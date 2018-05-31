@@ -15,6 +15,22 @@ public class Message
 
     private boolean timeout;
 
+    private Object resultObj;
+
+    public Object getResultObj() {
+        return resultObj;
+    }
+
+    public void setResultObj(Object resultObj) {
+        this.resultObj = resultObj;
+    }
+
+    public Message(boolean flag, Object resultObj) {
+        this.s = flag;
+        this.resultObj = resultObj;
+
+    }
+
     public Message(int r)
     {
         if (r > 0)
