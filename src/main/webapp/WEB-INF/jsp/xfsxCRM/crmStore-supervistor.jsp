@@ -148,7 +148,7 @@
                 }
             }
         ];
-        var url = "${context_root}/crmUser/userCRMView.action";
+        var url = "${context_root}/crmUser/userCRMView.action?status=0";
         pageTable = _Datatable_Init(pageTable, aoColumns, url);
     });
     function updateSupervisor(storId){
@@ -156,7 +156,7 @@
     }
     function query() {
         var userName = $("#userName").val();
-        pageTable.fnSettings().sAjaxSource = encodeURI("${context_root}/crmUser/userCRMView.action?userName=" + userName);
+        pageTable.fnSettings().sAjaxSource = encodeURI("${context_root}/crmUser/userCRMView.action?userName=" + userName + "&status=0");
         pageTable.fnClearTable(0);
         pageTable.fnDraw();
     }
