@@ -141,6 +141,20 @@
             crmLogin: {
                 required: true,
                 isSpace: true,
+                remote: {
+                    url: "${context_root}/crmUser/checkCrmLoginView.action",
+                    type: "post",
+                    dataType: "text",
+                    data: {
+                        name: function () {
+                            return $.trim($("#crmLogin").val());
+                        }
+                    },
+                    dataFilter: function (data, type) {
+                        if (data == "0") return true;
+                        else return "用户名已存在";
+                    }
+                }
             },
             crmPwd: {
                 required: true,
