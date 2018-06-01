@@ -65,65 +65,65 @@
 <!--业绩信息查询supervisorId-->
     <select id="rankingInfo" resultType="HashMap" parameterType="HashMap">
         SELECT
-        IFNULL(SUM(ta.amount), 0) AS amount,
-        IFNULL(SUM(tb.storeIdNum), 0) AS storeIdNum,
-        IFNULL(SUM(tc.visitStoreNum), 0) AS visitStoreNum,
-        IFNULL(SUM(<![CDATA[td.firstStore<2]]>), 0) AS firstStore,
-        IFNULL(SUM(te.amount1), 0) AS amount1,
-        IFNULL(SUM(tf.storeIdNum1), 0) AS storeIdNum1,
-        IFNULL(SUM(tg.visitStoreNum1), 0) AS visitStoreNum1,
-        IFNULL(SUM(<![CDATA[th.firstStore1<2]]>), 0) AS firstStore1
-        FROM t_store ts
-        LEFT JOIN (
-            SELECT storeId, SUM(orderPrice)*0.01 AS amount
-            FROM t_order
-            WHERE `status` = 1 AND orderTime >= #{timeBegin} AND <![CDATA[orderTime <= #{timeEnd}]]>
-            GROUP BY storeId
-        ) ta ON ts.storeId = ta.storeId
-        LEFT JOIN (
-            SELECT storeId, COUNT(DISTINCT storeId) AS storeIdNum
-            FROM t_order
-            WHERE `status` = 1 AND orderTime >= #{timeBegin} AND <![CDATA[orderTime <= #{timeEnd}]]>
-            GROUP BY storeId
-        ) tb ON ts.storeId = tb.storeId
-        LEFT JOIN (
-            SELECT storeId, COUNT(DISTINCT storeId) AS visitStoreNum
-            FROM c_visit_record
-            WHERE `status` = 0 AND createTime >= #{timeBegin} AND <![CDATA[createTime <= #{timeEnd}]]>
-            AND visitResultStatus IS NOT NULL
-            GROUP BY storeId
-        ) tc ON tc.storeId = ts.storeId
-        LEFT JOIN (
-            SELECT storeId, COUNT(storeId) AS firstStore
-            FROM t_order
-            WHERE `status` = 1 AND orderTime >= #{timeBegin} AND <![CDATA[orderTime <= #{timeEnd}]]>
-            GROUP BY storeId
-        ) td ON td.storeId = ts.storeId
-        LEFT JOIN (
-            SELECT storeId, SUM(orderPrice)*0.01 AS amount1
-            FROM t_order
-            WHERE `status` = 1 AND orderTime >= #{timeBegin1} AND <![CDATA[orderTime <= #{timeEnd1}]]>
-            GROUP BY storeId
-        ) te ON ts.storeId = te.storeId
-        LEFT JOIN (
-            SELECT storeId, COUNT(DISTINCT storeId) AS storeIdNum1
-            FROM t_order
-            WHERE `status` = 1 AND orderTime >= #{timeBegin1} AND <![CDATA[orderTime <= #{timeEnd1}]]>
-            GROUP BY storeId
-        ) tf ON ts.storeId = tf.storeId
-        LEFT JOIN (
-            SELECT storeId, COUNT(DISTINCT storeId) AS visitStoreNum1
-            FROM c_visit_record
-            WHERE `status` = 0 AND createTime >= #{timeBegin1} AND <![CDATA[createTime <= #{timeEnd1}]]>
-            AND visitResultStatus IS NOT NULL
-            GROUP BY storeId
-        ) tg ON tg.storeId = ts.storeId
-        LEFT JOIN (
-            SELECT storeId, COUNT(storeId) AS firstStore1
-            FROM t_order
-            WHERE `status` = 1 AND orderTime >= #{timeBegin1} AND <![CDATA[orderTime <= #{timeEnd1}]]>
-            GROUP BY storeId
-        ) th ON th.storeId = ts.storeId
+		  IFNULL(SUM(ta.amount), 0) AS amount,
+		  IFNULL(SUM(tb.storeIdNum), 0) AS storeIdNum,
+		  IFNULL(SUM(tc.visitStoreNum), 0) AS visitStoreNum,
+		  IFNULL(SUM(<![CDATA[td.firstStore<2]]>), 0) AS firstStore,
+		  IFNULL(SUM(te.amount1), 0) AS amount1,
+		  IFNULL(SUM(tf.storeIdNum1), 0) AS storeIdNum1,
+		  IFNULL(SUM(tg.visitStoreNum1), 0) AS visitStoreNum1,
+		  IFNULL(SUM(<![CDATA[th.firstStore1<2]]>), 0) AS firstStore1
+	    FROM t_store ts
+		LEFT JOIN (
+			SELECT userId, SUM(orderPrice)*0.01 AS amount
+			FROM t_order
+			WHERE `status` = 1 AND orderStatus NOT IN ('-1','1') AND orderTime >= #{timeBegin} AND <![CDATA[orderTime <= #{timeEnd}]]>
+			GROUP BY userId
+		) ta ON ts.userId = ta.userId
+		LEFT JOIN (
+			SELECT userId, COUNT(DISTINCT userId) AS storeIdNum
+			FROM t_order
+			WHERE `status` = 1 AND orderStatus NOT IN ('-1','1') AND orderTime >= #{timeBegin} AND <![CDATA[orderTime <= #{timeEnd}]]>
+			GROUP BY userId
+		) tb ON ts.userId = tb.userId
+		LEFT JOIN (
+			SELECT userId, COUNT(DISTINCT userId) AS visitStoreNum
+			FROM c_visit_record
+			WHERE `status` = 0 AND createTime >= #{timeBegin} AND <![CDATA[createTime <= #{timeEnd}]]>
+			AND visitResultStatus IS NOT NULL
+			GROUP BY userId
+		) tc ON tc.userId = ts.userId
+		LEFT JOIN (
+		  SELECT userId, COUNT(userId) AS firstStore
+			FROM t_order
+			WHERE `status` = 1 AND orderStatus NOT IN ('-1','1') AND orderTime >= #{timeBegin} AND <![CDATA[orderTime <= #{timeEnd}]]>
+			GROUP BY userId
+		) td ON td.userId = ts.userId
+		LEFT JOIN (
+			SELECT userId, SUM(orderPrice)*0.01 AS amount1
+			FROM t_order
+			WHERE `status` = 1 AND orderStatus NOT IN ('-1','1') AND orderTime >= #{timeBegin1} AND <![CDATA[orderTime <= #{timeEnd1}]]>
+			GROUP BY userId
+		) te ON ts.userId = te.userId
+		LEFT JOIN (
+			SELECT userId, COUNT(DISTINCT userId) AS storeIdNum1
+			FROM t_order
+			WHERE `status` = 1 AND orderStatus NOT IN ('-1','1') AND orderTime >= #{timeBegin1} AND <![CDATA[orderTime <= #{timeEnd1}]]>
+			GROUP BY userId
+		) tf ON ts.userId = tf.userId
+		LEFT JOIN (
+			SELECT userId, COUNT(DISTINCT userId) AS visitStoreNum1
+			FROM c_visit_record
+			WHERE `status` = 0 AND createTime >= #{timeBegin1} AND <![CDATA[createTime <= #{timeEnd1}]]>
+			AND visitResultStatus IS NOT NULL
+			GROUP BY userId
+		) tg ON tg.userId = ts.userId
+		LEFT JOIN (
+		  SELECT userId, COUNT(userId) AS firstStore1
+			FROM t_order
+			WHERE `status` = 1 AND orderStatus NOT IN ('-1','1') AND orderTime >= #{timeBegin1} AND <![CDATA[orderTime <= #{timeEnd1}]]>
+			GROUP BY userId
+		) th ON th.userId = ts.userId
         WHERE ts.supervisorId = #{supervisorId}
     </select>
 
