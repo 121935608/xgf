@@ -44,6 +44,8 @@ import com.xingrongjinfu.system.order.common.OrderConstant;
 import com.xingrongjinfu.system.order.service.IOrderService;
 import com.xingrongjinfu.system.user.model.User;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * 订单管理（平台端） 〈〉
  *
@@ -705,4 +707,106 @@ public class OrderController extends BaseController {
         JSONArray jaProCommodity = JSONArray.fromObject(commodities);
         return jaProCommodity;
     }
+
+
+
+    //虚拟订单审核----------------------------------------------------------------
+
+    //t_virtual_order订单审核部分-----------------------------------------------------
+
+    /**
+     * 跳转到虚拟订单审核页面
+     * @param
+     * @return
+     */
+    @RequestMapping(OrderConstant.TO_VIRTUAL_ORDER_AUTIDING)
+    @ResponseBody
+    public ModelAndView ToVirtuaOrderAuditing(HttpServletRequest request) throws Exception {
+        String orderNumber=request.getParameter("orderNumber");
+        ModelAndView modelAndView = this.getModelAndView(OrderConstant.VIRTUAL_ORDER_AUDITING);
+        //查询虚拟订单信息
+        Order orders = orderService.findVirtualOrder(orderNumber);
+        fillingOrder(orders);
+        //查询订单详情
+        List<OrderDetail> orderDetails = orderService.findVirtualOrderDetails(orderNumber);
+        List<OrderCommodityDetail> orderCommodityDetails = new ArrayList<>();
+        for (OrderDetail orderDetail : orderDetails) {
+            if (orderDetail.getInPrice() == null) {
+                orderDetail.setInPrice(0.00);
+            }
+            if (orderDetail.getCommodityNum() == null) {
+                orderDetail.setCommodityNum(0);
+            }
+            // 总金额=数量*进价
+            orderDetail.setInPrice(orderDetail.getInPrice());
+            Double all = orderDetail.getInPrice() * orderDetail.getCommodityNum();
+            BigDecimal b = new BigDecimal(all);
+            all = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+            orderDetail.setTotalMoney(all);
+
+            // 根据商品条形码查询商品
+            String commodityNo = orderDetail.getCommodityNo();
+            List<Commodity> commodities = commodityService.queryByCommodityNo(commodityNo);
+            System.out.println(commodities);
+            for (Commodity commodity : commodities) {
+                OrderCommodityDetail orderCommodityDetail = new OrderCommodityDetail();
+                // 将订单和商品信息存储
+                BeanUtils.copyProperties(commodity, orderCommodityDetail);
+                BeanUtils.copyProperties(orderDetail, orderCommodityDetail);
+                orderCommodityDetails.add(orderCommodityDetail);
+            }
+        }
+
+        modelAndView.addObject("orders", orders);
+        modelAndView.addObject("orderCommodityDetails", orderCommodityDetails);
+        return modelAndView;
+    }
+
+    /**
+     * 取消虚拟订单
+     *
+     */
+    @RequestMapping(OrderConstant.CANCELVIRTUALORDER)
+    @ResponseBody
+    public  Message cancelVirtualOrder111 (String orderId, String orderNumber, String serviceId, String serviceRemark) throws Exception {
+        boolean resultFlag = true;
+        //查询虚拟订单详情
+        List<OrderDetail> orderDetailInfos = orderService.findVirtualOrderDetails(orderNumber);
+        for (OrderDetail orderDetailInfo : orderDetailInfos) {
+            // 补全订单审核表参数
+            OrderAuditing orderAuditing = new OrderAuditing();
+            orderAuditing.setAuditingId(UuidUtil.get32UUID());
+            orderAuditing.setOrderId(orderId);
+            orderAuditing.setOrderDetailId(orderDetailInfo.getOrderDetailId());
+            orderAuditing.setOrderNumber(orderNumber);
+            orderAuditing.setCommodityNo(orderDetailInfo.getCommodityNo());
+            orderAuditing.setServiceId(serviceId);
+            orderAuditing.setServiceRemark(serviceRemark);
+            List<Commodity> commodities =
+                    commodityService.queryByCommodityNo(orderDetailInfo.getCommodityNo());
+            // 查询所有订单明细所对应的商品
+            for (Commodity commodity : commodities) {
+                orderAuditing.setCommodityId(commodity.getCommodityId());
+                orderAuditing.setCommodityName(commodity.getCommodityName());
+                orderAuditing.setModifyStatus(3);
+                int result = orderService.insertOrderAuditing(orderAuditing);
+                if (result <= 0) {
+                    resultFlag = false;
+                }
+            }
+        }
+
+        int updateResult = 0;
+        if (resultFlag) {
+            Order order = new Order();
+            order.setOrderId(orderId);
+            order.setOrderNumber(orderNumber);
+            order.setServiceRemark(serviceRemark);
+            order.setOrderStatus("-1");
+            updateResult = orderService.updateVirtualOrder(order);
+        }
+
+        return new Message(updateResult);
+    }
+
 }

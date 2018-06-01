@@ -263,4 +263,18 @@
     <update id="updateOrderStorageNoAndStatus" parameterType="Orders">
 		UPDATE t_order SET storageNo=#{storageNo} WHERE orderId=#{orderId}
 	</update>
+
+    <!--查询虚拟订单信息通过orderNumber-->
+    <select id="findVirtualOrder" parameterType="String" resultType="Orders">
+        select * from t_virtual_order WHERE orderNumber=#{orderNumber};
+    </select>
+    <!--查询虚拟订单详情-->
+    <select id="findVirtualOrderDetails" parameterType="String" resultMap="OrderDetailResult">
+        SELECT d.orderDetailId,d.commodityName,d.commodityNo,d.unit,d.commodityNum,d.salePrice/100
+        inPrice,d.orderNumber
+        FROM t_virtual_order_detail d WHERE
+        d.orderNumber = #{orderNumber}
+    </select>
+    <!--更新虚拟订单-->
+
 </mapper> 

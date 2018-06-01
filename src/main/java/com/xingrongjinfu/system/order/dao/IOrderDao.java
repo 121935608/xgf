@@ -13,6 +13,7 @@ package com.xingrongjinfu.system.order.dao;
 import com.xingrongjinfu.system.order.model.Order;
 import com.xingrongjinfu.system.order.model.OrderAuditing;
 import com.xingrongjinfu.system.order.model.OrderDetail;
+import org.apache.ibatis.annotations.Param;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 
@@ -112,4 +113,11 @@ public interface IOrderDao {
     int updateOrderStatus(Order order);
 
     List<OrderDetail> findOrderDetailInfoByNo(String orderNumber);
+
+    //查询虚拟订单
+    Order findVirtualOrder(String orderNumber);
+
+    List<OrderDetail> findVirtualOrderDetails(@Param("orderNumber")String orderNumber) throws Exception;
+
+    int updateVirtualOrder(Order order);
 }

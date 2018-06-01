@@ -150,4 +150,18 @@ public class OrderConstant {
      * 请求地址:请求库存的地址
      */
     public static final String STORAGE_URL = "http://wuhanxingrong.vicp.io:3080/stock2.0/app/order.action";
+
+    /**
+     * 跳转到虚拟订单审核
+     */
+    public static final String TO_VIRTUAL_ORDER_AUTIDING="virtualOrderManagerView";
+
+    /**
+     * 虚拟订单审核页面
+     */
+    public static  final String VIRTUAL_ORDER_AUDITING="virtualOrderAuditing";
+    /**
+     * 取消虚拟订单
+     */
+    public static  final String CANCELVIRTUALORDER="cancelVirtualOrder";
 }

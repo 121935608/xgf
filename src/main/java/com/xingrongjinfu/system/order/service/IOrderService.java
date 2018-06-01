@@ -13,6 +13,7 @@ package com.xingrongjinfu.system.order.service;
 import com.xingrongjinfu.system.order.model.Order;
 import com.xingrongjinfu.system.order.model.OrderAuditing;
 import com.xingrongjinfu.system.order.model.OrderDetail;
+import org.apache.ibatis.annotations.Param;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 
@@ -86,4 +87,10 @@ public interface IOrderService {
     /** 更新订单状态*/
     int updateOrderStatus(Order order);
     List<OrderDetail> findOrderDetailInfoByNo(String orderNumber);
+    //查询t_virtual_order信息
+    Order findVirtualOrder(String orderNumber);
+
+    List<OrderDetail> findVirtualOrderDetails(@Param("orderNumber")String orderNumber) throws Exception;
+    //更新虚拟订单
+    int updateVirtualOrder(Order order);
 }

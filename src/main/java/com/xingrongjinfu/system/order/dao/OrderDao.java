@@ -148,4 +148,19 @@ public class OrderDao extends DynamicObjectBaseDao implements IOrderDao {
     public int updateOrderStatus(Order order) {
         return this.update("OrderMapper.updateOrderStatus", order);
     }
+    //查询虚拟订单信息
+    @Override
+    public Order findVirtualOrder(String orderNumber) {
+        return (Order) this.findForObject("OrderMapper.findVirtualOrder",orderNumber);
+    }
+
+    @Override
+    public List<OrderDetail> findVirtualOrderDetails(String orderNumber) throws Exception {
+        return  (List<OrderDetail>) this.findForList("OrderMapper.findVirtualOrderDetails",orderNumber);
+    }
+
+    @Override
+    public int updateVirtualOrder(Order order) {
+        return (int) this.update("OrderMapper.updateVirtualOrder",order);
+    }
 }

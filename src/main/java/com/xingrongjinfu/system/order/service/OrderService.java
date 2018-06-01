@@ -103,4 +103,19 @@ public class OrderService implements IOrderService {
   public List<OrderDetail> findOrderDetailInfoByNo(String orderNumber){
     return orderDao.findOrderDetailInfoByNo(orderNumber);
   }
+  @Override
+  public Order findVirtualOrder(String orderNumber) {
+    Order order=orderDao.findVirtualOrder(orderNumber);
+    return order;
+  }
+
+  @Override
+  public List<OrderDetail> findVirtualOrderDetails(String orderNumber) throws Exception {
+    return  orderDao.findVirtualOrderDetails(orderNumber);
+  }
+//
+  @Override
+  public int updateVirtualOrder(Order order) {
+    return orderDao.updateVirtualOrder(order);
+  }
 }
