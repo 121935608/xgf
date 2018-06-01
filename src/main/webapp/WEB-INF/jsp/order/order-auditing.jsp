@@ -60,6 +60,10 @@
                         <c:if test="${orders.orderStatus eq 3}">待收货</c:if>
                         <c:if test="${orders.orderStatus eq 4}">已完成</c:if>
                         <c:if test="${orders.orderStatus eq 5}">已收款</c:if>
+                        <c:if test="${orders.orderStatus eq 6}">客服审核</c:if>
+                        <c:if test="${orders.orderStatus eq 7}">库存审核</c:if>
+                        <c:if test="${orders.orderStatus eq 8}">退货中</c:if>
+                        <c:if test="${orders.orderStatus eq 9}">关闭交易</c:if>
                     </span>
                 </div>
             </div>
@@ -159,7 +163,7 @@
         <div class="row cl">
             <label class="form-label col-xs-offset-7 col-xs-2 col-sm-2"><span class="c-red"></span>总共费用:</label>
             <div class="formControls col-xs-2 col-sm-2">
-                <input type="text" id="moneyInput" value="${orders.orderPrice+orders.freight}" placeholder="总费用"/>
+                <input type="text" id="moneyInput" value="${orders.orderPrice}" placeholder="总费用"/>
                 <input type="hidden" id="moneyHiddenInput" value="${orders.orderPrice}" placeholder="总费用"/>
             </div>
         </div>
@@ -334,7 +338,7 @@
                 dataType: "json",
                 success: function (data) {
                     if (data.s == false) {
-                        layer.warn(data.m);
+                        layer.msg(data.m);
                     }
                 }
             });
@@ -588,11 +592,14 @@
                 alert($(this).text());*/
                 var name = $(this).attr("jsonName");
                 if (j == 0) {
-                    alert( $("#autoCompleteId" + i).val());
-                    data[name] = $("#autoCompleteId" + i).val();
-                    return true;
+                    if ($("#autoCompleteId" + (j + 1)).length > 0) {
+                        data[name] = $("#autoCompleteId" + (j + 1)).val();
+                    }else{
+                        data[name] = $(this).text();
+                    }
+                } else {
+                    data[name] = $(this).text();
                 }
-                data[name] = $(this).text();
             });
             args[i] = data;
         });
@@ -852,7 +859,7 @@
                     if (!data.s == true) {
                         // 如果修改失败重新加载审核页面
                         layer.msg(data.m, {time: 1000});
-                        window.location.href = "${context_root}/order/toAuditingInfo.action";
+                        window.location.href = "${context_root}/order/toAuditingInfo.action?orderNumber=${orders.orderNumber}";
                     } else {
                         layer.msg("审核成功", {time: 1000});
                         layer_close();

@@ -419,6 +419,7 @@ public class OrderController extends BaseController {
                 OrderAuditing orderAuditing = new OrderAuditing();
                 orderAuditing.setServiceRemark(serviceRemark); // 设置客服人员备注
                 orderAuditing.setAuditingId(UuidUtil.get32UUID()); // 设置审核单id
+                orderAuditing.setOrderNumber(orderNumber); // 订单编号
                 orderAuditing.setOrderId(order.getOrderId());
                 orderAuditing.setServiceId(serviceId);
 
@@ -440,16 +441,21 @@ public class OrderController extends BaseController {
                 OrderDetail orderDetail = new OrderDetail();
                 orderDetail.setOrderDetailId(UuidUtil.get32UUID());
                 orderDetail.setOrderNumber(orderNumber);
-                orderDetail.setCommodityId((String) jsonObj.get("commodityId"));
+                orderDetail.setCommodityId(product.getCommodityId());
                 orderDetail.setCommodityNum(commodityNum);
                 orderDetail.setCommodityName((String) jsonObj.get("commodityName"));
                 orderDetail.setUnit((String) jsonObj.get("unit"));
                 orderDetail.setSalePrice(Double.valueOf((String) jsonObj.get("salePrice")));
                 orderDetail.setTotalMoney(Double.valueOf((String) jsonObj.get("totalMoney")));
+                orderDetail.setTaxRate(product.getTaxRate());
+                orderDetail.setImgMain(product.getImgMain());
+                orderDetail.setCommodityNo(commodityNo);
+                orderDetail.setInPrice(product.getInPrice());
+                orderDetail.setAddTime(new Date());
 
                 // 补全订单审核表参数
                 orderAuditing.setOrderDetailId(orderDetail.getOrderDetailId());
-                orderAuditing.setCommodityId((String) jsonObj.get("commodityId"));
+                orderAuditing.setCommodityId(product.getCommodityId());
                 orderAuditing.setCommodityName((String) jsonObj.get("commodityName"));
                 orderAuditing.setCommodityNo((String) jsonObj.get("commodityNo"));
                 orderAuditing.setCommodityNum(0); // 商品原数量为0
@@ -479,7 +485,8 @@ public class OrderController extends BaseController {
             String orderId = order.getOrderId();
             try {
                 // 审核完成后,减少商品客服库存,订单状态改为库存审核,推送到库存
-                return new Message(pushStock(orderId)); // 推送库存,和库存返回信息是否为空
+                boolean b = pushStock(orderId);// 推送库存,和库存返回信息是否为空
+                return b ? new Message("0000", "操作成功") : new Message(b);
             } catch (UnsupportedEncodingException e) {
                 return new Message(false);
             }
@@ -519,7 +526,7 @@ public class OrderController extends BaseController {
         Order order = orderService.findOrder(orderId); // 获取订单
         String userId = order.getUserId(); // 获取到userId
         Store store = certificationService.getStoreByUserId(userId); // 查询商铺
-        if (store == null){
+        if (store == null) {
             store = certificationService.getVirtualStoreInfo(userId);
         }
         JSONObject jsonObject = new JSONObject(); // 用于封装推送参数
@@ -534,7 +541,7 @@ public class OrderController extends BaseController {
             object.put("barCode", orderDetail.getCommodityNo());
             object.put("number", orderDetail.getCommodityNum());
             object.put("salePrice", (int) Math.ceil(orderDetail.getSalePrice()));
-            object.put("totalPrice", (int) Math.ceil(orderDetail.getTotalPrice()));
+            object.put("totalPrice", (int) Math.ceil(orderDetail.getTotalPrice() == null ? 0 : orderDetail.getTotalPrice()));
 
             // 查询商品
             Commodity commodity =

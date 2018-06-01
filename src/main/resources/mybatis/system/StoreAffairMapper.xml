@@ -74,7 +74,7 @@
     <!-- 查询消费金融推送用户店铺详细信息 -->
     <select id="getVirtualStoreByUserId" parameterType="java.lang.String" resultType="Store">
 		select
-		storeId,userId,storeName,userName,idCard,phone,area,address,process,remark,supervisorId,licensePic,frontStorePic,innerStorePic,contractPic,transactionPic,utilitiesPic,auditStatus,startCollect,endCollect
+		s.storeId,s.userId,s.storeName,s.userName,s.idCard,s.phone,s.area,s.address,s.process,s.remark,s.supervisorId,s.licensePic,s.frontStorePic,s.innerStorePic,s.contractPic,s.transactionPic,s.utilitiesPic,s.auditStatus,s.startCollect,endCollect
 		from t_store s LEFT JOIN t_user_store us on s.storeId = us.storeId where userId = #{userId}
 	</select>
 

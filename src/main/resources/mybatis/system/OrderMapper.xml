@@ -114,8 +114,8 @@
 
 
     <select id="findOrderDetailInfoByNo" parameterType="String" resultMap="OrderDetailResult">
-		SELECT d.orderDetailId,d.commodityName,c.commodityNo,d.unit,d.commodityNum,d.salePrice inPrice,d.salePrice,d.totalPrice,  d.orderNumber,c.commodityId,c.unit
-		FROM t_order_detail d LEFT JOIN t_commodity c ON d.commodityId=c.commodityId
+		SELECT d.orderDetailId,d.commodityName,d.commodityNo,d.unit,d.commodityNum,d.salePrice inPrice,d.salePrice,d.totalPrice,d.orderNumber,d.commodityId
+		FROM t_order_detail d
 		WHERE d.orderNumber=#{orderNumber}
 	</select>
 
@@ -190,7 +190,7 @@
     <select id="findOrderDetail" parameterType="map" resultMap="OrderDetailResult">
         SELECT d.orderDetailId,d.commodityName,d.commodityNo,d.unit,d.commodityNum,d.salePrice/100
         inPrice,d.orderNumber,d.commodityId
-        FROM t_order_detail
+        FROM t_order_detail d
         <where>
             <if test="orderNumber !=null and orderNumber != ''">
                 AND d.orderNumber = #{orderNumber}
