@@ -527,7 +527,7 @@ public class OrderController extends BaseController {
         String userId = order.getUserId(); // 获取到userId
         Store store = certificationService.getStoreByUserId(userId); // 查询商铺
         if (store == null) {
-            store = certificationService.getVirtualStoreInfo(userId);
+            store = certificationService.getVirtualStoreInfo(userId); // 查询虚拟订单
         }
         JSONObject jsonObject = new JSONObject(); // 用于封装推送参数
 
@@ -618,7 +618,7 @@ public class OrderController extends BaseController {
             order.setStorageNo(storageNo); // 设置订单库存号
             // order.setOrderStatus("2"); // 设置订单为待发货
             logger.info("==========订单storageNo:{}", storageNo);
-            if (orderService.pushToStorage(order) > 0) { // 更新订单信息
+            if (orderService.updateStorageAndStatus(order) > 0) { // 更新订单信息
                 logger.info("===============订单库存号修改成功");
                 return true;
             }

@@ -140,7 +140,7 @@ public class OrderDao extends DynamicObjectBaseDao implements IOrderDao {
     }
 
     @Override
-    public int pushToStorage(Order order) {
+    public int updateStorageAndStatus(Order order) {
         return this.update("OrderMapper.updateOrderStorageNoAndStatus", order);
     }
 

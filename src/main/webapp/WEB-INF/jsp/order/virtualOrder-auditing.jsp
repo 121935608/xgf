@@ -1,6 +1,6 @@
 ﻿<%@ page contentType="text/html; charset=UTF-8" %>
 <%@include file="/WEB-INF/jsp/common/taglibs.jspf" %>
-<ys:contentHeader title="审核订单信息"/>
+<ys:contentHeader title="审核虚拟订单信息"/>
 <body>
 <article class="page-container">
     <form action="${context_root}/order/orderSave.action" method="post" class="form form-horizontal" id="form-order-modify">

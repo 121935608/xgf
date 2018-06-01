@@ -90,8 +90,8 @@ public class OrderService implements IOrderService {
   }
 
   @Override
-  public int pushToStorage(Order order) {
-    return orderDao.pushToStorage(order);
+  public int updateStorageAndStatus(Order order) {
+    return orderDao.updateStorageAndStatus(order);
   }
 
   @Override

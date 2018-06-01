@@ -81,7 +81,7 @@ public interface IOrderService {
     Order findOrder(String orderId);
 
     /** 填充订单的库存*/
-    int pushToStorage(Order order);
+    int updateStorageAndStatus(Order order);
 
     /** 更新订单状态*/
     int updateOrderStatus(Order order);

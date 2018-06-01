@@ -261,6 +261,6 @@
 
     <!-- 更新订单库存号 -->
     <update id="updateOrderStorageNoAndStatus" parameterType="Orders">
-		UPDATE t_order set storageNo=#{storageNo},orderStatus=#{orderStatus} where orderId=#{orderId}
+		UPDATE t_order SET storageNo=#{storageNo} WHERE orderId=#{orderId}
 	</update>
 </mapper> 
