@@ -126,4 +126,9 @@ public class ProductService implements IProductService {
         return productDao.findProductInfoByNo(commodityNo);
     }
 
+    @Override
+    public int updateProductStock(Product product) {
+        return productDao.updateProductStock(product);
+    }
+
 }

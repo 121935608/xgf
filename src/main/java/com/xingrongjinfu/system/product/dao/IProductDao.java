@@ -95,5 +95,7 @@ public interface IProductDao {
     /** 查询商品详情 */
     Product findProductInfoByNo(String commodityNo);
 
+    int updateProductStock(Product product);
+
     List<Map> productInfoQuery(Map<String, String> param);
 }

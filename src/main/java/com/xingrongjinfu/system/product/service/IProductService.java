@@ -94,5 +94,7 @@ public interface IProductService {
     public String getStockUrl();
 
     Product findProductInfoByNo(String commodityNo);
+
+    int updateProductStock(Product product);
     List<Map> productInfoQuery(Map<String, String> param);
 }

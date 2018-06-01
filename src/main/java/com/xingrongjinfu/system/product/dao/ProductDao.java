@@ -176,6 +176,11 @@ public class ProductDao extends DynamicObjectBaseDao implements IProductDao {
     }
 
     @Override
+    public int updateProductStock(Product product) {
+        return this.update("ProductMapper.updateProductStock", product);
+    }
+
+    @Override
     public List<Map> productInfoQuery(Map<String, String> param) {
         List<Map> productInfolsit=null;
         try {

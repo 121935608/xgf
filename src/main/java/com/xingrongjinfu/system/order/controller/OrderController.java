@@ -1,12 +1,6 @@
 /**
- * Copyright (C), 2018
- * FileName: OrderController
- * Author:   zxuser
- * Date:     2018/1/4 11:05
- * Description:
- * History:
- * <author>          <time>          <version>          <desc>
- * 作者姓名           修改时间           版本号              描述
+ * Copyright (C), 2018 FileName: OrderController Author: zxuser Date: 2018/1/4 11:05 Description:
+ * History: <author> <time> <version> <desc> 作者姓名 修改时间 版本号 描述
  */
 package com.xingrongjinfu.system.order.controller;
 
@@ -51,8 +45,7 @@ import com.xingrongjinfu.system.order.service.IOrderService;
 import com.xingrongjinfu.system.user.model.User;
 
 /**
- * 订单管理（平台端）
- * 〈〉
+ * 订单管理（平台端） 〈〉
  *
  * @author zxuser
  * @create 2018/1/4
@@ -78,76 +71,76 @@ public class OrderController extends BaseController {
     private IProductService productService;
 
     @RequestMapping(OrderConstant.ORDER_MANAGE_URL)
-    public ModelAndView loadOrderManage(){return this.getModelAndView(OrderConstant.ORDER_MANAGE_PAGE);}
+    public ModelAndView loadOrderManage() {
+        return this.getModelAndView(OrderConstant.ORDER_MANAGE_PAGE);
+    }
 
     /**
-     *
      * @return
      */
     @RequestMapping(OrderConstant.ORDER_MANAGE_LIST_URL)
-    public ModelAndView orderManageList()
-    {
-        PageUtilEntity pageUtilEntity=this.getPageUtilEntity();
-        List<TableDataInfo> tableDataInfo=orderService.pageInfoQuery(pageUtilEntity);
-        return buildDatasTable(pageUtilEntity.getTotalResult(),tableDataInfo);
+    public ModelAndView orderManageList() {
+        PageUtilEntity pageUtilEntity = this.getPageUtilEntity();
+        List<TableDataInfo> tableDataInfo = orderService.pageInfoQuery(pageUtilEntity);
+        return buildDatasTable(pageUtilEntity.getTotalResult(), tableDataInfo);
     }
 
     /**
      * 查看订单信息
+     *
      * @param orderNumber
      * @return
      */
     @RequestMapping(OrderConstant.ORDER_LOOK_URL)
-    public ModelAndView lookOrderInfo(String orderNumber)
-    {
-        ModelAndView modelAndView=this.getModelAndView(OrderConstant.ORDER_LOOK_PAGE);
-        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Order orders=orderService.findOrderInfo(orderNumber);
+    public ModelAndView lookOrderInfo(String orderNumber) {
+        ModelAndView modelAndView = this.getModelAndView(OrderConstant.ORDER_LOOK_PAGE);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Order orders = orderService.findOrderInfo(orderNumber);
         fillingOrder(orders);
-        List<OrderDetail> orderDetails=orderService.findOrderDetailInfo(orderNumber);
+        List<OrderDetail> orderDetails = orderService.findOrderDetailInfo(orderNumber);
         fillingOrderDetail(orderDetails);
-        modelAndView.addObject("orders",orders);
-        modelAndView.addObject("orderDetails",orderDetails);
+        modelAndView.addObject("orders", orders);
+        modelAndView.addObject("orderDetails", orderDetails);
         return modelAndView;
     }
 
     /**
      * 发货界面
+     *
      * @param orderNumber
      * @return
      */
     @RequestMapping(OrderConstant.ORDER_SEND_URL)
-    public ModelAndView loadSendPage(String orderNumber)
-    {
-        ModelAndView modelAndView=this.getModelAndView(OrderConstant.ORDER_SEND_PAGE);
+    public ModelAndView loadSendPage(String orderNumber) {
+        ModelAndView modelAndView = this.getModelAndView(OrderConstant.ORDER_SEND_PAGE);
         return modelAndView;
     }
 
     /**
      * 收货后更新订单信息
+     *
      * @param order
      * @return
      */
     @RequestMapping(OrderConstant.ORDER_CONFIRM_URL)
     public @ResponseBody
-    Message orderConfirm(Order order)
-    {
-     int result=0;
-     String orderNumber=order.getOrderNumber();
-     if (orderNumber !=null && orderNumber !="") {
-         result = orderService.updateOrderInfo(order);
-     }
-     return new Message(result);
+    Message orderConfirm(Order order) {
+        int result = 0;
+        String orderNumber = order.getOrderNumber();
+        if (orderNumber != null && orderNumber != "") {
+            result = orderService.updateOrderInfo(order);
+        }
+        return new Message(result);
     }
 
     /**
      * 跳转到打印配送单界面
      */
     @RequestMapping(OrderConstant.ORDER_PRINT_URL)
-    public ModelAndView loadPrintPage(String orderNumber){
-        ModelAndView modelAndView=this.getModelAndView(OrderConstant.ORDER_PRINT_PAGE);
-        List<OrderDetail> orderDetails=orderService.findOrderDetailInfo(orderNumber);
-        modelAndView.addObject("orderDetails",orderDetails);
+    public ModelAndView loadPrintPage(String orderNumber) {
+        ModelAndView modelAndView = this.getModelAndView(OrderConstant.ORDER_PRINT_PAGE);
+        List<OrderDetail> orderDetails = orderService.findOrderDetailInfo(orderNumber);
+        modelAndView.addObject("orderDetails", orderDetails);
         return modelAndView;
     }
 
@@ -155,34 +148,38 @@ public class OrderController extends BaseController {
      * 跳转到订单快递查询界面
      */
     @RequestMapping(OrderConstant.ORDER_EXPRESS_URL)
-    public ModelAndView loadExpressPage(){return this.getModelAndView(OrderConstant.ORDER_EXPRESS_PAGE);}
+    public ModelAndView loadExpressPage() {
+        return this.getModelAndView(OrderConstant.ORDER_EXPRESS_PAGE);
+    }
 
     /**
      * 查询订单快递信息
      */
     @RequestMapping(OrderConstant.ORDER_EXPRESS_LIST_URL)
-    public ModelAndView orderExpressList(){
-        PageUtilEntity pageUtilEntity=this.getPageUtilEntity();
-        List<TableDataInfo> tableDataInfo=orderService.expressPageInfoQuery(pageUtilEntity);
-        return buildDatasTable(pageUtilEntity.getTotalResult(),tableDataInfo);
+    public ModelAndView orderExpressList() {
+        PageUtilEntity pageUtilEntity = this.getPageUtilEntity();
+        List<TableDataInfo> tableDataInfo = orderService.expressPageInfoQuery(pageUtilEntity);
+        return buildDatasTable(pageUtilEntity.getTotalResult(), tableDataInfo);
     }
 
     /**
      * 财务结算单界面
      */
     @RequestMapping(OrderConstant.ORDER_FINANCIAL_URL)
-    public ModelAndView loadFinancialPage(){return this.getModelAndView(OrderConstant.ORDER_FINANCIAL_PAGE);}
+    public ModelAndView loadFinancialPage() {
+        return this.getModelAndView(OrderConstant.ORDER_FINANCIAL_PAGE);
+    }
 
     /**
      * 跳转到输入密码界面
      */
     @RequestMapping(OrderConstant.ORDER_CHECK_URL)
-    public ModelAndView loadCheckPage(Financial financial)
-    {
-        ModelAndView modelAndView=this.getModelAndView(OrderConstant.ORDER_CHECK_PAGE);
-        modelAndView.addObject("financial",financial);
+    public ModelAndView loadCheckPage(Financial financial) {
+        ModelAndView modelAndView = this.getModelAndView(OrderConstant.ORDER_CHECK_PAGE);
+        modelAndView.addObject("financial", financial);
         return modelAndView;
     }
+
     /**
      * @param @Description:跳转到审核界面
      * @return: org.springframework.web.servlet.ModelAndView
@@ -232,40 +229,39 @@ public class OrderController extends BaseController {
      * 确认结账
      */
     @RequestMapping(OrderConstant.ORDER_TOCHECK_URL)
-    public @ResponseBody Message toCheck(Financial financial, User user)
-    {
-        int result=0;
-        User nowUser=this.getCurrentUser();
-        String amountId=financial.getAmountId();
-        if (amountId !=null && amountId !=""){
-            //校验密码
+    public @ResponseBody
+    Message toCheck(Financial financial, User user) {
+        int result = 0;
+        User nowUser = this.getCurrentUser();
+        String amountId = financial.getAmountId();
+        if (amountId != null && amountId != "") {
+            // 校验密码
             if (nowUser.getPassword().equals(user.getPassword())) {
                 result = 1;
             }
-            //校验密码通过之后更新结算单
-            if (result==1) {
+            // 校验密码通过之后更新结算单
+            if (result == 1) {
                 financial.setAmountStatus(0);
 
-                result=financialService.updateAmountInfo(financial);
+                result = financialService.updateAmountInfo(financial);
             }
         }
         return new Message(result);
     }
 
-
     /**
      * 确认收款
      */
     @RequestMapping(OrderConstant.PAY_ORDER_URL)
-    public @ResponseBody Message payOrder(String orderNumber){
-        int result=0;
-        result=orderService.updatePayOrder(orderNumber);
+    public @ResponseBody
+    Message payOrder(String orderNumber) {
+        int result = 0;
+        result = orderService.updatePayOrder(orderNumber);
         return new Message(result);
     }
 
     /**
-     * @param orderDetails
-     * @Description:校验填充订单明细
+     * @param orderDetails @Description:校验填充订单明细
      * @return: void
      * @author: ncainiao @Date: 2018/5/23
      */
@@ -287,8 +283,7 @@ public class OrderController extends BaseController {
     }
 
     /**
-     * @param orders
-     * @Description校验填充订单
+     * @param orders @Description校验填充订单
      * @return: void
      * @author: ncainiao @Date: 2018/5/23
      */
@@ -311,7 +306,8 @@ public class OrderController extends BaseController {
      */
     @RequestMapping(OrderConstant.ORDER_CHANGE_COMMODITY_NUM)
     public @ResponseBody
-    Message changeOrderNum(String commodityNum, String orderNumber, String commodityNo) {
+    Message changeOrderNum(
+            String commodityNum, String orderNumber, String commodityNo) {
         // 查询商品
         Product product = productService.findProductInfoByNo(commodityNo);
         Integer kxdStock = product.getKxdStock();
@@ -348,7 +344,12 @@ public class OrderController extends BaseController {
             @Param("serviceId") String serviceId,
             @Param("addOrderTable") String addOrderTable,
             Order order) {
-        logger.info("==========客服提交审核 cancelOrder:{},addOrderTable:{},serviceRemark:{},serviceId:{}", cancelOrder, addOrderTable, serviceRemark, serviceId);
+        logger.info(
+                "==========客服提交审核 cancelOrder:{},addOrderTable:{},serviceRemark:{},serviceId:{}",
+                cancelOrder,
+                addOrderTable,
+                serviceRemark,
+                serviceId);
         // 定义结果显示
         Boolean modifyResult = true;
         Boolean addResult = true;
@@ -357,7 +358,7 @@ public class OrderController extends BaseController {
         JSONObject addOrderTableObj = JSONObject.parseObject(addOrderTable);
         int addOrderTableSize = addOrderTableObj.size();
 
-        /******** 存在修改订单逻辑 *******/
+        /** ****** 存在修改订单逻辑 ****** */
 
         // 如果存在修改订单
         if (jsonObject.size() > 0) {
@@ -403,7 +404,7 @@ public class OrderController extends BaseController {
             }
         }
 
-        /******** 存在新增订单逻辑 *******/
+        /** ****** 存在新增订单逻辑 ****** */
 
         // 如果存在新增订单
         if (addOrderTableSize > 0) {
@@ -430,7 +431,7 @@ public class OrderController extends BaseController {
                 // 增加客服库存,减少可下单库存
                 product.setKfStock(product.getKfStock() + kxdStock);
                 product.setKxdStock(product.getKxdStock() - commodityNum);
-                productService.updateProduct(product);
+                productService.updateProductStock(product);
 
                 OrderDetail orderDetail = new OrderDetail();
                 orderDetail.setOrderDetailId(UuidUtil.get32UUID());
@@ -468,8 +469,7 @@ public class OrderController extends BaseController {
             updateResult = orderService.updateOrderStatus(order);
         }
 
-        /******** 推送库存 *******/
-
+        /** ****** 推送库存 ****** */
         if (updateResult > 0) {
             // 封装推送库存参数
             String orderId = order.getOrderId();
@@ -496,6 +496,9 @@ public class OrderController extends BaseController {
         hashMap.put("orderNumber", orderNumber);
         hashMap.put("commodityNo", commodityNo);
         List<OrderDetail> orderDetailInfos = orderService.findOrderDetail(hashMap);
+        if (orderDetailInfos == null) {
+            return new OrderDetail();
+        }
         return orderDetailInfos.get(0);
     }
 
@@ -506,12 +509,12 @@ public class OrderController extends BaseController {
      * @return
      * @throws UnsupportedEncodingException
      */
-    @Transactional  //事务管理
+    @Transactional // 事务管理
     public boolean pushStock(String orderId) throws UnsupportedEncodingException {
         logger.info("==========开始推送订单,订单orderId:{}", orderId);
-        Order order = orderService.findOrder(orderId);   // 获取订单
-        String userId = order.getUserId();  // 获取到userId
-        Store store = certificationService.getStoreInfoByUserId(userId); // 查询商铺
+        Order order = orderService.findOrder(orderId); // 获取订单
+        String userId = order.getUserId(); // 获取到userId
+        Store store = certificationService.getStoreByUserId(userId); // 查询商铺
         JSONObject jsonObject = new JSONObject(); // 用于封装推送参数
 
         // 根据订单明细查询商品信息
@@ -523,11 +526,12 @@ public class OrderController extends BaseController {
             JSONObject object = new JSONObject();
             object.put("barCode", orderDetail.getCommodityNo());
             object.put("number", orderDetail.getCommodityNum());
-            object.put("salePrice", (int)Math.ceil(orderDetail.getSalePrice()));
-            object.put("totalPrice", (int)Math.ceil(orderDetail.getTotalPrice()));
+            object.put("salePrice", (int) Math.ceil(orderDetail.getSalePrice()));
+            object.put("totalPrice", (int) Math.ceil(orderDetail.getTotalPrice()));
 
             // 查询商品
-            Commodity commodity = commodityService.queryByCommodityNo(orderDetail.getCommodityNo()).get(0);
+            Commodity commodity =
+                    commodityService.queryByCommodityNo(orderDetail.getCommodityNo()).get(0);
             String subPrice = "";
             String subPriceUnit = "";
             if (commodity.getSubPrice() != null) {
@@ -553,7 +557,8 @@ public class OrderController extends BaseController {
         jsonObject.put("shopPhone", store.getPhone());
         jsonObject.put("shopContacts", store.getUserName());
         String receiveTime = "";
-        if (!StringUtil.nullOrBlank(store.getStartCollect()) && !StringUtil.nullOrBlank(store.getEndCollect())) {
+        if (!StringUtil.nullOrBlank(store.getStartCollect())
+                && !StringUtil.nullOrBlank(store.getEndCollect())) {
             receiveTime = store.getStartCollect() + "--" + store.getEndCollect();
         }
         jsonObject.put("cusreceiveTime", receiveTime);
@@ -562,12 +567,12 @@ public class OrderController extends BaseController {
         jsonObject.put("phone", order.getReceivePhone());
         jsonObject.put("address", order.getReceiveArea() + order.getReceiveAdd());
         jsonObject.put("orderNumber", order.getOrderNumber());
-        jsonObject.put("orderPrice", (int)Math.ceil(order.getOrderPrice()));
-        int payWay =2;
-        if (order.getPayCode().equalsIgnoreCase("HDFK")){
-            payWay=2;
-        }else{
-            payWay=1;
+        jsonObject.put("orderPrice", (int) Math.ceil(order.getOrderPrice()));
+        int payWay = 2;
+        if (order.getPayCode().equalsIgnoreCase("HDFK")) {
+            payWay = 2;
+        } else {
+            payWay = 1;
         }
         jsonObject.put("payWay", payWay);
         jsonObject.put("cusremark", order.getRemark());
@@ -579,7 +584,8 @@ public class OrderController extends BaseController {
         stringObjectHashMap.put("params", jsonObject);
         logger.info("==========推送订单到库存,参数为:{}", stringObjectHashMap);
         // 推送到库存
-        String resultStr = HttpClientUtil.httpPostRequest(OrderConstant.STORAGE_URL, stringObjectHashMap);
+        String resultStr =
+                HttpClientUtil.httpPostRequest(OrderConstant.STORAGE_URL, stringObjectHashMap);
         logger.info("==========接收库存返回参数:{}", resultStr);
         if (!StringUtil.nullOrBlank(resultStr)) {
             return pubStorage(order, resultStr);
@@ -596,7 +602,7 @@ public class OrderController extends BaseController {
             net.sf.json.JSONObject jsonObject2 = net.sf.json.JSONObject.fromObject(data);
             storageNo = jsonObject2.getString("purchaserId");
             order.setStorageNo(storageNo); // 设置订单库存号
-            order.setOrderStatus("2"); // 设置订单为待发货
+            // order.setOrderStatus("2"); // 设置订单为待发货
             logger.info("==========订单storageNo:{}", storageNo);
             if (orderService.pushToStorage(order) > 0) { // 更新订单信息
                 logger.info("===============订单库存号修改成功");
@@ -608,14 +614,14 @@ public class OrderController extends BaseController {
     }
 
     /**
-     * @param orderNumber
-     * @Description:整单取消
+     * @param orderNumber @Description:整单取消
      * @return: org.framework.core.model.Message
      * @author: ncainiao @Date: 2018/5/24
      */
     @RequestMapping(OrderConstant.ORDER_CANCELL_ALL_OPS)
     public @ResponseBody
-    Message cancelAllOrder(String orderId, String orderNumber, String serviceId, String serviceRemark) {
+    Message cancelAllOrder(
+            String orderId, String orderNumber, String serviceId, String serviceRemark) {
         boolean resultFlag = true;
         // 查询所有的明细
         Map<String, String> map = new HashMap<>();
@@ -631,7 +637,8 @@ public class OrderController extends BaseController {
             orderAuditing.setCommodityNo(orderDetailInfo.getCommodityNo());
             orderAuditing.setServiceId(serviceId);
             orderAuditing.setServiceRemark(serviceRemark);
-            List<Commodity> commodities = commodityService.queryByCommodityNo(orderDetailInfo.getCommodityNo());
+            List<Commodity> commodities =
+                    commodityService.queryByCommodityNo(orderDetailInfo.getCommodityNo());
             // 查询所有订单明细所对应的商品
             for (Commodity commodity : commodities) {
                 orderAuditing.setCommodityId(commodity.getCommodityId());
@@ -658,11 +665,9 @@ public class OrderController extends BaseController {
     }
 
     /**
-     * @param commodityNo
-     * @Description:根据商品条形码查询商品
+     * @param commodityNo @Description:根据商品条形码查询商品
      * @return: com.xingrongjinfu.system.commodity.model.Commodity
-     * @author: niu
-     * @Date: 2018/5/27
+     * @author: niu @Date: 2018/5/27
      */
     @RequestMapping(value = CommodityConstant.COMMODITY_ONE_NO)
     @ResponseBody
@@ -675,11 +680,9 @@ public class OrderController extends BaseController {
     }
 
     /**
-     * @param commodityName
-     * @Description:根据商品名称模糊查询商品
+     * @param commodityName @Description:根据商品名称模糊查询商品
      * @return: com.xingrongjinfu.system.commodity.model.Commodity
-     * @author: niu
-     * @Date: 2018/5/27
+     * @author: niu @Date: 2018/5/27
      */
     @RequestMapping(value = CommodityConstant.COMMODITY_ALL_NAME)
     public @ResponseBody
@@ -688,5 +691,4 @@ public class OrderController extends BaseController {
         JSONArray jaProCommodity = JSONArray.fromObject(commodities);
         return jaProCommodity;
     }
-
 }

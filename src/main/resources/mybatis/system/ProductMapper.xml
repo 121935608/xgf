@@ -266,4 +266,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getUnitList" resultType="string">
 		select unit from t_commodity GROUP BY unit
 	</select>
-</mapper> 
+
+    <update id="updateProductStock" parameterType="Product">
+        UPDATE t_commodity
+        <set>
+            <if test="yyStock!=null and yyStock !=''">yyStock=#{yyStock},</if>
+            <if test="kfStock!=null and kfStock !=''">kfStock=#{kfStock},</if>
+            <if test="kxdStock!=null and kxdStock !=''">kxdStock=#{kxdStock},</if>
+        </set>
+        <where>
+            <if test="commodityId !=null and commodityId!=''">
+                AND commodityId=#{commodityId}
+            </if>
+            <if test="commodityNum !=null and commodityNum!=''">
+                AND commodityNum = #{commodityNum}
+            </if>
+        </where>
+
+    </update>
+</mapper>

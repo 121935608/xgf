@@ -793,8 +793,8 @@
                 var obj = {}
                 var tds = $(this).parent().parent().find("td")
                 var orderNumber = tds.eq(0).text();
-                var commodityNo = tds.eq(2).text();
-                var commodityNum = tds.eq(4).text();
+                var commodityNo = tds.eq(1).text();
+                var commodityNum = tds.eq(3).text();
                 obj["orderNumber"] = orderNumber;
                 obj["commodityNo"] = commodityNo;
                 obj["commodityNum"] = commodityNum;
