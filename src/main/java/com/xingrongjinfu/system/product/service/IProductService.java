@@ -17,6 +17,7 @@ import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -93,4 +94,5 @@ public interface IProductService {
     public String getStockUrl();
 
     Product findProductInfoByNo(String commodityNo);
+    List<Map> productInfoQuery(Map<String, String> param);
 }

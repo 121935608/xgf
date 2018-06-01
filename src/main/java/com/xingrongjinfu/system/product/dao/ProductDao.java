@@ -20,6 +20,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -172,5 +173,17 @@ public class ProductDao extends DynamicObjectBaseDao implements IProductDao {
     @Override
     public Product findProductInfoByNo(String commodityNo) {
         return (Product) this.findForObject("ProductMapper.findProductInfoByNo", commodityNo);
+    }
+
+    @Override
+    public List<Map> productInfoQuery(Map<String, String> param) {
+        List<Map> productInfolsit=null;
+        try {
+            productInfolsit=(List<Map>)this.findForList("ProductMapper.productInfoQuery",param);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return productInfolsit;
     }
 }

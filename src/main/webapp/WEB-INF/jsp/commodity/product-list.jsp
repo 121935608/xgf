@@ -36,6 +36,7 @@
        </span>
 		<input type="text" class="input-text" style="width:250px" placeholder="编号|商品名称|商品条码" id="commodityName" name="commodityName">
 		<button type="button" class="btn btn-success radius" onclick="query()"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+		<button type="button" class="btn btn-success radius" onclick="export_excel1()"><i class="Hui-iconfont">&#xe665;</i> 导出</button>
 	</div>
 	<div class="mt-20">
 	<table class="table table-border table-bordered table-hover table-bg table-sort">
@@ -397,18 +398,33 @@ function statusTools(row) {
         return "<a style=\"text-decoration:none\" onClick=\"user_start(this,\'" + row.commodityId + "\')\" href=\"javascript:;\" title=\"启用\"><span style='color: #0e90d2 '>启用</span></a>";
     }
 }
-
+//导出商品的excel
+function export_excel1() {
+    var tag = $("#tag option:selected").val();
+    var origin = $("#origin option:selected").val();
+    var categoryId = $("#categoryId option:selected").val();
+    var commodityStatus = $("#commodityStatus option:selected").val();
+    var commodityName =$("#commodityName").val();
+    var elemIF = document.createElement("iframe");
+    elemIF.src = "${context_root}/commodity/exportExcel.action?tag="+tag+"&origin="+origin+"&categoryId="+categoryId+"&commodityStatus="+commodityStatus+"&commodityName="+commodityName;
+    elemIF.style.display = "none";
+    document.body.appendChild(elemIF);
+}
+//导出excel
 function query() {
     var tag = $("#tag option:selected").val();
     var origin = $("#origin option:selected").val();
     var categoryId = $("#categoryId option:selected").val();
     var supply = $("#supply option:selected").val();
     var commodityStatus = $("#commodityStatus option:selected").val();
-	var commodityName =$("#commodityName").val();
+    var commodityName =$("#commodityName").val();
     pageTable.fnSettings().sAjaxSource = encodeURI("${context_root}/commodity/findProductList.action?tag="+tag+"&origin="+origin+"&categoryId="+categoryId+"&commodityStatus="+commodityStatus+"&commodityName="+commodityName+"&type=${product.type}");
     pageTable.fnClearTable(0);
     pageTable.fnDraw();
 }
+
+
+
 
 
 /*角色-添加*/

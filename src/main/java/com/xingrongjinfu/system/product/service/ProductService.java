@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -112,6 +113,12 @@ public class ProductService implements IProductService {
     @Override
     public String getStockUrl() {
         return stockUrl;
+    }
+    //查询商品信息,导表
+    @Override
+    public List<Map> productInfoQuery(Map<String, String> param) {
+        List<Map> list = productDao.productInfoQuery(param);
+        return list;
     }
 
     @Override

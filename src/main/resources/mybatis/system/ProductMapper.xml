@@ -90,6 +90,55 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by c.addTime desc
 	</select>
 
+	<!--查询所有-->
+	<resultMap id="ProductResult1" type="map">
+		<result column="commodityId" property="commodityId" />
+		<result column="commodityName" property="commodityName" />
+		<result column="commodityNo" property="commodityNo" />
+		<result column="inPrice" property="inPrice" />
+		<result column="salePrice" property="salePrice" />
+		<result column="categoryId" property="categoryId" />
+		<result column="unit" property="unit" />
+		<result column="stockNum" property="stockNum" />
+		<result column="status" property="status" />
+		<result column="origin" property="origin" />
+		<result column="country" property="country" />
+		<result column="yyStock" property="yyStock" />
+		<result column="kfStock" property="kfStock" />
+		<result column="kxdStock" property="kxdStock" />
+		<result column="categoryName" property="categoryName" />
+	</resultMap>
+	<select id="productInfoQuery" parameterType="map" resultMap="ProductResult1">
+		SELECT c.commodityId,c.yyStock,c.kfStock,c.kxdStock,c.commodityName,c.commodityNo,c.subprice,c.inPrice/100 inPrice,
+		c.salePrice/100 salePrice,c.unit,c.stockNum,c.status,c.origin,c.commodityStatus commodityStatus,case c.country when 1 THEN '国内' when 2 then '国外' ELSE  '其他' END country,t.categoryName
+		FROM t_commodity c LEFT JOIN t_category t ON c.categoryId=t.categoryId
+		WHERE 1=1
+		<if test="type !=null and type!=''">
+			AND c.type=#{type}
+		</if>
+		<if test="tag!=null and tag !=''">
+			AND c.tag=#{tag}
+		</if>
+		<if test="origin!=null and origin !=''">
+			AND c.origin=#{origin}
+		</if>
+		<if test="categoryId!=null and categoryId !=''">
+			AND t.categoryId=#{categoryId}
+		</if>
+		<if test="commodityStatus!=null and commodityStatus !=''">
+			AND c.commodityStatus=#{commodityStatus}
+		</if>
+		<if test="commodityName!=null and commodityName !=''">
+			AND (
+			c.barCode LIKE CONCAT(CONCAT('%', #{commodityName}),'%')
+			OR
+			c.commodityName LIKE CONCAT(CONCAT('%', #{commodityName}),'%')
+			OR
+			c.commodityNo LIKE CONCAT(CONCAT('%', #{commodityName}),'%')
+			)
+		</if>
+	</select>
+
 
 	<select id="getProductList"  resultMap="ProductResult">
 		SELECT c.commodityId,c.subPrice,c.barCode,c.commodityDes,c.priceSpecification,c.commodityName,c.commodityNo,c.imgMain,c.imgOther,c.specification,c.inPrice/100 inPrice,

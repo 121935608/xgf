@@ -10,10 +10,13 @@
  */
 package com.xingrongjinfu.system.product.controller;
 
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.*;
 
 import com.xingrongjinfu.common.constants.Constants;
+import com.xingrongjinfu.system.commodity.common.CommodityConstant;
+import com.xingrongjinfu.utils.ExportExcel;
 import com.xingrongjinfu.utils.HttpClientUtil;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.core.controller.BaseController;
@@ -36,6 +39,9 @@ import com.xingrongjinfu.system.product.service.IProductService;
 import com.xingrongjinfu.system.syscode.model.SysCode;
 import com.xingrongjinfu.utils.AliyunOSSClientUtil;
 import com.xingrongjinfu.utils.StringUtil;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * 商品列表+新增商品列表（平台端）
@@ -357,4 +363,38 @@ public class ProductController extends BaseController{
         }
         return sysCodeList;
     }
+
+
+    /**
+     * 导出商品列表数据
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping("exportExcel")
+    public Message downloadProducts(HttpServletRequest request, HttpServletResponse response) {
+        Map<String, String> param = new HashMap();
+        param.put("tag",request.getParameter("tag"));
+        param.put("categoryId",request.getParameter("categoryId"));
+        param.put("commodityStatus",request.getParameter("commodityStatus"));
+        param.put("commodityName",request.getParameter("commodityName"));
+        param.put("origin",request.getParameter("origin"));
+        List<Map> data=productService.productInfoQuery(param);
+        try {
+            String[][] headers=new String[][]{{"编号","商品名称","商品条码","分类","产地","单位","国内/国外","主观价","客观价","进价(元)","售价(元)","库存","犹豫库存","客服库存","可下单库存","上下架"},
+                    {"commodityId","commodityName","commodityNo","categoryName","origin","unit","country","subprice","salePrice","inPrice","salePrice","stockNum","yyStock","kfStock","kxdStock","commodityStatus"}};
+            response.setContentType("application/force-" +
+                    "");// 设置强制下载不打开
+            response.addHeader("Content-Disposition","attachment;fileName=export.xls");// 设置文件名
+            OutputStream output = response.getOutputStream();
+            ExportExcel.exportExcel2("商品信息", headers, data, output);
+            output.flush();
+            output.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Message(0);
+        }
+        return new Message(1);
+    }
+
 }
