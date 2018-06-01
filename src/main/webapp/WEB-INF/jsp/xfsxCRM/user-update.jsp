@@ -148,7 +148,9 @@
                     data: {
                         name: function () {
                             return $.trim($("#crmLogin").val());
-                        }
+                        },
+                        supervisorId : $("#supervisorId").val()
+ 
                     },
                     dataFilter: function (data, type) {
                         if (data == "0") return true;

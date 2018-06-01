@@ -4,6 +4,7 @@ import com.xingrongjinfu.crm.crmUser.dao.CrmUserDao;
 import com.xingrongjinfu.crm.department.model.Dept;
 import com.xingrongjinfu.system.role.model.Role;
 import com.xingrongjinfu.system.supervisor.model.Supervisor;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,4 +31,9 @@ public class CrmUserServiceImpl implements CrmUserService{
     public List<Supervisor> checkCrmLogin(String crmLogin) {
         return crmUserDao.checkCrmLogin(crmLogin);
     }
+
+	@Override
+	public Supervisor findBySupervisorId(Integer supervisorId) {
+		return crmUserDao.findBySupervisorId(supervisorId);
+	}
 }

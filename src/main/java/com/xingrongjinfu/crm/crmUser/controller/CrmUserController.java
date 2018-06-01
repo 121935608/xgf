@@ -195,14 +195,20 @@ public class CrmUserController extends BaseController
     /*检查用户名是否存在*/
     @RequestMapping(CrmUserConstant.USER_CRM_CHECK_CRMLOGIN_URL)
     public @ResponseBody String checkCrm(Supervisor supervisor){
-        String checkCrmLogin = "0";
-            if(supervisor.getCrmLogin() != null){
-                List<Supervisor> list = crmUserService.checkCrmLogin(supervisor.getCrmLogin());
-                if(list.size()>0){
-                    checkCrmLogin = "1";
-                }
+	    String checkCrmLogin = "0";
+    	if(supervisor != null  && supervisor.getSupervisorId() != null) {
+    		Supervisor supervisors = crmUserService.findBySupervisorId(supervisor.getSupervisorId());
+    		if(supervisors.getCrmLogin().equals(supervisor.getCrmLogin())) {
+    			return checkCrmLogin;
+    		}
+    	}
+        if(supervisor.getCrmLogin() != null){
+            List<Supervisor> list = crmUserService.checkCrmLogin(supervisor.getCrmLogin());
+            if(list.size()>0){
+                checkCrmLogin = "1";
             }
-            return checkCrmLogin;
+        }
+        return checkCrmLogin;
     }
     
     

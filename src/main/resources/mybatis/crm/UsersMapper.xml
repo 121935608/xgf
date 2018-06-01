@@ -30,6 +30,9 @@
     <select id="checkCrmLogin" resultType="Supervisor">
         SELECT supervisorId FROM sys_supervisor WHERE crmLogin = #{crmLogin};
     </select>
-
+    
+    <select id="findBySupervisorId" resultType="Supervisor">
+        SELECT * FROM sys_supervisor WHERE supervisorId = #{supervisorId};
+    </select>
 
 </mapper>

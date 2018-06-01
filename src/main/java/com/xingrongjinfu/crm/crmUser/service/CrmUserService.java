@@ -16,4 +16,6 @@ public interface CrmUserService {
 
     /*根据用户名查询数据*/
     List<Supervisor> checkCrmLogin(String crmLogin);
+
+	Supervisor findBySupervisorId(Integer supervisorId);
 }
