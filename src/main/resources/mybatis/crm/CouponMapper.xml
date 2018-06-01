@@ -39,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <!-- 查询优惠券信息列表，分页 -->
  	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultType="Coupon" useCache="false">
-		SELECT * FROM c_coupon 
+		SELECT * FROM c_coupon ORDER BY createTime DESC
 	</select>
 	
 	<!-- 根据ID查询优惠券信息 -->
