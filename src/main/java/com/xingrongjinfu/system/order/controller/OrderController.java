@@ -547,7 +547,7 @@ public class OrderController extends BaseController {
             // 减少客服库存
             Product product = productService.findProductInfoByNo(orderDetail.getCommodityNo());
             product.setKfStock(product.getKfStock());
-            productService.updateProduct(product);
+            productService.updateProductStock(product);
         }
 
         // 封装商铺信息
