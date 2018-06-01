@@ -1,103 +1,104 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="OrderMapper">
 
-	<resultMap id="OrderResult" type="Orders">
-		<result column="orderId" property="orderId" />
-		<result column="orderNumber" property="orderNumber" />
-		<result column="addressId" property="addressId" />
-		<result column="userId" property="userId" />
-		<result column="orderTime" property="orderTime" />
-		<result column="payTime" property="payTime" />
-		<result column="number" property="number" />
-		<result column="totalPrice" property="totalPrice" />
-		<result column="freight" property="freight" />
-		<result column="payment" property="payment" />
-		<result column="orderPrice" property="orderPrice" />
-		<result column="orderStatus" property="orderStatus" />
-		<result column="status" property="status" />
-		<result column="userName" property="userName" />
-		<result column="platform" property="platform" />
-		<result column="storeName" property="storeName" />
-		<result column="userNames" property="userNames" />
-		<result column="phone" property="phone" />
-		<result column="area" property="area" />
-		<result column="address" property="address" />
-		<result column="supervisorName" property="supervisorName" />
-	</resultMap>
+    <resultMap id="OrderResult" type="Orders">
+        <result column="orderId" property="orderId"/>
+        <result column="orderNumber" property="orderNumber"/>
+        <result column="addressId" property="addressId"/>
+        <result column="userId" property="userId"/>
+        <result column="orderTime" property="orderTime"/>
+        <result column="payTime" property="payTime"/>
+        <result column="number" property="number"/>
+        <result column="totalPrice" property="totalPrice"/>
+        <result column="freight" property="freight"/>
+        <result column="payment" property="payment"/>
+        <result column="orderPrice" property="orderPrice"/>
+        <result column="orderStatus" property="orderStatus"/>
+        <result column="status" property="status"/>
+        <result column="userName" property="userName"/>
+        <result column="platform" property="platform"/>
+        <result column="storeName" property="storeName"/>
+        <result column="userNames" property="userNames"/>
+        <result column="phone" property="phone"/>
+        <result column="area" property="area"/>
+        <result column="address" property="address"/>
+        <result column="supervisorName" property="supervisorName"/>
+    </resultMap>
 
 
-	<resultMap id="OrderDetailResult" type="OrderDetail">
-		<result column="orderDetailId" property="orderDetailId" />
-		<result column="orderNumber" property="orderNumber" />
-		<result column="commodityId" property="commodityId" />
-		<result column="commodityNum" property="commodityNum" />
-		<result column="commodityName" property="commodityName" />
-		<result column="addTime" property="addTime" />
-		<result column="inPrice" property="inPrice" />
-		<result column="salePrice" property="salePrice" />
-		<result column="taxRate" property="taxRate" />
-		<result column="unit" property="unit" />
-		<result column="imgMain" property="imgMain" />
-		<result column="totalPrice" property="totalPrice" />
-		<result column="commodityNo" property="commodityNo" />
-	</resultMap>
+    <resultMap id="OrderDetailResult" type="OrderDetail">
+        <result column="orderDetailId" property="orderDetailId"/>
+        <result column="orderNumber" property="orderNumber"/>
+        <result column="commodityId" property="commodityId"/>
+        <result column="commodityNum" property="commodityNum"/>
+        <result column="commodityName" property="commodityName"/>
+        <result column="addTime" property="addTime"/>
+        <result column="inPrice" property="inPrice"/>
+        <result column="salePrice" property="salePrice"/>
+        <result column="taxRate" property="taxRate"/>
+        <result column="unit" property="unit"/>
+        <result column="imgMain" property="imgMain"/>
+        <result column="totalPrice" property="totalPrice"/>
+        <result column="commodityNo" property="commodityNo"/>
+    </resultMap>
 
-	<resultMap id="OrderExpressResult" type="OrderExpress">
-		<result column="expressId" property="expressId" />
-		<result column="expressNo" property="expressNo" />
-		<result column="orderNumber" property="orderNumber" />
-		<result column="expressFirm" property="expressFirm" />
-		<result column="address" property="address" />
-		<result column="status" property="status" />
-		<result column="addTime" property="addTime" />
-		<result column="freight" property="freight" />
-	</resultMap>
-	
-	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultMap="OrderResult">
-		SELECT o.orderNumber,o.orderTime,o.payTime,s.userName,o.orderPrice/100 orderPrice,o.platform,o.orderStatus,o.payCode,ad.address address ,ss.`name` supervisorName
-		FROM t_order o
-		LEFT JOIN sys_user s ON o.userId=s.userId
-		LEFT JOIN t_address ad ON ad.`addrId`=o.`addressId`
-		LEFT JOIN t_store st on st.userId=o.userId
-		LEFT JOIN sys_supervisor ss on ss.supervisorNum=st.supervisorId
-		WHERE 1=1 and o.`status`=1
-		<if test="relationMap.beginTime != null and relationMap.beginTime != ''"><!-- 开始时间检索 -->
-			AND DATE_FORMAT(o.orderTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
-		</if>
-		<if test="relationMap.endTime != null and relationMap.endTime != ''"><!-- 结束时间检索 -->
-			AND DATE_FORMAT(o.orderTime,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
-		</if>
-		<if test="relationMap.platform != null and relationMap.platform != ''">
-			AND o.platform=#{relationMap.platform}
-		</if>
-		<if test="relationMap.orderStatus != null and relationMap.orderStatus != ''">
-					AND o.orderStatus=#{relationMap.orderStatus}
-		</if>
-		<if test="relationMap.orderNumber !=null and relationMap.orderNumber !=''">
-			AND (
-			o.orderNumber LIKE CONCAT(CONCAT('%', #{relationMap.orderNumber}),'%')
-			OR
-			s.userName LIKE CONCAT(CONCAT('%', #{relationMap.orderNumber}),'%')
-			)
-		</if>
-		<if test="relationMap.address !=null and relationMap.address !=''">
-			AND ad.address LIKE CONCAT(CONCAT('%', #{relationMap.address}),'%')
+    <resultMap id="OrderExpressResult" type="OrderExpress">
+        <result column="expressId" property="expressId"/>
+        <result column="expressNo" property="expressNo"/>
+        <result column="orderNumber" property="orderNumber"/>
+        <result column="expressFirm" property="expressFirm"/>
+        <result column="address" property="address"/>
+        <result column="status" property="status"/>
+        <result column="addTime" property="addTime"/>
+        <result column="freight" property="freight"/>
+    </resultMap>
 
-		</if>
+    <select id="pageInfoQuery" parameterType="PageUtilEntity" resultMap="OrderResult">
+        SELECT o.orderNumber,o.orderTime,o.payTime,s.userName,o.orderPrice/100
+        orderPrice,o.platform,o.orderStatus,o.payCode,ad.address address ,ss.`name` supervisorName
+        FROM t_order o
+        LEFT JOIN sys_user s ON o.userId=s.userId
+        LEFT JOIN t_address ad ON ad.`addrId`=o.`addressId`
+        LEFT JOIN t_store st on st.userId=o.userId
+        LEFT JOIN sys_supervisor ss on ss.supervisorNum=st.supervisorId
+        WHERE 1=1 and o.`status`=1
+        <if test="relationMap.beginTime != null and relationMap.beginTime != ''"><!-- 开始时间检索 -->
+            AND DATE_FORMAT(o.orderTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
+        </if>
+        <if test="relationMap.endTime != null and relationMap.endTime != ''"><!-- 结束时间检索 -->
+            AND DATE_FORMAT(o.orderTime,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
+        </if>
+        <if test="relationMap.platform != null and relationMap.platform != ''">
+            AND o.platform=#{relationMap.platform}
+        </if>
+        <if test="relationMap.orderStatus != null and relationMap.orderStatus != ''">
+            AND o.orderStatus=#{relationMap.orderStatus}
+        </if>
+        <if test="relationMap.orderNumber !=null and relationMap.orderNumber !=''">
+            AND (
+            o.orderNumber LIKE CONCAT(CONCAT('%', #{relationMap.orderNumber}),'%')
+            OR
+            s.userName LIKE CONCAT(CONCAT('%', #{relationMap.orderNumber}),'%')
+            )
+        </if>
+        <if test="relationMap.address !=null and relationMap.address !=''">
+            AND ad.address LIKE CONCAT(CONCAT('%', #{relationMap.address}),'%')
 
-		<if test="relationMap.supervisorName !=null and relationMap.supervisorName !=''">
-			AND ss.`name` LIKE CONCAT(CONCAT('%', #{relationMap.supervisorName}),'%')
+        </if>
 
-		</if>
+        <if test="relationMap.supervisorName !=null and relationMap.supervisorName !=''">
+            AND ss.`name` LIKE CONCAT(CONCAT('%', #{relationMap.supervisorName}),'%')
 
-		<!--关键词查询-->
-	     order by o.orderTime DESC
-	</select>
-	
-	<select id="findOrderInfo" parameterType="String" resultMap="OrderResult">
+        </if>
+
+        <!--关键词查询-->
+        order by o.orderTime DESC
+    </select>
+
+    <select id="findOrderInfo" parameterType="String" resultMap="OrderResult">
 		SELECT o.orderId,o.orderNumber,o.orderTime,o.payCode,s.userName,o.orderPrice/100 orderPrice,o.orderStatus,t.storeName,
 		ad.name userNames,ad.phone phone,ad.area `area`,ad.address address,o.totalPrice/100 totalPrice,o.freight/100 freight,o.payment/100 payment
 		FROM t_order o LEFT JOIN sys_user s ON o.userId=s.userId
@@ -105,162 +106,161 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		LEFT JOIN t_store t ON o.userId=t.userId WHERE o.orderNumber=#{orderNumber}
 	</select>
 
-	<select id="findOrderDetailInfo" parameterType="String" resultMap="OrderDetailResult">
+    <select id="findOrderDetailInfo" parameterType="String" resultMap="OrderDetailResult">
 		SELECT d.orderDetailId,d.commodityName,c.commodityNo,d.unit,d.commodityNum,d.salePrice/100 inPrice,d.orderNumber,c.commodityId,c.unit
 		FROM t_order_detail d LEFT JOIN t_commodity c ON d.commodityId=c.commodityId
 		WHERE d.orderNumber=#{orderNumber}
 	</select>
 
 
-	<select id="findOrderDetailInfoByNo" parameterType="String" resultMap="OrderDetailResult">
+    <select id="findOrderDetailInfoByNo" parameterType="String" resultMap="OrderDetailResult">
 		SELECT d.orderDetailId,d.commodityName,c.commodityNo,d.unit,d.commodityNum,d.salePrice inPrice,d.salePrice,d.totalPrice,  d.orderNumber,c.commodityId,c.unit
 		FROM t_order_detail d LEFT JOIN t_commodity c ON d.commodityId=c.commodityId
 		WHERE d.orderNumber=#{orderNumber}
 	</select>
 
-	<update id="updateOrderInfo" parameterType="Orders">
-		UPDATE t_order
-		<set>
-			<if test="orderStatus !=null and orderStatus!=''">orderStatus=#{orderStatus},</if>
-			arriveTime=sysdate()
-		</set>
-		WHERE 1=1
-		<if test="orderNumber!=null and orderNumber!=''"> AND orderNumber=#{orderNumber}</if>
-	</update>
+    <update id="updateOrderInfo" parameterType="Orders">
+        UPDATE t_order
+        <set>
+            <if test="orderStatus !=null and orderStatus!=''">orderStatus=#{orderStatus},</if>
+            arriveTime=sysdate()
+        </set>
+        WHERE 1=1
+        <if test="orderNumber!=null and orderNumber!=''">AND orderNumber=#{orderNumber}</if>
+    </update>
 
-	<!-- 修改订单状态 -->
-	<update id="updateOrderStatus" parameterType="Orders">
-		UPDATE t_order
-		<set>
-			<if test="orderStatus !=null and orderStatus!=''">orderStatus=#{orderStatus},</if>
-		</set>
-		WHERE 1=1
-		<if test="orderNumber!=null and orderNumber!=''">AND orderNumber=#{orderNumber}</if>
-	</update>
+    <!-- 修改订单状态 -->
+    <update id="updateOrderStatus" parameterType="Orders">
+        UPDATE t_order
+        <set>
+            <if test="orderStatus !=null and orderStatus!=''">orderStatus=#{orderStatus},</if>
+        </set>
+        <where>orderNumber=#{orderNumber}</where>
+    </update>
 
-	<select id="ExpresspageInfoQuery" parameterType="PageUtilEntity" resultMap="OrderExpressResult">
-		SELECT expressId,expressNo,orderNumber,expressFirm,address,status,addTime,freight/100 freight FROM t_express
-		WHERE 1=1
-		<if test="relationMap.expressFirm !=null and relationMap.expressFirm !=''">
-			AND expressFirm=#{relationMap.expressFirm}
-		</if>
-		<if test="relationMap.orderNumber!=null and relationMap.orderNumber!=''">
-			AND
-			(
-			orderNumber LIKE CONCAT(CONCAT('%', #{relationMap.orderNumber}),'%')
-			OR
-			expressNo LIKE CONCAT(CONCAT('%', #{relationMap.orderNumber}),'%')
-			)
-		</if>
-	</select>
+    <select id="ExpresspageInfoQuery" parameterType="PageUtilEntity" resultMap="OrderExpressResult">
+        SELECT expressId,expressNo,orderNumber,expressFirm,address,status,addTime,freight/100 freight FROM t_express
+        WHERE 1=1
+        <if test="relationMap.expressFirm !=null and relationMap.expressFirm !=''">
+            AND expressFirm=#{relationMap.expressFirm}
+        </if>
+        <if test="relationMap.orderNumber!=null and relationMap.orderNumber!=''">
+            AND
+            (
+            orderNumber LIKE CONCAT(CONCAT('%', #{relationMap.orderNumber}),'%')
+            OR
+            expressNo LIKE CONCAT(CONCAT('%', #{relationMap.orderNumber}),'%')
+            )
+        </if>
+    </select>
 
-	<select id="findAllOrders" resultType="Integer">
+    <select id="findAllOrders" resultType="Integer">
 		SELECT count(orderNumber) FROM t_order WHERE status=1 AND orderStatus !='1'
 	</select>
 
-	<update id="updatePayOrder" parameterType="string">
+    <update id="updatePayOrder" parameterType="string">
 		update t_order set orderStatus=5 where orderNumber=#{0}
 	</update>
-	
-	<!--谢鲜CRM统计查询-->
-	<select id="orderAllList" resultType="Orders">
+
+    <!--谢鲜CRM统计查询-->
+    <select id="orderAllList" resultType="Orders">
 		SELECT * FROM t_order o WHERE o.orderStatus NOT IN ('-1','1') AND o.`status` = 1
 	</select>
 
-	<!-- 客户更新订单信息 -->
-	<update id="updateModifyOrder" parameterType="Order">
-		UPDATE t_order
-		<set>
-			<if test="orderStatus !=null and orderStatus !=''">orderStatus=#{orderStatus},</if>
-			<if test="orderStatus !=null and orderStatus !=''">receivePhone=#{phone},</if>
-			<if test="area !=null and area !=''">receiveArea=#{area},</if>
-			<if test="address !=null and address !=''">receiveAddress=#{address},</if>
-			<if test="userNames !=null and userNames !=''">receiver=#{userNames},</if>
-			<if test="freight !=null and freight !=''">freight=#{freight},</if>
-			<if test="orderPrice !=null and orderPrice !=''">orderPrice=#{orderPrice}</if>
-			<if test="serviceRemark !=null and serviceRemark !=''">serviceRemark=#{serviceRemark}</if>
-		</set>
-		<where>
-			<if test="orderNumber !=null and orderNumber !=''">AND orderNumber=#{orderNumber}</if>
-			<if test="orderId !=null and orderId !=''">AND orderId=#{orderId}</if>
-		</where>
-	</update>
+    <!-- 客户更新订单信息 -->
+    <update id="updateModifyOrder" parameterType="Order">
+        UPDATE t_order
+        <set>
+            <if test="orderStatus !=null and orderStatus !=''">orderStatus=#{orderStatus},</if>
+            <if test="orderStatus !=null and orderStatus !=''">receivePhone=#{phone},</if>
+            <if test="area !=null and area !=''">receiveArea=#{area},</if>
+            <if test="address !=null and address !=''">receiveAddress=#{address},</if>
+            <if test="userNames !=null and userNames !=''">receiver=#{userNames},</if>
+            <if test="freight !=null and freight !=''">freight=#{freight},</if>
+            <if test="orderPrice !=null and orderPrice !=''">orderPrice=#{orderPrice}</if>
+            <if test="serviceRemark !=null and serviceRemark !=''">serviceRemark=#{serviceRemark}</if>
+        </set>
+        <where>
+            <if test="orderNumber !=null and orderNumber !=''">AND orderNumber=#{orderNumber}</if>
+            <if test="orderId !=null and orderId !=''">AND orderId=#{orderId}</if>
+        </where>
+    </update>
 
-	<!-- 通过订单编号,商品条码查询唯一订单明细 -->
-	<select id="findOrderDetail" parameterType="map" resultMap="OrderDetailResult">
-		SELECT d.orderDetailId,d.commodityName,d.commodityNo,d.unit,d.commodityNum,d.salePrice/100
-		inPrice,d.orderNumber
-		FROM t_order_detail d
-		<where>
-			<if test="orderNumber !=null and orderNumber != ''">
-				AND d.orderNumber = #{orderNumber}
-			</if>
-			<if test="commodityNo !=null and commodityNo != ''">
-				AND d.commodityNo = #{commodityNo}
-			</if>
-		</where>
-	</select>
+    <!-- 通过订单编号,商品条码查询唯一订单明细 -->
+    <select id="findOrderDetail" parameterType="map" resultMap="OrderDetailResult">
+        SELECT d.orderDetailId,d.commodityName,d.commodityNo,d.unit,d.commodityNum,d.salePrice/100
+        inPrice,d.orderNumber
+        FROM t_order_detail d
+        <where>
+            <if test="orderNumber !=null and orderNumber != ''">
+                AND d.orderNumber = #{orderNumber}
+            </if>
+            <if test="commodityNo !=null and commodityNo != ''">
+                AND d.commodityNo = #{commodityNo}
+            </if>
+        </where>
+    </select>
 
-	<!-- 插入订单审核表 -->
-	<insert id="insertOrderAuditing" parameterType="orderAuditing">
-		INSERT INTO t_order_auditing(auditingId,orderId,orderDetailId,
-		<if test="orderNumber !=null and orderNumber !='' ">orderNumber,</if>
-		<if test="commodityId !=null and commodityId !='' ">commodityId,</if>
-		<if test="commodityNo !=null and commodityNo!='' ">commodityNo,</if>
-		<if test="commodityName !=null and commodityName !='' ">commodityName,</if>
-		<if test="commodityNum !=null and commodityNum !='' ">commodityNum,</if>
-		<if test="serviceId !=null and serviceId !='' ">serviceId,</if>
-		<if test="serviceRemark !=null and serviceRemark !='' ">serviceRemark,</if>
-		<if test="serviceModify !=null and serviceModify !='' ">serviceModify,</if>
-		<if test="modifyStatus !=null and modifyStatus !='' ">modifyStatus,</if>
-		modifyTime
-		)VALUES (#{auditingId},#{orderId},#{orderDetailId},
-		<if test="orderNumber !=null and orderNumber !='' ">#{orderNumber},</if>
-		<if test="commodityId !=null and commodityId !='' ">#{commodityId},</if>
-		<if test="commodityNo !=null and commodityNo!='' ">#{commodityNo},</if>
-		<if test="commodityName !=null and commodityName !='' ">#{commodityName},</if>
-		<if test="commodityNum !=null and commodityNum !='' ">#{commodityNum},</if>
-		<if test="serviceId !=null and serviceId !='' ">#{serviceId},</if>
-		<if test="serviceRemark !=null and serviceRemark !='' ">#{serviceRemark},</if>
-		<if test="serviceModify !=null and serviceModify !='' ">#{serviceModify},</if>
-		<if test="modifyStatus !=null and modifyStatus !='' ">#{modifyStatus},</if>
-		sysdate())
-	</insert>
+    <!-- 插入订单审核表 -->
+    <insert id="insertOrderAuditing" parameterType="orderAuditing">
+        INSERT INTO t_order_auditing(auditingId,orderId,orderDetailId,
+        <if test="orderNumber !=null and orderNumber !='' ">orderNumber,</if>
+        <if test="commodityId !=null and commodityId !='' ">commodityId,</if>
+        <if test="commodityNo !=null and commodityNo!='' ">commodityNo,</if>
+        <if test="commodityName !=null and commodityName !='' ">commodityName,</if>
+        <if test="commodityNum !=null and commodityNum !='' ">commodityNum,</if>
+        <if test="serviceId !=null and serviceId !='' ">serviceId,</if>
+        <if test="serviceRemark !=null and serviceRemark !='' ">serviceRemark,</if>
+        <if test="serviceModify !=null and serviceModify !='' ">serviceModify,</if>
+        <if test="modifyStatus !=null and modifyStatus !='' ">modifyStatus,</if>
+        modifyTime
+        )VALUES (#{auditingId},#{orderId},#{orderDetailId},
+        <if test="orderNumber !=null and orderNumber !='' ">#{orderNumber},</if>
+        <if test="commodityId !=null and commodityId !='' ">#{commodityId},</if>
+        <if test="commodityNo !=null and commodityNo!='' ">#{commodityNo},</if>
+        <if test="commodityName !=null and commodityName !='' ">#{commodityName},</if>
+        <if test="commodityNum !=null and commodityNum !='' ">#{commodityNum},</if>
+        <if test="serviceId !=null and serviceId !='' ">#{serviceId},</if>
+        <if test="serviceRemark !=null and serviceRemark !='' ">#{serviceRemark},</if>
+        <if test="serviceModify !=null and serviceModify !='' ">#{serviceModify},</if>
+        <if test="modifyStatus !=null and modifyStatus !='' ">#{modifyStatus},</if>
+        sysdate())
+    </insert>
 
-	<!-- 插入订单明细表 -->
-	<insert id="insertOrderDetail" parameterType="OrderDetail">
-		INSERT INTO t_order_detail(
-		orderDetailId,orderNumber,commodityId,commodityNo,
-		<if test="commodityName !=null and commodityName !='' ">commodityName,</if>
-		<if test="commodityNum !=null and commodityNum !='' ">commodityNum,</if>
-		<if test="inPrice !=null and inPrice !='' ">inPrice,</if>
-		<if test="salePrice !=null and salePrice !='' ">salePrice,</if>
-		<if test="taxRate !=null and taxRate !='' ">taxRate,</if>
-		<if test="unit !=null and unit !='' ">unit,</if>
-		<if test="imgMain !=null and imgMain !='' ">imgMain,</if>
-		<if test="totalPrice !=null and totalPrice !='' ">totalPrice,</if>
-		addTime
-		)VALUES (
-		#{orderDetailId},#{orderNumber},#{commodityId},#{commodityNo},
-		<if test="commodityName !=null and commodityName !='' ">#{commodityName},</if>
-		<if test="commodityNum !=null and commodityNum !='' ">#{commodityNum},</if>
-		<if test="inPrice !=null and inPrice !='' ">#{inPrice},</if>
-		<if test="salePrice !=null and salePrice !='' ">#{salePrice},</if>
-		<if test="taxRate !=null and taxRate !='' ">#{taxRate},</if>
-		<if test="unit !=null and unit !='' ">#{unit},</if>
-		<if test="imgMain !=null and imgMain !='' ">#{imgMain},</if>
-		<if test="totalPrice !=null and totalPrice !='' ">#{totalPrice},</if>
-		sysdate()
-		)
-	</insert>
+    <!-- 插入订单明细表 -->
+    <insert id="insertOrderDetail" parameterType="OrderDetail">
+        INSERT INTO t_order_detail(
+        orderDetailId,orderNumber,commodityId,commodityNo,
+        <if test="commodityName !=null and commodityName !='' ">commodityName,</if>
+        <if test="commodityNum !=null and commodityNum !='' ">commodityNum,</if>
+        <if test="inPrice !=null and inPrice !='' ">inPrice,</if>
+        <if test="salePrice !=null and salePrice !='' ">salePrice,</if>
+        <if test="taxRate !=null and taxRate !='' ">taxRate,</if>
+        <if test="unit !=null and unit !='' ">unit,</if>
+        <if test="imgMain !=null and imgMain !='' ">imgMain,</if>
+        <if test="totalPrice !=null and totalPrice !='' ">totalPrice,</if>
+        addTime
+        )VALUES (
+        #{orderDetailId},#{orderNumber},#{commodityId},#{commodityNo},
+        <if test="commodityName !=null and commodityName !='' ">#{commodityName},</if>
+        <if test="commodityNum !=null and commodityNum !='' ">#{commodityNum},</if>
+        <if test="inPrice !=null and inPrice !='' ">#{inPrice},</if>
+        <if test="salePrice !=null and salePrice !='' ">#{salePrice},</if>
+        <if test="taxRate !=null and taxRate !='' ">#{taxRate},</if>
+        <if test="unit !=null and unit !='' ">#{unit},</if>
+        <if test="imgMain !=null and imgMain !='' ">#{imgMain},</if>
+        <if test="totalPrice !=null and totalPrice !='' ">#{totalPrice},</if>
+        sysdate()
+        )
+    </insert>
 
-	<!-- 通过订单id查询订单 -->
-	<select id="findOrder" parameterType="string" resultType="Orders">
+    <!-- 通过订单id查询订单 -->
+    <select id="findOrder" parameterType="string" resultType="Orders">
 		SELECT * FROM t_order WHERE orderId = #{orderId}
 	</select>
 
-	<!-- 更新订单库存号 -->
-	<update id="updateOrderStorageNoAndStatus" parameterType="Orders">
+    <!-- 更新订单库存号 -->
+    <update id="updateOrderStorageNoAndStatus" parameterType="Orders">
 		UPDATE t_order set storageNo=#{storageNo},orderStatus=#{orderStatus} where orderId=#{orderId}
 	</update>
 </mapper> 

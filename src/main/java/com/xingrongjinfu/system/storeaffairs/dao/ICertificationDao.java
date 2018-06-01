@@ -60,4 +60,6 @@ public interface ICertificationDao
 
     /** 查询商铺详细信息*/
     Store getStoreByUserId(String userId);
+
+    Store getVirtualStoreByUserId(String userId);
 }

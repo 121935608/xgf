@@ -214,15 +214,15 @@
         <div id="add" class="row cl">
             <div class="col-xs-offset-3 col-xs-2 col-sm-2">
                 <input class="btn btn-primary radius" type="button" id="submitBut" onClick="submitModifyOrder()"
-                       value="&nbsp;&nbsp;提交审核&nbsp;&nbsp;">
+                       value="&nbsp;&nbsp;提交审核&nbsp;&nbsp;"/>
             </div>
             <div class="col-xs-2 col-sm-2">
                 <input class="btn btn-primary radius" type="button" id="cancelBut" onClick="cancelAllOrderFn()"
-                       value="&nbsp;&nbsp;整单取消&nbsp;&nbsp;">
+                       value="&nbsp;&nbsp;整单取消&nbsp;&nbsp;"/>
             </div>
             <div class="col-xs-2 col-sm-2">
                 <input class="btn btn-primary radius" type="button" id="closeBut" onClick="closeWin()"
-                       value="&nbsp;&nbsp;关闭&nbsp;&nbsp;">
+                       value="&nbsp;&nbsp;关闭&nbsp;&nbsp;"/>
             </div>
         </div>
     </form>
@@ -550,14 +550,14 @@
                         trNode.children("td").eq(1).html(comObj.commodityNo);
                         trNode.children("td").eq(2).html(comObj.unit);
                         trNode.children("td").eq(3).html(1);
-                        trNode.children("td").eq(4).html((comObj.salePrice/100).toFixed(1));
-                        trNode.children("td").eq(5).html((comObj.subPrice/100).toFixed(1));
+                        trNode.children("td").eq(4).html((comObj.salePrice / 100).toFixed(1));
+                        trNode.children("td").eq(5).html((comObj.subPrice / 100).toFixed(1));
                         trNode.children("td").eq(6).html(comObj.subPriceUnit);
                         trNode.children("td").eq(7).html(comObj.weight);
-                        trNode.children("td").eq(8).html((comObj.salePrice/100).toFixed(1));
+                        trNode.children("td").eq(8).html((comObj.salePrice / 100).toFixed(1));
 
                         if ($("#addOrderMoneyInput").val() == undefined || $("#addOrderMoneyInput").val() == "") {
-                            $("#addOrderMoneyInput").val((comObj.salePrice/100).toFixed(1));
+                            $("#addOrderMoneyInput").val((comObj.salePrice / 100).toFixed(1));
                         }
                     }
                 },
@@ -588,7 +588,8 @@
                 alert($(this).text());*/
                 var name = $(this).attr("jsonName");
                 if (j == 0) {
-                    data[name] = $(this).find("input").val()
+                    alert( $("#autoCompleteId" + i).val());
+                    data[name] = $("#autoCompleteId" + i).val();
                     return true;
                 }
                 data[name] = $(this).text();
@@ -792,10 +793,9 @@
             if ($(this).is(':checked')) {
                 var obj = {}
                 var tds = $(this).parent().parent().find("td")
-                var orderNumber = tds.eq(0).text();
                 var commodityNo = tds.eq(1).text();
                 var commodityNum = tds.eq(3).text();
-                obj["orderNumber"] = orderNumber;
+                //obj["orderNumber"] = "${orders.orderNumber}";
                 obj["commodityNo"] = commodityNo;
                 obj["commodityNum"] = commodityNum;
                 selectOrder[i] = obj;
@@ -809,8 +809,8 @@
         }
 
         // 运费和总金额
-        var freight = $("#freightInput").val()*100;
-        var orderPrice = (Number($("#moneyInput").val()) + Number($("#addOrderMoneyInput").val()))*100;
+        var freight = $("#freightInput").val() * 100;
+        var orderPrice = (Number($("#moneyInput").val()) + Number($("#addOrderMoneyInput").val())) * 100;
 
         var data = {
             "serviceRemark": $("#serviceRemark").val(),
@@ -819,7 +819,8 @@
             "orderId": orderId,
             "addOrderTable": addOrderTable,
             "freight": freight,
-            "orderPrice": orderPrice
+            "orderPrice": orderPrice,
+            "orderNumber": "${orders.orderNumber}"
         };
 
         alert(JSON.stringify(data));
@@ -835,7 +836,8 @@
                 "orderId": orderId,
                 "addOrderTable": JSON.stringify(addOrderTable),
                 "freight": freight,
-                "orderPrice": orderPrice
+                "orderPrice": orderPrice,
+                "orderNumber": "${orders.orderNumber}"
             },
             async: true,
             cache:
@@ -849,7 +851,7 @@
                 function (data) {
                     if (!data.s == true) {
                         // 如果修改失败重新加载审核页面
-                        layer.warn(data.m, {time: 1000});
+                        layer.msg(data.m, {time: 1000});
                         window.location.href = "${context_root}/order/toAuditingInfo.action";
                     } else {
                         layer.msg("审核成功", {time: 1000});

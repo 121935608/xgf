@@ -214,8 +214,12 @@ public class OrderController extends BaseController {
             for (Commodity commodity : commodities) {
                 OrderCommodityDetail orderCommodityDetail = new OrderCommodityDetail();
                 // 将订单和商品信息存储
-                BeanUtils.copyProperties(commodity, orderCommodityDetail);
+                // BeanUtils.copyProperties(commodity, orderCommodityDetail);
                 BeanUtils.copyProperties(orderDetail, orderCommodityDetail);
+                orderCommodityDetail.setSalePrice(commodity.getSalePrice());
+                orderCommodityDetail.setSubPrice(commodity.getSubPrice());
+                orderCommodityDetail.setSubPriceUnit(commodity.getSubPriceUnit());
+                orderCommodityDetail.setWeight(commodity.getWeight());
                 orderCommodityDetails.add(orderCommodityDetail);
             }
         }
@@ -356,6 +360,7 @@ public class OrderController extends BaseController {
 
         JSONObject jsonObject = JSONObject.parseObject(cancelOrder);
         JSONObject addOrderTableObj = JSONObject.parseObject(addOrderTable);
+        String orderNumber = order.getOrderNumber();
         int addOrderTableSize = addOrderTableObj.size();
 
         /** ****** 存在修改订单逻辑 ****** */
@@ -372,7 +377,6 @@ public class OrderController extends BaseController {
                 orderAuditing.setServiceId(serviceId); // 设置操作人员id
 
                 JSONObject jsonObj = jsonObject.getJSONObject(String.valueOf(i));
-                String orderNumber = (String) jsonObj.get("orderNumber");
                 String commodityNo = (String) jsonObj.get("commodityNo");
                 String commodityNum = (String) jsonObj.get("commodityNum");
 
@@ -435,7 +439,7 @@ public class OrderController extends BaseController {
 
                 OrderDetail orderDetail = new OrderDetail();
                 orderDetail.setOrderDetailId(UuidUtil.get32UUID());
-                orderDetail.setOrderNumber((String) jsonObj.get("orderNumber"));
+                orderDetail.setOrderNumber(orderNumber);
                 orderDetail.setCommodityId((String) jsonObj.get("commodityId"));
                 orderDetail.setCommodityNum(commodityNum);
                 orderDetail.setCommodityName((String) jsonObj.get("commodityName"));
@@ -515,6 +519,9 @@ public class OrderController extends BaseController {
         Order order = orderService.findOrder(orderId); // 获取订单
         String userId = order.getUserId(); // 获取到userId
         Store store = certificationService.getStoreByUserId(userId); // 查询商铺
+        if (store == null){
+            store = certificationService.getVirtualStoreInfo(userId);
+        }
         JSONObject jsonObject = new JSONObject(); // 用于封装推送参数
 
         // 根据订单明细查询商品信息

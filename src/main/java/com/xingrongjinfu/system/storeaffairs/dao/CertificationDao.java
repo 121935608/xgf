@@ -153,4 +153,15 @@ public class CertificationDao extends DynamicObjectBaseDao implements ICertifica
         }
         return storeInfo;
     }
+
+    @Override
+    public Store getVirtualStoreByUserId(String userId) {
+        Store storeInfo = null;
+        try {
+            storeInfo = (Store) this.findForObject("StoreAffairMapper.getVirtualStoreByUserId", userId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return storeInfo;
+    }
 }

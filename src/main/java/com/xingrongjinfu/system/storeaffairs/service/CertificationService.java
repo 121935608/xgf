@@ -83,4 +83,9 @@ public class CertificationService implements ICertificationService
     public Store getStoreByUserId(String userId) {
         return certificationDao.getStoreByUserId(userId);
     }
+
+    @Override
+    public Store getVirtualStoreInfo(String userId) {
+        return certificationDao.getVirtualStoreByUserId(userId);
+    }
 }

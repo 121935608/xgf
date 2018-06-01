@@ -64,4 +64,7 @@ public interface ICertificationService
 
     /** 查询订单详细信息*/
     Store getStoreByUserId(String userId);
+
+    /** 查询消费金融用户对应的Store*/
+    Store getVirtualStoreInfo(String userId);
 }

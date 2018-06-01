@@ -1,296 +1,302 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="StoreAffairMapper">
-	<resultMap id="BaseResultMap" type="com.xingrongjinfu.system.storeaffairs.model.PurchaseDto" >
-		<result column="storeName" property="storeName"/>
-		<result column="name" property="name"/>
-		<result column="orderPrice" property="orderPrice"/>
-		<result column="orderNum" property="orderNum"/>
-	</resultMap>
+    <resultMap id="BaseResultMap" type="com.xingrongjinfu.system.storeaffairs.model.PurchaseDto">
+        <result column="storeName" property="storeName"/>
+        <result column="name" property="name"/>
+        <result column="orderPrice" property="orderPrice"/>
+        <result column="orderNum" property="orderNum"/>
+    </resultMap>
 
 
-	<select id="CertificationpageInfoQuery"  parameterType="PageUtilEntity"  resultType="Store">
-		select a.storeId,a.storeNo,a.addTime,b.accountName,s.`name`,a.process,a.remark,bc.cardNumber
-		from t_store a
-		LEFT join  sys_user b
-		on a.userId=b.userId
-		LEFT JOIN sys_supervisor s
-		on s.supervisorId=a.supervisorId
-		left join t_bankCard bc
-		on bc.userId=a.userId
-		where 1=1 and bc.bankType=0
-		<if test="relationMap.accountName != null and relationMap.accountName != ''">
-			AND (
-			b.accountName LIKE CONCAT(CONCAT('%', #{relationMap.accountName}),'%')
-			)
-		</if>
-		<if test="relationMap.supervisor != null and relationMap.supervisor != ''">
-			AND a.supervisorId = #{relationMap.supervisor}
-		</if>
-		<if test="relationMap.repaymentStatus != null and relationMap.repaymentStatus != ''">
-			AND a.process = #{relationMap.repaymentStatus}
-		</if>
-		<if test="relationMap.beginTime != null and relationMap.beginTime != ''">
-			AND DATE_FORMAT(a.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
-		</if>
-		<if test="relationMap.endTime != null and relationMap.endTime != ''">
-			AND DATE_FORMAT(a.addTime,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
-		</if>
-		ORDER BY a.addTime DESC
-	</select>
+    <select id="CertificationpageInfoQuery" parameterType="PageUtilEntity" resultType="Store">
+        select a.storeId,a.storeNo,a.addTime,b.accountName,s.`name`,a.process,a.remark,bc.cardNumber
+        from t_store a
+        LEFT join sys_user b
+        on a.userId=b.userId
+        LEFT JOIN sys_supervisor s
+        on s.supervisorId=a.supervisorId
+        left join t_bankCard bc
+        on bc.userId=a.userId
+        where 1=1 and bc.bankType=0
+        <if test="relationMap.accountName != null and relationMap.accountName != ''">
+            AND (
+            b.accountName LIKE CONCAT(CONCAT('%', #{relationMap.accountName}),'%')
+            )
+        </if>
+        <if test="relationMap.supervisor != null and relationMap.supervisor != ''">
+            AND a.supervisorId = #{relationMap.supervisor}
+        </if>
+        <if test="relationMap.repaymentStatus != null and relationMap.repaymentStatus != ''">
+            AND a.process = #{relationMap.repaymentStatus}
+        </if>
+        <if test="relationMap.beginTime != null and relationMap.beginTime != ''">
+            AND DATE_FORMAT(a.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
+        </if>
+        <if test="relationMap.endTime != null and relationMap.endTime != ''">
+            AND DATE_FORMAT(a.addTime,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
+        </if>
+        ORDER BY a.addTime DESC
+    </select>
 
-	<!--CRM查询所有门店-->
-	<select id="selectCRMStore"   parameterType="PageUtilEntity" resultType="HashMap">
+    <!--CRM查询所有门店-->
+    <select id="selectCRMStore" parameterType="PageUtilEntity" resultType="HashMap">
 		SELECT
 			a.*, s.*
 		FROM t_store a
 		LEFT JOIN sys_supervisor s ON a.supervisorId = s.supervisorNum
 
 	</select>
-	<!-- 查询所有监督员对象 -->
-	<select id="getSupervisorList"    resultType="supervisor">
+    <!-- 查询所有监督员对象 -->
+    <select id="getSupervisorList" resultType="supervisor">
 		select  supervisorId,name,supervisorNum from sys_supervisor where status=0
 	</select>
 
 
-	<!-- 查询店铺详细信息 -->
-	<select id="getStoreInfo"  parameterType="java.lang.String"   resultType="Store">
+    <!-- 查询店铺详细信息 -->
+    <select id="getStoreInfo" parameterType="java.lang.String" resultType="Store">
 		select storeId,userId,storeName,userName,idCard,phone,area,address,process,remark,supervisorId,licensePic,frontStorePic,innerStorePic,contractPic,transactionPic,utilitiesPic,auditStatus from t_store where storeId = #{storeId}
 	</select>
-	<!-- 查询店铺详细信息 -->
-	<select id="getStoreInfoByUserId"  parameterType="java.lang.String"   resultType="Store">
+    <!-- 查询店铺详细信息 -->
+    <select id="getStoreInfoByUserId" parameterType="java.lang.String" resultType="Store">
 		select storeId,userId,storeName,userName,idCard,phone,area,address,process,remark,supervisorId,licensePic,frontStorePic,innerStorePic,contractPic,transactionPic,utilitiesPic,auditStatus from t_store where userId = #{userId}
 	</select>
 
-	<!-- 查询店铺详细信息 -->
-	<select id="getStoreByUserId" parameterType="java.lang.String" resultType="Store">
+    <!-- 查询店铺详细信息 -->
+    <select id="getStoreByUserId" parameterType="java.lang.String" resultType="Store">
 		select
 		storeId,userId,storeName,userName,idCard,phone,area,address,process,remark,supervisorId,licensePic,frontStorePic,innerStorePic,contractPic,transactionPic,utilitiesPic,auditStatus,startCollect,endCollect
 		from t_store where userId = #{userId}
 	</select>
 
-	<!-- 查询银行账户详细信息 -->
-	<select id="getBankAccountInfo"  parameterType="java.lang.String"   resultType="BankAccount">
+    <!-- 查询消费金融推送用户店铺详细信息 -->
+    <select id="getStoreByUserId" parameterType="java.lang.String" resultType="Store">
+		select
+		storeId,userId,storeName,userName,idCard,phone,area,address,process,remark,supervisorId,licensePic,frontStorePic,innerStorePic,contractPic,transactionPic,utilitiesPic,auditStatus,startCollect,endCollect
+		from t_store s LEFT JOIN t_user_store us on s.storeId = us.storeId where userId = #{userId}
+	</select>
+
+    <!-- 查询银行账户详细信息 -->
+    <select id="getBankAccountInfo" parameterType="java.lang.String" resultType="BankAccount">
 		select bankType,accountType,userName,cardNumber,idType,idCard,remark
 		 from t_bankCard
 		where userId=(select userId from t_store where storeId = #{storeId})  and bankType=0
 	</select>
 
 
-	<update id="updateCheckToStore"  parameterType="Store">
-		update  t_store
-		<set>
-			<if test="supervisorId != null and supervisorId != ''">supervisorId = #{supervisorId},</if>
-			<if test="process != null and process != ''">process = #{process},</if>
-			<if test="updateTime != null">updateTime = #{updateTime},</if>
-			<if test="auditStatus != null">auditStatus = #{auditStatus},</if>
-			remark = #{remark}
-		</set>
-		where  storeId= #{storeId}
+    <update id="updateCheckToStore" parameterType="Store">
+        update t_store
+        <set>
+            <if test="supervisorId != null and supervisorId != ''">supervisorId = #{supervisorId},</if>
+            <if test="process != null and process != ''">process = #{process},</if>
+            <if test="updateTime != null">updateTime = #{updateTime},</if>
+            <if test="auditStatus != null">auditStatus = #{auditStatus},</if>
+            remark = #{remark}
+        </set>
+        where storeId= #{storeId}
 
-	</update>
-
-
+    </update>
 
 
-	<select id="repaymentpageInfoQuery"  parameterType="PageUtilEntity"  resultType="Repay">
-		select a.repayId repayId,a.repayNo,a.addTime,c.orderNumber,b.storeName,a.planRepayDate,
-		a.planTotal/100 planTotal,a.status,
-		ifnull(a.repayMoney/100,0) repayMoney,
-		ifnull((a.planTotal/100-ifnull(a.repayMoney/100,0)),0) withholdMoney
-		from t_repay a
-		LEFT join  t_store b on a.userId=b.userId
-		LEFT join  t_order c on a.orderId=c.orderId
-		where 1=1 and a.status!=-1
-		<if test="relationMap.type != null and relationMap.type=='B'.toString()">
-			AND b.storeId=#{relationMap.storeId}
-		</if>
-		<if test="relationMap.dateType=='addTime'">
-			<if test="relationMap.beginTime != null and relationMap.beginTime != ''">
-				AND DATE_FORMAT(a.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
-			</if>
-			<if test="relationMap.endTime != null and relationMap.endTime != ''">
-				AND DATE_FORMAT(a.addTime,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
-			</if>
-		</if>
-		<if test="relationMap.dateType=='repayDate'">
-			<if test="relationMap.beginTime != null and relationMap.beginTime != ''">
-				AND DATE_FORMAT(a.planRepayDate,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
-			</if>
-			<if test="relationMap.endTime != null and relationMap.endTime != ''">
-				AND DATE_FORMAT(a.planRepayDate,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
-			</if>
-		</if>
-		<if test="relationMap.status != null and relationMap.status != ''">
-			<if test="relationMap.status == '0'">
-				AND (a.status = 0 or a.status = 3)
-			</if>
-			<if test="relationMap.status != '0'">
-				AND a.status = #{relationMap.status}
-			</if>
-		</if>
-		<if test="relationMap.fuzzyCondition != null and relationMap.fuzzyCondition != ''">
-			AND (
-			a.repayNo LIKE CONCAT(CONCAT('%', #{relationMap.fuzzyCondition}),'%') or
-			c.orderNumber LIKE CONCAT(CONCAT('%', #{relationMap.fuzzyCondition}),'%') or
-			b.storeName LIKE CONCAT(CONCAT('%', #{relationMap.fuzzyCondition}),'%')
-			)
-		</if>
-		ORDER BY a.addTime desc
-	</select>
+    <select id="repaymentpageInfoQuery" parameterType="PageUtilEntity" resultType="Repay">
+        select a.repayId repayId,a.repayNo,a.addTime,c.orderNumber,b.storeName,a.planRepayDate,
+        a.planTotal/100 planTotal,a.status,
+        ifnull(a.repayMoney/100,0) repayMoney,
+        ifnull((a.planTotal/100-ifnull(a.repayMoney/100,0)),0) withholdMoney
+        from t_repay a
+        LEFT join t_store b on a.userId=b.userId
+        LEFT join t_order c on a.orderId=c.orderId
+        where 1=1 and a.status!=-1
+        <if test="relationMap.type != null and relationMap.type=='B'.toString()">
+            AND b.storeId=#{relationMap.storeId}
+        </if>
+        <if test="relationMap.dateType=='addTime'">
+            <if test="relationMap.beginTime != null and relationMap.beginTime != ''">
+                AND DATE_FORMAT(a.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
+            </if>
+            <if test="relationMap.endTime != null and relationMap.endTime != ''">
+                AND DATE_FORMAT(a.addTime,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
+            </if>
+        </if>
+        <if test="relationMap.dateType=='repayDate'">
+            <if test="relationMap.beginTime != null and relationMap.beginTime != ''">
+                AND DATE_FORMAT(a.planRepayDate,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
+            </if>
+            <if test="relationMap.endTime != null and relationMap.endTime != ''">
+                AND DATE_FORMAT(a.planRepayDate,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
+            </if>
+        </if>
+        <if test="relationMap.status != null and relationMap.status != ''">
+            <if test="relationMap.status == '0'">
+                AND (a.status = 0 or a.status = 3)
+            </if>
+            <if test="relationMap.status != '0'">
+                AND a.status = #{relationMap.status}
+            </if>
+        </if>
+        <if test="relationMap.fuzzyCondition != null and relationMap.fuzzyCondition != ''">
+            AND (
+            a.repayNo LIKE CONCAT(CONCAT('%', #{relationMap.fuzzyCondition}),'%') or
+            c.orderNumber LIKE CONCAT(CONCAT('%', #{relationMap.fuzzyCondition}),'%') or
+            b.storeName LIKE CONCAT(CONCAT('%', #{relationMap.fuzzyCondition}),'%')
+            )
+        </if>
+        ORDER BY a.addTime desc
+    </select>
 
-	<select id="getByRepayId" parameterType="string" resultType="Repay">
+    <select id="getByRepayId" parameterType="string" resultType="Repay">
 	 	SELECT userId,repayId,repayNo,round(planTotal/100,2) planTotal,round(IFNULL(repayMoney/100,0),2) repayMoney,remark,
 	 	ROUND(IFNULL((planTotal/100-IFNULL(repayMoney/100,0)),0),2) withholdMoney
 		FROM t_repay WHERE repayId=#{0}
 	 </select>
 
-	<select id="getOrderNumber" parameterType="string" resultType="String">
+    <select id="getOrderNumber" parameterType="string" resultType="String">
 	select o.orderNumber from t_order o inner join t_repay r on o.orderId=r.orderId where r.repayId=#{0}
     </select>
 
-	<update id="updateRepay" parameterType="Repay">
-		UPDATE t_repay
-		<set>
-			repayMoney = #{repayMoney},
-			withholdMoney=#{withholdMoney},
-			repayDate = #{repayDate},
-			status = #{status},
-			repayType = #{repayType},
-			updateTime = #{updateTime}
-		</set>
-		where repayId = #{repayId}
-	</update>
-	<insert id="addRepayDetail" parameterType="RepayDetail">
-		INSERT INTO t_repay_detail(repayDetailId,repayId,remark,userId,
-		<if test="repayMoney != null and repayMoney != ''">repayMoney,</if>
-		<if test="repayType != null and repayType != ''">repayType,</if>
-		repayTime)
-		values(#{repayDetailId},#{repayId},#{remark},#{userId},
-		<if test="repayMoney != null and repayMoney != ''">#{repayMoney},</if>
-		<if test="repayType != null and repayType != ''">#{repayType},</if>
-		#{repayTime})
-	</insert>
+    <update id="updateRepay" parameterType="Repay">
+        UPDATE t_repay
+        <set>
+            repayMoney = #{repayMoney},
+            withholdMoney=#{withholdMoney},
+            repayDate = #{repayDate},
+            status = #{status},
+            repayType = #{repayType},
+            updateTime = #{updateTime}
+        </set>
+        where repayId = #{repayId}
+    </update>
+    <insert id="addRepayDetail" parameterType="RepayDetail">
+        INSERT INTO t_repay_detail(repayDetailId,repayId,remark,userId,
+        <if test="repayMoney != null and repayMoney != ''">repayMoney,</if>
+        <if test="repayType != null and repayType != ''">repayType,</if>
+        repayTime)
+        values(#{repayDetailId},#{repayId},#{remark},#{userId},
+        <if test="repayMoney != null and repayMoney != ''">#{repayMoney},</if>
+        <if test="repayType != null and repayType != ''">#{repayType},</if>
+        #{repayTime})
+    </insert>
 
-	<select id="getRepayDetail" parameterType="string" resultType="RepayDetail">
+    <select id="getRepayDetail" parameterType="string" resultType="RepayDetail">
         SELECT  repayDetailId,repayId,repayMoney/100 repayMoney,repayTime,repayType,operator,remark
 		FROM t_repay_detail WHERE repayId=#{0} ORDER BY repayTime DESC
 	</select>
 
-	<select id="storeSalepageInfoQuery"  parameterType="PageUtilEntity"  resultType="Store">
-		select t.storeId storeId,t.storeName storeName,s.`name` name,IFNULL(SUM(o.orderPrice),0) orderPrice,count(o.orderId) orderNum   from t_store t
-		left join sys_supervisor s on s.supervisorNum=t.supervisorId
-		left join t_order o on o.userId=t.userId  and o.orderStatus !=1
+    <select id="storeSalepageInfoQuery" parameterType="PageUtilEntity" resultType="Store">
+        select t.storeId storeId,t.storeName storeName,s.`name` name,IFNULL(SUM(o.orderPrice),0) orderPrice,count(o.orderId)
+        orderNum from t_store t
+        left join sys_supervisor s on s.supervisorNum=t.supervisorId
+        left join t_order o on o.userId=t.userId and o.orderStatus !=1
 
-		<if test="relationMap.beginTime != null and relationMap.beginTime != ''">
-			AND DATE_FORMAT(o.orderTime,'%Y%m%d') &gt;=
-			DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
-		</if>
-		<if test="relationMap.endTime != null and relationMap.endTime != ''">
-			AND DATE_FORMAT(o.orderTime,'%Y%m%d') &lt;=
-			DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
-		</if>
+        <if test="relationMap.beginTime != null and relationMap.beginTime != ''">
+            AND DATE_FORMAT(o.orderTime,'%Y%m%d') &gt;=
+            DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
+        </if>
+        <if test="relationMap.endTime != null and relationMap.endTime != ''">
+            AND DATE_FORMAT(o.orderTime,'%Y%m%d') &lt;=
+            DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
+        </if>
 
-		GROUP BY t.storeId,t.storeName,s.`name`  having 1=1
+        GROUP BY t.storeId,t.storeName,s.`name` having 1=1
 
-		<if test="relationMap.storeName != null and relationMap.storeName != ''">
-			AND  t.storeName LIKE CONCAT(#{relationMap.storeName},'%') or
-			s.name LIKE CONCAT(#{relationMap.storeName},'%')
-		</if>
+        <if test="relationMap.storeName != null and relationMap.storeName != ''">
+            AND t.storeName LIKE CONCAT(#{relationMap.storeName},'%') or
+            s.name LIKE CONCAT(#{relationMap.storeName},'%')
+        </if>
 
-	</select>
+    </select>
 
-	<select id="infoQuery"  parameterType="map"  resultType="PurchaseDto">
-		select t.storeName storeName,s.`name` name,cast((IFNULL(SUM(o.orderPrice), 0)/100) as decimal(13,1)) orderPrice,
-		count(o.orderId) orderNum   from t_store t
-		left join sys_supervisor s on s.supervisorNum=t.supervisorId
-		left join t_order o on o.userId=t.userId  and o.orderStatus !=1
+    <select id="infoQuery" parameterType="map" resultType="PurchaseDto">
+        select t.storeName storeName,s.`name` name,cast((IFNULL(SUM(o.orderPrice), 0)/100) as decimal(13,1)) orderPrice,
+        count(o.orderId) orderNum from t_store t
+        left join sys_supervisor s on s.supervisorNum=t.supervisorId
+        left join t_order o on o.userId=t.userId and o.orderStatus !=1
 
-		<if test="beginTime != null and beginTime != ''">
-			AND DATE_FORMAT(o.orderTime,'%Y%m%d') &gt;=
-			DATE_FORMAT(#{beginTime},'%Y%m%d')
-		</if>
-		<if test="endTime != null and endTime != ''">
-			AND DATE_FORMAT(o.orderTime,'%Y%m%d') &lt;=
-			DATE_FORMAT(#{endTime},'%Y%m%d')
-		</if>
+        <if test="beginTime != null and beginTime != ''">
+            AND DATE_FORMAT(o.orderTime,'%Y%m%d') &gt;=
+            DATE_FORMAT(#{beginTime},'%Y%m%d')
+        </if>
+        <if test="endTime != null and endTime != ''">
+            AND DATE_FORMAT(o.orderTime,'%Y%m%d') &lt;=
+            DATE_FORMAT(#{endTime},'%Y%m%d')
+        </if>
 
-		GROUP BY t.storeId,t.storeName,s.`name`  having 1=1
+        GROUP BY t.storeId,t.storeName,s.`name` having 1=1
 
-		<if test="storeName != null and storeName != ''">
-			AND  t.storeName LIKE CONCAT(#{storeName},'%') or
-			s.name LIKE CONCAT(#{storeName},'%')
-		</if>
+        <if test="storeName != null and storeName != ''">
+            AND t.storeName LIKE CONCAT(#{storeName},'%') or
+            s.name LIKE CONCAT(#{storeName},'%')
+        </if>
 
-	</select>
-	<!--查询店铺和督导员关联的详情信息-->
-	<select id="selectStoreSup" parameterType="PageUtilEntity" resultType="HashMap" useCache="false">
-		SELECT
-		a.*, s.*, top.*,tb.*,ca.*
-		FROM
-		t_store a
-		LEFT JOIN sys_supervisor s ON a.supervisorId = s.supervisorNum
-		LEFT JOIN (
-		SELECT
-		userId,
-		SUM(t.orderPrice) AS totalPrice
-		FROM
-		t_order t
-		WHERE
-		`status` = 1
-		GROUP BY
-		userId
-		) top ON a.userId = top.userId
-		LEFT JOIN (
-		SELECT
-		userId,
-		SUM(orderPrice) AS monthPrice,
-		COUNT(1) AS monthNum
-		FROM
-		t_order
-		WHERE
-		DATE_SUB(CURDATE(), INTERVAL 30 DAY) <![CDATA[   <=  ]]> date(orderTime)
-		AND `status` = 1
-		GROUP BY
-		userId
-		) tb ON a.userId = tb.userId
-		LEFT JOIN (
-		SELECT
-		userId,
-		COUNT(1) AS totalVisitNum
-		FROM
-		c_visit_record
-		WHERE
-		`status` = 0
-		AND visitResultStatus IS NOT NULL
-		GROUP BY
-		userId
-		) ca ON ca.userId = a.userId
-		LEFT JOIN (
-		SELECT
-		supervisorNum,
-		deptName
-		FROM
-		sys_supervisor sss
-		LEFT JOIN c_dept cd ON
-		cd.deptId = sss.deptId
-		) cds ON a.supervisorId = cds.supervisorNum
-		where 1=1
-		<if test="relationMap.supervisor != null and relationMap.supervisor != ''">
-			AND a.supervisorId = #{relationMap.supervisor}
-		</if>
-		<if test="relationMap.auditStatus != null and relationMap.auditStatus != ''">
-			AND a.auditStatus = #{relationMap.auditStatus}
-		</if>
-		<if test="relationMap.beginTime != null and relationMap.beginTime != ''">
-			AND DATE_FORMAT(a.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
-		</if>
-		<if test="relationMap.endTime != null and relationMap.endTime != ''">
-			AND DATE_FORMAT(a.addTime,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
-		</if>
-		ORDER BY totalPrice DESC;
-	</select>
+    </select>
+    <!--查询店铺和督导员关联的详情信息-->
+    <select id="selectStoreSup" parameterType="PageUtilEntity" resultType="HashMap" useCache="false">
+        SELECT
+        a.*, s.*, top.*,tb.*,ca.*
+        FROM
+        t_store a
+        LEFT JOIN sys_supervisor s ON a.supervisorId = s.supervisorNum
+        LEFT JOIN (
+        SELECT
+        userId,
+        SUM(t.orderPrice) AS totalPrice
+        FROM
+        t_order t
+        WHERE
+        `status` = 1
+        GROUP BY
+        userId
+        ) top ON a.userId = top.userId
+        LEFT JOIN (
+        SELECT
+        userId,
+        SUM(orderPrice) AS monthPrice,
+        COUNT(1) AS monthNum
+        FROM
+        t_order
+        WHERE
+        DATE_SUB(CURDATE(), INTERVAL 30 DAY) <![CDATA[   <=  ]]> date(orderTime)
+        AND `status` = 1
+        GROUP BY
+        userId
+        ) tb ON a.userId = tb.userId
+        LEFT JOIN (
+        SELECT
+        userId,
+        COUNT(1) AS totalVisitNum
+        FROM
+        c_visit_record
+        WHERE
+        `status` = 0
+        AND visitResultStatus IS NOT NULL
+        GROUP BY
+        userId
+        ) ca ON ca.userId = a.userId
+        LEFT JOIN (
+        SELECT
+        supervisorNum,
+        deptName
+        FROM
+        sys_supervisor sss
+        LEFT JOIN c_dept cd ON
+        cd.deptId = sss.deptId
+        ) cds ON a.supervisorId = cds.supervisorNum
+        where 1=1
+        <if test="relationMap.supervisor != null and relationMap.supervisor != ''">
+            AND a.supervisorId = #{relationMap.supervisor}
+        </if>
+        <if test="relationMap.auditStatus != null and relationMap.auditStatus != ''">
+            AND a.auditStatus = #{relationMap.auditStatus}
+        </if>
+        <if test="relationMap.beginTime != null and relationMap.beginTime != ''">
+            AND DATE_FORMAT(a.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
+        </if>
+        <if test="relationMap.endTime != null and relationMap.endTime != ''">
+            AND DATE_FORMAT(a.addTime,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
+        </if>
+        ORDER BY totalPrice DESC;
+    </select>
 
 </mapper>
