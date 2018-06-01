@@ -4,7 +4,7 @@
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 订单管理 <span class="c-gray en">&gt;</span> 订单管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
-	
+
 	<div class="text-c">
 		<input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')||\'%y-%M-%d\'}'})" id="beginTime"
 			   class="input-text Wdate" style="width:120px;" placeholder="开始时间">
@@ -63,7 +63,7 @@
 </div>
 <script type="text/javascript">
 var pageTable;
-$(document).ready(function(){ 
+$(document).ready(function(){
     var aoColumns = [
         {
             "sDefaultContent": "订单号",
@@ -203,7 +203,15 @@ $(document).ready(function(){
                     return "已完成";
                 }else if(row.orderStatus == 5) {
                     return "已收款";
-                }else {
+                }else if(row.orderStatus == 6) {
+                    return "客服审核";
+                }else if(row.orderStatus == 7) {
+                    return "库存审核";
+                }else if(row.orderStatus == 8) {
+                    return "退货中";
+                }else if(row.orderStatus == 9) {
+                    return "交易关闭";
+                }else{
                     return "";
                 }
             }
@@ -414,6 +422,6 @@ function user_start(obj,id){
 
     });
 }
-</script> 
+</script>
 </body>
 </html>

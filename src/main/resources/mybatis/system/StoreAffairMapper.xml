@@ -72,7 +72,7 @@
 	</select>
 
     <!-- 查询消费金融推送用户店铺详细信息 -->
-    <select id="getStoreByUserId" parameterType="java.lang.String" resultType="Store">
+    <select id="getVirtualStoreByUserId" parameterType="java.lang.String" resultType="Store">
 		select
 		storeId,userId,storeName,userName,idCard,phone,area,address,process,remark,supervisorId,licensePic,frontStorePic,innerStorePic,contractPic,transactionPic,utilitiesPic,auditStatus,startCollect,endCollect
 		from t_store s LEFT JOIN t_user_store us on s.storeId = us.storeId where userId = #{userId}

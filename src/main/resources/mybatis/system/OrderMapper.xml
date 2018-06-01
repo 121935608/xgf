@@ -189,8 +189,8 @@
     <!-- 通过订单编号,商品条码查询唯一订单明细 -->
     <select id="findOrderDetail" parameterType="map" resultMap="OrderDetailResult">
         SELECT d.orderDetailId,d.commodityName,d.commodityNo,d.unit,d.commodityNum,d.salePrice/100
-        inPrice,d.orderNumber
-        FROM t_order_detail d
+        inPrice,d.orderNumber,d.commodityId
+        FROM t_order_detail
         <where>
             <if test="orderNumber !=null and orderNumber != ''">
                 AND d.orderNumber = #{orderNumber}
