@@ -62,9 +62,9 @@
         FROM t_virtual_order o
         LEFT JOIN sys_user s ON o.userId=s.userId
         LEFT JOIN t_address ad ON ad.`addrId`=o.`addressId`
-        LEFT JOIN t_user_store ust on ust.userId=o.userId
-        LEFT JOIN t_store st ON st.storeId = ust.storeId
-        LEFT JOIN sys_supervisor ss on ss.supervisorNum=st.supervisorId
+        LEFT JOIN t_user_store tus ON tus.userId=o.userId
+        LEFT JOIN t_store st ON st.storeId = tus.storeId
+        LEFT JOIN sys_supervisor ss ON ss.supervisorNum=st.supervisorId
         WHERE 1=1 and o.`status`=1
         <if test="relationMap.beginTime != null and relationMap.beginTime != ''"><!-- 开始时间检索 -->
             AND DATE_FORMAT(o.orderTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')

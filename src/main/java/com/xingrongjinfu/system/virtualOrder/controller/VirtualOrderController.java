@@ -604,11 +604,11 @@ public class VirtualOrderController extends BaseController {
         jsonObject.put("address", virtualOrder.getReceiveArea() + virtualOrder.getReceiveAdd());
         jsonObject.put("orderNumber", virtualOrder.getOrderNumber());
         jsonObject.put("orderPrice", (int) Math.ceil(virtualOrder.getOrderPrice()));
-        int payWay = 2;
-        if (virtualOrder.getPayCode().equalsIgnoreCase("HDFK")) {
+        int payWay = 2; // 线下
+        if (virtualOrder.getPayCode() == null || virtualOrder.getPayCode().equalsIgnoreCase("HDFK")) {
             payWay = 2;
         } else {
-            payWay = 1;
+            payWay = 1; // 线上
         }
         jsonObject.put("payWay", payWay);
         jsonObject.put("cusremark", virtualOrder.getRemark());
@@ -652,7 +652,7 @@ public class VirtualOrderController extends BaseController {
     /**
      * @param orderNumber @Description:整单取消
      * @return: org.framework.core.model.Message
-     * @author: ncainiao @Date: 2018/5/24
+     * @author: niu @Date: 2018/5/24
      */
     @RequestMapping(OrderConstant.ORDER_CANCELL_ALL_OPS)
     public @ResponseBody

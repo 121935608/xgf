@@ -366,7 +366,7 @@
         var orderNumber = $("#orderNumber").val();
         var address = $("#address").val();
         var supervisorName = $("#supervisorName").val();
-        pageTable.fnSettings().sAjaxSource = encodeURI("${context_root}/order/findOrderManageList.action?beginTime=" + beginTime + "&endTime=" + endTime + "&payType=" + payType + "&platform=" + platform + "&orderStatus=" + orderStatus + "&orderNumber=" + orderNumber + "&address=" + address + "&supervisorName=" + supervisorName);
+        pageTable.fnSettings().sAjaxSource = encodeURI("${context_root}/virtualOrder/findOrderManageList.action?beginTime=" + beginTime + "&endTime=" + endTime + "&payType=" + payType + "&platform=" + platform + "&orderStatus=" + orderStatus + "&orderNumber=" + orderNumber + "&address=" + address + "&supervisorName=" + supervisorName);
         pageTable.fnClearTable(0);
         pageTable.fnDraw();
     }

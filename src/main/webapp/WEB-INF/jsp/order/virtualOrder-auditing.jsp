@@ -3,7 +3,8 @@
 <ys:contentHeader title="审核虚拟订单信息"/>
 <body>
 <article class="page-container">
-    <form action="${context_root}/virtualOrder/orderSave.action" method="post" class="form form-horizontal" id="form-order-modify">
+    <form action="${context_root}/virtualOrder/orderSave.action" method="post" class="form form-horizontal"
+          id="form-order-modify">
         <input type="hidden" name="id" value="WO-20180521-00309" id="num">
         <%-- 订单信息 --%>
         <div class="info-div">
@@ -11,12 +12,12 @@
                 <div class="col-xs-3 col-sm-2">
                     <h4>订单信息</h4>
                 </div>
-               <%-- <div id="modifyDiv" class="col-xs-offset-8 col-sm-offset-8 col-xs-2 col-sm-2" style="display: block">
-                    <a title="修改" href="javascript:;" onclick="modifyOrder()"><h5>修改</h5></a>
-                </div>
-                <div id="saveDiv" class="col-xs-offset-8 col-sm-offset-8 col-xs-2 col-sm-2" style="display: none">
-                    <a title="保存" href="javascript:;" onclick="saveOrder('${orders.orderNumber}')"><h5>保存</h5></a>
-                </div>--%>
+                <%-- <div id="modifyDiv" class="col-xs-offset-8 col-sm-offset-8 col-xs-2 col-sm-2" style="display: block">
+                     <a title="修改" href="javascript:;" onclick="modifyOrder()"><h5>修改</h5></a>
+                 </div>
+                 <div id="saveDiv" class="col-xs-offset-8 col-sm-offset-8 col-xs-2 col-sm-2" style="display: none">
+                     <a title="保存" href="javascript:;" onclick="saveOrder('${orders.orderNumber}')"><h5>保存</h5></a>
+                 </div>--%>
             </div>
             <%-- 第一行 --%>
             <div class="row cl">
@@ -116,15 +117,15 @@
                 <table id="orderTable" class="table table-border table-bordered table-hover table-bg table-sort">
                     <thead>
                     <tr class="text-c">
-                        <th width="10%">商品名称</th>
-                        <th width="10%">商品条形码</th>
+                        <th width="15%">商品名称</th>
+                        <th width="15%">商品条形码</th>
                         <th width="5%">单位</th>
                         <th width="5%">数量</th>
                         <th width="5%">售价</th>
-                        <th width="7.5%">主观价</th>
-                        <th width="7.5%">计费方式</th>
-                        <th width="10%">重量(kg)</th>
-                        <th width="10%">金额(元)</th>
+                        <th width="5%">主观价</th>
+                        <th width="6%">计费方式</th>
+                        <th width="6%">重量(kg)</th>
+                        <th width="9%">金额(元)</th>
                         <th width="10%">操作</th>
                     </tr>
                     </thead>
@@ -137,7 +138,7 @@
                             <td id="${orderCommodityDetail.orderNumber}"
                                 <%--ondblclick="changeTd(this)"--%>>${orderCommodityDetail.commodityNum}</td>
                             <td>${orderCommodityDetail.salePrice/100}</td>
-                            <td>${orderCommodityDetail.subPrice/100}</td>
+                            <td>${orderCommodityDetail.subPrice}</td>
                             <td>${orderCommodityDetail.subPriceUnit}</td>
                             <td>${orderCommodityDetail.weight}</td>
                             <td onclick="showAllMoney(this)">${orderCommodityDetail.totalMoney}</td>
@@ -190,15 +191,15 @@
                     <thead>
                     <tr class="text-c">
                         <%--<th width="5%">序号</th>--%>
-                        <th width="10%">商品名称</th>
-                        <th width="10%">商品条形码</th>
+                        <th width="15%">商品名称</th>
+                        <th width="12%">商品条形码</th>
                         <th width="5%">单位</th>
                         <th width="5%">数量</th>
                         <th width="5%">售价</th>
-                        <th width="7.5%">主观价</th>
-                        <th width="7.5%">计费方式</th>
-                        <th width="10%">重量(kg)</th>
-                        <th width="10%">金额(元)</th>
+                        <th width="5%">主观价</th>
+                        <th width="6%">计费方式</th>
+                        <th width="6%">重量(kg)</th>
+                        <th width="9%">金额(元)</th>
                         <th width="10%">操作</th>
                     </tr>
                     </thead>
@@ -281,8 +282,7 @@
         });
     })
     // 基本路径
-    var baseOrderUrl = "${context_root}/order";
-    var baseComUrl = "${context_root}/commodity";
+    var baseOrderUrl = "${context_root}/virtualOrder";
     // 当前用户id
     var serviceId = ${currentUser.userId};
     var orderNumber = "${orders.orderNumber}"
@@ -294,12 +294,8 @@
     var area = null;
     var address = null;
 
-    // 封装所有商品条形码的数组
-    var comNoList = [];
-
     // 定义计数器
     var modifyCount = 0;
-    var cancelCount = 0;
 
     // 双击后修改td
     function changeTd(obj) {
@@ -500,7 +496,7 @@
                             trNode.children("td").eq(2).html(comObj.unit);
                             trNode.children("td").eq(3).html(1);
                             trNode.children("td").eq(4).html((comObj.salePrice / 100).toFixed(1));
-                            trNode.children("td").eq(5).html((comObj.subPrice / 100).toFixed(1));
+                            trNode.children("td").eq(5).html((comObj.subPrice / 1).toFixed(1));
                             trNode.children("td").eq(6).html(comObj.subPriceUnit);
                             trNode.children("td").eq(7).html(comObj.weight);
                             trNode.children("td").eq(8).html((comObj.salePrice / 100).toFixed(1));
@@ -626,13 +622,13 @@
     function sumMoney(obj) {
         var num = $(obj).text();
         var MoneyNode = $(obj).parent().children("td").eq(8);
-        MoneyNode.html(num * MoneyNode.html());
+        MoneyNode.html((num * MoneyNode.html()).toFixed(1));
 
         // 获取总金额
         var tableNode = $(obj).parent().parent().parent();
         var tableId = tableNode.attr("id");
         var allMoney = addAllMoney(tableId);
-        $("#addOrderMoneyInput").val(allMoney);
+        $("#addOrderMoneyInput").val(allMoney.toFixed(1));
     }
 
     // 获取订单信息
@@ -826,7 +822,7 @@
                     layer_close();
                 } else {
                     layer.msg("整单取消失败", {time: 1000});
-                    window.location.href = "${context_root}/order/toAuditingInfo.action";
+                    window.location.href = "${context_root}/virtualOrder/toAuditingInfo.action";
                 }
             },
         });
@@ -910,7 +906,7 @@
                     } else {
                         // 如果修改失败重新加载审核页面
                         layer.msg(data.m);
-                        window.location.href = "${context_root}/order/toAuditingInfo.action?orderNumber=${orders.orderNumber}";
+                        window.location.href = "${context_root}/virtualOrder/toAuditingInfo.action?orderNumber=${orders.orderNumber}";
                     }
                 }
         })
