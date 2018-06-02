@@ -194,7 +194,7 @@ public class VirtualOrderController extends BaseController {
     @RequestMapping(OrderConstant.ORDER_AUDITING_URL)
     @ResponseBody
     public ModelAndView loadAuditingPage(String orderNumber) {
-        ModelAndView modelAndView = this.getModelAndView(OrderConstant.ORDER_AUDITING_PAGE);
+        ModelAndView modelAndView = this.getModelAndView(VirtualOrderConstant.VIRTUALORDER_AUDITING_PAGE);
         Order orders = orderService.findOrderInfo(orderNumber);
         fillingOrder(orders);
         List<OrderDetail> orderDetails = orderService.findOrderDetailInfo(orderNumber);
@@ -314,7 +314,7 @@ public class VirtualOrderController extends BaseController {
      * @param commodityNo  商品条形码
      * @return
      */
-    @RequestMapping(OrderConstant.ORDER_CHANGE_COMMODITY_NUM)
+  /*  @RequestMapping(OrderConstant.ORDER_CHANGE_COMMODITY_NUM)
     public @ResponseBody
     Message changeOrderNum(
             String commodityNum, String orderNumber, String commodityNo) {
@@ -339,7 +339,7 @@ public class VirtualOrderController extends BaseController {
             }
             return new Message(false, "更新商品库存失败");
         }
-    }
+    }*/
 
     /**
      * @Description:保存客服修改的订单信息
@@ -353,7 +353,7 @@ public class VirtualOrderController extends BaseController {
             @Param("serviceRemark") String serviceRemark,
             @Param("serviceId") String serviceId,
             @Param("addOrderTable") String addOrderTable,
-            Order virtualOrder) {
+            Order order) {
         logger.info(
                 "==========客服提交审核 cancelOrder:{},addOrderTable:{},serviceRemark:{},serviceId:{}",
                 cancelOrder,
@@ -366,10 +366,10 @@ public class VirtualOrderController extends BaseController {
 
         JSONObject jsonObject = JSONObject.parseObject(cancelOrder);
         JSONObject addOrderTableObj = JSONObject.parseObject(addOrderTable);
-        String orderNumber = virtualOrder.getOrderNumber();
+        String orderNumber = order.getOrderNumber();
         int addOrderTableSize = addOrderTableObj.size();
 
-        /** ****** 存在修改订单逻辑 ****** */
+        /** ****** 存在取消订单逻辑 ****** */
 
         // 如果存在修改订单
         if (jsonObject.size() > 0) {
@@ -379,15 +379,36 @@ public class VirtualOrderController extends BaseController {
                 OrderAuditing orderAuditing = new OrderAuditing();
                 orderAuditing.setServiceRemark(serviceRemark); // 设置客服人员备注
                 orderAuditing.setAuditingId(UuidUtil.get32UUID()); // 设置审核单id
-                orderAuditing.setOrderId(virtualOrder.getOrderId());
+                orderAuditing.setOrderId(order.getOrderId());
                 orderAuditing.setServiceId(serviceId); // 设置操作人员id
 
                 JSONObject jsonObj = jsonObject.getJSONObject(String.valueOf(i));
                 String commodityNo = (String) jsonObj.get("commodityNo");
                 String commodityNum = (String) jsonObj.get("commodityNum");
-
                 // 根据orderNumber和commodiytNO 查询订单明细
                 OrderDetail orderDetail = getOrderDetail(orderNumber, commodityNo);
+                if (commodityNum == null) {
+                    // 如果商品数为空,代表是取消商品
+                    Integer commodityNum1 = orderDetail.getCommodityNum();
+                    // 修改客服库存
+                    Product productByNo = productService.findProductInfoByNo(commodityNo);
+                    productByNo.setKfStock(productByNo.getKfStock() - commodityNum1);
+                    productByNo.setKxdStock(productByNo.getKxdStock() + commodityNum1);
+                    orderAuditing.setServiceModify(commodityNum1);
+                    orderAuditing.setModifyStatus(2);
+                } else { // 不为空表示可能存在修改商品数量
+                    Integer modifiedNum = Integer.valueOf(commodityNum);
+                    if (modifiedNum < 0) {
+                        return new Message(false, "商品数量不能小于0");
+                    }
+                    orderAuditing.setServiceModify(modifiedNum);
+                    // 判断修改后的商品数量和原来商品数量是否相同
+                    if (orderDetail.getCommodityNum() == modifiedNum) {
+                        continue; // 相同则是没有任何操作
+                    } else {
+                        orderAuditing.setModifyStatus(2); // 不相同则是修改订单
+                    }
+                }
 
                 orderAuditing.setOrderDetailId(orderDetail.getOrderDetailId());
                 orderAuditing.setOrderNumber(orderNumber);
@@ -395,21 +416,11 @@ public class VirtualOrderController extends BaseController {
                 orderAuditing.setCommodityName(orderDetail.getCommodityName());
                 orderAuditing.setCommodityNo(commodityNo);
                 orderAuditing.setCommodityNum(orderDetail.getCommodityNum());
-                Integer modifiedNum = Integer.valueOf(commodityNum);
-                if (modifiedNum < 0) {
-                    modifiedNum = 0;
-                }
-                orderAuditing.setServiceModify(modifiedNum);
-                // 判断修改后的商品数量和原来商品数量是否相同
-                if (orderDetail.getCommodityNum() == modifiedNum) {
-                    orderAuditing.setModifyStatus(1); // 相同则是取消单个订单
-                } else {
-                    orderAuditing.setModifyStatus(2); // 不相同则是修改订单
-                }
                 orderAuditing.setModifyTime(new Date());
 
                 if (orderService.insertOrderAuditing(orderAuditing) < 0) {
                     modifyResult = false;
+                    return new Message(false, "插入订单审核记录失败");
                 }
             }
         }
@@ -426,7 +437,7 @@ public class VirtualOrderController extends BaseController {
                 orderAuditing.setServiceRemark(serviceRemark); // 设置客服人员备注
                 orderAuditing.setAuditingId(UuidUtil.get32UUID()); // 设置审核单id
                 orderAuditing.setOrderNumber(orderNumber); // 订单编号
-                orderAuditing.setOrderId(virtualOrder.getOrderId());
+                orderAuditing.setOrderId(order.getOrderId());
                 orderAuditing.setServiceId(serviceId);
 
                 JSONObject jsonObj = addOrderTableObj.getJSONObject(String.valueOf(i));
@@ -480,15 +491,17 @@ public class VirtualOrderController extends BaseController {
         int updateResult = 0;
         if (modifyResult && addResult) {
             // 设置订单状态
-            virtualOrder.setOrderStatus("7");
+            order.setOrderStatus("7");
             // 更新订单
-            updateResult = orderService.updateOrderStatus(virtualOrder);
+            updateResult = orderService.updateOrderStatus(order);
+        } else {
+            return new Message(false, "审核订单失败");
         }
 
         /** ****** 推送库存 ****** */
         if (updateResult > 0) {
             // 封装推送库存参数
-            String orderId = virtualOrder.getOrderId();
+            String orderId = order.getOrderId();
             try {
                 // 审核完成后,减少商品客服库存,订单状态改为库存审核,推送到库存
                 boolean b = pushStock(orderId);// 推送库存,和库存返回信息是否为空

@@ -11,12 +11,12 @@
                 <div class="col-xs-3 col-sm-2">
                     <h4>订单信息</h4>
                 </div>
-                <div id="modifyDiv" class="col-xs-offset-8 col-sm-offset-8 col-xs-2 col-sm-2" style="display: block">
+            <%--    <div id="modifyDiv" class="col-xs-offset-8 col-sm-offset-8 col-xs-2 col-sm-2" style="display: block">
                     <a title="修改" href="javascript:;" onclick="modifyOrder()"><h5>修改</h5></a>
                 </div>
                 <div id="saveDiv" class="col-xs-offset-8 col-sm-offset-8 col-xs-2 col-sm-2" style="display: none">
                     <a title="保存" href="javascript:;" onclick="saveOrder('${orders.orderNumber}')"><h5>保存</h5></a>
-                </div>
+                </div>--%>
             </div>
             <%-- 第一行 --%>
             <div class="row cl">
@@ -141,7 +141,7 @@
                             <td>${orderCommodityDetail.subPriceUnit}</td>
                             <td>${orderCommodityDetail.weight}</td>
                             <td onclick="showAllMoney(this)">${orderCommodityDetail.totalMoney}</td>
-                            <td><input id="cancelInput" type="checkbox"/>取消
+                            <td><input id="cancelInput" onclick="cancelOrder(this)" type="checkbox"/>取消
                             </td>
                         </tr>
                     </c:forEach>
@@ -273,9 +273,11 @@
     $(function () {
         // 为运费绑定失焦事件
         $("#freightInput").blur(function () {
-            var oldValue = parseFloat($("#moneyHiddenInput").val());
+            //var oldValue = parseFloat($("#moneyHiddenInput").val());
             var newFreiValue = parseFloat($("#freightInput").val());
-            $("#moneyInput").val((oldValue + newFreiValue).toFixed(1));
+            // 获取
+            var sum = addAllMoney("orderTable");
+            $("#moneyInput").val((sum + newFreiValue).toFixed(1));
         });
     })
     // 基本路径
@@ -308,43 +310,52 @@
             var parent = $("#comNumInput").parent();
             parent.html($("#comNumInput").val());
 
-            // 异步请求获取提交数量修改
-            // 获取commodityNo
-            var commodityNo = trNode.find("td").eq(1).html();
-            var data = {
-                "commodityNum": parent.html(),
-                "orderNumber": parent.attr("id"),
-                "commodityNo": commodityNo
-            }
-            //alert(JSON.stringify(data));
-            $.ajax({
-                url: baseOrderUrl + "/changeCommodityNum.action",
-                type: 'post',
-                data: {
-                    "commodityNum": parent.html(),
-                    "orderNumber": parent.attr("id"),
-                    "commodityNo": commodityNo
-                },
-                async: true,
-                cache: false,
-                dataType: "json",
-                success: function (data) {
-                    if (data.s == false) {
-                        layer.msg(data.m);
-                        // 将数量改为原数量
-                        parent.html(oldNum);
-                    } else {
-                        var totalMoneyCell = trNode.find("td").eq(8);
-                        var saleMoneyCell = trNode.find("td").eq(4);
-                        //alert(parent.html() * saleMoneyCell.html());
-                        var totalMoney = parent.html() * saleMoneyCell.html();
-                        totalMoneyCell.html(totalMoney);
-                        var allMoney = addAllMoney("orderTable");
-                        var freightMoney = $("#freightInput").val();
-                        $("#moneyInput").val(allMoney + Number(freightMoney));
-                    }
-                }
-            });
+            var totalMoneyCell = trNode.find("td").eq(8);
+            var saleMoneyCell = trNode.find("td").eq(4);
+            //alert(parent.html() * saleMoneyCell.html());
+            var totalMoney = parent.html() * saleMoneyCell.html();
+            totalMoneyCell.html(totalMoney.toFixed(1));
+            var allMoney = addAllMoney("orderTable");
+            var freightMoney = $("#freightInput").val();
+            $("#moneyInput").val((allMoney + Number(freightMoney)).toFixed(1));
+
+            /* // 异步请求获取提交数量修改
+             // 获取commodityNo
+             var commodityNo = trNode.find("td").eq(1).html();
+             var data = {
+                 "commodityNum": parent.html(),
+                 "orderNumber": parent.attr("id"),
+                 "commodityNo": commodityNo
+             }
+             //alert(JSON.stringify(data));
+             $.ajax({
+                 url: baseOrderUrl + "/changeCommodityNum.action",
+                 type: 'post',
+                 data: {
+                     "commodityNum": parent.html(),
+                     "orderNumber": parent.attr("id"),
+                     "commodityNo": commodityNo
+                 },
+                 async: true,
+                 cache: false,
+                 dataType: "json",
+                 success: function (data) {
+                     if (data.s == false) {
+                         layer.msg(data.m);
+                         // 将数量改为原数量
+                         parent.html(oldNum);
+                     } else {
+                         var totalMoneyCell = trNode.find("td").eq(8);
+                         var saleMoneyCell = trNode.find("td").eq(4);
+                         //alert(parent.html() * saleMoneyCell.html());
+                         var totalMoney = parent.html() * saleMoneyCell.html();
+                         totalMoneyCell.html(totalMoney);
+                         var allMoney = addAllMoney("orderTable");
+                         var freightMoney = $("#freightInput").val();
+                         $("#moneyInput").val(allMoney + Number(freightMoney));
+                     }
+                 }
+             });*/
         })
     }
 
@@ -759,24 +770,19 @@
         }
     }
 
-    /*   // 取消单个订单
-       function cancelOrder(obj) {
-           // 如果没有选中
-           if (obj.checked) {
-               // 获取当前行对象
-               var trNode = $(obj).parent().parent();
-               var tdCell = trNode.find("td").eq(3);
-               tdCell.html("<input id='comNumInput' type='text' value='" + tdCell.text() + "'/>");
-               $("#comNumInput").bind("blur", function () {
-                   var parent = $("#comNumInput").parent();
-                   parent.html($("#comNumInput").val());
-
-                   var allMoney = addAllMoney("orderTable");
-                   var freightMoney = $("#freightInput").val();
-                   $("#moneyInput").val(parseFloat(allMoney) + parseFloat(freightMoney));
-               })
-           }
-       }*/
+    // 取消单个订单
+    function cancelOrder(obj) {
+        // 获取当前行对象
+        var trNode = $(obj).parent().parent();
+        if (obj.checked) { // 如果选中
+            trNode.css({"background-color": "#C0C0C0"});
+            alert(trNode.find("td").eq(3).html());
+            trNode.find("td").eq(3).removeAttr("ondblclick");
+        } else { // 如果没选中
+            trNode.removeAttr("style");
+            trNode.find("td").eq(3).attr("ondblclick", 'changeTd(this)');
+        }
+    }
 
     // 删除增加订单
     function deleteOrder(obj) {
@@ -839,16 +845,16 @@
         var selectOrder = {};
         // 如果有选中取消的
         $("input[type='checkbox']").each(function (i) {
-            if ($(this).is(':checked')) {
-                var obj = {}
-                var tds = $(this).parent().parent().find("td")
-                var commodityNo = tds.eq(1).text();
-                var commodityNum = tds.eq(3).text();
+            var obj = {}
+            var tds = $(this).parent().parent().find("td")
+            var commodityNo = tds.eq(1).text();
+            var commodityNum = tds.eq(3).text();
+            if (!$(this).is(':checked')) {
                 //obj["orderNumber"] = "${orders.orderNumber}";
-                obj["commodityNo"] = commodityNo;
                 obj["commodityNum"] = commodityNum;
-                selectOrder[i] = obj;
             }
+            obj["commodityNo"] = commodityNo;
+            selectOrder[i] = obj;
         })
 
         var addOrderTable = {};

@@ -18,7 +18,6 @@ import com.xingrongjinfu.system.product.model.Product;
 import com.xingrongjinfu.system.product.service.IProductService;
 import com.xingrongjinfu.system.storeaffairs.model.Store;
 import com.xingrongjinfu.system.storeaffairs.service.ICertificationService;
-import com.xingrongjinfu.system.virtualOrder.common.VirtualOrderConstant;
 import com.xingrongjinfu.utils.HttpClientUtil;
 import com.xingrongjinfu.utils.StringUtil;
 import com.xingrongjinfu.utils.UuidUtil;
@@ -311,7 +310,7 @@ public class OrderController extends BaseController {
      * @param commodityNo  商品条形码
      * @return
      */
-    @RequestMapping(OrderConstant.ORDER_CHANGE_COMMODITY_NUM)
+  /*  @RequestMapping(OrderConstant.ORDER_CHANGE_COMMODITY_NUM)
     public @ResponseBody
     Message changeOrderNum(
             String commodityNum, String orderNumber, String commodityNo) {
@@ -336,7 +335,7 @@ public class OrderController extends BaseController {
             }
             return new Message(false, "更新商品库存失败");
         }
-    }
+    }*/
 
     /**
      * @Description:保存客服修改的订单信息
@@ -366,7 +365,7 @@ public class OrderController extends BaseController {
         String orderNumber = order.getOrderNumber();
         int addOrderTableSize = addOrderTableObj.size();
 
-        /** ****** 存在修改订单逻辑 ****** */
+        /** ****** 存在取消订单逻辑 ****** */
 
         // 如果存在修改订单
         if (jsonObject.size() > 0) {
@@ -382,9 +381,30 @@ public class OrderController extends BaseController {
                 JSONObject jsonObj = jsonObject.getJSONObject(String.valueOf(i));
                 String commodityNo = (String) jsonObj.get("commodityNo");
                 String commodityNum = (String) jsonObj.get("commodityNum");
-
                 // 根据orderNumber和commodiytNO 查询订单明细
                 OrderDetail orderDetail = getOrderDetail(orderNumber, commodityNo);
+                if (commodityNum == null) {
+                    // 如果商品数为空,代表是取消商品
+                    Integer commodityNum1 = orderDetail.getCommodityNum();
+                    // 修改客服库存
+                    Product productByNo = productService.findProductInfoByNo(commodityNo);
+                    productByNo.setKfStock(productByNo.getKfStock() - commodityNum1);
+                    productByNo.setKxdStock(productByNo.getKxdStock() + commodityNum1);
+                    orderAuditing.setServiceModify(commodityNum1);
+                    orderAuditing.setModifyStatus(2);
+                } else { // 不为空表示可能存在修改商品数量
+                    Integer modifiedNum = Integer.valueOf(commodityNum);
+                    if (modifiedNum < 0) {
+                        return new Message(false, "商品数量不能小于0");
+                    }
+                    orderAuditing.setServiceModify(modifiedNum);
+                    // 判断修改后的商品数量和原来商品数量是否相同
+                    if (orderDetail.getCommodityNum() == modifiedNum) {
+                        continue; // 相同则是没有任何操作
+                    } else {
+                        orderAuditing.setModifyStatus(2); // 不相同则是修改订单
+                    }
+                }
 
                 orderAuditing.setOrderDetailId(orderDetail.getOrderDetailId());
                 orderAuditing.setOrderNumber(orderNumber);
@@ -392,21 +412,11 @@ public class OrderController extends BaseController {
                 orderAuditing.setCommodityName(orderDetail.getCommodityName());
                 orderAuditing.setCommodityNo(commodityNo);
                 orderAuditing.setCommodityNum(orderDetail.getCommodityNum());
-                Integer modifiedNum = Integer.valueOf(commodityNum);
-                if (modifiedNum < 0) {
-                    modifiedNum = 0;
-                }
-                orderAuditing.setServiceModify(modifiedNum);
-                // 判断修改后的商品数量和原来商品数量是否相同
-                if (orderDetail.getCommodityNum() == modifiedNum) {
-                    orderAuditing.setModifyStatus(1); // 相同则是取消单个订单
-                } else {
-                    orderAuditing.setModifyStatus(2); // 不相同则是修改订单
-                }
                 orderAuditing.setModifyTime(new Date());
 
                 if (orderService.insertOrderAuditing(orderAuditing) < 0) {
                     modifyResult = false;
+                    return new Message(false, "插入订单审核记录失败");
                 }
             }
         }
