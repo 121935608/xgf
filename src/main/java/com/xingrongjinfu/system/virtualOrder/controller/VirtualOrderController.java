@@ -2,23 +2,28 @@
  * Copyright (C), 2018 FileName: OrderController Author: zxuser Date: 2018/1/4 11:05 Description:
  * History: <author> <time> <version> <desc> 作者姓名 修改时间 版本号 描述
  */
-package com.xingrongjinfu.system.order.controller;
-
-import java.io.UnsupportedEncodingException;
-import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
-import java.util.*;
+package com.xingrongjinfu.system.virtualOrder.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.xingrongjinfu.system.SystemConstant;
 import com.xingrongjinfu.system.commodity.common.CommodityConstant;
 import com.xingrongjinfu.system.commodity.model.Commodity;
 import com.xingrongjinfu.system.commodity.service.ICommodityService;
-import com.xingrongjinfu.system.order.model.*;
+import com.xingrongjinfu.system.financial.model.Financial;
+import com.xingrongjinfu.system.financial.service.IFinancialService;
+import com.xingrongjinfu.system.order.common.OrderConstant;
+import com.xingrongjinfu.system.order.controller.OrderController;
+import com.xingrongjinfu.system.order.model.Order;
+import com.xingrongjinfu.system.order.model.OrderAuditing;
+import com.xingrongjinfu.system.order.model.OrderCommodityDetail;
+import com.xingrongjinfu.system.order.model.OrderDetail;
 import com.xingrongjinfu.system.product.model.Product;
 import com.xingrongjinfu.system.product.service.IProductService;
 import com.xingrongjinfu.system.storeaffairs.model.Store;
 import com.xingrongjinfu.system.storeaffairs.service.ICertificationService;
+import com.xingrongjinfu.system.user.model.User;
 import com.xingrongjinfu.system.virtualOrder.common.VirtualOrderConstant;
+import com.xingrongjinfu.system.virtualOrder.service.IVirtualOrderService;
 import com.xingrongjinfu.utils.HttpClientUtil;
 import com.xingrongjinfu.utils.StringUtil;
 import com.xingrongjinfu.utils.UuidUtil;
@@ -32,20 +37,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.xingrongjinfu.system.SystemConstant;
-import com.xingrongjinfu.system.financial.model.Financial;
-import com.xingrongjinfu.system.financial.service.IFinancialService;
-import com.xingrongjinfu.system.order.common.OrderConstant;
-import com.xingrongjinfu.system.order.service.IOrderService;
-import com.xingrongjinfu.system.user.model.User;
-
-import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * 订单管理（平台端） 〈〉
@@ -55,11 +57,12 @@ import javax.servlet.http.HttpServletRequest;
  * @since 1.0.0
  */
 @Controller
-@RequestMapping(SystemConstant.ORDER_URL)
-public class OrderController extends BaseController {
-    private static Logger logger = LoggerFactory.getLogger(OrderController.class);
+@RequestMapping(SystemConstant.VIRTUALORDER_URL)
+public class VirtualOrderController extends BaseController {
+    private static Logger logger = LoggerFactory.getLogger(VirtualOrderController.class);
     @Autowired
-    private IOrderService orderService;
+    @Qualifier("virtualOrderService")
+    private IVirtualOrderService orderService;
 
     @Autowired
     private IFinancialService financialService;
@@ -75,7 +78,7 @@ public class OrderController extends BaseController {
 
     @RequestMapping(OrderConstant.ORDER_MANAGE_URL)
     public ModelAndView loadOrderManage() {
-        return this.getModelAndView(OrderConstant.ORDER_MANAGE_PAGE);
+        return this.getModelAndView(VirtualOrderConstant.VIRTUALORDER_MANAGE_PAGE);
     }
 
     /**
@@ -350,7 +353,7 @@ public class OrderController extends BaseController {
             @Param("serviceRemark") String serviceRemark,
             @Param("serviceId") String serviceId,
             @Param("addOrderTable") String addOrderTable,
-            Order order) {
+            Order virtualOrder) {
         logger.info(
                 "==========客服提交审核 cancelOrder:{},addOrderTable:{},serviceRemark:{},serviceId:{}",
                 cancelOrder,
@@ -363,7 +366,7 @@ public class OrderController extends BaseController {
 
         JSONObject jsonObject = JSONObject.parseObject(cancelOrder);
         JSONObject addOrderTableObj = JSONObject.parseObject(addOrderTable);
-        String orderNumber = order.getOrderNumber();
+        String orderNumber = virtualOrder.getOrderNumber();
         int addOrderTableSize = addOrderTableObj.size();
 
         /** ****** 存在修改订单逻辑 ****** */
@@ -376,7 +379,7 @@ public class OrderController extends BaseController {
                 OrderAuditing orderAuditing = new OrderAuditing();
                 orderAuditing.setServiceRemark(serviceRemark); // 设置客服人员备注
                 orderAuditing.setAuditingId(UuidUtil.get32UUID()); // 设置审核单id
-                orderAuditing.setOrderId(order.getOrderId());
+                orderAuditing.setOrderId(virtualOrder.getOrderId());
                 orderAuditing.setServiceId(serviceId); // 设置操作人员id
 
                 JSONObject jsonObj = jsonObject.getJSONObject(String.valueOf(i));
@@ -423,7 +426,7 @@ public class OrderController extends BaseController {
                 orderAuditing.setServiceRemark(serviceRemark); // 设置客服人员备注
                 orderAuditing.setAuditingId(UuidUtil.get32UUID()); // 设置审核单id
                 orderAuditing.setOrderNumber(orderNumber); // 订单编号
-                orderAuditing.setOrderId(order.getOrderId());
+                orderAuditing.setOrderId(virtualOrder.getOrderId());
                 orderAuditing.setServiceId(serviceId);
 
                 JSONObject jsonObj = addOrderTableObj.getJSONObject(String.valueOf(i));
@@ -477,17 +480,15 @@ public class OrderController extends BaseController {
         int updateResult = 0;
         if (modifyResult && addResult) {
             // 设置订单状态
-            order.setOrderStatus("7");
+            virtualOrder.setOrderStatus("7");
             // 更新订单
-            updateResult = orderService.updateOrderStatus(order);
-        } else {
-            return new Message(false, "审核订单失败");
+            updateResult = orderService.updateOrderStatus(virtualOrder);
         }
 
         /** ****** 推送库存 ****** */
         if (updateResult > 0) {
             // 封装推送库存参数
-            String orderId = order.getOrderId();
+            String orderId = virtualOrder.getOrderId();
             try {
                 // 审核完成后,减少商品客服库存,订单状态改为库存审核,推送到库存
                 boolean b = pushStock(orderId);// 推送库存,和库存返回信息是否为空
@@ -528,12 +529,12 @@ public class OrderController extends BaseController {
     @Transactional // 事务管理
     public boolean pushStock(String orderId) throws UnsupportedEncodingException {
         logger.info("==========开始推送订单,订单orderId:{}", orderId);
-        Order order = orderService.findOrder(orderId); // 获取订单
-        String userId = order.getUserId(); // 获取到userId
+        Order virtualOrder = orderService.findOrder(orderId); // 获取订单
+        String userId = virtualOrder.getUserId(); // 获取到userId
         Store store = certificationService.getStoreByUserId(userId); // 查询商铺
         if (store == null) {
             store = certificationService.getVirtualStoreInfo(userId); // 查询虚拟订单
-            if (store == null) { // 若为空表示用户未绑定商铺
+            if (store == null) {
                 return false;
             }
         }
@@ -541,7 +542,7 @@ public class OrderController extends BaseController {
 
         // 根据订单明细查询商品信息
         JSONArray jsonArray = new JSONArray();
-        String orderNumber = order.getOrderNumber();
+        String orderNumber = virtualOrder.getOrderNumber();
         List<OrderDetail> orderDetailInfos = orderService.findOrderDetailInfoByNo(orderNumber);
         for (OrderDetail orderDetail : orderDetailInfos) {
             // 封装products
@@ -585,19 +586,19 @@ public class OrderController extends BaseController {
         }
         jsonObject.put("cusreceiveTime", receiveTime);
         // 封装订单信息
-        jsonObject.put("purchaser", order.getReceiver());
-        jsonObject.put("phone", order.getReceivePhone());
-        jsonObject.put("address", order.getReceiveArea() + order.getReceiveAdd());
-        jsonObject.put("orderNumber", order.getOrderNumber());
-        jsonObject.put("orderPrice", (int) Math.ceil(order.getOrderPrice()));
+        jsonObject.put("purchaser", virtualOrder.getReceiver());
+        jsonObject.put("phone", virtualOrder.getReceivePhone());
+        jsonObject.put("address", virtualOrder.getReceiveArea() + virtualOrder.getReceiveAdd());
+        jsonObject.put("orderNumber", virtualOrder.getOrderNumber());
+        jsonObject.put("orderPrice", (int) Math.ceil(virtualOrder.getOrderPrice()));
         int payWay = 2;
-        if (order.getPayCode().equalsIgnoreCase("HDFK")) {
+        if (virtualOrder.getPayCode().equalsIgnoreCase("HDFK")) {
             payWay = 2;
         } else {
             payWay = 1;
         }
         jsonObject.put("payWay", payWay);
-        jsonObject.put("cusremark", order.getRemark());
+        jsonObject.put("cusremark", virtualOrder.getRemark());
         // 添加产品信息
         jsonObject.put("products", jsonArray);
 
@@ -610,12 +611,12 @@ public class OrderController extends BaseController {
                 HttpClientUtil.httpPostRequest(OrderConstant.STORAGE_URL, stringObjectHashMap);
         logger.info("==========接收库存返回参数:{}", resultStr);
         if (!StringUtil.nullOrBlank(resultStr)) {
-            return pubStorage(order, resultStr);
+            return pubStorage(virtualOrder, resultStr);
         }
         return false;
     }
 
-    private boolean pubStorage(Order order, String resultStr) {
+    private boolean pubStorage(Order virtualOrder, String resultStr) {
         net.sf.json.JSONObject jsonObject1 = net.sf.json.JSONObject.fromObject(resultStr);
         String code = jsonObject1.getString("code");
         String storageNo = "";
@@ -623,15 +624,15 @@ public class OrderController extends BaseController {
             String data = jsonObject1.getString("data");
             net.sf.json.JSONObject jsonObject2 = net.sf.json.JSONObject.fromObject(data);
             storageNo = jsonObject2.getString("purchaserId");
-            order.setStorageNo(storageNo); // 设置订单库存号
+            virtualOrder.setStorageNo(storageNo); // 设置订单库存号
             // order.setOrderStatus("2"); // 设置订单为待发货
             logger.info("==========订单storageNo:{}", storageNo);
-            if (orderService.updateStorageAndStatus(order) > 0) { // 更新订单信息
+            if (orderService.updateStorageAndStatus(virtualOrder) > 0) { // 更新订单信息
                 logger.info("===============订单库存号修改成功");
                 return true;
             }
         }
-        logger.warn("===============订单order:{},库存号storageNo:{}修改失败", order.getOrderId(), storageNo);
+        logger.warn("===============订单order:{},库存号storageNo:{}修改失败", virtualOrder.getOrderId(), storageNo);
         return false;
     }
 
@@ -675,12 +676,12 @@ public class OrderController extends BaseController {
 
         int updateResult = 0;
         if (resultFlag) {
-            Order order = new Order();
-            order.setOrderId(orderId);
-            order.setOrderNumber(orderNumber);
-            order.setServiceRemark(serviceRemark);
-            order.setOrderStatus("-1");
-            updateResult = orderService.updateModifyOrder(order);
+            Order virtualOrder = new Order();
+            virtualOrder.setOrderId(orderId);
+            virtualOrder.setOrderNumber(orderNumber);
+            virtualOrder.setServiceRemark(serviceRemark);
+            virtualOrder.setOrderStatus("-1");
+            updateResult = orderService.updateModifyOrder(virtualOrder);
         }
 
         return new Message(updateResult);
@@ -712,106 +713,6 @@ public class OrderController extends BaseController {
         List<Commodity> commodities = commodityService.queryByCommodityName(commodityName);
         JSONArray jaProCommodity = JSONArray.fromObject(commodities);
         return jaProCommodity;
-    }
-
-
-    //虚拟订单审核----------------------------------------------------------------
-
-    //t_virtual_order订单审核部分-----------------------------------------------------
-
-    /**
-     * 跳转到虚拟订单审核页面
-     *
-     * @param
-     * @return
-     */
-    @RequestMapping(OrderConstant.TO_VIRTUAL_ORDER_AUTIDING)
-    @ResponseBody
-    public ModelAndView ToVirtuaOrderAuditing(HttpServletRequest request) throws Exception {
-        String orderNumber = request.getParameter("orderNumber");
-        ModelAndView modelAndView = this.getModelAndView(OrderConstant.VIRTUAL_ORDER_AUDITING);
-        //查询虚拟订单信息
-        Order orders = orderService.findVirtualOrder(orderNumber);
-        fillingOrder(orders);
-        //查询订单详情
-        List<OrderDetail> orderDetails = orderService.findVirtualOrderDetails(orderNumber);
-        List<OrderCommodityDetail> orderCommodityDetails = new ArrayList<>();
-        for (OrderDetail orderDetail : orderDetails) {
-            if (orderDetail.getInPrice() == null) {
-                orderDetail.setInPrice(0.00);
-            }
-            if (orderDetail.getCommodityNum() == null) {
-                orderDetail.setCommodityNum(0);
-            }
-            // 总金额=数量*进价
-            orderDetail.setInPrice(orderDetail.getInPrice());
-            Double all = orderDetail.getInPrice() * orderDetail.getCommodityNum();
-            BigDecimal b = new BigDecimal(all);
-            all = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-            orderDetail.setTotalMoney(all);
-
-            // 根据商品条形码查询商品
-            String commodityNo = orderDetail.getCommodityNo();
-            List<Commodity> commodities = commodityService.queryByCommodityNo(commodityNo);
-            System.out.println(commodities);
-            for (Commodity commodity : commodities) {
-                OrderCommodityDetail orderCommodityDetail = new OrderCommodityDetail();
-                // 将订单和商品信息存储
-                BeanUtils.copyProperties(commodity, orderCommodityDetail);
-                BeanUtils.copyProperties(orderDetail, orderCommodityDetail);
-                orderCommodityDetails.add(orderCommodityDetail);
-            }
-        }
-
-        modelAndView.addObject("orders", orders);
-        modelAndView.addObject("orderCommodityDetails", orderCommodityDetails);
-        return modelAndView;
-    }
-
-    /**
-     * 取消虚拟订单
-     */
-    @RequestMapping(OrderConstant.CANCELVIRTUALORDER)
-    @ResponseBody
-    public Message cancelVirtualOrder111(String orderId, String orderNumber, String serviceId, String serviceRemark) throws Exception {
-        boolean resultFlag = true;
-        //查询虚拟订单详情
-        List<OrderDetail> orderDetailInfos = orderService.findVirtualOrderDetails(orderNumber);
-        for (OrderDetail orderDetailInfo : orderDetailInfos) {
-            // 补全订单审核表参数
-            OrderAuditing orderAuditing = new OrderAuditing();
-            orderAuditing.setAuditingId(UuidUtil.get32UUID());
-            orderAuditing.setOrderId(orderId);
-            orderAuditing.setOrderDetailId(orderDetailInfo.getOrderDetailId());
-            orderAuditing.setOrderNumber(orderNumber);
-            orderAuditing.setCommodityNo(orderDetailInfo.getCommodityNo());
-            orderAuditing.setServiceId(serviceId);
-            orderAuditing.setServiceRemark(serviceRemark);
-            List<Commodity> commodities =
-                    commodityService.queryByCommodityNo(orderDetailInfo.getCommodityNo());
-            // 查询所有订单明细所对应的商品
-            for (Commodity commodity : commodities) {
-                orderAuditing.setCommodityId(commodity.getCommodityId());
-                orderAuditing.setCommodityName(commodity.getCommodityName());
-                orderAuditing.setModifyStatus(3);
-                int result = orderService.insertOrderAuditing(orderAuditing);
-                if (result <= 0) {
-                    resultFlag = false;
-                }
-            }
-        }
-
-        int updateResult = 0;
-        if (resultFlag) {
-            Order order = new Order();
-            order.setOrderId(orderId);
-            order.setOrderNumber(orderNumber);
-            order.setServiceRemark(serviceRemark);
-            order.setOrderStatus("-1");
-            updateResult = orderService.updateVirtualOrder(order);
-        }
-
-        return new Message(updateResult);
     }
 
 }

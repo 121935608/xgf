@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="OrderMapper">
+<mapper namespace="VirtualOrderMapper">
 
-    <resultMap id="OrderResult" type="Orders">
+    <resultMap id="VirtualOrderResult" type="Orders">
         <result column="orderId" property="orderId"/>
         <result column="orderNumber" property="orderNumber"/>
         <result column="addressId" property="addressId"/>
@@ -29,7 +29,7 @@
     </resultMap>
 
 
-    <resultMap id="OrderDetailResult" type="OrderDetail">
+    <resultMap id="VirtualOrderDetailResult" type="OrderDetail">
         <result column="orderDetailId" property="orderDetailId"/>
         <result column="orderNumber" property="orderNumber"/>
         <result column="commodityId" property="commodityId"/>
@@ -45,7 +45,7 @@
         <result column="commodityNo" property="commodityNo"/>
     </resultMap>
 
-    <resultMap id="OrderExpressResult" type="OrderExpress">
+    <resultMap id="VirtualOrderExpressResult" type="OrderExpress">
         <result column="expressId" property="expressId"/>
         <result column="expressNo" property="expressNo"/>
         <result column="orderNumber" property="orderNumber"/>
@@ -56,13 +56,14 @@
         <result column="freight" property="freight"/>
     </resultMap>
 
-    <select id="pageInfoQuery" parameterType="PageUtilEntity" resultMap="OrderResult">
+    <select id="virtualPageInfoQuery" parameterType="PageUtilEntity" resultMap="VirtualOrderResult">
         SELECT o.orderNumber,o.orderTime,o.payTime,s.userName,o.orderPrice/100
         orderPrice,o.platform,o.orderStatus,o.payCode,ad.address address ,ss.`name` supervisorName
-        FROM t_order o
+        FROM t_virtual_order o
         LEFT JOIN sys_user s ON o.userId=s.userId
         LEFT JOIN t_address ad ON ad.`addrId`=o.`addressId`
-        LEFT JOIN t_store st on st.userId=o.userId
+        LEFT JOIN t_user_store ust on ust.userId=o.userId
+        LEFT JOIN t_store st ON st.storeId = ust.storeId
         LEFT JOIN sys_supervisor ss on ss.supervisorNum=st.supervisorId
         WHERE 1=1 and o.`status`=1
         <if test="relationMap.beginTime != null and relationMap.beginTime != ''"><!-- 开始时间检索 -->
@@ -98,29 +99,29 @@
         order by o.orderTime DESC
     </select>
 
-    <select id="findOrderInfo" parameterType="String" resultMap="OrderResult">
+    <select id="findVirtualOrderInfo" parameterType="String" resultMap="VirtualOrderResult">
 		SELECT o.orderId,o.orderNumber,o.orderTime,o.payCode,s.userName,o.orderPrice/100 orderPrice,o.orderStatus,t.storeName,
 		ad.name userNames,ad.phone phone,ad.area `area`,ad.address address,o.totalPrice/100 totalPrice,o.freight/100 freight,o.payment/100 payment
-		FROM t_order o LEFT JOIN sys_user s ON o.userId=s.userId
+		FROM t_virtual_order o LEFT JOIN sys_user s ON o.userId=s.userId
 		LEFT JOIN t_address ad ON ad.`addrId`=o.`addressId`
 		LEFT JOIN t_store t ON o.userId=t.userId WHERE o.orderNumber=#{orderNumber}
 	</select>
 
-    <select id="findOrderDetailInfo" parameterType="String" resultMap="OrderDetailResult">
+    <select id="findVirtualOrderDetailInfo" parameterType="String" resultMap="VirtualOrderDetailResult">
 		SELECT d.orderDetailId,d.commodityName,c.commodityNo,d.unit,d.commodityNum,d.salePrice/100 inPrice,d.orderNumber,c.commodityId,c.unit
-		FROM t_order_detail d LEFT JOIN t_commodity c ON d.commodityId=c.commodityId
+		FROM t_virtual_order_detail d LEFT JOIN t_commodity c ON d.commodityId=c.commodityId
 		WHERE d.orderNumber=#{orderNumber}
 	</select>
 
 
-    <select id="findOrderDetailInfoByNo" parameterType="String" resultMap="OrderDetailResult">
+    <select id="findVirtualOrderDetailInfoByNo" parameterType="String" resultMap="VirtualOrderDetailResult">
 		SELECT d.orderDetailId,d.commodityName,d.commodityNo,d.unit,d.commodityNum,d.salePrice inPrice,d.salePrice,d.totalPrice,d.orderNumber,d.commodityId
-		FROM t_order_detail d
+		FROM t_virtual_order_detail d
 		WHERE d.orderNumber=#{orderNumber}
 	</select>
 
-    <update id="updateOrderInfo" parameterType="Orders">
-        UPDATE t_order
+    <update id="updateVirtualOrderInfo" parameterType="Orders">
+        UPDATE t_virtual_order
         <set>
             <if test="orderStatus !=null and orderStatus!=''">orderStatus=#{orderStatus},</if>
             arriveTime=sysdate()
@@ -130,15 +131,15 @@
     </update>
 
     <!-- 修改订单状态 -->
-    <update id="updateOrderStatus" parameterType="Orders">
-        UPDATE t_order
+    <update id="updateVirtualOrderStatus" parameterType="Orders">
+        UPDATE t_virtual_order
         <set>
             <if test="orderStatus !=null and orderStatus!=''">orderStatus=#{orderStatus},</if>
         </set>
         <where>orderNumber=#{orderNumber}</where>
     </update>
 
-    <select id="ExpresspageInfoQuery" parameterType="PageUtilEntity" resultMap="OrderExpressResult">
+    <select id="vitualExpresspageInfoQuery" parameterType="PageUtilEntity" resultMap="VirtualOrderExpressResult">
         SELECT expressId,expressNo,orderNumber,expressFirm,address,status,addTime,freight/100 freight FROM t_express
         WHERE 1=1
         <if test="relationMap.expressFirm !=null and relationMap.expressFirm !=''">
@@ -154,22 +155,22 @@
         </if>
     </select>
 
-    <select id="findAllOrders" resultType="Integer">
+    <select id="findAllVirtualOrders" resultType="Integer">
 		SELECT count(orderNumber) FROM t_order WHERE status=1 AND orderStatus !='1'
 	</select>
 
-    <update id="updatePayOrder" parameterType="string">
-		update t_order set orderStatus=5 where orderNumber=#{0}
+    <update id="updatePayVirtualOrder" parameterType="string">
+		update t_virtual_order set orderStatus=5 where orderNumber=#{0}
 	</update>
 
     <!--谢鲜CRM统计查询-->
-    <select id="orderAllList" resultType="Orders">
-		SELECT * FROM t_order o WHERE o.orderStatus NOT IN ('-1','1') AND o.`status` = 1
+    <select id="virtualOrderAllList" resultType="Orders">
+		SELECT * FROM t_virtual_order o WHERE o.orderStatus NOT IN ('-1','1') AND o.`status` = 1
 	</select>
 
     <!-- 客户更新订单信息 -->
-    <update id="updateModifyOrder" parameterType="Order">
-        UPDATE t_order
+    <update id="updateModifyVirtualOrder" parameterType="Order">
+        UPDATE t_virtual_order
         <set>
             <if test="orderStatus !=null and orderStatus !=''">orderStatus=#{orderStatus},</if>
             <if test="orderStatus !=null and orderStatus !=''">receivePhone=#{phone},</if>
@@ -187,10 +188,10 @@
     </update>
 
     <!-- 通过订单编号,商品条码查询唯一订单明细 -->
-    <select id="findOrderDetail" parameterType="map" resultMap="OrderDetailResult">
+    <select id="findVirtualOrderDetail" parameterType="map" resultMap="VirtualOrderDetailResult">
         SELECT d.orderDetailId,d.commodityName,d.commodityNo,d.unit,d.commodityNum,d.salePrice/100
         inPrice,d.orderNumber,d.commodityId
-        FROM t_order_detail d
+        FROM t_virtual_order_detail d
         <where>
             <if test="orderNumber !=null and orderNumber != ''">
                 AND d.orderNumber = #{orderNumber}
@@ -202,8 +203,8 @@
     </select>
 
     <!-- 插入订单审核表 -->
-    <insert id="insertOrderAuditing" parameterType="orderAuditing">
-        INSERT INTO t_order_auditing(auditingId,orderId,orderDetailId,
+    <insert id="insertVirtualOrderAuditing" parameterType="OrderAuditing">
+        INSERT INTO t_virtual_auditing(auditingId,orderId,orderDetailId,
         <if test="orderNumber !=null and orderNumber !='' ">orderNumber,</if>
         <if test="commodityId !=null and commodityId !='' ">commodityId,</if>
         <if test="commodityNo !=null and commodityNo!='' ">commodityNo,</if>
@@ -228,8 +229,8 @@
     </insert>
 
     <!-- 插入订单明细表 -->
-    <insert id="insertOrderDetail" parameterType="OrderDetail">
-        INSERT INTO t_order_detail(
+    <insert id="insertVirtualOrderDetail" parameterType="OrderDetail">
+        INSERT INTO t_virtual_order_detail(
         orderDetailId,orderNumber,commodityId,commodityNo,
         <if test="commodityName !=null and commodityName !='' ">commodityName,</if>
         <if test="commodityNum !=null and commodityNum !='' ">commodityNum,</if>
@@ -255,26 +256,26 @@
     </insert>
 
     <!-- 通过订单id查询订单 -->
-    <select id="findOrder" parameterType="string" resultType="Orders">
-		SELECT * FROM t_order WHERE orderId = #{orderId}
+    <select id="findVirtualOrder" parameterType="string" resultType="Orders">
+		SELECT * FROM t_virtual_order WHERE orderId = #{orderId}
 	</select>
 
     <!-- 更新订单库存号 -->
-    <update id="updateOrderStorageNoAndStatus" parameterType="Orders">
-		UPDATE t_order SET storageNo=#{storageNo} WHERE orderId=#{orderId}
+    <update id="updateVirtualOrderStorageNoAndStatus" parameterType="Orders">
+		UPDATE t_virtual_order SET storageNo=#{storageNo} WHERE orderId=#{orderId}
 	</update>
-
-  <!--  查询虚拟订单信息通过orderNumber
-    <select id="findVirtualOrder" parameterType="String" resultType="Orders">
-        select * from t_virtual_order WHERE orderNumber=#{orderNumber};
-    </select>
-    查询虚拟订单详情
-    <select id="findVirtualOrderDetails" parameterType="String" resultMap="OrderDetailResult">
-        SELECT d.orderDetailId,d.commodityName,d.commodityNo,d.unit,d.commodityNum,d.salePrice/100
-        inPrice,d.orderNumber
-        FROM t_virtual_order_detail d WHERE
-        d.orderNumber = #{orderNumber}
-    </select>
-    更新虚拟订单-->
+    <!--
+        查询虚拟订单信息通过orderNumber
+        <select id="findVirtualOrder" parameterType="String" resultType="Orders">
+            select * from t_virtual_order WHERE orderNumber=#{orderNumber};
+        </select>
+        查询虚拟订单详情
+        <select id="findVirtualOrderDetails" parameterType="String" resultMap="VirtualOrderDetailResult">
+            SELECT d.orderDetailId,d.commodityName,d.commodityNo,d.unit,d.commodityNum,d.salePrice/100
+            inPrice,d.orderNumber
+            FROM t_virtual_order_detail d WHERE
+            d.orderNumber = #{orderNumber}
+        </select>
+        更新虚拟订单-->
 
 </mapper> 
