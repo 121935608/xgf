@@ -301,20 +301,12 @@
 
     // 双击后修改td
     function changeTd(obj) {
+        var oldNum = $(obj).html();
         $(obj).html("<input id='comNumInput' type='text' value='" + $(obj).text() + "'/>");
         var trNode = $(obj).parent();
         $("#comNumInput").bind("blur", function () {
             var parent = $("#comNumInput").parent();
             parent.html($("#comNumInput").val());
-
-            var totalMoneyCell = trNode.find("td").eq(8);
-            var saleMoneyCell = trNode.find("td").eq(4);
-            alert(parent.html() * saleMoneyCell.html());
-            var totalMoney = parent.html() * saleMoneyCell.html();
-            totalMoneyCell.html(totalMoney);
-            var allMoney = addAllMoney("orderTable");
-            var freightMoney = $("#freightInput").val();
-            $("#moneyInput").val(allMoney + Number(freightMoney));
 
             // 异步请求获取提交数量修改
             // 获取commodityNo
@@ -339,6 +331,17 @@
                 success: function (data) {
                     if (data.s == false) {
                         layer.msg(data.m);
+                        // 将数量改为原数量
+                        parent.html(oldNum);
+                    } else {
+                        var totalMoneyCell = trNode.find("td").eq(8);
+                        var saleMoneyCell = trNode.find("td").eq(4);
+                        //alert(parent.html() * saleMoneyCell.html());
+                        var totalMoney = parent.html() * saleMoneyCell.html();
+                        totalMoneyCell.html(totalMoney);
+                        var allMoney = addAllMoney("orderTable");
+                        var freightMoney = $("#freightInput").val();
+                        $("#moneyInput").val(allMoney + Number(freightMoney));
                     }
                 }
             });
@@ -358,7 +361,7 @@
         $(cell0).html("<div class='wrap'><input style='width:100%;position:relative;' class='input-text auto-inp' autocomplete='off' type='text' id='autoCompleteId" + rowsNum + "' name='autoCompleteName" + rowsNum + "'/>" + "<div style='display: none' class='ac_results' id='autoCompleteHidden" + rowsNum + "' /></div>");
         var cell1 = newRow.insertCell(1);
         // 绑定失焦事件进行回显
-        cell1.setAttribute("onblur", "findCom(this)");
+        //cell1.setAttribute("onblur", "findCom(this)");
         var cell2 = newRow.insertCell(2);
         var cell3 = newRow.insertCell(3);
         cell3.setAttribute("onblur", "sumMoney(this)")
@@ -471,6 +474,30 @@
                             $("#autoCompleteId" + rowsNum).val($("#autoCompleteHidden" + rowsNum + " li:eq(" + this.id + ")").text());
                             $("#autoCompleteHidden" + rowsNum).html("");
                             $("#autoCompleteHidden" + rowsNum).hide();
+                            var InputNode = $("#autoCompleteId" + rowsNum);
+                            var trNode = InputNode.parent().parent().parent();
+                            var comObj = ls[this.id];
+                            //trNode.children("td").eq(0).html(comObj.commodityName);
+                            // 获取商品信息table的所有商品条码
+                            var comNoList = getAllCommodityNo("#orderTable");
+                            // 如果商品已存在
+                            if (comNoList.length > 0 && comNoList.indexOf(comObj.commodityNo) != -1) {
+                                layer.msg("该商品已经添加,请不要重复添加");
+                                return;
+                            }
+                            trNode.children("td").eq(1).html(comObj.commodityNo);
+                            trNode.children("td").eq(2).html(comObj.unit);
+                            trNode.children("td").eq(3).html(1);
+                            trNode.children("td").eq(4).html((comObj.salePrice / 100).toFixed(1));
+                            trNode.children("td").eq(5).html((comObj.subPrice / 100).toFixed(1));
+                            trNode.children("td").eq(6).html(comObj.subPriceUnit);
+                            trNode.children("td").eq(7).html(comObj.weight);
+                            trNode.children("td").eq(8).html((comObj.salePrice / 100).toFixed(1));
+
+                            if ($("#addOrderMoneyInput").val() == undefined || $("#addOrderMoneyInput").val() == "") {
+                                $("#addOrderMoneyInput").val((comObj.salePrice / 100).toFixed(1));
+                            }
+
                         });
                         //移动对象
                         $("#autoCompleteHidden" + rowsNum + " li").hover(function () {
@@ -506,7 +533,7 @@
         var tableNode = $(obj).parent().parent();
         var tableId = tableNode.attr("id");
         alert(tableId);
-        alert(tableId == "orderTable");
+        //alert(tableId == "orderTable");
         addAllMoney(tableId);
     }
 
@@ -527,17 +554,9 @@
     }
 
     // 商品条形码绑定失焦事件
-    function findCom(obj) {
+    /*function findCom(obj) {
         var commodityNo = $(obj).html();
-        // 获取商品信息table的所有商品条码
-        var comNoList = getAllCommodityNo("#orderTable");
-        if (comNoList < 0) {
-            return;
-        }
-        if (comNoList.indexOf(commodityNo) != -1) {
-            layer.msg("该商品已经添加,请不要重复添加");
-            return;
-        }
+
         if (commodityNo != null && commodityNo.trim() != "") {
             // 查询商品
             var url = baseOrderUrl + "/findCommodityByNo.action";
@@ -551,8 +570,8 @@
                 cache: false,
                 dataType: "json",
                 contentType: "application/json;charset=utf-8",
-                //Accept:"text/html, application/xhtml+xml, */*",
-                accept: "*/*",
+                //Accept:"text/html, application/xhtml+xml, *!/!*",
+                accept: "*!/!*",
                 success: function (data) {
                     //alert(data.s);
                     if (data.s == true) { // 如果返回成功将信息回显到表单
@@ -576,7 +595,7 @@
                 },
             });
         }
-    }
+    }*/
 
     // 获取table的商品条码
     function getAllCommodityNo(tableId) {
@@ -880,11 +899,11 @@
 
                 function (data) {
                     if (data.s == true) {
-                        layer.msg('审核成功', {time: 1000});
+                        layer.msg('审核成功');
                         layer_close();
                     } else {
                         // 如果修改失败重新加载审核页面
-                        layer.msg(data.m, {time: 1000});
+                        layer.msg(data.m);
                         window.location.href = "${context_root}/order/toAuditingInfo.action?orderNumber=${orders.orderNumber}";
                     }
                 }

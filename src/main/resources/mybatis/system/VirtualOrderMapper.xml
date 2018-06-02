@@ -56,7 +56,7 @@
         <result column="freight" property="freight"/>
     </resultMap>
 
-    <select id="virtualPageInfoQuery" parameterType="PageUtilEntity" resultMap="VirtualOrderResult">
+    <select id="virtualpageInfoQuery" parameterType="PageUtilEntity" resultMap="VirtualOrderResult">
         SELECT o.orderNumber,o.orderTime,o.payTime,s.userName,o.orderPrice/100
         orderPrice,o.platform,o.orderStatus,o.payCode,ad.address address ,ss.`name` supervisorName
         FROM t_virtual_order o

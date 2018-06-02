@@ -36,7 +36,7 @@ public class VirtualOrderDao extends DynamicObjectBaseDao implements IVirtualOrd
     public List<TableDataInfo> pageInfoQuery(PageUtilEntity pageUtilEntity) {
         List<TableDataInfo> pageInfoQuery=null;
         try {
-            pageInfoQuery=(List<TableDataInfo>)this.findForList("VirtualOrderMapper.virtualPageInfoQuery",pageUtilEntity);
+            pageInfoQuery=(List<TableDataInfo>)this.findForList("VirtualOrderMapper.virtualpageInfoQuery",pageUtilEntity);
         } catch (Exception e) {
             e.printStackTrace();
         }

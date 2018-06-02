@@ -1,9 +1,9 @@
 ﻿<%@ page contentType="text/html; charset=UTF-8" %>
 <%@include file="/WEB-INF/jsp/common/taglibs.jspf" %>
-<ys:contentHeader title="审核虚拟订单信息"/>
+<ys:contentHeader title="审核订单信息"/>
 <body>
 <article class="page-container">
-    <form action="${context_root}/order/orderSave.action" method="post" class="form form-horizontal" id="form-order-modify">
+    <form action="${context_root}/virtualOrder/orderSave.action" method="post" class="form form-horizontal" id="form-order-modify">
         <input type="hidden" name="id" value="WO-20180521-00309" id="num">
         <%-- 订单信息 --%>
         <div class="info-div">
@@ -164,7 +164,7 @@
             <label class="form-label col-xs-offset-7 col-xs-2 col-sm-2"><span class="c-red"></span>总共费用:</label>
             <div class="formControls col-xs-2 col-sm-2">
                 <input type="text" id="moneyInput" value="${orders.orderPrice}" placeholder="总费用"/>
-                <input type="hidden" id="moneyHiddenInput" value="${orders.orderPrice}" placeholder="总费用"/>
+                <input type="hidden" id="moneyHiddenInput" value="${orders.totalPrice}" placeholder="总费用"/>
             </div>
         </div>
 
@@ -529,6 +529,15 @@
     // 商品条形码绑定失焦事件
     function findCom(obj) {
         var commodityNo = $(obj).html();
+        // 获取商品信息table的所有商品条码
+        var comNoList = getAllCommodityNo("#orderTable");
+        if (comNoList < 0) {
+            return;
+        }
+        if (comNoList.indexOf(commodityNo) != -1) {
+            layer.msg("该商品已经添加,请不要重复添加");
+            return;
+        }
         if (commodityNo != null && commodityNo.trim() != "") {
             // 查询商品
             var url = baseOrderUrl + "/findCommodityByNo.action";
@@ -567,6 +576,20 @@
                 },
             });
         }
+    }
+
+    // 获取table的商品条码
+    function getAllCommodityNo(tableId) {
+        var comNoList = [];
+        var trs = $(tableId).find("tr");
+        if (trs.length > 0) {
+            for (var i = 1; i < trs.length; i++) {
+                var comNo = trs.eq(i).find("td").eq("1").html();
+                alert(comNo);
+                comNoList.push(comNo);
+            }
+        }
+        return comNoList;
     }
 
     // 编辑数量绑定失焦事件
@@ -856,13 +879,13 @@
             success:
 
                 function (data) {
-                    if (!data.s == true) {
-                        // 如果修改失败重新加载审核页面
-                        layer.msg(data.m, {time: 1000});
-                        window.location.href = "${context_root}/order/toAuditingInfo.action?orderNumber=${orders.orderNumber}";
-                    } else {
-                        layer.msg('审核成功', {time: 1000});
+                    if (data.s == true) {
+                        layer.msg('审核成功');
                         layer_close();
+                    } else {
+                        // 如果修改失败重新加载审核页面
+                        layer.msg(data.m);
+                        window.location.href = "${context_root}/order/toAuditingInfo.action?orderNumber=${orders.orderNumber}";
                     }
                 }
         })
