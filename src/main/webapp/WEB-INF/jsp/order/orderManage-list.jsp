@@ -26,7 +26,7 @@
                <option value="HDFK">货到付款</option>
                <option value="CL">额度支付</option>
            </select>
-       </span>
+        </span>
         <span class="select-box" style="width: 120px;">
            <select name="platform" id="platform" class="select" autocomplete="off">
                <option value="">订单来源</option>
