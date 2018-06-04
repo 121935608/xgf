@@ -104,7 +104,7 @@
     </select>
 
     <select id="findOrderInfo" parameterType="String" resultMap="OrderResult">
-		SELECT o.orderId,o.orderNumber,o.orderTime,o.payCode,s.userName,o.orderPrice/100 orderPrice,o.orderStatus,t.storeName,
+		SELECT o.orderId,o.orderNumber,o.orderTime,o.payCode,s.userName,o.orderPrice/100 orderPrice,o.orderStatus,o.confirmOrder,t.storeName,
 		ad.name userNames,ad.phone phone,ad.area `area`,ad.address address,o.totalPrice/100 totalPrice,o.freight/100 freight,o.payment/100 payment
 		FROM t_order o LEFT JOIN sys_user s ON o.userId=s.userId
 		LEFT JOIN t_address ad ON ad.`addrId`=o.`addressId`

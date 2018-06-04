@@ -150,7 +150,7 @@ public class OrderConstant {
      * 请求地址:请求库存的地址
      */
     public static final String STORAGE_URL              = "http://wuhanxingrong.vicp.io:3080/stock2.0/app/order.action";
-    public static final String STORAGE_COMFIRMORDER_URL = "stockUrl=http://wuhanxingrong.vicp.io:3080/stock2.0/app/confirmMoney.action";
+    public static final String STORAGE_COMFIRMORDER_URL = "http://wuhanxingrong.vicp.io:3080/stock2.0/app/confirmMoney.action";
 
     public static final String SERVICE_URL = "http://localhost:8886/xgf/third/confirmOrder";
 
