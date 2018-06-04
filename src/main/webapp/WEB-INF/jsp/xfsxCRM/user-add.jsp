@@ -130,7 +130,7 @@
         return this.optional(element) || (chrnum.test(value));
     }, "请输入中文");
     jQuery.validator.addMethod("checkPhone", function (value, element) {
-        var chrnum =/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
+        var chrnum =/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
         return this.optional(element) || (chrnum.test(value));
     }, "请输入正确的手机号");
     $("#form-supervisor-add").validate({
