@@ -35,6 +35,10 @@
                <option value="3">待收货</option>
                <option value="4">已完成</option>
                <option value="5">已收款</option>
+                <option value="6">客服审核</option>
+               <option value="7">库存审核</option>
+               <option value="8">退货中</option>
+               <option value="9">交易关闭</option>
            </select>
        </span>
         <input type="text" class="input-text" style="width:250px" placeholder="订单号|会员" id="orderNumber" name="orderNumber">
@@ -361,12 +365,13 @@
         var beginTime = $("#beginTime").val();
         var endTime = $("#endTime").val();
         var payType = $("#payType option:selected").val();
+        var payCode = $("#payCode option:selected").val();
         var platform = $("#platform option:selected").val();
         var orderStatus = $("#orderStatus option:selected").val();
         var orderNumber = $("#orderNumber").val();
         var address = $("#address").val();
         var supervisorName = $("#supervisorName").val();
-        pageTable.fnSettings().sAjaxSource = encodeURI("${context_root}/virtualOrder/findOrderManageList.action?beginTime=" + beginTime + "&endTime=" + endTime + "&payType=" + payType + "&platform=" + platform + "&orderStatus=" + orderStatus + "&orderNumber=" + orderNumber + "&address=" + address + "&supervisorName=" + supervisorName);
+        pageTable.fnSettings().sAjaxSource = encodeURI("${context_root}/virtualOrder/findOrderManageList.action?beginTime=" + beginTime + "&endTime=" + endTime + "&payType=" + payType + "&payCode=" + payCode + "&platform=" + platform + "&orderStatus=" + orderStatus + "&orderNumber=" + orderNumber + "&address=" + address + "&supervisorName=" + supervisorName);
         pageTable.fnClearTable(0);
         pageTable.fnDraw();
     }

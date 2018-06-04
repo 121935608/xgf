@@ -88,12 +88,17 @@
             AND ad.address LIKE CONCAT(CONCAT('%', #{relationMap.address}),'%')
 
         </if>
-
         <if test="relationMap.supervisorName !=null and relationMap.supervisorName !=''">
             AND ss.`name` LIKE CONCAT(CONCAT('%', #{relationMap.supervisorName}),'%')
-
         </if>
-
+        <choose>
+            <when test="relationMap.payCode != null and relationMap.payCode !='' and relationMap.payCode == 'XSZF'.toString()">
+                AND o.payCode IN ('WX','ZFB')
+            </when>
+            <when test="relationMap.payCode != null and relationMap.payCode !='' and relationMap.payCode != 'XSZF'.toString()">
+                AND o.payCode = #{relationMap.payCode}
+            </when>
+        </choose>
         <!--关键词查询-->
         order by o.orderTime DESC
     </select>
