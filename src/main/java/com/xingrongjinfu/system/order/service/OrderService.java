@@ -118,4 +118,9 @@ public class OrderService implements IOrderService {
   public int updateVirtualOrder(Order order) {
     return orderDao.updateVirtualOrder(order);
   }
+
+  @Override
+  public int updateOrderDetailComNum(OrderDetail orderDetail) {
+    return orderDao.updateOrderDetailComNum(orderDetail);
+  }
 }

@@ -93,4 +93,7 @@ public interface IVirtualOrderService {
     List<OrderDetail> findVirtualOrderDetails(@Param("orderNumber") String orderNumber) throws Exception;
     //更新虚拟订单
     int updateVirtualOrder(Order virtualOrder);
+
+    /** 修改订单明细商品数量 */
+    int updateOrderDetailComNum(OrderDetail orderDetail);
 }

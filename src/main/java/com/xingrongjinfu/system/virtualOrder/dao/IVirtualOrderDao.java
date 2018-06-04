@@ -120,4 +120,7 @@ public interface IVirtualOrderDao {
     List<OrderDetail> findVirtualOrderDetails(@Param("orderNumber") String orderNumber) throws Exception;
 
     int updateVirtualOrder(Order order);
+
+    /** 更新订单明细商品数量 */
+    int updateOrderDetailComNum(OrderDetail orderDetail);
 }

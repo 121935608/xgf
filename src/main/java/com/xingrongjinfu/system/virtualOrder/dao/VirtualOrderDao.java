@@ -34,9 +34,9 @@ public class VirtualOrderDao extends DynamicObjectBaseDao implements IVirtualOrd
 
     @Override
     public List<TableDataInfo> pageInfoQuery(PageUtilEntity pageUtilEntity) {
-        List<TableDataInfo> pageInfoQuery=null;
+        List<TableDataInfo> pageInfoQuery = null;
         try {
-            pageInfoQuery=(List<TableDataInfo>)this.findForList("VirtualOrderMapper.virtualpageInfoQuery",pageUtilEntity);
+            pageInfoQuery = (List<TableDataInfo>) this.findForList("VirtualOrderMapper.virtualpageInfoQuery", pageUtilEntity);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -45,14 +45,14 @@ public class VirtualOrderDao extends DynamicObjectBaseDao implements IVirtualOrd
 
     @Override
     public Order findOrderInfo(String orderNumber) {
-        return (Order)this.findForObject("VirtualOrderMapper.findVirtualOrderInfo",orderNumber);
+        return (Order) this.findForObject("VirtualOrderMapper.findVirtualOrderInfo", orderNumber);
     }
 
     @Override
     public List<OrderDetail> findOrderDetailInfo(String orderNumber) {
-        List<OrderDetail> findOrderDetailInfo=null;
+        List<OrderDetail> findOrderDetailInfo = null;
         try {
-            findOrderDetailInfo=(List<OrderDetail>)this.findForList("VirtualOrderMapper.findVirtualOrderDetailInfo",orderNumber);
+            findOrderDetailInfo = (List<OrderDetail>) this.findForList("VirtualOrderMapper.findVirtualOrderDetailInfo", orderNumber);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -61,9 +61,9 @@ public class VirtualOrderDao extends DynamicObjectBaseDao implements IVirtualOrd
 
     @Override
     public List<OrderDetail> findOrderDetailInfoByNo(String orderNumber) {
-        List<OrderDetail> findOrderDetailInfo=null;
+        List<OrderDetail> findOrderDetailInfo = null;
         try {
-            findOrderDetailInfo=(List<OrderDetail>)this.findForList("VirtualOrderMapper.findVirtualOrderDetailInfoByNo",orderNumber);
+            findOrderDetailInfo = (List<OrderDetail>) this.findForList("VirtualOrderMapper.findVirtualOrderDetailInfoByNo", orderNumber);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -78,14 +78,14 @@ public class VirtualOrderDao extends DynamicObjectBaseDao implements IVirtualOrd
 
     @Override
     public int updatePayOrder(String orderNumber) {
-        return this.update("VirtualOrderMapper.updatePayVirtualOrder",orderNumber);
+        return this.update("VirtualOrderMapper.updatePayVirtualOrder", orderNumber);
     }
 
     @Override
     public List<TableDataInfo> expressPageInfoQuery(PageUtilEntity pageUtilEntity) {
-        List<TableDataInfo> expressPageInfoQuery=null;
+        List<TableDataInfo> expressPageInfoQuery = null;
         try {
-            expressPageInfoQuery=(List<TableDataInfo>)this.findForList("VirtualOrderMapper.virtualExpresspageInfoQuery",pageUtilEntity);
+            expressPageInfoQuery = (List<TableDataInfo>) this.findForList("VirtualOrderMapper.virtualExpresspageInfoQuery", pageUtilEntity);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -94,7 +94,7 @@ public class VirtualOrderDao extends DynamicObjectBaseDao implements IVirtualOrd
 
     @Override
     public int findAllOrders() {
-        return (int) this.findForObject("VirtualOrderMapper.findAllVirtualOrders",null);
+        return (int) this.findForObject("VirtualOrderMapper.findAllVirtualOrders", null);
     }
 
     @Override
@@ -148,19 +148,25 @@ public class VirtualOrderDao extends DynamicObjectBaseDao implements IVirtualOrd
     public int updateOrderStatus(Order virtualOrder) {
         return this.update("VirtualOrderMapper.updateVirtualOrderStatus", virtualOrder);
     }
+
     //查询虚拟订单信息
     @Override
     public Order findVirtualOrder(String orderNumber) {
-        return (Order) this.findForObject("VirtualOrderMapper.findVirtualOrder",orderNumber);
+        return (Order) this.findForObject("VirtualOrderMapper.findVirtualOrder", orderNumber);
     }
 
     @Override
     public List<OrderDetail> findVirtualOrderDetails(String orderNumber) throws Exception {
-        return  (List<OrderDetail>) this.findForList("VirtualOrderMapper.findVirtualOrderDetails",orderNumber);
+        return (List<OrderDetail>) this.findForList("VirtualOrderMapper.findVirtualOrderDetails", orderNumber);
     }
 
     @Override
     public int updateVirtualOrder(Order order) {
         return (int) this.update("VirtualOrderMapper.updateVirtualOrder", order);
+    }
+
+    @Override
+    public int updateOrderDetailComNum(OrderDetail orderDetail) {
+        return this.update("VirtualOrderMapper.updateOrderDetailComNum", orderDetail);
     }
 }

@@ -273,7 +273,7 @@ public class VirtualOrderController extends BaseController {
     /**
      * @param orderDetails @Description:校验填充订单明细
      * @return: void
-     * @author: ncainiao @Date: 2018/5/23
+     * @author: niu @Date: 2018/5/23
      */
     private void fillingOrderDetail(List<OrderDetail> orderDetails) {
         for (OrderDetail orderDetail : orderDetails) {
@@ -295,7 +295,7 @@ public class VirtualOrderController extends BaseController {
     /**
      * @param orders @Description校验填充订单
      * @return: void
-     * @author: ncainiao @Date: 2018/5/23
+     * @author: niu @Date: 2018/5/23
      */
     private void fillingOrder(Order orders) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -344,7 +344,7 @@ public class VirtualOrderController extends BaseController {
     /**
      * @Description:保存客服修改的订单信息
      * @return: org.framework.core.model.Message
-     * @author: ncainiao @Date: 2018/5/23
+     * @author: niu @Date: 2018/5/23
      */
     @RequestMapping(value = OrderConstant.ORDER_SAVE_MODIFY_OPS)
     public @ResponseBody
@@ -387,14 +387,20 @@ public class VirtualOrderController extends BaseController {
                 String commodityNum = (String) jsonObj.get("commodityNum");
                 // 根据orderNumber和commodiytNO 查询订单明细
                 OrderDetail orderDetail = getOrderDetail(orderNumber, commodityNo);
+                if (orderDetail == null) {
+                    return new Message(false, "不存在改订单明细");
+                }
                 if (commodityNum == null) {
                     // 如果商品数为空,代表是取消商品
-                    Integer commodityNum1 = orderDetail.getCommodityNum();
+                    Integer oldCommodityNum = orderDetail.getCommodityNum();
                     // 修改客服库存
                     Product productByNo = productService.findProductInfoByNo(commodityNo);
-                    productByNo.setKfStock(productByNo.getKfStock() - commodityNum1);
-                    productByNo.setKxdStock(productByNo.getKxdStock() + commodityNum1);
-                    orderAuditing.setServiceModify(commodityNum1);
+                    if (productByNo.getKfStock() <= 0 || productByNo.getKfStock() < oldCommodityNum) {
+                        return new Message(false, "客服库存数异常"); // 客服库存数小于支付商品数量,则下单时库存数量操作异常
+                    }
+                    productByNo.setKfStock(productByNo.getKfStock() - oldCommodityNum);
+                    productByNo.setKxdStock(productByNo.getKxdStock() + oldCommodityNum);
+                    orderAuditing.setServiceModify(oldCommodityNum);
                     orderAuditing.setModifyStatus(2);
                 } else { // 不为空表示可能存在修改商品数量
                     Integer modifiedNum = Integer.valueOf(commodityNum);
@@ -406,7 +412,12 @@ public class VirtualOrderController extends BaseController {
                     if (orderDetail.getCommodityNum() == modifiedNum) {
                         continue; // 相同则是没有任何操作
                     } else {
-                        orderAuditing.setModifyStatus(2); // 不相同则是修改订单
+                        orderAuditing.setModifyStatus(1); // 不相同则是修改订单
+                        // 修改订单明细商品数量
+                        orderDetail.setCommodityNum(modifiedNum);
+                        if (orderService.updateOrderDetailComNum(orderDetail) < 0) {
+                            return new Message(false, "更新订单明细商品数量失败");
+                        }
                     }
                 }
 
@@ -447,7 +458,7 @@ public class VirtualOrderController extends BaseController {
                 Product product = productService.findProductInfoByNo(commodityNo);
                 // 判断商品库存是否足够
                 Integer kxdStock = product.getKxdStock();
-                if (kxdStock < commodityNum) {
+                if (kxdStock <= 0 || kxdStock < commodityNum) {
                     return new Message(false, "商品库存不足");
                 }
                 // 增加客服库存,减少可下单库存
@@ -605,7 +616,7 @@ public class VirtualOrderController extends BaseController {
         jsonObject.put("orderNumber", virtualOrder.getOrderNumber());
         jsonObject.put("orderPrice", (int) Math.ceil(virtualOrder.getOrderPrice()));
         int payWay = 2; // 线下
-        if (virtualOrder.getPayCode() == null || virtualOrder.getPayCode().equalsIgnoreCase("HDFK")) {
+        if (virtualOrder.getPayCode() == null || virtualOrder.getPayCode().equalsIgnoreCase("HDFK")) { // 若为空表示货到付款,或默认为货到付款
             payWay = 2;
         } else {
             payWay = 1; // 线上

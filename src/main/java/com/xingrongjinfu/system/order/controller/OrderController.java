@@ -218,7 +218,7 @@ public class OrderController extends BaseController {
                 // 将订单和商品信息存储
                 // BeanUtils.copyProperties(commodity, orderCommodityDetail);
                 BeanUtils.copyProperties(orderDetail, orderCommodityDetail);
-                orderCommodityDetail.setSalePrice(commodity.getSalePrice());
+                // orderCommodityDetail.setSalePrice(commodity.getSalePrice());
                 orderCommodityDetail.setSubPrice(commodity.getSubPrice());
                 orderCommodityDetail.setSubPriceUnit(commodity.getSubPriceUnit());
                 orderCommodityDetail.setWeight(commodity.getWeight());
@@ -269,7 +269,7 @@ public class OrderController extends BaseController {
     /**
      * @param orderDetails @Description:校验填充订单明细
      * @return: void
-     * @author: ncainiao @Date: 2018/5/23
+     * @author: niu @Date: 2018/5/23
      */
     private void fillingOrderDetail(List<OrderDetail> orderDetails) {
         for (OrderDetail orderDetail : orderDetails) {
@@ -291,7 +291,7 @@ public class OrderController extends BaseController {
     /**
      * @param orders @Description校验填充订单
      * @return: void
-     * @author: ncainiao @Date: 2018/5/23
+     * @author: niu @Date: 2018/5/23
      */
     private void fillingOrder(Order orders) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -340,7 +340,7 @@ public class OrderController extends BaseController {
     /**
      * @Description:保存客服修改的订单信息
      * @return: org.framework.core.model.Message
-     * @author: ncainiao @Date: 2018/5/23
+     * @author: niu @Date: 2018/5/23
      */
     @RequestMapping(value = OrderConstant.ORDER_SAVE_MODIFY_OPS)
     public @ResponseBody
@@ -383,14 +383,20 @@ public class OrderController extends BaseController {
                 String commodityNum = (String) jsonObj.get("commodityNum");
                 // 根据orderNumber和commodiytNO 查询订单明细
                 OrderDetail orderDetail = getOrderDetail(orderNumber, commodityNo);
+                if (orderDetail == null) {
+                    return new Message(false, "不存在改订单明细");
+                }
                 if (commodityNum == null) {
                     // 如果商品数为空,代表是取消商品
-                    Integer commodityNum1 = orderDetail.getCommodityNum();
+                    Integer oldCommodityNum = orderDetail.getCommodityNum();
                     // 修改客服库存
                     Product productByNo = productService.findProductInfoByNo(commodityNo);
-                    productByNo.setKfStock(productByNo.getKfStock() - commodityNum1);
-                    productByNo.setKxdStock(productByNo.getKxdStock() + commodityNum1);
-                    orderAuditing.setServiceModify(commodityNum1);
+                    if (productByNo.getKfStock() <= 0 || productByNo.getKfStock() < oldCommodityNum) {
+                        return new Message(false, "客服库存数异常"); // 客服库存数小于支付商品数量,则下单时库存数量操作异常
+                    }
+                    productByNo.setKfStock(productByNo.getKfStock() - oldCommodityNum);
+                    productByNo.setKxdStock(productByNo.getKxdStock() + oldCommodityNum);
+                    orderAuditing.setServiceModify(oldCommodityNum);
                     orderAuditing.setModifyStatus(2);
                 } else { // 不为空表示可能存在修改商品数量
                     Integer modifiedNum = Integer.valueOf(commodityNum);
@@ -402,7 +408,12 @@ public class OrderController extends BaseController {
                     if (orderDetail.getCommodityNum() == modifiedNum) {
                         continue; // 相同则是没有任何操作
                     } else {
-                        orderAuditing.setModifyStatus(2); // 不相同则是修改订单
+                        orderAuditing.setModifyStatus(1); // 不相同则是修改订单
+                        // 修改订单明细商品数量
+                        orderDetail.setCommodityNum(modifiedNum);
+                        if (orderService.updateOrderDetailComNum(orderDetail) < 0) {
+                            return new Message(false, "更新订单明细商品数量失败");
+                        }
                     }
                 }
 
@@ -433,8 +444,8 @@ public class OrderController extends BaseController {
                 orderAuditing.setServiceRemark(serviceRemark); // 设置客服人员备注
                 orderAuditing.setAuditingId(UuidUtil.get32UUID()); // 设置审核单id
                 orderAuditing.setOrderNumber(orderNumber); // 订单编号
-                orderAuditing.setOrderId(order.getOrderId());
-                orderAuditing.setServiceId(serviceId);
+                orderAuditing.setOrderId(order.getOrderId()); // 设置订单id
+                orderAuditing.setServiceId(serviceId); // 设置操作人员id
 
                 JSONObject jsonObj = addOrderTableObj.getJSONObject(String.valueOf(i));
                 String commodityNo = (String) jsonObj.get("commodityNo");
@@ -443,11 +454,11 @@ public class OrderController extends BaseController {
                 Product product = productService.findProductInfoByNo(commodityNo);
                 // 判断商品库存是否足够
                 Integer kxdStock = product.getKxdStock();
-                if (kxdStock < commodityNum) {
+                if (kxdStock <= 0 || kxdStock < commodityNum) {
                     return new Message(false, "商品库存不足");
                 }
                 // 增加客服库存,减少可下单库存
-                product.setKfStock(product.getKfStock() + kxdStock);
+                product.setKfStock(product.getKfStock() + commodityNum);
                 product.setKxdStock(product.getKxdStock() - commodityNum);
                 productService.updateProductStock(product);
 
@@ -600,11 +611,11 @@ public class OrderController extends BaseController {
         jsonObject.put("address", order.getReceiveArea() + order.getReceiveAdd());
         jsonObject.put("orderNumber", order.getOrderNumber());
         jsonObject.put("orderPrice", (int) Math.ceil(order.getOrderPrice()));
-        int payWay = 2;
-        if (order.getPayCode().equalsIgnoreCase("HDFK")) {
+        int payWay = 2; // 线下
+        if (order.getPayCode() == null || order.getPayCode().equalsIgnoreCase("HDFK")) { // 如果为空表示货到付款,或默认为货到付款
             payWay = 2;
         } else {
-            payWay = 1;
+            payWay = 1; // 线上
         }
         jsonObject.put("payWay", payWay);
         jsonObject.put("cusremark", order.getRemark());
@@ -648,7 +659,7 @@ public class OrderController extends BaseController {
     /**
      * @param orderNumber @Description:整单取消
      * @return: org.framework.core.model.Message
-     * @author: ncainiao @Date: 2018/5/24
+     * @author: niu @Date: 2018/5/24
      */
     @RequestMapping(OrderConstant.ORDER_CANCELL_ALL_OPS)
     public @ResponseBody
@@ -679,6 +690,7 @@ public class OrderController extends BaseController {
                 int result = orderService.insertOrderAuditing(orderAuditing);
                 if (result <= 0) {
                     resultFlag = false;
+                    return new Message(false, "整单取消订单失败");
                 }
             }
         }
@@ -722,106 +734,6 @@ public class OrderController extends BaseController {
         List<Commodity> commodities = commodityService.queryByCommodityName(commodityName);
         JSONArray jaProCommodity = JSONArray.fromObject(commodities);
         return jaProCommodity;
-    }
-
-
-    //虚拟订单审核----------------------------------------------------------------
-
-    //t_virtual_order订单审核部分-----------------------------------------------------
-
-    /**
-     * 跳转到虚拟订单审核页面
-     *
-     * @param
-     * @return
-     */
-    @RequestMapping(OrderConstant.TO_VIRTUAL_ORDER_AUTIDING)
-    @ResponseBody
-    public ModelAndView ToVirtuaOrderAuditing(HttpServletRequest request) throws Exception {
-        String orderNumber = request.getParameter("orderNumber");
-        ModelAndView modelAndView = this.getModelAndView(OrderConstant.VIRTUAL_ORDER_AUDITING);
-        //查询虚拟订单信息
-        Order orders = orderService.findVirtualOrder(orderNumber);
-        fillingOrder(orders);
-        //查询订单详情
-        List<OrderDetail> orderDetails = orderService.findVirtualOrderDetails(orderNumber);
-        List<OrderCommodityDetail> orderCommodityDetails = new ArrayList<>();
-        for (OrderDetail orderDetail : orderDetails) {
-            if (orderDetail.getInPrice() == null) {
-                orderDetail.setInPrice(0.00);
-            }
-            if (orderDetail.getCommodityNum() == null) {
-                orderDetail.setCommodityNum(0);
-            }
-            // 总金额=数量*进价
-            orderDetail.setInPrice(orderDetail.getInPrice());
-            Double all = orderDetail.getInPrice() * orderDetail.getCommodityNum();
-            BigDecimal b = new BigDecimal(all);
-            all = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-            orderDetail.setTotalMoney(all);
-
-            // 根据商品条形码查询商品
-            String commodityNo = orderDetail.getCommodityNo();
-            List<Commodity> commodities = commodityService.queryByCommodityNo(commodityNo);
-            System.out.println(commodities);
-            for (Commodity commodity : commodities) {
-                OrderCommodityDetail orderCommodityDetail = new OrderCommodityDetail();
-                // 将订单和商品信息存储
-                BeanUtils.copyProperties(commodity, orderCommodityDetail);
-                BeanUtils.copyProperties(orderDetail, orderCommodityDetail);
-                orderCommodityDetails.add(orderCommodityDetail);
-            }
-        }
-
-        modelAndView.addObject("orders", orders);
-        modelAndView.addObject("orderCommodityDetails", orderCommodityDetails);
-        return modelAndView;
-    }
-
-    /**
-     * 取消虚拟订单
-     */
-    @RequestMapping(OrderConstant.CANCELVIRTUALORDER)
-    @ResponseBody
-    public Message cancelVirtualOrder111(String orderId, String orderNumber, String serviceId, String serviceRemark) throws Exception {
-        boolean resultFlag = true;
-        //查询虚拟订单详情
-        List<OrderDetail> orderDetailInfos = orderService.findVirtualOrderDetails(orderNumber);
-        for (OrderDetail orderDetailInfo : orderDetailInfos) {
-            // 补全订单审核表参数
-            OrderAuditing orderAuditing = new OrderAuditing();
-            orderAuditing.setAuditingId(UuidUtil.get32UUID());
-            orderAuditing.setOrderId(orderId);
-            orderAuditing.setOrderDetailId(orderDetailInfo.getOrderDetailId());
-            orderAuditing.setOrderNumber(orderNumber);
-            orderAuditing.setCommodityNo(orderDetailInfo.getCommodityNo());
-            orderAuditing.setServiceId(serviceId);
-            orderAuditing.setServiceRemark(serviceRemark);
-            List<Commodity> commodities =
-                    commodityService.queryByCommodityNo(orderDetailInfo.getCommodityNo());
-            // 查询所有订单明细所对应的商品
-            for (Commodity commodity : commodities) {
-                orderAuditing.setCommodityId(commodity.getCommodityId());
-                orderAuditing.setCommodityName(commodity.getCommodityName());
-                orderAuditing.setModifyStatus(3);
-                int result = orderService.insertOrderAuditing(orderAuditing);
-                if (result <= 0) {
-                    resultFlag = false;
-                }
-            }
-        }
-
-        int updateResult = 0;
-        if (resultFlag) {
-            Order order = new Order();
-            order.setOrderId(orderId);
-            order.setOrderNumber(orderNumber);
-            order.setServiceRemark(serviceRemark);
-            order.setOrderStatus("-1");
-            updateResult = orderService.updateVirtualOrder(order);
-        }
-
-        return new Message(updateResult);
     }
 
 }
