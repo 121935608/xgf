@@ -298,9 +298,14 @@
                     if (row.orderStatus == 6) {
                         toAuditing = "<a title=\"审核\" href=\"javascript:;\" onclick=\"order_auditing('审核','${context_root}/order/toAuditingInfo.action?orderNumber=" + row.orderNumber + "','1000','700')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>审核</span></a>";
                     }
+                    // 确认出库
+                    var toComfirmOrder = "";
+                    if (row.orderStatus == 2) {
+                        toComfirmOrder = "<a title=\"确认发货\" href=\"javascript:;\" onclick=\"order_confirmOrder(" + row.orderNumber + ")\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>确认发货</span></a>";
+                    }
                     //对账
                     <%--var toEdit = "<a title=\"对账\" href=\"javascript:;\" onclick=\"repay_edit('对账','${context_root}/merchant/toRepayModify.action?repayId=" + row.repayId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>对账</span></a>";--%>
-                    return tolook + toAuditing + toEdit;
+                    return tolook + toAuditing + toEdit + toComfirmOrder;
                 }
             },
         ];
@@ -403,6 +408,27 @@
     /*订单-审核*/
     function order_auditing(title, url, w, h) {
         layer_show(title, url, w, h);
+    }
+
+    /*订单-确认出库*/
+    function order_confirmOrder(orderNumber) {
+        parent.layer.confirm('是否确认出库？', {icon: 3, title: '确认后将推送库存'}, function (index) {
+            $.ajax({
+                url: "${context_root}/order/confirmOrder.action?orderNumber=" + orderNumber,
+                type: 'post',
+                async: true,
+                cache: false,
+                dataType: "json",
+                success: function (data) {
+                    if (data.s == true) {
+                        parent.layer.msg(data.m, {icon: 6, time: 1000});
+                    } else {
+                        parent.layer.alert(data.m, {icon: 2, title: "系统提示"});
+                    }
+                },
+            });
+
+        });
     }
 
     /*停用*/

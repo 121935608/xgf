@@ -123,4 +123,9 @@ public class VirtualOrderService implements IVirtualOrderService {
   public int updateOrderDetailComNum(OrderDetail orderDetail) {
     return orderDao.updateOrderDetailComNum(orderDetail);
   }
+
+  @Override
+  public int updateConfirmOrder(Order order) {
+    return orderDao.updateConfirmOrder(order);
+  }
 }

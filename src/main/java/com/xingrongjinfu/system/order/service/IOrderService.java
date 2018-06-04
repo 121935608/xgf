@@ -96,4 +96,6 @@ public interface IOrderService {
 
     /** 修改订单明细商品数量 */
     int updateOrderDetailComNum(OrderDetail orderDetail);
+
+    int updateConfirmOrder(Order order);
 }

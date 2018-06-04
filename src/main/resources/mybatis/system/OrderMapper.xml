@@ -58,7 +58,7 @@
 
     <select id="pageInfoQuery" parameterType="PageUtilEntity" resultMap="OrderResult">
         SELECT o.orderNumber,o.orderTime,o.payTime,s.userName,o.orderPrice/100
-        orderPrice,o.platform,o.orderStatus,o.payCode,ad.address address ,ss.`name` supervisorName
+        orderPrice,o.platform,o.orderStatus,o.confirmOrder,o.payCode,ad.address address ,ss.`name` supervisorName
         FROM t_order o
         LEFT JOIN sys_user s ON o.userId=s.userId
         LEFT JOIN t_address ad ON ad.`addrId`=o.`addressId`
@@ -273,5 +273,9 @@
     <update id="updateOrderDetailComNum" parameterType="OrderDetail">
 		UPDATE t_order_detail SET commodityNum=#{commodityNum} WHERE orderNumber=#{orderNumber} AND commodityNo=#{commodityNo}
 	</update>
+
+    <update id="updateConfirmOrder" parameterType="Orders">
+        update t_order set confirmOrder=#{confirmOrder} where orderNumber=#{orderNumber}
+    </update>
 
 </mapper> 

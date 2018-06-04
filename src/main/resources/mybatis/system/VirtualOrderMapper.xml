@@ -58,7 +58,7 @@
 
     <select id="virtualpageInfoQuery" parameterType="PageUtilEntity" resultMap="VirtualOrderResult">
         SELECT o.orderNumber,o.orderTime,o.payTime,s.userName,o.orderPrice/100
-        orderPrice,o.platform,o.orderStatus,o.payCode,ad.address address ,ss.`name` supervisorName
+        orderPrice,o.platform,o.orderStatus,o.confirmOrder,o.payCode,ad.address address ,ss.`name` supervisorName
         FROM t_virtual_order o
         LEFT JOIN sys_user s ON o.userId=s.userId
         LEFT JOIN t_address ad ON ad.`addrId`=o.`addressId`
@@ -278,5 +278,10 @@
     <!--更新订单明细商品数量 -->
     <update id="updateOrderDetailComNum" parameterType="OrderDetail">
         UPDATE t_virtual_order_detail SET commodityNum=#{commodityNum} WHERE orderNumber=#{orderNumber} AND commodityNo=#{commodityNo}
+    </update>
+
+    <!--更新订单确认发货状态 -->
+    <update id="updateConfirmOrder" parameterType="OrderDetail">
+        UPDATE t_virtual_order SET confirmOrder=#{confirmOrder} AND orderNumber=#{orderNumber}
     </update>
 </mapper> 

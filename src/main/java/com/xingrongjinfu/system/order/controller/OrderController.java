@@ -18,6 +18,7 @@ import com.xingrongjinfu.system.product.model.Product;
 import com.xingrongjinfu.system.product.service.IProductService;
 import com.xingrongjinfu.system.storeaffairs.model.Store;
 import com.xingrongjinfu.system.storeaffairs.service.ICertificationService;
+import com.xingrongjinfu.utils.DesUtils;
 import com.xingrongjinfu.utils.HttpClientUtil;
 import com.xingrongjinfu.utils.StringUtil;
 import com.xingrongjinfu.utils.UuidUtil;
@@ -589,7 +590,7 @@ public class OrderController extends BaseController {
 
             // 减少客服库存
             Product product = productService.findProductInfoByNo(orderDetail.getCommodityNo());
-            product.setKfStock(0);
+            product.setKfStock(product.getKfStock() - orderDetail.getCommodityNum());
             productService.updateProductStock(product);
         }
 
@@ -736,4 +737,53 @@ public class OrderController extends BaseController {
         return jaProCommodity;
     }
 
+    @RequestMapping(value = OrderConstant.ORDER_CONFIRMORDER)
+    public @ResponseBody
+    Message confirmOrder(String orderNumber) {
+        if (StringUtil.isEmpty(orderNumber)) {
+            return new Message(false, "无orderNumber参数");
+        }
+        logger.info("==========前端确认出库,参数:{}", orderNumber);
+        Order order = orderService.findOrderInfo(orderNumber);
+        if (order == null) {
+            return new Message(false, "不存在该订单");
+        }
+        logger.info("==========更新orderNumber:{},确认出库", orderNumber);
+        if (order.getConfirmOrder() > 0) {
+            return new Message(false, "该订单已确认");
+        }
+        order.setConfirmOrder(1); // 设置用户已确认订单出库
+        int result = 0;
+        result = orderService.updateConfirmOrder(order);
+        if (result > 0) {
+            // 推送给库存开始发货
+            pushComfirmOrderStock(orderNumber);
+            return new Message(true);
+        } else {
+            logger.warn("===============订单orderNumber:{}更新失败", orderNumber);
+            return new Message("1111", "更新用户确认收库状态失败");
+        }
+    }
+
+    /**
+     * 推送库存发货
+     *
+     * @param orderNumber
+     */
+    private void pushComfirmOrderStock(String orderNumber) {
+        final String url = OrderConstant.STORAGE_COMFIRMORDER_URL; // 配置库存地址
+        net.sf.json.JSONObject jsonObject = new net.sf.json.JSONObject();
+        jsonObject.put("orderNo", orderNumber);
+        Map map = new HashMap<>();
+        map.put("params", jsonObject);
+        // 推送给库存
+        try {
+            logger.info("==========推送库存请求参数:{}", map);
+            String resultStr = HttpClientUtil.httpPostRequest(url, map);
+            logger.info("==========接收库存返回参数:{}", resultStr);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            logger.warn("===============推送库存请求失败:{}", e);
+        }
+    }
 }

@@ -124,6 +124,15 @@ public class Order {
     private String  receiveAdd; // 收货地址
     private String  receivePhone; // 收货人电话
     private Integer stockTotalMoney; // 实际出库总金额
+    private Integer confirmOrder; // 是否确认出库 0-未确认 1-确认
+
+    public Integer getConfirmOrder() {
+        return confirmOrder;
+    }
+
+    public void setConfirmOrder(Integer confirmOrder) {
+        this.confirmOrder = confirmOrder;
+    }
 
     public String getSupervisorName() {
         return supervisorName;

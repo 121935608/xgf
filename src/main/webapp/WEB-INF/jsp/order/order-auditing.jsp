@@ -897,7 +897,7 @@
                         /*layer_close();
                         window.parent.location.reload();*/
                         parent.layer.msg("保存成功,正在刷新数据请稍后……", {icon: 1, time: 1000, shade: [0.1, '#fff']}, function () {
-                            window.opener.location.reload();
+                            parent.window.location.reload();
                         });
                         layer_close();
                     } else {

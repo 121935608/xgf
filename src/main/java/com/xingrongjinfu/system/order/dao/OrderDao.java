@@ -170,4 +170,9 @@ public class OrderDao extends DynamicObjectBaseDao implements IOrderDao {
     public int updateOrderDetailComNum(OrderDetail orderDetail) {
         return this.update("OrderMapper.updateOrderDetailComNum", orderDetail);
     }
+
+    @Override
+    public int updateConfirmOrder(Order order) {
+        return this.update("OrderMapper.updateConfirmOrder", order);
+    }
 }

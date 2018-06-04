@@ -278,8 +278,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="commodityId !=null and commodityId!=''">
                 AND commodityId=#{commodityId}
             </if>
-            <if test="commodityNum !=null and commodityNum!=''">
-                AND commodityNum = #{commodityNum}
+            <if test="commodityNo !=null and commodityNo!=''">
+                AND commodityNo = #{commodityNo}
             </if>
         </where>
 

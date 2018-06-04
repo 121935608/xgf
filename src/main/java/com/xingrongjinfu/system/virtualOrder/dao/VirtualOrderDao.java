@@ -169,4 +169,9 @@ public class VirtualOrderDao extends DynamicObjectBaseDao implements IVirtualOrd
     public int updateOrderDetailComNum(OrderDetail orderDetail) {
         return this.update("VirtualOrderMapper.updateOrderDetailComNum", orderDetail);
     }
+
+    @Override
+    public int updateConfirmOrder(Order order) {
+        return this.update("VirtualOrderMapper.updateConfirmOrder", order);
+    }
 }
