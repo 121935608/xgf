@@ -1,101 +1,102 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="CommodityMapper">
 
-	<resultMap id="CommodityResult" type="Commodity">
-		<result column="commodityName" property="commodityName" />
-		<result column="commodityNo" property="commodityNo" />
-		<result column="saleNum" property="saleNum" />
-		<result column="salePrice" property="salePrice" />
-		<result column="inPrice" property="inPrice" />
-		<result column="unit" property="unit" />
-		<result column="totalPrice" property="totalPrice" />
-		<result column="totalInPrice" property="totalInPrice" />
-	</resultMap>
-	<resultMap id="CommodityMap" type="map">
-		<result column="commodityName" property="commodityName" />
-		<result column="commodityNo" property="commodityNo" />
-		<result column="unit" property="unit" />
-		<result column="saleNum" property="saleNum" javaType="int" />
-		<result column="totalPrice" property="totalPrice" />
-		<result column="totalInPrice" property="totalInPrice" />
-		<result column="profit" property="profit" />
-	</resultMap>
+    <resultMap id="CommodityResult" type="Commodity">
+        <result column="commodityName" property="commodityName"/>
+        <result column="commodityNo" property="commodityNo"/>
+        <result column="saleNum" property="saleNum"/>
+        <result column="salePrice" property="salePrice"/>
+        <result column="inPrice" property="inPrice"/>
+        <result column="unit" property="unit"/>
+        <result column="totalPrice" property="totalPrice"/>
+        <result column="totalInPrice" property="totalInPrice"/>
+    </resultMap>
+    <resultMap id="CommodityMap" type="map">
+        <result column="commodityName" property="commodityName"/>
+        <result column="commodityNo" property="commodityNo"/>
+        <result column="unit" property="unit"/>
+        <result column="saleNum" property="saleNum" javaType="int"/>
+        <result column="totalPrice" property="totalPrice"/>
+        <result column="totalInPrice" property="totalInPrice"/>
+        <result column="profit" property="profit"/>
+    </resultMap>
 
 
-	
-	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultMap="CommodityResult">
-		SELECT IFNULL(t.commodityId,'')commodityId,IFNULL(t.commodityNo,'')commodityNo,
-		IFNULL(t.commodityName,'')commodityName,IFNULL(t.unit,'')unit,
-		IFNULL(SUM(t.commodityNum),'') saleNum, IFNULL(SUM(t.totalPrice),'') totalPrice,
-		IFNULL(SUM(t.inPrice * t.commodityNum),'') totalInPrice 
-		FROM t_order_detail t inner JOIN t_order o ON t.orderNumber=o.orderNumber
-		where 1=1 AND o.orderStatus not in (-1,1) AND o.status=1
-		<if test="relationMap.beginTime != null and relationMap.beginTime != ''"><!-- 开始时间检索 -->
-			AND DATE_FORMAT(t.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
-		</if>
-		<if test="relationMap.endTime != null and relationMap.endTime != ''"><!-- 结束时间检索 -->
-			AND DATE_FORMAT(t.addTime,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
-		</if>
-		<if test="relationMap.commodityName !=null and relationMap.commodityName !=''">
-			AND (
-			t.commodityName LIKE CONCAT(CONCAT('%', #{relationMap.commodityName}),'%')
-			OR
-			t.commodityNo LIKE CONCAT(CONCAT('%', #{relationMap.commodityName}),'%')
-			)
-		</if><!--关键词查询-->
-		GROUP BY t.commodityId,t.commodityNo,t.commodityName,t.unit
-		ORDER BY commodityNo
-	</select>
+    <select id="pageInfoQuery" parameterType="PageUtilEntity" resultMap="CommodityResult">
+        SELECT IFNULL(t.commodityId,'')commodityId,IFNULL(t.commodityNo,'')commodityNo,
+        IFNULL(t.commodityName,'')commodityName,IFNULL(t.unit,'')unit,
+        IFNULL(SUM(t.commodityNum),'') saleNum, IFNULL(SUM(t.totalPrice),'') totalPrice,
+        IFNULL(SUM(t.inPrice * t.commodityNum),'') totalInPrice
+        FROM t_order_detail t inner JOIN t_order o ON t.orderNumber=o.orderNumber
+        where 1=1 AND o.orderStatus not in (-1,1) AND o.status=1
+        <if test="relationMap.beginTime != null and relationMap.beginTime != ''"><!-- 开始时间检索 -->
+            AND DATE_FORMAT(t.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
+        </if>
+        <if test="relationMap.endTime != null and relationMap.endTime != ''"><!-- 结束时间检索 -->
+            AND DATE_FORMAT(t.addTime,'%Y%m%d') &lt;= DATE_FORMAT(#{relationMap.endTime},'%Y%m%d')
+        </if>
+        <if test="relationMap.commodityName !=null and relationMap.commodityName !=''">
+            AND (
+            t.commodityName LIKE CONCAT(CONCAT('%', #{relationMap.commodityName}),'%')
+            OR
+            t.commodityNo LIKE CONCAT(CONCAT('%', #{relationMap.commodityName}),'%')
+            )
+        </if><!--关键词查询-->
+        GROUP BY t.commodityId,t.commodityNo,t.commodityName,t.unit
+        ORDER BY commodityNo
+    </select>
 
-	<select id="infoQuery" parameterType="map" resultMap="CommodityMap">
-		SELECT
-		IFNULL(t.commodityId, '') commodityId,
-		IFNULL(t.commodityNo, '') commodityNo,
-		IFNULL(t.commodityName, '') commodityName,
-		IFNULL(t.unit, '') unit,
-		IFNULL(SUM(t.commodityNum), '') saleNum,
-		cast((IFNULL(SUM(t.totalPrice), ''))/100  as DECIMAL(13,1)) totalPrice,
-		cast((IFNULL(SUM(t.inPrice * t.commodityNum),''))/100  as DECIMAL(13,1)) totalInPrice,
-		cast((SUM(t.totalPrice)-SUM(t.inPrice*t.commodityNum))/100 as DECIMAL(13,1)) profit
-		FROM
-		t_order_detail t
-		INNER JOIN t_order o ON t.orderNumber = o.orderNumber
-		where 1=1 AND o.orderStatus not in (-1,1) AND o.status=1
-		<if test="beginTime != null and beginTime != ''"><!-- 开始时间检索 -->
-			AND DATE_FORMAT(t.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{beginTime},'%Y%m%d')
-		</if>
-		<if test="endTime != null and endTime != ''"><!-- 结束时间检索 -->
-			AND DATE_FORMAT(t.addTime,'%Y%m%d') &lt;= DATE_FORMAT(#{endTime},'%Y%m%d')
-		</if>
-		<if test="commodityName !=null and commodityName !=''">
-			AND (
-			t.commodityName LIKE CONCAT(CONCAT('%', #{commodityName}),'%')
-			OR
-			t.commodityNo LIKE CONCAT(CONCAT('%', #{commodityName}),'%')
-			)
-		</if><!--关键词查询-->
-		GROUP BY t.commodityId,t.commodityNo,t.commodityName,t.unit
-		ORDER BY commodityNo
-	</select>
+    <select id="infoQuery" parameterType="map" resultMap="CommodityMap">
+        SELECT
+        IFNULL(t.commodityId, '') commodityId,
+        IFNULL(t.commodityNo, '') commodityNo,
+        IFNULL(t.commodityName, '') commodityName,
+        IFNULL(t.unit, '') unit,
+        IFNULL(SUM(t.commodityNum), '') saleNum,
+        cast((IFNULL(SUM(t.totalPrice), ''))/100 as DECIMAL(13,1)) totalPrice,
+        cast((IFNULL(SUM(t.inPrice * t.commodityNum),''))/100 as DECIMAL(13,1)) totalInPrice,
+        cast((SUM(t.totalPrice)-SUM(t.inPrice*t.commodityNum))/100 as DECIMAL(13,1)) profit
+        FROM
+        t_order_detail t
+        INNER JOIN t_order o ON t.orderNumber = o.orderNumber
+        where 1=1 AND o.orderStatus not in (-1,1) AND o.status=1
+        <if test="beginTime != null and beginTime != ''"><!-- 开始时间检索 -->
+            AND DATE_FORMAT(t.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{beginTime},'%Y%m%d')
+        </if>
+        <if test="endTime != null and endTime != ''"><!-- 结束时间检索 -->
+            AND DATE_FORMAT(t.addTime,'%Y%m%d') &lt;= DATE_FORMAT(#{endTime},'%Y%m%d')
+        </if>
+        <if test="commodityName !=null and commodityName !=''">
+            AND (
+            t.commodityName LIKE CONCAT(CONCAT('%', #{commodityName}),'%')
+            OR
+            t.commodityNo LIKE CONCAT(CONCAT('%', #{commodityName}),'%')
+            )
+        </if><!--关键词查询-->
+        GROUP BY t.commodityId,t.commodityNo,t.commodityName,t.unit
+        ORDER BY commodityNo
+    </select>
 
-	<select id="queryByCommodityNo" parameterType="string" resultType="Commodity">
+    <select id="queryByCommodityNo" parameterType="string" resultType="Commodity">
 		SELECT *
 		FROM
 		t_commodity t
 		WHERE t.commodityNo = #{commodityNo}
 	</select>
 
-	<select id="queryByCommodityName" parameterType="string" resultType="Commodity">
+    <select id="queryByCommodityName" parameterType="string" resultType="Commodity">
 		SELECT *
 		FROM
 		t_commodity t
 		WHERE t.commodityName LIKE CONCAT(CONCAT('%', #{commodityName}),'%')
+		AND t.status = 1
+		AND t.commodityStatus = 0
 	</select>
 
-	<select id="queryAllCommodity" resultType="Commodity">
+    <select id="queryAllCommodity" resultType="Commodity">
 		SELECT *
 		FROM
 		t_commodity
