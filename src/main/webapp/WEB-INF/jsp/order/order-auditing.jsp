@@ -308,7 +308,6 @@
 
             var totalMoneyCell = trNode.find("td").eq(8);
             var saleMoneyCell = trNode.find("td").eq(4);
-            //alert(parent.html() * saleMoneyCell.html());
             var totalMoney = parent.html() * saleMoneyCell.html();
             totalMoneyCell.html(totalMoney.toFixed(1));
             var allMoney = addAllMoney("orderTable");
@@ -536,10 +535,8 @@
     }
 
     function showAllMoney(obj) {
-        alert("1");
         var tableNode = $(obj).parent().parent();
         var tableId = tableNode.attr("id");
-        alert(tableId);
         //alert(tableId == "orderTable");
         addAllMoney(tableId);
     }
@@ -550,13 +547,11 @@
         var rowNum = $("#" + tableId).find("tr").length;
         for (var i = 1; i < rowNum; i++) {
             var orderMoney = $("#" + tableId).find("tr").eq(i).find("td").eq(8).html();
-            alert(orderMoney);
             if (orderMoney == "") {
                 orderMoney = 0;
             }
             sum = sum + parseFloat(orderMoney);
         }
-        alert(sum);
         return sum;
     }
 
@@ -611,7 +606,6 @@
         if (trs.length > 0) {
             for (var i = 1; i < trs.length; i++) {
                 var comNo = trs.eq(i).find("td").eq("1").html();
-                alert(comNo);
                 comNoList.push(comNo);
             }
         }
@@ -772,7 +766,6 @@
         var trNode = $(obj).parent().parent();
         if (obj.checked) { // 如果选中
             trNode.css({"background-color": "#C0C0C0"});
-            alert(trNode.find("td").eq(3).html());
             trNode.find("td").eq(3).removeAttr("ondblclick");
         } else { // 如果没选中
             trNode.removeAttr("style");
@@ -874,7 +867,6 @@
             "orderNumber": "${orders.orderNumber}"
         };
 
-        alert(JSON.stringify(data));
         var url = baseOrderUrl + "/orderModifySave.action";
         // 异步请求
         $.ajax({
@@ -902,6 +894,11 @@
                 function (data) {
                     if (data.s == true) {
                         layer.msg('审核成功');
+                        /*layer_close();
+                        window.parent.location.reload();*/
+                        parent.layer.msg("保存成功,正在刷新数据请稍后……", {icon: 1, time: 1000, shade: [0.1, '#fff']}, function () {
+                            window.opener.location.reload();
+                        });
                         layer_close();
                     } else {
                         // 如果修改失败重新加载审核页面

@@ -516,9 +516,9 @@ public class VirtualOrderController extends BaseController {
             try {
                 // 审核完成后,减少商品客服库存,订单状态改为库存审核,推送到库存
                 boolean b = pushStock(orderId);// 推送库存,和库存返回信息是否为空
-                return b ? new Message("0000", "操作成功") : new Message(b);
+                return b ? new Message("0000", "操作成功") : new Message(b, "推送库存失败");
             } catch (UnsupportedEncodingException e) {
-                return new Message(false);
+                return new Message(false, "推送库存失败");
             }
         } else {
             return new Message(false, "更新订单信息失败");

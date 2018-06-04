@@ -264,7 +264,10 @@
 
     <!-- 通过订单id查询订单 -->
     <select id="findVirtualOrder" parameterType="string" resultType="Orders">
-		SELECT * FROM t_virtual_order WHERE orderId = #{orderId}
+		SELECT o.orderId,o.orderNumber,o.userId,o.addressId,o.userId,o.orderTime,o.payTime,o.arriveTime,o.number,o.freight,o.payment,o.totalPrice,o.orderPrice,o.orderStatus,o.status,o.payCode,o.storeId,o.storageNo,o.platform,o.remark,a.area receiveArea,a.phone receivePhone,a.name receiver,a.address receiveAdd
+		FROM t_virtual_order o
+		LEFT JOIN t_address a ON o.userId = a.userId
+		WHERE orderId = #{orderId}
 	</select>
 
     <!-- 更新订单库存号 -->

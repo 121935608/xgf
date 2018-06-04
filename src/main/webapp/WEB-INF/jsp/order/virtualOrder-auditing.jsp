@@ -536,10 +536,8 @@
     }
 
     function showAllMoney(obj) {
-        alert("1");
         var tableNode = $(obj).parent().parent();
         var tableId = tableNode.attr("id");
-        alert(tableId);
         //alert(tableId == "orderTable");
         addAllMoney(tableId);
     }
@@ -550,13 +548,11 @@
         var rowNum = $("#" + tableId).find("tr").length;
         for (var i = 1; i < rowNum; i++) {
             var orderMoney = $("#" + tableId).find("tr").eq(i).find("td").eq(8).html();
-            alert(orderMoney);
             if (orderMoney == "") {
                 orderMoney = 0;
             }
             sum = sum + parseFloat(orderMoney);
         }
-        alert(sum);
         return sum;
     }
 
@@ -611,7 +607,6 @@
         if (trs.length > 0) {
             for (var i = 1; i < trs.length; i++) {
                 var comNo = trs.eq(i).find("td").eq("1").html();
-                alert(comNo);
                 comNoList.push(comNo);
             }
         }
@@ -772,7 +767,6 @@
         var trNode = $(obj).parent().parent();
         if (obj.checked) { // 如果选中
             trNode.css({"background-color": "#C0C0C0"});
-            alert(trNode.find("td").eq(3).html());
             trNode.find("td").eq(3).removeAttr("ondblclick");
         } else { // 如果没选中
             trNode.removeAttr("style");
@@ -874,7 +868,6 @@
             "orderNumber": "${orders.orderNumber}"
         };
 
-        alert(JSON.stringify(data));
         var url = baseOrderUrl + "/orderModifySave.action";
         // 异步请求
         $.ajax({
