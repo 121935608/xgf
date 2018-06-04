@@ -18,7 +18,6 @@ import com.xingrongjinfu.system.product.model.Product;
 import com.xingrongjinfu.system.product.service.IProductService;
 import com.xingrongjinfu.system.storeaffairs.model.Store;
 import com.xingrongjinfu.system.storeaffairs.service.ICertificationService;
-import com.xingrongjinfu.utils.DesUtils;
 import com.xingrongjinfu.utils.HttpClientUtil;
 import com.xingrongjinfu.utils.StringUtil;
 import com.xingrongjinfu.utils.UuidUtil;
@@ -45,7 +44,6 @@ import com.xingrongjinfu.system.order.common.OrderConstant;
 import com.xingrongjinfu.system.order.service.IOrderService;
 import com.xingrongjinfu.system.user.model.User;
 
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * 订单管理（平台端） 〈〉
@@ -219,7 +217,7 @@ public class OrderController extends BaseController {
                 // 将订单和商品信息存储
                 // BeanUtils.copyProperties(commodity, orderCommodityDetail);
                 BeanUtils.copyProperties(orderDetail, orderCommodityDetail);
-                // orderCommodityDetail.setSalePrice(commodity.getSalePrice());
+                orderCommodityDetail.setSalePrice(commodity.getSalePrice());
                 orderCommodityDetail.setSubPrice(commodity.getSubPrice());
                 orderCommodityDetail.setSubPriceUnit(commodity.getSubPriceUnit());
                 orderCommodityDetail.setWeight(commodity.getWeight());
@@ -758,7 +756,7 @@ public class OrderController extends BaseController {
         if (result > 0) {
             // 推送给库存开始发货
             pushComfirmOrderStock(orderNumber);
-            return new Message(true);
+            return new Message(true,"操作成功");
         } else {
             logger.warn("===============订单orderNumber:{}更新失败", orderNumber);
             return new Message("1111", "更新用户确认收库状态失败");

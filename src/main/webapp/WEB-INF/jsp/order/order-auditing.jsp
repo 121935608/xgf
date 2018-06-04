@@ -129,7 +129,7 @@
                     </tr>
                     </thead>
                     <c:forEach items="${orderCommodityDetails}" var="orderCommodityDetail" varStatus="n">
-                        <tr>
+                        <tr style="text-align: center">
                                 <%--<td style="display: none">${orderCommodityDetail.orderNumber}</td>--%>
                             <td>${orderCommodityDetail.commodityName}</td>
                             <td>${orderCommodityDetail.commodityNo}</td>

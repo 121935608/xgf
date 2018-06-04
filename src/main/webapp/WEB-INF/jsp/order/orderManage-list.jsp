@@ -295,7 +295,7 @@
                     }
                     // 审核
                     var toAuditing = ""
-                    if (row.orderStatus == 6 && row.confirmOrder == 0) {
+                    if (row.orderStatus == 6) {
                         toAuditing = "<a title=\"审核\" href=\"javascript:;\" onclick=\"order_auditing('审核','${context_root}/order/toAuditingInfo.action?orderNumber=" + row.orderNumber + "','1000','700')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>审核</span></a>";
                     }
                     // 确认出库
