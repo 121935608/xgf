@@ -390,7 +390,7 @@ public class OrderController extends BaseController {
                     Integer oldCommodityNum = orderDetail.getCommodityNum();
                     // 修改客服库存
                     Product productByNo = productService.findProductInfoByNo(commodityNo);
-                    if (productByNo.getKfStock() <= 0) {
+                    if (productByNo.getKfStock() < 0) {
                         return new Message(false, "客服库存数异常"); // 客服库存数小于支付商品数量,则下单时库存数量操作异常
                     }
                     if (productByNo.getKfStock() - oldCommodityNum <= 0) {

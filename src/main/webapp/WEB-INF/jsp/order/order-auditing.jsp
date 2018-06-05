@@ -784,10 +784,11 @@
             //var trMoney = trNode.find("td").eq(8).html();
             var trNum = trNode.find("td").eq(3).html();
             var trSale = trNode.find("td").eq(4).html();
-            trNode.find("td").eq(8).html(parseFloat(trNum)*parseFloat(trSale).toFixed(1));
+            trNode.find("td").eq(8).html(parseFloat(trNum) * parseFloat(trSale).toFixed(1));
         }
         var money = addAllMoney('orderTable');
-        $("#moneyInput").val(money.toFixed(1));
+        var FreiMoney = $("#freightInput").val();
+        $("#moneyInput").val((parseFloat(money) + parseFloat(FreiMoney)).toFixed(1));
     }
 
     // 删除增加订单
