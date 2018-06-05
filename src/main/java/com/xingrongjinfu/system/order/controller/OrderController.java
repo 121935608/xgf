@@ -491,7 +491,7 @@ public class OrderController extends BaseController {
                 orderDetail.setCommodityName((String) jsonObj.get("commodityName"));
                 orderDetail.setUnit((String) jsonObj.get("unit"));
                 orderDetail.setSalePrice(Double.valueOf((String) jsonObj.get("salePrice")) * 100);
-                orderDetail.setTotalMoney(Double.valueOf((String) jsonObj.get("totalMoney")));
+                orderDetail.setTotalPrice(Double.valueOf((String) jsonObj.get("totalMoney")));
                 orderDetail.setTaxRate(product.getTaxRate());
                 orderDetail.setImgMain(product.getImgMain());
                 orderDetail.setCommodityNo(commodityNo);
