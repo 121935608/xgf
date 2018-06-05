@@ -426,7 +426,8 @@ public class OrderController extends BaseController {
                         if (diffStock > kxdStock) {
                             return new Message(false, "可下单库存不足");
                         }
-                        productByNo.setKxdStock(kxdStock + diffStock);
+                        productByNo.setKxdStock(kxdStock - diffStock);
+                        productByNo.setKfStock(productByNo.getKfStock() + diffStock);
                         productService.updateProductStock(productByNo);
                     }
                 }
@@ -640,9 +641,9 @@ public class OrderController extends BaseController {
             payWay = 1; // 线上
         }
         jsonObject.put("payWay", payWay);
-        String cusremark="";
-        if(!StringUtil.nullOrBlank(order.getRemark())){
-            cusremark=order.getRemark();
+        String cusremark = "";
+        if (!StringUtil.nullOrBlank(order.getRemark())) {
+            cusremark = order.getRemark();
         }
         jsonObject.put("cusremark", cusremark);
         // 添加产品信息

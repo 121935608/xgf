@@ -301,16 +301,13 @@
         });
 
         // 未添加订单总金额绑定失焦事件
-        $("#freightInput").blur(function () {
+        $("#addOrderMoneyInput").blur(function () {
             if (!isPositiveInteger($(this).val())) {
                 layer.msg("参数不合法");
-                $("#freightInput").val($("#freightHiddenInput").val());
             }
-            //var oldValue = parseFloat($("#moneyHiddenInput").val());
-            var newFreiValue = parseFloat($("#freightInput").val());
             // 获取
-            var sum = addAllMoney("orderTable");
-            $("#moneyInput").val((sum + newFreiValue).toFixed(1));
+            var sum = addAllMoney("addTable");
+            $("#addOrderMoneyInput").val(sum.toFixed(1));
         });
     })
 
@@ -925,8 +922,8 @@
 
         // 运费和总金额
         var freight = $("#freightInput").val() * 100;
-        var orderPrice = (Number($("#moneyInput").val()) + Number($("#addOrderMoneyInput").val())) * 100;
-        var totalPrice = freight + orderPrice;
+        var totalPrice = (Number($("#moneyInput").val()) + Number($("#addOrderMoneyInput").val())) * 100;
+        var orderPrice = freight + totalPrice;
 
         var data = {
             "serviceRemark": $("#serviceRemark").val(),
