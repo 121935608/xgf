@@ -122,14 +122,16 @@
                     <td>总金额</td>
                 </tr>
                 <c:forEach items="${orderDetails}" var="order" varStatus="n">
-                    <tr>
-                        <td>${order.commodityName}</td>
-                        <td>${order.commodityNo}</td>
-                        <td>${order.unit}</td>
-                        <td>${order.commodityNum}</td>
-                        <td>¥${order.inPrice}</td>
-                        <td>¥${order.totalMoney}</td>
-                    </tr>
+                    <c:if test="${order.status != -1}">
+                        <tr>
+                            <td>${order.commodityName}</td>
+                            <td>${order.commodityNo}</td>
+                            <td>${order.unit}</td>
+                            <td>${order.commodityNum}</td>
+                            <td>¥${order.inPrice}</td>
+                            <td>¥${order.totalMoney}</td>
+                        </tr>
+                    </c:if>
                 </c:forEach>
             </table>
         </div>

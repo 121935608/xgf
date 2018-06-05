@@ -129,21 +129,23 @@
                     </tr>
                     </thead>
                     <c:forEach items="${orderCommodityDetails}" var="orderCommodityDetail" varStatus="n">
-                        <tr style="text-align: center">
-                                <%--<td style="display: none">${orderCommodityDetail.orderNumber}</td>--%>
-                            <td>${orderCommodityDetail.commodityName}</td>
-                            <td>${orderCommodityDetail.commodityNo}</td>
-                            <td>${orderCommodityDetail.unit}</td>
-                            <td id="${orderCommodityDetail.orderNumber}"
-                                ondblclick="changeTd(this)">${orderCommodityDetail.commodityNum}</td>
-                            <td>${orderCommodityDetail.salePrice/100}</td>
-                            <td>${orderCommodityDetail.subPrice}</td>
-                            <td>${orderCommodityDetail.subPriceUnit}</td>
-                            <td>${orderCommodityDetail.weight}</td>
-                            <td onclick="showAllMoney(this)">${orderCommodityDetail.totalMoney}</td>
-                            <td><input id="cancelInput" onclick="cancelOrder(this)" type="checkbox"/>取消
-                            </td>
-                        </tr>
+                        <c:if test="${orderCommodityDetail.status != -1}">
+                            <tr style="text-align: center">
+                                    <%--<td style="display: none">${orderCommodityDetail.orderNumber}</td>--%>
+                                <td>${orderCommodityDetail.commodityName}</td>
+                                <td>${orderCommodityDetail.commodityNo}</td>
+                                <td>${orderCommodityDetail.unit}</td>
+                                <td id="${orderCommodityDetail.orderNumber}"
+                                    ondblclick="changeTd(this)">${orderCommodityDetail.commodityNum}</td>
+                                <td>${orderCommodityDetail.salePrice/100}</td>
+                                <td>${orderCommodityDetail.subPrice}</td>
+                                <td>${orderCommodityDetail.subPriceUnit}</td>
+                                <td>${orderCommodityDetail.weight}</td>
+                                <td onclick="showAllMoney(this)">${orderCommodityDetail.totalMoney}</td>
+                                <td><input id="cancelInput" onclick="cancelOrder(this)" type="checkbox"/>取消
+                                </td>
+                            </tr>
+                        </c:if>
                     </c:forEach>
 
                 </table>
@@ -845,6 +847,8 @@
             obj["commodityNo"] = commodityNo;
             selectOrder[i] = obj;
         })
+        /*alert(selectOrder.length);
+        alert(selectOrder.size());*/
 
         var addOrderTable = {};
         //alert($("#addTable tr:gt(0)").size())
@@ -894,14 +898,10 @@
                 function (data) {
                     var index = parent.layer.load();
                     if (data.s == true) {
-                        layer.msg('审核成功');
-                        /*layer_close();
-                        window.parent.location.reload();*/
-                        parent.layer.close(index);
-                        parent.layer.msg("保存成功,正在刷新数据请稍后……", {icon: 1, time: 50, shade: [0.1, '#fff']}, function () {
+                        parent.layer.msg("审核成功,正在刷新数据请稍后……", {icon: 1, time: 1000, shade: [0.1, '#fff']}, function () {
                             window.parent.location.reload();
                         });
-                        //layer_close();
+                        parent.layer.close(index);
                     } else {
                         // 如果修改失败重新加载审核页面
                         layer.msg(data.m);

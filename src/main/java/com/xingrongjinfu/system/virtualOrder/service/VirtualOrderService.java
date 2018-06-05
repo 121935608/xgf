@@ -130,7 +130,7 @@ public class VirtualOrderService implements IVirtualOrderService {
   }
 
   @Override
-  public int cancelOrderDetail(OrderDetail orderDetail) {
-    return orderDao.cancelOrderDetail(orderDetail);
+  public int updateOrderDetailStatus(OrderDetail orderDetail) {
+    return orderDao.updateOrderDetailStatus(orderDetail);
   }
 }

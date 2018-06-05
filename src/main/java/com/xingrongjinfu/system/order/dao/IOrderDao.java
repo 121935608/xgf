@@ -126,6 +126,6 @@ public interface IOrderDao {
 
     int updateConfirmOrder(Order order);
 
-    void cancelOrderDetail(OrderDetail orderDetail);
+    void updateOrderDetailStatus(OrderDetail orderDetail);
 
 }

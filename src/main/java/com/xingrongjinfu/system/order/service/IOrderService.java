@@ -100,5 +100,5 @@ public interface IOrderService {
     int updateConfirmOrder(Order order);
 
     /** 取消单个订单 */
-    void cancelOrderDetail(OrderDetail orderDetail);
+    void updateOrderDetailStatus(OrderDetail orderDetail);
 }

@@ -400,7 +400,7 @@ public class OrderController extends BaseController {
 
                     // 设置订单状态为取消
                     orderDetail.setStatus(-1);
-                    orderService.cancelOrderDetail(orderDetail);
+                    orderService.updateOrderDetailStatus(orderDetail);
                 } else { // 不为空表示可能存在修改商品数量
                     Integer modifiedNum = Integer.valueOf(commodityNum);
                     if (modifiedNum < 0) {
@@ -698,7 +698,7 @@ public class OrderController extends BaseController {
 
             // 将订单明细的状态设置为取消
             orderDetailInfo.setStatus(-1);
-            orderService.cancelOrderDetail(orderDetailInfo);
+            orderService.updateOrderDetailStatus(orderDetailInfo);
         }
 
         int updateResult = 0;

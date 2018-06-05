@@ -130,7 +130,7 @@ public class OrderService implements IOrderService {
   }
 
     @Override
-    public void cancelOrderDetail(OrderDetail orderDetail) {
-        orderDao.cancelOrderDetail(orderDetail);
+    public void updateOrderDetailStatus(OrderDetail orderDetail) {
+        orderDao.updateOrderDetailStatus(orderDetail);
     }
 }

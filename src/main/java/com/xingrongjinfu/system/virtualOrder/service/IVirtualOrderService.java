@@ -99,5 +99,5 @@ public interface IVirtualOrderService {
 
     int updateConfirmOrder(Order order);
 
-    int cancelOrderDetail(OrderDetail orderDetail);
+    int updateOrderDetailStatus(OrderDetail orderDetail);
 }

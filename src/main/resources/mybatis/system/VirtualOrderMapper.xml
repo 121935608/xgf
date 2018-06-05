@@ -285,7 +285,7 @@
         UPDATE t_virtual_order SET confirmOrder=#{confirmOrder} AND orderNumber=#{orderNumber}
     </update>
 
-    <update id="cancelOrderDetail" parameterType="OrderDetail">
-        update t_virtual_order_detail set status=#{status} where orderNumber=#{orderNumber}
+    <update id="updateOrderDetailStatus" parameterType="OrderDetail">
+        update t_virtual_order_detail set status=#{status} where orderNumber=#{orderNumber} AND commodityNo = #{commodityNo}
     </update>
 </mapper> 
