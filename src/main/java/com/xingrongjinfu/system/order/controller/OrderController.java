@@ -487,7 +487,7 @@ public class OrderController extends BaseController {
                 orderAuditing.setCommodityNo((String) jsonObj.get("commodityNo"));
                 orderAuditing.setCommodityNum(0); // 商品原数量为0
                 orderAuditing.setServiceModify(commodityNum); // 新增商品的数量
-                orderAuditing.setModifyStatus(0);
+                orderAuditing.setModifyStatus(0); // 设置客服修改状态为新增
                 orderAuditing.setModifyTime(new Date());
 
                 // 将记录添加到数据库中
@@ -591,6 +591,9 @@ public class OrderController extends BaseController {
 
             // 减少客服库存
             Product product = productService.findProductInfoByNo(orderDetail.getCommodityNo());
+            if (product.getKfStock() <= 0 || product.getKfStock() < orderDetail.getCommodityNum()) {
+                return new Message(false, "客服库存不足");
+            }
             product.setKfStock(product.getKfStock() - orderDetail.getCommodityNum());
             productService.updateProductStock(product);
         }
@@ -649,7 +652,7 @@ public class OrderController extends BaseController {
             return new Message(false, "库存返回参数异常");
         }
         String storageNo = "";
-        if ("0000".equals(code) && jsonObject1 != null){
+        if ("0000".equals(code) && jsonObject1 != null) {
             String data = jsonObject1.getString("data");
             net.sf.json.JSONObject jsonObject2 = net.sf.json.JSONObject.fromObject(data);
             storageNo = jsonObject2.getString("purchaserId");

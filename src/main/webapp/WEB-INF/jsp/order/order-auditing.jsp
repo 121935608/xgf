@@ -856,8 +856,12 @@
             selectOrderSize++;
         })
         var checkedInputs = $("input[type='checkbox']").find(":checked");
+        if (selectOrderSize == 0) {
+            layer.msg("该订单没有正常订单明细!", {time: 1000});
+            return;
+        }
         if (checkedInputs.length == selectOrderSize) {
-            layer.msg("您已取消所有的订单,请选择整单取消!!!", {time: 1000})
+            layer.msg("您已取消所有的订单,请选择整单取消!!!", {time: 1000});
             return;
         }
         var addOrderTable = {};
@@ -882,6 +886,7 @@
         };
 
         var url = baseOrderUrl + "/orderModifySave.action";
+        var index = parent.layer.load();
         // 异步请求
         $.ajax({
             url: url,
@@ -906,12 +911,11 @@
             success:
 
                 function (data) {
-                    var index = parent.layer.load();
+                    parent.layer.close(index);
                     if (data.s == true) {
                         parent.layer.msg("审核成功,正在刷新数据请稍后……", {icon: 1, time: 1000, shade: [0.1, '#fff']}, function () {
                             window.parent.location.reload();
                         });
-                        parent.layer.close(index);
                     } else {
                         // 如果修改失败重新加载审核页面
                         layer.msg(data.m);

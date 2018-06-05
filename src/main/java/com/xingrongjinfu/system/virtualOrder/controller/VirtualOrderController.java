@@ -596,6 +596,9 @@ public class VirtualOrderController extends BaseController {
 
             // 减少客服库存
             Product product = productService.findProductInfoByNo(orderDetail.getCommodityNo());
+            if (product.getKfStock() <= 0 || product.getKfStock() < orderDetail.getCommodityNum()) {
+                return new Message(false, "客服库存不足");
+            }
             product.setKfStock(product.getKfStock() - orderDetail.getCommodityNum());
             productService.updateProductStock(product);
         }
