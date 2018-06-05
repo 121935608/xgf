@@ -437,6 +437,10 @@ public class OrderController extends BaseController {
                 }
             }
         }
+        // 更新订单金额
+        if (orderService.updateOrderMoney(order) <= 0) {
+            return new Message(false, "更新订单金额失败");
+        }
 
         /** ****** 存在新增订单逻辑 ****** */
 

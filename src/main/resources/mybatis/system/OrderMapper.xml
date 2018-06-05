@@ -284,4 +284,7 @@
         update t_order_detail set status=#{status} where orderNumber=#{orderNumber} AND commodityNo = #{commodityNo}
     </update>
 
+    <update id="updateOrderMoney" parameterType="Orders">
+        update t_order set orderPrice=#{orderPrice} where orderNumber=#{orderNumber}
+    </update>
 </mapper> 

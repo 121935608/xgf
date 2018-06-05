@@ -128,4 +128,5 @@ public interface IOrderDao {
 
     void updateOrderDetailStatus(OrderDetail orderDetail);
 
+    int updateOrderMoney(Order order);
 }

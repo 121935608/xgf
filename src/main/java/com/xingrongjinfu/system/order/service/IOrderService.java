@@ -101,4 +101,6 @@ public interface IOrderService {
 
     /** 取消单个订单 */
     void updateOrderDetailStatus(OrderDetail orderDetail);
+
+    int updateOrderMoney(Order order);
 }

@@ -95,8 +95,8 @@
 		AND t.status = 1
 		AND t.commodityStatus = 0
 		AND t.kxdStock>0
-		AND t.kfStock>0
-		AND t.yyStock>0
+		AND t.kfStock>=0
+		AND t.yyStock>=0
 	</select>
 
     <select id="queryAllCommodity" resultType="Commodity">

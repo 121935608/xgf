@@ -133,4 +133,9 @@ public class OrderService implements IOrderService {
     public void updateOrderDetailStatus(OrderDetail orderDetail) {
         orderDao.updateOrderDetailStatus(orderDetail);
     }
+
+  @Override
+  public int updateOrderMoney(Order order) {
+    return orderDao.updateOrderMoney(order);
+  }
 }
