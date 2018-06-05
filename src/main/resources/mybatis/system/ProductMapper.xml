@@ -109,7 +109,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="categoryName" property="categoryName" />
 	</resultMap>
 	<select id="productInfoQuery" parameterType="map" resultMap="ProductResult1">
-		SELECT c.commodityId,c.yyStock,c.kfStock,c.kxdStock,c.commodityName,c.commodityNo,c.subprice,c.inPrice/100 inPrice,
+		SELECT c.commodityNum,c.taxRate,c.commodityId,c.yyStock,c.kfStock,c.kxdStock,c.commodityName,c.commodityNo,c.subprice,c.inPrice/100 inPrice,
 		c.salePrice/100 salePrice,c.unit,c.stockNum,c.status,c.origin,c.commodityStatus commodityStatus,case c.country when 1 THEN '国内' when 2 then '国外' ELSE  '其他' END country,t.categoryName
 		FROM t_commodity c LEFT JOIN t_category t ON c.categoryId=t.categoryId
 		WHERE 1=1

@@ -468,8 +468,10 @@
                         var Candidate = "";
                         maxcount = 0;//再重新得值
                         $.each(ls, function (k, v) {
-                            Candidate += "<li style='font-size:2px' id='" + maxcount + "'>" + v.commodityName + "</li>";
-                            maxcount++;
+                            if (v.commodityName != undefined) {
+                                Candidate += "<li style='font-size:2px' id='" + maxcount + "'>" + v.commodityName + "</li>";
+                                maxcount++;
+                            }
                         });
                         $("#autoCompleteHidden" + rowsNum).html(Candidate);
                         $("#autoCompleteHidden" + rowsNum + "li:eq(0)").css("background", "#A8A5A5");
@@ -766,12 +768,16 @@
     function cancelOrder(obj) {
         // 获取当前行对象
         var trNode = $(obj).parent().parent();
+        // 添加金额
+        var trMoney = trNode.find("td").eq(8).html();
         if (obj.checked) { // 如果选中
             trNode.css({"background-color": "#C0C0C0"});
             trNode.find("td").eq(3).removeAttr("ondblclick");
+            $("#moneyInput").val(($("#moneyInput").val() - trMoney).toFixed(1));
         } else { // 如果没选中
             trNode.removeAttr("style");
             trNode.find("td").eq(3).attr("ondblclick", 'changeTd(this)');
+            $("#moneyInput").val((parseFloat($("#moneyInput").val()) + parseFloat(trMoney)).toFixed(1));
         }
     }
 
@@ -834,6 +840,7 @@
     function submitModifyOrder() {
 
         var selectOrder = {};
+        var selectOrderSize = 0;
         // 如果有选中取消的
         $("input[type='checkbox']").each(function (i) {
             var obj = {}
@@ -846,10 +853,13 @@
             }
             obj["commodityNo"] = commodityNo;
             selectOrder[i] = obj;
+            selectOrderSize++;
         })
-        /*alert(selectOrder.length);
-        alert(selectOrder.size());*/
-
+        var checkedInputs = $("input[type='checkbox']").find(":checked");
+        if (checkedInputs.length == selectOrderSize) {
+            layer.msg("您已取消所有的订单,请选择整单取消!!!", {time: 1000})
+            return;
+        }
         var addOrderTable = {};
         //alert($("#addTable tr:gt(0)").size())
         if ($("#addTable tr:gt(0)").size() > 0) {

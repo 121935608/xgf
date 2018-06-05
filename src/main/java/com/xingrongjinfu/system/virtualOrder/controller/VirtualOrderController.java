@@ -519,8 +519,7 @@ public class VirtualOrderController extends BaseController {
             String orderId = order.getOrderId();
             try {
                 // 审核完成后,减少商品客服库存,订单状态改为库存审核,推送到库存
-                boolean b = pushStock(orderId);// 推送库存,和库存返回信息是否为空
-                return b ? new Message("0000", "操作成功") : new Message(b, "推送库存失败");
+                return pushStock(orderId);// 推送库存,和库存返回信息是否为空
             } catch (UnsupportedEncodingException e) {
                 return new Message(false, "推送库存失败");
             }
@@ -555,7 +554,7 @@ public class VirtualOrderController extends BaseController {
      * @throws UnsupportedEncodingException
      */
     @Transactional // 事务管理
-    public boolean pushStock(String orderId) throws UnsupportedEncodingException {
+    public Message pushStock(String orderId) throws UnsupportedEncodingException {
         logger.info("==========开始推送订单,订单orderId:{}", orderId);
         Order virtualOrder = orderService.findOrder(orderId); // 获取订单
         String userId = virtualOrder.getUserId(); // 获取到userId
@@ -563,7 +562,7 @@ public class VirtualOrderController extends BaseController {
         if (store == null) {
             store = certificationService.getVirtualStoreInfo(userId); // 查询虚拟订单
             if (store == null) {
-                return false;
+                return new Message(false, "用户未绑定商铺");
             }
         }
         JSONObject jsonObject = new JSONObject(); // 用于封装推送参数
@@ -641,14 +640,21 @@ public class VirtualOrderController extends BaseController {
         if (!StringUtil.nullOrBlank(resultStr)) {
             return pubStorage(virtualOrder, resultStr);
         }
-        return false;
+        return new Message(false, "库存返回参数为空");
     }
 
-    private boolean pubStorage(Order virtualOrder, String resultStr) {
-        net.sf.json.JSONObject jsonObject1 = net.sf.json.JSONObject.fromObject(resultStr);
-        String code = jsonObject1.getString("code");
+    private Message pubStorage(Order virtualOrder, String resultStr) {
+        net.sf.json.JSONObject jsonObject1 = null;
+        String code = "";
+        try {
+            jsonObject1 = net.sf.json.JSONObject.fromObject(resultStr);
+            code = jsonObject1.getString("code");
+        } catch (Exception e) {
+            logger.warn("===============库存返回参数异常", e);
+            return new Message(false, "库存返回参数异常");
+        }
         String storageNo = "";
-        if ("0000".equals(code)) {
+        if ("0000".equals(code) && jsonObject1 != null) {
             String data = jsonObject1.getString("data");
             net.sf.json.JSONObject jsonObject2 = net.sf.json.JSONObject.fromObject(data);
             storageNo = jsonObject2.getString("purchaserId");
@@ -657,11 +663,11 @@ public class VirtualOrderController extends BaseController {
             logger.info("==========订单storageNo:{}", storageNo);
             if (orderService.updateStorageAndStatus(virtualOrder) > 0) { // 更新订单信息
                 logger.info("===============订单库存号修改成功");
-                return true;
+                return new Message(true, "推送成功");
             }
         }
         logger.warn("===============订单order:{},库存号storageNo:{}修改失败", virtualOrder.getOrderId(), storageNo);
-        return false;
+        return new Message(false, "库存返回错误码");
     }
 
     /**
@@ -698,6 +704,7 @@ public class VirtualOrderController extends BaseController {
                 int result = orderService.insertOrderAuditing(orderAuditing);
                 if (result <= 0) {
                     resultFlag = false;
+                    return new Message(false, "整单取消订单失败");
                 }
             }
 

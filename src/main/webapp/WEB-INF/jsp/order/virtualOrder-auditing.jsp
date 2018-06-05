@@ -169,51 +169,51 @@
             </div>
         </div>
 
-     <%--   &lt;%&ndash; 按钮 &ndash;%&gt;
-        <div id="add" class="row cl">
-            <div class="col-xs-1.5 col-sm-2">
-                <input class="btn btn-primary radius" type="button" id="addInput" onClick="addOrder()"
-                       value="&nbsp;&nbsp;添加&nbsp;&nbsp;">
-            </div>
-        </div>
+        <%--   &lt;%&ndash; 按钮 &ndash;%&gt;
+           <div id="add" class="row cl">
+               <div class="col-xs-1.5 col-sm-2">
+                   <input class="btn btn-primary radius" type="button" id="addInput" onClick="addOrder()"
+                          value="&nbsp;&nbsp;添加&nbsp;&nbsp;">
+               </div>
+           </div>
 
-        &lt;%&ndash; 添加商品信息 &ndash;%&gt;
-        <div class="info-div" id="addOrderDiv">
-            <div class="row cl">
-                <div class="col-xs-3 col-sm-2">
-                    <h4>添加商品</h4>
-                </div>
-            </div>
+           &lt;%&ndash; 添加商品信息 &ndash;%&gt;
+           <div class="info-div" id="addOrderDiv">
+               <div class="row cl">
+                   <div class="col-xs-3 col-sm-2">
+                       <h4>添加商品</h4>
+                   </div>
+               </div>
 
-            &lt;%&ndash; 商品表格 &ndash;%&gt;
-            <div class="mt-20">
-                <table id="addTable" class="table table-border table-bordered table-hover table-bg table-sort">
-                    <thead>
-                    <tr class="text-c">
-                        &lt;%&ndash;<th width="5%">序号</th>&ndash;%&gt;
-                        <th width="15%">商品名称</th>
-                        <th width="12%">商品条形码</th>
-                        <th width="5%">单位</th>
-                        <th width="5%">数量</th>
-                        <th width="5%">售价</th>
-                        <th width="5%">主观价</th>
-                        <th width="6%">计费方式</th>
-                        <th width="6%">重量(kg)</th>
-                        <th width="9%">金额(元)</th>
-                        <th width="10%">操作</th>
-                    </tr>
-                    </thead>
-                </table>
-            </div>
+               &lt;%&ndash; 商品表格 &ndash;%&gt;
+               <div class="mt-20">
+                   <table id="addTable" class="table table-border table-bordered table-hover table-bg table-sort">
+                       <thead>
+                       <tr class="text-c">
+                           &lt;%&ndash;<th width="5%">序号</th>&ndash;%&gt;
+                           <th width="15%">商品名称</th>
+                           <th width="12%">商品条形码</th>
+                           <th width="5%">单位</th>
+                           <th width="5%">数量</th>
+                           <th width="5%">售价</th>
+                           <th width="5%">主观价</th>
+                           <th width="6%">计费方式</th>
+                           <th width="6%">重量(kg)</th>
+                           <th width="9%">金额(元)</th>
+                           <th width="10%">操作</th>
+                       </tr>
+                       </thead>
+                   </table>
+               </div>
 
-            &lt;%&ndash; 添加商品总金额 &ndash;%&gt;
-            <div class="row cl" id="addOrderMoneyDiv" style="display: none;">
-                <label class="form-label col-xs-offset-7 col-xs-2 col-sm-2"><span class="c-red"></span>总共费用:</label>
-                <div class="formControls col-xs-2 col-sm-2">
-                    <input type="text" id="addOrderMoneyInput" value="" placeholder="添加商品总费用"/>
-                </div>
-            </div>
-        </div>--%>
+               &lt;%&ndash; 添加商品总金额 &ndash;%&gt;
+               <div class="row cl" id="addOrderMoneyDiv" style="display: none;">
+                   <label class="form-label col-xs-offset-7 col-xs-2 col-sm-2"><span class="c-red"></span>总共费用:</label>
+                   <div class="formControls col-xs-2 col-sm-2">
+                       <input type="text" id="addOrderMoneyInput" value="" placeholder="添加商品总费用"/>
+                   </div>
+               </div>
+           </div>--%>
 
         <%-- 操作按钮 --%>
         <div id="add" class="row cl">
@@ -221,10 +221,10 @@
                 <input class="btn btn-primary radius" type="button" id="submitBut" onClick="submitModifyOrder()"
                        value="&nbsp;&nbsp;提交审核&nbsp;&nbsp;"/>
             </div>
-           <%-- <div class="col-xs-2 col-sm-2">
-                <input class="btn btn-primary radius" type="button" id="cancelBut" onClick="cancelAllOrderFn()"
-                       value="&nbsp;&nbsp;整单取消&nbsp;&nbsp;"/>
-            </div>--%>
+            <%-- <div class="col-xs-2 col-sm-2">
+                 <input class="btn btn-primary radius" type="button" id="cancelBut" onClick="cancelAllOrderFn()"
+                        value="&nbsp;&nbsp;整单取消&nbsp;&nbsp;"/>
+             </div>--%>
             <div class="col-xs-2 col-sm-2">
                 <input class="btn btn-primary radius" type="button" id="closeBut" onClick="closeWin()"
                        value="&nbsp;&nbsp;关闭&nbsp;&nbsp;"/>
@@ -467,9 +467,12 @@
                         var Candidate = "";
                         maxcount = 0;//再重新得值
                         $.each(ls, function (k, v) {
-                            Candidate += "<li style='font-size:2px' id='" + maxcount + "'>" + v.commodityName + "</li>";
-                            maxcount++;
+                            if (v.commodityName != undefined) {
+                                Candidate += "<li style='font-size:2px' id='" + maxcount + "'>" + v.commodityName + "</li>";
+                                maxcount++;
+                            }
                         });
+
                         $("#autoCompleteHidden" + rowsNum).html(Candidate);
                         $("#autoCompleteHidden" + rowsNum + "li:eq(0)").css("background", "#A8A5A5");
                         //高亮对象
