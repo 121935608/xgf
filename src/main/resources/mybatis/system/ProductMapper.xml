@@ -1,278 +1,288 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ProductMapper">
 
-	<resultMap id="ProductResult" type="Product">
-		<result column="commodityId" property="commodityId" />
-		<result column="commodityName" property="commodityName" />
-		<result column="commodityNo" property="commodityNo" />
-		<result column="imgMain" property="imgMain" />
-		<result column="imgOther" property="imgOther" />
-		<result column="specification" property="specification" />
-		<result column="inPrice" property="inPrice" />
-		<result column="salePrice" property="salePrice" />
-		<result column="tag" property="tag" />
-		<result column="categoryId" property="categoryId" />
-		<result column="info" property="info" />
-		<result column="weight" property="weight" />
-		<result column="commodityStatus" property="commodityStatus" />
-		<result column="unit" property="unit" />
-		<result column="stockNum" property="stockNum" />
-		<result column="taxRate" property="taxRate" />
-		<result column="status" property="status" />
-		<result column="addTime" property="addTime" />
-		<result column="updateTime" property="updateTime" />
-		<result column="origin" property="origin" />
-		<result column="supply" property="supply" />
-		<result column="hint" property="hint" />
-		<result column="country" property="country" />
-		<result column="type" property="type" />
-		<result column="categoryName" property="categoryName" />
-		<result column="grade" property="grade" />
-		<result column="storage" property="storage" />
-		<result column="barCode" property="barCode" />
-	</resultMap>
+    <resultMap id="ProductResult" type="Product">
+        <result column="commodityId" property="commodityId"/>
+        <result column="commodityName" property="commodityName"/>
+        <result column="commodityNo" property="commodityNo"/>
+        <result column="imgMain" property="imgMain"/>
+        <result column="imgOther" property="imgOther"/>
+        <result column="specification" property="specification"/>
+        <result column="inPrice" property="inPrice"/>
+        <result column="salePrice" property="salePrice"/>
+        <result column="tag" property="tag"/>
+        <result column="categoryId" property="categoryId"/>
+        <result column="info" property="info"/>
+        <result column="weight" property="weight"/>
+        <result column="commodityStatus" property="commodityStatus"/>
+        <result column="unit" property="unit"/>
+        <result column="stockNum" property="stockNum"/>
+        <result column="taxRate" property="taxRate"/>
+        <result column="status" property="status"/>
+        <result column="addTime" property="addTime"/>
+        <result column="updateTime" property="updateTime"/>
+        <result column="origin" property="origin"/>
+        <result column="supply" property="supply"/>
+        <result column="hint" property="hint"/>
+        <result column="country" property="country"/>
+        <result column="type" property="type"/>
+        <result column="categoryName" property="categoryName"/>
+        <result column="grade" property="grade"/>
+        <result column="storage" property="storage"/>
+        <result column="barCode" property="barCode"/>
+    </resultMap>
 
-	<resultMap id="ClassesResult" type="Classes">
-		<result column="classId" property="classId" />
-		<result column="className" property="className" />
-		<result column="status" property="status" />
-		<result column="addTime" property="addTime" />
-		<result column="type" property="type" />
-		<result column="sort" property="sort" />
-	</resultMap>
+    <resultMap id="ClassesResult" type="Classes">
+        <result column="classId" property="classId"/>
+        <result column="className" property="className"/>
+        <result column="status" property="status"/>
+        <result column="addTime" property="addTime"/>
+        <result column="type" property="type"/>
+        <result column="sort" property="sort"/>
+    </resultMap>
 
-	<resultMap id="CategoryResult" type="Category">
-		<result column="categoryId" property="categoryId" />
-		<result column="categoryName" property="categoryName" />
-		<result column="type" property="type" />
-		<result column="img" property="img" />
-		<result column="sort" property="sort" />
-		<result column="status" property="status" />
-		<result column="addTime" property="addTime" />
-	</resultMap>
+    <resultMap id="CategoryResult" type="Category">
+        <result column="categoryId" property="categoryId"/>
+        <result column="categoryName" property="categoryName"/>
+        <result column="type" property="type"/>
+        <result column="img" property="img"/>
+        <result column="sort" property="sort"/>
+        <result column="status" property="status"/>
+        <result column="addTime" property="addTime"/>
+    </resultMap>
 
-	<select id="pageInfoQuery" parameterType="PageUtilEntity" resultMap="ProductResult">
-		SELECT c.commodityId,c.yyStock,c.kfStock,c.kxdStock,c.subPrice,c.barCode,c.commodityDes,c.priceSpecification,c.commodityName,c.commodityNo,c.imgMain,c.imgOther,c.specification,c.inPrice/100 inPrice,
-		c.salePrice/100 salePrice,c.tag,c.categoryId,c.info,c.weight,c.commodityStatus,c.unit,c.stockNum,c.taxRate,
-		c.status,c.addTime,c.updateTime,c.commodityBanner,c.origin,c.supply,c.hint,c.grade,c.country,c.type,c.storage,t.categoryName
-		FROM t_commodity c LEFT JOIN t_category t ON c.categoryId=t.categoryId
-		WHERE 1=1
-		<if test="relationMap.type !=null and relationMap.type!=''">
-			AND c.type=#{relationMap.type}
-		</if>
-		<if test="relationMap.tag!=null and relationMap.tag !=''">
-			AND c.tag=#{relationMap.tag}
-		</if>
-		<if test="relationMap.origin!=null and relationMap.origin !=''">
-			AND c.origin=#{relationMap.origin}
-		</if>
-		<if test="relationMap.categoryId!=null and relationMap.categoryId !=''">
-			AND t.categoryId=#{relationMap.categoryId}
-		</if>
-		<if test="relationMap.supply!=null and relationMap.supply !=''">
-			AND	c.supply=#{relationMap.supply}
-		</if>
-		<if test="relationMap.commodityStatus!=null and relationMap.commodityStatus !=''">
-			AND c.commodityStatus=#{relationMap.commodityStatus}
-		</if>
-		<if test="relationMap.commodityName!=null and relationMap.commodityName !=''">
-			AND (
-			c.barCode LIKE CONCAT(CONCAT('%', #{relationMap.commodityName}),'%')
-			OR
-			c.commodityName LIKE CONCAT(CONCAT('%', #{relationMap.commodityName}),'%')
-			OR
-			c.commodityNo LIKE CONCAT(CONCAT('%', #{relationMap.commodityName}),'%')
-			)
-		</if>
-		order by c.addTime desc
-	</select>
+    <select id="pageInfoQuery" parameterType="PageUtilEntity" resultMap="ProductResult">
+        SELECT
+        c.commodityId,c.yyStock,c.kfStock,c.kxdStock,c.subPrice,c.barCode,c.commodityDes,c.priceSpecification,c.commodityName,c.commodityNo,c.imgMain,c.imgOther,c.specification,c.inPrice/100
+        inPrice,
+        c.salePrice/100 salePrice,c.tag,c.categoryId,c.info,c.weight,c.commodityStatus,c.unit,c.stockNum,c.taxRate,
+        c.status,c.addTime,c.updateTime,c.commodityBanner,c.origin,c.supply,c.hint,c.grade,c.country,c.type,c.storage,t.categoryName
+        FROM t_commodity c LEFT JOIN t_category t ON c.categoryId=t.categoryId
+        WHERE 1=1
+        <if test="relationMap.type !=null and relationMap.type!=''">
+            AND c.type=#{relationMap.type}
+        </if>
+        <if test="relationMap.tag!=null and relationMap.tag !=''">
+            AND c.tag=#{relationMap.tag}
+        </if>
+        <if test="relationMap.origin!=null and relationMap.origin !=''">
+            AND c.origin=#{relationMap.origin}
+        </if>
+        <if test="relationMap.categoryId!=null and relationMap.categoryId !=''">
+            AND t.categoryId=#{relationMap.categoryId}
+        </if>
+        <if test="relationMap.supply!=null and relationMap.supply !=''">
+            AND c.supply=#{relationMap.supply}
+        </if>
+        <if test="relationMap.commodityStatus!=null and relationMap.commodityStatus !=''">
+            AND c.commodityStatus=#{relationMap.commodityStatus}
+        </if>
+        <if test="relationMap.commodityName!=null and relationMap.commodityName !=''">
+            AND (
+            c.barCode LIKE CONCAT(CONCAT('%', #{relationMap.commodityName}),'%')
+            OR
+            c.commodityName LIKE CONCAT(CONCAT('%', #{relationMap.commodityName}),'%')
+            OR
+            c.commodityNo LIKE CONCAT(CONCAT('%', #{relationMap.commodityName}),'%')
+            )
+        </if>
+        order by c.addTime desc
+    </select>
 
-	<!--查询所有-->
-	<resultMap id="ProductResult1" type="map">
-		<result column="commodityId" property="commodityId" />
-		<result column="commodityName" property="commodityName" />
-		<result column="commodityNo" property="commodityNo" />
-		<result column="inPrice" property="inPrice" />
-		<result column="salePrice" property="salePrice" />
-		<result column="categoryId" property="categoryId" />
-		<result column="unit" property="unit" />
-		<result column="stockNum" property="stockNum" />
-		<result column="status" property="status" />
-		<result column="origin" property="origin" />
-		<result column="country" property="country" />
-		<result column="yyStock" property="yyStock" />
-		<result column="kfStock" property="kfStock" />
-		<result column="kxdStock" property="kxdStock" />
-		<result column="categoryName" property="categoryName" />
-	</resultMap>
-	<select id="productInfoQuery" parameterType="map" resultMap="ProductResult1">
-		SELECT c.commodityNum,c.taxRate,c.commodityId,c.yyStock,c.kfStock,c.kxdStock,c.commodityName,c.commodityNo,c.subprice,c.inPrice/100 inPrice,
-		c.salePrice/100 salePrice,c.unit,c.stockNum,c.status,c.origin,c.commodityStatus commodityStatus,case c.country when 1 THEN '国内' when 2 then '国外' ELSE  '其他' END country,t.categoryName
-		FROM t_commodity c LEFT JOIN t_category t ON c.categoryId=t.categoryId
-		WHERE 1=1
-		<if test="type !=null and type!=''">
-			AND c.type=#{type}
-		</if>
-		<if test="tag!=null and tag !=''">
-			AND c.tag=#{tag}
-		</if>
-		<if test="origin!=null and origin !=''">
-			AND c.origin=#{origin}
-		</if>
-		<if test="categoryId!=null and categoryId !=''">
-			AND t.categoryId=#{categoryId}
-		</if>
-		<if test="commodityStatus!=null and commodityStatus !=''">
-			AND c.commodityStatus=#{commodityStatus}
-		</if>
-		<if test="commodityName!=null and commodityName !=''">
-			AND (
-			c.barCode LIKE CONCAT(CONCAT('%', #{commodityName}),'%')
-			OR
-			c.commodityName LIKE CONCAT(CONCAT('%', #{commodityName}),'%')
-			OR
-			c.commodityNo LIKE CONCAT(CONCAT('%', #{commodityName}),'%')
-			)
-		</if>
-	</select>
+    <!--查询所有-->
+    <resultMap id="ProductResult1" type="map">
+        <result column="commodityId" property="commodityId"/>
+        <result column="commodityName" property="commodityName"/>
+        <result column="commodityNo" property="commodityNo"/>
+        <result column="inPrice" property="inPrice"/>
+        <result column="salePrice" property="salePrice"/>
+        <result column="categoryId" property="categoryId"/>
+        <result column="unit" property="unit"/>
+        <result column="stockNum" property="stockNum"/>
+        <result column="status" property="status"/>
+        <result column="origin" property="origin"/>
+        <result column="country" property="country"/>
+        <result column="yyStock" property="yyStock"/>
+        <result column="kfStock" property="kfStock"/>
+        <result column="kxdStock" property="kxdStock"/>
+        <result column="categoryName" property="categoryName"/>
+    </resultMap>
+    <select id="productInfoQuery" parameterType="map" resultMap="ProductResult1">
+        SELECT
+        c.commodityNum,c.taxRate,c.commodityId,c.yyStock,c.kfStock,c.kxdStock,c.commodityName,c.commodityNo,c.subprice,c.inPrice/100
+        inPrice,
+        c.salePrice/100 salePrice,c.unit,c.stockNum,c.status,c.origin,c.commodityStatus commodityStatus,case c.country when 1 THEN
+        '国内' when 2 then '国外' ELSE '其他' END country,t.categoryName
+        FROM t_commodity c LEFT JOIN t_category t ON c.categoryId=t.categoryId
+        WHERE 1=1
+        <if test="type !=null and type!=''">
+            AND c.type=#{type}
+        </if>
+        <if test="tag!=null and tag !=''">
+            AND c.tag=#{tag}
+        </if>
+        <if test="origin!=null and origin !=''">
+            AND c.origin=#{origin}
+        </if>
+        <if test="categoryId!=null and categoryId !=''">
+            AND t.categoryId=#{categoryId}
+        </if>
+        <if test="commodityStatus!=null and commodityStatus !=''">
+            AND c.commodityStatus=#{commodityStatus}
+        </if>
+        <if test="commodityName!=null and commodityName !=''">
+            AND (
+            c.barCode LIKE CONCAT(CONCAT('%', #{commodityName}),'%')
+            OR
+            c.commodityName LIKE CONCAT(CONCAT('%', #{commodityName}),'%')
+            OR
+            c.commodityNo LIKE CONCAT(CONCAT('%', #{commodityName}),'%')
+            )
+        </if>
+    </select>
 
 
-	<select id="getProductList"  resultMap="ProductResult">
+    <select id="getProductList" resultMap="ProductResult">
 		SELECT c.commodityId,c.subPrice,c.barCode,c.commodityDes,c.priceSpecification,c.commodityName,c.commodityNo,c.imgMain,c.imgOther,c.specification,c.inPrice/100 inPrice,
 		c.salePrice/100 salePrice,c.tag,c.categoryId,c.info,c.weight,c.commodityStatus,c.unit,c.stockNum,c.taxRate,
 		c.status,c.addTime,c.updateTime,c.commodityBanner,c.origin,c.supply,c.hint,c.grade,c.country,c.type,c.storage,t.categoryName
 		FROM t_commodity c LEFT JOIN t_category t ON c.categoryId=t.categoryId order by c.addTime desc
 	</select>
 
-	<select id="findAllClass" resultMap="CategoryResult">
+    <select id="findAllClass" resultMap="CategoryResult">
 		SELECT categoryId,categoryName,parentId FROM t_category WHERE type='FL' AND parentId !='0' and status=1
 	</select>
 
-	<select id="findFirstCategory" resultMap="CategoryResult">
+    <select id="findFirstCategory" resultMap="CategoryResult">
 		SELECT categoryId,categoryName,parentId FROM t_category WHERE type='FL' AND parentId ='0' and status=1
 	</select>
 
-	<select id="findCategoryById" resultMap="CategoryResult" parameterType="String">
+    <select id="findCategoryById" resultMap="CategoryResult" parameterType="String">
 		SELECT categoryId,categoryName,parentId FROM t_category WHERE categoryId=#{0}
 	</select>
 
-	<select id="findAllCategory" resultMap="CategoryResult">
+    <select id="findAllCategory" resultMap="CategoryResult">
 		SELECT categoryId,categoryName FROM t_category WHERE type='BQ' and status=1
 	</select>
 
-	<select id="findAllSupply" resultMap="ProductResult">
-		SELECT supply FROM t_commodity WHERE 1=1
-		<if test="type!=null and type!=''">
-			AND type=#{type}
-		</if>
-		and status=1
-		GROUP BY supply
-	</select>
+    <select id="findAllSupply" resultMap="ProductResult">
+        SELECT supply FROM t_commodity WHERE 1=1
+        <if test="type!=null and type!=''">
+            AND type=#{type}
+        </if>
+        and status=1
+        GROUP BY supply
+    </select>
 
-	<select id="findAllOrigin" resultMap="ProductResult">
-		SELECT DISTINCT (origin) FROM t_commodity WHERE 1=1
-		<if test="type!=null and type!=''">
-			AND type=#{type}
-		</if>
-		and status=1
-	</select>
+    <select id="findAllOrigin" resultMap="ProductResult">
+        SELECT DISTINCT (origin) FROM t_commodity WHERE 1=1
+        <if test="type!=null and type!=''">
+            AND type=#{type}
+        </if>
+        and status=1
+    </select>
 
-	<update id="changeStatus" parameterType="Product">
-		UPDATE t_commodity
-		<set>
-			<if test="status !=null and status !=''">
-				status=#{status},
-			</if>
-			updateTime=sysdate()
-		</set>
-		WHERE 1=1
-		<if test="commodityId !=null and commodityId!=''">
-			AND commodityId=#{commodityId}
-		</if>
-		<if test="type!=null and type !=''">
-			AND type=#{type}
-		</if>
-	</update>
+    <update id="changeStatus" parameterType="Product">
+        UPDATE t_commodity
+        <set>
+            <if test="status !=null and status !=''">
+                status=#{status},
+            </if>
+            updateTime=sysdate()
+        </set>
+        WHERE 1=1
+        <if test="commodityId !=null and commodityId!=''">
+            AND commodityId=#{commodityId}
+        </if>
+        <if test="type!=null and type !=''">
+            AND type=#{type}
+        </if>
+    </update>
 
-	<select id="findProductById" parameterType="Product" resultType="Product">
-		SELECT c.commodityId,c.priceSpecificationUnit,c.subPrice,c.subPriceUnit,c.barCode,c.priceSpecification,c.commodityDes,c.commodityName,c.commodityNo,c.imgMain,c.imgOther,c.specification,c.inPrice/100 inPrice,
-		c.salePrice/100 salePrice,c.tag,c.categoryId,c.info,c.weight,c.commodityStatus,c.unit,c.stockNum,c.taxRate,
-		c.status,c.addTime,c.updateTime,c.commodityBanner,c.origin,c.supply,c.hint,c.grade,c.country,c.type,c.storage,t.categoryName FROM t_commodity c LEFT JOIN t_category t ON c.categoryId=t.categoryId
-		WHERE 1=1
-		<if test="commodityId !=null and commodityId !=''">
-			AND commodityId =#{commodityId}
-		</if>
-	</select>
+    <select id="findProductById" parameterType="Product" resultType="Product">
+        SELECT
+        c.commodityId,c.priceSpecificationUnit,c.subPrice,c.subPriceUnit,c.barCode,c.priceSpecification,c.commodityDes,c.commodityName,c.commodityNo,c.imgMain,c.imgOther,c.specification,c.inPrice/100
+        inPrice,
+        c.salePrice/100 salePrice,c.tag,c.categoryId,c.info,c.weight,c.commodityStatus,c.unit,c.stockNum,c.taxRate,
+        c.status,c.addTime,c.updateTime,c.commodityBanner,c.origin,c.supply,c.hint,c.grade,c.country,c.type,c.storage,t.categoryName
+        FROM t_commodity c LEFT JOIN t_category t ON c.categoryId=t.categoryId
+        WHERE 1=1
+        <if test="commodityId !=null and commodityId !=''">
+            AND commodityId =#{commodityId}
+        </if>
+    </select>
 
-	<select id="findProductByNo" parameterType="string" resultType="Product">
+    <select id="findProductByNo" parameterType="string" resultType="Product">
 		SELECT commodityName, barCode FROM t_commodity
 		WHERE commodityNo = #{0}
 
 	</select>
 
-	<!-- 查询详细的商品信息 -->
-	<select id="findProductInfoByNo" parameterType="string" resultType="Product">
+    <!-- 查询详细的商品信息 -->
+    <select id="findProductInfoByNo" parameterType="string" resultType="Product">
 		SELECT * FROM t_commodity
 		WHERE commodityNo = #{0}
 	</select>
 
-	<select id="getCommodityNos"  resultType="string">
+    <select id="getCommodityNos" resultType="string">
 		SELECT  commodityNo from t_commodity
 	</select>
 
-	<update id="updateProduct" parameterType="Product" >
-		UPDATE t_commodity 
-		<set>
-			imgOther=#{imgOther},
-			<if test="commodityName!=null and commodityName !=''">commodityName=#{commodityName},</if>
-			<if test="commodityNo!=null and commodityNo !=''">commodityNo=#{commodityNo},</if>
-			<if test="imgMain!=null and imgMain !=''">imgMain=#{imgMain},</if>
-			<if test="specification!=null and specification !=''">specification=#{specification},</if>
-			<if test="inPrice!=null">inPrice=#{inPrice}*100,</if>
-			<if test="salePrice!=null">salePrice=#{salePrice}*100,</if>
-			<if test="tag!=null">tag=#{tag},</if>
-			<if test="categoryId!=null and categoryId !=''">categoryId=#{categoryId},</if>
-			<if test="info!=null and info !=''">info=#{info},</if>
-			<if test="weight!=null ">weight=#{weight},</if>
-			<if test="commodityStatus!=null and commodityStatus !=''">commodityStatus=#{commodityStatus},</if>
-			<if test="unit!=null and unit !=''">unit=#{unit},</if>
-			<if test="stockNum!=null ">stockNum=#{stockNum},</if>
-			<if test="taxRate!=null">taxRate=#{taxRate},</if>
-			<if test="status!=null ">status=#{status},</if>
-			<if test="commodityBanner!=null ">commodityBanner=#{commodityBanner},</if>
-			<if test="origin!=null and origin !=''">origin=#{origin},</if>
-			<if test="supply!=null and supply !=''">supply=#{supply},</if>
-			<if test="hint!=null and hint !=''">hint=#{hint},</if>
-			<if test="grade!=null and grade !=''">grade=#{grade},</if>
-			<if test="storage!=null and storage !=''">storage=#{storage},</if>
-			<if test="country!=null and country !=''">country=#{country},</if>
-			<if test="commodityDes!=null and commodityDes !=''">commodityDes=#{commodityDes},</if>
-			<if test="subPrice!=null and subPrice !=''">subPrice=#{subPrice},</if>
-			<if test="priceSpecification!=null and priceSpecification !=''">priceSpecification=#{priceSpecification},</if>
-			<if test="type!=null and type !=''">type=#{type},</if>
-			<if test="priceSpecificationUnit!=null and priceSpecificationUnit !=''">priceSpecificationUnit=#{priceSpecificationUnit},</if>
-			<if test="subPriceUnit!=null and subPriceUnit !=''">subPriceUnit=#{subPriceUnit},</if>
-			updateTime=#{updateTime}
-		</set>
-		WHERE 1=1
-		<if test="commodityId !=null and commodityId!=''">
-			AND commodityId=#{commodityId}
-		</if>
-	</update>
+    <update id="updateProduct" parameterType="Product">
+        UPDATE t_commodity
+        <set>
+            imgOther=#{imgOther},
+            <if test="commodityName!=null and commodityName !=''">commodityName=#{commodityName},</if>
+            <if test="commodityNo!=null and commodityNo !=''">commodityNo=#{commodityNo},</if>
+            <if test="imgMain!=null and imgMain !=''">imgMain=#{imgMain},</if>
+            <if test="specification!=null and specification !=''">specification=#{specification},</if>
+            <if test="inPrice!=null">inPrice=#{inPrice}*100,</if>
+            <if test="salePrice!=null">salePrice=#{salePrice}*100,</if>
+            <if test="tag!=null">tag=#{tag},</if>
+            <if test="categoryId!=null and categoryId !=''">categoryId=#{categoryId},</if>
+            <if test="info!=null and info !=''">info=#{info},</if>
+            <if test="weight!=null ">weight=#{weight},</if>
+            <if test="commodityStatus!=null and commodityStatus !=''">commodityStatus=#{commodityStatus},</if>
+            <if test="unit!=null and unit !=''">unit=#{unit},</if>
+            <if test="stockNum!=null ">stockNum=#{stockNum},</if>
+            <if test="taxRate!=null">taxRate=#{taxRate},</if>
+            <if test="status!=null ">status=#{status},</if>
+            <if test="commodityBanner!=null ">commodityBanner=#{commodityBanner},</if>
+            <if test="origin!=null and origin !=''">origin=#{origin},</if>
+            <if test="supply!=null and supply !=''">supply=#{supply},</if>
+            <if test="hint!=null and hint !=''">hint=#{hint},</if>
+            <if test="grade!=null and grade !=''">grade=#{grade},</if>
+            <if test="storage!=null and storage !=''">storage=#{storage},</if>
+            <if test="country!=null and country !=''">country=#{country},</if>
+            <if test="commodityDes!=null and commodityDes !=''">commodityDes=#{commodityDes},</if>
+            <if test="subPrice!=null and subPrice !=''">subPrice=#{subPrice},</if>
+            <if test="priceSpecification!=null and priceSpecification !=''">priceSpecification=#{priceSpecification},</if>
+            <if test="type!=null and type !=''">type=#{type},</if>
+            <if test="priceSpecificationUnit!=null and priceSpecificationUnit !=''">
+                priceSpecificationUnit=#{priceSpecificationUnit},
+            </if>
+            <if test="subPriceUnit!=null and subPriceUnit !=''">subPriceUnit=#{subPriceUnit},</if>
+            updateTime=#{updateTime}
+        </set>
+        WHERE 1=1
+        <if test="commodityId !=null and commodityId!=''">
+            AND commodityId=#{commodityId}
+        </if>
+    </update>
 
-	<select id="getUnitList" resultType="string">
+    <select id="getUnitList" resultType="string">
 		select unit from t_commodity GROUP BY unit
 	</select>
 
     <update id="updateProductStock" parameterType="Product">
         UPDATE t_commodity
         <set>
-            <if test="yyStock!=null and yyStock !=''">yyStock=#{yyStock},</if>
-            <if test="kfStock!=null and kfStock !=''">kfStock=#{kfStock},</if>
-            <if test="kxdStock!=null and kxdStock !=''">kxdStock=#{kxdStock},</if>
+            <if test="yyStock !=null and yyStock !=''">yyStock=#{yyStock},</if>
+            <if test="kfStock >=0 ">kfStock=#{kfStock},</if>
+            <if test="kxdStock !=null and kxdStock !=''">kxdStock=#{kxdStock}</if>
         </set>
         <where>
             <if test="commodityId !=null and commodityId!=''">
