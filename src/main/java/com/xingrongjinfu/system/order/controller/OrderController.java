@@ -390,8 +390,11 @@ public class OrderController extends BaseController {
                     Integer oldCommodityNum = orderDetail.getCommodityNum();
                     // 修改客服库存
                     Product productByNo = productService.findProductInfoByNo(commodityNo);
-                    if (productByNo.getKfStock() <= 0 || productByNo.getKfStock() < oldCommodityNum) {
+                    if (productByNo.getKfStock() <= 0) {
                         return new Message(false, "客服库存数异常"); // 客服库存数小于支付商品数量,则下单时库存数量操作异常
+                    }
+                    if (productByNo.getKfStock() - oldCommodityNum <= 0) {
+                        productByNo.setKfStock(0);
                     }
                     productByNo.setKfStock(productByNo.getKfStock() - oldCommodityNum);
                     productByNo.setKxdStock(productByNo.getKxdStock() + oldCommodityNum);
@@ -498,28 +501,26 @@ public class OrderController extends BaseController {
             }
         }
 
+        /** ****** 推送库存 ****** */
         int updateResult = 0;
         if (modifyResult && addResult) {
-            // 设置订单状态
-            order.setOrderStatus("7");
-            // 更新订单
-            updateResult = orderService.updateOrderStatus(order);
-        } else {
-            return new Message(false, "审核订单失败");
-        }
-
-        /** ****** 推送库存 ****** */
-        if (updateResult > 0) {
             // 封装推送库存参数
             String orderId = order.getOrderId();
             try {
                 // 审核完成后,减少商品客服库存,订单状态改为库存审核,推送到库存
-                return pushStock(orderId);// 推送库存,和库存返回信息是否为空
+                Message message = pushStock(orderId);// 推送库存,和库存返回信息是否为空
+                if (message.isS()) {
+                    // 设置订单状态
+                    order.setOrderStatus("7");
+                    // 更新订单
+                    updateResult = orderService.updateOrderStatus(order);
+                }
+                return new Message(updateResult, message.getM());
             } catch (UnsupportedEncodingException e) {
-                return new Message(false);
+                return new Message(false, "推送库存异常");
             }
         } else {
-            return new Message(false, "更新订单信息失败");
+            return new Message(false, "更新审核信息失败");
         }
     }
 

@@ -391,6 +391,7 @@
         cell6.setAttribute("jsonName", "subPriceUnit");
         cell7.setAttribute("jsonName", "weight");
         cell8.setAttribute("jsonName", "totalMoney");
+        //cell8.setAttribute("onblur", "addOrderMoney('addTable')")
 
         cell0.setAttribute("contentEditable", true);
         cell1.setAttribute("contentEditable", true);
@@ -547,6 +548,7 @@
 
     // 遍历所有的行的金额汇总
     function addAllMoney(tableId) {
+        //alert(1);
         var sum = 0.0;
         var rowNum = $("#" + tableId).find("tr").length;
         for (var i = 1; i < rowNum; i++) {
@@ -554,7 +556,7 @@
             if (orderMoney == "") {
                 orderMoney = 0;
             }
-            sum = sum + parseFloat(orderMoney);
+            sum = sum + Number(orderMoney);
         }
         return sum;
     }
@@ -768,17 +770,24 @@
     function cancelOrder(obj) {
         // 获取当前行对象
         var trNode = $(obj).parent().parent();
-        // 添加金额
-        var trMoney = trNode.find("td").eq(8).html();
         if (obj.checked) { // 如果选中
             trNode.css({"background-color": "#C0C0C0"});
             trNode.find("td").eq(3).removeAttr("ondblclick");
-            $("#moneyInput").val(($("#moneyInput").val() - trMoney).toFixed(1));
+            //$("#moneyInput").val(($("#moneyInput").val() - trMoney).toFixed(1));
+            // 添加金额
+            trNode.find("td").eq(8).html(0.0);
         } else { // 如果没选中
             trNode.removeAttr("style");
             trNode.find("td").eq(3).attr("ondblclick", 'changeTd(this)');
-            $("#moneyInput").val((parseFloat($("#moneyInput").val()) + parseFloat(trMoney)).toFixed(1));
+            //$("#moneyInput").val((parseFloat($("#moneyInput").val()) + parseFloat(trMoney)).toFixed(1));
+            // 添加金额
+            //var trMoney = trNode.find("td").eq(8).html();
+            var trNum = trNode.find("td").eq(3).html();
+            var trSale = trNode.find("td").eq(4).html();
+            trNode.find("td").eq(8).html(parseFloat(trNum)*parseFloat(trSale).toFixed(1));
         }
+        var money = addAllMoney('orderTable');
+        $("#moneyInput").val(money.toFixed(1));
     }
 
     // 删除增加订单
