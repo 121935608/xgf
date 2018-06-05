@@ -741,9 +741,9 @@ public class OrderController extends BaseController {
             if (kxdStock <= 0 || kxdStock < commodityNum) {
                 return new Message(false, "商品库存不足");
             }
-            // 增加客服库存,减少可下单库存
-            product.setKfStock(product.getKfStock() + commodityNum);
-            product.setKxdStock(product.getKxdStock() - commodityNum);
+            // 减少客服库存,增加可下单库存
+            product.setKfStock(product.getKfStock() - commodityNum);
+            product.setKxdStock(product.getKxdStock() + commodityNum);
             productService.updateProductStock(product);
         }
 
