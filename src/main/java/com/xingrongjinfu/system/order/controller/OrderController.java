@@ -397,6 +397,10 @@ public class OrderController extends BaseController {
                     productByNo.setKxdStock(productByNo.getKxdStock() + oldCommodityNum);
                     orderAuditing.setServiceModify(oldCommodityNum);
                     orderAuditing.setModifyStatus(2);
+
+                    // 设置订单状态为取消
+                    orderDetail.setStatus(-1);
+                    orderService.cancelOrderDetail(orderDetail);
                 } else { // 不为空表示可能存在修改商品数量
                     Integer modifiedNum = Integer.valueOf(commodityNum);
                     if (modifiedNum < 0) {
@@ -686,12 +690,15 @@ public class OrderController extends BaseController {
                 orderAuditing.setCommodityId(commodity.getCommodityId());
                 orderAuditing.setCommodityName(commodity.getCommodityName());
                 orderAuditing.setModifyStatus(3);
-                int result = orderService.insertOrderAuditing(orderAuditing);
-                if (result <= 0) {
+                if (orderService.insertOrderAuditing(orderAuditing) <= 0) {
                     resultFlag = false;
                     return new Message(false, "整单取消订单失败");
                 }
             }
+
+            // 将订单明细的状态设置为取消
+            orderDetailInfo.setStatus(-1);
+            orderService.cancelOrderDetail(orderDetailInfo);
         }
 
         int updateResult = 0;
@@ -755,8 +762,7 @@ public class OrderController extends BaseController {
         result = orderService.updateConfirmOrder(order);
         if (result > 0) {
             // 推送给库存开始发货
-            pushComfirmOrderStock(orderNumber);
-            return new Message(true,"操作成功");
+            return pushComfirmOrderStock(orderNumber);
         } else {
             logger.warn("===============订单orderNumber:{}更新失败", orderNumber);
             return new Message("1111", "更新用户确认收库状态失败");
@@ -768,7 +774,7 @@ public class OrderController extends BaseController {
      *
      * @param orderNumber
      */
-    private void pushComfirmOrderStock(String orderNumber) {
+    private Message pushComfirmOrderStock(String orderNumber) {
         final String url = OrderConstant.STORAGE_COMFIRMORDER_URL; // 配置库存地址
         net.sf.json.JSONObject jsonObject = new net.sf.json.JSONObject();
         jsonObject.put("orderNo", orderNumber);
@@ -779,9 +785,17 @@ public class OrderController extends BaseController {
             logger.info("==========推送库存请求参数:{}", map);
             String resultStr = HttpClientUtil.httpPostRequest(url, map);
             logger.info("==========接收库存返回参数:{}", resultStr);
+            net.sf.json.JSONObject jsonObject1 = net.sf.json.JSONObject.fromObject(resultStr);
+            String code = jsonObject1.getString("code");
+            if ("0000".equals(code)) {
+                return new Message(true, "库存操作成功");
+            } else {
+                return new Message(false, "库存操作失败");
+            }
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
             logger.warn("===============推送库存请求失败:{}", e);
+            return new Message(false, "推送请求异常");
         }
     }
 }

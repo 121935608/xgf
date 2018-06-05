@@ -175,4 +175,9 @@ public class OrderDao extends DynamicObjectBaseDao implements IOrderDao {
     public int updateConfirmOrder(Order order) {
         return this.update("OrderMapper.updateConfirmOrder", order);
     }
+
+    @Override
+    public void cancelOrderDetail(OrderDetail orderDetail) {
+        this.update("OrderMapper.cancelOrderDetail", orderDetail);
+    }
 }

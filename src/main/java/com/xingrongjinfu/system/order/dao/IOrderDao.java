@@ -125,4 +125,7 @@ public interface IOrderDao {
     int updateOrderDetailComNum(OrderDetail orderDetail);
 
     int updateConfirmOrder(Order order);
+
+    void cancelOrderDetail(OrderDetail orderDetail);
+
 }

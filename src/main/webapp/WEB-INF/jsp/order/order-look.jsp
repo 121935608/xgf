@@ -3,218 +3,222 @@
 <ys:contentHeader title="查看订单信息"/>
 <body>
 <div class="page-container">
-	<div class="mt-20">
-		<div class="info-div">
-			<div class="row cl">
-				<div class="col-xs-3 col-sm-2">
-					<h4>订单信息</h4>
-				</div>
-			</div>
-			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-3">订单号:</label>
-				<div class="formControls col-xs-8 col-sm-4">
-					<span>${orders.orderNumber}</span>
-				</div>
-			</div>
-				<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-3">支付状态:</label>
-				<div class="formControls col-xs-8 col-sm-4">
+    <div class="mt-20">
+        <div class="info-div">
+            <div class="row cl">
+                <div class="col-xs-3 col-sm-2">
+                    <h4>订单信息</h4>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">订单号:</label>
+                <div class="formControls col-xs-8 col-sm-4">
+                    <span>${orders.orderNumber}</span>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">支付状态:</label>
+                <div class="formControls col-xs-8 col-sm-4">
 					<span>
-						<c:if  test="${orders.orderStatus eq 1}">未支付</c:if>
-						<c:if  test="${orders.orderStatus ne 1}">已支付</c:if>
+						<c:if test="${orders.orderStatus eq 1}">未支付</c:if>
+						<c:if test="${orders.orderStatus ne 1}">已支付</c:if>
 					</span>
-				</div>
-			</div>
-			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-3">会员:</label>
-				<div class="formControls col-xs-8 col-sm-4">
-					<span>${orders.userName}</span>
-				</div>
-			</div>
-			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-3">付款金额:</label>
-				<div class="formControls col-xs-8 col-sm-4">
-					<span>¥${orders.orderPrice}</span>
-				</div>
-			</div>
-			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-3">下单时间:</label>
-				<div class="formControls col-xs-8 col-sm-4">
-					<span>${orders.orderTimes}</span>
-				</div>
-			</div>
-			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-3">订单状态:</label>
-				<div class="formControls col-xs-8 col-sm-4">
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">会员:</label>
+                <div class="formControls col-xs-8 col-sm-4">
+                    <span>${orders.userName}</span>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">付款金额:</label>
+                <div class="formControls col-xs-8 col-sm-4">
+                    <span>¥${orders.orderPrice}</span>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">下单时间:</label>
+                <div class="formControls col-xs-8 col-sm-4">
+                    <span>${orders.orderTimes}</span>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">订单状态:</label>
+                <div class="formControls col-xs-8 col-sm-4">
 					<span>
-						<c:if  test="${orders.orderStatus eq -1}">已取消</c:if>
-						<c:if  test="${orders.orderStatus eq 1}">待支付</c:if>
-						<c:if  test="${orders.orderStatus eq 2}">待发货</c:if>
-						<c:if  test="${orders.orderStatus eq 3}">待收货</c:if>
-						<c:if  test="${orders.orderStatus eq 4}">已完成</c:if>
-						<c:if  test="${orders.orderStatus eq 5}">已收款</c:if>
+						<c:if test="${orders.orderStatus eq -1}">已取消</c:if>
+						<c:if test="${orders.orderStatus eq 1}">待支付</c:if>
+						<c:if test="${orders.orderStatus eq 2}">待发货</c:if>
+						<c:if test="${orders.orderStatus eq 3}">待收货</c:if>
+						<c:if test="${orders.orderStatus eq 4}">已完成</c:if>
+						<c:if test="${orders.orderStatus eq 5}">已收款</c:if>
+                        <c:if test="${orders.orderStatus eq 6}">客服审核</c:if>
+                        <c:if test="${orders.orderStatus eq 7}">库存审核</c:if>
+                        <c:if test="${orders.orderStatus eq 8}">退货中</c:if>
+                        <c:if test="${orders.orderStatus eq 9}">关闭交易</c:if>
 					</span>
-				</div>
-			</div>
-			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-3">支付方式:</label>
-				<div class="formControls col-xs-8 col-sm-4">
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">支付方式:</label>
+                <div class="formControls col-xs-8 col-sm-4">
 					<span>
-						<c:if  test="${orders.payCode eq 'ZFB'}">支付宝</c:if>
-						<c:if  test="${orders.payCode eq 'WX'}">微信</c:if>
-						<c:if  test="${orders.payCode eq 'HDFK'}">货到付款</c:if>
-						<c:if  test="${orders.payCode eq 'CL'}">额度支付</c:if>
+						<c:if test="${orders.payCode eq 'ZFB'}">支付宝</c:if>
+						<c:if test="${orders.payCode eq 'WX'}">微信</c:if>
+						<c:if test="${orders.payCode eq 'HDFK'}">货到付款</c:if>
+						<c:if test="${orders.payCode eq 'CL'}">额度支付</c:if>
 					</span>
-				</div>
-			</div>
-		</div>
-		<div class="info-div">
-			<div class="row cl">
-				<div class="col-xs-3 col-sm-2">
-					<h4>配送信息</h4>
-				</div>
-			</div>
-			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-3">下单店铺:</label>
-				<div class="formControls col-xs-8 col-sm-4">
-					<span>${orders.storeName}</span>
-				</div>
-			</div>
-			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-3">收货人:</label>
-				<div class="formControls col-xs-8 col-sm-4">
-					<span>${orders.userNames}</span>
-				</div>
-			</div>
-			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-3">联系方式:</label>
-				<div class="formControls col-xs-8 col-sm-4">
-					<span>${orders.phone}</span>
-				</div>
-			</div>
-			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-3">配送:</label>
-				<div class="formControls col-xs-8 col-sm-4">
-					<span>${orders.area}${orders.address}</span>
-				</div>
-			</div>
+                </div>
+            </div>
+        </div>
+        <div class="info-div">
+            <div class="row cl">
+                <div class="col-xs-3 col-sm-2">
+                    <h4>配送信息</h4>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">下单店铺:</label>
+                <div class="formControls col-xs-8 col-sm-4">
+                    <span>${orders.storeName}</span>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">收货人:</label>
+                <div class="formControls col-xs-8 col-sm-4">
+                    <span>${orders.userNames}</span>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">联系方式:</label>
+                <div class="formControls col-xs-8 col-sm-4">
+                    <span>${orders.phone}</span>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">配送:</label>
+                <div class="formControls col-xs-8 col-sm-4">
+                    <span>${orders.area}${orders.address}</span>
+                </div>
+            </div>
 
-		</div>
+        </div>
 
 
-		<div class="info-div">
-			<div class="row cl">
-				<div class="col-xs-3 col-sm-2">
-					<h4>配送信息</h4>
-				</div>
-			</div>
-			<table>
-				<tr>
-					<td>商品名称</td>
-					<td>商品条码</td>
-					<td>规格</td>
-					<td>数量</td>
-					<td>单价</td>
-					<td>总金额</td>
-				</tr>
-				<c:forEach items="${orderDetails}" var="order" varStatus="n">
-				<tr>
-					<td>${order.commodityName}</td>
-					<td>${order.commodityNo}</td>
-					<td>${order.unit}</td>
-					<td>${order.commodityNum}</td>
-					<td>¥${order.inPrice}</td>
-					<td>¥${order.totalMoney}</td>
-				</tr>
-				</c:forEach>
-			</table>
-		</div>
-		<div class="info-div">
-			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-3">商品金额:</label>
-				<div class="formControls col-xs-8 col-sm-4">
-					<span>¥${orders.totalPrice}</span>
-				</div>
-			</div>
-			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-3">运费:</label>
-				<div class="formControls col-xs-8 col-sm-4">
-					<span>¥${orders.freight}</span>
-				</div>
-			</div>
-			<c:if test="${orders.payCode=='CL'}">
-			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-3">账期金额:</label>
-				<div class="formControls col-xs-8 col-sm-4">
-					<span>¥${orders.payment}</span>
-				</div>
-			</div>
-			</c:if>
-			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-3">付款金额:</label>
-				<div class="formControls col-xs-8 col-sm-4">
-					<span>¥${orders.orderPrice}</span>
-				</div>
-			</div>
-		</div>
+        <div class="info-div">
+            <div class="row cl">
+                <div class="col-xs-3 col-sm-2">
+                    <h4>配送信息</h4>
+                </div>
+            </div>
+            <table>
+                <tr>
+                    <td>商品名称</td>
+                    <td>商品条码</td>
+                    <td>规格</td>
+                    <td>数量</td>
+                    <td>单价</td>
+                    <td>总金额</td>
+                </tr>
+                <c:forEach items="${orderDetails}" var="order" varStatus="n">
+                    <tr>
+                        <td>${order.commodityName}</td>
+                        <td>${order.commodityNo}</td>
+                        <td>${order.unit}</td>
+                        <td>${order.commodityNum}</td>
+                        <td>¥${order.inPrice}</td>
+                        <td>¥${order.totalMoney}</td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </div>
+        <div class="info-div">
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">商品金额:</label>
+                <div class="formControls col-xs-8 col-sm-4">
+                    <span>¥${orders.totalPrice}</span>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">运费:</label>
+                <div class="formControls col-xs-8 col-sm-4">
+                    <span>¥${orders.freight}</span>
+                </div>
+            </div>
+            <c:if test="${orders.payCode=='CL'}">
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-3">账期金额:</label>
+                    <div class="formControls col-xs-8 col-sm-4">
+                        <span>¥${orders.payment}</span>
+                    </div>
+                </div>
+            </c:if>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">付款金额:</label>
+                <div class="formControls col-xs-8 col-sm-4">
+                    <span>¥${orders.orderPrice}</span>
+                </div>
+            </div>
+        </div>
 
-	</div>
+    </div>
 </div>
 <script type="text/javascript">
-  /*  var pageTable;
-    $(document).ready(function () {
-        var aoColumns = [
-            {
-                "mData": "mobilePhone",
-                "bSortable" : false,
-                "sClass": "text-c",
-                "defaultContent": ""
-            },
-            {
-                "mData": "storeName",
-                "bSortable" : false,
-                "sClass": "text-c",
-                "defaultContent": ""
-            },
-
-            {
-                "mData": "userName",
-                "bSortable" : false,
-                "sClass": "text-c",
-                "defaultContent": ""
-            },
-            {
-                "mData": "phone",
-                "bSortable" : false,
-                "sClass": "text-c",
-                "defaultContent": ""
-            },
-            {
-                "mData": "status",
-                "bSortable" : false,
-                "sClass": "text-c",
-                "defaultContent": ""
-            },
-            /!*  {
-                  "sDefaultContent": "首推时间",
-                  "bSortable": false,
+    /*  var pageTable;
+      $(document).ready(function () {
+          var aoColumns = [
+              {
+                  "mData": "mobilePhone",
+                  "bSortable" : false,
                   "sClass": "text-c",
+                  "defaultContent": ""
+              },
+              {
+                  "mData": "storeName",
+                  "bSortable" : false,
+                  "sClass": "text-c",
+                  "defaultContent": ""
+              },
+
+              {
+                  "mData": "userName",
+                  "bSortable" : false,
+                  "sClass": "text-c",
+                  "defaultContent": ""
+              },
+              {
+                  "mData": "phone",
+                  "bSortable" : false,
+                  "sClass": "text-c",
+                  "defaultContent": ""
+              },
+              {
+                  "mData": "status",
+                  "bSortable" : false,
+                  "sClass": "text-c",
+                  "defaultContent": ""
+              },
+              /!*  {
+                    "sDefaultContent": "首推时间",
+                    "bSortable": false,
+                    "sClass": "text-c",
+                    "bSearchable": false,
+                    "mRender": function (data, type, row) {
+                        if (row.createTime == null){
+                            return "";
+                        }
+                        return formatDate(row.createTime * 1000, "yyyy-MM-dd hh:mm:ss")
+                    }
+                },*!/
+              {
+                  "sDefaultContent": "操作",
+                  "bSortable" : false,
+                  "sClass": "td-manage text-c",
                   "bSearchable": false,
-                  "mRender": function (data, type, row) {
-                      if (row.createTime == null){
-                          return "";
-                      }
-                      return formatDate(row.createTime * 1000, "yyyy-MM-dd hh:mm:ss")
-                  }
-              },*!/
-            {
-                "sDefaultContent": "操作",
-                "bSortable" : false,
-                "sClass": "td-manage text-c",
-                "bSearchable": false,
-                "mRender": function(data, type, row) {
-                    //查看
-                    var toQuery = "<a title=\"查看\" href=\"javascript:;\" onclick=\"user_query('查看','${context_root}/system/toMerchantQuery.action?userId=" + row.userId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\">查看</a>";
+                  "mRender": function(data, type, row) {
+                      //查看
+                      var toQuery = "<a title=\"查看\" href=\"javascript:;\" onclick=\"user_query('查看','${context_root}/system/toMerchantQuery.action?userId=" + row.userId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\">查看</a>";
                     //禁用
                     var toForbidden = "<a title=\"禁用\" href=\"javascript:;\" onclick=\"user_forbidden(this,\'" + row.userId + "\')\" class=\"ml-5\" style=\"text-decoration:none\"><i class=\"Hui-iconfont\">&#xe6e2;</i></a>";
                     //账户余额
@@ -228,8 +232,6 @@
     });*/
 
 
-
-
     function statusTools(row) {
         if (row.locked == '0') {
             return "<a style=\"text-decoration:none\" onClick=\"user_stop(this,\'" + row.userId + "\')\" href=\"javascript:;\" title=\"停用\"><i class=\"Hui-iconfont\">&#xe631;</i></a>";
@@ -239,44 +241,44 @@
     }
 
     function query() {
-        var timeType=$("#timeTypeSelect option:selected").val();
+        var timeType = $("#timeTypeSelect option:selected").val();
 
         var beginTime = $("#beginTime").val();
 
         var endTime = $("#endTime").val();
 
-        var source = $("#sourceId option:selected" ).val();
+        var source = $("#sourceId option:selected").val();
 
         var type = $("#typeSelect").val();
 
         var status = $("#statusSelect").val();
 
-        var frontOrApp= $("#productTypeSelect option:selected").val();
-        var phone=$("#search").val();
+        var frontOrApp = $("#productTypeSelect option:selected").val();
+        var phone = $("#search").val();
         //var jsonObject = '{\"beginTime\":\"' + beginTime + '\",\"endTime\":\"' + endTime + '\",\"source\":\"' + source + '\",\"type\":\"' + type + '\",\"status\":\"' + status + '\",\"phone\":\"' + phone + '\"}';
-        pageTable.fnSettings().sAjaxSource =encodeURI("${context_root}/system/dataList.action?beginTime=" + beginTime+"&endTime="+endTime+"&source="+source+"&type="+type+"&status="+status+"&phone="+phone+"&timeType="+timeType+"&frontOrApp="+frontOrApp);
+        pageTable.fnSettings().sAjaxSource = encodeURI("${context_root}/system/dataList.action?beginTime=" + beginTime + "&endTime=" + endTime + "&source=" + source + "&type=" + type + "&status=" + status + "&phone=" + phone + "&timeType=" + timeType + "&frontOrApp=" + frontOrApp);
         pageTable.fnClearTable(0);
         pageTable.fnDraw();
 
     }
 
     function excle() {
-        var timeType=$("#timeTypeSelect option:selected").val();
+        var timeType = $("#timeTypeSelect option:selected").val();
 
         var beginTime = $("#beginTime").val();
 
         var endTime = $("#endTime").val();
 
-        var source = $("#sourceId option:selected" ).val();
+        var source = $("#sourceId option:selected").val();
 
         var type = $("#typeSelect").val();
 
         var status = $("#statusSelect").val();
 
-        var frontOrApp= $("#productTypeSelect option:selected").val();
-        var phone=$("#search").val();
+        var frontOrApp = $("#productTypeSelect option:selected").val();
+        var phone = $("#search").val();
 
-        window.location.href = encodeURI("${context_root}/system/datacountExcelPoiList.action?beginTime=" + beginTime+"&endTime="+endTime+"&source="+source+"&type="+type+"&status="+status+"&phone="+phone+"&timeType="+timeType+"&frontOrApp="+frontOrApp);
+        window.location.href = encodeURI("${context_root}/system/datacountExcelPoiList.action?beginTime=" + beginTime + "&endTime=" + endTime + "&source=" + source + "&type=" + type + "&status=" + status + "&phone=" + phone + "&timeType=" + timeType + "&frontOrApp=" + frontOrApp);
 
     }
 
@@ -365,6 +367,7 @@
             });
         });
     }
+
     /** 时间格式化 */
     function formatDate(date, pattern) {
         var oldDate = new Date(date);

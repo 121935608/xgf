@@ -295,12 +295,12 @@
                     }
                     // 审核
                     var toAuditing = ""
-                    if (row.orderStatus == 6) {
+                    if (row.orderStatus == 6 && row.confirmOrder == 0) {
                         toAuditing = "<a title=\"审核\" href=\"javascript:;\" onclick=\"order_auditing('审核','${context_root}/order/toAuditingInfo.action?orderNumber=" + row.orderNumber + "','1000','700')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>审核</span></a>";
                     }
                     // 确认出库
                     var toComfirmOrder = "";
-                    if (row.orderStatus == 2) {
+                    if (row.orderStatus == 2 && row.confirmOrder == 0) {
                         toComfirmOrder = "<a title=\"确认发货\" href=\"javascript:;\" onclick=\"order_confirmOrder('" + row.orderNumber + "')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>确认发货</span></a>";
                     }
                     //对账
@@ -421,9 +421,11 @@
                 dataType: "json",
                 success: function (data) {
                     if (data.s == true) {
-                        parent.layer.msg(data.m, {icon: 6, time: 1000});
+                        parent.layer.msg(data.m, {icon: 6});
+                        window.location.reload();
                     } else {
                         parent.layer.alert(data.m, {icon: 2, title: "系统提示"});
+                        window.location.reload();
                     }
                 },
             });

@@ -98,4 +98,6 @@ public interface IVirtualOrderService {
     int updateOrderDetailComNum(OrderDetail orderDetail);
 
     int updateConfirmOrder(Order order);
+
+    int cancelOrderDetail(OrderDetail orderDetail);
 }

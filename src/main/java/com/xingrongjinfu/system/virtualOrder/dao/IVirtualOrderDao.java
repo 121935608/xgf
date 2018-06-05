@@ -125,4 +125,6 @@ public interface IVirtualOrderDao {
     int updateOrderDetailComNum(OrderDetail orderDetail);
 
     int updateConfirmOrder(Order order);
+
+    int cancelOrderDetail(OrderDetail orderDetail);
 }

@@ -13,7 +13,7 @@ package com.xingrongjinfu.system.order.model;
 import java.util.Date;
 
 /**
- * 〈一句话功能简述〉<br> 
+ * 〈一句话功能简述〉<br>
  * 〈〉
  *
  * @author zxuser
@@ -22,20 +22,30 @@ import java.util.Date;
  */
 public class OrderDetail {
 
-    private String orderDetailId;
-    private String orderNumber;
-    private String commodityId;
+    private String  orderDetailId;
+    private String  orderNumber;
+    private String  commodityId;
     private Integer commodityNum;
-    private String commodityName;
-    private Date addTime;
-    private Double inPrice;
-    private Double salePrice;
-    private Double taxRate;
-    private String unit;
-    private String imgMain;
-    private Double totalPrice;
-    private String commodityNo;
-    private Double totalMoney;
+    private String  commodityName;
+    private Date    addTime;
+    private Double  inPrice;
+    private Double  salePrice;
+    private Double  taxRate;
+    private String  unit;
+    private String  imgMain;
+    private Double  totalPrice;
+    private String  commodityNo;
+    private Double  totalMoney;
+
+    private Integer status; // 订单明细状态
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 
     public String getOrderDetailId() {
         return orderDetailId;

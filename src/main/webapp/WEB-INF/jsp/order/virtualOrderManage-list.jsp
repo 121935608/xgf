@@ -295,12 +295,12 @@
                     }
                     // 审核
                     var toAuditing = ""
-                    if (row.orderStatus == 6) {
+                    if (row.orderStatus == 6 && row.confirmOrder == 0) {
                         toAuditing = "<a title=\"审核\" href=\"javascript:;\" onclick=\"order_auditing('审核','${context_root}/virtualOrder/toAuditingInfo.action?orderNumber=" + row.orderNumber + "','1000','700')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>审核</span></a>";
                     }
                     // 确认出库
                     var toComfirmOrder = "";
-                    if (row.orderStatus == 2) {
+                    if (row.orderStatus == 2 && row.confirmOrder == 0) {
                         toComfirmOrder = "<a title=\"确认发货\" href=\"javascript:;\" onclick=\"order_confirmOrder('" + row.orderNumber + "')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>确认发货</span></a>";
                     }
                     //对账
@@ -315,7 +315,7 @@
 
     function virtualOrder() {
         var orderNumber = "TOR180601165251246";
-        pageTable.fnSettings().sAjaxSource = encodeURI("${context_root}/order/TovirtualOrderAuditing.action?orderNumber=" + orderNumber);
+        pageTable.fnSettings().sAjaxSource = encodeURI("${context_root}/virtualOrder/TovirtualOrderAuditing.action?orderNumber=" + orderNumber);
         pageTable.fnClearTable(0);
         pageTable.fnDraw();
     }
@@ -324,7 +324,7 @@
     function pay_edit(obj, id) {
         parent.layer.confirm('确认已收款吗？', {icon: 3, title: '提示'}, function (index) {
             $.ajax({
-                url: "${context_root}/order/payOrder.action?orderNumber=" + id,
+                url: "${context_root}/virtualOrder/payOrder.action?orderNumber=" + id,
                 type: 'post',
                 async: true,
                 cache: false,
@@ -333,7 +333,7 @@
                     if (data.s == true) {
                         $(obj).parents("tr").remove();
                         parent.layer.msg('已收款!', {icon: 1, time: 1000});
-                        window.location.reload();
+                        window.location.reload(true);
                     } else {
                         parent.layer.msg("操作失败", {icon: 2, title: "系统提示"});
                     }
@@ -346,7 +346,7 @@
     //发货
     function sendTools(row) {
         if (row.orderStatus == '2') {
-            return "<a style=\"text-decoration:none\" onclick=\"order_send('发送','${context_root}/order/toSendOrder.action?orderNumber=" + row.orderNumber + "','','510')\" href=\"javascript:;\" title=\"发送\"><span style='color: #0e90d2 '>发送</span></a>";
+            return "<a style=\"text-decoration:none\" onclick=\"order_send('发送','${context_root}/virtualOrder/toSendOrder.action?orderNumber=" + row.orderNumber + "','','510')\" href=\"javascript:;\" title=\"发送\"><span style='color: #0e90d2 '>发送</span></a>";
         } else {
             return "<a style=\"cursor: default;\" title=\"发送\">发送</a>";
         }
@@ -368,7 +368,7 @@
     //打印配送单
     function printTools(row) {
         if (row.orderStatus != 1) {
-            return "<a style=\"text-decoration:none\" onclick=\"order_print('打印配送单','${context_root}/order/toPrintOrder.action?orderNumber=" + row.orderNumber + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>打印配送单</span></a>";
+            return "<a style=\"text-decoration:none\" onclick=\"order_print('打印配送单','${context_root}/virtualOrder/toPrintOrder.action?orderNumber=" + row.orderNumber + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>打印配送单</span></a>";
         } else {
             return "<a style=\"cursor: default;\" title=\"打印配送单\">打印配送单</a>";
         }
@@ -421,7 +421,8 @@
                 dataType: "json",
                 success: function (data) {
                     if (data.s == true) {
-                        parent.layer.msg(data.m, {icon: 6, time: 1000});
+                        parent.layer.msg(data.m, {icon: 6});
+                        window.parent.location.reload();
                     } else {
                         parent.layer.alert(data.m, {icon: 2, title: "系统提示"});
                     }
@@ -435,7 +436,7 @@
     function order_confirm(obj, orderNumber) {
         parent.layer.confirm('确认要停用吗？', {icon: 3, title: '确认收货后开始计算贷款日期'}, function (index) {
             $.ajax({
-                url: "${context_root}/order/toOrderConfirm.action?orderNumber=" + orderNumber + "&orderStatus=4",
+                url: "${context_root}/virtualOrder/toOrderConfirm.action?orderNumber=" + orderNumber + "&orderStatus=4",
                 type: 'post',
                 async: true,
                 cache: false,

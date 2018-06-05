@@ -896,8 +896,8 @@
                         layer.msg('审核成功');
                         /*layer_close();
                         window.parent.location.reload();*/
-                        parent.layer.msg("保存成功,正在刷新数据请稍后……", {icon: 1, time: 1000, shade: [0.1, '#fff']}, function () {
-                            parent.window.location.reload();
+                        parent.layer.msg("保存成功,正在刷新数据请稍后……", {icon: 1, shade: [0.1, '#fff']}, function () {
+                            window.parent.location.reload();
                         });
                         layer_close();
                     } else {
@@ -909,6 +909,5 @@
         })
         ;
     }
-
 </script>
 </html>

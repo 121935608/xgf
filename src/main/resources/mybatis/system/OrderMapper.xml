@@ -194,7 +194,7 @@
     <!-- 通过订单编号,商品条码查询唯一订单明细 -->
     <select id="findOrderDetail" parameterType="map" resultMap="OrderDetailResult">
         SELECT d.orderDetailId,d.commodityName,d.commodityNo,d.unit,d.commodityNum,d.salePrice/100
-        inPrice,d.orderNumber,d.commodityId
+        inPrice,d.orderNumber,d.commodityId,d.status
         FROM t_order_detail d
         <where>
             <if test="orderNumber !=null and orderNumber != ''">
@@ -244,6 +244,7 @@
         <if test="unit !=null and unit !='' ">unit,</if>
         <if test="imgMain !=null and imgMain !='' ">imgMain,</if>
         <if test="totalPrice !=null and totalPrice !='' ">totalPrice,</if>
+        <if test="status !=null and status !='' ">status,</if>
         addTime
         )VALUES (
         #{orderDetailId},#{orderNumber},#{commodityId},#{commodityNo},
@@ -255,6 +256,7 @@
         <if test="unit !=null and unit !='' ">#{unit},</if>
         <if test="imgMain !=null and imgMain !='' ">#{imgMain},</if>
         <if test="totalPrice !=null and totalPrice !='' ">#{totalPrice},</if>
+        <if test="status !=null and status !='' ">#{status},</if>
         sysdate()
         )
     </insert>
@@ -276,6 +278,10 @@
 
     <update id="updateConfirmOrder" parameterType="Orders">
         update t_order set confirmOrder=#{confirmOrder} where orderNumber=#{orderNumber}
+    </update>
+
+    <update id="cancelOrderDetail" parameterType="OrderDetail">
+        update t_order_detail set status=#{status} where orderNumber=#{orderNumber}
     </update>
 
 </mapper> 

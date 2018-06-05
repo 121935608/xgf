@@ -128,4 +128,9 @@ public class OrderService implements IOrderService {
   public int updateConfirmOrder(Order order) {
     return orderDao.updateConfirmOrder(order);
   }
+
+    @Override
+    public void cancelOrderDetail(OrderDetail orderDetail) {
+        orderDao.cancelOrderDetail(orderDetail);
+    }
 }
