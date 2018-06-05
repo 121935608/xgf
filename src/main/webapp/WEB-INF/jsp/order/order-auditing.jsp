@@ -622,7 +622,8 @@
     function sumMoney(obj) {
         var num = $(obj).text();
         var MoneyNode = $(obj).parent().children("td").eq(8);
-        MoneyNode.html((num * MoneyNode.html()).toFixed(1));
+        var saleNode = $(obj).parent().children("td").eq(4);
+        MoneyNode.html((num * saleNode.html()).toFixed(1));
 
         // 获取总金额
         var tableNode = $(obj).parent().parent().parent();
@@ -865,7 +866,8 @@
             selectOrder[i] = obj;
             selectOrderSize++;
         })
-        var checkedInputs = $("input[type='checkbox']").find(":checked");
+
+        var checkedInputs = $("input[type='checkbox']:checked");
         if (selectOrderSize == 0) {
             layer.msg("该订单没有正常订单明细!", {time: 1000});
             return;

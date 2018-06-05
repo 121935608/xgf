@@ -479,7 +479,7 @@ public class OrderController extends BaseController {
                 orderDetail.setCommodityNum(commodityNum);
                 orderDetail.setCommodityName((String) jsonObj.get("commodityName"));
                 orderDetail.setUnit((String) jsonObj.get("unit"));
-                orderDetail.setSalePrice(Double.valueOf((String) jsonObj.get("salePrice")));
+                orderDetail.setSalePrice(Double.valueOf((String) jsonObj.get("salePrice")) * 100);
                 orderDetail.setTotalMoney(Double.valueOf((String) jsonObj.get("totalMoney")));
                 orderDetail.setTaxRate(product.getTaxRate());
                 orderDetail.setImgMain(product.getImgMain());
@@ -638,7 +638,7 @@ public class OrderController extends BaseController {
         logger.info("==========推送订单到库存,参数为:{}", stringObjectHashMap);
         // 推送到库存
         String resultStr =
-                HttpClientUtil.httpPostRequest(OrderConstant.STORAGE_URL, stringObjectHashMap);
+                HttpClientUtil.httpPostRequest("http://192.168.0.111:8080/app/order.action", stringObjectHashMap);
         logger.info("==========接收库存返回参数:{}", resultStr);
         if (!StringUtil.nullOrBlank(resultStr)) {
             return pubStorage(order, resultStr);
