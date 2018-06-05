@@ -893,9 +893,15 @@
             success:
 
                 function (data) {
+                    var index = parent.layer.load();
                     if (data.s == true) {
                         layer.msg('审核成功');
-                        layer_close();
+                        /*layer_close();
+                        window.parent.location.reload();*/
+                        parent.layer.close(index);
+                        parent.layer.msg("保存成功,正在刷新数据请稍后……", {icon: 1, time: 50, shade: [0.1, '#fff']}, function () {
+                            window.parent.location.reload();
+                        });
                     } else {
                         // 如果修改失败重新加载审核页面
                         layer.msg(data.m);

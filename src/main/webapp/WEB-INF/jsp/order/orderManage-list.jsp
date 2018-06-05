@@ -301,7 +301,7 @@
                     // 确认出库
                     var toComfirmOrder = "";
                     if (row.orderStatus == 2 && row.confirmOrder == 0) {
-                        toComfirmOrder = "<a title=\"确认发货\" href=\"javascript:;\" onclick=\"order_confirmOrder('" + row.orderNumber + "')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>确认发货</span></a>";
+                        toComfirmOrder = "<a title=\"确认发货\" href=\"javascript:;\" onclick=\"order_confirmOrder(this,'" + row.orderNumber + "')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>确认发货</span></a>";
                     }
                     //对账
                     <%--var toEdit = "<a title=\"对账\" href=\"javascript:;\" onclick=\"repay_edit('对账','${context_root}/merchant/toRepayModify.action?repayId=" + row.repayId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>对账</span></a>";--%>
@@ -411,7 +411,7 @@
     }
 
     /*订单-确认出库*/
-    function order_confirmOrder(orderNumber) {
+    function order_confirmOrder(obj, orderNumber) {
         parent.layer.confirm('是否确认出库？', {icon: 3, title: '确认后将推送库存'}, function (index) {
             $.ajax({
                 url: "${context_root}/order/confirmOrder.action?orderNumber=" + orderNumber,

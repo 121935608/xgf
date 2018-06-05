@@ -422,9 +422,10 @@
                 success: function (data) {
                     if (data.s == true) {
                         parent.layer.msg(data.m, {icon: 6});
-                        window.parent.location.reload();
+                        window.location.reload();
                     } else {
                         parent.layer.alert(data.m, {icon: 2, title: "系统提示"});
+                        window.location.reload();
                     }
                 },
             });
