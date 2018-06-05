@@ -398,6 +398,8 @@ public class OrderController extends BaseController {
                     }
                     productByNo.setKfStock(productByNo.getKfStock() - oldCommodityNum);
                     productByNo.setKxdStock(productByNo.getKxdStock() + oldCommodityNum);
+                    productService.updateProductStock(productByNo);
+
                     orderAuditing.setServiceModify(oldCommodityNum);
                     orderAuditing.setModifyStatus(2);
 
@@ -711,9 +713,11 @@ public class OrderController extends BaseController {
             orderAuditing.setOrderId(orderId);
             orderAuditing.setOrderDetailId(orderDetailInfo.getOrderDetailId());
             orderAuditing.setOrderNumber(orderNumber);
-            orderAuditing.setCommodityNo(orderDetailInfo.getCommodityNo());
+            String commodityNo = orderDetailInfo.getCommodityNo();
+            orderAuditing.setCommodityNo(commodityNo);
             orderAuditing.setServiceId(serviceId);
             orderAuditing.setServiceRemark(serviceRemark);
+            Integer commodityNum = orderDetailInfo.getCommodityNum();
             List<Commodity> commodities =
                     commodityService.queryByCommodityNo(orderDetailInfo.getCommodityNo());
             // 查询所有订单明细所对应的商品
@@ -730,6 +734,17 @@ public class OrderController extends BaseController {
             // 将订单明细的状态设置为取消
             orderDetailInfo.setStatus(-1);
             orderService.updateOrderDetailStatus(orderDetailInfo);
+
+            Product product = productService.findProductInfoByNo(commodityNo);
+            // 判断商品库存是否足够
+            Integer kxdStock = product.getKxdStock();
+            if (kxdStock <= 0 || kxdStock < commodityNum) {
+                return new Message(false, "商品库存不足");
+            }
+            // 增加客服库存,减少可下单库存
+            product.setKfStock(product.getKfStock() + commodityNum);
+            product.setKxdStock(product.getKxdStock() - commodityNum);
+            productService.updateProductStock(product);
         }
 
         int updateResult = 0;

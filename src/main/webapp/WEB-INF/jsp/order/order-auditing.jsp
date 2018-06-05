@@ -312,7 +312,7 @@
     })
 
     function isPositiveInteger(s) {//是否为正整数
-        var re = /^([1-9]\d*(\.\d+)?|0)$/;
+        var re = /^-[0-9]*[1-9][0-9]*$/;
         return re.test(s)
     }
 
