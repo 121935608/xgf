@@ -628,7 +628,11 @@ public class OrderController extends BaseController {
             payWay = 1; // 线上
         }
         jsonObject.put("payWay", payWay);
-        jsonObject.put("cusremark", order.getRemark());
+        String cusremark="";
+        if(!StringUtil.nullOrBlank(order.getRemark())){
+            cusremark=order.getRemark();
+        }
+        jsonObject.put("cusremark", cusremark);
         // 添加产品信息
         jsonObject.put("products", jsonArray);
 
@@ -638,7 +642,7 @@ public class OrderController extends BaseController {
         logger.info("==========推送订单到库存,参数为:{}", stringObjectHashMap);
         // 推送到库存
         String resultStr =
-                HttpClientUtil.httpPostRequest("http://192.168.0.111:8080/app/order.action", stringObjectHashMap);
+                HttpClientUtil.httpPostRequest("http://wuhanxingrong.vicp.io:3080/stock2.0/app/order.action", stringObjectHashMap);
         logger.info("==========接收库存返回参数:{}", resultStr);
         if (!StringUtil.nullOrBlank(resultStr)) {
             return pubStorage(order, resultStr);
