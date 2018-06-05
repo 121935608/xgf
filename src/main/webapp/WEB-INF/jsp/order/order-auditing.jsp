@@ -926,7 +926,7 @@
         // 运费和总金额
         var freight = $("#freightInput").val() * 100;
         var orderPrice = (Number($("#moneyInput").val()) + Number($("#addOrderMoneyInput").val())) * 100;
-        var totalPrice = Number($("#moneyInput").val()) * 100;
+        var totalPrice = freight + orderPrice;
 
         var data = {
             "serviceRemark": $("#serviceRemark").val(),
