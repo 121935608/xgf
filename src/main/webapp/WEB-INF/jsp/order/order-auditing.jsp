@@ -238,6 +238,7 @@
     // 自动补全
     var maxcount = 0;// 表示他最大的值
     var thisCount = 0;// 初始化他框的位置
+
     /*$(function () {
          $("#autoCompleteId").autocomplete({
              source:function(request,response){
@@ -275,6 +276,36 @@
     $(function () {
         // 为运费绑定失焦事件
         $("#freightInput").blur(function () {
+            if (!isPositiveInteger($(this).val())) {
+                layer.msg("参数不合法");
+                $("#freightInput").val($("#freightHiddenInput").val());
+            }
+            //var oldValue = parseFloat($("#moneyHiddenInput").val());
+            var newFreiValue = parseFloat($("#freightInput").val());
+            // 获取
+            var sum = addAllMoney("orderTable");
+            $("#moneyInput").val((sum + newFreiValue).toFixed(1));
+        });
+
+        // 为总共费用绑定失焦事件
+        $("#moneyInput").blur(function () {
+            if (!isPositiveInteger($(this).val())) {
+                layer.msg("参数不合法");
+                $("#moneyInput").val($("#moneyHiddenInput").val());
+            }
+            //var oldValue = parseFloat($("#moneyHiddenInput").val());
+            var newFreiValue = parseFloat($("#freightInput").val());
+            // 获取
+            var sum = addAllMoney("orderTable");
+            $("#moneyInput").val((sum + newFreiValue).toFixed(1));
+        });
+
+        // 未添加订单总金额绑定失焦事件
+        $("#freightInput").blur(function () {
+            if (!isPositiveInteger($(this).val())) {
+                layer.msg("参数不合法");
+                $("#freightInput").val($("#freightHiddenInput").val());
+            }
             //var oldValue = parseFloat($("#moneyHiddenInput").val());
             var newFreiValue = parseFloat($("#freightInput").val());
             // 获取
@@ -282,6 +313,12 @@
             $("#moneyInput").val((sum + newFreiValue).toFixed(1));
         });
     })
+
+    function isPositiveInteger(s) {//是否为正整数
+        var re = /^([1-9]\d*(\.\d+)?|0)$/;
+        return re.test(s)
+    }
+
     // 基本路径
     var baseOrderUrl = "${context_root}/order";
     var baseComUrl = "${context_root}/commodity";
@@ -509,6 +546,8 @@
                                 $("#addOrderMoneyInput").val((comObj.salePrice / 100).toFixed(1));
                             }
 
+                            var allMoney = addAllMoney("addTable");
+                            $("#addOrderMoneyInput").val(allMoney.toFixed(1));
                         });
                         //移动对象
                         $("#autoCompleteHidden" + rowsNum + " li").hover(function () {
@@ -799,6 +838,8 @@
         if ($("#addTable").find("tr:gt(0)").size() <= 0) {
             $("#addOrderMoneyDiv").hide();
         }
+        var allMoney = addAllMoney("addTable");
+        $("#addOrderMoneyInput").val(allMoney.toFixed(1));
     }
 
     // 删除表格第一行以外的所有行
@@ -885,6 +926,7 @@
         // 运费和总金额
         var freight = $("#freightInput").val() * 100;
         var orderPrice = (Number($("#moneyInput").val()) + Number($("#addOrderMoneyInput").val())) * 100;
+        var totalPrice = Number($("#moneyInput").val()) * 100;
 
         var data = {
             "serviceRemark": $("#serviceRemark").val(),
@@ -911,7 +953,8 @@
                 "addOrderTable": JSON.stringify(addOrderTable),
                 "freight": freight,
                 "orderPrice": orderPrice,
-                "orderNumber": "${orders.orderNumber}"
+                "orderNumber": "${orders.orderNumber}",
+                "totalPrice": totalPrice
             },
             async: true,
             cache:

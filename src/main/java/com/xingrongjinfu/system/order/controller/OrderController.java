@@ -385,11 +385,11 @@ public class OrderController extends BaseController {
                 if (orderDetail == null) {
                     return new Message(false, "不存在改订单明细");
                 }
+                // 如果商品数为空,代表是取消商品
+                Integer oldCommodityNum = orderDetail.getCommodityNum();
+                // 修改客服库存
+                Product productByNo = productService.findProductInfoByNo(commodityNo);
                 if (commodityNum == null) {
-                    // 如果商品数为空,代表是取消商品
-                    Integer oldCommodityNum = orderDetail.getCommodityNum();
-                    // 修改客服库存
-                    Product productByNo = productService.findProductInfoByNo(commodityNo);
                     if (productByNo.getKfStock() < 0) {
                         return new Message(false, "客服库存数异常"); // 客服库存数小于支付商品数量,则下单时库存数量操作异常
                     }
@@ -420,6 +420,14 @@ public class OrderController extends BaseController {
                         if (orderService.updateOrderDetailComNum(orderDetail) < 0) {
                             return new Message(false, "更新订单明细商品数量失败");
                         }
+                        // 更新商品可下单库存
+                        Integer kxdStock = productByNo.getKxdStock();
+                        Integer diffStock = modifiedNum - orderDetail.getCommodityNum();
+                        if (diffStock > kxdStock) {
+                            return new Message(false, "可下单库存不足");
+                        }
+                        productByNo.setKxdStock(kxdStock + diffStock);
+                        productService.updateProductStock(productByNo);
                     }
                 }
 
@@ -572,6 +580,10 @@ public class OrderController extends BaseController {
         String orderNumber = order.getOrderNumber();
         List<OrderDetail> orderDetailInfos = orderService.findOrderDetailInfoByNo(orderNumber);
         for (OrderDetail orderDetail : orderDetailInfos) {
+            // 判断是否是取消订单
+            if (orderDetail.getStatus() == -1) {
+                continue;
+            }
             // 封装products
             JSONObject object = new JSONObject();
             object.put("barCode", orderDetail.getCommodityNo());

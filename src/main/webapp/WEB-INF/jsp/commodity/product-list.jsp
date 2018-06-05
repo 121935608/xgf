@@ -36,7 +36,7 @@
        </span>
 		<input type="text" class="input-text" style="width:250px" placeholder="编号|商品名称|商品条码" id="commodityName" name="commodityName">
 		<button type="button" class="btn btn-success radius" onclick="query()"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
-		<button type="button" class="btn btn-success radius" onclick="export_excel1()"><i class="Hui-iconfont">&#xe665;</i> 导出</button>
+		<%--<button type="button" class="btn btn-success radius" onclick="export_excel1()"><i class="Hui-iconfont">&#xe665;</i> 导出</button>--%>
 	</div>
 	<div class="mt-20">
 	<table class="table table-border table-bordered table-hover table-bg table-sort">

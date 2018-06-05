@@ -121,7 +121,7 @@
     <select id="findOrderDetailInfoByNo" parameterType="String" resultMap="OrderDetailResult">
 		SELECT d.orderDetailId,d.commodityName,d.commodityNo,d.unit,d.commodityNum,d.salePrice inPrice,d.salePrice,d.totalPrice,d.orderNumber,d.commodityId,d.status
 		FROM t_order_detail d
-		WHERE d.orderNumber=#{orderNumber}
+		WHERE d.orderNumber=#{orderNumber} AND d.status = 1
 	</select>
 
     <update id="updateOrderInfo" parameterType="Orders">
@@ -285,6 +285,6 @@
     </update>
 
     <update id="updateOrderMoney" parameterType="Orders">
-        update t_order set orderPrice=#{orderPrice} where orderNumber=#{orderNumber}
+        update t_order set orderPrice=#{orderPrice},freight=#{freight},totalPrice=#{totalPrice} where orderNumber=#{orderNumber}
     </update>
 </mapper> 
