@@ -122,7 +122,7 @@
                     <td>总金额</td>
                 </tr>
                 <c:forEach items="${orderDetails}" var="order" varStatus="n">
-                    <c:if test="${order.status != -1}">
+                    <c:if test="${order.status != -1 or (orders.orderStatus == -1 and order.status == -1)}">
                         <tr>
                             <td>${order.commodityName}</td>
                             <td>${order.commodityNo}</td>

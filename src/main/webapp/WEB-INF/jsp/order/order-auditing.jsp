@@ -312,7 +312,7 @@
     })
 
     function isPositiveInteger(s) {//是否为正整数
-        var re = /^-[0-9]*[1-9][0-9]*$/;
+        var re = /^\d+(\.\d+)?$/;
         return re.test(s)
     }
 
@@ -922,7 +922,8 @@
 
         // 运费和总金额
         var freight = $("#freightInput").val() * 100;
-        var totalPrice = (Number($("#moneyInput").val()) + Number($("#addOrderMoneyInput").val())) * 100;
+        var orderTableMoney = addAllMoney("orderTable");
+        var totalPrice = ( orderTableMoney + Number($("#addOrderMoneyInput").val())) * 100;
         var orderPrice = freight + totalPrice;
 
         var data = {
