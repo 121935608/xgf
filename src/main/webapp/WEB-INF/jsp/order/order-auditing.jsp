@@ -170,9 +170,9 @@
     </div>
 
     <%-- 按钮 --%>
-    <div id="add" class="row cl">
+    <div id="add" class="row cl" style="margin-top:10px">
         <div class="col-xs-1.5 col-sm-2">
-            <input class="btn btn-primary radius" type="button" id="addInput" onClick="addOrder()"
+            <input class="btn btn-primary radius" type="button" id="addInput" <%--onClick="addOrder()"--%>
                    value="&nbsp;&nbsp;添加&nbsp;&nbsp;">
         </div>
     </div>
@@ -216,17 +216,17 @@
     </div>
 
     <%-- 操作按钮 --%>
-    <div id="add" class="row cl">
+    <div id="add" class="row cl" style="margin-top:10px">
         <div class="col-xs-offset-3 col-xs-2 col-sm-2">
-            <input class="btn btn-primary radius" type="button" id="submitBut" onClick="submitModifyOrder()"
+            <input class="btn btn-primary radius" type="button" id="submitModifiedBut" <%--onClick="submitModifyOrder()"--%>
                    value="&nbsp;&nbsp;提交审核&nbsp;&nbsp;"/>
         </div>
         <div class="col-xs-2 col-sm-2">
-            <input class="btn btn-primary radius" type="button" id="cancelBut" onClick="cancelAllOrderFn()"
+            <input class="btn btn-primary radius" type="button" id="cancelOrderBut" <%--onClick="cancelAllOrderFn()"--%>
                    value="&nbsp;&nbsp;整单取消&nbsp;&nbsp;"/>
         </div>
         <div class="col-xs-2 col-sm-2">
-            <input class="btn btn-primary radius" type="button" id="closeBut" onClick="closeWin()"
+            <input class="btn btn-primary radius" type="button" id="closeOrderBut" <%--onClick="closeWin()"--%>
                    value="&nbsp;&nbsp;关闭&nbsp;&nbsp;"/>
         </div>
     </div>
@@ -237,41 +237,21 @@
     var maxcount = 0;// 表示他最大的值
     var thisCount = 0;// 初始化他框的位置
 
-    /*$(function () {
-         $("#autoCompleteId").autocomplete({
-             source:function(request,response){
-                 $.ajax({
-                     type:"POST",
-                     url:baseOrderUrl+"/findAllCommodity.action",
-                     dataType : "json",
-                     cache : true,
-                     async : false,
-                     data : {
-                         "commodityName" : encodeURI($(this).val())
-                     },
-                     success : function(json) {
-                         var data = eval(json);//json数组
-
-                         response($.map(data,function(item){
-                             var name = item.name;
-                             var id = item.id;
-                             return {
-                                 label:item.code+'--'+ item.name,//下拉框显示值
-                                 value:item.name,//选中后，填充到下拉框的值
-                                 id:item.id//选中后，填充到id里面的值
-                             }
-                         }));
-                     }
-                 });
-             },
-             delay: 500,//延迟500ms便于输入
-             select : function(event, ui) {
-                 $("#statId").val(ui.item.id);
-             }
-         });
-
-     })*/
     $(function () {
+        // 为按钮绑定点击事件
+        $("#submitModifiedBut").unbind("click").bind("click", function () {
+            submitModifyOrder();
+        });
+        $("#cancelOrderBut").unbind("click").bind("click", function () {
+            cancelAllOrderFn();
+        });
+        $("#closeOrderBut").unbind("click").bind("click", function () {
+            closeWin();
+        });
+        $("#addInput").unbind("click").bind("click", function () {
+            addOrder();
+        });
+
         // 为运费绑定失焦事件
         $("#freightInput").blur(function () {
             if (!isPositiveInteger($(this).val())) {
@@ -298,7 +278,7 @@
             $("#moneyInput").val((sum + newFreiValue).toFixed(1));
         });
 
-        // 未添加订单总金额绑定失焦事件
+        // 为添加订单总金额绑定失焦事件
         $("#addOrderMoneyInput").blur(function () {
             if (!isPositiveInteger($(this).val())) {
                 layer.msg("参数不合法");
@@ -318,8 +298,8 @@
     var baseOrderUrl = "${context_root}/order";
     var baseComUrl = "${context_root}/commodity";
     // 当前用户id
-    var serviceId = ${currentUser.userId};
-    var orderNumber = "${orders.orderNumber}"
+    var serviceId = "${currentUser.userId}";
+    var orderNumber = "${orders.orderNumber}";
     var orderId = "${orders.orderId}";
 
     // 获取到当前用户得信息
@@ -929,7 +909,7 @@
         var data = {
             "serviceRemark": $("#serviceRemark").val(),
             "cancelOrder": JSON.stringify(selectOrder),
-            "serviceId":  ${currentUser.userId},
+            "serviceId":  "${currentUser.userId}",
             "orderId": orderId,
             "addOrderTable": addOrderTable,
             "freight": freight,
