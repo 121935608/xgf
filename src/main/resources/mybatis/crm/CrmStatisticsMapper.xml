@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		LEFT JOIN (
 			 SELECT storeId 
 					FROM t_order o
-	WHERE o.orderTime >= #{timeBegin} AND <![CDATA[o.orderTime <= #{timeEnd}]]>
+	WHERE o.`status` = 1 AND o.orderStatus NOT IN ('-1','1') AND  o.orderTime >= #{timeBegin} AND <![CDATA[o.orderTime <= #{timeEnd}]]>
 					GROUP BY storeId
 		) ta ON s.storeId = ta.storeId
 	WHERE s.addTime >= #{timeBegin} AND <![CDATA[s.addTime <= #{timeEnd}]]>
@@ -34,28 +34,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				FROM
 					c_coupon WHERE createTime >= #{timeBegin} AND <![CDATA[createTime <= #{timeEnd}]]>
 			) t1,
-			(SELECT count(1) b FROM t_order WHERE orderTime >= #{timeBegin} AND <![CDATA[orderTime <= #{timeEnd}]]>) t2,
+			(SELECT count(1) b FROM t_order WHERE `status` = 1 AND orderStatus NOT IN ('-1','1') AND  orderTime >= #{timeBegin} AND <![CDATA[orderTime <= #{timeEnd}]]>) t2,
 			(
 				SELECT
 					count(1) a
 				FROM
 					c_coupon  WHERE createTime >= #{timeBegin1} AND <![CDATA[createTime <= #{timeEnd1}]]>
 			) t3,
-			(SELECT count(1) b FROM t_order WHERE orderTime >= #{timeBegin1} AND <![CDATA[orderTime <= #{timeEnd1}]]>) t4,
+			(SELECT count(1) b FROM t_order WHERE `status` = 1 AND orderStatus NOT IN ('-1','1') AND  orderTime >= #{timeBegin1} AND <![CDATA[orderTime <= #{timeEnd1}]]>) t4,
 			(
 				SELECT
 					count(1) a
 				FROM
 					c_coupon  WHERE createTime >= #{timeBegin2} AND <![CDATA[createTime <= #{timeEnd2}]]>
 			) t5,
-			(SELECT count(1) b FROM t_order WHERE orderTime >= #{timeBegin2} AND <![CDATA[orderTime <= #{timeEnd2}]]>) t6,
+			(SELECT count(1) b FROM t_order WHERE `status` = 1 AND orderStatus NOT IN ('-1','1') AND  orderTime >= #{timeBegin2} AND <![CDATA[orderTime <= #{timeEnd2}]]>) t6,
 			(
 				SELECT
 					count(1) a
 				FROM
 					c_coupon  WHERE createTime >= #{timeBegin3} AND <![CDATA[createTime <= #{timeEnd3}]]>
 			) t7,
-			(SELECT count(1) b FROM t_order WHERE orderTime >= #{timeBegin3} AND <![CDATA[orderTime <= #{timeEnd3}]]>) t8
+			(SELECT count(1) b FROM t_order WHERE `status` = 1 AND orderStatus NOT IN ('-1','1') AND orderTime >= #{timeBegin3} AND <![CDATA[orderTime <= #{timeEnd3}]]>) t8
 		)
 	</select>
 </mapper> 

@@ -105,7 +105,7 @@
 </div>
 
 </div>
-<script type="text/javascript">
+<script type="text/javascript" charset="UTF-8">
 var pageTable,pageTableOne;
 $(document).ready(function(){ 
     var $wrapper = $('.tab-wrapper'),

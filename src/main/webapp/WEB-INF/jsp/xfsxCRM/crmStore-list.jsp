@@ -57,7 +57,7 @@
         </table>
     </div>
 </div>
-<script type="text/javascript">
+<script type="text/javascript" charset="UTF-8">
     var pageTable;
     $(document).ready(function(){
         var aoColumns = [

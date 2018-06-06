@@ -147,7 +147,7 @@
                 }
             }
         ];
-        var url = "${context_root}/crmUser/userCRMView.action";
+        var url = "${context_root}/crmUser/userCRMView.action?status=0";
         pageTable = _Datatable_Init(pageTable, aoColumns, url);
     });
     function updateSupervisor(supervisorIdOne){
