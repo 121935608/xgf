@@ -114,7 +114,7 @@
             SELECT userId,SUM(orderPrice)*0.01 AS monthPrice,COUNT(1) AS monthNum FROM t_order WHERE <![CDATA[DATE_SUB(CURDATE(), INTERVAL 30 DAY) <= date(orderTime)]]> AND `status` = 1 AND orderStatus !='-1' GROUP BY userId
         ) tb ON ts.userId = tb.userId
         LEFT JOIN (
-            SELECT COUNT(1) AS couponNum , storeId FROM c_coupon GROUP BY storeId
+            SELECT COUNT(1) AS couponNum , storeId FROM c_coupon WHERE auditStatus=1 GROUP BY storeId
         )AS cc ON cc.storeId=ts.storeId
         LEFT JOIN sys_supervisor sup ON sup.supervisorNum=ts.supervisorId
         WHERE ts.`status` = 1

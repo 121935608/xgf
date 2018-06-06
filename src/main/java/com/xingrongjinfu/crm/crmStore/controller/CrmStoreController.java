@@ -280,17 +280,28 @@ public class CrmStoreController extends BaseController {
                 store.put("consumptionFrequency","--");
             }else {
                 store.put("recentOrderTime",dateformat.format(order.getOrderTime()));
+
                 //补券率
-                Integer coupon =Integer.parseInt(store.get("couponNum").toString());
+                Double coupon =Double.parseDouble(store.get("couponNum").toString());
                 Integer orderNum=Integer.parseInt(store.get("totalNum").toString());
-                store.put("returnRate",((coupon/orderNum)*100)+"%");
+                if (coupon==0 || orderNum==0){
+                    store.put("returnRate","0%");
+                }else {
+                    store.put("returnRate",String.format("%.2f", ((coupon/orderNum)*100))+"%");
+                }
+
                 //消费频次
                 java.text.SimpleDateFormat   FormatDate = new   java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 java.util.Date  add  =  FormatDate.parse(String.valueOf(store.get("addTime")));//转成Date
                 Date now=new Date();
-                Integer days =(int) (( now.getTime() - add.getTime()) / (24 * 60 * 60 * 1000));
-                BigDecimal bg = new BigDecimal((double)days/orderNum).setScale(2, RoundingMode.UP);
-                store.put("consumptionFrequency",bg.doubleValue()+"");
+                double days =( now.getTime() - add.getTime()) / (24 * 60 * 60 * 1000);
+                if (days==0 && orderNum!=0){
+                    store.put("consumptionFrequency",String.format("%.2f", 1d/ orderNum) + "");
+                }else if (orderNum==0 || (days==0 && orderNum==0)){
+                    store.put("consumptionFrequency","0.0");
+                }else {
+                    store.put("consumptionFrequency",String.format("%.2f", days / orderNum)+ "");
+                }
             }
             //门店详情
             modelAndView.addObject("store", store);

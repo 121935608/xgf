@@ -45,13 +45,6 @@ public class PerformanceRankController extends BaseController {
         ModelAndView modelAndView= this.getModelAndView(PerformanceRankConstant.PERFORMANCE_RANK_PAGE);
         Supervisor supervisor=new Supervisor();
         modelAndView.addObject("supervisor",supervisor);
-        //省
-//        modelAndView.addObject("province",getProvince());
-//        //市
-//        modelAndView.addObject("category",getCategoryList());
-//        //区
-//        modelAndView.addObject("supply",getSupplyList());
-        //部门
         modelAndView.addObject("dept",getDept());
         return modelAndView;
     }
