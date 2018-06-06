@@ -851,6 +851,7 @@
 
     // 整单取消方法
     function cancelAllOrderFn() {
+        var index = parent.layer.load();
         var url = baseOrderUrl + "/cancelAllOrder.action";
         $.ajax({
             url: url,
@@ -866,12 +867,13 @@
             dataType: "json",
             contentType: "application/json;charset=utf-8",
             success: function (data) {
+                parent.layer.close(index);
                 if (data.s == true) {
-                    layer.msg("整单取消成功", {time: 1000});
-                    // 关闭窗口
-                    layer_close();
+                    parent.layer.msg("取消成功,正在刷新数据请稍后……", {icon: 1, time: 1000, shade: [0.1, '#fff']}, function () {
+                        window.parent.location.reload();
+                    });
                 } else {
-                    layer.msg("整单取消失败", {time: 1000});
+                    layer.msg(data.m, {time: 1000});
                     window.location.href = "${context_root}/order/toAuditingInfo.action";
                 }
             },
