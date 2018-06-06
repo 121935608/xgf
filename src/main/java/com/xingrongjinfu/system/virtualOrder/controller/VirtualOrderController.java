@@ -822,7 +822,7 @@ public class VirtualOrderController extends BaseController {
      * @param orderNumber
      */
     private Message pushComfirmOrderStock(String orderNumber) {
-        final String url = stockUrl + "/app/order.action"; // 配置库存地址
+        final String url = stockUrl + "/app/confirmMoney.action"; // 配置库存地址
         net.sf.json.JSONObject jsonObject = new net.sf.json.JSONObject();
         jsonObject.put("orderNo", orderNumber);
         Map map = new HashMap<>();
