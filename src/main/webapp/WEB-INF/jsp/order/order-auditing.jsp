@@ -906,17 +906,6 @@
         var totalPrice = ( orderTableMoney + Number($("#addOrderMoneyInput").val())) * 100;
         var orderPrice = freight + totalPrice;
 
-        var data = {
-            "serviceRemark": $("#serviceRemark").val(),
-            "cancelOrder": JSON.stringify(selectOrder),
-            "serviceId":  "${currentUser.userId}",
-            "orderId": orderId,
-            "addOrderTable": addOrderTable,
-            "freight": freight,
-            "orderPrice": orderPrice,
-            "orderNumber": "${orders.orderNumber}"
-        };
-
         var url = baseOrderUrl + "/orderModifySave.action";
         var index = parent.layer.load();
         // 异步请求
@@ -947,7 +936,8 @@
                     parent.layer.close(index);
                     if (data.s == true) {
                         parent.layer.msg("审核成功,正在刷新数据请稍后……", {icon: 1, time: 1000, shade: [0.1, '#fff']}, function () {
-                            window.parent.location.reload();
+                            window.parent.query();
+                            layer_close();
                         });
                     } else {
                         // 如果修改失败重新加载审核页面
