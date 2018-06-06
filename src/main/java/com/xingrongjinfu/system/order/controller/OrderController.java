@@ -730,7 +730,8 @@ public class OrderController extends BaseController {
             for (Commodity commodity : commodities) {
                 orderAuditing.setCommodityId(commodity.getCommodityId());
                 orderAuditing.setCommodityName(commodity.getCommodityName());
-                orderAuditing.setModifyStatus(3);
+                orderAuditing.setServiceModify(0); // 取消订单修改为零
+                orderAuditing.setModifyStatus(3); // 将订单设为取消状态
                 if (orderService.insertOrderAuditing(orderAuditing) <= 0) {
                     resultFlag = false;
                     return new Message(false, "整单取消订单失败");
@@ -743,9 +744,9 @@ public class OrderController extends BaseController {
 
             Product product = productService.findProductInfoByNo(commodityNo);
             // 判断商品库存是否足够
-            Integer kxdStock = product.getKxdStock();
-            if (kxdStock <= 0 || kxdStock < commodityNum) {
-                return new Message(false, "商品库存不足");
+            Integer kfStock = product.getKfStock();
+            if (kfStock <= 0 || kfStock < commodityNum) {
+                return new Message(false, "客服库存不足");
             }
             // 减少客服库存,增加可下单库存
             product.setKfStock(product.getKfStock() - commodityNum);

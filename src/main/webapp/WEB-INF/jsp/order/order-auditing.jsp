@@ -3,55 +3,55 @@
 <ys:contentHeader title="审核订单信息"/>
 <body>
 <article class="page-container">
-        <input type="hidden" name="id" value="WO-20180521-00309" id="num">
-        <%-- 订单信息 --%>
-        <div class="info-div">
-            <div class="row cl">
-                <div class="col-xs-3 col-sm-2">
-                    <h4>订单信息</h4>
-                </div>
-                <%--    <div id="modifyDiv" class="col-xs-offset-8 col-sm-offset-8 col-xs-2 col-sm-2" style="display: block">
-                        <a title="修改" href="javascript:;" onclick="modifyOrder()"><h5>修改</h5></a>
-                    </div>
-                    <div id="saveDiv" class="col-xs-offset-8 col-sm-offset-8 col-xs-2 col-sm-2" style="display: none">
-                        <a title="保存" href="javascript:;" onclick="saveOrder('${orders.orderNumber}')"><h5>保存</h5></a>
-                    </div>--%>
+    <input type="hidden" name="id" value="WO-20180521-00309" id="num">
+    <%-- 订单信息 --%>
+    <div class="info-div">
+        <div class="row cl">
+            <div class="col-xs-3 col-sm-2">
+                <h4>订单信息</h4>
             </div>
-            <%-- 第一行 --%>
-            <div class="row cl">
-                <label class="form-label col-xs-2 col-sm-2"><span class="c-red"></span>订单号:</label>
-                <div class="formControls col-xs-2 col-sm-2">
-                    <span>${orders.orderNumber}</span>
+            <%--    <div id="modifyDiv" class="col-xs-offset-8 col-sm-offset-8 col-xs-2 col-sm-2" style="display: block">
+                    <a title="修改" href="javascript:;" onclick="modifyOrder()"><h5>修改</h5></a>
                 </div>
-                <label class="form-label col-xs-2 col-sm-2"><span class="c-red"></span>下单时间:</label>
-                <div class="formControls col-xs-2 col-sm-2">
-                    <span>${orders.orderTimes}</span>
-                </div>
-                <label class="form-label col-xs-2 col-sm-2"><span class="c-red"></span>支付状态:</label>
-                <div class="formControls col-xs-2 col-sm-2">
+                <div id="saveDiv" class="col-xs-offset-8 col-sm-offset-8 col-xs-2 col-sm-2" style="display: none">
+                    <a title="保存" href="javascript:;" onclick="saveOrder('${orders.orderNumber}')"><h5>保存</h5></a>
+                </div>--%>
+        </div>
+        <%-- 第一行 --%>
+        <div class="row cl">
+            <label class="form-label col-xs-2 col-sm-2"><span class="c-red"></span>订单号:</label>
+            <div class="formControls col-xs-2 col-sm-2">
+                <span>${orders.orderNumber}</span>
+            </div>
+            <label class="form-label col-xs-2 col-sm-2"><span class="c-red"></span>下单时间:</label>
+            <div class="formControls col-xs-2 col-sm-2">
+                <span>${orders.orderTimes}</span>
+            </div>
+            <label class="form-label col-xs-2 col-sm-2"><span class="c-red"></span>支付状态:</label>
+            <div class="formControls col-xs-2 col-sm-2">
                  <span>
                     <c:if test="${orders.orderStatus eq 1}">未支付</c:if>
                     <c:if test="${orders.orderStatus ne 1}">已支付</c:if>
                  </span>
-                </div>
             </div>
-            <%-- 第二行 --%>
-            <div class="row cl">
-                <label class="form-label col-xs-2 col-sm-2"><span class="c-red"></span>支付方式:</label>
-                <div class="formControls col-xs-2 col-sm-2">
+        </div>
+        <%-- 第二行 --%>
+        <div class="row cl">
+            <label class="form-label col-xs-2 col-sm-2"><span class="c-red"></span>支付方式:</label>
+            <div class="formControls col-xs-2 col-sm-2">
                     <span>
 						<c:if test="${orders.payCode eq 'ZFB'}">支付宝</c:if>
 						<c:if test="${orders.payCode eq 'WX'}">微信</c:if>
 						<c:if test="${orders.payCode eq 'HDFK'}">货到付款</c:if>
 						<c:if test="${orders.payCode eq 'CL'}">额度支付</c:if>
 					</span>
-                </div>
-                <label class="form-label col-xs-2 col-sm-2"><span class="c-red"></span>应付金额:</label>
-                <div class="formControls col-xs-2 col-sm-2">
-                    <span>¥${orders.orderPrice}</span>
-                </div>
-                <label class="form-label col-xs-2 col-sm-2"><span class="c-red"></span>订单状态:</label>
-                <div class="formControls col-xs-2 col-sm-2">
+            </div>
+            <label class="form-label col-xs-2 col-sm-2"><span class="c-red"></span>应付金额:</label>
+            <div class="formControls col-xs-2 col-sm-2">
+                <span>¥${orders.orderPrice}</span>
+            </div>
+            <label class="form-label col-xs-2 col-sm-2"><span class="c-red"></span>订单状态:</label>
+            <div class="formControls col-xs-2 col-sm-2">
                     <span>
                         <c:if test="${orders.orderStatus eq -1}">已取消</c:if>
                         <c:if test="${orders.orderStatus eq 1}">待支付</c:if>
@@ -64,120 +64,120 @@
                         <c:if test="${orders.orderStatus eq 8}">退货中</c:if>
                         <c:if test="${orders.orderStatus eq 9}">关闭交易</c:if>
                     </span>
-                </div>
-            </div>
-            <%-- 第三行 --%>
-            <div class="row cl">
-                <label class="form-label col-xs-2 col-sm-2"><span class="c-red"></span>会员:</label>
-                <div class="formControls col-xs-2 col-sm-2">
-                    <span>${orders.userName}</span>
-                </div>
-                <label class="form-label col-xs-2 col-sm-2"><span class="c-red"></span>订货商家:</label>
-                <div class="formControls col-xs-2 col-sm-2">
-                    <span>${orders.storeName}</span>
-                </div>
-                <label class="form-label col-xs-2 col-sm-2"><span class="c-red"></span>收货人:</label>
-                <div class="formControls col-xs-2 col-sm-2">
-                    <span id="userNamesSpan" name="order.userNames">${orders.userNames}</span>
-                </div>
-            </div>
-            <%-- 第四行 --%>
-            <div class="row cl">
-                <label class="form-label col-xs-2 col-sm-2"><span class="c-red"></span>联系方式:</label>
-                <div class="formControls col-xs-2 col-sm-2">
-                    <span id="phoneSpan">${orders.phone}</span>
-                </div>
-                <label class="form-label col-xs-2 col-sm-2"><span class="c-red"></span>收货地址:</label>
-                <div class="formControls col-xs-5 col-sm-5">
-                    <span id="areaSpan">${orders.area}${orders.address}</span>
-                </div>
             </div>
         </div>
-
-        <%-- 客服备注 --%>
-        <div id="bei" class="row cl">
-            <label class="form-label col-xs-1.5 col-sm-2"><span class="c-red"></span>操作人员备注:</label>
+        <%-- 第三行 --%>
+        <div class="row cl">
+            <label class="form-label col-xs-2 col-sm-2"><span class="c-red"></span>会员:</label>
+            <div class="formControls col-xs-2 col-sm-2">
+                <span>${orders.userName}</span>
+            </div>
+            <label class="form-label col-xs-2 col-sm-2"><span class="c-red"></span>订货商家:</label>
+            <div class="formControls col-xs-2 col-sm-2">
+                <span>${orders.storeName}</span>
+            </div>
+            <label class="form-label col-xs-2 col-sm-2"><span class="c-red"></span>收货人:</label>
+            <div class="formControls col-xs-2 col-sm-2">
+                <span id="userNamesSpan" name="order.userNames">${orders.userNames}</span>
+            </div>
+        </div>
+        <%-- 第四行 --%>
+        <div class="row cl">
+            <label class="form-label col-xs-2 col-sm-2"><span class="c-red"></span>联系方式:</label>
+            <div class="formControls col-xs-2 col-sm-2">
+                <span id="phoneSpan">${orders.phone}</span>
+            </div>
+            <label class="form-label col-xs-2 col-sm-2"><span class="c-red"></span>收货地址:</label>
             <div class="formControls col-xs-5 col-sm-5">
-                <input type="text" class="input-text" value=" " id="serviceRemark" name="serviceRemark">
+                <span id="areaSpan">${orders.area}${orders.address}</span>
             </div>
         </div>
+    </div>
 
-        <%-- 商品信息 --%>
-        <div class="info-div">
-            <div class="row cl">
-                <div class="col-xs-3 col-sm-2">
-                    <h4>商品信息</h4>
-                </div>
-            </div>
-
-            <%-- 商品表格 --%>
-            <div class="mt-20">
-                <table id="orderTable" class="table table-border table-bordered table-hover table-bg table-sort">
-                    <thead>
-                    <tr class="text-c">
-                        <th width="15%">商品名称</th>
-                        <th width="15%">商品条形码</th>
-                        <th width="5%">单位</th>
-                        <th width="5%">数量</th>
-                        <th width="5%">售价</th>
-                        <th width="5%">主观价</th>
-                        <th width="6%">计费方式</th>
-                        <th width="6%">重量(kg)</th>
-                        <th width="9%">金额(元)</th>
-                        <th width="10%">操作</th>
-                    </tr>
-                    </thead>
-                    <c:forEach items="${orderCommodityDetails}" var="orderCommodityDetail" varStatus="n">
-                        <c:if test="${orderCommodityDetail.status != -1}">
-                            <tr style="text-align: center">
-                                    <%--<td style="display: none">${orderCommodityDetail.orderNumber}</td>--%>
-                                <td>${orderCommodityDetail.commodityName}</td>
-                                <td>${orderCommodityDetail.commodityNo}</td>
-                                <td>${orderCommodityDetail.unit}</td>
-                                <td id="${orderCommodityDetail.orderNumber}"
-                                    ondblclick="changeTd(this)">${orderCommodityDetail.commodityNum}</td>
-                                <td>${orderCommodityDetail.salePrice/100}</td>
-                                <td>${orderCommodityDetail.subPrice}</td>
-                                <td>${orderCommodityDetail.subPriceUnit}</td>
-                                <td>${orderCommodityDetail.weight}</td>
-                                <td onclick="showAllMoney(this)">${orderCommodityDetail.totalMoney}</td>
-                                <td><input id="cancelInput" onclick="cancelOrder(this)" type="checkbox"/>取消
-                                </td>
-                            </tr>
-                        </c:if>
-                    </c:forEach>
-
-                </table>
-            </div>
+    <%-- 客服备注 --%>
+    <div id="bei" class="row cl">
+        <label class="form-label col-xs-1.5 col-sm-2"><span class="c-red"></span>操作人员备注:</label>
+        <div class="formControls col-xs-5 col-sm-5">
+            <input type="text" class="input-text" value=" " id="serviceRemark" name="serviceRemark">
         </div>
+    </div>
 
-        <%-- 运费 --%>
+    <%-- 商品信息 --%>
+    <div class="info-div">
         <div class="row cl">
-            <label class="form-label col-xs-offset-7 col-xs-2 col-sm-2"><span class="c-red"></span>运费:</label>
-            <div class="formControls col-xs-2 col-sm-2">
-                <input type="text" id="freightInput" value="${orders.freight}" placeholder="输入运费"/>
-                <input type="hidden" id="freightHiddenInput" value="${orders.freight}" placeholder="输入运费"/>
+            <div class="col-xs-3 col-sm-2">
+                <h4>商品信息</h4>
             </div>
         </div>
 
-        <%-- 总金额 --%>
-        <div class="row cl">
-            <label class="form-label col-xs-offset-7 col-xs-2 col-sm-2"><span class="c-red"></span>总共费用:</label>
-            <div class="formControls col-xs-2 col-sm-2">
-                <input type="text" id="moneyInput" value="${orders.orderPrice}" placeholder="总费用"/>
-                <input type="hidden" id="moneyHiddenInput" value="${orders.totalPrice}" placeholder="总费用"/>
-            </div>
-        </div>
+        <%-- 商品表格 --%>
+        <div class="mt-20">
+            <table id="orderTable" class="table table-border table-bordered table-hover table-bg table-sort">
+                <thead>
+                <tr class="text-c">
+                    <th width="15%">商品名称</th>
+                    <th width="15%">商品条形码</th>
+                    <th width="5%">单位</th>
+                    <th width="5%">数量</th>
+                    <th width="5%">售价</th>
+                    <th width="5%">主观价</th>
+                    <th width="6%">计费方式</th>
+                    <th width="6%">重量(kg)</th>
+                    <th width="9%">金额(元)</th>
+                    <th width="10%">操作</th>
+                </tr>
+                </thead>
+                <c:forEach items="${orderCommodityDetails}" var="orderCommodityDetail" varStatus="n">
+                    <c:if test="${orderCommodityDetail.status != -1}">
+                        <tr style="text-align: center">
+                                <%--<td style="display: none">${orderCommodityDetail.orderNumber}</td>--%>
+                            <td>${orderCommodityDetail.commodityName}</td>
+                            <td>${orderCommodityDetail.commodityNo}</td>
+                            <td>${orderCommodityDetail.unit}</td>
+                            <td id="${orderCommodityDetail.orderNumber}"
+                                ondblclick="changeTd(this)">${orderCommodityDetail.commodityNum}</td>
+                            <td>${orderCommodityDetail.salePrice/100}</td>
+                            <td>${orderCommodityDetail.subPrice}</td>
+                            <td>${orderCommodityDetail.subPriceUnit}</td>
+                            <td>${orderCommodityDetail.weight}</td>
+                            <td onclick="showAllMoney(this)">${orderCommodityDetail.totalMoney}</td>
+                            <td><input id="cancelInput" onclick="cancelOrder(this)" type="checkbox"/>取消
+                            </td>
+                        </tr>
+                    </c:if>
+                </c:forEach>
 
-        <%-- 按钮
-        <div id="add" class="row cl">
-            <div class="col-xs-1.5 col-sm-2">
-                <input class="btn btn-primary radius" type="button" id="addInput" onClick="addOrder()"
-                       value="&nbsp;&nbsp;添加&nbsp;&nbsp;">
-            </div>
+            </table>
         </div>
+    </div>
 
-    添加商品信息
+    <%-- 运费 --%>
+    <div class="row cl">
+        <label class="form-label col-xs-offset-7 col-xs-2 col-sm-2"><span class="c-red"></span>运费:</label>
+        <div class="formControls col-xs-2 col-sm-2">
+            <input type="text" id="freightInput" value="${orders.freight}" placeholder="输入运费"/>
+            <input type="hidden" id="freightHiddenInput" value="${orders.freight}" placeholder="输入运费"/>
+        </div>
+    </div>
+
+    <%-- 总金额 --%>
+    <div class="row cl">
+        <label class="form-label col-xs-offset-7 col-xs-2 col-sm-2"><span class="c-red"></span>总共费用:</label>
+        <div class="formControls col-xs-2 col-sm-2">
+            <input type="text" id="moneyInput" value="${orders.orderPrice}" placeholder="总费用"/>
+            <input type="hidden" id="moneyHiddenInput" value="${orders.totalPrice}" placeholder="总费用"/>
+        </div>
+    </div>
+
+    <%-- 按钮 --%>
+    <div id="add" class="row cl">
+        <div class="col-xs-1.5 col-sm-2">
+            <input class="btn btn-primary radius" type="button" id="addInput" onClick="addOrder()"
+                   value="&nbsp;&nbsp;添加&nbsp;&nbsp;">
+        </div>
+    </div>
+
+    <%-- 添加商品信息 --%>
     <div class="info-div" id="addOrderDiv">
         <div class="row cl">
             <div class="col-xs-3 col-sm-2">
@@ -185,12 +185,12 @@
             </div>
         </div>
 
-        &lt;%&ndash; 商品表格 &ndash;%&gt;
+        <%-- 商品表格 --%>
         <div class="mt-20">
             <table id="addTable" class="table table-border table-bordered table-hover table-bg table-sort">
                 <thead>
                 <tr class="text-c">
-                    &lt;%&ndash;<th width="5%">序号</th>&ndash;%&gt;
+                    <%--<th width="5%">序号</th>--%>
                     <th width="15%">商品名称</th>
                     <th width="12%">商品条形码</th>
                     <th width="5%">单位</th>
@@ -206,7 +206,7 @@
             </table>
         </div>
 
-        &lt;%&ndash; 添加商品总金额 &ndash;%&gt;
+        <%-- 添加商品总金额 --%>
         <div class="row cl" id="addOrderMoneyDiv" style="display: none;">
             <label class="form-label col-xs-offset-7 col-xs-2 col-sm-2"><span class="c-red"></span>总共费用:</label>
             <div class="formControls col-xs-2 col-sm-2">
@@ -214,22 +214,22 @@
             </div>
         </div>
     </div>
---%>
-        <%-- 操作按钮 --%>
-        <div id="add" class="row cl">
-            <div class="col-xs-offset-3 col-xs-2 col-sm-2">
-                <input class="btn btn-primary radius" type="button" id="submitBut" onClick="submitModifyOrder()"
-                       value="&nbsp;&nbsp;提交审核&nbsp;&nbsp;"/>
-            </div>
-            <div class="col-xs-2 col-sm-2">
-                <input class="btn btn-primary radius" type="button" id="cancelBut" onClick="cancelAllOrderFn()"
-                       value="&nbsp;&nbsp;整单取消&nbsp;&nbsp;"/>
-            </div>
-            <div class="col-xs-2 col-sm-2">
-                <input class="btn btn-primary radius" type="button" id="closeBut" onClick="closeWin()"
-                       value="&nbsp;&nbsp;关闭&nbsp;&nbsp;"/>
-            </div>
+
+    <%-- 操作按钮 --%>
+    <div id="add" class="row cl">
+        <div class="col-xs-offset-3 col-xs-2 col-sm-2">
+            <input class="btn btn-primary radius" type="button" id="submitBut" onClick="submitModifyOrder()"
+                   value="&nbsp;&nbsp;提交审核&nbsp;&nbsp;"/>
         </div>
+        <div class="col-xs-2 col-sm-2">
+            <input class="btn btn-primary radius" type="button" id="cancelBut" onClick="cancelAllOrderFn()"
+                   value="&nbsp;&nbsp;整单取消&nbsp;&nbsp;"/>
+        </div>
+        <div class="col-xs-2 col-sm-2">
+            <input class="btn btn-primary radius" type="button" id="closeBut" onClick="closeWin()"
+                   value="&nbsp;&nbsp;关闭&nbsp;&nbsp;"/>
+        </div>
+    </div>
 </article>
 </body>
 <script type="text/javascript">

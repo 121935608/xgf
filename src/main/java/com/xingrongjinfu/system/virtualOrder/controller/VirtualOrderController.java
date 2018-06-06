@@ -588,6 +588,10 @@ public class VirtualOrderController extends BaseController {
         String orderNumber = virtualOrder.getOrderNumber();
         List<OrderDetail> orderDetailInfos = orderService.findOrderDetailInfoByNo(orderNumber);
         for (OrderDetail orderDetail : orderDetailInfos) {
+            // 判断是否是取消订单
+            if (orderDetail.getStatus() == -1) {
+                continue;
+            }
             // 封装products
             JSONObject object = new JSONObject();
             object.put("barCode", orderDetail.getCommodityNo());
@@ -724,6 +728,7 @@ public class VirtualOrderController extends BaseController {
             for (Commodity commodity : commodities) {
                 orderAuditing.setCommodityId(commodity.getCommodityId());
                 orderAuditing.setCommodityName(commodity.getCommodityName());
+                orderAuditing.setServiceModify(0);
                 orderAuditing.setModifyStatus(3);
                 int result = orderService.insertOrderAuditing(orderAuditing);
                 if (result <= 0) {
@@ -738,9 +743,9 @@ public class VirtualOrderController extends BaseController {
 
             Product product = productService.findProductInfoByNo(orderDetailInfo.getCommodityNo());
             // 判断商品库存是否足够
-            Integer kxdStock = product.getKxdStock();
-            if (kxdStock <= 0 || kxdStock < orderDetailInfo.getCommodityNum()) {
-                return new Message(false, "商品库存不足");
+            Integer kfStock = product.getKfStock();
+            if (kfStock <= 0 || kfStock < orderDetailInfo.getCommodityNum()) {
+                return new Message(false, "客服库存不足");
             }
             // 减少客服库存,增加可下单库存
             product.setKfStock(product.getKfStock() - orderDetailInfo.getCommodityNum());
