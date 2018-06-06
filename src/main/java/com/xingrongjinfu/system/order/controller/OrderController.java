@@ -400,8 +400,9 @@ public class OrderController extends BaseController {
                     }
                     if (productByNo.getKfStock() - oldCommodityNum <= 0) {
                         productByNo.setKfStock(0);
+                    } else {
+                        productByNo.setKfStock(productByNo.getKfStock() - oldCommodityNum);
                     }
-                    productByNo.setKfStock(productByNo.getKfStock() - oldCommodityNum);
                     productByNo.setKxdStock(productByNo.getKxdStock() + oldCommodityNum);
                     productService.updateProductStock(productByNo);
 

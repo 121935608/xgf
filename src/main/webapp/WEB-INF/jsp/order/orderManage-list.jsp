@@ -298,14 +298,14 @@
                     if (row.orderStatus == 6 && row.confirmOrder == 0) {
                         toAuditing = "<a title=\"审核\" href=\"javascript:;\" onclick=\"order_auditing('审核','${context_root}/order/toAuditingInfo.action?orderNumber=" + row.orderNumber + "','1000','700')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>审核</span></a>";
                     }
-                    // 确认出库
+               /*     // 确认出库
                     var toComfirmOrder = "";
                     if (row.orderStatus == 2 && row.confirmOrder == 0) {
                         toComfirmOrder = "<a title=\"确认发货\" href=\"javascript:;\" onclick=\"order_confirmOrder(this,'" + row.orderNumber + "')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>确认发货</span></a>";
-                    }
+                    }*/
                     //对账
                     <%--var toEdit = "<a title=\"对账\" href=\"javascript:;\" onclick=\"repay_edit('对账','${context_root}/merchant/toRepayModify.action?repayId=" + row.repayId + "','','510')\" class=\"ml-5\" style=\"text-decoration:none\"><span style='color: #0e90d2 '>对账</span></a>";--%>
-                    return tolook + toAuditing + toEdit + toComfirmOrder;
+                    return tolook + toAuditing + toEdit;
                 }
             },
         ];
@@ -313,14 +313,6 @@
         pageTable = _Datatable_Init(pageTable, aoColumns, url);
     });
 
-  /*  function virtualOrder() {
-        var orderNumber = "TOR180601165251246";
-        pageTable.fnSettings().sAjaxSource = encodeURI("${context_root}/order/TovirtualOrderAuditing.action?orderNumber=" + orderNumber);
-        pageTable.fnClearTable(0);
-        pageTable.fnDraw();
-    }
-
-*/
     function pay_edit(obj, id) {
         parent.layer.confirm('确认已收款吗？', {icon: 3, title: '提示'}, function (index) {
             $.ajax({
