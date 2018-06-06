@@ -3,7 +3,6 @@
 <ys:contentHeader title="审核订单信息"/>
 <body>
 <article class="page-container">
-    <form action="${context_root}/order/orderSave.action" method="post" class="form form-horizontal" id="form-order-modify">
         <input type="hidden" name="id" value="WO-20180521-00309" id="num">
         <%-- 订单信息 --%>
         <div class="info-div">
@@ -170,7 +169,7 @@
             </div>
         </div>
 
-        <%-- 按钮 --%>
+        <%-- 按钮
         <div id="add" class="row cl">
             <div class="col-xs-1.5 col-sm-2">
                 <input class="btn btn-primary radius" type="button" id="addInput" onClick="addOrder()"
@@ -178,44 +177,44 @@
             </div>
         </div>
 
-        <%-- 添加商品信息 --%>
-        <div class="info-div" id="addOrderDiv">
-            <div class="row cl">
-                <div class="col-xs-3 col-sm-2">
-                    <h4>添加商品</h4>
-                </div>
-            </div>
-
-            <%-- 商品表格 --%>
-            <div class="mt-20">
-                <table id="addTable" class="table table-border table-bordered table-hover table-bg table-sort">
-                    <thead>
-                    <tr class="text-c">
-                        <%--<th width="5%">序号</th>--%>
-                        <th width="15%">商品名称</th>
-                        <th width="12%">商品条形码</th>
-                        <th width="5%">单位</th>
-                        <th width="5%">数量</th>
-                        <th width="5%">售价</th>
-                        <th width="5%">主观价</th>
-                        <th width="6%">计费方式</th>
-                        <th width="6%">重量(kg)</th>
-                        <th width="9%">金额(元)</th>
-                        <th width="10%">操作</th>
-                    </tr>
-                    </thead>
-                </table>
-            </div>
-
-            <%-- 添加商品总金额 --%>
-            <div class="row cl" id="addOrderMoneyDiv" style="display: none;">
-                <label class="form-label col-xs-offset-7 col-xs-2 col-sm-2"><span class="c-red"></span>总共费用:</label>
-                <div class="formControls col-xs-2 col-sm-2">
-                    <input type="text" id="addOrderMoneyInput" value="" placeholder="添加商品总费用"/>
-                </div>
+    添加商品信息
+    <div class="info-div" id="addOrderDiv">
+        <div class="row cl">
+            <div class="col-xs-3 col-sm-2">
+                <h4>添加商品</h4>
             </div>
         </div>
 
+        &lt;%&ndash; 商品表格 &ndash;%&gt;
+        <div class="mt-20">
+            <table id="addTable" class="table table-border table-bordered table-hover table-bg table-sort">
+                <thead>
+                <tr class="text-c">
+                    &lt;%&ndash;<th width="5%">序号</th>&ndash;%&gt;
+                    <th width="15%">商品名称</th>
+                    <th width="12%">商品条形码</th>
+                    <th width="5%">单位</th>
+                    <th width="5%">数量</th>
+                    <th width="5%">售价</th>
+                    <th width="5%">主观价</th>
+                    <th width="6%">计费方式</th>
+                    <th width="6%">重量(kg)</th>
+                    <th width="9%">金额(元)</th>
+                    <th width="10%">操作</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+
+        &lt;%&ndash; 添加商品总金额 &ndash;%&gt;
+        <div class="row cl" id="addOrderMoneyDiv" style="display: none;">
+            <label class="form-label col-xs-offset-7 col-xs-2 col-sm-2"><span class="c-red"></span>总共费用:</label>
+            <div class="formControls col-xs-2 col-sm-2">
+                <input type="text" id="addOrderMoneyInput" value="" placeholder="添加商品总费用"/>
+            </div>
+        </div>
+    </div>
+--%>
         <%-- 操作按钮 --%>
         <div id="add" class="row cl">
             <div class="col-xs-offset-3 col-xs-2 col-sm-2">
@@ -231,7 +230,6 @@
                        value="&nbsp;&nbsp;关闭&nbsp;&nbsp;"/>
             </div>
         </div>
-    </form>
 </article>
 </body>
 <script type="text/javascript">
