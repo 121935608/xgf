@@ -53,8 +53,8 @@
         <input type="text" class="input-text" style="width:250px" placeholder="收货地址" id="address" name="address">
         <input type="text" class="input-text" style="width:250px" placeholder="督导员名称" id="supervisorName" name="supervisorName">
         <button type="button" class="btn btn-success radius" onclick="query()"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
-        <button type="button" class="btn btn-success radius" onclick="virtualOrder()"><i class="Hui-iconfont">&#xe665;</i> 查询
-        </button>
+        <%--<button type="button" class="btn btn-success radius" onclick="virtualOrder()"><i class="Hui-iconfont">&#xe665;</i> 查询
+        </button>--%>
     </div>
     <div class="mt-20">
         <table class="table table-border table-bordered table-hover table-bg table-sort">
@@ -313,12 +313,12 @@
         pageTable = _Datatable_Init(pageTable, aoColumns, url);
     });
 
-    function virtualOrder() {
+    /*function virtualOrder() {
         var orderNumber = "TOR180601165251246";
         pageTable.fnSettings().sAjaxSource = encodeURI("${context_root}/virtualOrder/TovirtualOrderAuditing.action?orderNumber=" + orderNumber);
         pageTable.fnClearTable(0);
         pageTable.fnDraw();
-    }
+    }*/
 
 
     function pay_edit(obj, id) {
