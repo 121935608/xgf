@@ -38,6 +38,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,6 +61,9 @@ import java.util.*;
 @RequestMapping(SystemConstant.VIRTUALORDER_URL)
 public class VirtualOrderController extends BaseController {
     private static Logger logger = LoggerFactory.getLogger(VirtualOrderController.class);
+    @Value("${stockUrl}")
+    private String stockUrl;
+
     @Autowired
     @Qualifier("virtualOrderService")
     private IVirtualOrderService orderService;
@@ -390,16 +394,19 @@ public class VirtualOrderController extends BaseController {
                 if (orderDetail == null) {
                     return new Message(false, "不存在改订单明细");
                 }
+                // 如果商品数为空,代表是取消商品
+                Integer oldCommodityNum = orderDetail.getCommodityNum();
+                Product productByNo = productService.findProductInfoByNo(commodityNo);
                 if (commodityNum == null) {
-                    // 如果商品数为空,代表是取消商品
-                    Integer oldCommodityNum = orderDetail.getCommodityNum();
-                    // 修改客服库存
-                    Product productByNo = productService.findProductInfoByNo(commodityNo);
-                    if (productByNo.getKfStock() <= 0 || productByNo.getKfStock() < oldCommodityNum) {
+                    if (productByNo.getKfStock() < 0) {
                         return new Message(false, "客服库存数异常"); // 客服库存数小于支付商品数量,则下单时库存数量操作异常
+                    }
+                    if (productByNo.getKfStock() - oldCommodityNum <= 0) {
+                        productByNo.setKfStock(0);
                     }
                     productByNo.setKfStock(productByNo.getKfStock() - oldCommodityNum);
                     productByNo.setKxdStock(productByNo.getKxdStock() + oldCommodityNum);
+                    productService.updateProductStock(productByNo);
                     orderAuditing.setServiceModify(oldCommodityNum);
                     orderAuditing.setModifyStatus(2);
 
@@ -422,6 +429,16 @@ public class VirtualOrderController extends BaseController {
                         if (orderService.updateOrderDetailComNum(orderDetail) < 0) {
                             return new Message(false, "更新订单明细商品数量失败");
                         }
+
+                        // 更新商品可下单库存
+                        Integer kxdStock = productByNo.getKxdStock();
+                        Integer diffStock = modifiedNum - orderDetail.getCommodityNum();
+                        if (diffStock > kxdStock) {
+                            return new Message(false, "可下单库存不足");
+                        }
+                        productByNo.setKxdStock(kxdStock - diffStock);
+                        productByNo.setKfStock(productByNo.getKfStock() + diffStock);
+                        productService.updateProductStock(productByNo);
                     }
                 }
 
@@ -439,7 +456,10 @@ public class VirtualOrderController extends BaseController {
                 }
             }
         }
-
+        // 更新订单金额
+        if (orderService.updateOrderMoney(order) <= 0) {
+            return new Message(false, "更新订单金额失败");
+        }
         /** ****** 存在新增订单逻辑 ****** */
 
         // 如果存在新增订单
@@ -465,8 +485,7 @@ public class VirtualOrderController extends BaseController {
                 if (kxdStock <= 0 || kxdStock < commodityNum) {
                     return new Message(false, "商品库存不足");
                 }
-                // 增加客服库存,减少可下单库存
-                product.setKfStock(product.getKfStock() + kxdStock);
+                product.setKfStock(product.getKfStock() + commodityNum);
                 product.setKxdStock(product.getKxdStock() - commodityNum);
                 productService.updateProductStock(product);
 
@@ -477,8 +496,8 @@ public class VirtualOrderController extends BaseController {
                 orderDetail.setCommodityNum(commodityNum);
                 orderDetail.setCommodityName((String) jsonObj.get("commodityName"));
                 orderDetail.setUnit((String) jsonObj.get("unit"));
-                orderDetail.setSalePrice(Double.valueOf((String) jsonObj.get("salePrice")));
-                orderDetail.setTotalMoney(Double.valueOf((String) jsonObj.get("totalMoney")));
+                orderDetail.setSalePrice(Double.valueOf((String) jsonObj.get("salePrice")) * 100);
+                orderDetail.setTotalPrice(Double.valueOf((String) jsonObj.get("totalMoney")));
                 orderDetail.setTaxRate(product.getTaxRate());
                 orderDetail.setImgMain(product.getImgMain());
                 orderDetail.setCommodityNo(commodityNo);
@@ -505,26 +524,23 @@ public class VirtualOrderController extends BaseController {
 
         int updateResult = 0;
         if (modifyResult && addResult) {
-            // 设置订单状态
-            order.setOrderStatus("7");
-            // 更新订单
-            updateResult = orderService.updateOrderStatus(order);
-        } else {
-            return new Message(false, "审核订单失败");
-        }
-
-        /** ****** 推送库存 ****** */
-        if (updateResult > 0) {
             // 封装推送库存参数
             String orderId = order.getOrderId();
             try {
                 // 审核完成后,减少商品客服库存,订单状态改为库存审核,推送到库存
-                return pushStock(orderId);// 推送库存,和库存返回信息是否为空
+                Message message = pushStock(orderId);// 推送库存,和库存返回信息是否为空
+                if (message.isS()) {
+                    // 设置订单状态
+                    order.setOrderStatus("7");
+                    // 更新订单
+                    updateResult = orderService.updateOrderStatus(order);
+                }
+                return new Message(updateResult, message.getM());
             } catch (UnsupportedEncodingException e) {
-                return new Message(false, "推送库存失败");
+                return new Message(false, "推送库存异常");
             }
         } else {
-            return new Message(false, "更新订单信息失败");
+            return new Message(false, "更新审核信息失败");
         }
     }
 
@@ -628,7 +644,11 @@ public class VirtualOrderController extends BaseController {
             payWay = 1; // 线上
         }
         jsonObject.put("payWay", payWay);
-        jsonObject.put("cusremark", virtualOrder.getRemark());
+        String cusremark = "";
+        if (!StringUtil.nullOrBlank(virtualOrder.getRemark())) {
+            cusremark = virtualOrder.getRemark();
+        }
+        jsonObject.put("cusremark", cusremark);
         // 添加产品信息
         jsonObject.put("products", jsonArray);
 
@@ -637,8 +657,9 @@ public class VirtualOrderController extends BaseController {
         stringObjectHashMap.put("params", jsonObject);
         logger.info("==========推送订单到库存,参数为:{}", stringObjectHashMap);
         // 推送到库存
+        String url = stockUrl + "/app/order.action";
         String resultStr =
-                HttpClientUtil.httpPostRequest(OrderConstant.STORAGE_URL, stringObjectHashMap);
+                HttpClientUtil.httpPostRequest(url, stringObjectHashMap);
         logger.info("==========接收库存返回参数:{}", resultStr);
         if (!StringUtil.nullOrBlank(resultStr)) {
             return pubStorage(virtualOrder, resultStr);
@@ -714,6 +735,17 @@ public class VirtualOrderController extends BaseController {
             // 将订单明细的状态设置为取消
             orderDetailInfo.setStatus(-1);
             orderService.updateOrderDetailStatus(orderDetailInfo);
+
+            Product product = productService.findProductInfoByNo(orderDetailInfo.getCommodityNo());
+            // 判断商品库存是否足够
+            Integer kxdStock = product.getKxdStock();
+            if (kxdStock <= 0 || kxdStock < orderDetailInfo.getCommodityNum()) {
+                return new Message(false, "商品库存不足");
+            }
+            // 减少客服库存,增加可下单库存
+            product.setKfStock(product.getKfStock() - orderDetailInfo.getCommodityNum());
+            product.setKxdStock(product.getKxdStock() + orderDetailInfo.getCommodityNum());
+            productService.updateProductStock(product);
         }
 
         int updateResult = 0;
@@ -790,7 +822,7 @@ public class VirtualOrderController extends BaseController {
      * @param orderNumber
      */
     private Message pushComfirmOrderStock(String orderNumber) {
-        final String url = OrderConstant.STORAGE_COMFIRMORDER_URL; // 配置库存地址
+        final String url = stockUrl + "/app/order.action"; // 配置库存地址
         net.sf.json.JSONObject jsonObject = new net.sf.json.JSONObject();
         jsonObject.put("orderNo", orderNumber);
         Map map = new HashMap<>();

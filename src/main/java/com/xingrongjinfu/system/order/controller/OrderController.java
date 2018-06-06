@@ -31,6 +31,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,6 +57,10 @@ import com.xingrongjinfu.system.user.model.User;
 @RequestMapping(SystemConstant.ORDER_URL)
 public class OrderController extends BaseController {
     private static Logger logger = LoggerFactory.getLogger(OrderController.class);
+
+    @Value("${stockUrl}")
+    private String stockUrl;
+
     @Autowired
     private IOrderService orderService;
 
@@ -656,8 +661,9 @@ public class OrderController extends BaseController {
         stringObjectHashMap.put("params", jsonObject);
         logger.info("==========推送订单到库存,参数为:{}", stringObjectHashMap);
         // 推送到库存
+        String url = stockUrl + "/app/order.action";
         String resultStr =
-                HttpClientUtil.httpPostRequest("http://wuhanxingrong.vicp.io:3080/stock2.0/app/order.action", stringObjectHashMap);
+                HttpClientUtil.httpPostRequest(url, stringObjectHashMap);
         logger.info("==========接收库存返回参数:{}", resultStr);
         if (!StringUtil.nullOrBlank(resultStr)) {
             return pubStorage(order, resultStr);
@@ -821,7 +827,7 @@ public class OrderController extends BaseController {
      * @param orderNumber
      */
     private Message pushComfirmOrderStock(String orderNumber) {
-        final String url = OrderConstant.STORAGE_COMFIRMORDER_URL; // 配置库存地址
+        final String url = stockUrl + "/app/confirmMoney.action"; // 配置库存地址
         net.sf.json.JSONObject jsonObject = new net.sf.json.JSONObject();
         jsonObject.put("orderNo", orderNumber);
         Map map = new HashMap<>();

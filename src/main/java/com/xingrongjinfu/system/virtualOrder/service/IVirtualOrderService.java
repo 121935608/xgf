@@ -100,4 +100,6 @@ public interface IVirtualOrderService {
     int updateConfirmOrder(Order order);
 
     int updateOrderDetailStatus(OrderDetail orderDetail);
+
+    int updateOrderMoney(Order order);
 }

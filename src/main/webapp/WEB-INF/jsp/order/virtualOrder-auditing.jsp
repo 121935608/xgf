@@ -274,13 +274,46 @@
     $(function () {
         // 为运费绑定失焦事件
         $("#freightInput").blur(function () {
+            if (!isPositiveInteger($(this).val())) {
+                layer.msg("参数不合法");
+                $("#freightInput").val($("#freightHiddenInput").val());
+            }
             //var oldValue = parseFloat($("#moneyHiddenInput").val());
             var newFreiValue = parseFloat($("#freightInput").val());
             // 获取
             var sum = addAllMoney("orderTable");
             $("#moneyInput").val((sum + newFreiValue).toFixed(1));
         });
+
+        // 为总共费用绑定失焦事件
+        $("#moneyInput").blur(function () {
+            if (!isPositiveInteger($(this).val())) {
+                layer.msg("参数不合法");
+                $("#moneyInput").val($("#moneyHiddenInput").val());
+            }
+            //var oldValue = parseFloat($("#moneyHiddenInput").val());
+            var newFreiValue = parseFloat($("#freightInput").val());
+            // 获取
+            var sum = addAllMoney("orderTable");
+            $("#moneyInput").val((sum + newFreiValue).toFixed(1));
+        });
+
+        // 未添加订单总金额绑定失焦事件
+        $("#addOrderMoneyInput").blur(function () {
+            if (!isPositiveInteger($(this).val())) {
+                layer.msg("参数不合法");
+            }
+            // 获取
+            var sum = addAllMoney("addTable");
+            $("#addOrderMoneyInput").val(sum.toFixed(1));
+        });
     })
+
+    function isPositiveInteger(s) {//是否为正整数
+        var re = /^\d+(\.\d+)?$/;
+        return re.test(s)
+    }
+
     // 基本路径
     var baseOrderUrl = "${context_root}/virtualOrder";
     // 当前用户id
@@ -508,6 +541,8 @@
                                 $("#addOrderMoneyInput").val((comObj.salePrice / 100).toFixed(1));
                             }
 
+                            var allMoney = addAllMoney("addTable");
+                            $("#addOrderMoneyInput").val(allMoney.toFixed(1));
                         });
                         //移动对象
                         $("#autoCompleteHidden" + rowsNum + " li").hover(function () {
@@ -554,7 +589,7 @@
             if (orderMoney == "") {
                 orderMoney = 0;
             }
-            sum = sum + parseFloat(orderMoney);
+            sum = sum + Number(orderMoney);
         }
         return sum;
     }
@@ -620,7 +655,8 @@
     function sumMoney(obj) {
         var num = $(obj).text();
         var MoneyNode = $(obj).parent().children("td").eq(8);
-        MoneyNode.html((num * MoneyNode.html()).toFixed(1));
+        var saleNode = $(obj).parent().children("td").eq(4);
+        MoneyNode.html((num * saleNode.html()).toFixed(1));
 
         // 获取总金额
         var tableNode = $(obj).parent().parent().parent();
@@ -771,10 +807,22 @@
         if (obj.checked) { // 如果选中
             trNode.css({"background-color": "#C0C0C0"});
             trNode.find("td").eq(3).removeAttr("ondblclick");
+            //$("#moneyInput").val(($("#moneyInput").val() - trMoney).toFixed(1));
+            // 添加金额
+            trNode.find("td").eq(8).html(0.0);
         } else { // 如果没选中
             trNode.removeAttr("style");
             trNode.find("td").eq(3).attr("ondblclick", 'changeTd(this)');
+            //$("#moneyInput").val((parseFloat($("#moneyInput").val()) + parseFloat(trMoney)).toFixed(1));
+            // 添加金额
+            //var trMoney = trNode.find("td").eq(8).html();
+            var trNum = trNode.find("td").eq(3).html();
+            var trSale = trNode.find("td").eq(4).html();
+            trNode.find("td").eq(8).html(parseFloat(trNum) * parseFloat(trSale).toFixed(1));
         }
+        var money = addAllMoney('orderTable');
+        var FreiMoney = $("#freightInput").val();
+        $("#moneyInput").val((parseFloat(money) + parseFloat(FreiMoney)).toFixed(1));
     }
 
     // 删除增加订单
@@ -784,6 +832,9 @@
         if ($("#addTable").find("tr:gt(0)").size() <= 0) {
             $("#addOrderMoneyDiv").hide();
         }
+
+        var allMoney = addAllMoney("addTable");
+        $("#addOrderMoneyInput").val(allMoney.toFixed(1));
     }
 
     // 删除表格第一行以外的所有行
@@ -798,6 +849,7 @@
 
     // 整单取消方法
     function cancelAllOrderFn() {
+        var index = parent.layer.load();
         var url = baseOrderUrl + "/cancelAllOrder.action";
         $.ajax({
             url: url,
@@ -813,13 +865,14 @@
             dataType: "json",
             contentType: "application/json;charset=utf-8",
             success: function (data) {
+                parent.layer.close(index);
                 if (data.s == true) {
-                    layer.msg("整单取消成功", {time: 1000});
-                    // 关闭窗口
-                    layer_close();
+                    parent.layer.msg("取消成功,正在刷新数据请稍后……", {icon: 1, time: 1000, shade: [0.1, '#fff']}, function () {
+                        window.parent.location.reload();
+                    });
                 } else {
-                    layer.msg("整单取消失败", {time: 1000});
-                    window.location.href = "${context_root}/virtualOrder/toAuditingInfo.action";
+                    layer.msg(data.m, {time: 1000});
+                    window.location.href = "${context_root}/order/toAuditingInfo.action";
                 }
             },
         });
@@ -836,6 +889,7 @@
     function submitModifyOrder() {
 
         var selectOrder = {};
+        var selectOrderSize = 0;
         // 如果有选中取消的
         $("input[type='checkbox']").each(function (i) {
             var obj = {}
@@ -848,8 +902,18 @@
             }
             obj["commodityNo"] = commodityNo;
             selectOrder[i] = obj;
+            selectOrderSize++;
         })
 
+        var checkedInputs = $("input[type='checkbox']:checked");
+        if (selectOrderSize == 0) {
+            layer.msg("该订单没有正常订单明细!", {time: 1000});
+            return;
+        }
+        if (checkedInputs.length == selectOrderSize) {
+            layer.msg("您已取消所有的订单,请选择整单取消!!!", {time: 1000});
+            return;
+        }
         var addOrderTable = {};
         //alert($("#addTable tr:gt(0)").size())
         if ($("#addTable tr:gt(0)").size() > 0) {
@@ -858,7 +922,9 @@
 
         // 运费和总金额
         var freight = $("#freightInput").val() * 100;
-        var orderPrice = (Number($("#moneyInput").val()) + Number($("#addOrderMoneyInput").val())) * 100;
+        var orderTableMoney = addAllMoney("orderTable");
+        var totalPrice = ( orderTableMoney + Number($("#addOrderMoneyInput").val())) * 100;
+        var orderPrice = freight + totalPrice;
 
         var data = {
             "serviceRemark": $("#serviceRemark").val(),
@@ -872,6 +938,7 @@
         };
 
         var url = baseOrderUrl + "/orderModifySave.action";
+        var index = parent.layer.load();
         // 异步请求
         $.ajax({
             url: url,
@@ -884,7 +951,8 @@
                 "addOrderTable": JSON.stringify(addOrderTable),
                 "freight": freight,
                 "orderPrice": orderPrice,
-                "orderNumber": "${orders.orderNumber}"
+                "orderNumber": "${orders.orderNumber}",
+                "totalPrice": totalPrice
             },
             async: true,
             cache:
@@ -896,20 +964,18 @@
             success:
 
                 function (data) {
-                    var index = parent.layer.load();
+                    parent.layer.close(index);
                     if (data.s == true) {
-                        parent.layer.msg("审核成功,正在刷新数据请稍后……", {icon: 1, time: 50, shade: [0.1, '#fff']}, function () {
+                        parent.layer.msg("审核成功,正在刷新数据请稍后……", {icon: 1, time: 1000, shade: [0.1, '#fff']}, function () {
                             window.parent.location.reload();
                         });
-                        parent.layer.close(index);
                     } else {
                         // 如果修改失败重新加载审核页面
                         layer.msg(data.m);
-                        window.location.href = "${context_root}/virtualOrder/toAuditingInfo.action?orderNumber=${orders.orderNumber}";
+                        window.location.href = "${context_root}/order/toAuditingInfo.action?orderNumber=${orders.orderNumber}";
                     }
                 }
         })
-        ;
     }
 
 </script>

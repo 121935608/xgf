@@ -288,4 +288,8 @@
     <update id="updateOrderDetailStatus" parameterType="OrderDetail">
         update t_virtual_order_detail set status=#{status} where orderNumber=#{orderNumber} AND commodityNo = #{commodityNo}
     </update>
+
+    <update id="updateVirtualOrderMoney" parameterType="Orders">
+        update t_virtual_order set orderPrice=#{orderPrice},freight=#{freight},totalPrice=#{totalPrice} where orderNumber=#{orderNumber}
+    </update>
 </mapper> 
