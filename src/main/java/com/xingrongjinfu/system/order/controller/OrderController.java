@@ -497,11 +497,12 @@ public class OrderController extends BaseController {
                 orderDetail.setCommodityName((String) jsonObj.get("commodityName"));
                 orderDetail.setUnit((String) jsonObj.get("unit"));
                 orderDetail.setSalePrice(Double.valueOf((String) jsonObj.get("salePrice")) * 100);
-                orderDetail.setTotalPrice(Double.valueOf((String) jsonObj.get("totalMoney")));
-                orderDetail.setTaxRate(product.getTaxRate());
+                orderDetail.setTotalPrice(Double.valueOf((String) jsonObj.get("totalMoney")) * 100);
+                orderDetail.setTaxRate(product.getTaxRate() == null ? 0 : product.getTaxRate()); // 费率为0 设置为空
                 orderDetail.setImgMain(product.getImgMain());
                 orderDetail.setCommodityNo(commodityNo);
                 orderDetail.setInPrice(product.getInPrice());
+                orderDetail.setStatus(1); // 设置订单明细为正常状态
                 orderDetail.setAddTime(new Date());
 
                 // 补全订单审核表参数
@@ -683,7 +684,7 @@ public class OrderController extends BaseController {
             return new Message(false, "库存返回参数异常");
         }
         String storageNo = "";
-        if ("0000".equals(code) && jsonObject1 != null) {
+        if (jsonObject1 != null && StringUtil.nullOrBlank(code) && "0000".equals(code)) {
             String data = jsonObject1.getString("data");
             net.sf.json.JSONObject jsonObject2 = net.sf.json.JSONObject.fromObject(data);
             storageNo = jsonObject2.getString("purchaserId");

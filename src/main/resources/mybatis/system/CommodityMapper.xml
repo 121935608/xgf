@@ -31,7 +31,7 @@
         IFNULL(SUM(t.commodityNum),'') saleNum, IFNULL(SUM(t.totalPrice),'') totalPrice,
         IFNULL(SUM(t.inPrice * t.commodityNum),'') totalInPrice
         FROM t_order_detail t inner JOIN t_order o ON t.orderNumber=o.orderNumber
-        where 1=1 AND o.orderStatus not in (-1,1) AND o.status=1
+        where 1=1 AND o.orderStatus in (2,3,4,5,6,7) AND o.status=1 AND t.status = 1
         <if test="relationMap.beginTime != null and relationMap.beginTime != ''"><!-- 开始时间检索 -->
             AND DATE_FORMAT(t.addTime,'%Y%m%d') &gt;= DATE_FORMAT(#{relationMap.beginTime},'%Y%m%d')
         </if>

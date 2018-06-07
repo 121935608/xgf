@@ -53,55 +53,55 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Controller
 @RequestMapping(SystemConstant.COMMODITY_URL)
-public class ProductController extends BaseController{
+public class ProductController extends BaseController {
 
     @Autowired
     private IProductService productService;
 
     @RequestMapping(ProductConstant.PRODUCT_URL)
-    public ModelAndView loadProductPage(){
-        ModelAndView modelAndView=this.getModelAndView(ProductConstant.PRODUCT_PAGE);
-        Product product=new Product();
+    public ModelAndView loadProductPage() {
+        ModelAndView modelAndView = this.getModelAndView(ProductConstant.PRODUCT_PAGE);
+        Product product = new Product();
         product.setType("c");
-        modelAndView.addObject("product",product);
+        modelAndView.addObject("product", product);
         //分类
-        modelAndView.addObject("classes",getClassList());
+        modelAndView.addObject("classes", getClassList());
         //标签
-        modelAndView.addObject("category",getCategoryList());
+        modelAndView.addObject("category", getCategoryList());
         //供货地
-        modelAndView.addObject("supply",getSupplyList());
+        modelAndView.addObject("supply", getSupplyList());
         //产地
-        modelAndView.addObject("origin",getOriginList());
+        modelAndView.addObject("origin", getOriginList());
         return modelAndView;
     }
 
     /**
      * 查询所有的商品信息
+     *
      * @return
      */
     @RequestMapping(ProductConstant.PRODUCT_LIST_URL)
-    public ModelAndView findProductList()
-    {
-        PageUtilEntity pageUtilEntity=this.getPageUtilEntity();
-        List<Product> tableDataInfo=productService.pageInfoQuery(pageUtilEntity);
-        Integer i=1;
-        for(Product product:tableDataInfo){
-            product.setCommodityNum(pageUtilEntity.getPage()+(i++));
+    public ModelAndView findProductList() {
+        PageUtilEntity pageUtilEntity = this.getPageUtilEntity();
+        List<Product> tableDataInfo = productService.pageInfoQuery(pageUtilEntity);
+        Integer i = 1;
+        for (Product product : tableDataInfo) {
+            product.setCommodityNum(pageUtilEntity.getPage() + (i++));
         }
-        return buildDatasTable(pageUtilEntity.getTotalResult(),tableDataInfo);
+        return buildDatasTable(pageUtilEntity.getTotalResult(), tableDataInfo);
     }
 
     /**
      * 商品的启用与禁用
      */
-   @RequestMapping(ProductConstant.PRODUCT_CHANGE_STATUS_URL)
+    @RequestMapping(ProductConstant.PRODUCT_CHANGE_STATUS_URL)
     public @ResponseBody
-    Message changeStatus(Product product){
-        int result=0;
-        String commodityId=product.getCommodityId();
-        if (commodityId!=null && commodityId !=""){
+    Message changeStatus(Product product) {
+        int result = 0;
+        String commodityId = product.getCommodityId();
+        if (commodityId != null && commodityId != "") {
             //根据商品id修改状态
-            result=productService.changeStatus(product);
+            result = productService.changeStatus(product);
         }
         return new Message(result);
     }
@@ -111,25 +111,25 @@ public class ProductController extends BaseController{
      */
 
     @RequestMapping(ProductConstant.PRODUCT_EDIT_URL)
-    public ModelAndView loadEditPage(Product product){
-        ModelAndView modelAndView=this.getModelAndView(ProductConstant.PRODUCT_EDIT_PAGE);
-        String commodityId=product.getCommodityId();
-        if (commodityId !=null && commodityId !=""){
-            Product products=productService.findProductById(product);
-            if(!StringUtil.nullOrBlank(products.getImgMain())){
-                products.setImgMain(MerchantConstant.ALIYUN_URL+products.getImgMain());
-            }else{
+    public ModelAndView loadEditPage(Product product) {
+        ModelAndView modelAndView = this.getModelAndView(ProductConstant.PRODUCT_EDIT_PAGE);
+        String commodityId = product.getCommodityId();
+        if (commodityId != null && commodityId != "") {
+            Product products = productService.findProductById(product);
+            if (!StringUtil.nullOrBlank(products.getImgMain())) {
+                products.setImgMain(MerchantConstant.ALIYUN_URL + products.getImgMain());
+            } else {
                 products.setImgMain("");
             }
-            modelAndView.addObject("product",products);
+            modelAndView.addObject("product", products);
             //分类
-            modelAndView.addObject("classes",getClassList());
+            modelAndView.addObject("classes", getClassList());
             //标签
-            modelAndView.addObject("category",getCategoryList());
+            modelAndView.addObject("category", getCategoryList());
             //规格
-            modelAndView.addObject("specification",getSpecificationList());
+            modelAndView.addObject("specification", getSpecificationList());
             //单位
-            modelAndView.addObject("unit",getUnitList());
+            modelAndView.addObject("unit", getUnitList());
         }
         return modelAndView;
     }
@@ -137,74 +137,75 @@ public class ProductController extends BaseController{
 
     /**
      * 跳转到新增商品列表
-     *
      */
 
     @RequestMapping(ProductConstant.NEW_PRODUCT_URL)
-    public ModelAndView loadNewProduct(){
-        ModelAndView modelAndView=this.getModelAndView(ProductConstant.PRODUCT_PAGE);
-        Product product=new Product();
+    public ModelAndView loadNewProduct() {
+        ModelAndView modelAndView = this.getModelAndView(ProductConstant.PRODUCT_PAGE);
+        Product product = new Product();
         product.setType("s");
-        modelAndView.addObject("product",product);
+        modelAndView.addObject("product", product);
         //分类
-        modelAndView.addObject("classes",getClassList());
+        modelAndView.addObject("classes", getClassList());
         //标签
-        modelAndView.addObject("category",getCategoryList());
+        modelAndView.addObject("category", getCategoryList());
         //供货地
-        modelAndView.addObject("supply",getSupplyList());
+        modelAndView.addObject("supply", getSupplyList());
         //产地
-        modelAndView.addObject("origin",getOriginList());
+        modelAndView.addObject("origin", getOriginList());
         return modelAndView;
     }
+
     /**
      * 提交商品
      */
     @RequestMapping(ProductConstant.PRODUCT_ADD_URL)
-    public @ResponseBody Message saveProduct(Product product,String imgs,String imgZ){
-        int result=0;
-        if(!imgZ.equals("undefined")){
-            String img = imgZ.replace("http://"+AliyunOSSClientUtil.BACKET_NAME+"."+AliyunOSSClientUtil.ENDPOINT+"/", "");
+    public @ResponseBody
+    Message saveProduct(Product product, String imgs, String imgZ) {
+        int result = 0;
+        if (!imgZ.equals("undefined")) {
+            String img = imgZ.replace("http://" + AliyunOSSClientUtil.BACKET_NAME + "." + AliyunOSSClientUtil.ENDPOINT + "/", "");
             product.setImgMain(img);
-        }else{
-            return new Message(false,"请选择主图！");
+        } else {
+            return new Message(false, "请选择主图！");
         }
         String[] imgList = imgs.split(",");
         String imgOther = "";
-        for(int i=0;i<imgList.length;i++){
-            String p = imgList[i].replace("http://"+AliyunOSSClientUtil.BACKET_NAME+"."+AliyunOSSClientUtil.ENDPOINT+"/", "");
-            if(!p.equals("undefined")){
-                imgOther += p+";";
+        for (int i = 0; i < imgList.length; i++) {
+            String p = imgList[i].replace("http://" + AliyunOSSClientUtil.BACKET_NAME + "." + AliyunOSSClientUtil.ENDPOINT + "/", "");
+            if (!p.equals("undefined")) {
+                imgOther += p + ";";
             }
         }
         product.setImgOther(imgOther);
-        String commodityId=product.getCommodityId();
-        if (commodityId !=null && commodityId!=""){
-               //商品为c就是商品表中的信息
-               if (product.getType().equalsIgnoreCase("c")) {
-                    product.setUpdateTime(new Date());
-                    result = productService.updateProduct(product);
-               }else {
-                   //商品为s这里的提交还需将type改为c
-                   product.setType("c");
-                   product.setUpdateTime(new Date());
-                   result =productService.updateProduct(product);
-               }
+        String commodityId = product.getCommodityId();
+        if (commodityId != null && commodityId != "") {
+            //商品为c就是商品表中的信息
+            if (product.getType().equalsIgnoreCase("c")) {
+                product.setUpdateTime(new Date());
+                result = productService.updateProduct(product);
+            } else {
+                //商品为s这里的提交还需将type改为c
+                product.setType("c");
+                product.setUpdateTime(new Date());
+                result = productService.updateProduct(product);
+            }
 
             //将商品上下架信息推给库存
 
             JSONObject json = new JSONObject();
-            json.put("barCode",product.getCommodityNo());
-            json.put("currentState",product.getCommodityStatus());
+            json.put("barCode", product.getCommodityNo());
+            json.put("currentState", product.getCommodityStatus());
             Map map = new HashMap();
             map.put("params", json);
 
             try {
-                String s= HttpClientUtil.httpPostRequest(productService.getStockUrl()+"/app/currentState.action", map);//
-                System.out.println("s:"+s);
+                String s = HttpClientUtil.httpPostRequest(productService.getStockUrl() + "/app/currentState.action", map);//
+                System.out.println("s:" + s);
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
-            }
+        }
 
         return new Message(result);
     }
@@ -213,20 +214,19 @@ public class ProductController extends BaseController{
      * 富文本上传图片
      */
     @RequestMapping(ProductConstant.PRODUCT_IMFFILE_URL)
-    public @ResponseBody Message imgFile(MultipartFile file){
-        AliyunOSSClientUtil aliyunOSSClientUtil=new AliyunOSSClientUtil();
+    public @ResponseBody
+    Message imgFile(MultipartFile file) {
+        AliyunOSSClientUtil aliyunOSSClientUtil = new AliyunOSSClientUtil();
         JSONObject jsonObject = new JSONObject();
         try {
             String key = aliyunOSSClientUtil.uploadImgs(file);
 
             String filePath = aliyunOSSClientUtil.FOLDER2 + AliyunOSSClientUtil.filePath;
             // 返回地址
-            return new Message(true,filePath);
-        }
-        catch (OSSException e)
-        {
+            return new Message(true, filePath);
+        } catch (OSSException e) {
             e.printStackTrace();
-            return new Message(false,"对不起图片上传失败!");
+            return new Message(false, "对不起图片上传失败!");
 
         }
 
@@ -237,44 +237,43 @@ public class ProductController extends BaseController{
      * 富文本上传图片
      */
     @RequestMapping(ProductConstant.PRODUCT_IMFFILE_URLS)
-    public @ResponseBody Object imgFiles(MultipartFile file){
-        AliyunOSSClientUtil aliyunOSSClientUtil=new AliyunOSSClientUtil();
+    public @ResponseBody
+    Object imgFiles(MultipartFile file) {
+        AliyunOSSClientUtil aliyunOSSClientUtil = new AliyunOSSClientUtil();
         JSONObject jsonObject = new JSONObject();
         try {
             String key = aliyunOSSClientUtil.uploadImgs(file);
 
-            String filePath = Constants.PATH+ aliyunOSSClientUtil.BACKET_NAME + "." + aliyunOSSClientUtil.ENDPOINT+ "/" +aliyunOSSClientUtil.FOLDER2 + AliyunOSSClientUtil.filePath;
+            String filePath = Constants.PATH + aliyunOSSClientUtil.BACKET_NAME + "." + aliyunOSSClientUtil.ENDPOINT + "/" + aliyunOSSClientUtil.FOLDER2 + AliyunOSSClientUtil.filePath;
             // 返回地址
-            jsonObject.put("error",0);
-            jsonObject.put("url",filePath);
+            jsonObject.put("error", 0);
+            jsonObject.put("url", filePath);
             return jsonObject;
 //            return new Message(true,filePath);
-        }
-        catch (OSSException e)
-        {
+        } catch (OSSException e) {
             e.printStackTrace();
 //            return new Message(false,"对不起图片上传失败!");
-            jsonObject.put("msg","对不起图片上传失败!");
-            jsonObject.put("error",1);
+            jsonObject.put("msg", "对不起图片上传失败!");
+            jsonObject.put("error", 1);
             return jsonObject;
         }
 
     }
 
 
-
     /**
      * 获取所有的分类
+     *
      * @return
      */
-    public List<SysCode> getClassList(){
-        List<Category> categories=productService.findAllClass();
+    public List<SysCode> getClassList() {
+        List<Category> categories = productService.findAllClass();
         List<SysCode> sysCodeList = new ArrayList<SysCode>();
-        for (Category category:categories){
+        for (Category category : categories) {
             SysCode sysCode = new SysCode();
-            if (category!=null) {
-                sysCode.setCodeid(category.getCategoryId()==null?"":category.getCategoryId());
-                sysCode.setCodevalue(category.getCategoryName()==null?"":category.getCategoryName());
+            if (category != null) {
+                sysCode.setCodeid(category.getCategoryId() == null ? "" : category.getCategoryId());
+                sysCode.setCodevalue(category.getCategoryName() == null ? "" : category.getCategoryName());
                 sysCodeList.add(sysCode);
             }
         }
@@ -283,16 +282,17 @@ public class ProductController extends BaseController{
 
     /**
      * 获取所有的标签
+     *
      * @return
      */
-    public List<SysCode> getCategoryList(){
-        List<Category> categories=productService.findAllCategory();
+    public List<SysCode> getCategoryList() {
+        List<Category> categories = productService.findAllCategory();
         List<SysCode> sysCodeList = new ArrayList<SysCode>();
-        for (Category category:categories){
+        for (Category category : categories) {
             SysCode sysCode = new SysCode();
-            if (category!=null) {
-                sysCode.setCodeid(category.getCategoryName()==null?"":category.getCategoryName());
-                sysCode.setCodevalue(category.getCategoryName()==null?"":category.getCategoryName());
+            if (category != null) {
+                sysCode.setCodeid(category.getCategoryName() == null ? "" : category.getCategoryName());
+                sysCode.setCodevalue(category.getCategoryName() == null ? "" : category.getCategoryName());
                 sysCodeList.add(sysCode);
             }
         }
@@ -301,14 +301,15 @@ public class ProductController extends BaseController{
 
     /**
      * 获取商品中所有的供货地
+     *
      * @return
      */
-    public List<SysCode> getSupplyList(){
-        List<Product> products=productService.findAllSupply();
+    public List<SysCode> getSupplyList() {
+        List<Product> products = productService.findAllSupply();
         List<SysCode> sysCodeList = new ArrayList<SysCode>();
-        for (Product product:products){
+        for (Product product : products) {
             SysCode sysCode = new SysCode();
-            if (product!=null) {
+            if (product != null) {
                 sysCode.setCodeid(null == product.getSupply() ? "" : product.getSupply());
                 sysCode.setCodevalue(product.getSupply() == null ? "" : product.getSupply());
                 sysCodeList.add(sysCode);
@@ -319,16 +320,17 @@ public class ProductController extends BaseController{
 
     /**
      * 获取商品中所有产地
+     *
      * @return
      */
-    public List<SysCode> getOriginList(){
-        List<Product> products=productService.findAllOrigin();
+    public List<SysCode> getOriginList() {
+        List<Product> products = productService.findAllOrigin();
         List<SysCode> sysCodeList = new ArrayList<SysCode>();
-        for (Product product:products){
+        for (Product product : products) {
             SysCode sysCode = new SysCode();
-            if (product !=null) {
-                sysCode.setCodeid(product.getOrigin()==null?"":product.getOrigin());
-                sysCode.setCodevalue(product.getOrigin()==null?"":product.getOrigin());
+            if (product != null) {
+                sysCode.setCodeid(product.getOrigin() == null ? "" : product.getOrigin());
+                sysCode.setCodevalue(product.getOrigin() == null ? "" : product.getOrigin());
                 sysCodeList.add(sysCode);
             }
         }
@@ -337,9 +339,10 @@ public class ProductController extends BaseController{
 
     /**
      * 获取商品中所有规格
+     *
      * @return
      */
-    public List<SysCode> getSpecificationList(){
+    public List<SysCode> getSpecificationList() {
         List<SysCode> sysCodeList = new ArrayList<SysCode>();
         SysCode sysCode = new SysCode();
         sysCode.setCodeid("70");
@@ -352,10 +355,10 @@ public class ProductController extends BaseController{
         return sysCodeList;
     }
 
-    public List<SysCode> getUnitList(){
-        List<String> unitList=productService.getUnitList();
+    public List<SysCode> getUnitList() {
+        List<String> unitList = productService.getUnitList();
         List<SysCode> sysCodeList = new ArrayList<SysCode>();
-        for(String str:unitList){
+        for (String str : unitList) {
             SysCode sysCode = new SysCode();
             sysCode.setCodeid(str);
             sysCode.setCodevalue(str);
@@ -367,25 +370,27 @@ public class ProductController extends BaseController{
 
     /**
      * 导出商品列表数据
+     *
      * @param request
      * @param response
      * @return
      */
     @RequestMapping("exportExcel")
+    @ResponseBody
     public Message downloadProducts(HttpServletRequest request, HttpServletResponse response) {
         Map<String, String> param = new HashMap();
-        param.put("tag",request.getParameter("tag"));
-        param.put("categoryId",request.getParameter("categoryId"));
-        param.put("commodityStatus",request.getParameter("commodityStatus"));
-        param.put("commodityName",request.getParameter("commodityName"));
-        param.put("origin",request.getParameter("origin"));
-        List<Map> data=productService.productInfoQuery(param);
+        param.put("tag", request.getParameter("tag"));
+        param.put("categoryId", request.getParameter("categoryId"));
+        param.put("commodityStatus", request.getParameter("commodityStatus"));
+        param.put("commodityName", request.getParameter("commodityName"));
+        param.put("origin", request.getParameter("origin"));
+        List<Map> data = productService.productInfoQuery(param);
         try {
-            String[][] headers=new String[][]{{"编号","商品名称","商品条码","分类","产地","单位","国内/国外","主观价","客观价","进价(元)","售价(元)","库存","犹豫库存","客服库存","可下单库存","上下架"},
-                    {"commodityId","commodityName","commodityNo","categoryName","origin","unit","country","subprice","salePrice","inPrice","salePrice","stockNum","yyStock","kfStock","kxdStock","commodityStatus"}};
+            String[][] headers = new String[][]{{"编号", "商品名称", "商品条码", "分类", "产地", "单位", "国内/国外", "主观价", "客观价", "进价(元)", "售价(元)", "库存", "犹豫库存", "客服库存", "可下单库存", "上下架"},
+                    {"commodityId", "commodityName", "commodityNo", "categoryName", "origin", "unit", "country", "subprice", "salePrice", "inPrice", "salePrice", "stockNum", "yyStock", "kfStock", "kxdStock", "commodityStatus"}};
             response.setContentType("application/force-" +
                     "");// 设置强制下载不打开
-            response.addHeader("Content-Disposition","attachment;fileName=export.xls");// 设置文件名
+            response.addHeader("Content-Disposition", "attachment;fileName=export.xls");// 设置文件名
             OutputStream output = response.getOutputStream();
             ExportExcel.exportExcel2("商品信息", headers, data, output);
             output.flush();

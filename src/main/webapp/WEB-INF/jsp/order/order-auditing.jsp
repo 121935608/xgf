@@ -237,6 +237,7 @@
     var maxcount = 0;// 表示他最大的值
     var thisCount = 0;// 初始化他框的位置
 
+    // jquery绑定事件解决一定的浏览器兼容问题
     $(function () {
         // 为按钮绑定点击事件
         $("#submitModifiedBut").unbind("click").bind("click", function () {
@@ -289,7 +290,7 @@
         });
     })
 
-    function isPositiveInteger(s) {//是否为正整数
+    function isPositiveInteger(s) {//是否为非负浮点数
         var re = /^\d+(\.\d+)?$/;
         return re.test(s)
     }
@@ -297,6 +298,7 @@
     // 基本路径
     var baseOrderUrl = "${context_root}/order";
     var baseComUrl = "${context_root}/commodity";
+
     // 当前用户id
     var serviceId = "${currentUser.userId}";
     var orderNumber = "${orders.orderNumber}";

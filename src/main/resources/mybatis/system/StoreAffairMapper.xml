@@ -188,7 +188,10 @@
         select t.storeId storeId,t.storeName storeName,s.`name` name,IFNULL(SUM(o.orderPrice),0) orderPrice,count(o.orderId)
         orderNum from t_store t
         left join sys_supervisor s on s.supervisorNum=t.supervisorId
-        left join t_order o on o.userId=t.userId and o.orderStatus !=1
+        left join t_order o on o.userId=t.userId
+        LEFT JOIN t_order_detail od ON o.orderNumber = od.orderNumber
+        and o.orderStatus NOT IN (-1,1)
+        AND od.status != -1
 
         <if test="relationMap.beginTime != null and relationMap.beginTime != ''">
             AND DATE_FORMAT(o.orderTime,'%Y%m%d') &gt;=

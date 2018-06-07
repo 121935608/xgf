@@ -213,22 +213,22 @@
         <if test="commodityId !=null and commodityId !='' ">commodityId,</if>
         <if test="commodityNo !=null and commodityNo!='' ">commodityNo,</if>
         <if test="commodityName !=null and commodityName !='' ">commodityName,</if>
-        <if test="commodityNum !=null and commodityNum !='' ">commodityNum,</if>
+        <if test="commodityNum >=0 ">commodityNum,</if>
         <if test="serviceId !=null and serviceId !='' ">serviceId,</if>
         <if test="serviceRemark !=null and serviceRemark !='' ">serviceRemark,</if>
-        <if test="serviceModify !=null and serviceModify !='' ">serviceModify,</if>
-        <if test="modifyStatus !=null and modifyStatus !='' ">modifyStatus,</if>
+        <if test="serviceModify >= 0 ">serviceModify,</if>
+        <if test="modifyStatus >=0 ">modifyStatus,</if>
         modifyTime
         )VALUES (#{auditingId},#{orderId},#{orderDetailId},
         <if test="orderNumber !=null and orderNumber !='' ">#{orderNumber},</if>
         <if test="commodityId !=null and commodityId !='' ">#{commodityId},</if>
         <if test="commodityNo !=null and commodityNo!='' ">#{commodityNo},</if>
         <if test="commodityName !=null and commodityName !='' ">#{commodityName},</if>
-        <if test="commodityNum !=null and commodityNum !='' ">#{commodityNum},</if>
+        <if test="commodityNum >=0 ">#{commodityNum},</if>
         <if test="serviceId !=null and serviceId !='' ">#{serviceId},</if>
         <if test="serviceRemark !=null and serviceRemark !='' ">#{serviceRemark},</if>
-        <if test="serviceModify !=null and serviceModify !='' ">#{serviceModify},</if>
-        <if test="modifyStatus !=null and modifyStatus !='' ">#{modifyStatus},</if>
+        <if test="serviceModify >=0 ">#{serviceModify},</if>
+        <if test="modifyStatus >=0 ">#{modifyStatus},</if>
         sysdate())
     </insert>
 
@@ -237,26 +237,26 @@
         INSERT INTO t_order_detail(
         orderDetailId,orderNumber,commodityId,commodityNo,
         <if test="commodityName !=null and commodityName !='' ">commodityName,</if>
-        <if test="commodityNum !=null and commodityNum !='' ">commodityNum,</if>
+        <if test="commodityNum >=0 ">commodityNum,</if>
         <if test="inPrice !=null and inPrice !='' ">inPrice,</if>
         <if test="salePrice !=null and salePrice !='' ">salePrice,</if>
-        <if test="taxRate !=null and taxRate !='' ">taxRate,</if>
+        <if test="taxRate >=0 ">taxRate,</if>
         <if test="unit !=null and unit !='' ">unit,</if>
         <if test="imgMain !=null and imgMain !='' ">imgMain,</if>
         <if test="totalPrice !=null and totalPrice !='' ">totalPrice,</if>
-        <if test="status !=null and status !='' ">status,</if>
+        <if test="status >=0 ">status,</if>
         addTime
         )VALUES (
         #{orderDetailId},#{orderNumber},#{commodityId},#{commodityNo},
         <if test="commodityName !=null and commodityName !='' ">#{commodityName},</if>
-        <if test="commodityNum !=null and commodityNum !='' ">#{commodityNum},</if>
+        <if test="commodityNum >=0 ">#{commodityNum},</if>
         <if test="inPrice !=null and inPrice !='' ">#{inPrice},</if>
         <if test="salePrice !=null and salePrice !='' ">#{salePrice},</if>
-        <if test="taxRate !=null and taxRate !='' ">#{taxRate},</if>
+        <if test="taxRate >=0 ">#{taxRate},</if>
         <if test="unit !=null and unit !='' ">#{unit},</if>
         <if test="imgMain !=null and imgMain !='' ">#{imgMain},</if>
         <if test="totalPrice !=null and totalPrice !='' ">#{totalPrice},</if>
-        <if test="status !=null and status !='' ">#{status},</if>
+        <if test="status >=0 ">#{status},</if>
         sysdate()
         )
     </insert>
