@@ -360,6 +360,12 @@ public class OrderController extends BaseController {
                 addOrderTable,
                 serviceRemark,
                 serviceId);
+        // 判断订单是否已审核
+        Order confirmOrder = orderService.findOrder(order.getOrderId()); // 获取订单
+        if (!confirmOrder.getOrderStatus().equals("6")) {
+            return new Message(false, "该商品已审核");
+        }
+
         // 定义结果显示
         Boolean modifyResult = true;
         Boolean addResult = true;
@@ -575,6 +581,9 @@ public class OrderController extends BaseController {
     public Message pushStock(String orderId) throws UnsupportedEncodingException {
         logger.info("==========开始推送订单,订单orderId:{}", orderId);
         Order order = orderService.findOrder(orderId); // 获取订单
+        if (order == null) {
+            return new Message(false, "该订单已推送");
+        }
         String userId = order.getUserId(); // 获取到userId
         Store store = certificationService.getStoreByUserId(userId); // 查询商铺
         if (store == null) {

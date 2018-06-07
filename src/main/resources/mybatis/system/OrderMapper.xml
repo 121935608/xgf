@@ -263,7 +263,7 @@
 
     <!-- 通过订单id查询订单 -->
     <select id="findOrder" parameterType="string" resultType="Orders">
-		SELECT * FROM t_order WHERE orderId = #{orderId}
+		SELECT * FROM t_order WHERE orderId = #{orderId} AND orderStatus = '6'
 	</select>
 
     <!-- 更新订单库存号 -->
