@@ -10,14 +10,21 @@
  */
 package com.xingrongjinfu.system.product.controller;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.*;
 
+import com.xingrongjinfu.commodity.register.common.RegisterConstant;
+import com.xingrongjinfu.commodity.register.controller.RegisterController;
+import com.xingrongjinfu.commodity.register.model.Register;
+import com.xingrongjinfu.commodity.register.service.IRegisterService;
 import com.xingrongjinfu.common.constants.Constants;
 import com.xingrongjinfu.system.commodity.common.CommodityConstant;
-import com.xingrongjinfu.utils.ExportExcel;
-import com.xingrongjinfu.utils.HttpClientUtil;
+import com.xingrongjinfu.system.product.model.ProductDtl;
+import com.xingrongjinfu.utils.*;
+import org.apache.shiro.common.utils.SessionUtils;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.core.controller.BaseController;
 import org.framework.core.model.Message;
@@ -37,8 +44,6 @@ import com.xingrongjinfu.system.product.common.ProductConstant;
 import com.xingrongjinfu.system.product.model.Product;
 import com.xingrongjinfu.system.product.service.IProductService;
 import com.xingrongjinfu.system.syscode.model.SysCode;
-import com.xingrongjinfu.utils.AliyunOSSClientUtil;
-import com.xingrongjinfu.utils.StringUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -402,4 +407,90 @@ public class ProductController extends BaseController {
         return new Message(1);
     }
 
+    /**
+     * 跳转到导入excel页面
+     */
+    @RequestMapping(ProductConstant.TO_EXCEL_IN)
+    public ModelAndView toImpPage(String commodityId) throws Exception{
+        ModelAndView modelAndView = new ModelAndView(ProductConstant.TO_IMPORT_PRICE_PAGE);
+        return modelAndView;
+    }
+
+
+    /**
+     * Description: 价格模版<br/>
+     *
+     * @author huYL
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(ProductConstant.GET_PRICE_MODEL)
+    public @ResponseBody Message getImpExcelModel(HttpServletResponse response){
+        response.setContentType("application/force-download");// 设置强制下载不打开
+        response.addHeader("Content-Disposition","attachment;fileName=exportPrice.xls");// 设置文件名
+        try {
+            InputStream is= RegisterController.class.getClassLoader().getResource("../jsp/excelModel/price.xls").openStream();
+            OutputStream output = response.getOutputStream();
+            int ch;
+            while ((ch = is.read()) != -1) {
+                output.write(ch);
+            }
+            output.flush();
+            output.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new Message(0);
+        }
+        return new Message(1);
+    }
+    //批量导入修改商品价格,单位,上下架状态
+    @RequestMapping(ProductConstant.ADD_EXCEL)
+    public @ResponseBody Message impRegisterList(MultipartFile file) throws IllegalStateException, IOException {
+        String[] fields=new String[]{"commodityNo","subPrice","subPriceUnit","priceSpecification","priceSpecificationUnit",
+                "commodityStatus"};
+        List<ProductDtl> list = new ArrayList<>();
+        String a=null;
+        try {
+            ImportExcel<ProductDtl> ie=new ImportExcel<ProductDtl>();
+            list=ie.readExcel(file.getInputStream(), fields, new ProductDtl().getClass().getName());
+            if(list.size()==0){
+                return new Message(false,"没有数据！");
+            }
+            int n = list.size();
+                for(ProductDtl productDtl:list){
+                    Map map = new HashMap();
+                    if(null == productDtl.getCommodityNo()){
+                        return new Message(false,"请输入商品名称和条码！");
+                    }
+                    map.put("commodityNo", productDtl.getCommodityNo());
+                    a=productDtl.getCommodityNo();
+                    //判断商品编号是否存在
+                    Map m = productService.isExist(map);
+                    String b=null;
+                    if(null==m.get("commodityNo")){
+                        return  new Message(false,"单号"+productDtl.getCommodityNo()+"不存在");
+                    }
+                    a=productDtl.getCommodityNo();
+                    int a1=0;
+                    if(null == m){
+                        return new Message(false,"请输入正确的编号！");
+                    }
+                    if(null != productDtl.getSubPrice()){
+                        productDtl.setSubPrice(String.valueOf(Double.parseDouble(productDtl.getSubPrice())*100));
+                    }
+                    if(null != productDtl.getPriceSpecification()) {
+                        productDtl.setPriceSpecification(String.valueOf(Double.parseDouble(productDtl.getPriceSpecification())*100));
+                    }
+                }
+                for (ProductDtl productDtl:list){
+                    productService.updatePriceAndstatus(productDtl);
+                }
+             //   n=productService.updatePrice(list);
+                return new Message(true,"导入成功，修改数据"+n+"条！");
+            }
+         catch (Exception e) {
+            e.printStackTrace();
+            return new Message(false,"修改失败!"+"单号"+a+"不存在,请检查");
+        }
+    }
 }

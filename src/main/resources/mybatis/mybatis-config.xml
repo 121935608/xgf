@@ -76,6 +76,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.xingrongjinfu.crm.information.model.Information" alias="Information"/>
 		<typeAlias type="com.xingrongjinfu.crm.approvingCoupons.model.CouponGoods" alias="CouponGoods"/>
 		<typeAlias type="com.xingrongjinfu.system.order.model.OrderAuditing" alias="orderAuditing"/>
+		<typeAlias type="com.xingrongjinfu.system.product.model.ProductDtl" alias="productDtl"/>
 
 
 		<!-- 分页 -->

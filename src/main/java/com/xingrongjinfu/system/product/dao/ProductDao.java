@@ -13,6 +13,7 @@ package com.xingrongjinfu.system.product.dao;
 import com.xingrongjinfu.commodity.classification.model.Category;
 import com.xingrongjinfu.system.product.model.Classes;
 import com.xingrongjinfu.system.product.model.Product;
+import com.xingrongjinfu.system.product.model.ProductDtl;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.framework.core.dao.DynamicObjectBaseDao;
@@ -190,5 +191,20 @@ public class ProductDao extends DynamicObjectBaseDao implements IProductDao {
             e.printStackTrace();
         }
         return productInfolsit;
+    }
+    //更新商品价格
+    @Override
+    public int updatePrice(List<ProductDtl> list) {
+        return this.update("ProductMapper.updatePrice",list);
+    }
+    //判断商品编号是否有误
+    @Override
+    public Map isExist(Map map) {
+        return (Map) this.findForObject("ProductMapper.isExist",map);
+    }
+
+    @Override
+    public int updatePriceAndstatus(ProductDtl productDtl) {
+        return this.update("ProductMapper.updatePriceAndstatus",productDtl);
     }
 }

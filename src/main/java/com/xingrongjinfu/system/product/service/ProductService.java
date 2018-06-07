@@ -14,6 +14,7 @@ import com.xingrongjinfu.commodity.classification.model.Category;
 import com.xingrongjinfu.system.product.dao.IProductDao;
 import com.xingrongjinfu.system.product.model.Classes;
 import com.xingrongjinfu.system.product.model.Product;
+import com.xingrongjinfu.system.product.model.ProductDtl;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -119,6 +120,21 @@ public class ProductService implements IProductService {
     public List<Map> productInfoQuery(Map<String, String> param) {
         List<Map> list = productDao.productInfoQuery(param);
         return list;
+    }
+    //批量修改价格
+    @Override
+    public int updatePrice(List<ProductDtl> list) {
+        return productDao.updatePrice(list);
+    }
+    //判断商品是否存在
+    @Override
+    public Map isExist(Map map) {
+        return productDao.isExist(map);
+    }
+
+    @Override
+    public int updatePriceAndstatus(ProductDtl productDtl) {
+        return productDao.updatePriceAndstatus(productDtl);
     }
 
     @Override

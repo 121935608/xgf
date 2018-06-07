@@ -13,6 +13,7 @@ package com.xingrongjinfu.system.product.service;
 import com.xingrongjinfu.commodity.classification.model.Category;
 import com.xingrongjinfu.system.product.model.Classes;
 import com.xingrongjinfu.system.product.model.Product;
+import com.xingrongjinfu.system.product.model.ProductDtl;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 
@@ -97,4 +98,10 @@ public interface IProductService {
 
     int updateProductStock(Product product);
     List<Map> productInfoQuery(Map<String, String> param);
+
+    int updatePrice(List<ProductDtl> list);
+    //判断单号是否存在
+    Map isExist(Map map);
+
+    int updatePriceAndstatus(ProductDtl productDtl);
 }

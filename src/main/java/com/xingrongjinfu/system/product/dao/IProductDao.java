@@ -13,6 +13,7 @@ package com.xingrongjinfu.system.product.dao;
 import com.xingrongjinfu.commodity.classification.model.Category;
 import com.xingrongjinfu.system.product.model.Classes;
 import com.xingrongjinfu.system.product.model.Product;
+import com.xingrongjinfu.system.product.model.ProductDtl;
 import org.framework.base.util.PageUtilEntity;
 import org.framework.base.util.TableDataInfo;
 
@@ -98,4 +99,10 @@ public interface IProductDao {
     int updateProductStock(Product product);
 
     List<Map> productInfoQuery(Map<String, String> param);
+    //批量修改价格
+    int updatePrice(List<ProductDtl> list);
+    //判断是否存在
+    Map isExist(Map map);
+
+    int updatePriceAndstatus(ProductDtl productDtl);
 }

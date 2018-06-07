@@ -72,4 +72,13 @@ public class ProductConstant {
      * 请求地址:富文本上传图片
      */
     public final static String PRODUCT_IMFFILE_URLS="imgFiles";
+
+    //跳转到导入excel的界面
+    public final static String TO_EXCEL_IN="to_excel_in";
+
+    public final static String TO_IMPORT_PRICE_PAGE="commodity/import-price" ;
+    //导入商品价格的excel
+    public final static String ADD_EXCEL="add_excel" ;
+    //导入价格模版
+    public final static String GET_PRICE_MODEL="get_price_model" ;
 }

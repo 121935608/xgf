@@ -293,4 +293,36 @@
         </where>
 
     </update>
+    <select id="isExist" parameterType="map" resultType="map">
+        SELECT  commodityNo FROM  t_commodity WHERE commodityNo=#{commodityNo}
+    </select>
+
+    <update id="updatePrice" parameterType="java.util.List" >
+
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            update t_commodity
+            <set>
+                <if test="#{item.subPrice}!=null and #{item.subPrice}!=''" >
+                    subPrice=#{item.subPrice},
+                </if>
+                subPriceUnit=#{item.subPriceUnit},
+                priceSpecification=#{item.priceSpecification},
+                priceSpecificationUnit=#{item.priceSpecificationUnit},
+            </set>
+            where commodityNo = #{item.commodityNo}
+        </foreach>
+    </update>
+
+
+    <update id="updatePriceAndstatus" parameterType="ProductDtl" >
+        UPDATE  t_commodity
+            <set>
+                <if test="subPrice !=null and subPrice !=''" >subPrice=#{subPrice},</if>
+                <if test="subPriceUnit !=null and subPriceUnit !=''">subPriceUnit=#{subPriceUnit},</if>
+                <if test="priceSpecification !=null and priceSpecification !=''">priceSpecification=#{priceSpecification},</if>
+                <if test="priceSpecificationUnit !=null and priceSpecificationUnit !=''"> priceSpecificationUnit=#{priceSpecificationUnit},</if>
+                <if test="commodityStatus !=null and commodityStatus !=''">commodityStatus=#{commodityStatus},</if>
+            </set>
+            where commodityNo = #{commodityNo}
+    </update>
 </mapper>

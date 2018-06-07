@@ -44,6 +44,11 @@
             <button type="button" class="btn btn-success radius" onclick="export_excel1()"><i class="Hui-iconfont">&#xe665;</i> 导出
             </button>
         </c:if>
+        <!--批量导入改价-->
+        <c:if test="${product.type=='c'}">
+          <span class="l" style="margin-left:20px;"><a href="javascript:;" onclick="excel_in()"
+                                                       class="btn btn-primary radius">一键改价</a></span>
+        </c:if>
     </div>
     <div class="mt-20">
         <table class="table table-border table-bordered table-hover table-bg table-sort">
@@ -69,6 +74,7 @@
                 <th width="5%">客服库存</th>
                 <th width="5%">可下单库存</th>
                 <th width="5%">上下架</th>
+                <th width="5%">启用/停用</th>
                 <th width="8%">操作</th>
 
             </tr>
@@ -361,7 +367,7 @@
                     }
                 }
             },
-            /*{
+            {
                 "sDefaultContent": "状态",
                 "bSortable" : false,
                 "sClass": "td-status text-c",
@@ -372,8 +378,9 @@
                     } else {
                         return "<span class=\"label label-defaunt radius\">已停用</span>";
                     }
+                    return statusTools(row);
                 }
-            },*/
+            },
             {
                 "sDefaultContent": "操作",
                 "bSortable": false,
@@ -418,6 +425,22 @@
         elemIF.style.display = "none";
         document.body.appendChild(elemIF);
     }
+    <!--批量更改价格-->
+    function excel_in() {//跳转到
+        var url='${context_root}/commodity/to_excel_in.action?impUrl='+encodeURIComponent('/commodity/add_excel.action')+'&molUrl='+encodeURIComponent('/commodity/get_price_model.action')
+        layer.open({
+            type: 2,
+            title: '导入',
+            shadeClose: true,
+            shade: 0.8,
+            area: ['380px', '50%'],
+            content: url
+        });
+    }
+
+
+
+
 
     //导出excel
     function query() {
