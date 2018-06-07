@@ -61,6 +61,9 @@ public class OrderController extends BaseController {
     @Value("${stockUrl}")
     private String stockUrl;
 
+    @Value("${localStockUrl}")
+    private String localStockUrl;
+
     @Autowired
     private IOrderService orderService;
 
@@ -693,7 +696,7 @@ public class OrderController extends BaseController {
             return new Message(false, "库存返回参数异常");
         }
         String storageNo = "";
-        if (jsonObject1 != null && StringUtil.nullOrBlank(code) && "0000".equals(code)) {
+        if (jsonObject1 != null && !StringUtil.nullOrBlank(code) && "0000".equals(code)) {
             String data = jsonObject1.getString("data");
             net.sf.json.JSONObject jsonObject2 = net.sf.json.JSONObject.fromObject(data);
             storageNo = jsonObject2.getString("purchaserId");
@@ -706,7 +709,7 @@ public class OrderController extends BaseController {
             }
         }
         logger.warn("===============订单order:{},库存号storageNo:{}修改失败", order.getOrderId(), storageNo);
-        return new Message(false, "库存返回错误码");
+        return new Message(false, "更新库存号失败");
     }
 
     /**
