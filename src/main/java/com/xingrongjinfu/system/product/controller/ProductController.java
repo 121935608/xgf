@@ -392,7 +392,7 @@ public class ProductController extends BaseController {
         List<Map> data = productService.productInfoQuery(param);
         try {
             String[][] headers = new String[][]{{"编号", "商品名称", "商品条码", "分类", "产地", "单位", "国内/国外", "主观价", "客观价", "进价(元)", "售价(元)", "库存", "犹豫库存", "客服库存", "可下单库存", "上下架"},
-                    {"commodityId", "commodityName", "commodityNo", "categoryName", "origin", "unit", "country", "subprice", "salePrice", "inPrice", "salePrice", "stockNum", "yyStock", "kfStock", "kxdStock", "commodityStatus"}};
+                    {"barCode", "commodityName", "commodityNo", "categoryName", "origin", "unit", "country", "subprice", "salePrice", "inPrice", "salePrice", "stockNum", "yyStock", "kfStock", "kxdStock", "commodityStatus"}};
             response.setContentType("application/force-" +
                     "");// 设置强制下载不打开
             response.addHeader("Content-Disposition", "attachment;fileName=export.xls");// 设置文件名
@@ -416,13 +416,10 @@ public class ProductController extends BaseController {
         return modelAndView;
     }
 
-
     /**
-     * Description: 价格模版<br/>
-     *
-     * @author huYL
+     * 价格模版
+     * @param response
      * @return
-     * @throws Exception
      */
     @RequestMapping(ProductConstant.GET_PRICE_MODEL)
     public @ResponseBody Message getImpExcelModel(HttpServletResponse response){
@@ -443,7 +440,14 @@ public class ProductController extends BaseController {
         }
         return new Message(1);
     }
-    //批量导入修改商品价格,单位,上下架状态
+
+    /**
+     * 批量导入修改商品价格,单位,上下架状态
+     * @param file
+     * @return
+     * @throws IllegalStateException
+     * @throws IOException
+     */
     @RequestMapping(ProductConstant.ADD_EXCEL)
     public @ResponseBody Message impRegisterList(MultipartFile file) throws IllegalStateException, IOException {
         String[] fields=new String[]{"commodityNo","subPrice","subPriceUnit","priceSpecification","priceSpecificationUnit",
@@ -476,16 +480,16 @@ public class ProductController extends BaseController {
                         return new Message(false,"请输入正确的编号！");
                     }
                     if(null != productDtl.getSubPrice()){
-                        productDtl.setSubPrice(String.valueOf(Double.parseDouble(productDtl.getSubPrice())*100));
+                        productDtl.setSubPrice(String.valueOf(Integer.parseInt(productDtl.getSubPrice())*100));
                     }
                     if(null != productDtl.getPriceSpecification()) {
-                        productDtl.setPriceSpecification(String.valueOf(Double.parseDouble(productDtl.getPriceSpecification())*100));
+                        productDtl.setPriceSpecification(String.valueOf(Integer.parseInt(productDtl.getPriceSpecification())*100));
                     }
                 }
                 for (ProductDtl productDtl:list){
                     productService.updatePriceAndstatus(productDtl);
                 }
-             //   n=productService.updatePrice(list);
+               // n=productService.updatePrice(list);
                 return new Message(true,"导入成功，修改数据"+n+"条！");
             }
          catch (Exception e) {

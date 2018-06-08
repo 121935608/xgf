@@ -9,7 +9,7 @@ public class ProductDtl {
     public String subPriceUnit;//主观价单位
     public String priceSpecification;//客观价
     public String priceSpecificationUnit;//客观价单位
-    public Integer commodityStatus;//状态：1 正常 -1 已删除
+    public String  commodityStatus;//状态：1 正常 -1 已删除
 
     public String getCommodityNo() {
         return commodityNo;
@@ -51,11 +51,11 @@ public class ProductDtl {
         this.priceSpecificationUnit = priceSpecificationUnit;
     }
 
-    public Integer getCommodityStatus() {
+    public String getCommodityStatus() {
         return commodityStatus;
     }
 
-    public void setCommodityStatus(Integer commodityStatus) {
+    public void setCommodityStatus(String commodityStatus) {
         this.commodityStatus = commodityStatus;
     }
 }

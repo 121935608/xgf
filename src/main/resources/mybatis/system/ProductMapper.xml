@@ -94,7 +94,7 @@
 
     <!--查询所有-->
     <resultMap id="ProductResult1" type="map">
-        <result column="commodityId" property="commodityId"/>
+        <result column="barCode" property="barCode"/>
         <result column="commodityName" property="commodityName"/>
         <result column="commodityNo" property="commodityNo"/>
         <result column="inPrice" property="inPrice"/>
@@ -111,7 +111,7 @@
         <result column="categoryName" property="categoryName"/>
     </resultMap>
     <select id="productInfoQuery" parameterType="map" resultMap="ProductResult1">
-        SELECT c.taxRate,c.commodityId,c.yyStock,c.kfStock,c.kxdStock,c.commodityName,c.commodityNo,c.subprice,c.inPrice/100
+        SELECT c.barCode,c.yyStock,c.kfStock,c.kxdStock,c.commodityName,c.commodityNo,c.subprice,c.inPrice/100
         inPrice,
         c.salePrice/100 salePrice,c.unit,c.stockNum,CASE c.commodityStatus WHEN 0 THEN '上架' WHEN 1 THEN '下架' END commodityStatus,c.origin,c.commodityStatus commodityStatus,case c.country when 1 THEN
         '国内' when 2 then '国外' ELSE '其他' END country,t.categoryName
@@ -297,12 +297,14 @@
         SELECT  commodityNo FROM  t_commodity WHERE commodityNo=#{commodityNo}
     </select>
 
+
+    <!--批量修改价格-->
     <update id="updatePrice" parameterType="java.util.List" >
 
         <foreach collection="list" item="item" index="index" open="" close="" separator=";">
             update t_commodity
             <set>
-                <if test="#{item.subPrice}!=null and #{item.subPrice}!=''" >
+                <if test="${item.subPrice}!=null and ${item.subPrice}!=''" >
                     subPrice=#{item.subPrice},
                 </if>
                 subPriceUnit=#{item.subPriceUnit},
@@ -313,7 +315,7 @@
         </foreach>
     </update>
 
-
+    <!--批量修改商品价格-->
     <update id="updatePriceAndstatus" parameterType="ProductDtl" >
         UPDATE  t_commodity
             <set>
@@ -321,7 +323,7 @@
                 <if test="subPriceUnit !=null and subPriceUnit !=''">subPriceUnit=#{subPriceUnit},</if>
                 <if test="priceSpecification !=null and priceSpecification !=''">priceSpecification=#{priceSpecification},</if>
                 <if test="priceSpecificationUnit !=null and priceSpecificationUnit !=''"> priceSpecificationUnit=#{priceSpecificationUnit},</if>
-                <if test="commodityStatus !=null and commodityStatus !=''">commodityStatus=#{commodityStatus},</if>
+                <if test="commodityStatus !=null and commodityStatus !=''"> commodityStatus=#{commodityStatus},</if>
             </set>
             where commodityNo = #{commodityNo}
     </update>
