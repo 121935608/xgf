@@ -475,7 +475,6 @@ public class ProductController extends BaseController {
                         return  new Message(false,"单号"+productDtl.getCommodityNo()+"不存在");
                     }
                     a=productDtl.getCommodityNo();
-                    int a1=0;
                     if(null == m){
                         return new Message(false,"请输入正确的编号！");
                     }

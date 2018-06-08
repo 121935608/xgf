@@ -332,8 +332,8 @@ $(document).ready(function(){
 		var expresslist = '${product.imgOther}';
 		var express = expresslist.split(';');
 		var a = $("img").length;
-    	if(express.length > 3 || (a >3)){
-    		alert("最多只能选择四张图片!");
+    	if(express.length > 4 || (a >4)){
+    		alert("最多只能选择5张图片!");
     		return;
     	}
 		document.getElementById('picture').click();
