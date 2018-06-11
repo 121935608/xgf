@@ -52,7 +52,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 						carouselName LIKE CONCAT(CONCAT('%', #{relationMap.fuzzyCondition}),'%')
 						)
 			</if>
-			order by createTime desc
+			order by sort,createTime desc
 	</select>
 	
 	<!-- 修改信息 -->

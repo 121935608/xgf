@@ -73,9 +73,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_web_4_1_7_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_web_4_1_7_RELEASE.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_webmvc_4_1_7_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_webmvc_4_1_7_RELEASE.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/commodity/model/Commodity.java" afterPath="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/commodity/model/Commodity.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/system/CommodityMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/system/CommodityMapper.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/dataCount/commodity-list.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/dataCount/commodity-list.jsp" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/content/CarouselMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/content/CarouselMapper.xml" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/content/carousel-modify.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/content/carousel-modify.jsp" />
       <change beforePath="$PROJECT_DIR$/xgf_admin.iml" afterPath="$PROJECT_DIR$/xgf_admin.iml" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
@@ -108,11 +107,59 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="CommodityController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/commodity/controller/CommodityController.java">
+      <file leaf-file-name="ClassificationController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/commodity/classification/controller/ClassificationController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="90" column="21" lean-forward="true" selection-start-line="90" selection-start-column="21" selection-end-line="90" selection-end-column="21" />
+            <state relative-caret-position="81">
+              <caret line="123" column="50" lean-forward="true" selection-start-line="123" selection-start-column="50" selection-end-line="123" selection-end-column="50" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Category.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/commodity/classification/model/Category.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="348">
+              <caret line="17" column="26" lean-forward="false" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ClassificationMapper.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/commodity/ClassificationMapper.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="63">
+              <caret line="38" column="13" lean-forward="true" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
+              <folding>
+                <marker date="1526628996283" expanded="true" signature="711:786" ph="SELECT * FRO... t_category" />
+                <marker date="1526628996283" expanded="true" signature="879:934" ph="select * fro... t_category" />
+                <marker date="1526628996283" expanded="true" signature="1028:1106" ph="SELECT * FRO... t_category" />
+                <marker date="1526628996283" expanded="true" signature="1182:1392" ph="update t_category... " />
+                <marker date="1526628996283" expanded="true" signature="1489:2138" ph="update t_category... " />
+                <marker date="1526628996283" expanded="true" signature="3350:3466" ph="SELECT COUNT... t_category" />
+                <marker date="1526628996283" expanded="true" signature="3552:3626" ph="SELECT COUNT... t_category" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ClassificationConstant.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/commodity/classification/common/ClassificationConstant.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="54" column="78" lean-forward="false" selection-start-line="54" selection-start-column="64" selection-end-line="54" selection-end-column="78" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="classification-list.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/commodity/classification-list.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="201">
+              <caret line="45" column="14" lean-forward="true" selection-start-line="45" selection-start-column="14" selection-end-line="45" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -121,8 +168,8 @@
       <file leaf-file-name="CommodityDao.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/commodity/dao/CommodityDao.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="146">
-              <caret line="40" column="32" lean-forward="true" selection-start-line="40" selection-start-column="32" selection-end-line="40" selection-end-column="32" />
+            <state relative-caret-position="540">
+              <caret line="37" column="76" lean-forward="false" selection-start-line="37" selection-start-column="61" selection-end-line="37" selection-end-column="76" />
               <folding />
             </state>
           </provider>
@@ -144,12 +191,69 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CarouselController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CarouselController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/content/carousel/controller/CarouselController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="316">
-              <caret line="181" column="42" lean-forward="false" selection-start-line="181" selection-start-column="42" selection-end-line="181" selection-end-column="42" />
+            <state relative-caret-position="216">
+              <caret line="225" column="48" lean-forward="true" selection-start-line="225" selection-start-column="48" selection-end-line="225" selection-end-column="48" />
+              <folding>
+                <element signature="e#5375#5384#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ICarouselService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/content/carousel/service/ICarouselService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="213">
+              <caret line="53" column="15" lean-forward="false" selection-start-line="53" selection-start-column="15" selection-end-line="53" selection-end-column="15" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CarouselConstant.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/content/carousel/common/CarouselConstant.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="158">
+              <caret line="43" column="58" lean-forward="false" selection-start-line="43" selection-start-column="58" selection-end-line="43" selection-end-column="58" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="carousel-modify.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/content/carousel-modify.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="232">
+              <caret line="83" column="57" lean-forward="false" selection-start-line="83" selection-start-column="57" selection-end-line="83" selection-end-column="57" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CarouselDao.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/content/carousel/dao/CarouselDao.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="34" column="101" lean-forward="false" selection-start-line="34" selection-start-column="88" selection-end-line="34" selection-end-column="101" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CarouselMapper.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/content/CarouselMapper.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="169">
+              <caret line="21" column="13" lean-forward="true" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+              <folding>
+                <marker date="1528695843668" expanded="true" signature="857:916" ph="select * fro... t_carousel" />
+                <marker date="1528695843668" expanded="true" signature="992:1110" ph="delete from t_carousel... " />
+                <marker date="1528695843668" expanded="true" signature="1209:1264" ph="select * fro... t_carousel" />
+                <marker date="1528695843668" expanded="true" signature="1379:2216" ph="SELECT carou... t_carousel" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -164,21 +268,6 @@
                 <element signature="e#957#958#0" expanded="true" />
                 <element signature="e#1006#1007#0" expanded="true" />
                 <element signature="e#1046#1047#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="commodity-list.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/dataCount/commodity-list.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="278">
-              <caret line="136" column="23" lean-forward="true" selection-start-line="136" selection-start-column="23" selection-end-line="136" selection-end-column="23" />
-              <folding>
-                <marker date="1528687567736" expanded="true" signature="4956:4976" ph="..." />
-                <marker date="1528687567736" expanded="true" signature="5118:5138" ph="..." />
-                <marker date="1528687567736" expanded="true" signature="6782:6802" ph="..." />
-                <marker date="1528687567736" expanded="true" signature="7804:7824" ph="..." />
               </folding>
             </state>
           </provider>
@@ -211,14 +300,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>getClassList</find>
-      <find>审核</find>
-      <find>obj</find>
-      <find>导入excel</find>
-      <find>TO_REGISTER_IMP</find>
-      <find>toImpPage</find>
-      <find>impRegisterList</find>
-      <find>molUrl</find>
       <find>getImpExcelModel</find>
       <find>isExist</find>
       <find>updateImpExcel</find>
@@ -239,8 +320,16 @@
       <find>img</find>
       <find>跳转到审核</find>
       <find>下载</find>
-      <find>pageInfoQuery</find>
       <find>CommodityResult</find>
+      <find>提交</find>
+      <find>queryCategorys</find>
+      <find>状态</find>
+      <find>classificationList</find>
+      <find>updateCategoryInfo</find>
+      <find>排序</find>
+      <find>updateC</find>
+      <find>pageInfoQuery</find>
+      <find>Carousel</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -266,20 +355,16 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/product/model/Product.java" />
         <option value="$PROJECT_DIR$/src/main/resources/spring/spring-config-shiro.xml" />
         <option value="$PROJECT_DIR$/src/main/java/org/apache/shiro/web/filter/jcaptcha/JCaptchaValidateFilter.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/login.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/common/constants/Constants.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/content/carousel/common/CarouselConstant.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/content/carousel/model/Carousel.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/mybatis/content/CarouselMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/commodity/dao/CommodityDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/commodity/dao/ICommodityDao.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/content/carousel-add.jsp" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/content/carousel-modify.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/system/certification-check.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/content/carousel/controller/CarouselController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/storeaffairs/model/Store.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/merchant/model/Merchant.java" />
         <option value="$PROJECT_DIR$/src/main/resources/mybatis/system/MerchantMapper.xml" />
@@ -317,6 +402,10 @@
         <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/commodity/model/Commodity.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/dataCount/commodity-list.jsp" />
         <option value="$PROJECT_DIR$/src/main/resources/mybatis/system/CommodityMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/mybatis/commodity/ClassificationMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/content/carousel-modify.jsp" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xingrongjinfu/content/carousel/controller/CarouselController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mybatis/content/CarouselMapper.xml" />
       </list>
     </option>
   </component>
@@ -473,7 +562,8 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="xingrongjinfu" type="462c0819:PsiDirectoryNode" />
-              <item name="crm" type="462c0819:PsiDirectoryNode" />
+              <item name="commodity" type="462c0819:PsiDirectoryNode" />
+              <item name="classification" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
@@ -482,29 +572,8 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="xingrongjinfu" type="462c0819:PsiDirectoryNode" />
-              <item name="crm" type="462c0819:PsiDirectoryNode" />
-              <item name="approvingCoupons" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="xingrongjinfu" type="462c0819:PsiDirectoryNode" />
-              <item name="crm" type="462c0819:PsiDirectoryNode" />
-              <item name="approvingCoupons" type="462c0819:PsiDirectoryNode" />
-              <item name="common" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="xingrongjinfu" type="462c0819:PsiDirectoryNode" />
-              <item name="crm" type="462c0819:PsiDirectoryNode" />
-              <item name="approvingCoupons" type="462c0819:PsiDirectoryNode" />
+              <item name="commodity" type="462c0819:PsiDirectoryNode" />
+              <item name="classification" type="462c0819:PsiDirectoryNode" />
               <item name="controller" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -514,38 +583,8 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="xingrongjinfu" type="462c0819:PsiDirectoryNode" />
-              <item name="crm" type="462c0819:PsiDirectoryNode" />
-              <item name="approvingCoupons" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="xingrongjinfu" type="462c0819:PsiDirectoryNode" />
-              <item name="system" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="xingrongjinfu" type="462c0819:PsiDirectoryNode" />
-              <item name="system" type="462c0819:PsiDirectoryNode" />
               <item name="commodity" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="xingrongjinfu" type="462c0819:PsiDirectoryNode" />
-              <item name="system" type="462c0819:PsiDirectoryNode" />
-              <item name="commodity" type="462c0819:PsiDirectoryNode" />
+              <item name="classification" type="462c0819:PsiDirectoryNode" />
               <item name="dao" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -555,9 +594,7 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="xingrongjinfu" type="462c0819:PsiDirectoryNode" />
-              <item name="system" type="462c0819:PsiDirectoryNode" />
-              <item name="commodity" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
+              <item name="content" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
@@ -566,8 +603,8 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="xingrongjinfu" type="462c0819:PsiDirectoryNode" />
-              <item name="system" type="462c0819:PsiDirectoryNode" />
-              <item name="document" type="462c0819:PsiDirectoryNode" />
+              <item name="content" type="462c0819:PsiDirectoryNode" />
+              <item name="carousel" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
@@ -576,159 +613,9 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="xingrongjinfu" type="462c0819:PsiDirectoryNode" />
-              <item name="system" type="462c0819:PsiDirectoryNode" />
-              <item name="document" type="462c0819:PsiDirectoryNode" />
-              <item name="common" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="xingrongjinfu" type="462c0819:PsiDirectoryNode" />
-              <item name="system" type="462c0819:PsiDirectoryNode" />
-              <item name="document" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="xingrongjinfu" type="462c0819:PsiDirectoryNode" />
-              <item name="system" type="462c0819:PsiDirectoryNode" />
-              <item name="order" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="xingrongjinfu" type="462c0819:PsiDirectoryNode" />
-              <item name="system" type="462c0819:PsiDirectoryNode" />
-              <item name="order" type="462c0819:PsiDirectoryNode" />
-              <item name="common" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="xingrongjinfu" type="462c0819:PsiDirectoryNode" />
-              <item name="system" type="462c0819:PsiDirectoryNode" />
-              <item name="order" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="xingrongjinfu" type="462c0819:PsiDirectoryNode" />
-              <item name="system" type="462c0819:PsiDirectoryNode" />
-              <item name="PayMethod" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="xingrongjinfu" type="462c0819:PsiDirectoryNode" />
-              <item name="system" type="462c0819:PsiDirectoryNode" />
-              <item name="PayMethod" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="xingrongjinfu" type="462c0819:PsiDirectoryNode" />
-              <item name="system" type="462c0819:PsiDirectoryNode" />
-              <item name="permission" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="xingrongjinfu" type="462c0819:PsiDirectoryNode" />
-              <item name="system" type="462c0819:PsiDirectoryNode" />
-              <item name="permission" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="xingrongjinfu" type="462c0819:PsiDirectoryNode" />
-              <item name="system" type="462c0819:PsiDirectoryNode" />
-              <item name="product" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="xingrongjinfu" type="462c0819:PsiDirectoryNode" />
-              <item name="system" type="462c0819:PsiDirectoryNode" />
-              <item name="product" type="462c0819:PsiDirectoryNode" />
-              <item name="common" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="xingrongjinfu" type="462c0819:PsiDirectoryNode" />
-              <item name="system" type="462c0819:PsiDirectoryNode" />
-              <item name="product" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="xingrongjinfu" type="462c0819:PsiDirectoryNode" />
-              <item name="system" type="462c0819:PsiDirectoryNode" />
-              <item name="product" type="462c0819:PsiDirectoryNode" />
+              <item name="content" type="462c0819:PsiDirectoryNode" />
+              <item name="carousel" type="462c0819:PsiDirectoryNode" />
               <item name="dao" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="xingrongjinfu" type="462c0819:PsiDirectoryNode" />
-              <item name="system" type="462c0819:PsiDirectoryNode" />
-              <item name="product" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="xingrongjinfu" type="462c0819:PsiDirectoryNode" />
-              <item name="system" type="462c0819:PsiDirectoryNode" />
-              <item name="product" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
@@ -864,6 +751,26 @@
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
               <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
               <item name="jsp" type="462c0819:PsiDirectoryNode" />
+              <item name="commodity" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
+              <item name="jsp" type="462c0819:PsiDirectoryNode" />
+              <item name="content" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xgf_admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xgf_admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
+              <item name="jsp" type="462c0819:PsiDirectoryNode" />
               <item name="dataCount" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -876,13 +783,13 @@
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.tabs" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="SearchEverywhereHistoryKey" value="findCommodityInfo&#9;PSI&#9;JAVA://com.xingrongjinfu.system.commodity.controller.CommodityController#findCommodityInfo&#10;regist&#9;FILE&#9;file://D:/xgf_admin/src/main/resources/mybatis/commodity/RegisterMapper.xml&#10;couponList&#9;PSI&#9;JAVA://com.xingrongjinfu.crm.approvingCoupons.controller.CouponController#couponList&#10;orderC&#9;null&#9;null&#10;registerList&#9;PSI&#9;JAVA://com.xingrongjinfu.commodity.register.controller.RegisterController#registerList&#10;registerlist&#9;FILE&#9;file://D:/xgf_admin/src/main/webapp/WEB-INF/jsp/commodity/register-list.jsp&#10;PaysMapper&#9;FILE&#9;file://E:/IdeaProjects/xgf_admin/src/main/resources/mybatis/statistics/PaysMapper.xml&#10;firstPageInfoQuery&#9;PSI&#9;JAVA://com.xingrongjinfu.system.pays.dao.IPaysDao#firstPageInfoQuery" />
+    <property name="SearchEverywhereHistoryKey" value="getCommodityTree&#9;null&#9;null&#10;carouselList&#9;PSI&#9;JAVA://com.xingrongjinfu.content.carousel.controller.CarouselController#carouselList&#10;classificationList&#9;FILE&#9;file://D:/xgf_admin/src/main/webapp/WEB-INF/jsp/commodity/classification-list.jsp&#10;findCommodityInfo&#9;PSI&#9;JAVA://com.xingrongjinfu.system.commodity.controller.CommodityController#findCommodityInfo&#10;regist&#9;FILE&#9;file://D:/xgf_admin/src/main/resources/mybatis/commodity/RegisterMapper.xml&#10;couponList&#9;PSI&#9;JAVA://com.xingrongjinfu.crm.approvingCoupons.controller.CouponController#couponList&#10;orderC&#9;null&#9;null&#10;registerList&#9;PSI&#9;JAVA://com.xingrongjinfu.commodity.register.controller.RegisterController#registerList&#10;registerlist&#9;FILE&#9;file://D:/xgf_admin/src/main/webapp/WEB-INF/jsp/commodity/register-list.jsp&#10;PaysMapper&#9;FILE&#9;file://E:/IdeaProjects/xgf_admin/src/main/resources/mybatis/statistics/PaysMapper.xml&#10;firstPageInfoQuery&#9;PSI&#9;JAVA://com.xingrongjinfu.system.pays.dao.IPaysDao#firstPageInfoQuery" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -1191,14 +1098,7 @@
       <workItem from="1528331934740" duration="20253000" />
       <workItem from="1528353509110" duration="15682000" />
       <workItem from="1528418347122" duration="26518000" />
-      <workItem from="1528677103253" duration="10622000" />
-    </task>
-    <task id="LOCAL-00034" summary="添加银行卡号到企业认证表里">
-      <created>1520837848473</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1520837848473</updated>
+      <workItem from="1528677103253" duration="17013000" />
     </task>
     <task id="LOCAL-00035" summary="添加银行卡号到企业认证表里">
       <created>1520848225889</created>
@@ -1536,11 +1436,18 @@
       <option name="project" value="LOCAL" />
       <updated>1528682960401</updated>
     </task>
-    <option name="localTasksCounter" value="83" />
+    <task id="LOCAL-00083" summary="商品销售统计增加:可销售库存">
+      <created>1528687818374</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1528687818374</updated>
+    </task>
+    <option name="localTasksCounter" value="84" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="617102000" />
+    <option name="totallyTimeSpent" value="623493000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1553,7 +1460,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.45492372" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1570,7 +1476,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32871014" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="JRebel remote servers log" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28108808" sideWeight="0.5045278" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24870466" sideWeight="0.47328246" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2707254" sideWeight="0.47328246" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="JRebel" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23834197" sideWeight="0.5277247" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32923675" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1578,7 +1484,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24967659" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22574386" sideWeight="0.51167727" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.54646325" sideWeight="0.6262953" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.45769763" sideWeight="0.6262953" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1677,7 +1583,8 @@
     <MESSAGE value="一键改价,导出字段调整,商品状态显示调整" />
     <MESSAGE value="商品图片上传限制修改" />
     <MESSAGE value="一键修改价格,商品导出 bug修复" />
-    <option name="LAST_COMMIT_MESSAGE" value="一键修改价格,商品导出 bug修复" />
+    <MESSAGE value="商品销售统计增加:可销售库存" />
+    <option name="LAST_COMMIT_MESSAGE" value="商品销售统计增加:可销售库存" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1784,26 +1691,8 @@
           <properties />
           <option name="timeStamp" value="90" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/content/carousel/controller/CarouselController.java</url>
-          <line>153</line>
-          <properties />
-          <option name="timeStamp" value="112" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/content/carousel/controller/CarouselController.java</url>
-          <line>223</line>
-          <properties />
-          <option name="timeStamp" value="113" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/content/carousel/controller/CarouselController.java</url>
-          <line>174</line>
-          <properties />
-          <option name="timeStamp" value="114" />
-        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="190" />
+      <option name="time" value="192" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory">
@@ -1816,113 +1705,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/commodity/register/service/IRegisterService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="31" column="18" lean-forward="false" selection-start-line="31" selection-start-column="18" selection-end-line="31" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/repository/org/springframework/spring-web/4.1.7.RELEASE/spring-web-4.1.7.RELEASE.jar!/org/springframework/web/method/support/InvocableHandlerMethod.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="132" column="0" lean-forward="false" selection-start-line="132" selection-start-column="0" selection-end-line="132" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/product/model/Product.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="39" column="27" lean-forward="false" selection-start-line="39" selection-start-column="27" selection-end-line="39" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/mybatis-config.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="78" column="93" lean-forward="false" selection-start-line="78" selection-start-column="83" selection-end-line="78" selection-end-column="93" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/product/model/ProductDtl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-906">
-          <caret line="13" column="36" lean-forward="true" selection-start-line="13" selection-start-column="36" selection-end-line="13" selection-end-column="36" />
-          <folding>
-            <element signature="e#421#422#0" expanded="false" />
-            <element signature="e#475#476#0" expanded="false" />
-            <element signature="e#521#522#0" expanded="false" />
-            <element signature="e#556#557#0" expanded="false" />
-            <element signature="e#587#588#0" expanded="false" />
-            <element signature="e#635#636#0" expanded="false" />
-            <element signature="e#675#676#0" expanded="false" />
-            <element signature="e#714#715#0" expanded="false" />
-            <element signature="e#749#750#0" expanded="false" />
-            <element signature="e#805#806#0" expanded="false" />
-            <element signature="e#853#854#0" expanded="false" />
-            <element signature="e#898#899#0" expanded="false" />
-            <element signature="e#939#940#0" expanded="false" />
-            <element signature="e#1007#1008#0" expanded="false" />
-            <element signature="e#1067#1068#0" expanded="false" />
-            <element signature="e#1116#1117#0" expanded="false" />
-            <element signature="e#1161#1162#0" expanded="false" />
-            <element signature="e#1347#1348#0" expanded="false" />
-            <element signature="e#1385#1386#0" expanded="false" />
-            <element signature="e#1447#1448#0" expanded="false" />
-            <element signature="e#1501#1502#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/product/dao/IProductDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
-          <caret line="91" column="31" lean-forward="true" selection-start-line="91" selection-start-column="31" selection-end-line="91" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/product/service/ProductService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="103">
-          <caret line="126" column="0" lean-forward="false" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/system/SettingMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1526628996349" expanded="true" signature="655:680" ph="SELECT * FRO... sys_setting" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/product/service/IProductService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
-          <caret line="105" column="8" lean-forward="false" selection-start-line="105" selection-start-column="8" selection-end-line="105" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/tags/contentHeader.tag">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/common/taglibs.jspf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="8" column="26" lean-forward="true" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/product/dao/ProductDao.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
@@ -2249,11 +2031,72 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/commodity/controller/CommodityController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="90" column="21" lean-forward="true" selection-start-line="90" selection-start-column="21" selection-end-line="90" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/content/carousel/dao/CarouselDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="34" column="101" lean-forward="false" selection-start-line="34" selection-start-column="88" selection-end-line="34" selection-end-column="101" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/commodity/dao/CommodityDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="40" column="32" lean-forward="true" selection-start-line="40" selection-start-column="32" selection-end-line="40" selection-end-column="32" />
+        <state relative-caret-position="540">
+          <caret line="37" column="76" lean-forward="false" selection-start-line="37" selection-start-column="61" selection-end-line="37" selection-end-column="76" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/commodity/classification/dao/ClassificationDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="21" column="106" lean-forward="false" selection-start-line="21" selection-start-column="92" selection-end-line="21" selection-end-column="106" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/commodity/classification/common/ClassificationConstant.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="54" column="78" lean-forward="false" selection-start-line="54" selection-start-column="64" selection-end-line="54" selection-end-column="78" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/commodity/ClassificationMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="63">
+          <caret line="38" column="13" lean-forward="true" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
+          <folding>
+            <marker date="1526628996283" expanded="true" signature="711:786" ph="SELECT * FRO... t_category" />
+            <marker date="1526628996283" expanded="true" signature="879:934" ph="select * fro... t_category" />
+            <marker date="1526628996283" expanded="true" signature="1028:1106" ph="SELECT * FRO... t_category" />
+            <marker date="1526628996283" expanded="true" signature="1182:1392" ph="update t_category... " />
+            <marker date="1526628996283" expanded="true" signature="1489:2138" ph="update t_category... " />
+            <marker date="1526628996283" expanded="true" signature="3350:3466" ph="SELECT COUNT... t_category" />
+            <marker date="1526628996283" expanded="true" signature="3552:3626" ph="SELECT COUNT... t_category" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/dataCount/commodity-list.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1169">
+          <caret line="136" column="23" lean-forward="true" selection-start-line="136" selection-start-column="23" selection-end-line="136" selection-end-column="23" />
+          <folding>
+            <marker date="1528687567736" expanded="true" signature="4956:4976" ph="..." />
+            <marker date="1528687567736" expanded="true" signature="5118:5138" ph="..." />
+            <marker date="1528687567736" expanded="true" signature="6782:6802" ph="..." />
+            <marker date="1528687567736" expanded="true" signature="7804:7824" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2270,24 +2113,45 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/dataCount/commodity-list.jsp">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/commodity/classification/controller/ClassificationController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="278">
-          <caret line="136" column="23" lean-forward="true" selection-start-line="136" selection-start-column="23" selection-end-line="136" selection-end-column="23" />
-          <folding>
-            <marker date="1528687567736" expanded="true" signature="4956:4976" ph="..." />
-            <marker date="1528687567736" expanded="true" signature="5118:5138" ph="..." />
-            <marker date="1528687567736" expanded="true" signature="6782:6802" ph="..." />
-            <marker date="1528687567736" expanded="true" signature="7804:7824" ph="..." />
-          </folding>
+        <state relative-caret-position="81">
+          <caret line="123" column="50" lean-forward="true" selection-start-line="123" selection-start-column="50" selection-end-line="123" selection-end-column="50" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/system/commodity/controller/CommodityController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/commodity/classification/model/Category.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="90" column="21" lean-forward="true" selection-start-line="90" selection-start-column="21" selection-end-line="90" selection-end-column="21" />
+        <state relative-caret-position="348">
+          <caret line="17" column="26" lean-forward="false" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/content/carousel/service/ICarouselService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="53" column="15" lean-forward="false" selection-start-line="53" selection-start-column="15" selection-end-line="53" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/content/carousel/common/CarouselConstant.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="158">
+          <caret line="43" column="58" lean-forward="false" selection-start-line="43" selection-start-column="58" selection-end-line="43" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/content/carousel/controller/CarouselController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="225" column="48" lean-forward="true" selection-start-line="225" selection-start-column="48" selection-end-line="225" selection-end-column="48" />
+          <folding>
+            <element signature="e#5375#5384#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2305,11 +2169,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xingrongjinfu/content/carousel/controller/CarouselController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/content/carousel-modify.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="181" column="42" lean-forward="false" selection-start-line="181" selection-start-column="42" selection-end-line="181" selection-end-column="42" />
+        <state relative-caret-position="232">
+          <caret line="83" column="57" lean-forward="false" selection-start-line="83" selection-start-column="57" selection-end-line="83" selection-end-column="57" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/commodity/classification-list.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="201">
+          <caret line="45" column="14" lean-forward="true" selection-start-line="45" selection-start-column="14" selection-end-line="45" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/content/CarouselMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="21" column="13" lean-forward="true" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+          <folding>
+            <marker date="1528695843668" expanded="true" signature="857:916" ph="select * fro... t_carousel" />
+            <marker date="1528695843668" expanded="true" signature="992:1110" ph="delete from t_carousel... " />
+            <marker date="1528695843668" expanded="true" signature="1209:1264" ph="select * fro... t_carousel" />
+            <marker date="1528695843668" expanded="true" signature="1379:2216" ph="SELECT carou... t_carousel" />
+          </folding>
         </state>
       </provider>
     </entry>
