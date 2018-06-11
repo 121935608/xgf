@@ -141,6 +141,7 @@
             c.commodityNo LIKE CONCAT(CONCAT('%', #{commodityName}),'%')
             )
         </if>
+        order by c.addTime desc
     </select>
 
 

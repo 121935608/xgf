@@ -466,23 +466,27 @@ public class ProductController extends BaseController {
                     if(null == productDtl.getCommodityNo()){
                         return new Message(false,"请输入商品名称和条码！");
                     }
-                    map.put("commodityNo", productDtl.getCommodityNo());
+                    //去掉编号中的空格
+                    String str2 = productDtl.getCommodityNo().replaceAll(" ", "");
+                    map.put("commodityNo", str2);
                     a=productDtl.getCommodityNo();
+                    productDtl.setCommodityNo(str2);
                     //判断商品编号是否存在
                     Map m = productService.isExist(map);
+
                     String b=null;
                     if(null==m.get("commodityNo")){
                         return  new Message(false,"单号"+productDtl.getCommodityNo()+"不存在");
                     }
                     a=productDtl.getCommodityNo();
-                    if(null == m){
+                    /*if(null == m){
                         return new Message(false,"请输入正确的编号！");
-                    }
+                    }*/
                     if(null != productDtl.getSubPrice()){
-                        productDtl.setSubPrice(String.valueOf(Integer.parseInt(productDtl.getSubPrice())*100));
+                        productDtl.setSubPrice(String.valueOf(Double.parseDouble(productDtl.getSubPrice())*100));
                     }
                     if(null != productDtl.getPriceSpecification()) {
-                        productDtl.setPriceSpecification(String.valueOf(Integer.parseInt(productDtl.getPriceSpecification())*100));
+                        productDtl.setPriceSpecification(String.valueOf(Double.parseDouble(productDtl.getPriceSpecification())*100));
                     }
                 }
                 for (ProductDtl productDtl:list){
