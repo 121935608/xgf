@@ -12,7 +12,7 @@
 			   class="input-text Wdate" style="width:120px;" placeholder="结束时间">
 		<input type="text" class="input-text" style="width:250px" placeholder="商品名称|商品编号" id="commodityName" name="commodityName">
 		<button type="button" class="btn btn-success radius" onclick="query()"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
-		<button type="button" class="btn btn-success radius" onclick="excel_out()"><i class="Hui-iconfont">&#xe665;</i>下载</button>
+		<button type="button" class="btn btn-success radius" onclick="excel_out()"><i class="Hui-iconfont">&#xe665;</i>导出</button>
 	</div>
 	<div class="mt-20">
 	<table class="table table-border table-bordered table-hover table-bg table-sort">
@@ -25,6 +25,7 @@
 				<th width="10%">销售金额(元) </th>
 				<th width="10%">进价(元)</th>
 				<th width="10%">利润(元)</th>
+				<th width="10%">可用库存</th>
 			</tr>
 		</thead>
 	</table>
@@ -125,7 +126,19 @@ $(document).ready(function(){
 				return 0;
 			}
 		}
-	},
+	},{
+            "sDefaultContent": "可用库存",
+            "bSortable" : false,
+            "sClass": "td-status text-c",
+            "bSearchable": false,
+            "mRender": function(data, type, row) {
+                if (row.kxdStock !=null) {
+                    return row.kxdStock;
+                }else {
+                    return 0;
+                }
+            }
+        },
     ];
     var url = "${context_root}/dataCount/findCommodityInfo.action";
     pageTable = _Datatable_Init(pageTable, aoColumns, url);

@@ -36,6 +36,16 @@ public class Commodity {
     private String subPrice; // 主观价
     private String subPriceUnit; // 主观价单位
 
+    private Integer kxdStock;//可下单库存
+
+    public Integer getKxdStock() {
+        return kxdStock;
+    }
+
+    public void setKxdStock(Integer kxdStock) {
+        this.kxdStock = kxdStock;
+    }
+
     public Double getWeight() {
         return weight;
     }
